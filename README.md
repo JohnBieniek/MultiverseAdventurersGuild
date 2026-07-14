@@ -43,8 +43,9 @@ src/
 |   `-- Footer.css
 |-- pages/
 |   |-- Home.jsx
-|   |-- About.jsx
-|   |-- CharacterCreation.jsx
+|   |-- GM.jsx
+|   |-- Players.jsx
+|   |-- Rules.jsx
 |   |-- Contact.jsx
 |   `-- pages.css
 |-- App.jsx
@@ -56,8 +57,9 @@ src/
 ## Pages
 
 - **Home** - Welcome page with featured content
-- **About** - Guild information and team members
-- **Character Creation** - Character creation information and tools
+- **GM** - Game master resources and notes
+- **Players** - Player resources and preparation
+- **Rules** - Table rules and quick references
 - **Contact** - Contact form and information
 
 ## Customization

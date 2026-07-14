@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import About from './pages/About'
+import GM from './pages/GM'
+import Players from './pages/Players'
+import Rules from './pages/Rules'
 import Contact from './pages/Contact'
-import CharacterCreation from './pages/CharacterCreation'
 import './App.css'
 
 function App() {
@@ -15,9 +16,10 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/gm" element={<GM />} />
+            <Route path="/players" element={<Players />} />
+            <Route path="/rules" element={<Rules />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/character-creation" element={<CharacterCreation />} />
           </Routes>
         </main>
         <Footer />

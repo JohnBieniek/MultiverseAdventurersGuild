@@ -18,10 +18,13 @@ function Navigation() {
             <Link to="/" className="nav-link">Home</Link>
           </li>
           <li className="nav-item">
-            <Link to="/about" className="nav-link">About</Link>
+            <Link to="/gm" className="nav-link">GM</Link>
           </li>
           <li className="nav-item">
-            <Link to="/character-creation" className="nav-link">Character Creation</Link>
+            <Link to="/players" className="nav-link">Players</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/rules" className="nav-link">Rules</Link>
           </li>
           <li className="nav-item">
             <Link to="/contact" className="nav-link">Contact</Link>

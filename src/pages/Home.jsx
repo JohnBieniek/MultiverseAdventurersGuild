@@ -5,28 +5,27 @@ function Home() {
     <div className="page home-page">
       <section className="hero">
         <h1>Welcome to the Multiverse Adventurers Guild</h1>
-        <p>Join adventurers from across infinite worlds in epic quests and legendary tales</p>
-        <button className="cta-button">Join Our Guild</button>
+        <p>A home base for game masters, players, table rules, and guild contact details.</p>
       </section>
 
       <section className="featured-content">
         <div className="content-card">
-          <h2>🗺️ Explore Adventures</h2>
-          <p>Discover epic campaigns spanning multiple universes and dimensions.</p>
+          <h2>GM</h2>
+          <p>Tools, notes, and guidance for running sessions across the multiverse.</p>
         </div>
         <div className="content-card">
-          <h2>👥 Connect With Others</h2>
-          <p>Meet fellow adventurers and build lasting friendships across the multiverse.</p>
+          <h2>Players</h2>
+          <p>Resources for characters, table expectations, and getting ready to play.</p>
         </div>
         <div className="content-card">
-          <h2>📖 Share Stories</h2>
-          <p>Chronicle your adventures and inspire others with your legendary tales.</p>
+          <h2>Rules</h2>
+          <p>Keep shared rulings and table procedures easy to find.</p>
         </div>
       </section>
 
       <section className="latest-news">
-        <h2>Latest Updates</h2>
-        <p>Replace this with your latest news, events, and announcements from your Wix site.</p>
+        <h2>Guild Updates</h2>
+        <p>Use this space for announcements, schedule notes, and important changes.</p>
       </section>
     </div>
   )
