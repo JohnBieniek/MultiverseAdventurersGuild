@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './pages.css'
 
+const contactEmail = 'multiverseadventurersguild@gmail.com'
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -18,9 +20,16 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = `Message from ${formData.name}`
+    const body = [
+      formData.message,
+      '',
+      `From: ${formData.name}`,
+      `Reply to: ${formData.email}`
+    ].join('\n')
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -72,7 +81,7 @@ function Contact() {
         <div className="contact-info">
           <h2>Other Ways to Reach Us</h2>
           <p>
-            Email: <a href="mailto:multiverseadventurersguild@gmail.com">multiverseadventurersguild@gmail.com</a>
+            Email: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </p>
           <p>Discord: Join our Discord server for instant communication</p>
           <p>Replace with your actual contact information from your Wix site.</p>

@@ -232,12 +232,12 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+  border-color: #33612F;
+  box-shadow: 0 0 5px rgba(51, 97, 47, 0.3);
 }
 
 .submit-button {
-  background-color: #667eea;
+  background-color: #33612F;
   color: white;
   padding: 12px 30px;
   border: none;
@@ -249,7 +249,7 @@
 }
 
 .submit-button:hover {
-  background-color: #5568d3;
+  background-color: #254723;
 }
 
 .contact-info {
