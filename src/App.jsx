@@ -3,8 +3,6 @@ import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
-import Adventures from './pages/Adventures'
-import Community from './pages/Community'
 import Contact from './pages/Contact'
 import CharacterCreation from './pages/CharacterCreation'
 import './App.css'
@@ -18,8 +16,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/adventures" element={<Adventures />} />
-            <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/character-creation" element={<CharacterCreation />} />
           </Routes>

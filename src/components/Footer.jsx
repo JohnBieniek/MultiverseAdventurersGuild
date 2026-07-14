@@ -11,8 +11,6 @@ function Footer() {
         <div className="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="#">Discord</a></li>
-            <li><a href="#">Twitter</a></li>
             <li><a href="mailto:multiverseadventurersguild@gmail.com">Contact Us</a></li>
           </ul>
         </div>

@@ -24,12 +24,6 @@ function Navigation() {
             <Link to="/character-creation" className="nav-link">Character Creation</Link>
           </li>
           <li className="nav-item">
-            <Link to="/adventures" className="nav-link">Adventures</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/community" className="nav-link">Community</Link>
-          </li>
-          <li className="nav-item">
             <Link to="/contact" className="nav-link">Contact</Link>
           </li>
         </ul>

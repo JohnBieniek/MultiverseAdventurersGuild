@@ -35,7 +35,7 @@ function Contact() {
   return (
     <div className="page contact-page">
       <h1>Contact Us</h1>
-      <p>Have questions or want to join the guild? Get in touch!</p>
+      <p>Have questions? Get in touch!</p>
 
       <div className="contact-container">
         <form className="contact-form" onSubmit={handleSubmit}>
@@ -79,12 +79,10 @@ function Contact() {
         </form>
 
         <div className="contact-info">
-          <h2>Other Ways to Reach Us</h2>
+          <h2>Reach us directly</h2>
           <p>
             Email: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </p>
-          <p>Discord: Join our Discord server for instant communication</p>
-          <p>Replace with your actual contact information from your Wix site.</p>
         </div>
       </div>
     </div>
