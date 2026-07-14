@@ -13,7 +13,7 @@ function Footer() {
           <ul>
             <li><a href="#">Discord</a></li>
             <li><a href="#">Twitter</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="mailto:multiverseadventurersguild@gmail.com">Contact Us</a></li>
           </ul>
         </div>
       </div>

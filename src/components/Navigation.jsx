@@ -6,7 +6,12 @@ function Navigation() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          🌌 Multiverse Adventurers Guild
+          <img
+            src="/multiverse%20adventurers%20guild%20icon.png"
+            alt=""
+            className="nav-logo-icon"
+          />
+          <span>Multiverse Adventurers Guild</span>
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">

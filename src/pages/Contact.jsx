@@ -71,7 +71,9 @@ function Contact() {
 
         <div className="contact-info">
           <h2>Other Ways to Reach Us</h2>
-          <p>Email: contact@multiverseadventurersguild.com</p>
+          <p>
+            Email: <a href="mailto:multiverseadventurersguild@gmail.com">multiverseadventurersguild@gmail.com</a>
+          </p>
           <p>Discord: Join our Discord server for instant communication</p>
           <p>Replace with your actual contact information from your Wix site.</p>
         </div>
