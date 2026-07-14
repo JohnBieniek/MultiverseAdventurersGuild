@@ -6,6 +6,7 @@ import About from './pages/About'
 import Adventures from './pages/Adventures'
 import Community from './pages/Community'
 import Contact from './pages/Contact'
+import CharacterCreation from './pages/CharacterCreation'
 import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/adventures" element={<Adventures />} />
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/character-creation" element={<CharacterCreation />} />
           </Routes>
         </main>
         <Footer />
