@@ -5,12 +5,12 @@ If players want, they can create their own Species. This won't give the characte
 For NPC species, characteristics may exist. I could say halflings are good at hiding and have a (+2) modifier for hide checks. So, in a general build of halflings, we would expect this. For a Hero, it would explain the sneak score, not add to it.
 Strengths and weaknesses are guidelines for building your character. Talents are also recommendations, but must be paid for using standard acquisition costs.
 The Primary Species for the Multiverse are: Giant, Troll, Orc, Human, Elf, Dwarf, Halfling, Gnome, and Fairy. Any other species is considered exotic, such as a Luminent Veilwathcver.
-Player Species give no mechanical bonuses—EVER.
+Player Species give no mechanical bonusesEVER.
 Species influences items, personality, roleplay, and TN adjustments at GM discretion.
 NPC species mods are shorthand to avoid full builds.
 
 Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your Cyberwear is Hard Wired.
-Real Deal - Cyborgs make people feel very uncomfortable. People see this as a life choice that they don’t understand.
+Real Deal - Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
 
 Strengths: strength, technology, endurance
 
@@ -22,7 +22,7 @@ Common Archetypes - Street Samurai, Merc, Sniper
 
 Personality:
 Dehumanized - The lack of real flesh leaves you feeling disembodied from the world around you. You struggle to connect with people.
-Reckless - you don’t feel pain other than an indicator on your heads-up display. Because of this, you don’t think about the consequences of entering dangerous places like combat.
+Reckless - you don't feel pain other than an indicator on your heads-up display. Because of this, you don't think about the consequences of entering dangerous places like combat.
 
 Dwarf - dwarves are over 4 feet tall. They are thick of build.
 
@@ -62,7 +62,7 @@ Haughty - any elf you ask would deny this. Most secretly (or not so secretly) be
 Dark side - there is a dark element to every elf. A side they hide from the world. This side covets money and power.
 Don't play well with others - they are always looking for an edge, even against their allies.
 
-Fairy: This race is 3 feet tall and considered “cute” by most people. They are seen as happy, free-spirited, and nature-oriented. Some think they are a subspecies of Elf. Less than 1% of the population is faerie. They tend to live in the wilderness or in parks in urban areas. They are the most magical species.
+Fairy: This race is 3 feet tall and considered cute by most people. They are seen as happy, free-spirited, and nature-oriented. Some think they are a subspecies of Elf. Less than 1% of the population is faerie. They tend to live in the wilderness or in parks in urban areas. They are the most magical species.
 
 Rep: Their size and ephemeral nature lead most people to not take them seriously. A faerie would be deeply offended to be thought of as a subspecies of Elf. Faeries have a natural distrust of elves because they often feel they are competing for similar resources. Most Urban Faeries make their living utilizing their magic knowledge.
 
@@ -120,7 +120,7 @@ Communal - Giants tend to live in groups. Isolated Giants tend to become angry a
 Inquisitive - giants are constantly seeking out knowledge.
 Intimidating - giants are naturally scary, even when they try not to be.
 Misunderstood - people assume giants are dumb even when faced with contrary evidence.
-Anti-Tech - They don’t like technology and will do all they can to avoid dealing with it.
+Anti-Tech - They don't like technology and will do all they can to avoid dealing with it.
 
 Halfling- They are 3+ feet tall and round. They use their stealth to protect themselves from the outsized world around them. As such, they favor stealth and ranged weapons.
 
@@ -166,7 +166,7 @@ Aggressive - Orcs come from large families and learn to assert themselves at an 
 Poor manners - Orcs learn early that it's not how you eat your meal, but how fast you can eat and avoid hunger.
 Loyal - Orcs can rapidly bond with others regardless of race. This bond can only be broken in death. This makes orcs excellent soldiers and enlistment is common.
 
-Sentient AI (SAI)- at one point a mere collective of “1s” and “0s”, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
+Sentient AI (SAI)- at one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
 
 Rep: People fear SAI. They don't trust them. Decades of anti-SAI movies contributed to this. People are convinced that SAI will try to take over the world.
 
@@ -181,6 +181,6 @@ Talents: Hacker
 Common Archetypes: Hacker
 
 Personality:
-Cold and calculating - Having grown up serving the nets, you don’t take emotion into account. You don’t even understand emotions.
+Cold and calculating - Having grown up serving the nets, you don't take emotion into account. You don't even understand emotions.
 Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
 Paranoid - You are afraid the world is out to get you. And you are right.

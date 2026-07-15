@@ -1,6 +1,6 @@
 Archetypes
 Definition: an original model, universal pattern, or perfect example from which other things-like characters, objects, or behaviors - are copied or based.
-These are archetypes used throughout many settings. The idea is to give the player an outline to help build the character. The Hero can pick and choose based on the outlined information or even go in a different direction. After all, the character that goes against type is often more interesting. Players can pull items from other archetypes as well to help in defining their Hero. The players can interpret these archetypes however they want. Two players may have different views. That’s what makes this interesting. These choices can be made after the initial “tutorial” of the “0” level.
+These are archetypes used throughout many settings. The idea is to give the player an outline to help build the character. The Hero can pick and choose based on the outlined information or even go in a different direction. After all, the character that goes against type is often more interesting. Players can pull items from other archetypes as well to help in defining their Hero. The players can interpret these archetypes however they want. Two players may have different views. That's what makes this interesting. These choices can be made after the initial tutorial of the 0 level.
 
 Career Path
 
@@ -35,7 +35,7 @@ Quick to take offense - all you have is your reputation. If anyone calls it into
 
 Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
 
-Anti-Tech - You don’t like technology and will do all you can to avoid dealing with it by using low-tech weapons.
+Anti-Tech - You don't like technology and will do all you can to avoid dealing with it by using low-tech weapons.
 
 Bounty Hunter: You love the chase. You live for the thrill of finding and subduing your quarry, dead or alive.
 
@@ -93,9 +93,9 @@ Personality:
 
 No man left behind - ever!
 
-Driven - you don’t know or understand the meaning of quit.
+Driven - you don't know or understand the meaning of quit.
 
-Self-assured - You know what you can do and how to get it done. You are fully confident in your abilities. You don’t brag or boast because you don’t have to.
+Self-assured - You know what you can do and how to get it done. You are fully confident in your abilities. You don't brag or boast because you don't have to.
 
 Criminal: This is your basic criminal type. They lie, steal, and cheat their way to fame and fortune.
 
@@ -121,7 +121,7 @@ Preferred talents: Shapeshift, Pathfinder, Regeneration
 
 Personality:
 
-One with nature: you are completely at home in natural settings. You don’t like technology and will do all you can to avoid dealing with it, including using low-tech weapons.
+One with nature: you are completely at home in natural settings. You don't like technology and will do all you can to avoid dealing with it, including using low-tech weapons.
 
 Militant - Druids tend to be very active in the protection of the natural world.
 
@@ -151,7 +151,7 @@ Talents: Silver Tongue, Concealed Weapon Specialist, Detect Lie
 
 Personality:
 1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-company men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
-2. Stubborn—They are slow to acknowledge issues with where their loyalties lie. This makes it difficult for them to turn against their corporation and makes them so dangerous when they do.
+2. StubbornThey are slow to acknowledge issues with where their loyalties lie. This makes it difficult for them to turn against their corporation and makes them so dangerous when they do.
 3. Ego - Company men see their loyalty as a higher calling. They see themselves as superior to the simple wage slaves.
 
 Ex-cop - You served as a peacekeeping officer for a paramilitary force.
@@ -184,7 +184,7 @@ Loyal - soldiers form tight-knit units. Often, they are motivated more by intra-
 
 Mediocrity - soldiers learn to volunteer for nothing, keep their heads down, and stay out of trouble.
 
-Face: This is the con artist, influencer, interrogator, negotiator, and fast talker of the party. The face’s biggest weapon is charm. And they have it in spades. The face will keep you out of combat and then negotiate the surrender.
+Face: This is the con artist, influencer, interrogator, negotiator, and fast talker of the party. The faces biggest weapon is charm. And they have it in spades. The face will keep you out of combat and then negotiate the surrender.
 
 Scores:
 Strengths: Charisma, Influence, Knowledge, Any Weapon
@@ -197,7 +197,7 @@ Charming - this is how you manipulate. You believe you can make anyone like you.
 
 Slow to the draw - You try so hard to talk your way out of combat that you are slow to react when the fight starts.
 
-Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming “look at me!”
+Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming look at me!
 
 Fixer: You are the master at getting illicit gear. You have contacts all over and know how to mix and match these assets to get jobs done. You work closely with Operators.
 
@@ -208,7 +208,7 @@ Preferred talents: Silver Tongue, Aim, Detect Lie
 
 Personality:
 
-I’ve gotta guy for that! You know people everywhere and love putting together teams.
+I've gotta guy for that! You know people everywhere and love putting together teams.
 
 In control. Your ability to connect with many different groups of people leaves you with the feeling that you can get out of anything.
 
@@ -238,7 +238,7 @@ Preferred talents: Silver Tongue, Alertness, Ki Body
 
 Personality:
 
-Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming “look at me!”
+Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming look at me!
 
 Famous - People notice you when you are in public. You thrill at the recognition, but sometimes this interferes with your mission.
 
@@ -253,7 +253,7 @@ Preferred talents: Aim, Close Quarters Combat, Concealed Weapon Specialist
 
 Personality:
 
-A gun for every occasion; clear a building, sniping, tuxedo, happy mood …
+A gun for every occasion; clear a building, sniping, tuxedo, happy mood 
 
 Have gun will travel - the gun Bunny will always be armed except for security checkpoints. And they will do anything to subvert these checkpoints.
 
@@ -289,7 +289,7 @@ Ice in your Veins - you are preternaturally calm. You build and dismantle bombs 
 
 Signature - every bomb you make has something that is distinctly you. Maybe it's the wiring harness or a particular part.
 
-Mage: These are your classic spellcasters. They learn their craft through study and use Education. They tend to use items like rings, wands, brooches, and such as magic items. Mages tend to gather in like-minded groups as their magic works uniformly from one Mage to another. Mages tend to have a lot of non-combat talents that they view as “spells”. Mages will buy more talents and expand their energy points.
+Mage: These are your classic spellcasters. They learn their craft through study and use Education. They tend to use items like rings, wands, brooches, and such as magic items. Mages tend to gather in like-minded groups as their magic works uniformly from one Mage to another. Mages tend to have a lot of non-combat talents that they view as spells. Mages will buy more talents and expand their energy points.
 
 Scores:
 Strengths: Education, Knowledge, Observation, Range Attack (Simple proxy - spirit)
@@ -330,7 +330,7 @@ Personality:
 
 Calm - Ninjas always act as if they are in full control over what is going on around them.
 
-Shy - Ninjas live in the shadows. They stay in the background during social situations. They don’t like the spotlight.
+Shy - Ninjas live in the shadows. They stay in the background during social situations. They don't like the spotlight.
 
 Stealthy - you are a master at hiding.
 
@@ -343,7 +343,7 @@ Preferred talents: any Buff, Goad, Tactical Commander
 
 Personality:
 
-Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming “look at me!”
+Loud and proud - everything about your personality is overblown. You are a giant neon sign screaming look at me!
 
 Inquisitive - Performers are constantly seeking out knowledge.
 
@@ -360,7 +360,7 @@ Personality:
 
 Inquisitive - Private eyes are constantly seeking out knowledge.
 
-Personable - You are down-to-earth. People tend to like you for it and tell you things they probably shouldn’t.
+Personable - You are down-to-earth. People tend to like you for it and tell you things they probably shouldn't.
 
 World Weary - you are weary from seeing the same terrible things over and over again.
 
@@ -373,7 +373,7 @@ Preferred Talent: Control Drone, Transporter, Tech Expertise
 
 Personality:
 
-Don't touch this - Screamers treat their vehicles and drones like close friends… and they don't want you messing with them.
+Don't touch this - Screamers treat their vehicles and drones like close friends and they don't want you messing with them.
 
 Need for speed - Drivers have one speed, fast. This is why they are known as screamers. Take a ride with one and you'll see.
 
@@ -390,7 +390,7 @@ Personality:
 
 Cool under pressure - the hairier the situation, the calmer you get.
 
-Lack of curiosity - You don’t know or even care what you are smuggling.
+Lack of curiosity - You don't know or even care what you are smuggling.
 
 Friends in low places - your work tends to come from criminals. Your contacts tend to be from that group.
 
@@ -407,7 +407,7 @@ Patient - You have waited days in place to take your shot.
 
 Stealthy - you are a master at hiding.
 
-Accurate - you live by the motto, “One shot, one Kill.” You never multi-attack, preferring accuracy over volume.
+Accurate - you live by the motto, One shot, one Kill. You never multi-attack, preferring accuracy over volume.
 
 Street doc: a generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a street doc brings down the worst retribution the streets have to offer.
 
@@ -439,7 +439,7 @@ Charming - this is how you manipulate. You believe you can make anyone like you.
 
 Ego - you believe you are so charming that you fail to recognize when your charms fail.
 
-Street Samurai—At its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
+Street SamuraiAt its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
 
 Scores:
 Strengths: Strength, Attack, Athletic, Melee Weapon
@@ -462,6 +462,6 @@ Weaknesses: Strength, Sneak, Athletics
 Preferred Talents: Implant Thought, Detect Talents, End Talent.
 
 Personality:
-Subservient - A Warlock doesn’t ask, “What should I do in this situation?” The Warlock asks, “What would my Master want me to do in this situation?”
+Subservient - A Warlock doesn't ask, What should I do in this situation? The Warlock asks, What would my Master want me to do in this situation?
 Knowledge is Power - Warlocks are constantly reading and learning about how magic works in order to increase their power.
 Driven - a Warlock will focus on short- and long-term goals and then pursue them intensely without losing sight of the goals.

@@ -1,0 +1,45 @@
+Introduction
+
+Welcome to the Multiverse! You can play a Hero from any time, setting, or era. Imagine a party comprising a superhero, a cowgirl, a cyborg, a medieval knight, and a Witch. Now imagine them being any Species you want. In 15 minutes, you could build that Hero and start playing. You will be a part of the Guild that explores the Multiverse.
+
+Welcome to the Multiverse Adventurers Guild!
+
+Gunny has your basic supplies and weapons. Then, see Dr. Orak'na. He'll get you that extra special gear!
+
+How to Navigate the Rules.
+
+There are 3 levels to play.
+
+Basic quick start and play. Perfect for one shots or introductions to the game. You start at Level "0". Read the text to build a character. Level "0" is about learning game concepts, most importantly the basic roll. The GM interprets and explains rules as you go. It's important to listen to the Heroes concept and translate it into game terms. Explain the tutorial nature of the level. The Hero doesn't need to know any rules to start with or even read anything. Incorporate Talents when the Heroes might need them.
+
+Campaign. Using Talents demonstrates how to use them and how they affect gameplay. Talents are a core concept. At this point, encourage your Heroes to at least read the combat Talents. Ask your Heroes about the cool things they want to do and introduce them to the particular Talent.
+
+Advanced play. At this point, encourage your Heroes to read all the player material. Much of the material, in particular the section on Archetypes, will help advanced Heroes discover new character concepts. May consider starting at level 1 or higher.
+
+Heroes can focus on playing in one setting or multiple settings.
+
+The idea behind the game is to spend more time playing and less time going through the rules. The central dynamic of target number (TN) allows the GM to quickly factor in difficulty. TN modifiers are circumstantial. This also limits metagaming because it's not written down; it's in the GM's head. The key is that modifiers are determined by the GM, not by specific rules. This streamlines play.
+
+The following dynamic is the Basic Roll.
+
+Add score from stat plus skill plus a modifier(This could be from a Talent)
+
+You roll the BR against TN. You can modify the BR by activating Talents.
+
+TN is situational. This game is a d20 system. The score can be a (-4) to (+4) modifier in each category. These numbers interact to create a + or - to the d20 roll to a base target number (TN) that you have to tie or beat. The GM assigns the TN, but it starts at 11.
+
+Default TN ladder: 9 Easy - 11 Standard - 13 Tricky - 15 Hard - 17 Heroic - 19 Legendary.
+
+The average TN depends on the tier the players are in. Tier 1 = 11, Tier 2 = 13, Tier = 17.
+
+The game mechanics are flexible. This favors letting the story dictate the game. Rules are guidelines. If Heroes want to try something, let them. You can easily assign a TN and let the creativity flow.
+
+As a GM, look for opportunities to say yes. The rules shouldn't get in the way of good roleplaying. RPGs exist to allow us to stretch the boundaries of imagination. Encourage it!
+
+Items and Traits
+
+These are purely narrative labels. They answer why you get the effect. They may change BR if the GM gives situational TN adjustments. Items and act as items or gear that explain stats and skill scores. A ring of strenghnth would be an Item. Traits work to describe characteristic of of things such as Species and Archetype the define Scores. A Giant with with a high streength sscore might explain that as a Trait of Giants.
+
+In the game, you don't pay for Items. My weapon can be a Katana. My strength from a magic item. I could have reach as an Archetype. Your Items and Traits help define your character. Traits can also be from Species or Archetypes.
+
+Also, bend and change rules to suit your campaign.

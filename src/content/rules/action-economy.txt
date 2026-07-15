@@ -1,0 +1,25 @@
+Action economy
+
+Attack action: an act designed to deal damage. This can come from a weapon or from utilizing a non-combat talent against a person. If the action is resisted by AV, Ego, or Athletics, it is an attack. Some talents use an attack action. May use attack action for an additional 30' of movement.
+
+Skill action - Use a skill other than an attack. You can try to influence somebody, observe, pick locks, etc. If the GM feels you can do it during combat, then go for it. The GM should be liberal on this and keep the action moving. A skill action may be used to activate a talent. A GM might say the skill must be used for a set period to take effect. The Hero could still attack, but would use the skill action until the intended effect is completed. For instance, the Hero may be picking a lock and fighting.
+
+Move Action: Players can move 30 feet per turn. Sometimes a move action may power another action, such as activating a healing talent. This eliminates your ability to move. It takes up 15 feet of movement to stand. Heroes can use alternative forms of movement: teleport, jump, skate, etc., as long as it doesn't result in an advantage over a standard move. The effect would still act as a standard move but would be more cinematic. This means I can't end the move off the floor. If I want to jump on a roof, I then must buy the talent to do so.
+
+Free Action: you can talk, but it becomes a skill action if you want the target to act on your words. Draw Weapon. Move 5' once without triggering a reactive strike.
+
+Combat Talent Activation - You can activate a Combat Talent. It costs an activation if it is a one-shot or sustained. You get two combat talent activation actions.
+
+Reaction - some talents can be a response to something the opponent does. You have one reaction per turn. You can also use a reaction to interrupt an opponent's turn if you have actions left.
+
+In combat, each turn lasts 10 seconds.
+
+Status Effects
+
+Prone
+
+Cover
+
+Tripped
+
+Disarm

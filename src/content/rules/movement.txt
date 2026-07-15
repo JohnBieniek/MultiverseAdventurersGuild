@@ -1,0 +1,25 @@
+Movement
+
+There are 3 movement intervals:
+
+Strategic - this is counted in hours. This is when broad moves are being planned, such as traveling over long distances
+
+Tactical - this is counted in minutes. Strategic movement ends when you reach the point where you need to slow down as confrontation gets closer.
+
+Combat - this is combat and is measured in turns.
+
+In a fantasy setting, strategic intervals would move you around the map for days, hours, or weeks. When you enter the dungeon, you go tactical. When you confront your enemy, it's combat.
+
+A Hero may move 30' as a move action. The player is considered to be running full out. The Hero may move an additional 30' as a sprint for an attack action. A Hero may make a 5' Adjustment step each turn. Sprinting is an action. Standing from a prone position costs 15 feet of movement and is part of a move action.
+
+Combat turn - 30' full tilt
+
+15' walking
+
+Tactical turn (1 minute) - 180' full tilt
+
+90' walking
+
+Strategic - 3 miles per hour
+
+Full tilt penalizes sneak and observation checks.

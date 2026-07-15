@@ -1,16 +1,16 @@
-?“Before we begin, understand this clearly: you are not here because of where you’re from, when you’re from, or whatever world you call home.
-You’re here because you showed potential.
-The Guild doesn’t care if you’re a knight, a hacker, a witch, a gunslinger, or something no one here has a name for yet. If you can survive, adapt, and make decisions under pressure, we can work with you. Our systems will let you build what you already are - close enough that it won’t matter in the field.”
+Before we begin, understand this clearly: you are not here because of where you're from, when you're from, or whatever world you call home.
+You're here because you showed potential.
+The Guild doesn't care if you're a knight, a hacker, a witch, a gunslinger, or something no one here has a name for yet. If you can survive, adapt, and make decisions under pressure, we can work with you. Our systems will let you build what you already are - close enough that it won't matter in the field.
 The handler pauses, letting that sink in.
-“We exist to monitor timelines in flux. When worlds drift, fracture, or start breaking their own rules, we step in. Sometimes that means investigation. Sometimes it means diplomacy. Sometimes it means violence. You’ll decide which.”
+We exist to monitor timelines in flux. When worlds drift, fracture, or start breaking their own rules, we step in. Sometimes that means investigation. Sometimes it means diplomacy. Sometimes it means violence. You'll decide which.
 They tap a control, and a holographic ledger flickers to life.
-“Here’s the offer. For every successful assignment, compensation is placed into a private account under your name. You can leave the Guild at any time. When you do, the money goes with you. No debt. No ownership. No chains.”
+Here's the offer. For every successful assignment, compensation is placed into a private account under your name. You can leave the Guild at any time. When you do, the money goes with you. No debt. No ownership. No chains.
 A faint smile.
-“We don’t recruit heroes because they’re perfect. We recruit them because they’re becoming something special. Right now, you’re better than average—stronger, smarter, luckier than most of the people in your home reality. That’s enough. The rest comes from surviving. You will be sent into a timeline with what you can carry. If you need money or gear, find it yourself. Just don't do anything to alter the timeline.”
+We don't recruit heroes because they're perfect. We recruit them because they're becoming something special. Right now, you're better than average: stronger, smarter, luckier than most of the people in your home reality. That's enough. The rest comes from surviving. You will be sent into a timeline with what you can carry. If you need money or gear, find it yourself. Just don't do anything to alter the timeline.
 The handler looks directly at each of you in turn.
 They step aside, a portal beginning to form behind them.
-“So. Welcome to the Multiverse Adventurers Guild.
-Your first job is waiting."
+So. Welcome to the Multiverse Adventurers Guild.
+Your first job is waiting.
 Everything in MAG starts with one rule:
 Basic Roll (BR)
 
@@ -21,13 +21,13 @@ Compare the total to a Target Number (TN) set by the GM.
 
 If your total meets or beats the TN, you succeed.
 Use this process during Session Zero to build your hero in about 15 minutes. Heroes new to role-playing take longer, as it's important to teach them how to play.
-"Think about the kind of hero you want to play. Any genre, any era, any setting is allowed in the Multiverse - cyborgs, cowgirls, witches, knights, superheroes, detectives, monks, and everything in between."
+Think about the kind of hero you want to play. Any genre, any era, any setting is allowed in the Multiverse - cyborgs, cowgirls, witches, knights, superheroes, detectives, monks, and everything in between.
 Pick the Archetype that best matches your concept. Archetypes give your character direction, style, a few suggested Talents, and ideas about your Hero's personality.
 You can change your Archetype early in the campaign as you get familiar with the system.
-"Giant, Troll, Orc, Human, Elf, Dwarf, and Halfling are the basic races. You can create any Species you want. These are known as the Exotics. Fairy is an example of an Exotic
-Select a Species that fits your concept or the setting. Species give you flavor and descriptive traits."
+Giant, Troll, Orc, Human, Elf, Dwarf, and Halfling are the basic races. You can create any Species you want. These are known as the Exotics. Fairy is an example of an Exotic
+Select a Species that fits your concept or the setting. Species give you flavor and descriptive traits.
 
-If you’re unsure, your GM will summarize races available in the current campaign.
+If you're unsure, your GM will summarize races available in the current campaign.
 Stats measure your physical, mental, and social strengths.
 Assign the following values:
 
@@ -72,13 +72,13 @@ You begin with:
 Access to Force 1 Talents
 Items explain why your Stats and Skills look the way they do.
 
-They don’t change numbers; they describe your character. Most items are equipment, such as a Ring of Protection. Some can be from Species, Archetype.
+They don't change numbers; they describe your character. Most items are equipment, such as a Ring of Protection. Some can be from Species, Archetype.
 Examples:
 (+2) Strength - Giant Species.
-(+1) Education - “Street-taught scavenger tech.”
-(-1) Sneak - “Loud, heavy boots”
-Items help define who you are and where you come from. Think of these as gear for your Hero, except they don’t have a price tag on them
-You begin with 3 ± Charisma Contacts.
+(+1) Education - Street-taught scavenger tech.
+(-1) Sneak - Loud, heavy boots
+Items help define who you are and where you come from. Think of these as gear for your Hero, except they don't have a price tag on them
+You begin with 3  Charisma Contacts.
 
 Contacts are NPCs you know who can help you with:
 information
@@ -87,12 +87,12 @@ favors
 You may choose some now and fill in others as you play. You will be assigned Gold at level 1, which helps pay for favors and information.
 Reputation is what the Multiverse thinks it knows about you.
 
-It might be true… or not.
+It might be true or not.
 Examples:
-“Dead-eye shot”
-“Arcane scholar”
-“Former corporate asset”
-“Lucky beyond reason.”
+Dead-eye shot
+Arcane scholar
+Former corporate asset
+Lucky beyond reason.
 Pick something that fits your concept. You will refine this during play.
 You start with one Weapon Enhancement for Melee or Ranged: These will be listed as Damage die, Weapon Type, Special Rules, and examples.
 Melee
@@ -152,15 +152,15 @@ Pass/fail check (Observation, Sneak, Influence, etc.)
 Succeed or fail outright.
 Complex (C)
 Measures the degree of success (contests, extended actions, damage, influence duels)
-Every 2 points above TN = +1 “success.”
+Every 2 points above TN = +1 success.
 Opposed Tests: Both sides roll Complex checks vs the same TN (usually 11). Higher successes win.
 
 Ties favor the Heroes.
-Attack = BR vs target’s Armor Value (AV)
+Attack = BR vs targets Armor Value (AV)
 
 If you meet or beat AV, the attack hits.
 
-Then roll your weapon’s damage dice + relevant Stat + Weapon Bonus.
+Then roll your weapons damage dice + relevant Stat + Weapon Bonus.
 Natural 20: Auto-success. Make a free attack. Max damage.
 Natural 1: Critical failure. GM narrates a costly or funny mishap.
 You get each turn:
@@ -181,7 +181,7 @@ F4 16/8
 Legendary powers
 The second number is the one-shot cost. One-shots never occupy a slot. Sustained effects do.
 A street-mage (Dex 2, Attack 3, Enhancement +1) fires an energy bolt.
-Rolls: d20 + 2 + 3 + 1 = d20 + 6 vs target’s AV 15.
+Rolls: d20 + 2 + 3 + 1 = d20 + 6 vs targets AV 15.
 Rolls 12 - total 18 = hit.
 Damage: 1d6 + dex + 2 = 8 total.
 Natural 20 Max Damage and free attack
@@ -192,24 +192,24 @@ Force Access Rule (Hard Limit)
 
 You cannot activate or purchase Talents of a Force higher than your level allows.
 Players are rewarded with the following benefits at each level:
-Tagline: “You’ve joined the Guild. You’re raw, reckless, and ready to prove yourself.”
-0: Access F1 Talents • 1 Talent Slot, 10HP
+Tagline: You've joined the Guild. You're raw, reckless, and ready to prove yourself.
+0: Access F1 Talents  1 Talent Slot, 10HP
 1: 2 Talents, (Choose 1: +1 Attack / +1 Defense / Talent +1) Talent,16HP, 3 energy
 2: Access F2 Talents, 22HP, 6 energy
 3: +1 Talent, 28 HP, 9 energy
-Tagline: “You’ve survived the first missions. Now you’re trusted to act on your own initiative.”
+Tagline: You've survived the first missions. Now you're trusted to act on your own initiative.
 4:+1 Talent Slot, (Choose 1: +1 Attack / +1 Defense / +1 Talent), 34HP, 12 energy
 5: Access F3 Talents, +1 Talent, 40 HP, 15 energy
 6: (Choose 1: +1 Attack / +1 Defense /+1 Talent), 46 HP, 18 energy
-Tagline: “You are a legend in motion — the Guild’s finest. Timelines bend around your choices.”
+Tagline: You are a legend in motion  the Guilds finest. Timelines bend around your choices.
 
 7: Talent slot, +1 Talent, 52 HP, 21 Energy
 8: (Choose 1: +1 Attack / +1 Defense / +1 Talent), 58 HP, 24 Energy
 9: Access F4 Talents, +1 Talent, 64 HP, 27 Energy
-10: 70 HP, 30 Energy • Final Guild Rank
+10: 70 HP, 30 Energy  Final Guild Rank
 If you improve your Endurance score, the bonus applies retroactively to all levels. For example, at level 3 with a score of (0), my HP is 28. I buy (+1) endurance. The bonus applies to all levels, giving me 32 HP.
 You can switch your talents when you reach a new level.
 MAG is a blended system. You gain specific advantages as you reach each level, but you can also spend XP whenever you want.
-A player earns 3 XP per playing session. These can be used to improve attributes, skills, talents, and energy. The GM can adjust this XP award up or down depending on how fast or slow they want the campaign to progress. “(0)” level is essentially a Tutorial for beginning players.
+A player earns 3 XP per playing session. These can be used to improve attributes, skills, talents, and energy. The GM can adjust this XP award up or down depending on how fast or slow they want the campaign to progress. (0) level is essentially a Tutorial for beginning players.
 0 / Untrained/ 0
 You must pay for each level of the score. For instance if I went from (0) to (3) I would pay one point for a score of (+1) another four points to increase it to (+2) and a final nine points for a (+3) for a total of fourteen points.

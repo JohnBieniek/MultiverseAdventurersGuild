@@ -1,0 +1,15 @@
+Adventuring in the Multiverse Adventurers Guild
+
+Many Talents last 5 minutes after combat and renew the timeline when combat occurs again. This leaves the Heroes with some choices to make in terms of activities. Do they make a search for treasure that could cost them the time they need to renew the clock? The following speaks to that timeline.
+
+Search - this would allow the heroes to search for treasure, traps, and secret doors with one roll though the TN may vary for each. This takes one minute. For each additional minute the TNs reduce by 2. Each player rolls separately if they are involved in this task. This allows the search of one room or hallway, regardless of size. A Hero can only find one item per search. So if there were multiple items (2 treasures and a secret door) it would take multiple searches or Heroes to find it all. Lower TN items are found first.
+
+Heal - this allows the Hero to take the max heal. This takes one minute. If the effect is granted by another Hero, that hero must spend one minute of time as well.
+
+Travel - a party can move 100' per minute at walking speed twice that if they run.
+
+Door - it takes no time if the door is not locked or blocked.
+
+Breech - if the door is locked or somehow blocked this is the action. It takes 1 minute to breach a door. This could be done by picking a lock, using brute force, or explosives. The GM determines a TN for each of the actions. Each extra minute you spend breaching reduces the relevant TN by 2.
+
+Analyze Treasure - this is how you learn what that piece of treasure does. This takes one minute and utilizes Chronoline Node.

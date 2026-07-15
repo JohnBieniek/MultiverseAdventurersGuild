@@ -1,0 +1,81 @@
+Vehicle combat
+
+A vehicle can be defined in 2 ways: as a vehicle or as a drone. A vehicle has a driver. A drone is piloted remotely using the Control Drone talent. A vehicle can function both ways.
+
+A drone costs 1500 credits. You choose the size at purchase.
+
+The following stats define a vehicle.
+
+Size: (see chart)
+
+Mode: (ground or flying vehicle)
+
+Str: speed
+
+Dex - maneuverability
+
+Hit Points: The vehicle has hit points based on its size.
+
+Defense - normal costs but the size of a vehicle factors into how hard it is to hit. Take the reverse stat for size. Ie (-4) size adds (+4) to AV. So a microdrone would have an AV of 11 + 4 (size).
+
+All vehicles start with stats of (0). Players can spend experience to buy up the 2 stats and AV. You can take negatives in stats to boost other stats. A player gains 3 points/XP to modify the vehicle/Drone. These can be reallocated before starting the vehicle/Drone.
+
+GM will determine acceptable sizes for the campaign.
+
+Speed in combat is relative. Out of combat various modes of travel have their own speeds. Use logic or internet guidelines.
+
+Size/HP/Armaments
+
+(-4) Micro - the size of a bee/2/none
+
+(-3) Up to the size of 2 loaves of bread/4/pistol
+
+(-2) The size of a person/8/medium
+
+(-1) Motorcycle/medium
+
+(0) - Car/20/long
+
+(+1) Minivan)SUV/30
+
+(+2) Full size truck/ 6 seater airplane/helicopter/40
+
+(+3) Semi/mid sized plane/ Attack Helicopter/80
+
+(+4) Full sized jet/120
+
+Speed in combat is relative.
+
+When operating a vehicle, use your skill and the vehicle stats. For mental stats it's all the Hero.
+
+Players can use Ablative Armor Talent. It is bought for use by the drone only and costs as a One Shot in terms of energy and lasts through the combat. One player captains the vehicle. Each player man's a gun. Combat takes turns. A vehicle can also be a person.
+
+Start with a range of 1 to 5,
+
+0 being adjacent to 5 far away.
+
+Short range is 0 to 1. Medium to 3. Long to 5.
+
+Later: "AV = 11 + level adjustment + (Armor*2)." is (armor *2) +1 for medium, (+2) long +/- size.
+
+The players roll initiative based on the pilot. The pilot goes first and must pick from the following maneuvers;
+
+For every 25% of damage to the Vehicle/Drone, all roles suffer a(+2) to TN and a (-2) to AV. The driver/pilot also loses 25% of their current HP if they are utilizing the vehicle as a drone.
+
+Attack
+
+Vehicles operate on the driver's initiative. The Driver makes a modified c11 vehicle roll. Each success increases the given effect. Vehicle gunners can use standard per turn actions, but can't use a move action to move. The vehicle/drone has as many firearms as there are players in the combat. The vehicle/drone can have one permanent armament used by the pilot and subjected to size restrictions.
+
+Offense - (-2) to vehicle AV and (+1)/success to the pool for attack or damage. For instance, with 3 successes I might opt for (+2) attack and (+1) damage. All attacks by the occupants gain these bonuses. Max (+3 in total bonuses.)
+
+Defense - (-2) to attack. (+1) added to vehicle AV per success. Max (+3).
+
+Stand pat - the captain opts to make an attack this round. He must make a successful Vehicle skill check to continue the pursuit safely.
+
+Flee/pursue - Range is relative. If you can see it, you can technically hit it. Fleeing establishes range penalties until you are no longer a viable target. The base TN is 11. Every roll 2 above that creates a(-1) range penalty against your enemy. Pursue eliminates those penalties. Compare the strength of each Vehicle. Take the difference between the 2 vehicles. The superior strength adds the difference to flee/pursue A vehicle is considered out of range after 2 failed attacks or 6 + range. It has either moved too far or is obstructed.
+
+Use Drone/vehicle Dex and player's Vehicle skill for rolls. This creates an opposed test with a TN of 11. For each 90 degree turn the player's TN increases by 2.
+
+Vehicle combat is cinematic. The GM can add obstructions or modify the course as needed.
+
+Destroyed drones are repaired for 5 Credits.

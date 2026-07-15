@@ -1,7 +1,7 @@
 Welcome to the Talented Multiverse
 
 Talents
-“Be the best version of yourself.”
+Be the best version of yourself.
 Talents are the engine that runs the game. You use them to define how your character interacts with the world. They could be cyberwear. They can represent spells you cast. Some could represent better living through superior chemistry: drugs.
 Talents are paid with energy based on Force (F): F 1 = 1, F2 = 4, F3= 9, F4= 16.
 Any player can buy a talent for 5xp per talent. Melee attacks use strength and ranged attacks use dexterity. Players gain Talents as their level increases.
@@ -9,9 +9,9 @@ Any player can buy a talent for 5xp per talent. Melee attacks use strength and r
 The following Types of Talents exist;
 Technical: These talents are derived from technological/mechanical means. I could use the Fly talent as technology by calling it a Jet Pack as an item.
 Magical: These are inherent Talents. Many act like spells, such as a fireball. I could take Fly with a magical ring as an item.
-Racial: These are Talents derived from one’s race.
+Racial: These are Talents derived from one's race.
 Archetype: These are Talents specific to the Archetype. For instance, the Barbarian Ferocious Attack.
-When a Talent is used, it is “activated”.
+When a Talent is used, it is activated.
 You can only use a Force according to your level.
 Many Talents operate for 5 minutes after the conflict ends. Begin another combat before the five minutes end, and the clock resets. The Heroes will have to make difficult choices in marshaling their resources. Should they move quickly to the next encounter to maintain the edge given by their talents or spend time searching for loot and avoiding traps?
 Some attacks will use Athletics or Ego to resist. You use your Athletics/Ego + level for defense. It is an 11 + ego + level for defense against a TN.
@@ -24,7 +24,7 @@ Combat Talents act as modifiers.
 
 Combat Talents:
 These talents further define how you operate during combat. See Archetypes for recommendations. These are self-only.
-Once activated, a Combat talent is active until the end of combat + 5 minutes. You can end a talent as a free action. You can have a talent active for one roll at the following energy: 1(1), 2(2), 3(4), 4(8). This does not count toward your number of slots. These are called one-shots. You have slots that represent the number of talents you can have active at any given time. You are allotted one slot at Level Zero and an additional slot at Levels 4 and 7. A free talent means it doesn’t cost energy to use and everyone can use it without purchasing it. It still counts as a slot unless it is a one-shot. Unless otherwise specified, the activation counts toward your activation count and slots. You gain slots as you advance in level. You cannot activate or purchase Talents of a Force higher than your level allows.
+Once activated, a Combat talent is active until the end of combat + 5 minutes. You can end a talent as a free action. You can have a talent active for one roll at the following energy: 1(1), 2(2), 3(4), 4(8). This does not count toward your number of slots. These are called one-shots. You have slots that represent the number of talents you can have active at any given time. You are allotted one slot at Level Zero and an additional slot at Levels 4 and 7. A free talent means it doesn't cost energy to use and everyone can use it without purchasing it. It still counts as a slot unless it is a one-shot. Unless otherwise specified, the activation counts toward your activation count and slots. You gain slots as you advance in level. You cannot activate or purchase Talents of a Force higher than your level allows.
 
 Aim
 
@@ -41,7 +41,7 @@ Ambush
 
 Description: Catch your opponent by surprise to gain an advantage.
 
-Mechanic: If you attack before your enemy has its first turn, or if a party member is attacking the same target, modify the attack by adding (+1d4)/F between To Hit and damage/F. Max 2. Can’t be combined with Ferocious Attack or Aim.
+Mechanic: If you attack before your enemy has its first turn, or if a party member is attacking the same target, modify the attack by adding (+1d4)/F between To Hit and damage/F. Max 2. Can't be combined with Ferocious Attack or Aim.
 
 Bring on the Pain
 
@@ -80,7 +80,7 @@ Drunken Attack
 
 Description: You move in unpredictable fits and starts, putting your target at a disadvantage. Combined with charge, it eliminates the need for a straight line to attack.
 
-Mechanic: F2. Your target can not be set for the charge. You only need to move 10,’ but not in a straight line.
+Mechanic: F2. Your target can not be set for the charge. You only need to move 10, but not in a straight line.
 
 Escape:
 Description: Leave a threatened zone safely.
@@ -120,18 +120,18 @@ Mechanic: pay F2 and increase weapon range by 1 step. Pay F3 and increase the ra
 
 Melee Reach (Major)
 
-Description: You can make a melee attack out to 50’. You move in a line and are not subject to a reactive attack. You end the attack where you started.
-Mechanic: make a melee attack against a target up to 50’ away. F3.
+Description: You can make a melee attack out to 50. You move in a line and are not subject to a reactive attack. You end the attack where you started.
+Mechanic: make a melee attack against a target up to 50 away. F3.
 
 Melee Reach (minor)
 
 Description: You can extend your melee attack beyond adjacent squares. You end in the space you attacked from. Does not provoke a reactive attack.
 
-Mechanic: Make a melee attack 5’/ F level. Max 2 levels.
+Mechanic: Make a melee attack 5/ F level. Max 2 levels.
 
 Multi-attack:
 
-Description: Use this when you want to attack more than once. This can simulate a shotgun, 2-handed weapon, double-tap, burst, or automatic fire, or AOE Talent. You can hit more than one target, but they must be within 10’ of one another. This doesn't stop anyone from firing their weapons on auto or two-weapon fighting. It just means you only hit once.
+Description: Use this when you want to attack more than once. This can simulate a shotgun, 2-handed weapon, double-tap, burst, or automatic fire, or AOE Talent. You can hit more than one target, but they must be within 10 of one another. This doesn't stop anyone from firing their weapons on auto or two-weapon fighting. It just means you only hit once.
 Mechanic: Make 2 attacks. Roll for each. F3. 3 attacks for F4.
 
 Offensive Attack
@@ -143,19 +143,19 @@ Parry
 
 Description: increase Defense vs. a melee attack.
 
-Mechanic: increase Defense by (+1d6)/F. Max F1. Counts against range weapons within 5’ of the character. Use a reaction to activate.
+Mechanic: increase Defense by (+1d6)/F. Max F1. Counts against range weapons within 5 of the character. Use a reaction to activate.
 
 Push
 
 Description: An attack that can be combined with the attack roll. The attack moves the target away from the caster.
 
-Mechanic: Move the target away by (+3d6’) /F.
+Mechanic: Move the target away by (+3d6) /F.
 
 Run
 
 Description: increase your move
 
-Mechanics: As part of a move action, you may run an additional (3d6’)/F.
+Mechanics: As part of a move action, you may run an additional (3d6)/F.
 
 Running Attack
 
@@ -165,17 +165,17 @@ Mechanic: Any time you activate the Run talent and move your full move, you incr
 
 Suppressive Fire:
 Description: Lay down a field of fire.
-Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10’ wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a resilience 18S roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
+Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10 wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a resilience 18S roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
 Tactical commander: You are a commander of men. You direct your fellow Heroes in Combat to gain their max efficiency.
 Mechanic: Add your Charisma score and (+1d4) to your initiative check. Use your initiative for the party. Not usable as a one-shot, but can be activated in later rounds of combat.
 
 Trip
 
 Description: Cause the target to trip. It can be part of the attack.
-Mechanic: F2. Target makes an Resiliance 14S or is tripped and has the Prtoned condition. If four-legged or more than 8’ tall, get a (+4) defense bonus to avoid the trip.
+Mechanic: F2. Target makes an Resiliance 14S or is tripped and has the Prtoned condition. If four-legged or more than 8 tall, get a (+4) defense bonus to avoid the trip.
 
 AOE:
-These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50’), medium (200), long (+200).
+These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50), medium (200), long (+200).
 There are 4 shapes of the AOE.
 Ground zero - you drop the AOE at your feet, but not on you. Doesn't require a to-hit roll. Affects all targets in adjacent squares around you.
 Square - You aim an explosive at a square with a TN of 14. If you miss, the device scatters. It misses by 5 feet for every 2 points you miss on the roll. If a device misses, roll a d6. On a 1 or 2, miss a square to the left. 3 and 4 miss up the middle. 5 or 6 misses to the right. Odd on the roll indicates a shorted throw, even if it went too far. The square the explosive lands on and the surrounding 9 squares take full damage, halved on a successful 15T Athletic test.
@@ -249,7 +249,7 @@ Cost: move action.
 
 Detect life:
 Description: Detect the location of living organisms within the spell radius.
-Mechanic: Detect living creatures within 100’. Works through walls and debris. F1.
+Mechanic: Detect living creatures within 100. Works through walls and debris. F1.
 Duration: 10 minutes
 Cost: move action.
 
@@ -266,7 +266,7 @@ Duration: immediate
 Cost: move action.
 Indestructible:
 Description - You are harder to kill.
-Mechanic - any time you are dropped below “0” HP, you immediately stabilize at (+1d4) and the Talent ends for that target. F2 + 1 energy per target.
+Mechanic - any time you are dropped below 0 HP, you immediately stabilize at (+1d4) and the Talent ends for that target. F2 + 1 energy per target.
 Duration: 8 hours
 Cost: Move action
 
@@ -298,7 +298,7 @@ Duration: combat + 5 minutes
 Cost: Attack action
 
 Grand Illusion:
-Description: Create an illusion with audio, visual, thermal, and olfactory components based on force. An illusion can occupy a 10’ cube.
+Description: Create an illusion with audio, visual, thermal, and olfactory components based on force. An illusion can occupy a 10 cube.
 Mechanic: F - audio or visual. F2 - audio and visual. F3 - add thermal. F4 - add olfactory. Targets disbelieve illusion on an observation s12 plus F*2. An F3 save would be 18S. You use your move action to manipulate the illusion.
 Duration: combat + 5 minutes
 Cost: Attack action.
@@ -311,7 +311,7 @@ Cost: Attack action
 
 Invisibility (Major):
 Description: same as minor except Observation is a 30S.
-Mechanic: F3. The attack doesn’t end the effect.
+Mechanic: F3. The attack doesn't end the effect.
 Duration: combat + 5 minutes
 Cost: Attack action
 
@@ -341,13 +341,13 @@ Movement:
 
 Fly (minor):
 Description: This talent allows for flight in Combat.
-Mechanic: You can fly 15’ +5’/F.
+Mechanic: You can fly 15 +5/F.
 Duration: combat + five minutes
 Cost: Move Action
 
 Fly (Major):
 Description: This allows you to fly outside of Combat.
-Mechanic: Fly at the same speed as the party. F3. In combat, the Hero has Fly (30’) until the end of combat, at which time it reverts to major.
+Mechanic: Fly at the same speed as the party. F3. In combat, the Hero has Fly (30) until the end of combat, at which time it reverts to major.
 Duration: 8 hours.
 Cost: Move action.
 
@@ -359,7 +359,7 @@ Cost: Attack action.
 
 Teleport: (minor)
 Description: This talent allows for movement from one spot to another in Combat.
-Mechanic: As a move action. You can teleport 40’ +10’/F. Max F 2. Target doesn't incur a reactive strike.
+Mechanic: As a move action. You can teleport 40 +10/F. Max F 2. Target doesn't incur a reactive strike.
 Duration: scene.
 Cost: Move action
 
@@ -377,7 +377,7 @@ Cost: Uninterrupted concentration for 1 minute.
 
 Wallrunner: (minor)
 Description: This talent allows for running up and down walls in Combat. You may end the turn on a surface other than the ground.
-Mechanic: You can run your movement up walls. F 2. Can’t run on ceilings.
+Mechanic: You can run your movement up walls. F 2. Can't run on ceilings.
 Duration: combat + five minutes
 Cost: move action.
 
@@ -390,8 +390,8 @@ Duration: 8 hours.
 Action: 1 minute
 
 Create Wall:
-Description: Create a wall that takes up a 10’ space. The wall is 6” thick
-Mechanic: destroy a 10’ section by doing damage to the wall. Attacks automatically hit. The wall section has F *20 HP. 2 sections on activation, plus an additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
+Description: Create a wall that takes up a 10 space. The wall is 6 thick
+Mechanic: destroy a 10 section by doing damage to the wall. Attacks automatically hit. The wall section has F *20 HP. 2 sections on activation, plus an additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
 Duration: 5 minutes
 Action: attack.
 
@@ -415,7 +415,7 @@ Action: Skill action.
 Hacker:
 Description: You are able to manipulate the private net. You use your technology skills.
 Mechanic: This represents an item used to hack. It could be straight from your brain, a computer, or a data device. Etc. This talent grants a (+1d4)/F (Max F2) bonus to all D20 rolls during the hack. F1 to use. This represents hacking when it is directly linked to the system or done wirelessly. You can also use other talents when hacking. All attacks in the Net use Range Weapons skills. There are no ranges. You use your HP. When you drop below (0) HP, you are kicked off the net and incapacitated d6 - End before you act again.
-Duration: 8 hours. (Special note: in environments where this talent can’t be used, the player may temporarily substitute another Talent.)
+Duration: 8 hours. (Special note: in environments where this talent can't be used, the player may temporarily substitute another Talent.)
 Implant Thought: Give a short order (run away, drop your weapons, let us pass, do nothing)
 Description: Target follows the implanted thought for the duration of the talent.
 Mechanics: Melee attack unless range increments are paid for. Target is aware of the attack unless the attacker pays an additional 2 energy. Target must make an Ego S14 roll to end the effect. Target rolls each turn in combat or every minute outside of combat. F2.

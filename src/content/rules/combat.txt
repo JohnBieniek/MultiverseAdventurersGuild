@@ -1,0 +1,53 @@
+Combat
+
+Attack works like this.
+
+The formula is:
+
+Str/Dex + attack skill + Range or Melee weapon enhancement + modifier vs target number of 12 modified by defensive bonus + defense = Defense.
+
+Range weapons can be used at point-blank range with a (-2) modifier to the attack.
+
+Grappling - see Grappling Talent
+
+Here are a few combat modifiers which cost nothing to use:
+
+Flank - (+2) to hit, when you are adjacent and attack an opponent when another Hero is also adjacent to that opponent. Both Heroes can benefit.
+
+Cover (+2) to AV when making a ranged attack while behind a solid object.
+
+Threat Response - if you leave an area that another player/enemy can reach, they get a free attack against you if they have a reaction left.
+
+Defense
+
+Defense = 12 + defense bonus + Defense rating
+
+Heroes start with a Defense rating of 1 and a Defense of 13. Defense rating is a score from 1 to 9. Hereos get level 1 for free. Defense ratins are increased by the following table: 2 for 2, 2 for 3, 4 for 4, 5 for 4, 6 for 8, and 8 for 9. Defense can represent various types of armor, a high ability to evade attack. Let's say I wore level-one leather armor. That would make the dfense 13. Defense is a game mechanic. Things like a shield would be a part of that number if you chose. Examples of armor include leather and plate armor. Hides, amulet, off-hand weapon, Kevlar. Leather could be (+3), and plate could be (+1). Your choice of armor type doesn't lessen or increase the Defense. Your Defense could also be an effect caused by your innate ability to dodge attacks.
+
+Initiative
+
+Players roll d20 +/- (intuition modifier). Ties go to the Heroes. The Heroes initiative is based on the Heroes' best initiative roll.
+
+Weapons
+
+Just like anything else, the points you pay for equal the quality and thus the bonus. The enhancement applies to ranged or Melee. This is bought for each. The player starts with a (+1) in one weapon type.
+
+A weapon can be magical. My weapon could be a fire bolt, a psychic blade, lightning, poison, or cold. Magic attacks are considered melee attacks and do melee damage. A Hero can pay 1 energy to extend it to short, 2 for medium, and 3 for long range. This then uses dexterity for the attack. Once this is paid, it lasts the length of the combat. A Hero could increase the range during play by paying the difference. So a short would cost 1 point. If I made it medium, I would pay only 1 point. This creates a ranged attack which uses Dex and does d4 damage. The increase in range lasts for Combat + 5 minutes.
+
+Weapons gain a bonus to hit and damage rolls.
+
+A weapon modifies the attack skill and, therefore, can be used with a ranged or melee weapon. You pay only once for the skill.
+
+A weapon is purchased like any other skill or stat. Weapons are a big part of the game. Personalize them. I don't have a Pistol. Instead, it's a Fortune Arms 540A 9mm with the Kandid Grip and semi-automatic capabilities. My melee weapon is a Keolon Era longsword. It's fun and good RP.
+
+Equipment
+
+Heroes are assumed to have whatever equipment they need to use their skills. It's better to assume Heroes have what they need most of the time.
+
+We could spend days defining hero money and how to spend it. Instead, use the campaign's logic. What do they need to accomplish their goals? Maybe you get most things free, but have to role-play obtaining a specific piece of equipment or spend Credits. Once again, the idea is to spend more time playing and less time shopping. We want to encourage creativity. If the players come up with a cool plan, assume they have the materials to execute it or charge Credits to make it happen. Assume each player has an "equipment bag" that contains the equipment they need to play the game. It contains everything they think the player may need, but you don't want to spend a lot of time filling it out. If the character wants a piece of equipment, the question should be asked, "Is this something I would have put on my sheet for this Hero?" In an RP sense, is this something the player could reasonably be assumed to have? Alternatively, players could spend Credits on specialty equipment.
+
+Items are essentially equipment and cost nothing to have. I don't pay money for the armor itself. I pay for the score and the item would be whatever armor I wanted to call it.
+
+In modern and science fiction environments (Cyberpunk, Space opera), heroes would have a vehicle and a home for free.
+
+Proxy - Item that stands in for the player. A weapon proxy is a weapon like any other. You use the proxy instead of a sword or other objects. This proxy uses your stats, and you take the damage dealt to it. It conforms to weapon rules. For example, you could use an animal, a drone, or a spirit as a proxy. Any damage to the simple proxy damages the wielder. If the proxy attacks a target next to you, it is a melee attack. The proxy can attack out to short range as a ranged attack using ranged attack damage and DEX.

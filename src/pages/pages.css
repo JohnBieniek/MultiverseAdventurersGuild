@@ -25,7 +25,7 @@
 /* Home Page */
 .home-intro {
   display: grid;
-  grid-template-columns: minmax(140px, 240px) minmax(0, 620px);
+  grid-template-columns: minmax(140px, 230px) minmax(0, 820px);
   align-items: center;
   gap: 1.5rem;
   justify-content: center;
@@ -36,7 +36,7 @@
   --knight-blue: #1f5f8c;
   background: var(--knight-blue);
   color: white;
-  padding: 2rem;
+  padding: 1.5rem 1.75rem;
   border-radius: 8px;
   text-align: left;
 }
@@ -51,15 +51,15 @@
 
 .hero h1 {
   color: white;
-  font-size: 1.8rem;
-  line-height: 1.2;
-  margin-bottom: 0.75rem;
+  font-size: 1.55rem;
+  line-height: 1.15;
+  margin-bottom: 0.55rem;
 }
 
 .hero p {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 0;
 }
 
@@ -125,10 +125,11 @@
 
 .guide-subnav {
   position: sticky;
-  top: var(--sticky-nav-offset);
+  top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap));
   z-index: 90;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
   background: var(--shield-cream);
   padding: 0.75rem 0;
@@ -139,6 +140,8 @@
 .guide-subnav a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   min-height: 36px;
   padding: 0.45rem 0.75rem;
   background: #33612F;
@@ -155,7 +158,7 @@
 }
 
 .guide-section {
-  scroll-margin-top: calc(var(--sticky-nav-offset) + 90px);
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + 90px);
 }
 
 .guide-section h2 {
@@ -284,12 +287,12 @@
   }
 
   .hero {
-    padding: 2rem;
+    padding: 1.35rem;
     text-align: center;
   }
 
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .hero-knight {
@@ -310,7 +313,7 @@
   }
 
   .guide-subnav {
-    top: var(--sticky-nav-offset);
+    top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap));
     max-height: 42vh;
     overflow-y: auto;
   }
@@ -322,6 +325,6 @@
   }
 
   .guide-section {
-    scroll-margin-top: calc(var(--sticky-nav-offset) + 260px);
+    scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + 260px);
   }
 }

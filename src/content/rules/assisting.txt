@@ -1,0 +1,5 @@
+Assisting
+
+Two Heroes can help complete a skill. Use the better skill paired to the better stat. One Hero rolls the attempt.
+
+If you fail a non-combat skill, you can try again. This adds +2 to the TN.

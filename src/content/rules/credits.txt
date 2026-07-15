@@ -1,0 +1,41 @@
+Credits
+
+This represents several resources for the party. This is a resource for all members to use during adventures to buy special items, pay off NPCs, etc. Credits are how Heroes are paid for their efforts. An NPC will negotiate the mission price with the party. That price becomes a number of Credits the party will earn at the end of each play session. Credits may be negotiated with an upfront amount, ready for immediate use. Keep in mind this is a per-session amount. If I negotiate 10 Credits, I get that amount for every session played. Each Hero would have their own credits to spend. The group should also put away credits to purchase items that benefit the group. Unused Credits do not roll over into the next session.
+
+Heroes automatically have a vehicle and a place to live.
+
+Missions grant 4000 Credits on average. Easy missions might cost less than more difficult ones. This is subject to negotiation. This amount is granted after each playing session.
+
+Pay off a contact - 1 credit will get basic information, more could yield more detailed information. 3+ Credits will get a favor from a Contact, such as referring them to someone else who can help, finding a tricky piece of gear, or performing an action for them.
+
+A Hero can spend 1000 Credits to buy a grenade.
+
+Sneak a small weapon by security. Based on security level. Less than (0), 500 credits. 1000 for (0), and F * 2.
+
+"Legitimate" ID. (AKA, Global Relevant Identification Number or GRIN) Many settings require a legal ID to pay for items, bribe contacts, purchase drones, or vehicle upgrades. An ID costs (0)/1000, 2/4000, 3/9000, 4/16000 per month. GRINs require a steady income to cover housing, food, and other essentials. Your GRIN level is also reflected in the way you live. Any time you make a purchase, your GRIN is scrutinized. The seller's security level is compared with the GRIN's level. For instance, if the seller has a (-2) and my GRIN is (+1), I have a (+2) to my roll. The TN to beat your Identity is 18S. Roll only when it would affect play. Grocery shopping, no. Getting into the cool club or a multinational, absolutely.
+
+Cover Identity - Half the cost for a legitimate Global Relevant Identification Number (GRIN). Max F3. Preestablished paper/identification for the adventure. Usable until burned, which occurs when the GRIN fails a security check. Also, any crimes associated with the GRIN remain active.
+
+Rumor Mill - 1000 Credits, social interaction reveals a solid, reliable lead. Twice per session.
+
+2G would yield a home with a (+2) value.
+
+Name Drop - 1000 Credits
+
+Invoke a known organization, Guild contact, or fixer. Gain +2 to Influence for this interaction. 1000 Credits
+
+Leverage - 2000 Credits. Turn a neutral NPC into a temporary ally for the scene (cooperative, not loyal).
+
+Call in a Favor - 500 Credits. A contact intervenes off-screen: distraction, transport, safe house, or gear hookup.
+
+Bad Reputation - 1500 Credits. Your reputation precedes you; hostile NPCs hesitate or give you a brief opening.
+
+Bribery - Spend Credits to bribe NPCs. An Influence 11S check reveals what constitutes a reasonable bribe.
+
+A simple drone proxy would make it useful for a range attack and is free.
+
+Heroes can buy a Drone for 1500 gold for surveillance purposes. It is destroyed after taking 10HP. Observation 17S.
+
+Treasure
+
+Some people would argue that loot is the whole point of adventuring. This is a challenge in this system because money doesn't exist. This is handled in 2 ways. The first is through Credits. This gives Heroes more effective ways to operate during a mission. The second is through treasure. These are items that are found during the adventure. It takes at least 1 minute to search for treasure. If you spend more time, you increase your chances of finding it by decreasing the Observation TN by (-2). Once found your Chronoline, it will tell you what it is and how it works. Treasure is a party resource. This means any player can use a treasure. It's not considered to be held by any one Hero.

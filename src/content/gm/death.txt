@@ -1,0 +1,3 @@
+Player Death
+
+A Hero with "0" HP can only take a move action. After a Hero drops below zero hit points no matter how far below "0", they have a -1 HP total. They start bleeding out. Each turn, they lose 1HP. At -5, they die. On each turn, the Hero rolls to stabilize using their endurance stat as a modifier. The TN is 11s. A Hero can spend a Credit to automatically stabilize.

@@ -1,0 +1,17 @@
+Contacts
+
+It's not what you know, but who you know. These are your contacts. You get 3 contacts +/- influence stat. Your contacts can provide work, information, equipment, etc. You can choose them during gameplay.
+
+Flesh them out. How do you know them? Do you owe/are you owed favors? What is the nature of the relationship?
+
+Some examples are: a journalist, a cop, a criminal, a bartender.
+
+You can use Gold to obtain information, favors, and more.
+
+Your contacts exist throughout the Multiverse. So if you have a bartender contact, you can use them in any setting. They would act similarly in each Multiverse.
+
+The Rating
+
+We determine various traits using (- 4) to (+4). As a GM I don't want to have to calculate the size of a village or the security level of a city. The game doesn't want to bog down on some details. Instead you can define everything from (-4) to (+4). This is the rating. Remember 0 is average. So let's say you want to know the population of a given city. Small might be a (-4), a huge city (+4). You define most things this way; wealth levels, tech levels ect. The number could be used to alter TN value x 2. For instance, if I defined the police force as a (+2) I could add 4 to that number to TNs when encountering security forces.
+
+The value can be used for modifying TN.

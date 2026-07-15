@@ -1,0 +1,11 @@
+Healing
+
+To heal in combat takes a move action. I could shoot a gun and heal in the same turn. Success is automatic and stabilizes below 0 HP as a move action. Out of combat, you heal the max, but it takes one minute. Through natural healing, a Hero fully heals after sleep and regains all energy points.
+
+Trauma patches. These are medical devices that you use when wounded. It takes an attack action, and you can use as many as you want at once. It costs 2 Gold per Trauma Patch and it heals 2d4 per patch.
+
+Player Death
+
+A Hero with "0" HP can only take a move action. After a Hero drops below zero hit points no matter how far below "0", they have a -1 HP total. They start bleeding out. Each turn, they lose 1HP. At -5, they die. On each turn, the Hero rolls to stabilize using their endurance stat as a modifier. The TN is 11s. A Hero can spend a Credit to automatically stabilize.
+
+Heal - this allows the Hero to take the max heal. This takes one minute. If the effect is granted by another Hero, that hero must spend one minute of time as well.

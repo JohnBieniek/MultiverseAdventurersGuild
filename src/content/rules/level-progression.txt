@@ -1,0 +1,35 @@
+How to Navigate the Rules.
+
+There are 3 levels to play.
+
+Basic quick start and play. Perfect for one shots or introductions to the game. You start at Level "0". Read the text to build a character. Level "0" is about learning game concepts, most importantly the basic roll. The GM interprets and explains rules as you go. It's important to listen to the Heroes concept and translate it into game terms. Explain the tutorial nature of the level. The Hero doesn't need to know any rules to start with or even read anything. Incorporate Talents when the Heroes might need them.
+
+Campaign. Using Talents demonstrates how to use them and how they affect gameplay. Talents are a core concept. At this point, encourage your Heroes to at least read the combat Talents. Ask your Heroes about the cool things they want to do and introduce them to the particular Talent.
+
+Advanced play. At this point, encourage your Heroes to read all the player material. Much of the material, in particular the section on Archetypes, will help advanced Heroes discover new character concepts. May consider starting at level 1 or higher.
+
+Force, Energy, and Talents
+
+Force (F): Maximum power tier you can use (unlocked by level).
+
+Energy (EN): Resource you spend to activate talents.
+
+Slots: Number of sustained combat talents you can keep active.
+
+Force Energy Cost
+
+F1 1/1
+
+F2 4/2
+
+F3 9/4
+
+F4 16/8
+
+One-shots never occupy a slot. Sustained effects do.
+
+For experience, you pay for each increase. To achieve a star score of (+3) from (+0) I would pay 1 for a (+1), 4 more for a(+2) and 9 for a (+3). You pay for each step.
+
+Level
+
+See Level progression under The Basic Heroes Handbook.
