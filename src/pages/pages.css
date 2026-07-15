@@ -138,7 +138,7 @@
   justify-content: center;
   gap: 0.3rem;
   background: var(--shield-cream);
-  padding: 0.25rem 0 0.3rem;
+  padding: 0.55rem 0 0.3rem;
   margin-bottom: 2rem;
   box-shadow: 0 8px 12px -12px rgba(0, 0, 0, 0.35);
 }

@@ -416,8 +416,8 @@ Hacker:
 Description: You are able to manipulate the private net. You use your technology skills.
 Mechanic: This represents an item used to hack. It could be straight from your brain, a computer, or a data device. Etc. This talent grants a (+1d4)/F (Max F2) bonus to all D20 rolls during the hack. F1 to use. This represents hacking when it is directly linked to the system or done wirelessly. You can also use other talents when hacking. All attacks in the Net use Range Weapons skills. There are no ranges. You use your HP. When you drop below (0) HP, you are kicked off the net and incapacitated d6 - End before you act again.
 Duration: 8 hours. (Special note: in environments where this talent can't be used, the player may temporarily substitute another Talent.)
-Implant Thought: Give a short order (run away, drop your weapons, let us pass, do nothing)
-Description: Target follows the implanted thought for the duration of the talent.
+Implant Thought:
+Description: Give a short order (run away, drop your weapons, let us pass, do nothing). Target follows the implanted thought for the duration of the talent.
 Mechanics: Melee attack unless range increments are paid for. Target is aware of the attack unless the attacker pays an additional 2 energy. Target must make an Ego S14 roll to end the effect. Target rolls each turn in combat or every minute outside of combat. F2.
 Duration: 5 minutes.
 Action: Attack action
