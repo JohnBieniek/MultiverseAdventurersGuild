@@ -68,8 +68,7 @@
 }
 
 .content-card {
-  --belt-gold: #c7953d;
-  background: var(--belt-gold);
+  background: white;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -83,16 +82,16 @@
 
 .content-card h2 {
   margin-top: 0;
-  color: #1d2630;
+  color: #667eea;
 }
 
 .content-card p {
-  color: #2f2618;
+  color: #555;
 }
 
 /* Basic Pages */
 .basic-section {
-  background: var(--shield-cream);
+  background: white;
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 8px;
@@ -169,7 +168,7 @@
 }
 
 .contact-form {
-  background: var(--shield-cream);
+  background: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -220,7 +219,7 @@
 }
 
 .contact-info {
-  background: var(--shield-cream);
+  background: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

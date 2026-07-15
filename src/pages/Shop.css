@@ -43,7 +43,7 @@
 }
 
 .product-card {
-  background: var(--shield-cream);
+  background: white;
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
