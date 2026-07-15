@@ -395,7 +395,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --sticky-nav-offset: 96px;
+    --site-nav-height: 96px;
   }
 
   .page h1 {

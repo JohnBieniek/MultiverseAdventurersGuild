@@ -1,13 +1,17 @@
 .navbar {
   background-color: #33612F;
-  padding: 0.35rem 0;
+  min-height: var(--site-nav-height);
+  padding: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  align-items: center;
 }
 
 .nav-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -58,9 +62,15 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    min-height: var(--site-nav-height);
+  }
+
   .nav-container {
     flex-direction: column;
     gap: 0.35rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
 
   .nav-menu {

@@ -6,7 +6,8 @@
 
 :root {
   --shield-cream: #f8edd4;
-  --sticky-nav-offset: 54px;
+  --site-nav-height: 56px;
+  --sticky-nav-offset: var(--site-nav-height);
   --sticky-subnav-gap: 0px;
 }
 
