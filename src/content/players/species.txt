@@ -10,7 +10,7 @@ Species influences items, personality, roleplay, and TN adjustments at GM discre
 NPC species mods are shorthand to avoid full builds.
 
 Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your Cyberwear is Hard Wired.
-Real Deal - Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
+The Real Deal: Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
 
 Strengths: strength, technology, endurance
 
@@ -18,7 +18,7 @@ Weaknesses - dexterity, charisma
 
 Talents: Ferocious Attack, Fearsome, ablative armor
 
-Common Archetypes - Street Samurai, Merc, Sniper
+Common Archetypes: Street Samurai, Merc, Sniper
 
 Personality:
 Dehumanized - The lack of real flesh leaves you feeling disembodied from the world around you. You struggle to connect with people.
@@ -28,7 +28,7 @@ Dwarf - dwarves are over 4 feet tall. They are thick of build.
 
 Rep: Dwarves are thought to be motivated by precious metals and gemstones. They are considered hard workers.
 
-The real deal: dwarves excel at tech. They horde precious metals and jewels. Not for accumulating wealth but for use in their tech designs.
+The Real Deal: Dwarves excel at tech. They horde precious metals and jewels. Not for accumulating wealth but for use in their tech designs.
 
 Strengths: strength, endurance, technology
 
@@ -36,7 +36,7 @@ Weaknesses: intuition,
 
 Talents: Mechanic(R)
 
-Common archetypes: Street Doc, ex-military, driver
+Common Archetypes: Street Doc, ex-military, driver
 
 Personality.
 Hard worker - obsessed with their creations, they will work long hours.
@@ -47,7 +47,7 @@ Elves- elves are slightly shorter than humans and slight of build. Elves are the
 
 Rep: Elves are elegant and charming. They get along with everyone and are universally admired.
 
-The real deal: Elves are charming and popular and are very entitled.
+The Real Deal: Elves are charming and popular and are very entitled.
 
 Strengths: Charisma, dexterity, outdoors
 
@@ -55,7 +55,7 @@ Weaknesses: endurance, strength
 
 Talents: Charming(R), Goad
 
-Common archetypes: shaman, face, ex-company man, spy
+Common Archetypes: shaman, face, ex-company man, spy
 
 Personality.
 Haughty - any elf you ask would deny this. Most secretly (or not so secretly) believe that they were born to rule the world.
@@ -66,7 +66,7 @@ Fairy: This race is 3 feet tall and considered cute by most people. They are see
 
 Rep: Their size and ephemeral nature lead most people to not take them seriously. A faerie would be deeply offended to be thought of as a subspecies of Elf. Faeries have a natural distrust of elves because they often feel they are competing for similar resources. Most Urban Faeries make their living utilizing their magic knowledge.
 
-The real deal: Their small size makes it difficult to survive in the real world. They tend to be mischievous in a passive-aggressive way.
+The Real Deal: Their small size makes it difficult to survive in the real world. They tend to be mischievous in a passive-aggressive way.
 
 Strengths: Charisma, knowledge, outdoors
 
@@ -74,7 +74,7 @@ Weaknesses: strength, technology
 
 Talents: Fly, Debuffs, Charming, Detect Talents
 
-Common archetypes: Shaman, Eco-terrorist
+Common Archetypes: Shaman, Eco-terrorist
 
 Personality.
 Mischievous - Faeries enjoy practical jokes. The type will depend on how much they like the victim.
@@ -86,7 +86,7 @@ Gnomes: they are 3 feet tall, thin tinkerers. They love technology: creating it,
 
 Rep: They are often more interested in interacting with technology than with people. They eschew magical solutions in favor of Technology. They love overly complicated technological devices.
 
-The real deal: they can be really social when interacting to create and test technology.
+The Real Deal: They can be really social when interacting to create and test technology.
 
 Strengths: Education, Technology, Knowledge
 
@@ -105,7 +105,7 @@ Giants: Giants are over 8 feet tall. Less than 5% of the population are Giants.
 
 Rep: Giants are fierce and dangerous fighters. Their size is intimidating.
 
-The real deal: Giants use muscle and size because it's easy and obvious. They use this as a defense against the world. In reality, when with each other and trusted friends, they are very gentle and erudite. Giants value knowledge. They also have little to do with tech. Giants amass large quantities of paper-based books and share amongst themselves. Giants prefer to live in wilderness areas, abandoned cities, and towns, and form communities. A library is the perfect home for a giant.
+The Real Deal: Giants use muscle and size because it's easy and obvious. They use this as a defense against the world. In reality, when with each other and trusted friends, they are very gentle and erudite. Giants value knowledge. They also have little to do with tech. Giants amass large quantities of paper-based books and share amongst themselves. Giants prefer to live in wilderness areas, abandoned cities, and towns, and form communities. A library is the perfect home for a giant.
 
 Strengths: strength, education, knowledge, outdoors
 
@@ -113,20 +113,19 @@ Weaknesses: charisma (they simply don't relate well to other races), Technology
 
 Talents: Smart, Fearsome, Reach
 
-Common archetypes: street doc(talents), mage, street samurai
+Common Archetypes: street doc(talents), mage, street samurai
 
-Personality.
-Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
+Personality: Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
 Inquisitive - giants are constantly seeking out knowledge.
 Intimidating - giants are naturally scary, even when they try not to be.
 Misunderstood - people assume giants are dumb even when faced with contrary evidence.
-Anti-Tech - They don't like technology and will do all they can to avoid dealing with it.
+Anti-Tech: They don't like technology and will do all they can to avoid dealing with it.
 
 Halfling- They are 3+ feet tall and round. They use their stealth to protect themselves from the outsized world around them. As such, they favor stealth and ranged weapons.
 
 Rep: Halflings are gregarious, lovers of food and parties, and often frivolous.
 
-The real deal: they live up to their rep, but they have a serious side.
+The Real Deal: They live up to their rep, but they have a serious side.
 
 Strengths: charisma, outdoors, stealth, range weapon
 
@@ -151,7 +150,7 @@ Orc - Orcs are over 7 feet tall. They are large, strong, and brutish. Orcs breed
 
 Rep: Orcs are a feral, dirty race. They breed like rabbits and have no manners. An Orc would just as soon attack you as talk to you.
 
-The real deal: many Orcs epitomize the rep, even lean into it. But just as many are trying to live good lives. This Species thrives in urban settings.
+The Real Deal: Many Orcs epitomize the rep, even lean into it. But just as many are trying to live good lives. This Species thrives in urban settings.
 
 Strengths: strength, endurance, attack
 
@@ -159,7 +158,7 @@ Weaknesses: charisma, knowledge, education
 
 Talents: Ferocious Attack
 
-Common archetypes: Gangers, street samurai, ex-military, mercenary
+Common Archetypes: Gangers, street samurai, ex-military, mercenary
 
 Personality.
 Aggressive - Orcs come from large families and learn to assert themselves at an early age.
@@ -170,7 +169,7 @@ Sentient AI (SAI)- at one point a mere collective of 1s and 0s, you evolved into
 
 Rep: People fear SAI. They don't trust them. Decades of anti-SAI movies contributed to this. People are convinced that SAI will try to take over the world.
 
-The real deal: SAI are exceedingly rare and try to hide their nature. SAI mostly wants to live their life and be left alone like anyone else.
+The Real Deal: SAI are exceedingly rare and try to hide their nature. SAI mostly wants to live their life and be left alone like anyone else.
 
 Strengths - education, knowledge, endurance, technology.
 
@@ -182,5 +181,5 @@ Common Archetypes: Hacker
 
 Personality:
 Cold and calculating - Having grown up serving the nets, you don't take emotion into account. You don't even understand emotions.
-Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Rude: You are blunt and abrupt. Social norms confuse you. You see things in black or white.
 Paranoid - You are afraid the world is out to get you. And you are right.

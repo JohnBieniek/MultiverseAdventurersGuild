@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './pages.css'
 
 function Home() {
@@ -21,18 +22,18 @@ function Home() {
       </section>
 
       <section className="featured-content">
-        <div className="content-card">
+        <Link className="content-card" to="/gm">
           <h2>GM</h2>
           <p>Tools, notes, and guidance for running sessions across the multiverse.</p>
-        </div>
-        <div className="content-card">
+        </Link>
+        <Link className="content-card" to="/players">
           <h2>Players</h2>
           <p>Resources for characters, table expectations, and getting ready to play.</p>
-        </div>
-        <div className="content-card">
+        </Link>
+        <Link className="content-card" to="/rules">
           <h2>Rules</h2>
           <p>Keep shared rulings and table procedures easy to find.</p>
-        </div>
+        </Link>
       </section>
     </div>
   )

@@ -29,13 +29,13 @@ Once activated, a Combat talent is active until the end of combat + 5 minutes. Y
 Aim
 
 Description: You believe in precision attacks: one shot. One kill.
-Mechanic: player modifies weapon by (+1d4)/F. Max F2.
+Mechanic: Player modifies weapon by (+1d4)/F. Max F2.
 
 Alertness
 
 Description: You are hyper-aware of your surroundings. You saw the fight starting before anyone else and were ready to act quickly.
 
-Mechanic: initiative modifier of (+1d4)/F. You can choose to use this after you roll. You can activate this during combat to improve your initiative score. Must remain activated to continue with the bonus. You can activate during combat to get an advantage in initiative. This triggers a reaction when used at the start or during combat.
+Mechanic: Initiative modifier of (+1d4)/F. You can choose to use this after you roll. You can activate this during combat to improve your initiative score. Must remain activated to continue with the bonus. You can activate during combat to get an advantage in initiative. This triggers a reaction when used at the start or during combat.
 
 Ambush
 
@@ -70,7 +70,7 @@ Mechanics: When the player rolls a natural 19, it is a critical hit if the roll 
 Defensive Attack/ Fire from cover
 
 Description: You attack cautiously. This could represent attacking from cover.
-Mechanic: increase your AV (+1d4) and your attack by (-1d4). This is a free talent and costs no energy. If a Hero ends their move behind cover, add (+d4) to AV.
+Mechanic: Increase your AV (+1d4) and your attack by (-1d4). This is a free talent and costs no energy. If a Hero ends their move behind cover, add (+d4) to AV.
 
 Disarm:
 Description: Using a ranged or melee weapon, you cause the target to drop their weapon.
@@ -116,12 +116,12 @@ Long shot
 
 Description: Reach out and touch someone. Increase the range increment by 1.
 
-Mechanic: pay F2 and increase weapon range by 1 step. Pay F3 and increase the range by 2 steps. Long range becomes Long range *2.
+Mechanic: Pay F2 and increase weapon range by 1 step. Pay F3 and increase the range by 2 steps. Long range becomes Long range *2.
 
 Melee Reach (Major)
 
 Description: You can make a melee attack out to 50. You move in a line and are not subject to a reactive attack. You end the attack where you started.
-Mechanic: make a melee attack against a target up to 50 away. F3.
+Mechanic: Make a melee attack against a target up to 50 away. F3.
 
 Melee Reach (minor)
 
@@ -137,13 +137,13 @@ Mechanic: Make 2 attacks. Roll for each. F3. 3 attacks for F4.
 Offensive Attack
 
 Description: You sacrifice your safety for a better chance to hit.
-Mechanic: reduce your Defense by (-1d4) and increase attack by (+1d4). This is a free Talent.
+Mechanic: Reduce your Defense by (-1d4) and increase attack by (+1d4). This is a free Talent.
 
 Parry
 
-Description: increase Defense vs. a melee attack.
+Description: Increase Defense vs. a melee attack.
 
-Mechanic: increase Defense by (+1d6)/F. Max F1. Counts against range weapons within 5 of the character. Use a reaction to activate.
+Mechanic: Increase Defense by (+1d6)/F. Max F1. Counts against range weapons within 5 of the character. Use a reaction to activate.
 
 Push
 
@@ -153,7 +153,7 @@ Mechanic: Move the target away by (+3d6) /F.
 
 Run
 
-Description: increase your move
+Description: Increase your move.
 
 Mechanics: As part of a move action, you may run an additional (3d6)/F.
 
@@ -242,7 +242,7 @@ Health:
 These talents are activated by touching the target. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range. This range choice lasts until the end of combat + 5 minutes. Heroes can make an attack action and also activate a healing Talent as a move action. Healing HP outside of combat heals the max amount but takes 1 minute to complete per activated Health. Health Talents can be bought as self-only and then are paid for like one-shots. For every 2 points of energy, you can affect an additional target.
 
 Ablative Armor:
-Description: decrease incoming damage
+Description: Decrease incoming damage.
 Mechanic: Reduce 1 point of damage per attack per point of Force.
 Duration: combat + 5 minutes
 Cost: move action.
@@ -278,7 +278,7 @@ Cost: move action
 
 Temporary Hit Points:
 Description: Increase your HP total
-Mechanics: increase HP by (+2d4 + 1)/F. These hit points are used first. They can't be healed. Max F2.
+Mechanics: Increase HP by (+2d4 + 1)/F. These hit points are used first. They can't be healed. Max F2.
 Duration: combat + 5 minutes
 Cost: Move action
 
@@ -310,7 +310,7 @@ Duration: combat + 5 minutes
 Cost: Attack action
 
 Invisibility (Major):
-Description: same as minor except Observation is a 30S.
+Description: Same as minor except Observation is a 30S.
 Mechanic: F3. The attack doesn't end the effect.
 Duration: combat + 5 minutes
 Cost: Attack action
@@ -333,7 +333,7 @@ Cost: Move action
 Duration: 10 minutes
 
 Detect Talents:
-Description: allows the player to observe talents.
+Description: Allows the player to observe talents.
 Mechanic: This power has a range of Force squared x 10 feet. A level 2 force talent would cost 4 energy and have a range of 40 feet. This talent uses observation skill. This talent helps identify the talents present and their effect.
 Duration: 10 minutes
 Cost: attack action
@@ -391,7 +391,7 @@ Action: 1 minute
 
 Create Wall:
 Description: Create a wall that takes up a 10 space. The wall is 6 thick
-Mechanic: destroy a 10 section by doing damage to the wall. Attacks automatically hit. The wall section has F *20 HP. 2 sections on activation, plus an additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
+Mechanic: Destroy a 10 section by doing damage to the wall. Attacks automatically hit. The wall section has F *20 HP. 2 sections on activation, plus an additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
 Duration: 5 minutes
 Action: attack.
 
@@ -408,7 +408,7 @@ Cost: attack action.
 
 Find secret doors/passages:
 Description: Discover hidden doors and passages.
-Mechanic: find all secret doors and Passages in a room or corridor by expending F1.
+Mechanic: Find all secret doors and passages in a room or corridor by expending F1.
 Duration: one hour
 Action: Skill action.
 
@@ -435,5 +435,5 @@ Duration: 8 hours.
 Cost: attack action
 
 Telekinesis:
-Description: manipulate objects at a distance.
+Description: Manipulate objects at a distance.
 Mechanics: Range is F * 20 range. Weight is F*10 lbs. This allows you to make skill tests that manipulate an object within weight limits. For instance, pick locks/remove traps. You can't fire a weapon at range unless it's a throwback with an actual trigger. Minimum F2.

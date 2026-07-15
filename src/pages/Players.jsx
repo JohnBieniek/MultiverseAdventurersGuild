@@ -29,11 +29,13 @@ const sections = [
   },
   {
     title: 'Species',
-    content: species
+    content: species,
+    cardType: 'species'
   },
   {
     title: 'Archetypes',
-    content: archetypes
+    content: archetypes,
+    cardType: 'archetype'
   },
   {
     title: 'Stats',
@@ -69,7 +71,8 @@ const sections = [
   },
   {
     title: 'Talents',
-    content: talents
+    content: talents,
+    cardType: 'talent'
   }
 ]
 

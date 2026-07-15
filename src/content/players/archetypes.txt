@@ -29,13 +29,11 @@ Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
 Preferred talents: Ferocious Attack, Ablative Armor, Temporary HP
 
-Personality:
+Personality: Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
-Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
+Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
 
-Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
-
-Anti-Tech - You don't like technology and will do all you can to avoid dealing with it by using low-tech weapons.
+Anti-Tech: You don't like technology and will do all you can to avoid dealing with it by using low-tech weapons.
 
 Bounty Hunter: You love the chase. You live for the thrill of finding and subduing your quarry, dead or alive.
 
@@ -377,7 +375,7 @@ Don't touch this - Screamers treat their vehicles and drones like close friends 
 
 Need for speed - Drivers have one speed, fast. This is why they are known as screamers. Take a ride with one and you'll see.
 
-Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Rude: You are blunt and abrupt. Social norms confuse you. You see things in black or white.
 
 Smuggler: You are an expert at getting illicit goods from one place to another.
 
@@ -439,7 +437,7 @@ Charming - this is how you manipulate. You believe you can make anyone like you.
 
 Ego - you believe you are so charming that you fail to recognize when your charms fail.
 
-Street SamuraiAt its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
+Street Samurai - At its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
 
 Scores:
 Strengths: Strength, Attack, Athletic, Melee Weapon
