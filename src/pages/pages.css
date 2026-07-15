@@ -123,8 +123,8 @@
 
 .guide-subnav {
   position: sticky;
-  top: 0;
-  z-index: 10;
+  top: var(--sticky-nav-offset);
+  z-index: 90;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -153,7 +153,7 @@
 }
 
 .guide-section {
-  scroll-margin-top: 150px;
+  scroll-margin-top: calc(var(--sticky-nav-offset) + 90px);
 }
 
 .guide-section h2 {
@@ -228,6 +228,10 @@
 }
 
 @media (max-width: 768px) {
+  :root {
+    --sticky-nav-offset: 132px;
+  }
+
   .page h1 {
     font-size: 1.8rem;
   }
@@ -265,7 +269,7 @@
   }
 
   .guide-subnav {
-    top: 0;
+    top: var(--sticky-nav-offset);
     max-height: 42vh;
     overflow-y: auto;
   }
@@ -277,6 +281,6 @@
   }
 
   .guide-section {
-    scroll-margin-top: 260px;
+    scroll-margin-top: calc(var(--sticky-nav-offset) + 260px);
   }
 }
