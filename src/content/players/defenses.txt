@@ -1,5 +1,7 @@
 Your defenses protect you from harm:
+
 AV (Armor Value) = 11 + Defense bonus + (Armor * 2)
+
 Athletics = Defense bonus + Str + Dex + End
 
 Ego = Defense bonus + Intuition + Education + Charisma

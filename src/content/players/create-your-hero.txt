@@ -39,8 +39,8 @@ Endurance - this represents a character's ability to handle physically grueling 
 Intuition - this represents knowing things outside your education. This is that gut feeling you get or the ability to take disparate pieces of information and draw a conclusion. Ex. Initiative, solving problems.
 Education - this is what you have learned in life. It could be a college education or things learned by experience.
 Charisma - this is your ability to use your personality to get people to do your bidding. Ex Fast talk, intimidate, contacts.
-?For your character, you get to assign the scores (+3, +2,+1,0,0,-1). The assigned number is the score. This is paired with a descriptor (which explains the score ie. (+2) St - vat muscle).
-??
+For your character, you get to assign the scores (+3, +2,+1,0,0,-1). The assigned number is the score. This is paired with a descriptor (which explains the score ie. (+2) St - vat muscle).
+
 "Pick your most important Stat and write in (+3). Now look at your least important stat. Write in a (-1). Pick your next most important stat. Write in a (+2). Of the three stats left, put a (+1) into the most important stat and (0)s in the remaining stats."
 These numbers are your base scores.
 Skills work with Stats to show what you are good at. Every Hero has every skill, but bonuses show specialization.
@@ -124,7 +124,7 @@ Uzi, Ingram, bow, crossbow
 d8
 Assault Rifle
 Conceal Observation 12S
-?AR15, AK47, shotgun, hunting rifle
+AR15, AK47, shotgun, hunting rifle
 d10
 Long Gun
 no conceal
@@ -133,13 +133,11 @@ Sniper Rifle, Machine Gun
 Two-Weapon Fighting:
 Melee - fight with 2 d6 weapons for d8 damage, same special rules of a d8 weapon
 Range - 2 d4 weapons for d6 damage, same special rules as a d6 weapon
-??
+
 Silencers - These increase the concealability by one step. A silencer on a pistol becomes Observation 15S. The damage decreases by one step. A sniper rifle would become a d8 weapon. A pistol becomes d4-1.
 Concealment - Add the sneak skill to the TN for concealment. If you have a Sneak skill of (+2), you conceal an SMG on 17S.
 The philosophy behind damage is that Heroes should be rewarded for fighting at Melee ranges because of the increased risk. Melee damage is slightly more serious than ranged damage.
-?
 
-?
 Difficulty TN Example
 Easy 9 simple climb, calm crowd
 Standard 11 Pick lock, persuade guard
@@ -204,7 +202,7 @@ Tagline: “You’ve survived the first missions. Now you’re trusted to act on your 
 5: Access F3 Talents, +1 Talent, 40 HP, 15 energy
 6: (Choose 1: +1 Attack / +1 Defense /+1 Talent), 46 HP, 18 energy
 Tagline: “You are a legend in motion — the Guild’s finest. Timelines bend around your choices.”
-??
+
 7: Talent slot, +1 Talent, 52 HP, 21 Energy
 8: (Choose 1: +1 Attack / +1 Defense / +1 Talent), 58 HP, 24 Energy
 9: Access F4 Talents, +1 Talent, 64 HP, 27 Energy

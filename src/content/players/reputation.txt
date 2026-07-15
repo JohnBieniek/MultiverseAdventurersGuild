@@ -1,6 +1,7 @@
 Reputation is what the Multiverse thinks it knows about you.
 
 It might be true… or not.
+
 Examples:
 “Dead-eye shot”
 “Arcane scholar”

@@ -17,6 +17,7 @@ GM describes the situation
 Heroes say what they do
 “I scan the street for trouble.”
 “I head into the saloon.”
+
 Dice decide uncertain outcomes
 Roll d20 + skill + stat = Basiuc Roll
 High roll = success, low roll = failure or complication.
@@ -24,14 +25,17 @@ GM narrates the result
 “You spot armed men watching the door.”
 Repeat
 This loop continues for exploration, social scenes, and combat.
+
 Dice add chance and tension.
 Rules keep things fair and consistent.
 You don’t need to memorize everything—the GM helps.
 The Guild uses d4, d6, d8, d10, d20
 Think of rules as guidelines, not restrictions on creativity.
+
 Combat is usually more structured:
 Everyone takes turns.
 You can move, attack, use abilities, or help allies.
+
 Dice determine hits, damage, and special effects.
 The goal isn’t just to win fights—it’s to make the story exciting.
 You can role-play as much or as little as you like:

@@ -1,6 +1,7 @@
 Items explain why your Stats and Skills look the way they do.
 
 They don’t change numbers; they describe your character. Most items are equipment, such as a Ring of Protection. Some can be from Species, Archetype.
+
 Examples:
 (+2) Strength - Giant Species.
 (+1) Education - “Street-taught scavenger tech.”
