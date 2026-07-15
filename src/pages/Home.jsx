@@ -4,8 +4,20 @@ function Home() {
   return (
     <div className="page home-page">
       <section className="hero">
-        <h1>Welcome to the Multiverse Adventurers Guild</h1>
-        <p>A home base for game masters, players, table rules, and guild contact details.</p>
+        <img
+          className="hero-knight"
+          src="/rifle-knight.avif"
+          alt="Rifle knight"
+        />
+        <div className="hero-copy">
+          <h1>Welcome to the Multiverse Adventurers Guild</h1>
+          <p>
+            Time is fracturing. The Multiverse is at risk of destruction. Join the
+            Multiverse Adventurers Guild, a tabletop role-playing game to play any
+            Hero: Cowboy, Cyborg. Wizard, Super Hero from any setting, time, or
+            era. The possibilities are endless.
+          </p>
+        </div>
       </section>
 
       <section className="featured-content">
@@ -21,11 +33,6 @@ function Home() {
           <h2>Rules</h2>
           <p>Keep shared rulings and table procedures easy to find.</p>
         </div>
-      </section>
-
-      <section className="latest-news">
-        <h2>Guild Updates</h2>
-        <p>Use this space for announcements, schedule notes, and important changes.</p>
       </section>
     </div>
   )

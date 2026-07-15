@@ -60,7 +60,7 @@
 }
 
 .art-card {
-  background: white;
+  background: var(--shield-cream);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;

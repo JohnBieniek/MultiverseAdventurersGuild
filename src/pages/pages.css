@@ -24,12 +24,32 @@
 
 /* Home Page */
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --knight-blue: #1f5f8c;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(140px, 240px) 1fr;
+  align-items: center;
+  gap: 2rem;
+  background: var(--knight-blue);
   color: white;
   padding: 3rem;
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
   margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.hero-knight {
+  align-self: start;
+  justify-self: start;
+  width: min(100%, 220px);
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -41,7 +61,7 @@
 .hero p {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .featured-content {
@@ -52,7 +72,7 @@
 }
 
 .content-card {
-  background: white;
+  background: var(--shield-cream);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -69,20 +89,80 @@
   color: #667eea;
 }
 
-.latest-news {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Basic Pages */
 .basic-section {
-  background: white;
+  background: var(--shield-cream);
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Guide Pages */
+.guide-header {
+  margin-bottom: 1.5rem;
+}
+
+.guide-header p {
+  max-width: 760px;
+}
+
+.guide-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.guide-subnav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0.6rem 0.9rem;
+  background: #33612F;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.guide-subnav a:hover {
+  background: #254723;
+  transform: translateY(-2px);
+}
+
+.guide-section {
+  scroll-margin-top: 110px;
+}
+
+.guide-section h2 {
+  margin-top: 0;
+}
+
+.section-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.section-page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: #33612F;
+  font-weight: bold;
+}
+
+.section-page-link.next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.section-page-link:not(.placeholder):hover {
+  color: #254723;
 }
 
 /* Contact Page */
@@ -94,7 +174,7 @@
 }
 
 .contact-form {
-  background: white;
+  background: var(--shield-cream);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -145,7 +225,7 @@
 }
 
 .contact-info {
-  background: white;
+  background: var(--shield-cream);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -159,13 +239,33 @@
 
   .hero {
     padding: 2rem;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
   .hero h1 {
     font-size: 1.8rem;
   }
 
+  .hero-knight {
+    justify-self: center;
+    width: min(70vw, 180px);
+  }
+
   .contact-container {
     grid-template-columns: 1fr;
+  }
+
+  .section-pager {
+    grid-template-columns: 1fr;
+  }
+
+  .section-page-link.next {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .section-page-link.placeholder {
+    display: none;
   }
 }
