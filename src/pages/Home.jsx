@@ -3,13 +3,13 @@ import './pages.css'
 function Home() {
   return (
     <div className="page home-page">
-      <section className="hero">
+      <section className="home-intro">
         <img
           className="hero-knight"
           src="/rifle-knight.avif"
           alt="Rifle knight"
         />
-        <div className="hero-copy">
+        <div className="hero">
           <h1>Welcome to the Multiverse Adventurers Guild</h1>
           <p>
             Time is fracturing. The Multiverse is at risk of destruction. Join the

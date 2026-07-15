@@ -22,41 +22,16 @@ function GuidePage({ title, intro, sections }) {
       </nav>
 
       <div className="guide-sections">
-        {sections.map((section, index) => {
-          const previous = sections[index - 1]
-          const next = sections[index + 1]
-
-          return (
-            <section
-              key={section.title}
-              id={slugify(section.title)}
-              className="basic-section guide-section"
-            >
-              <h2>{section.title}</h2>
-              <p>{section.body}</p>
-
-              <div className="section-pager" aria-label={`${section.title} navigation`}>
-                {previous ? (
-                  <a className="section-page-link previous" href={`#${slugify(previous.title)}`}>
-                    <span aria-hidden="true">←</span>
-                    <span>{previous.title}</span>
-                  </a>
-                ) : (
-                  <span className="section-page-link placeholder" />
-                )}
-
-                {next ? (
-                  <a className="section-page-link next" href={`#${slugify(next.title)}`}>
-                    <span>{next.title}</span>
-                    <span aria-hidden="true">→</span>
-                  </a>
-                ) : (
-                  <span className="section-page-link placeholder" />
-                )}
-              </div>
-            </section>
-          )
-        })}
+        {sections.map((section) => (
+          <section
+            key={section.title}
+            id={slugify(section.title)}
+            className="basic-section guide-section"
+          >
+            <h2>{section.title}</h2>
+            <p>{section.body}</p>
+          </section>
+        ))}
       </div>
     </div>
   )
