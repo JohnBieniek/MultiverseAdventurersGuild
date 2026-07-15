@@ -1,0 +1,46 @@
+You start with one Weapon Enhancement for Melee or Ranged: These will be listed as Damage die, Weapon Type, Special Rules, and examples.
+Melee
+d4
+Unarmed
+Automatic conceal
+martial arts, brawling
+d6
+Dagger
+Automatic conceal
+weapon under 18" in length, dagger, switchblade, pistol whip
+d8
+Sword
+Conceal Observation 15S
+weapon under 3', long sword, shortsword, axe, club
+d10
+Two-Handed Weapon
+No conceal, (-2) AV
+Staff, Halberd, Great Axe, Great Sword
+Range
+d4
+Pistol
+Automatic Conceal
+Rovolver, handgun, sling, slingshot
+d6
+Submachine Gun
+Conceal Observation 15S
+Uzi, Ingram, bow, crossbow
+d8
+Assault Rifle
+Conceal Observation 12S
+?AR15, AK47, shotgun, hunting rifle
+d10
+Long Gun
+no conceal
+braced
+Sniper Rifle, Machine Gun
+Two-Weapon Fighting:
+Melee - fight with 2 d6 weapons for d8 damage, same special rules of a d8 weapon
+Range - 2 d4 weapons for d6 damage, same special rules as a d6 weapon
+??
+Silencers - These increase the concealability by one step. A silencer on a pistol becomes Observation 15S. The damage decreases by one step. A sniper rifle would become a d8 weapon. A pistol becomes d4-1.
+Concealment - Add the sneak skill to the TN for concealment. If you have a Sneak skill of (+2), you conceal an SMG on 17S.
+The philosophy behind damage is that Heroes should be rewarded for fighting at Melee ranges because of the increased risk. Melee damage is slightly more serious than ranged damage.
+?
+
+?

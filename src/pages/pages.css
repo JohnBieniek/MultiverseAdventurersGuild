@@ -25,9 +25,10 @@
 /* Home Page */
 .home-intro {
   display: grid;
-  grid-template-columns: minmax(140px, 240px) 1fr;
+  grid-template-columns: minmax(140px, 240px) minmax(0, 620px);
   align-items: center;
   gap: 1.5rem;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
@@ -35,7 +36,7 @@
   --knight-blue: #1f5f8c;
   background: var(--knight-blue);
   color: white;
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 8px;
   text-align: left;
 }
@@ -50,13 +51,15 @@
 
 .hero h1 {
   color: white;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
 }
 
 .hero p {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.65;
   margin-bottom: 0;
 }
 
@@ -159,6 +162,45 @@
   margin-top: 0;
 }
 
+.guide-raw-text {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.guide-media {
+  margin-top: 2rem;
+}
+
+.guide-media img {
+  display: block;
+  width: min(100%, 720px);
+  height: auto;
+  border: 1px solid rgba(15, 29, 31, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.guide-download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  background: #33612F;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.guide-download-button:hover {
+  background: #254723;
+  transform: translateY(-2px);
+}
+
 /* Contact Page */
 .contact-container {
   display: grid;
@@ -228,7 +270,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --sticky-nav-offset: 132px;
+    --sticky-nav-offset: 96px;
   }
 
   .page h1 {

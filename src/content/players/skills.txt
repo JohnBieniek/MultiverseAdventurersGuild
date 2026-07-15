@@ -1,0 +1,17 @@
+Skills work with Stats to show what you are good at. Every Hero has every skill, but bonuses show specialization.
+Assign: +2, +2, +1, +1, +1, 0, 0, -1
+Attack (Str or Dex) - used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks.
+
+Influence (Cha) - intimidate, persuade, interrogate, acting, impersonation
+
+Knowledge (Edu) - learned topics, research, magic theory.
+
+Observation (Intuition) - noticing details, perception
+
+Outdoors (Intuition) - tracking, survival, navigation
+
+Sneak (Dex) - stealth, sleight of hand, infiltration, disguise, and acting
+Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matrix search
+
+Vehicle (Dex) - driving a car, piloting a starship, riding a horse
+"Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)

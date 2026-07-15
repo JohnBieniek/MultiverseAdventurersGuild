@@ -5,6 +5,34 @@ function slugify(title) {
     .replace(/^-|-$/g, '')
 }
 
+function renderSectionContent(section) {
+  return (
+    <>
+      {section.content ? (
+        <div className="guide-raw-text">{section.content}</div>
+      ) : (
+        <p>{section.body}</p>
+      )}
+
+      {section.image && (
+        <div className="guide-media">
+          <img src={section.image.src} alt={section.image.alt} />
+        </div>
+      )}
+
+      {section.download && (
+        <a
+          className="guide-download-button"
+          href={section.download.href}
+          download={section.download.filename}
+        >
+          {section.download.label}
+        </a>
+      )}
+    </>
+  )
+}
+
 function GuidePage({ title, intro, sections }) {
   return (
     <div className="page guide-page">
@@ -29,7 +57,7 @@ function GuidePage({ title, intro, sections }) {
             className="basic-section guide-section"
           >
             <h2>{section.title}</h2>
-            <p>{section.body}</p>
+            {renderSectionContent(section)}
           </section>
         ))}
       </div>
