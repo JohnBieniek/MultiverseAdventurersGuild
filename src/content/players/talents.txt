@@ -89,6 +89,50 @@ Description: You are skilled at making damaging attacks.
 
 Mechanic: Force 2 (F2) allows a reroll of all damage dice. The attacker can choose what roll to use. Can be used after the dice are rolled.
 
+Buffs:
+Description: Buffs are Talents that temporarily improve a target's skill. They last one hour, use an attack action, and have a maximum of Force 2 (F2). Buffs cannot stack with each other; only one Buff can be active on a target at a time. One-shots do not count toward this limit.
+Mechanic: Buffs are activated by touching the target. For 1 additional energy, you can activate a Buff at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range. A Buff can also be purchased as self-only, which means it uses the one-shot energy cost and only affects you.
+
+Buff Option: Genius
+Description: Your mind processes information with incredible speed and accuracy.
+Mechanic: The target improves Knowledge by +1d4 per Force used.
+
+Buff Option: Heightened Awareness
+Description: Your senses sharpen to extraordinary levels, allowing you to notice hidden details, danger, and subtle clues that others overlook.
+Mechanic: The target improves Observation by +1d4 per Force used.
+
+Buff Option: Intimidating Presence
+Description: Your sheer physical presence radiates menace, making threats impossible to ignore.
+Mechanic: You intimidate as a subset of Influence, using Strength as the stat. Add +1d6 per Force used to intimidate.
+
+Buff Option: Pathfinder
+Description: You become an excellent tracker, survivalist, and wilderness guide.
+Mechanic: The target improves Outdoors by +1d4 per Force used.
+
+Buff Option: Shadowstep
+Description: Your movements become silent and instinctive, making it easier to avoid detection.
+Mechanic: The target improves Sneak by +1d4 per Force used.
+
+Buff Option: Silver Tongue
+Description: Every word carries confidence and charisma. You effortlessly persuade, negotiate, and inspire others.
+Mechanic: The target improves Influence by +1d4 per Force used.
+
+Buff Option: Technical Expertise
+Description: Your understanding of machines, electronics, and complex systems reaches exceptional levels.
+Mechanic: The target improves Technology by +1d4 per Force used.
+
+Buff Option: Transporter
+Description: Whether behind the wheel, at the controls, or in the pilot's seat, your reflexes and instincts make every vehicle feel like an extension of yourself.
+Mechanic: The target improves Vehicle by +1d4 per Force used.
+
+Buff Option: Trap Sense
+Description: You instinctively notice dangerous mechanisms and understand how to disable them, regardless of whether they are technological or magical.
+Mechanic: The target improves Observation for traps by +1d6 per Force used and Technology to remove traps by +1d6 per Force used. This works at any tech level.
+
+Buff Option: Truthsense
+Description: You instinctively recognize hesitation, deception, and hidden motives.
+Mechanic: Add +1d6 per Force used to Observation checks made to determine truth.
+
 Close Quarter Combat
 
 Description: You have mastered the use of ranged combat against adjacent targets.
@@ -158,16 +202,11 @@ Description: Reach out and touch someone. Increase the range increment by 1.
 
 Mechanic: Pay Force 2 (F2) to increase weapon range by 1 step. Pay Force 3 (F3) to increase the range by 2 steps. Long range becomes long range x2.
 
-Melee Reach (Major)
+Melee Reach
 
-Description: You can make a melee attack out to 50. You move in a line and are not subject to a reactive attack. You end the attack where you started.
-Mechanic: Make a melee attack against a target up to 50 away. Force 3 (F3).
-
-Melee Reach (minor)
-
-Description: You can extend your melee attack beyond adjacent squares. You end in the space you attacked from. Does not provoke a reactive attack.
-
-Mechanic: Make a melee attack up to 5 feet per Force used. Maximum Force 2.
+Description: Extend a melee attack beyond adjacent squares without provoking a reactive attack.
+Minor Version: At Force 1 (F1) or Force 2 (F2), make a melee attack up to 5 feet per Force used. You end in the space you attacked from.
+Major Version: At Force 3 (F3), make a melee attack against a target up to 50 feet away. You move in a line, are not subject to a reactive attack, and end the attack where you started.
 
 Multi-attack:
 
@@ -216,14 +255,14 @@ Description: Cause the target to trip. It can be part of the attack.
 Mechanic: Force 2 (F2). Target makes a Resilience 14S or is tripped and has the Prone condition. If four-legged or more than 8 feet tall, the target gets a +4 Defense bonus to avoid the trip.
 
 AOE:
-These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50), medium (200), long (+200).
+Description: These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50), medium (200), long (+200).
 There are 4 shapes of the AOE.
 Ground zero - you drop the AOE at your feet, but not on you. Doesn't require a to-hit roll. Affects all targets in adjacent squares around you.
 Square - You aim an explosive at a square with a TN of 14. If you miss, the device scatters. It misses by 5 feet for every 2 points you miss on the roll. If a device misses, roll a d6. On a 1 or 2, miss a square to the left. 3 and 4 miss up the middle. 5 or 6 misses to the right. Odd on the roll indicates a shorted throw, even if it went too far. The square the explosive lands on and the surrounding 9 squares take full damage, halved on a successful 15T Athletic test.
 Line - affects 9 squares in front of you. No roll needed to hit.
 Cone - hits the first square in front of you, then widens to 2 squares, 3 squares, and 4 squares.
 
-Frag: Type
+Frag:
 Description: This is the Big Bang. Fragments explode over the area, causing damage. The following types of damage are possible: standard frag, fire, electricity, acid, and ice.
 Mechanic: Targets take +2d6 damage per Force used. Cost is Force + 3 energy, so Force 2 (F2) costs 7 energy. Minimum Force 2 and access to Force 2 Talents required. The effect can exclude 1 target for every 1 energy paid.
 Duration: instant
@@ -235,56 +274,10 @@ Mechanic: Throw the effect like an AOE. Target loses its next turn unless they m
 Duration: 1 turn.
 Cost: attack action.
 
-Buffs:
-Description: These Talents are designed to improve the target's skill. Duration: one hour. Maximum Force 2. Uses an attack action. Buffs may be taken as self-only. They then cost the one-shot price and must be purchased as self-only. These Buffs represent skill mastery. Can not stack buffs on each other. Only one buff is active at a time. You can use one-shots that don't count toward this limit.
-These talents are activated by touching the target. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range.
-
-Heightened Awareness:
-Description: Your senses sharpen toextraordinary levels, allowing you to notice hidden details, danger, and subtle clues that others overlook.
-Mechanic: The player becomes more aware of their surroundings. Improve Observation by +1d4 per Force used.
-
-Shadowstep:
-Description: Your movements become silent and instinctive, making it easier to avoid detection.
-Mechanic: The player improves Sneak by +1d4 per Force used.
-
-Silver Tongue:
-Description: Every word carries confidence and charisma. You effortlessly persuade, negotiate, and inspire others.
-Mechanic: The player improves Influence by +1d4 per Force used.
-
-Truthsense:
-Description: You instinctively recognize hesitation, deception, and hidden motives.
-Mechanic: Add +1d6 per Force used to Observation checks made to determine truth.
-
-Intimidating Presence:
-Description: Your sheer, physical presence radiates menace, making threats impossible to ignore.
-Mechanic: You intimidate as a subset of Influence, using your Strength as the stat. Add +1d6 per Force used to intimidate.
-
-Trap Sense:
-Description: You instinctively notice dangerous mechanisms and understand how to disable them, regardless of their technological or magical origin. This works at any tech level.
-Mechanic: Target improves Observation for traps by +1d6 per Force used and Technology to remove traps by +1d6 per Force used.
-
-Pathfinder:
-Description: You become an excellent tracker, survivalist, and wilderness guide.
-Mechanic: The target improves Outdoors by +1d4 per Force used.
-
-Technical Expertise:
-Description: Your understanding of machines, electronics, and complex systems reaches exceptional levels.
-Mechanic: The target improves Technology by +1d4 per Force used.
-
-Genius:
-Description: Your mind processes information with incredible speed and accuracy.
-Mechanic: The player improves Knowledge by +1d4 per Force used. Maximum Force 2.
-
-Transporter:
-Description: Whether behind the wheel, at the controls, or in the pilot's seat, your reflexes and instincts make every vehicle feel like an extension of yourself.
-Mechanic: The target improves Vehicle by +1d4 per Force used. Maximum Force 2.
-
-Health:
-Description: These talents are activated by touching the target. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range. This range choice lasts until the end of combat + 5 minutes. Heroes can make an attack action and also activate a healing Talent as a move action. Healing HP outside of combat heals the max amount but takes 1 minute to complete per activated Health. Health Talents can be bought as self-only and then are paid for like one-shots. For every 2 points of energy, you can affect an additional target.
-
 Ablative Armor:
 Description: Decrease incoming damage.
-Mechanic: Reduce 1 point of damage per attack per point of Force.
+Mechanic: Reduce 1 point of damage per attack per point of Force. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range. This range choice lasts until the end of combat + 5 minutes.
+Targets: For every 2 additional energy, affect one additional target.
 Duration: combat + 5 minutes
 Cost: move action.
 
@@ -294,37 +287,39 @@ Mechanic: Detect living creatures within 100 feet. Works through walls and debri
 Duration: 10 minutes
 Cost: move action.
 
-Heal (Minor)
-Description: Restore hit points.
-Mechanics: Restore +2d6 hit points per Force used.
-Duration: immediate
-Cost: move Action
-
-Heal (Major):
-Description: Heal damage as an area effect.
-Mechanic: All friendly targets in short range are healed +1d6 + 1 hit points per Force used. Requires Force 2 (F2) or higher.
+Heal:
+Description: Restore hit points to one or more friendly targets.
+Minor Version: At Force 1 (F1) or higher, restore +2d6 hit points per Force used to one touched target.
+Major Version: At Force 2 (F2) or higher, heal all friendly targets in short range for +1d6 + 1 hit point per Force used.
+Range: Touch by default. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
+Action: Heroes can make an attack action and also activate a healing Talent as a move action.
+Out of Combat: Healing HP outside of combat restores the maximum amount, but takes 1 minute to complete per activated healing Talent.
+Targets: For every 2 additional energy, affect one additional target with the minor version.
 Duration: immediate
 Cost: move action.
+
 Indestructible:
-Description - You are harder to kill.
-Mechanic - Any time you are dropped below 0 HP, you immediately stabilize at +1d4 HP and the Talent ends for that target. Costs Force 2 (F2) plus 1 energy per target.
-Duration: 8 hours
-Cost: Move action
+Description: You are harder to kill.
+Mechanic: Any time you are dropped below 0 HP, you immediately stabilize at +1d4 HP and the Talent ends for that target. Costs Force 2 (F2) plus 1 energy per target. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
+Duration: 8 hours.
+Cost: Move action.
 
 Regeneration:
 Description: Heal hit points.
-Mechanic: Heal +1d4 hit points per Force used each turn, up to full. You can't stack this Talent with itself.
+Mechanic: Heal +1d4 hit points per Force used each turn, up to full. You can't stack this Talent with itself. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
+Self-Only: This Talent can be purchased as self-only. If it is, use the one-shot energy price and it only affects you.
 Duration - combat + 5 minutes or until the target drops below 0 HP. Starts at Force 2 (F2).
 Cost: move action
 
 Temporary Hit Points:
 Description: Increase your HP total
-Mechanics: Increase HP by +2d4 + 1 per Force used. These hit points are used first. They can't be healed. Maximum Force 2.
+Mechanics: Increase HP by +2d4 + 1 per Force used. These hit points are used first. They can't be healed. Maximum Force 2. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
+Targets: For every 2 additional energy, affect one additional target.
 Duration: combat + 5 minutes
 Cost: Move action
 
 Illusion:
-Illusion Talents can be bought as self-only and then are paid for like one-shots. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range.
+Description: Illusion Talents can be bought as self-only and then are paid for like one-shots. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range.
 
 Disguise self:
 Description: Target may look like someone else. Target cannot change size, but may change Species within that restriction. Can't conceal weapons.
@@ -344,15 +339,10 @@ Mechanic: Force 1 (F1) creates audio or visual. Force 2 (F2) creates audio and v
 Duration: combat + 5 minutes
 Cost: Attack action.
 
-Invisibility (Minor):
-Description: You and any objects you carry are invisible. Talent ends when an attack action is made.
-Mechanic: Force 2 (F2). Others can see you on an Observation (sight) 26S. The target can still be heard.
-Duration: combat + 5 minutes
-Cost: Attack action
-
-Invisibility (Major):
-Description: Same as minor except Observation is a 30S.
-Mechanic: Force 3 (F3). The attack doesn't end the effect.
+Invisibility:
+Description: You and any objects you carry become invisible. The target can still be heard.
+Minor Version: At Force 2 (F2), others can see you with an Observation 26S. The Talent ends when you make an attack action.
+Major Version: At Force 3 (F3), others can see you with an Observation 30S. Making an attack does not end the Talent.
 Duration: combat + 5 minutes
 Cost: Attack action
 
@@ -378,18 +368,11 @@ Description: Allows the player to observe talents.
 Mechanic: This power has a range of Force squared x 10 feet. A level 2 force talent would cost 4 energy and have a range of 40 feet. This talent uses observation skill. This talent helps identify the talents present and their effect.
 Duration: 10 minutes
 Cost: attack action
-Movement:
 
-Fly (minor):
-Description: This talent allows for flight in Combat.
-Mechanic: You can fly 15 feet + 5 feet per Force used.
-Duration: combat + five minutes
-Cost: Move Action
-
-Fly (Major):
-Description: This allows you to fly outside of Combat.
-Mechanic: Fly at the same speed as the party. Force 3 (F3). In combat, the Hero has Fly (30 feet) until the end of combat, at which time it reverts to major.
-Duration: 8 hours.
+Fly:
+Description: Take to the air in combat or travel overland outside combat.
+Minor Version: At Force 1 (F1) or Force 2 (F2), fly in combat at 15 feet + 5 feet per Force used. Duration is combat + 5 minutes.
+Major Version: At Force 3 (F3), fly outside combat at the same speed as the party for 8 hours. In combat, this grants a 30-foot fly speed until combat ends, then reverts to the overland version.
 Cost: Move action.
 
 Reduce Movement:
@@ -398,31 +381,19 @@ Mechanic: Make a standard attack. If you hit, the target loses 50% movement per 
 Duration: combat + five minutes
 Cost: Attack action.
 
-Teleport: (minor)
-Description: This talent allows for movement from one spot to another in Combat.
-Mechanic: As a move action, you can teleport 40 feet + 10 feet per Force used. Maximum Force 2. Target doesn't incur a reactive strike.
-Duration: scene.
-Cost: Move action
-
-Teleport: (Mass)
-Description: Move targets up to 100 feet. Targets must be in range. Used in Combat.
-Mechanic: Force 3 (F3) plus 1 energy per additional person. If the target is an enemy, you must make a successful attack roll.
-Duration: once
-Cost: Attack action
-
-Teleport: (Major)
-Description: This allows you to teleport outside of Combat with others.
-Mechanic: Teleport up to 100 miles. Force 3 (F3) plus 1 additional point of energy per Hero.
+Teleport:
+Description: Move instantly from one place to another, from short combat hops to long-distance travel.
+Minor Version: At Force 1 (F1) or Force 2 (F2), teleport 40 feet + 10 feet per Force used as a move action. This does not provoke a reactive strike.
+Mass Version: At Force 3 (F3), move targets up to 100 feet in combat. Pay 1 additional energy per extra person. If the target is an enemy, you must make a successful attack roll.
+Major Version: At Force 3 (F3), teleport up to 100 miles outside combat. Pay 1 additional energy per Hero traveling with you.
 Duration: once.
-Cost: Uninterrupted concentration for 1 minute.
+Cost: Move action for the minor version, attack action for the mass version, or 1 minute of uninterrupted concentration for the major version.
 
-Wallrunner: (minor)
+Wallrunner:
 Description: This talent allows for running up and down walls in Combat. You may end the turn on a surface other than the ground.
 Mechanic: You can run your movement up walls. Force 2 (F2). Can't run on ceilings.
 Duration: combat + five minutes
 Cost: move action.
-
-Miscellaneous 
 
 Concealed Weapon Specialist:
 Description: You excel at hiding weapons on your body.

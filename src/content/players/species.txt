@@ -109,7 +109,7 @@ Strengths: Strength, Education, Knowledge, Outdoors
 
 Weaknesses: Charisma (they simply don't relate well to other races), Technology
 
-Talents: Genius, Intimidating Presence, Melee Reach (minor)
+Talents: Genius, Intimidating Presence, Melee Reach
 
 Common Archetypes: street doc(talents), mage, street samurai
 

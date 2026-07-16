@@ -35,6 +35,14 @@ const fieldLabels = [
   'Description',
   'Mechanic',
   'Mechanics',
+  'Minor Version',
+  'Major Version',
+  'Mass Version',
+  'Range',
+  'Action',
+  'Out of Combat',
+  'Targets',
+  'Self-Only',
   'Scores',
   'Category',
   'Example Name',
@@ -552,6 +560,40 @@ function parseCardFields(lines) {
   }, [])
 }
 
+function splitSubcards(lines) {
+  const bodyLines = []
+  const subcards = []
+  let activeSubcard = null
+
+  lines.forEach((line) => {
+    const subcardMatch = line.match(/^Buff Option:\s*(.+)$/i)
+
+    if (subcardMatch) {
+      if (activeSubcard) {
+        subcards.push(activeSubcard)
+      }
+
+      activeSubcard = {
+        name: subcardMatch[1].trim(),
+        lines: []
+      }
+      return
+    }
+
+    if (activeSubcard) {
+      activeSubcard.lines.push(line)
+    } else {
+      bodyLines.push(line)
+    }
+  })
+
+  if (activeSubcard) {
+    subcards.push(activeSubcard)
+  }
+
+  return { bodyLines, subcards }
+}
+
 function renderWeaponCard(card) {
   const fields = parseCardFields(card.lines)
 
@@ -581,6 +623,41 @@ function renderWeaponCard(card) {
   )
 }
 
+function renderInfoCard(card, type, cardIndex) {
+  const { bodyLines, subcards } = splitSubcards(card.lines)
+
+  return (
+    <article
+      key={card.name}
+      id={cardAnchor(type, card.name)}
+      className="guide-info-card"
+    >
+      <h3>{card.name}</h3>
+      {card.description && <p className="guide-card-summary">{card.description}</p>}
+      <div className="guide-card-body">
+        {bodyLines.map((line, index) => renderCardField(line, index, cardIndex))}
+      </div>
+
+      {subcards.length > 0 && (
+        <div className="guide-subcard-grid">
+          {subcards.map((subcard) => (
+            <article
+              key={subcard.name}
+              id={cardAnchor(type, subcard.name)}
+              className="guide-subcard"
+            >
+              <h4>{subcard.name}</h4>
+              <div className="guide-card-body">
+                {subcard.lines.map((line, index) => renderCardField(line, index, cardIndex))}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </article>
+  )
+}
+
 function renderCards(content, type, cardIndex) {
   const { intro, cards } = splitCards(content, type)
 
@@ -589,11 +666,26 @@ function renderCards(content, type, cardIndex) {
       <aside className="guide-item-sidebar" aria-label={`${type} list`}>
         <h3>{type === 'archetype' ? 'Archetypes' : `${type.charAt(0).toUpperCase()}${type.slice(1)}s`}</h3>
         <nav>
-          {cards.map((card) => (
-            <a key={card.name} href={`#${cardAnchor(type, card.name)}`}>
-              {card.name}
-            </a>
-          ))}
+          {cards.map((card) => {
+            const subcards = splitSubcards(card.lines).subcards
+
+            return (
+              <div key={card.name} className="guide-sidebar-link-group">
+                <a href={`#${cardAnchor(type, card.name)}`}>
+                  {card.name}
+                </a>
+                {subcards.map((subcard) => (
+                  <a
+                    key={subcard.name}
+                    className="guide-sidebar-subitem"
+                    href={`#${cardAnchor(type, subcard.name)}`}
+                  >
+                    {subcard.name}
+                  </a>
+                ))}
+              </div>
+            )
+          })}
         </nav>
       </aside>
 
@@ -617,17 +709,7 @@ function renderCards(content, type, cardIndex) {
             type === 'weapon' ? (
               renderWeaponCard(card)
             ) : (
-              <article
-                key={card.name}
-                id={cardAnchor(type, card.name)}
-                className="guide-info-card"
-              >
-                <h3>{card.name}</h3>
-                {card.description && <p className="guide-card-summary">{card.description}</p>}
-                <div className="guide-card-body">
-                  {card.lines.map((line, index) => renderCardField(line, index, cardIndex))}
-                </div>
-              </article>
+              renderInfoCard(card, type, cardIndex)
             )
           ))}
         </div>
@@ -656,6 +738,18 @@ function buildCardIndex(sections) {
       if (!cardIndex.has(`${section.cardType}:${normalizedName}`)) {
         cardIndex.set(`${section.cardType}:${normalizedName}`, href)
       }
+
+      splitSubcards(card.lines).subcards.forEach((subcard) => {
+        const fullSubcardName = subcard.name.replace(/\.$/, '').trim().toLowerCase()
+        const normalizedSubcardName = normalizeReferenceName(subcard.name).toLowerCase()
+        const subcardHref = `#${cardAnchor(section.cardType, subcard.name)}`
+
+        cardIndex.set(`${section.cardType}:${fullSubcardName}`, subcardHref)
+
+        if (!cardIndex.has(`${section.cardType}:${normalizedSubcardName}`)) {
+          cardIndex.set(`${section.cardType}:${normalizedSubcardName}`, subcardHref)
+        }
+      })
     })
   })
 

@@ -250,6 +250,11 @@
   gap: 0.25rem;
 }
 
+.guide-sidebar-link-group {
+  display: grid;
+  gap: 0.1rem;
+}
+
 .guide-item-sidebar a {
   display: block;
   padding: 0.3rem 0.4rem;
@@ -264,6 +269,13 @@
   background: rgba(51, 97, 47, 0.12);
   color: var(--visor-red);
   outline: none;
+}
+
+.guide-item-sidebar .guide-sidebar-subitem {
+  margin-left: 0.55rem;
+  padding-left: 0.55rem;
+  border-left: 2px solid rgba(179, 53, 45, 0.22);
+  font-size: 0.8rem;
 }
 
 .guide-card-main {
@@ -342,6 +354,28 @@
 .guide-card-field {
   display: grid;
   gap: 0.35rem;
+}
+
+.guide-subcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.guide-subcard {
+  border: 1px solid rgba(179, 53, 45, 0.18);
+  border-radius: 8px;
+  padding: 0.9rem;
+  background: rgba(248, 246, 236, 0.55);
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 1rem);
+}
+
+.guide-subcard h4 {
+  margin: 0 0 0.5rem;
+  color: var(--visor-red);
+  font-size: 1.08rem;
+  line-height: 1.2;
 }
 
 .guide-weapon-card {

@@ -57,7 +57,7 @@ Cleric - These are your healers. They derive power from worshipping their Deitie
 Scores:
 Strengths: Endurance, Influence, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Athletics, Observation
-Preferred talents: Health, Ferocious Attack, Change of Fortune
+Preferred talents: Heal, Ferocious Attack, Change of Fortune
 
 Personality:
 
@@ -72,7 +72,7 @@ Shaman - You are a spiritual guide, healer, and negotiator with forces most peop
 Scores:
 Strengths: Intuition, Outdoors, Knowledge, Influence
 Weaknesses: Technology, Vehicle, Attack
-Preferred Talents: Detect Talents, Heal (Minor), Pathfinder
+Preferred Talents: Detect Talents, Heal, Pathfinder
 
 Personality:
 
@@ -309,7 +309,7 @@ Mercenary - some ex-military move into this archetype. This archetype features c
 Scores:
 Strengths: Dexterity, Attack, Sneak, Range Weapon
 Weaknesses: Education, Knowledge, Influence
-Preferred Talents: Bring on the Pain, Heal(minor), Aim
+Preferred Talents: Bring on the Pain, Heal, Aim
 
 Personality:
 
@@ -414,7 +414,7 @@ Street doc: a generic term for someone who heals people. These are people who wo
 Scores:
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
-Preferred talents: Heal (Minor), Critical Hit, Bring on the Pain
+Preferred talents: Heal, Critical Hit, Bring on the Pain
 
 Personality:
 
