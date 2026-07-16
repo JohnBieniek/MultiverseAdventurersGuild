@@ -26,6 +26,7 @@
 
 /* Home Page */
 .home-page {
+  min-height: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -107,6 +108,58 @@
   font-size: 0.9rem;
   line-height: 1.45;
   margin-bottom: 0;
+}
+
+@media (min-width: 1921px) {
+  .home-page {
+    position: relative;
+    left: 50%;
+    width: min(2400px, calc(100vw - 80px));
+    transform: translateX(-50%);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .home-intro {
+    grid-template-columns: minmax(240px, 380px) minmax(0, 1840px);
+    gap: 2.3rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .hero {
+    padding: 2rem 2.5rem;
+  }
+
+  .hero-knight {
+    width: min(100%, 380px);
+  }
+
+  .hero h1 {
+    font-size: 2.68rem;
+    margin-bottom: 0.84rem;
+  }
+
+  .hero p {
+    font-size: 1.76rem;
+  }
+
+  .featured-content {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .content-card {
+    padding: 2rem 2.2rem;
+  }
+
+  .content-card h2 {
+    font-size: 2.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .content-card p {
+    font-size: 1.8rem;
+  }
 }
 
 /* Basic Pages */
