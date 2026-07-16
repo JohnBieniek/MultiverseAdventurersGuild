@@ -1,8 +1,7 @@
 Species describes what kind of being your Hero is and how that identity shapes their place in the story. It can reflect biology, culture, origin, body type, reputation, or how other people react to them. Species is mainly a role-playing choice, not a package of automatic bonuses.
-Combine Archetype with a Species. You can also design your own archetype and even a new Species with GM permission.
+Choose a Species and combine it with an Archetype to create your Hero. With GM permission, you can also design your own Archetype, create a new Species, or adapt an existing one to fit the campaign.
 Different settings will demand other Species. Most systems make a big deal about character progression. Species is a role-playing choice. Take whatever allowable Species you want. You decide what that means. Maybe I'm playing an elf. I have a great influence to reflect my belief in their inherent charm. I could say my (+2) influence was a Species descriptor and I take a (-1) in endurance because I think they are frail. Or maybe I buy high strength and low dex. In space opera, I might play a Zafara. With their dense muscles, they'll be strong. They are known to be clumsy, so a poor dexterity. Multiple players could play the same Species but do it differently. No one would be wrong. Race doesn't grant any bonuses or special abilities. If you want those, you have to pay for them.
 If players want, they can create their own Species. This won't give the character any bonuses or minuses. It will not confer any special abilities. It is strictly a role-playing choice. The Hero can modify stats and skills to reflect their abilities. A Hero could buy a single Talent to reflect the uniqueness of the character. Maybe if I'm playing an avian Species, I pay for the Fly Talent.
-For NPC species, characteristics may exist. I could say halflings are good at hiding and have a (+2) modifier for hide checks. So, in a general build of halflings, we would expect this. For a Hero, it would explain the sneak score, not add to it.
 Strengths and weaknesses are guidelines for building your character. Talents are also recommendations, but must be paid for using standard acquisition costs.
 The Primary Species for the Multiverse are: Giant, Troll, Orc, Human, Elf, Dwarf, Halfling, Gnome, and Fairy. Any other species is considered exotic, such as a Luminent Veilwatcher.
 Player Species give no mechanical bonuses ever.
@@ -139,11 +138,24 @@ Gregarious - Halflings are very social and the life of a party
 Friendly - they believe that everyone they meet is a friend.
 Naive - they view the world as full of infinite possibilities and are devastated when this is not true.
 
-Human - this is the majority species. They are as diverse as they are plentiful.
+Human - Humans are the majority Species across many Guild-accessible worlds. They are as diverse as they are plentiful, shaped more by culture, class, history, and personal ambition than by any single shared trait.
+
+Rep: Humans are adaptable, ambitious, and everywhere. Other Species often see them as restless, expansionist, and impossible to summarize.
+
+The Real Deal: Humans have no single pattern. Some are welcoming bridge-builders, some are suspicious traditionalists, and some believe their way of life should define the world around them. Their greatest strength is variety.
+
+Strengths: Charisma, Education, Influence
+
+Weaknesses: Outdoors, Technology
+
+Talents: Silver Tongue, Change of Fortune
+
+Common Archetypes: Face, Fixer, Ex-cop, Mercenary
 
 Personality:
 Superior - some humans are racist or believe this in general.
 Communal: humans fare better when they can socialize.
+Adaptable - Humans tend to reinvent themselves quickly when circumstances change.
 
 Orc - Orcs are over 7 feet tall. They are large, strong, and brutish. Orcs breed faster than any other race and tend to have multiple births, but orcs under 5 have a huge mortality rate.
 

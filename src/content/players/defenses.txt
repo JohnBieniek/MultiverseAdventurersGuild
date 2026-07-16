@@ -1,8 +1,15 @@
-Your defenses protect you from harm:
+Your defenses protect you from harm and harmful effects.
 
-Defense = 11 + Defense bonus + (Armor * 2)
+Defense: 11 + Defense bonus + (Defense rating x 2)
 
-Athletics = Defense bonus + Str + Dex + End
+Resilience: Defense bonus + Strength + Dexterity + Endurance
 
-Ego = Defense bonus + Intuition + Education + Charisma
-These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as Defense by adding the Score of each with a defensive stat.
+Ego: Defense bonus + Intuition + Education + Charisma
+
+Defense is the target number enemies roll against when they try to hit you.
+
+Resilience is used to resist physical danger, poison, pain, forced movement, exhaustion, and other body-based effects.
+
+Ego is used to resist fear, influence, mental attacks, illusions, possession, and other willpower-based effects.
+
+Athletics remains a normal skill for physical tasks such as climbing, jumping, swimming, and other movement challenges. It is not one of your three defenses.

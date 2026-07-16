@@ -127,11 +127,16 @@ const statSkillAliases = {
   'melee attack': 'attack',
   'ranged attack': 'attack',
   'range attack': 'attack',
-  'melee weapon': 'attack',
-  'ranged weapon': 'attack',
-  'range weapon': 'attack',
-  'any weapon': 'attack',
   'improvised weapon': 'attack'
+}
+
+const weaponReferenceTargets = {
+  'any melee weapon': '#weapons',
+  'any weapon': '#weapons',
+  'melee': '#weapons',
+  'melee weapon': '#weapons',
+  'range weapon': '#weapons',
+  'ranged weapon': '#weapons'
 }
 
 function statSkillAnchor(type, name) {
@@ -140,6 +145,12 @@ function statSkillAnchor(type, name) {
 
 function getStatSkillTarget(name) {
   const normalizedName = normalizeReferenceName(name).toLowerCase()
+  const weaponHref = weaponReferenceTargets[normalizedName]
+
+  if (weaponHref) {
+    return weaponHref
+  }
+
   const lookupName = statSkillAliases[normalizedName] || normalizedName
 
   if (statNames.includes(lookupName)) {
@@ -518,6 +529,69 @@ function renderCardField(line, index, cardIndex) {
   return <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
 }
 
+function parseCardFields(lines) {
+  return lines.reduce((fields, line) => {
+    const field = line.match(/^([A-Za-z][A-Za-z ]{1,28})(?::|\s+-)\s*(.*)$/)
+
+    if (field && isFieldLabel(field[1])) {
+      fields.push({
+        label: field[1],
+        value: field[2]
+      })
+    } else if (line) {
+      fields.push({
+        label: '',
+        value: line
+      })
+    }
+
+    return fields
+  }, [])
+}
+
+function renderWeaponCard(card) {
+  const fields = parseCardFields(card.lines)
+  const primaryLabels = new Set(['Category', 'Damage', 'Concealment'])
+  const primaryFields = fields.filter((field) => primaryLabels.has(field.label))
+  const detailFields = fields.filter((field) => !primaryLabels.has(field.label))
+
+  return (
+    <article
+      key={card.name}
+      id={cardAnchor('weapon', card.name)}
+      className="guide-info-card guide-weapon-card"
+    >
+      <h3>{card.name}</h3>
+      {card.description && <p className="guide-card-summary">{card.description}</p>}
+
+      {primaryFields.length > 0 && (
+        <dl className="guide-weapon-meta">
+          {primaryFields.map((field) => (
+            <div key={field.label}>
+              <dt>{field.label}</dt>
+              <dd>{field.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      {detailFields.length > 0 && (
+        <div className="guide-weapon-details">
+          {detailFields.map((field, index) => (
+            field.label ? (
+              <p key={`${field.label}-${index}`}>
+                <strong>{field.label}:</strong> {field.value}
+              </p>
+            ) : (
+              <p key={`${field.value}-${index}`}>{renderInlineText(field.value)}</p>
+            )
+          ))}
+        </div>
+      )}
+    </article>
+  )
+}
+
 function renderCards(content, type, cardIndex) {
   const { intro, cards } = splitCards(content, type)
 
@@ -545,17 +619,21 @@ function renderCards(content, type, cardIndex) {
 
         <div className="guide-card-grid">
           {cards.map((card) => (
-            <article
-              key={card.name}
-              id={cardAnchor(type, card.name)}
-              className="guide-info-card"
-            >
-              <h3>{card.name}</h3>
-              {card.description && <p className="guide-card-summary">{card.description}</p>}
-              <div className="guide-card-body">
-                {card.lines.map((line, index) => renderCardField(line, index, cardIndex))}
-              </div>
-            </article>
+            type === 'weapon' ? (
+              renderWeaponCard(card)
+            ) : (
+              <article
+                key={card.name}
+                id={cardAnchor(type, card.name)}
+                className="guide-info-card"
+              >
+                <h3>{card.name}</h3>
+                {card.description && <p className="guide-card-summary">{card.description}</p>}
+                <div className="guide-card-body">
+                  {card.lines.map((line, index) => renderCardField(line, index, cardIndex))}
+                </div>
+              </article>
+            )
           ))}
         </div>
       </div>

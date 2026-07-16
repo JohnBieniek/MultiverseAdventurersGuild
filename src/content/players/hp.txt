@@ -2,11 +2,13 @@ HP measures how much punishment your Hero can take before they are in serious da
 
 Starting HP: 10 + your Endurance score.
 
-Level HP: Heroes gain 6 HP per level after level 0. Your Endurance score is included in each level's HP total.
+Level HP: Heroes gain 6 + Endurance HP each time they gain a level after level 0.
+
+Formula: Total HP = the base HP for your level + your Endurance score for each level you have, including level 0. For example, a level 3 Hero counts Endurance four times: level 0, level 1, level 2, and level 3.
 
 Endurance increases are retroactive. If your Endurance improves later, apply that new bonus to every level you already have.
 
-Example: A level 3 Hero with Endurance 0 has 28 HP. If that Hero raises Endurance to +1, the bonus applies across all levels and their HP becomes 32.
+Example: A level 3 Hero with Endurance 0 has 28 HP. If that Hero raises Endurance to +1, the bonus applies across all four levels and their HP becomes 32.
 
 Taking Damage
 

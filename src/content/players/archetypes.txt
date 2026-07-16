@@ -1,10 +1,7 @@
-Archetypes
 Definition: an original model, universal pattern, or perfect example from which other things-like characters, objects, or behaviors - are copied or based.
 These are archetypes used throughout many settings. The idea is to give the player an outline to help build the character. The Hero can pick and choose based on the outlined information or even go in a different direction. After all, the character that goes against type is often more interesting. Players can pull items from other archetypes as well to help in defining their Hero. The players can interpret these archetypes however they want. Two players may have different views. That's what makes this interesting. These choices can be made after the initial tutorial of the 0 level.
 
-Career Path
-
-Players may move through different archetypes as they develop, such as the Ganger who becomes a Street Samurai. The path can be one or more archetypes. This movement reflects the Hero's progression.
+Career Path: Players may move through different archetypes as they develop, such as the Ganger who becomes a Street Samurai. The path can be one or more archetypes. This movement reflects the Hero's progression.
 
 Suggested Scores: When you make a new Hero, assign these starting stat scores: +3, +2, +1, 0, 0, and -1. Use the archetype's Strengths and Weaknesses as a guide. Put +3 in the stat that matters most to the archetype, +2 in the next most important stat, and +1 in a supporting stat. Put -1 in a listed Weakness. The two remaining stats usually stay at 0.
 

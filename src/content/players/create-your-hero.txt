@@ -61,11 +61,10 @@ Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matri
 Vehicle (Dex) - driving a car, piloting a starship, riding a horse
 "Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)
 Your defenses protect you from harm:
-Defense = 11 + Defense bonus + (Armor * 2)
-Athletics = Defense bonus + Str + Dex + End
-
+Defense = 11 + Defense bonus + (Defense rating x 2)
+Resilience = Defense bonus + Strength + Dexterity + Endurance
 Ego = Defense bonus + Intuition + Education + Charisma
-These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as Defense by adding the Score of each with a defensive stat.
+Defense is used when enemies try to hit you. Resilience resists physical danger and body-based effects. Ego resists fear, influence, mental attacks, and willpower-based effects. Athletics remains a normal skill for climbing, jumping, swimming, and similar physical tasks.
 You begin with:
 1 Talent Slot
 10 + endurance HP
@@ -188,7 +187,7 @@ Damage: 1d6 + dex + 2 = 8 total.
 Natural 20 Max Damage and free attack
 Level
 Level increases with every 10 XP. See the following table: Players spend XP when they want, including in the middle of a mission. For every 10XP, you gain a level and certain advantages. You don't pay for those advantages.
-HP = the number of HP you have at each level. E + energy. Slots indicate how many combat talents you can have active at any given time.
+HP = the base HP you have at each level before Endurance is applied. Add your Endurance score once for each level you have, including level 0. Slots indicate how many combat Talents you can have active at any given time.
 Force Access Rule (Hard Limit)
 
 You cannot activate or purchase Talents of a Force higher than your level allows.
