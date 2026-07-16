@@ -160,9 +160,9 @@ Description: You have mastered the use of ranged combat against adjacent targets
 
 Mechanic: Eliminate the penalty for point-blank range. Force 1 (F1).
 
-Concealed Weapon Specialist:
-Description: You excel at hiding weapons on your body.
-Mechanic: Spend Force 1 (F1) per weapon. Roll d4 and add it to your conceal TN for each affected weapon.
+Weapon Smuggler:
+Description: You excel at hiding weapons on your body or slipping them through security.
+Mechanic: Add your Sneak skill to the weapon's concealment TN. Spend Force 1 (F1) per weapon to roll +1d4 and add it to that concealment TN for each affected weapon.
 Duration: 8 hours.
 Action: 1 minute
 

@@ -89,7 +89,7 @@ Ex-Company Man - a person who puts the Company above himself. They are very loya
 Scores:
 Strengths: Charisma, Education, Technology, Range Weapon
 Weaknesses: Strength, Outdoors, Sneak
-Talents: Silver Tongue, Concealed Weapon Specialist, Detect Lie
+Talents: Silver Tongue, Weapon Smuggler, Detect Lie
 Personality:
 1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-company men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
 2. Stubborn—They are slow to acknowledge issues with where their loyalties lie. This makes it difficult for them to turn against their corporation and makes them so dangerous when they do.
@@ -155,7 +155,7 @@ Gun Bunny - it's all about the guns. This archetype collects guns. They categori
 Scores:
 Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
-Preferred talents: Aim, Close Quarters Combat, Concealed Weapon Specialist
+Preferred talents: Aim, Close Quarters Combat, Weapon Smuggler
 Personality:
 A gun for every occasion; clear a building, sniping, tuxedo, happy mood …
 Have gun will travel - the gun Bunny will always be armed except for security checkpoints. And they will do anything to subvert these checkpoints.

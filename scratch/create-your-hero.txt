@@ -156,13 +156,13 @@ no conceal
 braced
 Sniper Rifle, Machine Gun
 ?
-Two-Weapon Fighting:
-Melee - fight with 2 d6 weapons for d8 damage, same special rules of a d8 weapon
-Range - 2 d4 weapons for d6 damage, same special rules as a d6 weapon
+Paired Weapons:
+Melee - Fight with two d6 weapons for d8 damage, using the same special rules as a d8 weapon.
+Range - Fight with two d4 weapons for d6 damage, using the same special rules as a d6 weapon.
 ??
-Silencers - These increase the concealability by one step. A silencer on a pistol becomes a TN 15 Observation check. The damage decreases by one step. A sniper rifle would become a d8 weapon. A pistol becomes d4-1.
+Suppressors - These make ranged attacks harder to notice, but they do not make the weapon easier to conceal. The damage decreases by one step. A sniper rifle becomes a d8 weapon. A pistol becomes d4-1.
 ?
-Concealment - Add the sneak skill to the TN for concealment. If you have a Sneak skill of (+2), you conceal an SMG on TN 17.
+Weapon Smuggler - This Talent improves weapon concealment. Add your Sneak skill to the concealment TN, and activate Weapon Smuggler for an extra +1d4 per affected weapon.
 The philosophy behind damage is that Heroes should be rewarded for fighting at Melee ranges because of the increased risk. Melee damage is slightly more serious than ranged damage.
 ?
 ?

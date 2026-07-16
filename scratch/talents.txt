@@ -406,7 +406,7 @@ Cost: move action.
 ??
 Miscellaneous ???
 ??
-Concealed Weapon Specialist:
+Weapon Smuggler:
 Description: You excel at hiding weapons on your body.
 Mechanic: Roll d4 and add it to your conceal TN. F1/weapon
 Duration: 8 hours.

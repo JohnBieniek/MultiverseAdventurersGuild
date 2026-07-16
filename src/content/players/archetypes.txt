@@ -147,7 +147,7 @@ Ex-Company Man - a person who puts the Company above himself. They are very loya
 Scores: Strength -1, Dexterity +1, Endurance 0, Intuition 0, Education +2, Charisma +3
 Strengths: Charisma, Education, Technology, Range Weapon
 Weaknesses: Strength, Outdoors, Sneak
-Talents: Silver Tongue, Concealed Weapon Specialist, Truthsense
+Talents: Silver Tongue, Weapon Smuggler, Truthsense
 
 Personality:
 1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-company men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
@@ -249,7 +249,7 @@ Gun Bunny - it's all about the guns. This archetype collects guns. They categori
 Scores: Strength 0, Dexterity +3, Endurance +1, Intuition +2, Education -1, Charisma 0
 Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
-Preferred talents: Aim, Close Quarter Combat, Concealed Weapon Specialist
+Preferred talents: Aim, Close Quarter Combat, Weapon Smuggler
 
 Personality:
 
@@ -354,7 +354,7 @@ Private eye/ Investigator - whether you have a police background or are self-tau
 Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
-Preferred talents: Concealed Weapon Specialist, Silver Tongue, Truthsense
+Preferred talents: Weapon Smuggler, Silver Tongue, Truthsense
 
 Personality:
 

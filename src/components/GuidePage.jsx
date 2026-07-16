@@ -79,6 +79,8 @@ const referenceAliases = {
     'any non-combat talent': 'buffs',
     camouflage: 'shadowstep',
     'close quarters combat': 'close quarter combat',
+    'concealed weapon specialist': 'weapon smuggler',
+    concealment: 'weapon smuggler',
     'concealed weapom specialist': 'concealed weapon specialist',
     'detect lies': 'truthsense',
     'detect lie': 'truthsense',
@@ -120,6 +122,7 @@ const guideSectionLinks = {
 }
 
 const standaloneLineLinks = {
+  'Braced.': '#weapon-braced',
   'Reputation in the world': '#reputation'
 }
 
@@ -620,7 +623,7 @@ function renderWeaponCard(card) {
           {fields.map((field, index) => (
             field.label ? (
               <p key={`${field.label}-${index}`}>
-                <strong>{field.label}:</strong> {field.value}
+                <strong>{field.label}:</strong> {renderInlineText(field.value)}
               </p>
             ) : (
               <p key={`${field.value}-${index}`}>{renderInlineText(field.value)}</p>

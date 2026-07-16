@@ -1,4 +1,4 @@
-You start with one Weapon Enhancement for either Melee or Ranged. Weapon categories describe damage, concealment, and common examples. Rename the weapon however you want for the setting: a d8 melee weapon might be a longsword, fire axe, shock baton, or bone club.
+You start with one Weapon Enhancement for either Melee or Ranged. Weapon categories describe damage, concealment, and common examples. Rename the weapon however you want for the setting: a d8 melee weapon might be a longsword, fire axe, shock baton, or bone club. Heroes are rewarded for fighting at melee range because of the increased risk, so melee damage is slightly more serious than ranged damage.
 
 Unarmed or Tiny Melee - Small, natural, or improvised close-range attacks.
 Category: Melee
@@ -50,22 +50,15 @@ Concealment: No concealment.
 Special Rules: Braced.
 Examples: Sniper rifle, machine gun, anti-materiel rifle, heavy crossbow.
 
-Two-Weapon Fighting (Melee) - Fight with two light melee weapons.
+Paired Weapons - Fight with a weapon in each hand.
 Category: Rule
-Mechanic: Two d6 melee weapons deal d8 damage and use the same special rules as a d8 melee weapon.
+Melee: Two d6 melee weapons deal d8 damage and use the same special rules as a d8 melee weapon.
+Ranged: Two d4 ranged weapons deal d6 damage and use the same special rules as a d6 ranged weapon.
 
-Two-Weapon Fighting (Ranged) - Fight with two holdout ranged weapons.
+Suppressors - Make ranged attacks harder to notice, but reduce impact.
 Category: Rule
-Mechanic: Two d4 ranged weapons deal d6 damage and use the same special rules as a d6 ranged weapon.
+Mechanic: A suppressor does not make a weapon easier to conceal; it adds bulk. It can make it harder for bystanders or guards to notice where a shot came from, at the GM's discretion. Suppressed weapons reduce damage by one step: a pistol deals d4-1 damage, and a sniper rifle becomes a d8 weapon.
 
-Silencers - Suppressors make ranged weapons easier to hide but reduce damage.
+Braced - Heavy ranged weapons need setup or support.
 Category: Rule
-Mechanic: A silencer improves concealment by one step and reduces damage by one step. A pistol becomes a TN 15 Observation check to conceal and deals d4-1 damage. A sniper rifle becomes a d8 weapon.
-
-Concealment - Hiding a weapon is easier for sneaky Heroes.
-Category: Rule
-Mechanic: Add your Sneak skill to the concealment TN. If you have Sneak +2, you conceal a compact ranged weapon on TN 17 instead of TN 15.
-
-Damage Philosophy - Melee is dangerous because it puts you close to the enemy.
-Category: Rule
-Mechanic: Heroes are rewarded for fighting at melee range because of the increased risk. Melee damage is slightly more serious than ranged damage.
+Mechanic: A braced weapon must be fired from a stable position, such as prone, mounted, rested on cover, or supported by a bipod or similar gear. The GM may deny the shot or apply disadvantage when the weapon is fired without bracing.
