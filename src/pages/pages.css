@@ -684,6 +684,10 @@
     width: 100%;
   }
 
+  .guide-card-layout-species {
+    grid-template-columns: clamp(4.2rem, 20vw, 5.2rem) minmax(0, 1fr);
+  }
+
   .guide-section > h2,
   .guide-text-blocks {
     padding-left: var(--mobile-text-inset);
