@@ -78,7 +78,9 @@ New Talents: You gain new Talents at certain levels.
 
 Reputation in the world
 
-Story Changes: Your character changes because of the story.
+Reputation is how people start to recognize you before you ever enter the room. Maybe you become known as a reliable problem-solver, a dangerous duelist, a strange miracle worker, or the person who walked away from something impossible. Reputation can open doors, create complications, attract enemies, or make strangers ask for help.
+
+Story Changes: Your character should not stay frozen in place. Missions leave marks. You might gain allies, make enemies, change your ideals, pick up scars, earn titles, lose trust, or discover a new reason to keep going. Let the events of play reshape who your Hero is becoming.
 
 Table Goal
 
