@@ -2,47 +2,59 @@ Reputation is what the Multiverse thinks it knows about you.
 
 It might be true, exaggerated, outdated, or completely wrong. Pick a reputation that fits your concept, or choose one during play when the table discovers how people react to your Hero.
 
-Dead-Eye Shot - People say you never miss when it matters.
-Expertise: Gain attention from duelists, marksmen, bounty hunters, and anyone who needs a precision shooter.
+Anointed Champion - A temple, spirit, deity, prophecy, or movement has marked you as important.
+Expertise: Helps with faithful communities, sacred sites, religious authority, and supernatural obligations.
 
 Arcane Scholar - You are known for understanding old magic, impossible symbols, and dangerous rituals.
 Expertise: Opens doors with mages, cult researchers, relic hunters, and anyone afraid of a curse.
 
-Former Corporate Asset - You used to belong to a company, agency, or power structure that invested heavily in you.
-Expertise: Helps with corporate access, insider language, security procedures, and recognizing company tactics.
+Arena Favorite - Crowds know you from pit fights, tournaments, duels, or blood sport.
+Expertise: Helps with fighters, gamblers, promoters, fans, and anyone impressed by public violence.
 
-Lucky Beyond Reason - People believe fate bends around you at the last possible second.
-Expertise: Draws gamblers, risk-takers, desperate clients, and people willing to bet on your survival.
+Blacklisted - Someone powerful has warned people not to work with you.
+Expertise: Signals danger, reveals enemies, and opens doors with people who also hate that power.
 
-Ghost in the System - You are hard to track, hard to identify, and harder to keep out.
-Expertise: Helps with digital intrusion, false identities, hidden travel, and avoiding surveillance.
+Butcher - Whether fair or not, people believe you leave bodies behind.
+Expertise: Frightens enemies, attracts violent employers, and makes peaceful NPCs wary or hostile.
 
-Street-Born Survivor - Everyone knows you came up rough and learned to endure.
-Expertise: Earns respect from gangs, refugees, laborers, and people who distrust polished authority.
+Chaos Magnet - Trouble follows you, and everyone nearby knows it.
+Expertise: Draws rumors, weird opportunities, reckless allies, and NPCs who want the impossible stirred up.
 
-Noble Blood - Your name carries the weight of a house, dynasty, clan, or famous lineage.
-Expertise: Helps with formal introductions, old debts, court etiquette, and noble negotiations.
+Clean Professional - You are known for doing jobs neatly, quietly, and on time.
+Expertise: Earns trust from fixers, spies, nobles, and clients who value discretion.
 
-Monster Slayer - You are known for killing something most people run from.
-Expertise: Attracts frightened towns, hunters, monster experts, and patrons with dangerous creature problems.
-
-War Veteran - You survived a real war and people can see it in how you move.
-Expertise: Helps with soldiers, mercenaries, military logistics, battlefield rumors, and veteran communities.
-
-Gentle Healer - Your reputation is built on saving lives, even when it costs you.
-Expertise: Earns trust from civilians, medics, temples, clinics, and wounded NPCs who need reassurance.
+Cold Operator - You are known for staying calm when everyone else breaks.
+Expertise: Helps with hostage scenes, negotiations under threat, crisis command, and NPCs who respect discipline.
 
 Dangerous Temper - People know you can be provoked into violence.
 Expertise: Intimidates weak-willed enemies, scares off petty threats, and complicates delicate social scenes.
 
-Silver Tongue - You are known for talking your way into, out of, and around trouble.
-Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
+Dead-Eye Shot - People say you never miss when it matters.
+Expertise: Gain attention from duelists, marksmen, bounty hunters, and anyone who needs a precision shooter.
 
-Haunted Eyes - People believe you have seen something no one should see.
-Expertise: Draws occultists, trauma survivors, prophets, and NPCs who recognize supernatural scars.
+Debt Collector - You are known for making people pay what they owe.
+Expertise: Helps with intimidation, criminal negotiations, bounty work, and recovering stolen or promised goods.
 
-Tech Whisperer - Machines seem to make sense to you, even when they should not.
-Expertise: Helps with repairs, diagnostics, strange devices, jury-rigging, and conversations with technical crews.
+Disgraced Officer - You once had rank, authority, or a badge, and lost it.
+Expertise: Helps with police procedure, command habits, old colleagues, and understanding institutional rot.
+
+Fixer's Favorite - Job brokers know you get results.
+Expertise: Helps with paid work, introductions, better mission terms, and first notice of profitable opportunities.
+
+Forbidden Student - You learned from a banned school, outlawed master, or sealed archive.
+Expertise: Helps with forbidden lore, secret techniques, illegal texts, and NPCs who fear or covet that knowledge.
+
+Former Corporate Asset - You used to belong to a company, agency, or power structure that invested heavily in you.
+Expertise: Helps with corporate access, insider language, security procedures, and recognizing company tactics.
+
+Friend of Spirits - Spirits, ghosts, animals, or unseen things seem willing to deal with you.
+Expertise: Helps with omens, haunted places, nature spirits, dead witnesses, and supernatural negotiations.
+
+Gentle Healer - Your reputation is built on saving lives, even when it costs you.
+Expertise: Earns trust from civilians, medics, temples, clinics, and wounded NPCs who need reassurance.
+
+Ghost in the System - You are hard to track, hard to identify, and harder to keep out.
+Expertise: Helps with digital intrusion, false identities, hidden travel, and avoiding surveillance.
 
 Guild Darling - The Guild likes you, or at least people think it does.
 Expertise: Helps with internal favors, softer debriefs, extra briefings, and being trusted by Guild staff.
@@ -50,80 +62,68 @@ Expertise: Helps with internal favors, softer debriefs, extra briefings, and bei
 Guild Problem - The Guild knows your name for all the wrong reasons.
 Expertise: Makes officials cautious, draws Reeves attention, and helps when intimidation matters more than approval.
 
-Oathbound - People believe you keep promises no matter the cost.
-Expertise: Builds trust quickly with honorable factions, frightened clients, and NPCs looking for a reliable agent.
+Haunted Eyes - People believe you have seen something no one should see.
+Expertise: Draws occultists, trauma survivors, prophets, and NPCs who recognize supernatural scars.
 
-Debt Collector - You are known for making people pay what they owe.
-Expertise: Helps with intimidation, criminal negotiations, bounty work, and recovering stolen or promised goods.
+Last Witness - You survived an event everyone else wants forgotten.
+Expertise: Draws investigators, enemies, historians, and survivors who need testimony, confirmation, or the truth no official record contains.
 
 Liberator - You have a reputation for freeing prisoners, slaves, hostages, or oppressed communities.
 Expertise: Draws rebels, refugees, resistance cells, and people begging for rescue.
 
-Butcher - Whether fair or not, people believe you leave bodies behind.
-Expertise: Frightens enemies, attracts violent employers, and makes peaceful NPCs wary or hostile.
-
-Relic Finder - You have a knack for locating things history tried to bury.
-Expertise: Helps with treasure leads, museum contacts, artifact rumors, and ruins nobody wants to enter.
-
-Clean Professional - You are known for doing jobs neatly, quietly, and on time.
-Expertise: Earns trust from fixers, spies, nobles, and clients who value discretion.
-
-Chaos Magnet - Trouble follows you, and everyone nearby knows it.
-Expertise: Draws rumors, weird opportunities, reckless allies, and NPCs who want the impossible stirred up.
-
-Shield of the Weak - People believe you protect children, civilians, and anyone who cannot fight back.
-Expertise: Earns trust from communities, families, healers, and NPCs who need protection more than victory.
-
-Anointed Champion - A temple, spirit, deity, prophecy, or movement has marked you as important.
-Expertise: Helps with faithful communities, sacred sites, religious authority, and supernatural obligations.
-
-Blacklisted - Someone powerful has warned people not to work with you.
-Expertise: Signals danger, reveals enemies, and opens doors with people who also hate that power.
-
-Arena Favorite - Crowds know you from pit fights, tournaments, duels, or blood sport.
-Expertise: Helps with fighters, gamblers, promoters, fans, and anyone impressed by public violence.
-
-Disgraced Officer - You once had rank, authority, or a badge, and lost it.
-Expertise: Helps with police procedure, command habits, old colleagues, and understanding institutional rot.
-
-Friend of Spirits - Spirits, ghosts, animals, or unseen things seem willing to deal with you.
-Expertise: Helps with omens, haunted places, nature spirits, dead witnesses, and supernatural negotiations.
-
-No One's Fool - People know you are hard to trick.
-Expertise: Helps with detecting scams, reading suspicious NPCs, resisting manipulation, and spotting bad deals.
-
-Soft Touch - People believe you can be moved by a sad story.
-Expertise: Makes desperate NPCs approach you first, which can reveal hooks, lies, and hidden victims.
-
-Fixer's Favorite - Job brokers know you get results.
-Expertise: Helps with paid work, introductions, better mission terms, and first notice of profitable opportunities.
-
-Unkillable - People are convinced you should already be dead.
-Expertise: Intimidates enemies, reassures allies, and attracts people who need someone to survive the unsurvivable.
-
-Forbidden Student - You learned from a banned school, outlawed master, or sealed archive.
-Expertise: Helps with forbidden lore, secret techniques, illegal texts, and NPCs who fear or covet that knowledge.
-
-People's Hero - Ordinary people tell stories about you.
-Expertise: Helps with shelter, food, local warnings, hidden routes, and communities willing to take risks for you.
-
-Cold Operator - You are known for staying calm when everyone else breaks.
-Expertise: Helps with hostage scenes, negotiations under threat, crisis command, and NPCs who respect discipline.
-
 Lone Wolf - People believe you work best alone and do not need help.
 Expertise: Helps with solo infiltration, quiet intimidation, and NPCs who admire independence.
 
-Team Anchor - You are known as the one who keeps the crew together.
-Expertise: Helps with morale, mediation, rallying allies, and convincing scared NPCs to cooperate.
-
-Timeline Scarred - The Multiverse has visibly changed you.
-Expertise: Helps with anomaly recognition, strange sympathy from other altered beings, and warnings about timeline danger.
-
-MPS Enemy - The Multiverse Preservation Society has reason to hate you.
-Expertise: Attracts anti-MPS allies, alerts you to Preservation Society activity, and marks you as a threat to timeline manipulators.
+Lucky Beyond Reason - People believe fate bends around you at the last possible second.
+Expertise: Draws gamblers, risk-takers, desperate clients, and people willing to bet on your survival.
 
 Masked Legend - People know the symbol, mask, armor, or calling card before they know your real name.
 Expertise: Helps with dramatic entrances, frightening criminals, inspiring civilians, and hiding your identity behind a larger-than-life persona.
 
-Last Witness - You survived an event everyone else wants forgotten.
-Expertise: Draws investigators, enemies, historians, and survivors who need testimony, confirmation, or the truth no official record contains.
+Monster Slayer - You are known for killing something most people run from.
+Expertise: Attracts frightened towns, hunters, monster experts, and patrons with dangerous creature problems.
+
+MPS Enemy - The Multiverse Preservation Society has reason to hate you.
+Expertise: Attracts anti-MPS allies, alerts you to Preservation Society activity, and marks you as a threat to timeline manipulators.
+
+No One's Fool - People know you are hard to trick.
+Expertise: Helps with detecting scams, reading suspicious NPCs, resisting manipulation, and spotting bad deals.
+
+Noble Blood - Your name carries the weight of a house, dynasty, clan, or famous lineage.
+Expertise: Helps with formal introductions, old debts, court etiquette, and noble negotiations.
+
+Oathbound - People believe you keep promises no matter the cost.
+Expertise: Builds trust quickly with honorable factions, frightened clients, and NPCs looking for a reliable agent.
+
+People's Hero - Ordinary people tell stories about you.
+Expertise: Helps with shelter, food, local warnings, hidden routes, and communities willing to take risks for you.
+
+Relic Finder - You have a knack for locating things history tried to bury.
+Expertise: Helps with treasure leads, museum contacts, artifact rumors, and ruins nobody wants to enter.
+
+Shield of the Weak - People believe you protect children, civilians, and anyone who cannot fight back.
+Expertise: Earns trust from communities, families, healers, and NPCs who need protection more than victory.
+
+Silver Tongue - You are known for talking your way into, out of, and around trouble.
+Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
+
+Soft Touch - People believe you can be moved by a sad story.
+Expertise: Makes desperate NPCs approach you first, which can reveal hooks, lies, and hidden victims.
+
+Street-Born Survivor - Everyone knows you came up rough and learned to endure.
+Expertise: Earns respect from gangs, refugees, laborers, and people who distrust polished authority.
+
+Team Anchor - You are known as the one who keeps the crew together.
+Expertise: Helps with morale, mediation, rallying allies, and convincing scared NPCs to cooperate.
+
+Tech Whisperer - Machines seem to make sense to you, even when they should not.
+Expertise: Helps with repairs, diagnostics, strange devices, jury-rigging, and conversations with technical crews.
+
+Timeline Scarred - The Multiverse has visibly changed you.
+Expertise: Helps with anomaly recognition, strange sympathy from other altered beings, and warnings about timeline danger.
+
+Unkillable - People are convinced you should already be dead.
+Expertise: Intimidates enemies, reassures allies, and attracts people who need someone to survive the unsurvivable.
+
+War Veteran - You survived a real war and people can see it in how you move.
+Expertise: Helps with soldiers, mercenaries, military logistics, battlefield rumors, and veteran communities.

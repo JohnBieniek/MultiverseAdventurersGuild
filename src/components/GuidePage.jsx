@@ -392,6 +392,17 @@ function getTextBlockAnchor(sectionTitle, line) {
   return null
 }
 
+function isInlineSubhead(line, nextLine) {
+  return (
+    line.length < 48 &&
+    !line.endsWith('.') &&
+    !line.includes(',') &&
+    !/^[-+]?[\d(]/.test(line) &&
+    !/^Description|Mechanic/i.test(line) &&
+    nextLine.length > 0
+  )
+}
+
 function renderSectionMedia(section) {
   if (!section.image && !section.download) {
     return null
@@ -433,15 +444,7 @@ function renderTextBlocks(content, sectionTitle, section) {
         }
 
         const next = lines[index + 1] || ''
-        const isSubhead =
-          line.length < 48 &&
-          !line.endsWith('.') &&
-          !line.includes(',') &&
-          !/^[-+]?[\d(]/.test(line) &&
-          !/^Description|Mechanic/i.test(line) &&
-          next.length > 0
-
-        if (isSubhead) {
+        if (isInlineSubhead(line, next)) {
           return (
             <h3 key={`${line}-${index}`} className="guide-inline-heading">
               {line}
@@ -565,14 +568,13 @@ function renderWeaponCard(card) {
       {card.description && <p className="guide-card-summary">{card.description}</p>}
 
       {primaryFields.length > 0 && (
-        <dl className="guide-weapon-meta">
+        <div className="guide-weapon-meta">
           {primaryFields.map((field) => (
-            <div key={field.label}>
-              <dt>{field.label}</dt>
-              <dd>{field.value}</dd>
-            </div>
+            <span key={field.label}>
+              <strong>{field.label}:</strong> {field.value}
+            </span>
           ))}
-        </dl>
+        </div>
       )}
 
       {detailFields.length > 0 && (
@@ -612,7 +614,13 @@ function renderCards(content, type, cardIndex) {
         {intro.length > 0 && (
           <div className="guide-card-intro">
             {intro.map((line, index) => (
-              <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
+              isInlineSubhead(line, intro[index + 1] || '') ? (
+                <h3 key={`${line}-${index}`} className="guide-inline-heading">
+                  {line}
+                </h3>
+              ) : (
+                <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
+              )
             ))}
           </div>
         )}
