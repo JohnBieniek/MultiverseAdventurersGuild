@@ -517,18 +517,14 @@ function renderCardField(line, index, cardIndex) {
   if (field && isFieldLabel(field[1])) {
     const label = field[1]
     const value = field[2]
-    const isChipField = /strength|weakness|talent|archetype/i.test(label)
     const isReferenceField = /strength|weakness|talent|archetype/i.test(label)
 
     return (
       <div key={`${line}-${index}`} className="guide-card-field">
         <strong>{label}</strong>
-        {value && isChipField ? (
+        {value && isReferenceField ? (
           <div className="guide-chip-list">
-            {splitListItems(value)
-              .map((item) => (
-                isReferenceField ? renderChip(label, item, cardIndex) : <span key={item}>{item}</span>
-              ))}
+            {splitListItems(value).map((item) => renderChip(label, item, cardIndex))}
           </div>
         ) : (
           value && <p>{value}</p>
