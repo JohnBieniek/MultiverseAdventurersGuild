@@ -627,14 +627,18 @@
 
   .guide-card-layout {
     grid-template-columns: clamp(5.75rem, 28vw, 7.25rem) minmax(0, 1fr);
-    gap: 0.55rem;
+    gap: 0.2rem;
     width: 100%;
   }
 
   .guide-section > h2,
-  .guide-text-blocks,
-  .guide-card-main {
+  .guide-text-blocks {
     padding-left: var(--mobile-text-inset);
+    padding-right: var(--mobile-text-inset);
+  }
+
+  .guide-card-main {
+    padding-left: 0;
     padding-right: var(--mobile-text-inset);
   }
 
@@ -667,7 +671,6 @@
   }
 
   .guide-info-card {
-    border-right: 0;
     padding: 0.85rem;
   }
 
