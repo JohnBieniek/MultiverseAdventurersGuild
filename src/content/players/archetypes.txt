@@ -14,7 +14,7 @@ Barbarian - You fight with emotion - rage. You may have some skill, but you rely
 Scores:
 Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
-Preferred talents: Ferocious Attack, Ablative Armor, Temporary Hit Points
+Preferred talents: Ferocious Attack, Ablative Armor, Vital Reserve
 
 Personality: Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
@@ -264,7 +264,7 @@ Hacker - you are a master of the world of ones and zeros. Mastering the net mean
 Scores:
 Strengths: Education, Attack, Technology, Range Weapon
 Weaknesses: Strength, Influence, Athletics
-Preferred Talents: Alertness, Bring on the Pain, Hacker
+Preferred Talents: Alertness, Bring the Pain, Hacker
 
 Personality:
 
@@ -309,7 +309,7 @@ Mercenary - some ex-military move into this archetype. This archetype features c
 Scores:
 Strengths: Dexterity, Attack, Sneak, Range Weapon
 Weaknesses: Education, Knowledge, Influence
-Preferred Talents: Bring on the Pain, Heal, Aim
+Preferred Talents: Bring the Pain, Heal, Aim
 
 Personality:
 
@@ -414,7 +414,7 @@ Street doc: a generic term for someone who heals people. These are people who wo
 Scores:
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
-Preferred talents: Heal, Critical Hit, Bring on the Pain
+Preferred talents: Heal, Critical Hit, Bring the Pain
 
 Personality:
 

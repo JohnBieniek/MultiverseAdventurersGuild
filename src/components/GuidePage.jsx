@@ -88,7 +88,8 @@ const referenceAliases = {
     mechanic: 'technical expertise',
     reach: 'melee reach',
     smart: 'genius',
-    'temporary hp': 'temporary hit points',
+    'temporary hp': 'vital reserve',
+    'temporary hit points': 'vital reserve',
     'tech expertise': 'technical expertise',
     techie: 'technical expertise'
   }

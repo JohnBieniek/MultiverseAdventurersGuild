@@ -548,12 +548,17 @@
 }
 
 @media (max-width: 768px) {
+  .page {
+    padding: 1rem 0;
+  }
+
   .page h1 {
     font-size: 1.8rem;
   }
 
   .basic-section {
-    padding: 1rem;
+    border-radius: 0;
+    padding: 1rem 0;
   }
 
   .home-intro {
@@ -586,6 +591,7 @@
 
   .guide-header {
     display: block;
+    padding: 0 0.75rem;
   }
 
   .guide-header h1 {
@@ -594,8 +600,13 @@
 
   .guide-subnav {
     top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap));
+    width: 100vw;
     max-height: 42vh;
+    margin-left: calc(50% - 50vw);
+    margin-bottom: 0;
     overflow-y: auto;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
   }
 
   .guide-subnav a {
@@ -607,20 +618,19 @@
   .guide-card-layout {
     grid-template-columns: clamp(5.75rem, 28vw, 7.25rem) minmax(0, 1fr);
     gap: 0.55rem;
-    width: calc(100vw - 30px);
-    margin-left: calc(50% - 50vw + 15px);
+    width: 100%;
   }
 
   .guide-item-sidebar {
-    top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 0.5rem);
+    top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height));
     z-index: 80;
-    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem);
+    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height));
     padding: 0.45rem;
-    border-radius: 6px;
+    border-radius: 0 0 6px 0;
   }
 
   .guide-card-layout-archetype .guide-item-sidebar {
-    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem);
+    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height));
   }
 
   .guide-item-sidebar nav {
@@ -640,6 +650,7 @@
   }
 
   .guide-info-card {
+    border-right: 0;
     padding: 0.85rem;
   }
 

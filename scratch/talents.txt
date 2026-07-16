@@ -59,7 +59,7 @@ Description: Catch your opponent by surprise to gain an advantage.
 
 Mechanic: If you attack before your enemy has its first turn, or if a party member is attacking the same target, modify the attack by adding (+1d4)/F between To Hit and damage/F. Max 2. Can’t be combined with Ferocious Attack or Aim.
 ?
-Bring on the Pain
+Bring the Pain
 
 Description: You are skilled at making damaging attacks.
 
@@ -83,7 +83,7 @@ Description: You turn 19 into a critical hit.
 
 Mechanics: When the player rolls a natural 19, it is a critical hit if the roll would hit. This is not automatic. F2. Can be used as a reaction and pay F2 as a one-shot to make it a critical hit.
 ?
-?Defensive Attack/ Fire from cover
+Defensive strike
 
 Description: You attack cautiously. This could represent attacking from cover.
 Mechanic: increase your AV (+1d4) and your attack by (-1d4). This is a free talent and costs no energy. If a Hero ends their move behind cover, add (+d4) to AV.
@@ -106,7 +106,7 @@ Mechanic: F1. Not subject to reactive attack.
 
 Description: You fight with emotion. This combat style is a reckless, all-out attack.
 
-Mechanics: The player buffs the damage (+1d4)/ Force. It can't be combined with Bring on the Pain. Max F2.
+Mechanics: The player buffs the damage (+1d4)/ Force. It can't be combined with Bring the Pain. Max F2.
 ?
 Goad
 
@@ -301,8 +301,8 @@ Mechanic: Heal (+1d4)/F hit points/turn up to full. You can't stack this talent 
 Duration - combat + 5 minutes or drop below (0) HP. Starts at F2.
 Cost: move action
 ?
-Temporary Hit Points:
-Description: Increase your HP total
+Vital Reserve:
+Description: Increase the HP total of the player touched.
 Mechanics: increase HP by (+2d4 + 1)/F. These hit points are used first. They can't be healed. Max F2.
 Duration: combat + 5 minutes
 Cost: Move action
@@ -424,13 +424,13 @@ Mechanics: The player succeeds if he has a higher force level. 2 beats 1 ECT. Le
 Duration: one use
 Cost: reaction
 ?
-Far sight/sound:
+Sar sense:
 Description - When using this talent, choose whether to hear or see at a distance. Players can pay for both simultaneously. The power allows the user to project the spell's distance through any barrier and use the sense. Observation is used.
 Mechanics - this power has a range of Force squared x 100 feet. A level 2 force talent would cost 4 energy and have a range of 400 feet. This talent uses the observation skill. Once active in combat, you can use the skill action to make an observation check.
 Duration: combat + 5 minutes
 Cost: attack action.
 ?
-Find secret doors/passages:
+Find secret doors:
 Description: Discover hidden doors and passages.
 Mechanic: find all secret doors and Passages in a room or corridor by expending F1.
 Duration: one hour

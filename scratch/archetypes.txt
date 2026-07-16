@@ -17,7 +17,7 @@ Barbarian - You fight with emotion - rage. You may have some skill, but you rely
 Scores:
 Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
-Preferred talents: Ferocious Attack, Ablative Armor, Temporary HP
+Preferred talents: Ferocious Attack, Ablative Armor, Vital Reserve
 Personality:
 Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 Rude- you are blunt and abrupt. Social norms confuse you. You see things in black or white.
@@ -164,7 +164,7 @@ Hacker - you are a master of the world of ones and zeros. Mastering the net mean
 Scores:
 Strengths: Education, Attack, Technology, Range Weapon
 Weaknesses: Strength, Influence, Athletics
-Preferred Talents: Alertness, Bring on the Pain, Hacker
+Preferred Talents: Alertness, Bring the Pain, Hacker
 Personality:
 Gloating - you are a master of the universe and not afraid to let the whole world know.
 The real world is a dull grey - you live in VR. The rest of the world is dull, dull, dull.
@@ -191,7 +191,7 @@ Mercenary - some ex-military move into this archetype. This archetype features c
 Scores:
 Strengths: Dexterity, Attack, Sneak, Range Weapon
 Weaknesses: Education, Knowledge, Influence
-Preferred Talents: Bring on the Pain, Heal(minor), Aim
+Preferred Talents: Bring the Pain, Heal(minor), Aim
 Personality:
 It's just a job - the merc has no emotional commitment to the job at hand. They can walk away at a moment's notice
 No honor - the only code is money.
@@ -257,7 +257,7 @@ Street doc: a generic term for someone who heals people. These are people who wo
 Scores:
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
-Preferred talents: any in Health, Critical Hit, Bring on the Pain
+Preferred talents: any in Health, Critical Hit, Bring the Pain
 Personality:
 Compassionate -They care deeply about the world around them and the people who inhabit it.
 Hippocratic oath - Do no harm - this frequently comes in conflict with living on the streets. Do you see the oath as meaning you won't attack others? Or do your vows account for the realities of surviving on the streets?

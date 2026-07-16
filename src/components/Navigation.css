@@ -69,6 +69,9 @@
   .nav-container {
     flex-direction: column;
     gap: 0.35rem;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
     padding-top: 0.35rem;
     padding-bottom: 0.35rem;
   }
@@ -80,6 +83,15 @@
   }
 
   .nav-logo {
+    justify-content: center;
+    width: 100%;
     font-size: 1.2rem;
+    padding: 0 0.75rem;
+    text-align: center;
+  }
+
+  .nav-logo span {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 }
