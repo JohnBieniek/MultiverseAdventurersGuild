@@ -552,6 +552,10 @@
     font-size: 1.8rem;
   }
 
+  .basic-section {
+    padding: 1rem;
+  }
+
   .home-intro {
     grid-template-columns: 1fr;
     text-align: center;
@@ -601,27 +605,46 @@
   }
 
   .guide-card-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: clamp(5.75rem, 28vw, 7.25rem) minmax(0, 1fr);
+    gap: 0.55rem;
+    width: calc(100vw - 30px);
+    margin-left: calc(50% - 50vw + 15px);
   }
 
   .guide-item-sidebar {
     top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 0.5rem);
     z-index: 80;
-    max-height: min(10rem, calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem));
-    padding: 0.5rem;
+    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem);
+    padding: 0.45rem;
+    border-radius: 6px;
   }
 
   .guide-card-layout-archetype .guide-item-sidebar {
-    max-height: min(8.5rem, calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem));
+    max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1rem);
   }
 
   .guide-item-sidebar nav {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .guide-item-sidebar a {
-    padding: 0.25rem 0.35rem;
-    font-size: 0.8rem;
+    padding: 0.28rem 0.22rem;
+    font-size: 0.76rem;
+    overflow-wrap: anywhere;
+  }
+
+  .guide-item-sidebar .guide-sidebar-subitem {
+    margin-left: 0.3rem;
+    padding-left: 0.35rem;
+    font-size: 0.72rem;
+  }
+
+  .guide-info-card {
+    padding: 0.85rem;
+  }
+
+  .guide-info-card h3 {
+    font-size: 1.2rem;
   }
 
   .guide-section {
