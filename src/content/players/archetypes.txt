@@ -11,7 +11,7 @@ Example: A Barbarian lists Strength as a Strength and Education as a Weakness. A
 
 Barbarian - You fight with emotion - rage. You may have some skill, but you rely on the rage to get you through. Typically, you come from a primitive background relative to the setting you are playing in.
 
-Scores:
+Scores: Strength +3, Dexterity +1, Endurance +2, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
 Preferred talents: Ferocious Attack, Ablative Armor, Vital Reserve
@@ -24,7 +24,7 @@ Anti-Tech: You don't like technology and will do all you can to avoid dealing wi
 
 Bounty Hunter: You love the chase. You live for the thrill of finding and subduing your quarry, dead or alive.
 
-Scores:
+Scores: Strength 0, Dexterity +2, Endurance +1, Intuition +3, Education -1, Charisma 0
 Strengths: Intuition, Observation, Outdoors, Any Weapon
 Weaknesses: Education, Athletics, Vehicle
 Preferred Talents: Pathfinder, Heightened Awareness, Ambush
@@ -39,7 +39,7 @@ Connected - You rely on contacts to help you with your bounties. You see every s
 
 Brainiac: Knowledge is power and you know everything. You are a brilliant problem solver and believe you are an expert on everything.
 
-Scores:
+Scores: Strength 0, Dexterity +1, Endurance -1, Intuition +2, Education +3, Charisma 0
 Strengths: Education, Knowledge, Technology, Any Weapon
 Weaknesses: Endurance, Attack, Athletics
 Preferred Talents: Hacker, Genius, Detect Talents
@@ -54,7 +54,7 @@ College Educated - you believe that formal education is the only kind of educati
 
 Cleric - These are your healers. They derive power from worshipping their Deities. Many make excellent combatants as well.
 
-Scores:
+Scores: Strength 0, Dexterity -1, Endurance +3, Intuition 0, Education +1, Charisma +2
 Strengths: Endurance, Influence, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Athletics, Observation
 Preferred talents: Heal, Ferocious Attack, Change of Fortune
@@ -69,7 +69,7 @@ Militant: Clerics believe that it is not only enough to heal the world, but also
 
 Shaman - You are a spiritual guide, healer, and negotiator with forces most people barely understand. You speak for ancestors, nature spirits, local gods, or the unseen powers of a place.
 
-Scores:
+Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +3, Education +1, Charisma +2
 Strengths: Intuition, Outdoors, Knowledge, Influence
 Weaknesses: Technology, Vehicle, Attack
 Preferred Talents: Detect Talents, Heal, Pathfinder
@@ -84,7 +84,7 @@ Keeper of taboos - You know which rules must not be broken, even when outsiders 
 
 Commando: You were a part of an elite military unit like the SEALs, SAS, or Spetsnaz. You were the best your military had to offer.
 
-Scores:
+Scores: Strength +1, Dexterity +3, Endurance +2, Intuition 0, Education 0, Charisma -1
 Strengths: Dexterity, Athletics, Attack, Ranged Weapon
 Weaknesses: Charisma, Knowledge, Vehicle
 Preferred Talents: Aim, Shadowstep, Close Quarter Combat
@@ -99,7 +99,7 @@ Self-assured - You know what you can do and how to get it done. You are fully co
 
 Criminal: This is your basic criminal type. They lie, steal, and cheat their way to fame and fortune.
 
-Scores:
+Scores: Strength 0, Dexterity +3, Endurance -1, Intuition +1, Education +2, Charisma 0
 Strengths: Dexterity, Technology, Sneak, Any Weapon
 Weaknesses: Endurance, Influence, Outdoors
 Preferred talents: Ambush, Shadowstep, Trap Sense
@@ -114,7 +114,7 @@ Braggart - criminals always exaggerate their accomplishments.
 
 Druid - You worship nature. You express your worship through your relationship with animals and the natural world, often working with an animal as a simple proxy (animal) or by turning yourself into the animal.
 
-Scores:
+Scores: Strength 0, Dexterity 0, Endurance +1, Intuition +3, Education -1, Charisma +2
 Strengths: Intuition, Outdoors, Influence, Melee Weapon
 Weaknesses: Education, Technology, Vehicle
 Preferred talents: Shapeshift, Pathfinder, Regeneration
@@ -129,7 +129,7 @@ Animal Characteristic - Druids tend to use a proxy or shapeshift into one partic
 
 Eco Terrorist - Our planet is a living thing and you were born to protect it. At any cost. You believe the world is being destroyed by tech and greed. You seek a harmonious balance between tech and nature, but one that favors nature. Your terrorism takes the form of marches, assassinations, and destruction of eco-destroying companies. Your work with your team is just a way to pay the bills and fund your terrorism.
 
-Scores:
+Scores: Strength 0, Dexterity +2, Endurance +1, Intuition +3, Education -1, Charisma 0
 Strengths: Intuition, Outdoors, Sneak, Any Weapon
 Weaknesses: Education, Vehicle, Technology
 Preferred talents: Detect Talents, Ferocious Attack, Disguise Self
@@ -144,7 +144,7 @@ My cause - this is your pet cause; waters, anti-nuke, whatever.
 
 Ex-Company Man - a person who puts the Company above himself. They are very loyal employees and give up autonomy to the Company. When a Company Man defects, it is a serious tragedy. What did the employer say or do to destroy such loyalty? These Heroes will retain a great deal of information on how the company functions and who works for it. Ex-company men can fill several roles based on what they did for the company. Intelligence/security work and Negotiators are common.
 
-Scores:
+Scores: Strength -1, Dexterity +1, Endurance 0, Intuition 0, Education +2, Charisma +3
 Strengths: Charisma, Education, Technology, Range Weapon
 Weaknesses: Strength, Outdoors, Sneak
 Talents: Silver Tongue, Concealed Weapon Specialist, Truthsense
@@ -156,7 +156,7 @@ Personality:
 
 Ex-cop - You served as a peacekeeping officer for a paramilitary force.
 
-Scores:
+Scores: Strength -1, Dexterity +2, Endurance 0, Intuition +3, Education +1, Charisma 0
 Strengths: Intuition, Observation, Attack, Range Weapon
 Weaknesses: Strength, Sneak, Outdoors
 Preferred talents: Push, Trip, Heightened Awareness
@@ -171,7 +171,7 @@ Plodding - you will usually solve your case, but you move slowly and carefully.
 
 Ex-military - You served in a legitimate military organization for a given country. People enlist for many reasons: patriotism, poverty, learning useful skills, escaping a particular circumstance, or becoming citizens (for those without a legitimate GRIN). Enlistees learn basic combat skills as well as transferable skill sets (computers, mechanics, communication, etc.). Soldiers train mostly with modern firearms.
 
-Scores:
+Scores: Strength +1, Dexterity +3, Endurance +2, Intuition 0, Education 0, Charisma -1
 Strengths: Dexterity, Attack, Athletics, Range Weapon
 Weaknesses: Charisma, Influence, Knowledge
 Preferred Talents: Aim, Shadowstep, Pathfinder
@@ -186,7 +186,7 @@ Mediocrity - soldiers learn to volunteer for nothing, keep their heads down, and
 
 Face: This is the con artist, influencer, interrogator, negotiator, and fast talker of the party. The faces biggest weapon is charm. And they have it in spades. The face will keep you out of combat and then negotiate the surrender.
 
-Scores:
+Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Any Weapon
 Weaknesses: Strength, Attack, Athletics
 Preferred talents: Silver Tongue, Goad, Tactical Commander
@@ -201,7 +201,7 @@ Loud and proud - everything about your personality is overblown. You are a giant
 
 Fixer: You are the master at getting illicit gear. You have contacts all over and know how to mix and match these assets to get jobs done. You work closely with Operators.
 
-Scores:
+Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +2, Education +1, Charisma +3
 Strengths: Charisma, Influence, Observation, Any Melee Weapon
 Weaknesses: Strength, Athletics, Sneak
 Preferred talents: Silver Tongue, Aim, Truthsense
@@ -216,7 +216,7 @@ Charming - this is how you manipulate. You believe you can make anyone like you.
 
 Ganger - you learned early on that to survive on the streets, you couldn't do it alone. The gangs were a natural family. You joined at a young age and we're all in. Gangers typically come from poverty. The gang creates an instant safety net.
 
-Scores:
+Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Attack, Sneak, Melee Weapon
 Weaknesses: Education, Knowledge, Outdoors
 Preferred Talents: Ferocious Attack, Push, Intimidating Presence
@@ -231,7 +231,7 @@ Jailbird - you've done some time and will do more. It's just the cost of doing b
 
 Gonzo Journalist - News is your life. You record everything that happens around you and provide running commentary.
 
-Scores:
+Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Melee Weapon
 Weaknesses: Attack, Outdoors, Sneak
 Preferred talents: Silver Tongue, Alertness, Ki Body
@@ -246,7 +246,7 @@ Connected - your fame has put you in contact with the rich, famous, and powerful
 
 Gun Bunny - it's all about the guns. This archetype collects guns. They categorize them. Name them. Have one for every occasion. Even ones they will never use. Guns are a fetish. They are always cleaning them, playing with them, organizing them. And best of all, shooting them. But make no mistake. They could shoot the wings off a fly at 1000 yards.
 
-Scores:
+Scores: Strength 0, Dexterity +3, Endurance +1, Intuition +2, Education -1, Charisma 0
 Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
 Preferred talents: Aim, Close Quarter Combat, Concealed Weapon Specialist
@@ -261,7 +261,7 @@ Calm: they are trained to fire their weapon between breaths for greater accuracy
 
 Hacker - you are a master of the world of ones and zeros. Mastering the net means you understand the code behind how the world works. You believe this knowledge puts you ahead of the rest of humanity. The Private Nets are your home.
 
-Scores:
+Scores: Strength -1, Dexterity +2, Endurance 0, Intuition +1, Education +3, Charisma 0
 Strengths: Education, Attack, Technology, Range Weapon
 Weaknesses: Strength, Influence, Athletics
 Preferred Talents: Alertness, Bring the Pain, Hacker
@@ -276,7 +276,7 @@ Intuitive - You synthesize information quickly.
 
 Mad Bomber: It's all about the boom! You are an expert in demolitions.
 
-Scores:
+Scores: Strength -1, Dexterity +2, Endurance 0, Intuition +1, Education +3, Charisma 0
 Strengths: Education, Technology, Attack, Range Weapon (bombs that act like any Range Weapon)
 Weaknesses: Strength, Influence, Sneak
 Preferred Talents: Technical Expertise, Flash/Bang, Critical Hit
@@ -291,7 +291,7 @@ Signature - every bomb you make has something that is distinctly you. Maybe it's
 
 Mage: These are your classic spellcasters. They learn their craft through study and use Education. They tend to use items like rings, wands, brooches, and such as magic items. Mages tend to gather in like-minded groups as their magic works uniformly from one Mage to another. Mages tend to have a lot of non-combat talents that they view as spells. Mages will buy more talents and expand their energy points.
 
-Scores:
+Scores: Strength 0, Dexterity +1, Endurance -1, Intuition +2, Education +3, Charisma 0
 Strengths: Education, Knowledge, Observation, Range Attack (Simple proxy - spirit)
 Weaknesses: Endurance, Sneak, Influence
 Preferred Talents: Grand Illusion, Telekinesis, Detect Talents
@@ -306,7 +306,7 @@ Superiority Complex - Mages believe that their ability to manipulate the fabric 
 
 Mercenary - some ex-military move into this archetype. This archetype features combat arms, battle casters, Drivers, medics, and hackers. This archetype is simple - you get paid to fight for someone else's cause.
 
-Scores:
+Scores: Strength +1, Dexterity +3, Endurance +2, Intuition 0, Education -1, Charisma 0
 Strengths: Dexterity, Attack, Sneak, Range Weapon
 Weaknesses: Education, Knowledge, Influence
 Preferred Talents: Bring the Pain, Heal, Aim
@@ -321,7 +321,7 @@ Next best thing - mercs are always convinced that their next contract will set t
 
 Ninja/Monk: These are heroes who favor stealth over all things. They derive their prowess from magical talents. They prefer attacks that don't compromise their stealth.
 
-Scores:
+Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Sneak, Athletics, Melee
 Weaknesses: Education, Technology, Vehicle
 Preferred Talents: Ki Body, Parry, Shadowstep
@@ -336,7 +336,7 @@ Stealthy - you are a master at hiding.
 
 Performer - Performers are floating entertainers. They can be seen on stage or in your local pub. They tell stories with words and music that focus on historical themes. During missions, Performers are noted for supporting their party members using their own special magic. Performers use their performance to attack and the instrument serves as a weapon.
 
-Scores:
+Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Range Weapon (Performing makes a magical range attack when played)
 Weaknesses: Endurance, Technology, Sneak
 Preferred talents: Buffs, Goad, Tactical Commander
@@ -351,7 +351,7 @@ Selfless - Performers view themselves as successful when the party is successful
 
 Private eye/ Investigator - whether you have a police background or are self-taught, you excel in researching and gathering information. You are the classic private eye.
 
-Scores:
+Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
 Preferred talents: Concealed Weapon Specialist, Silver Tongue, Truthsense
@@ -366,7 +366,7 @@ World Weary - you are weary from seeing the same terrible things over and over a
 
 Screamer - you are what you drive. Screamers are masters at operating drones and vehicles. You express yourself in the way you manipulate vehicles. You relate better to tech than to people.
 
-Scores:
+Scores: Strength 0, Dexterity +3, Endurance 0, Intuition +1, Education +2, Charisma -1
 Strengths: Dexterity, Vehicle, Technology, Range Attack (simple proxy: Drone)
 Weaknesses: Charisma, Influence, Athletics
 Preferred Talent: Control Drone, Transporter, Technical Expertise
@@ -381,7 +381,7 @@ Rude: You are blunt and abrupt. Social norms confuse you. You see things in blac
 
 Smuggler: You are an expert at getting illicit goods from one place to another.
 
-Scores:
+Scores: Strength -1, Dexterity +3, Endurance 0, Intuition +1, Education 0, Charisma +2
 Strengths: Dexterity, Sneak, Influence, Range Weapon
 Weaknesses: Strength, Knowledge, Outdoors
 Preferred Talents: Shadowstep, Critical Hit, Control Drone
@@ -396,7 +396,7 @@ Friends in low places - your work tends to come from criminals. Your contacts te
 
 Sniper: Your brain is a computer. You are constantly looking at the world in terms of sight lines, windage, range, and humidity. You arrive at your perch by slow, patient, quiet movements. You are invisible death. Most come from a military or Paramilitary background. You could combine an ex-cop, ex-military, or merc with a sniper.
 
-Scores:
+Scores: Strength 0, Dexterity +3, Endurance 0, Intuition +2, Education +1, Charisma -1
 Strengths: Dexterity, Attack, Sneak, Range Attack
 Weaknesses: Charisma, Vehicle, Influence
 Preferred Talents: Ambush, Shadowstep, Long Shot
@@ -411,7 +411,7 @@ Accurate - you live by the motto, One shot, one Kill. You never multi-attack, pr
 
 Street doc: a generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a street doc brings down the worst retribution the streets have to offer.
 
-Scores:
+Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +2, Education +3, Charisma +1
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
 Preferred talents: Heal, Critical Hit, Bring the Pain
@@ -426,7 +426,7 @@ Heal the world - You will heal anyone at any time. You would even heal your enem
 
 Spy - you are all about gathering and leveraging intelligence. You have studied people and understand how to manipulate them. You are good at synthesizing information from diverse sources and discerning the truth behind it.
 
-Scores:
+Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +2, Education +1, Charisma +3
 Strengths: Intuition, Influence, Knowledge, Improvised Weapon
 Weaknesses: Endurance, Sneak, Technology
 Preferred Talents: Silver Tongue, Truthsense, Goad
@@ -441,7 +441,7 @@ Ego - you believe you are so charming that you fail to recognize when your charm
 
 Street Samurai - At its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
 
-Scores:
+Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Attack, Athletics, Melee Weapon
 Weaknesses: Education, Knowledge, Influence
 Preferred Talents: Ferocious Attack, Parry, Intimidating Presence
@@ -456,7 +456,7 @@ Impulsive - Street Samurai tend to act before thinking through a problem.
 
 Warlock - This Archetype has pledged its soul to a powerful being in return for mystic powers.
 
-Scores:
+Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +1, Education +3, Charisma +2
 Strengths: Education, Knowledge, Influence, Range Attack
 Weaknesses: Strength, Sneak, Athletics
 Preferred Talents: Implant Thought, Detect Talents, End Talent.

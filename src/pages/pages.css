@@ -549,6 +549,10 @@
 
 @media (max-width: 768px) {
   .page {
+    --mobile-text-inset: 4px;
+  }
+
+  .page {
     padding: 1rem 0;
   }
 
@@ -559,6 +563,12 @@
   .basic-section {
     border-radius: 0;
     padding: 1rem 0;
+  }
+
+  .basic-section > h2,
+  .basic-section > p {
+    padding-left: var(--mobile-text-inset);
+    padding-right: var(--mobile-text-inset);
   }
 
   .home-intro {
@@ -591,7 +601,7 @@
 
   .guide-header {
     display: block;
-    padding: 0 0.75rem;
+    padding: 0 var(--mobile-text-inset);
   }
 
   .guide-header h1 {
@@ -619,6 +629,13 @@
     grid-template-columns: clamp(5.75rem, 28vw, 7.25rem) minmax(0, 1fr);
     gap: 0.55rem;
     width: 100%;
+  }
+
+  .guide-section > h2,
+  .guide-text-blocks,
+  .guide-card-main {
+    padding-left: var(--mobile-text-inset);
+    padding-right: var(--mobile-text-inset);
   }
 
   .guide-item-sidebar {

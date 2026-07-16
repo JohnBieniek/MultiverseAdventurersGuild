@@ -148,6 +148,15 @@ const weaponReferenceTargets = {
   'ranged weapon': '#weapons'
 }
 
+const cardTypeLabels = {
+  archetype: 'Archetypes',
+  contact: 'Contacts',
+  reputation: 'Reputations',
+  species: 'Species',
+  talent: 'Talents',
+  weapon: 'Weapons'
+}
+
 function statSkillAnchor(type, name) {
   return `${type}-${slugify(name)}`
 }
@@ -300,8 +309,11 @@ function isReputationStart(lines, index) {
 }
 
 function isWeaponStart(lines, index) {
+  const line = lines[index]
+
   return Boolean(
-    splitTitleLine(lines[index]) &&
+    /\s+-\s+/.test(line) &&
+      splitTitleLine(line) &&
       lines.slice(index + 1, index + 5).some((line) => /^Category:/i.test(line))
   )
 }
@@ -661,7 +673,7 @@ function renderCards(content, type, cardIndex) {
   return (
     <div className={`guide-card-layout guide-card-layout-${type}`}>
       <aside className="guide-item-sidebar" aria-label={`${type} list`}>
-        <h3>{type === 'archetype' ? 'Archetypes' : `${type.charAt(0).toUpperCase()}${type.slice(1)}s`}</h3>
+        <h3>{cardTypeLabels[type] || `${type.charAt(0).toUpperCase()}${type.slice(1)}`}</h3>
         <nav>
           {cards.map((card) => {
             const subcards = splitSubcards(card.lines).subcards

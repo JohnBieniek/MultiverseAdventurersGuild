@@ -90,7 +90,7 @@ Mechanic: increase your AV (+1d4) and your attack by (-1d4). This is a free tale
 ??
 Disarm:
 Description: Using a ranged or melee weapon, you cause the target to drop their weapon.
-Mechanic: F2 one shot only. Add (+4) AV to the target. On a successful hit, the target must make an Athletics 14s or drop the weapon. Add a (+1) to the Athletics test per success.
+Mechanic: F2 one shot only. Add (+4) AV to the target. On a successful hit, the target must make a TN 14 Athletics check or drop the weapon. Add a (+1) to the Athletics test per success.
 ?
 ?Drunken Attack
 
@@ -181,7 +181,7 @@ Mechanic: Any time you activate the Run talent and move your full move, you incr
 ?
 ?Suppressive Fire:
 Description: Lay down a field of fire.
-Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10’ wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a resilience 18S roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
+Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10’ wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a TN 18 Resilience roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
 ?
 ?Tactical commander: You are a commander of men. You direct your fellow Heroes in Combat to gain their max efficiency.
 Mechanic: Add your Charisma score and (+1d4) to your initiative check. Use your initiative for the party. Not usable as a one-shot, but can be activated in later rounds of combat.
@@ -189,7 +189,7 @@ Mechanic: Add your Charisma score and (+1d4) to your initiative check. Use your 
 Trip
 
 Description: Cause the target to trip. It can be part of the attack.
-Mechanic: F2. Target makes an Resiliance 14S or is tripped and has the Prtoned condition. If four-legged or more than 8’ tall, get a (+4) defense bonus to avoid the trip.
+Mechanic: F2. Target makes a TN 14 Resilience save or be tripped and gain the Prone condition. If four-legged or more than 8’ tall, get a (+4) defense bonus to avoid the trip.
 ?
 ?
 AOE:
@@ -213,7 +213,7 @@ Cost: Attack action.
 ?
 Flash/Bang:
 Description: Victims are subjected to extreme sound, blast wave, and flash. This causes disorientation.
-Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a Resiliance 16S. If the target makes a successful Resiance save, they can resume their turn as usual. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
+Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a TN 16 Resilience save. If the target makes a successful Resiance save, they can resume their turn as usual. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
 Duration: 1 turn.
 Cost: attack action.
 ??
@@ -311,7 +311,7 @@ Illusion Talents can be bought as self-only and then are paid for like one-shots
 ?
 Disguise self:
 Description: Target may look like someone else. Target cannot change size, but may change Species within that restriction. Can't conceal weapons.
-Mechanics: Touch target. F2. Others must make an Ego save at 22S.
+Mechanics: Touch target. F2. Others must make an TN 22 Ego save.
 Duration: 8 hours
 Cost: 1 minute
 Displacement:
@@ -322,7 +322,7 @@ Cost: Attack action
 ?
 Grand Illusion:
 Description: Create an illusion with audio, visual, thermal, and olfactory components based on force. An illusion can occupy a 10’ cube.
-Mechanic: F - audio or visual. F2 - audio and visual. F3 - add thermal. F4 - add olfactory. Targets disbelieve illusion on an observation s12 plus F*2. An F3 save would be 18S. You use your move action to manipulate the illusion.
+Mechanic: F - audio or visual. F2 - audio and visual. F3 - add thermal. F4 - add olfactory. Targets disbelieve illusion on an TN 12 Observation check plus F*2. An F3 save would be TN 18. You use your move action to manipulate the illusion.
 Duration: combat + 5 minutes
 Cost: Attack action.
 ?
@@ -333,7 +333,7 @@ Duration: combat + 5 minutes
 Cost: Attack action
 ?
 Invisibility (Major):
-Description: same as minor except Observation is a 30S.
+Description: same as minor except Observation is a TN 30 check.
 Mechanic: F3. The attack doesn’t end the effect.
 Duration: combat + 5 minutes
 Cost: Attack action
@@ -345,7 +345,7 @@ Duration: combat + 5 minutes
 Cost: Attack action.
 ?
 Control Drone:
-Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: F1. To control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone have a (+1d4)F bonus to all roles, up to a max F2, including Defense, reflecting superior control. Drones can be operated out to 10 miles/ F. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted on an Observation 14S. F2 The drone is the size of a fly, Observation 20S.
+Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: F1. To control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone have a (+1d4)F bonus to all roles, up to a max F2, including Defense, reflecting superior control. Drones can be operated out to 10 miles/ F. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted on an TN 14 Observation check. F2 The drone is the size of a fly, TN 20 Observation check.
 Cost: Attack action.
 Duration: 8 hours
 ?

@@ -167,7 +167,7 @@ Duration: 8 hours.
 Action: 1 minute
 
 Control Drone:
-Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: Force 1 (F1) to control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone gain +1d4 per Force used to all rolls, up to Force 2 (F2), including Defense. Drones can be operated out to 10 miles per Force used. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted with Observation 14S. At F2, the drone is the size of a fly and can be spotted with Observation 20S.
+Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: Force 1 (F1) to control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone gain +1d4 per Force used to all rolls, up to Force 2 (F2), including Defense. Drones can be operated out to 10 miles per Force used. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted with a TN 14 Observation check. At F2, the drone is the size of a fly and can be spotted with a TN 20 Observation check.
 Cost: Attack action.
 Duration: 8 hours
 
@@ -208,11 +208,11 @@ Cost: attack action
 
 Disarm:
 Description: Using a ranged or melee weapon, you cause the target to drop their weapon.
-Mechanic: Force 2 (F2) one-shot only. Add +4 Defense to the target. On a successful hit, the target must make an Athletics 14S or drop the weapon. Add +1 to the Athletics test per success.
+Mechanic: Force 2 (F2) one-shot only. Add +4 Defense to the target. On a successful hit, the target must make a TN 14 Athletics check or drop the weapon. Add +1 to the Athletics test per success.
 
 Disguise self:
 Description: Target may look like someone else. Target cannot change size, but may change Species within that restriction. Can't conceal weapons.
-Mechanics: Touch target. Force 2 (F2). Others must make an Ego save at 22S.
+Mechanics: Touch target. Force 2 (F2). Others must make a TN 22 Ego save.
 Duration: 8 hours
 Cost: 1 minute
 
@@ -258,7 +258,7 @@ Action: Skill action.
 
 Flash/Bang:
 Description: Victims are subjected to extreme sound, blast wave, and flash. This causes disorientation.
-Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a Resilience 16S. If the target makes a successful Resilience save, they can resume their turn as usual. Cost is Force + 3 energy, so Force 2 (F2) costs 7 energy. Minimum Force 2 and access to Force 2 Talents required. The effect can exclude 1 target for every 1 energy paid.
+Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a TN 16 Resilience save. If the target makes a successful Resilience save, they can resume their turn as usual. Cost is Force + 3 energy, so Force 2 (F2) costs 7 energy. Minimum Force 2 and access to Force 2 Talents required. The effect can exclude 1 target for every 1 energy paid.
 Duration: 1 turn.
 Cost: attack action.
 
@@ -282,11 +282,11 @@ Goad
 
 Description: You hurl insults at your enemy until they attack only you.
 
-Mechanic: Hero makes an attack using Influence versus the target's Ego. For example, if I have an Ego of (4), the Hero must beat a 15. (Ego + 11) On a successful attack, you cause the target to forgo all other enemies and attack just you with a Strength-based attack. The target will move toward you directly, even if it results in a Reactive Attack. Force 2 (F2). Each turn, the target must succeed on an Ego 14S roll to end the Talent.
+Mechanic: Hero makes an attack using Influence versus the target's Ego. For example, if I have an Ego of (4), the Hero must beat a 15. (Ego + 11) On a successful attack, you cause the target to forgo all other enemies and attack just you with a Strength-based attack. The target will move toward you directly, even if it results in a Reactive Attack. Force 2 (F2). Each turn, the target must succeed on a TN 14 Ego roll to end the Talent.
 
 Grand Illusion:
 Description: Create an illusion with audio, visual, thermal, and olfactory components based on force. An illusion can occupy a 10 cube.
-Mechanic: Force 1 (F1) creates audio or visual. Force 2 (F2) creates audio and visual. Force 3 (F3) adds thermal details. Force 4 (F4) adds smell. Targets disbelieve the illusion with Observation 12S + twice the Force used, so an F3 illusion requires an 18S save. You use your move action to manipulate the illusion.
+Mechanic: Force 1 (F1) creates audio or visual. Force 2 (F2) creates audio and visual. Force 3 (F3) adds thermal details. Force 4 (F4) adds smell. Targets disbelieve the illusion with a TN 12 Observation check, increased by twice the Force used, so an F3 illusion requires a TN 18 save. You use your move action to manipulate the illusion.
 Duration: combat + 5 minutes
 Cost: Attack action.
 
@@ -315,7 +315,7 @@ Description: Illusion Talents can be bought as self-only and then are paid for l
 
 Implant Thought:
 Description: Give a short order (run away, drop your weapons, let us pass, do nothing). Target follows the implanted thought for the duration of the talent.
-Mechanics: Melee attack unless range increments are paid for. Target is aware of the attack unless the attacker pays an additional 2 energy. Target must make an Ego 14S roll to end the effect. Target rolls each turn in combat or every minute outside of combat. Force 2 (F2).
+Mechanics: Melee attack unless range increments are paid for. Target is aware of the attack unless the attacker pays an additional 2 energy. Target must make a TN 14 Ego roll to end the effect. Target rolls each turn in combat or every minute outside of combat. Force 2 (F2).
 Duration: 5 minutes.
 Action: Attack action
 
@@ -327,8 +327,8 @@ Cost: Move action.
 
 Invisibility:
 Description: You and any objects you carry become invisible. The target can still be heard.
-Minor Version: At Force 2 (F2), others can see you with an Observation 26S. The Talent ends when you make an attack action.
-Major Version: At Force 3 (F3), others can see you with an Observation 30S. Making an attack does not end the Talent.
+Minor Version: At Force 2 (F2), others can see you with a TN 26 Observation check. The Talent ends when you make an attack action.
+Major Version: At Force 3 (F3), others can see you with a TN 30 Observation check. Making an attack does not end the Talent.
 Duration: combat + 5 minutes
 Cost: Attack action
 
@@ -417,7 +417,7 @@ Cost: attack action
 
 Suppressive Fire:
 Description: Lay down a field of fire.
-Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10 wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a resilience 18S roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
+Mechanic: Costs a move and a combat action. Using a firearm, send a flurry of rounds downrange. The area is suppressed from your spot to the end of the weapons range. The suppressed area is 10 wide. The length of suppression stops if it encounters an object in its path. Anyone who enters or is already in this pathway must make a TN 18 Resilience roll to avoid damage. If hit, the target's move ends, and they take (+1d6) damage. The player also has a (-1d6) modifier on attack rolls.
 
 Tactical Commander:
 Description: You are a commander of men. You direct your fellow Heroes in Combat to gain their max efficiency.
@@ -445,7 +445,7 @@ Cost: Move action
 Trip
 
 Description: Cause the target to trip. It can be part of the attack.
-Mechanic: Force 2 (F2). Target makes a Resilience 14S or is tripped and has the Prone condition. If four-legged or more than 8 feet tall, the target gets a +4 Defense bonus to avoid the trip.
+Mechanic: Force 2 (F2). Target must make a TN 14 Resilience save or be tripped and gain the Prone condition. If four-legged or more than 8 feet tall, the target gets a +4 Defense bonus to avoid the trip.
 
 Wallrunner:
 Description: This talent allows for running up and down walls in Combat. You may end the turn on a surface other than the ground.

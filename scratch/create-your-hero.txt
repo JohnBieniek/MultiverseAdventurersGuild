@@ -130,7 +130,7 @@ weapon under 18" in length, dagger, switchblade, pistol whip
 ?
 d8
 Sword
-Conceal Observation 15S
+Conceal with a TN 15 Observation check
 weapon under 3', long sword, shortsword, axe, club
 d10
 Two-Handed Weapon
@@ -143,11 +143,11 @@ Automatic Conceal
 Rovolver, handgun, sling, slingshot
 d6
 Submachine Gun
-Conceal Observation 15S
+Conceal with a TN 15 Observation check
 Uzi, Ingram, bow, crossbow
 d8
 Assault Rifle
-Conceal Observation 12S
+Conceal with a TN 12 Observation check
 ?AR15, AK47, shotgun, hunting rifle
 ?
 d10
@@ -160,9 +160,9 @@ Two-Weapon Fighting:
 Melee - fight with 2 d6 weapons for d8 damage, same special rules of a d8 weapon
 Range - 2 d4 weapons for d6 damage, same special rules as a d6 weapon
 ??
-Silencers - These increase the concealability by one step. A silencer on a pistol becomes Observation 15S. The damage decreases by one step. A sniper rifle would become a d8 weapon. A pistol becomes d4-1.
+Silencers - These increase the concealability by one step. A silencer on a pistol becomes a TN 15 Observation check. The damage decreases by one step. A sniper rifle would become a d8 weapon. A pistol becomes d4-1.
 ?
-Concealment - Add the sneak skill to the TN for concealment. If you have a Sneak skill of (+2), you conceal an SMG on 17S.
+Concealment - Add the sneak skill to the TN for concealment. If you have a Sneak skill of (+2), you conceal an SMG on TN 17.
 The philosophy behind damage is that Heroes should be rewarded for fighting at Melee ranges because of the increased risk. Melee damage is slightly more serious than ranged damage.
 ?
 ?

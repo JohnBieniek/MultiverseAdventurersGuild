@@ -22,7 +22,7 @@ So what happens with an astounding success or failure known as crits? One is alw
 
 Critical success happens on a natural 20. If it is in combat, the Hero deals maximum damage and is granted a free attack. NPCs can't have critical success in combat. A natural 20 is always a critical success. A natural one is still a critical miss. Out of combat, a critical miss would be a catastrophic failure. For instance, instead of sneaking quietly, you make a ton of noise. A crit on a skill check should result in a better-than-expected outcome
 
-TN is either simple (s) or complex ( c ). A simple roll is binary. Rolling a TN or higher yields success. Below TN is a failure. This is expressed as 14S. A TN 14 complex roll is listed as 14C. A complex roll adds successes for every 2 beyond the TN. Use a simple roll if you only want to note success or failure. A complex test answers the question of how well the Hero succeeded.
+TN is either simple or complex. A simple roll is binary: rolling the TN or higher succeeds, and rolling below the TN fails. For clarity, write this as "TN 14" instead of the shorthand "14S." A TN 14 complex roll may be listed as "TN 14 complex" or "14C." A complex roll adds successes for every 2 beyond the TN. Use a simple roll if you only want to note success or failure. A complex test answers the question of how well the Hero succeeded.
 
 The last type of check is an opposed roll. The Hero and target roll using the relevant skill. The highest number wins.
 

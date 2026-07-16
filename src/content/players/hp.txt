@@ -28,7 +28,7 @@ At the start of each of their turns, a bleeding Hero loses 1 HP. At -5 HP, the H
 
 Stabilizing
 
-Each turn, the Hero rolls to stabilize using Endurance as the modifier. The TN is 11S. On a success, the Hero stops bleeding out.
+Each turn, the Hero rolls to stabilize using Endurance as the modifier. The TN is 11. On a success, the Hero stops bleeding out.
 
 A Hero can spend a Credit to automatically stabilize.
 

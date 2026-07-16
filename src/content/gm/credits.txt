@@ -12,7 +12,7 @@ A Hero can spend 1000 Credits to buy a grenade.
 
 Sneak a small weapon by security. Cost is based on security level: less than 0 costs 500 Credits, security level 0 costs 1000 Credits, and higher security costs 1000 Credits x 2 per security level.
 
-"Legitimate" ID. (AKA, Global Relevant Identification Number or GRIN) Many settings require a legal ID to pay for items, bribe contacts, purchase drones, or vehicle upgrades. An ID costs (0)/1000, 2/4000, 3/9000, 4/16000 per month. GRINs require a steady income to cover housing, food, and other essentials. Your GRIN level is also reflected in the way you live. Any time you make a purchase, your GRIN is scrutinized. The seller's security level is compared with the GRIN's level. For instance, if the seller has a (-2) and my GRIN is (+1), I have a (+2) to my roll. The TN to beat your Identity is 18S. Roll only when it would affect play. Grocery shopping, no. Getting into the cool club or a multinational, absolutely.
+"Legitimate" ID. (AKA, Global Relevant Identification Number or GRIN) Many settings require a legal ID to pay for items, bribe contacts, purchase drones, or vehicle upgrades. An ID costs (0)/1000, 2/4000, 3/9000, 4/16000 per month. GRINs require a steady income to cover housing, food, and other essentials. Your GRIN level is also reflected in the way you live. Any time you make a purchase, your GRIN is scrutinized. The seller's security level is compared with the GRIN's level. For instance, if the seller has a (-2) and my GRIN is (+1), I have a (+2) to my roll. The TN to beat your Identity is 18. Roll only when it would affect play. Grocery shopping, no. Getting into the cool club or a multinational, absolutely.
 
 Cover Identity - Half the cost for a legitimate Global Relevant Identification Number (GRIN). Maximum Force 3. Preestablished paper/identification for the adventure. Usable until burned, which occurs when the GRIN fails a security check. Also, any crimes associated with the GRIN remain active.
 
@@ -30,8 +30,8 @@ Call in a Favor - 500 Credits. A contact intervenes off-screen: distraction, tra
 
 Bad Reputation - 1500 Credits. Your reputation precedes you; hostile NPCs hesitate or give you a brief opening.
 
-Bribery - Spend Credits to bribe NPCs. An Influence 11S check reveals what constitutes a reasonable bribe.
+Bribery - Spend Credits to bribe NPCs. A TN 11 Influence check reveals what constitutes a reasonable bribe.
 
 A simple drone proxy would make it useful for a range attack and is free.
 
-Heroes can buy a Drone for 1500 gold for surveillance purposes. It is destroyed after taking 10HP. Observation 17S.
+Heroes can buy a Drone for 1500 gold for surveillance purposes. It is destroyed after taking 10HP. Spot it with a TN 17 Observation check.

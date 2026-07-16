@@ -1,7 +1,5 @@
 You start with one Weapon Enhancement for either Melee or Ranged. Weapon categories describe damage, concealment, and common examples. Rename the weapon however you want for the setting: a d8 melee weapon might be a longsword, fire axe, shock baton, or bone club.
 
-Melee Weapons
-
 Unarmed or Tiny Melee - Small, natural, or improvised close-range attacks.
 Category: Melee
 Damage: d4
@@ -17,7 +15,7 @@ Examples: Weapon under 18 inches, dagger, switchblade, hatchet, pistol whip.
 Medium Melee Weapon - Standard one-handed melee weapons with real reach and threat.
 Category: Melee
 Damage: d8
-Concealment: Observation 15S to conceal.
+Concealment: TN 15 Observation check to conceal.
 Examples: Weapon under 3 feet, longsword, shortsword, axe, club, machete, baton.
 
 Heavy Melee Weapon - Large weapons that hit hard but are obvious and harder to defend with.
@@ -26,8 +24,6 @@ Damage: d10
 Concealment: No concealment.
 Special Rules: -2 Defense while using it.
 Examples: Staff, halberd, great axe, great sword, maul, heavy polearm.
-
-Ranged Weapons
 
 Holdout Ranged Weapon - Small ranged weapons that are easy to hide but limited in impact.
 Category: Ranged
@@ -38,13 +34,13 @@ Examples: Revolver, handgun, sling, slingshot, compact blaster.
 Compact Ranged Weapon - Short ranged weapons with more punch, but harder to hide.
 Category: Ranged
 Damage: d6
-Concealment: Observation 15S to conceal.
+Concealment: TN 15 Observation check to conceal.
 Examples: Submachine gun, Uzi, Ingram, bow, crossbow, compact carbine.
 
 Longarm Ranged Weapon - Full-sized ranged weapons built for serious fights.
 Category: Ranged
 Damage: d8
-Concealment: Observation 12S to conceal.
+Concealment: TN 12 Observation check to conceal.
 Examples: Assault rifle, AR-15, AK-47, shotgun, hunting rifle, battle bow.
 
 Heavy Ranged Weapon - Large ranged weapons that need space, bracing, or commitment.
@@ -53,8 +49,6 @@ Damage: d10
 Concealment: No concealment.
 Special Rules: Braced.
 Examples: Sniper rifle, machine gun, anti-materiel rifle, heavy crossbow.
-
-Weapon Rules
 
 Two-Weapon Fighting (Melee) - Fight with two light melee weapons.
 Category: Rule
@@ -66,11 +60,11 @@ Mechanic: Two d4 ranged weapons deal d6 damage and use the same special rules as
 
 Silencers - Suppressors make ranged weapons easier to hide but reduce damage.
 Category: Rule
-Mechanic: A silencer improves concealment by one step and reduces damage by one step. A pistol becomes Observation 15S to conceal and deals d4-1 damage. A sniper rifle becomes a d8 weapon.
+Mechanic: A silencer improves concealment by one step and reduces damage by one step. A pistol becomes a TN 15 Observation check to conceal and deals d4-1 damage. A sniper rifle becomes a d8 weapon.
 
 Concealment - Hiding a weapon is easier for sneaky Heroes.
 Category: Rule
-Mechanic: Add your Sneak skill to the concealment TN. If you have Sneak +2, you conceal a compact ranged weapon on 17S instead of 15S.
+Mechanic: Add your Sneak skill to the concealment TN. If you have Sneak +2, you conceal a compact ranged weapon on TN 17 instead of TN 15.
 
 Damage Philosophy - Melee is dangerous because it puts you close to the enemy.
 Category: Rule
