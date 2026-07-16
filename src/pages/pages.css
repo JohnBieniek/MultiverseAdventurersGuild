@@ -186,6 +186,10 @@
   color: #223829;
 }
 
+.guide-linked-entry {
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + 90px);
+}
+
 .guide-inline-heading {
   margin: 1.4rem 0 0.45rem;
   color: #223829;

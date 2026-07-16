@@ -55,6 +55,57 @@ const referenceAliases = {
   }
 }
 
+const statNames = ['strength', 'dexterity', 'endurance', 'intuition', 'education', 'charisma']
+
+const skillNames = [
+  'attack',
+  'influence',
+  'knowledge',
+  'observation',
+  'outdoors',
+  'sneak',
+  'technology',
+  'vehicle'
+]
+
+const statSkillAliases = {
+  str: 'strength',
+  dex: 'dexterity',
+  end: 'endurance',
+  int: 'intuition',
+  edu: 'education',
+  cha: 'charisma',
+  stealth: 'sneak',
+  tech: 'technology',
+  'melee attack': 'attack',
+  'ranged attack': 'attack',
+  'range attack': 'attack',
+  'melee weapon': 'attack',
+  'ranged weapon': 'attack',
+  'range weapon': 'attack',
+  'any weapon': 'attack',
+  'improvised weapon': 'attack'
+}
+
+function statSkillAnchor(type, name) {
+  return `${type}-${slugify(name)}`
+}
+
+function getStatSkillTarget(name) {
+  const normalizedName = normalizeReferenceName(name).toLowerCase()
+  const lookupName = statSkillAliases[normalizedName] || normalizedName
+
+  if (statNames.includes(lookupName)) {
+    return `#${statSkillAnchor('stat', lookupName)}`
+  }
+
+  if (skillNames.includes(lookupName)) {
+    return `#${statSkillAnchor('skill', lookupName)}`
+  }
+
+  return null
+}
+
 function getLines(content) {
   return content
     .replace(/\r\n/g, '\n')
@@ -188,7 +239,28 @@ function renderInlineText(text) {
   return text
 }
 
-function renderTextBlocks(content) {
+function getTextBlockAnchor(sectionTitle, line) {
+  const section = sectionTitle.toLowerCase()
+  const match = line.match(/^([A-Za-z]+)(?:\s+\([^)]*\))?\s+-/)
+
+  if (!match) {
+    return null
+  }
+
+  const name = match[1].toLowerCase()
+
+  if (section === 'stats' && statNames.includes(name)) {
+    return statSkillAnchor('stat', name)
+  }
+
+  if (section === 'skills' && skillNames.includes(name)) {
+    return statSkillAnchor('skill', name)
+  }
+
+  return null
+}
+
+function renderTextBlocks(content, sectionTitle) {
   const lines = getLines(content).filter(Boolean)
 
   return (
@@ -211,13 +283,37 @@ function renderTextBlocks(content) {
           )
         }
 
-        return <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
+        const anchor = getTextBlockAnchor(sectionTitle, line)
+
+        return (
+          <p
+            key={`${line}-${index}`}
+            id={anchor || undefined}
+            className={anchor ? 'guide-linked-entry' : undefined}
+          >
+            {renderInlineText(line)}
+          </p>
+        )
       })}
     </div>
   )
 }
 
 function renderChip(label, item, cardIndex) {
+  const isStatSkillField = /strength|weakness/i.test(label)
+
+  if (isStatSkillField) {
+    const statSkillHref = getStatSkillTarget(item)
+
+    if (statSkillHref) {
+      return (
+        <a key={item} href={statSkillHref}>
+          {item}
+        </a>
+      )
+    }
+  }
+
   const targetType = /archetype/i.test(label) ? 'archetype' : 'talent'
   const normalizedName = normalizeReferenceName(item)
   const lookupName =
@@ -246,7 +342,7 @@ function renderCardField(line, index, cardIndex) {
     const label = field[1]
     const value = field[2]
     const isChipField = /strength|weakness|talent|archetype/i.test(label)
-    const isReferenceField = /talent|archetype/i.test(label)
+    const isReferenceField = /strength|weakness|talent|archetype/i.test(label)
 
     return (
       <div key={`${line}-${index}`} className="guide-card-field">
@@ -336,7 +432,7 @@ function renderSectionContent(section, cardIndex) {
         section.cardType ? (
           renderCards(section.content, section.cardType, cardIndex)
         ) : (
-          renderTextBlocks(section.content)
+          renderTextBlocks(section.content, section.title)
         )
       ) : (
         <p>{section.body}</p>
