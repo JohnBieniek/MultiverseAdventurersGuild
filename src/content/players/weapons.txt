@@ -57,7 +57,7 @@ Ranged: Two d4 ranged weapons deal d6 damage and use the same special rules as a
 
 Silenced - Make ranged attacks harder to notice, but reduce impact.
 Category: Fighting Style
-Mechanic: A silenced weapon is not easier to conceal; the suppressor adds bulk. It can make it harder for bystanders or guards to notice where a shot came from, at the GM's discretion. Silenced weapons reduce damage by one step: a pistol deals d4-1 damage, and a sniper rifle becomes a d8 weapon.
+Mechanic: A silenced weapon is not easier to conceal; the suppressor adds bulk. It can make it harder for bystanders or guards to notice where a shot came from, at the GM's discretion. Silenced weapons reduce damage by one step: a compact ranged weapon deals d4-1 damage, and a longarm ranged weapon becomes a d6 weapon.
 
 Braced - Heavy ranged weapons need setup or support.
 Category: Fighting Style

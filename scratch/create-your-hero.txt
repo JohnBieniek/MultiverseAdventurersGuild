@@ -160,7 +160,7 @@ Dual Wield:
 Melee - Fight with two d6 weapons for d8 damage, using the same special rules as a d8 weapon.
 Range - Fight with two d4 weapons for d6 damage, using the same special rules as a d6 weapon.
 ??
-Silenced - This makes ranged attacks harder to notice, but it does not make the weapon easier to conceal. The damage decreases by one step. A sniper rifle becomes a d8 weapon. A pistol becomes d4-1.
+Silenced - This makes ranged attacks harder to notice, but it does not make the weapon easier to conceal. The damage decreases by one step. A compact ranged weapon deals d4-1 damage, and a longarm ranged weapon becomes a d6 weapon.
 ?
 Weapon Smuggler - This Talent improves weapon concealment. Add your Sneak skill to the concealment TN, and activate Weapon Smuggler for an extra +1d4 per affected weapon.
 The philosophy behind damage is that Heroes should be rewarded for fighting at Melee ranges because of the increased risk. Melee damage is slightly more serious than ranged damage.
