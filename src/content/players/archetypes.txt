@@ -80,6 +80,21 @@ Compassionate: They care deeply about the world around them and the people who i
 
 Militant: Clerics believe that it is not only enough to heal the world, but also important to fight against their enemies. As such, Clerics make good fighters and use Ferocious Attack to their advantage.
 
+Shaman - You are a spiritual guide, healer, and negotiator with forces most people barely understand. You speak for ancestors, nature spirits, local gods, or the unseen powers of a place.
+
+Scores:
+Strengths: Intuition, Outdoors, Knowledge, Influence
+Weaknesses: Technology, Vehicle, Attack
+Preferred Talents: Detect Talents, Heal (Minor), Pathfinder
+
+Personality:
+
+Spirit-touched - You treat spirits, omens, dreams, and signs as part of ordinary life.
+
+Mediator - You prefer to bargain with unseen powers before forcing a confrontation.
+
+Keeper of taboos - You know which rules must not be broken, even when outsiders think they are superstition.
+
 Commando: You were a part of an elite military unit like the SEALs, SAS, or Spetsnaz. You were the best your military had to offer.
 
 Scores:
@@ -352,7 +367,7 @@ Private eye/ Investigator - whether you have a police background or are self-tau
 Scores:
 Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
-Preferred talents: Concealed Weapom Specialist, Silver Tongue, Detect Lies
+Preferred talents: Concealed Weapon Specialist, Silver Tongue, Detect Lie
 
 Personality:
 

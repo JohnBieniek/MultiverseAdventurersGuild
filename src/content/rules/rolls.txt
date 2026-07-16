@@ -32,7 +32,7 @@ The multiversal nature of the game means that skills are very general. The game 
 
 Attack Rolls
 
-Attack = BR + Weapon modifier vs target's Defense (Def) If you meet or beat Def, the attack hits. Then roll your weapon's damage dice + relevant Stat + weapon enhancement.
+Attack = BR + Weapon modifier vs target's Defense. If you meet or beat Defense, the attack hits. Then roll your weapon's damage dice + relevant Stat + weapon enhancement.
 
 Defenses
 

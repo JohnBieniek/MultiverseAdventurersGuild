@@ -1,6 +1,6 @@
 Action economy
 
-Attack action: an act designed to deal damage. This can come from a weapon or from utilizing a non-combat talent against a person. If the action is resisted by AV, Ego, or Athletics, it is an attack. Some talents use an attack action. May use attack action for an additional 30' of movement.
+Attack action: an act designed to deal damage. This can come from a weapon or from utilizing a non-combat talent against a person. If the action is resisted by Defense, Ego, or Athletics, it is an attack. Some talents use an attack action. May use attack action for an additional 30' of movement.
 
 Skill action - Use a skill other than an attack. You can try to influence somebody, observe, pick locks, etc. If the GM feels you can do it during combat, then go for it. The GM should be liberal on this and keep the action moving. A skill action may be used to activate a talent. A GM might say the skill must be used for a set period to take effect. The Hero could still attack, but would use the skill action until the intended effect is completed. For instance, the Hero may be picking a lock and fighting.
 

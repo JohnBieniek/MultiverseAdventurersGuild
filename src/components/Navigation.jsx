@@ -1,9 +1,35 @@
 import { Link } from 'react-router-dom'
+import { useLayoutEffect, useRef } from 'react'
 import './Navigation.css'
 
 function Navigation() {
+  const navRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const nav = navRef.current
+
+    if (!nav) {
+      return undefined
+    }
+
+    const updateNavHeight = () => {
+      document.documentElement.style.setProperty('--site-nav-height', `${nav.offsetHeight}px`)
+    }
+
+    updateNavHeight()
+
+    const observer = new ResizeObserver(updateNavHeight)
+    observer.observe(nav)
+    window.addEventListener('resize', updateNavHeight)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateNavHeight)
+    }
+  }, [])
+
   return (
-    <nav className="navbar">
+    <nav ref={navRef} className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
           <img

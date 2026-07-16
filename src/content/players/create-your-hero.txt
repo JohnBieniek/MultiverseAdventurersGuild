@@ -61,11 +61,11 @@ Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matri
 Vehicle (Dex) - driving a car, piloting a starship, riding a horse
 "Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)
 Your defenses protect you from harm:
-AV (Armor Value) = 11 + Defense bonus + (Armor * 2)
+Defense = 11 + Defense bonus + (Armor * 2)
 Athletics = Defense bonus + Str + Dex + End
 
 Ego = Defense bonus + Intuition + Education + Charisma
-These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as AV by adding the Score of each with a defensive stat.
+These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as Defense by adding the Score of each with a defensive stat.
 You begin with:
 1 Talent Slot
 10 + endurance HP
@@ -110,7 +110,7 @@ Conceal Observation 15S
 weapon under 3', long sword, shortsword, axe, club
 d10
 Two-Handed Weapon
-No conceal, (-2) AV
+No conceal, (-2) Defense
 Staff, Halberd, Great Axe, Great Sword
 Range
 d4
@@ -156,15 +156,15 @@ Every 2 points above TN = +1 success.
 Opposed Tests: Both sides roll Complex checks vs the same TN (usually 11). Higher successes win.
 
 Ties favor the Heroes.
-Attack = BR vs targets Armor Value (AV)
+Attack = BR vs target's Defense
 
-If you meet or beat AV, the attack hits.
+If you meet or beat Defense, the attack hits.
 
 Then roll your weapons damage dice + relevant Stat + Weapon Bonus.
 Natural 20: Auto-success. Make a free attack. Max damage.
 Natural 1: Critical failure. GM narrates a costly or funny mishap.
 You get each turn:
-1 Attack Action (melee/range attack, Talent rolling against AV, Athletics or Ego)
+1 Attack Action (melee/range attack, Talent rolling against Defense, Athletics or Ego)
 1 Skill action
 1 Move (30 ft)
 2 Combat Talent Activations
@@ -181,7 +181,7 @@ F4 16/8
 Legendary powers
 The second number is the one-shot cost. One-shots never occupy a slot. Sustained effects do.
 A street-mage (Dex 2, Attack 3, Enhancement +1) fires an energy bolt.
-Rolls: d20 + 2 + 3 + 1 = d20 + 6 vs targets AV 15.
+Rolls: d20 + 2 + 3 + 1 = d20 + 6 vs target's Defense 15.
 Rolls 12 - total 18 = hit.
 Damage: 1d6 + dex + 2 = 8 total.
 Natural 20 Max Damage and free attack

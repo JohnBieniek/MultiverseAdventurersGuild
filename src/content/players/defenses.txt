@@ -1,8 +1,8 @@
 Your defenses protect you from harm:
 
-AV (Armor Value) = 11 + Defense bonus + (Armor * 2)
+Defense = 11 + Defense bonus + (Armor * 2)
 
 Athletics = Defense bonus + Str + Dex + End
 
 Ego = Defense bonus + Intuition + Education + Charisma
-These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as AV by adding the Score of each with a defensive stat.
+These numbers are added to rolls used to resist attacks or harmful effects. Athletics provides a skill for physical tasks not covered by other skills, such as climbing. Athletic and Ego can act as Defense by adding the Score of each with a defensive stat.

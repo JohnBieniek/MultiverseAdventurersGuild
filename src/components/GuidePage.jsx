@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef } from 'react'
+
 function slugify(title) {
   return title
     .toLowerCase()
@@ -54,7 +56,35 @@ const speciesNames = [
 
 const referenceAliases = {
   archetype: {
+    driver: 'screamer',
+    'eco-terrorist': 'eco terrorist',
+    gangers: 'ganger',
+    monk: 'ninja/monk',
+    ninja: 'ninja/monk',
+    thief: 'smuggler',
     merc: 'mercenary'
+  },
+  talent: {
+    'any buff': 'buffs',
+    'any health': 'health',
+    'any in health': 'health',
+    'any non-combat talent': 'buffs',
+    camouflage: 'shadowstep',
+    charming: 'silver tongue',
+    'close quarters combat': 'close quarter combat',
+    'concealed weapom specialist': 'concealed weapon specialist',
+    'detect lies': 'truthsense',
+    'detect lie': 'truthsense',
+    debuffs: 'push',
+    drone: 'control drone',
+    fearsome: 'intimidating presence',
+    'find/remove traps': 'trap sense',
+    mechanic: 'technical expertise',
+    reach: 'melee reach',
+    smart: 'genius',
+    'temporary hp': 'temporary hit points',
+    'tech expertise': 'technical expertise',
+    techie: 'technical expertise'
   }
 }
 
@@ -111,6 +141,48 @@ function getStatSkillTarget(name) {
   return null
 }
 
+function resolveReferenceAlias(type, name) {
+  const aliases = referenceAliases[type] || {}
+  let lookupName = name.toLowerCase()
+  const seen = new Set()
+
+  while (aliases[lookupName] && !seen.has(lookupName)) {
+    seen.add(lookupName)
+    lookupName = aliases[lookupName]
+  }
+
+  return lookupName
+}
+
+function splitListItems(value) {
+  const items = []
+  let current = ''
+  let depth = 0
+
+  for (const char of value) {
+    if (char === '(') {
+      depth += 1
+    } else if (char === ')' && depth > 0) {
+      depth -= 1
+    }
+
+    if (char === ',' && depth === 0) {
+      if (current.trim()) {
+        items.push(current.trim())
+      }
+      current = ''
+    } else {
+      current += char
+    }
+  }
+
+  if (current.trim()) {
+    items.push(current.trim())
+  }
+
+  return items
+}
+
 function getLines(content) {
   return content
     .replace(/\r\n/g, '\n')
@@ -123,7 +195,7 @@ function isFieldLabel(label) {
 }
 
 function splitTitleLine(line) {
-  const match = line.match(/^(.{2,45}?)(?:\s*-\s*|:\s+)(.+)$/)
+  const match = line.match(/^(.{2,45}?)(?:\s+-\s+|:\s+)(.+)$/)
 
   if (!match) {
     return null
@@ -337,8 +409,7 @@ function renderChip(label, item, cardIndex) {
 
   const targetType = /archetype/i.test(label) ? 'archetype' : 'talent'
   const normalizedName = normalizeReferenceName(item)
-  const lookupName =
-    referenceAliases[targetType]?.[normalizedName.toLowerCase()] || normalizedName.toLowerCase()
+  const lookupName = resolveReferenceAlias(targetType, normalizedName)
   const href = cardIndex.get(`${targetType}:${lookupName}`)
 
   if (href) {
@@ -370,10 +441,7 @@ function renderCardField(line, index, cardIndex) {
         <strong>{label}</strong>
         {value && isChipField ? (
           <div className="guide-chip-list">
-            {value
-              .split(',')
-              .map((item) => item.trim())
-              .filter(Boolean)
+            {splitListItems(value)
               .map((item) => (
                 isReferenceField ? renderChip(label, item, cardIndex) : <span key={item}>{item}</span>
               ))}
@@ -493,6 +561,31 @@ function renderSectionContent(section, cardIndex) {
 
 function GuidePage({ title, intro, sections }) {
   const cardIndex = buildCardIndex(sections)
+  const subnavRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const subnav = subnavRef.current
+
+    if (!subnav) {
+      return undefined
+    }
+
+    const updateSubnavHeight = () => {
+      document.documentElement.style.setProperty('--guide-subnav-height', `${subnav.offsetHeight}px`)
+    }
+
+    updateSubnavHeight()
+
+    const observer = new ResizeObserver(updateSubnavHeight)
+    observer.observe(subnav)
+    window.addEventListener('resize', updateSubnavHeight)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateSubnavHeight)
+      document.documentElement.style.removeProperty('--guide-subnav-height')
+    }
+  }, [sections])
 
   return (
     <div className="page guide-page">
@@ -501,7 +594,7 @@ function GuidePage({ title, intro, sections }) {
         <p>{intro}</p>
       </header>
 
-      <nav className="guide-subnav" aria-label={`${title} sections`}>
+      <nav ref={subnavRef} className="guide-subnav" aria-label={`${title} sections`}>
         {sections.map((section) => (
           <a key={section.title} href={`#${slugify(section.title)}`}>
             {section.title}

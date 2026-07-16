@@ -19,7 +19,7 @@ weapon under 3', long sword, shortsword, axe, club
 
 d10
 Two-Handed Weapon
-No conceal, (-2) AV
+No conceal, (-2) Defense
 Staff, Halberd, Great Axe, Great Sword
 
 Range

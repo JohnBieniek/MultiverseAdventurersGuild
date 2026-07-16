@@ -16,9 +16,9 @@ Dex - maneuverability
 
 Hit Points: The vehicle has hit points based on its size.
 
-Defense - normal costs but the size of a vehicle factors into how hard it is to hit. Take the reverse stat for size. Ie (-4) size adds (+4) to AV. So a microdrone would have an AV of 11 + 4 (size).
+Defense - normal costs, but the size of a vehicle factors into how hard it is to hit. Take the reverse stat for size. For example, (-4) size adds (+4) to Defense, so a microdrone would have a Defense of 11 + 4 (size).
 
-All vehicles start with stats of (0). Players can spend experience to buy up the 2 stats and AV. You can take negatives in stats to boost other stats. A player gains 3 points/XP to modify the vehicle/Drone. These can be reallocated before starting the vehicle/Drone.
+All vehicles start with stats of (0). Players can spend experience to buy up the 2 stats and Defense. You can take negatives in stats to boost other stats. A player gains 3 points/XP to modify the vehicle/Drone. These can be reallocated before starting the vehicle/Drone.
 
 GM will determine acceptable sizes for the campaign.
 
@@ -56,19 +56,19 @@ Start with a range of 1 to 5,
 
 Short range is 0 to 1. Medium to 3. Long to 5.
 
-Later: "AV = 11 + level adjustment + (Armor*2)." is (armor *2) +1 for medium, (+2) long +/- size.
+Later: "Defense = 11 + level adjustment + (Armor*2)." is (armor *2) +1 for medium, (+2) long +/- size.
 
 The players roll initiative based on the pilot. The pilot goes first and must pick from the following maneuvers;
 
-For every 25% of damage to the Vehicle/Drone, all roles suffer a(+2) to TN and a (-2) to AV. The driver/pilot also loses 25% of their current HP if they are utilizing the vehicle as a drone.
+For every 25% of damage to the Vehicle/Drone, all roles suffer a(+2) to TN and a (-2) to Defense. The driver/pilot also loses 25% of their current HP if they are utilizing the vehicle as a drone.
 
 Attack
 
 Vehicles operate on the driver's initiative. The Driver makes a modified c11 vehicle roll. Each success increases the given effect. Vehicle gunners can use standard per turn actions, but can't use a move action to move. The vehicle/drone has as many firearms as there are players in the combat. The vehicle/drone can have one permanent armament used by the pilot and subjected to size restrictions.
 
-Offense - (-2) to vehicle AV and (+1)/success to the pool for attack or damage. For instance, with 3 successes I might opt for (+2) attack and (+1) damage. All attacks by the occupants gain these bonuses. Max (+3 in total bonuses.)
+Offense - (-2) to vehicle Defense and (+1)/success to the pool for attack or damage. For instance, with 3 successes I might opt for (+2) attack and (+1) damage. All attacks by the occupants gain these bonuses. Max (+3 in total bonuses.)
 
-Defense - (-2) to attack. (+1) added to vehicle AV per success. Max (+3).
+Defense - (-2) to attack. (+1) added to vehicle Defense per success. Max (+3).
 
 Stand pat - the captain opts to make an attack this round. He must make a successful Vehicle skill check to continue the pursuit safely.
 

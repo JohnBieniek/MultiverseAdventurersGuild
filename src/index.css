@@ -9,6 +9,7 @@
   --site-nav-height: 56px;
   --sticky-nav-offset: var(--site-nav-height);
   --sticky-subnav-gap: 0px;
+  --guide-subnav-height: 0px;
 }
 
 body {

@@ -1,6 +1,6 @@
 .navbar {
   background-color: #33612F;
-  min-height: var(--site-nav-height);
+  min-height: 56px;
   padding: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -63,7 +63,7 @@
 
 @media (max-width: 768px) {
   .navbar {
-    min-height: var(--site-nav-height);
+    min-height: 56px;
   }
 
   .nav-container {
