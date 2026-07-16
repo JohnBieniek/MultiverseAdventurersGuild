@@ -1,10 +1,163 @@
 Reputation is what the Multiverse thinks it knows about you.
 
-It might be true or not.
+It might be true, exaggerated, outdated, or completely wrong. Pick a reputation that fits your concept, or choose one during play when the table discovers how people react to your Hero.
 
-Examples:
-Dead-eye shot
-Arcane scholar
-Former corporate asset
-Lucky beyond reason.
-Pick something that fits your concept. You will refine this during play.
+Dead-Eye Shot - People say you never miss when it matters.
+Example Name: Varo Quinn
+Expertise: Gain attention from duelists, marksmen, bounty hunters, and anyone who needs a precision shooter.
+
+Arcane Scholar - You are known for understanding old magic, impossible symbols, and dangerous rituals.
+Example Name: Elian Voss
+Expertise: Opens doors with mages, cult researchers, relic hunters, and anyone afraid of a curse.
+
+Former Corporate Asset - You used to belong to a company, agency, or power structure that invested heavily in you.
+Example Name: Kira Dent
+Expertise: Helps with corporate access, insider language, security procedures, and recognizing company tactics.
+
+Lucky Beyond Reason - People believe fate bends around you at the last possible second.
+Example Name: Jax Lucky Vale
+Expertise: Draws gamblers, risk-takers, desperate clients, and people willing to bet on your survival.
+
+Ghost in the System - You are hard to track, hard to identify, and harder to keep out.
+Example Name: Zero Lorne
+Expertise: Helps with digital intrusion, false identities, hidden travel, and avoiding surveillance.
+
+Street-Born Survivor - Everyone knows you came up rough and learned to endure.
+Example Name: Mara Brick
+Expertise: Earns respect from gangs, refugees, laborers, and people who distrust polished authority.
+
+Noble Blood - Your name carries the weight of a house, dynasty, clan, or famous lineage.
+Example Name: Ser Caldus Ren
+Expertise: Helps with formal introductions, old debts, court etiquette, and noble negotiations.
+
+Monster Slayer - You are known for killing something most people run from.
+Example Name: Harlan Pike
+Expertise: Attracts frightened towns, hunters, monster experts, and patrons with dangerous creature problems.
+
+War Veteran - You survived a real war and people can see it in how you move.
+Example Name: Sera Holt
+Expertise: Helps with soldiers, mercenaries, military logistics, battlefield rumors, and veteran communities.
+
+Gentle Healer - Your reputation is built on saving lives, even when it costs you.
+Example Name: Doctor Nima Sol
+Expertise: Earns trust from civilians, medics, temples, clinics, and wounded NPCs who need reassurance.
+
+Dangerous Temper - People know you can be provoked into violence.
+Example Name: Brann Ash
+Expertise: Intimidates weak-willed enemies, scares off petty threats, and complicates delicate social scenes.
+
+Silver Tongue - You are known for talking your way into, out of, and around trouble.
+Example Name: Liora Vane
+Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
+
+Haunted Eyes - People believe you have seen something no one should see.
+Example Name: Noam Grey
+Expertise: Draws occultists, trauma survivors, prophets, and NPCs who recognize supernatural scars.
+
+Tech Whisperer - Machines seem to make sense to you, even when they should not.
+Example Name: Pella Sparks
+Expertise: Helps with repairs, diagnostics, strange devices, jury-rigging, and conversations with technical crews.
+
+Guild Darling - The Guild likes you, or at least people think it does.
+Example Name: Tavi Rune
+Expertise: Helps with internal favors, softer debriefs, extra briefings, and being trusted by Guild staff.
+
+Guild Problem - The Guild knows your name for all the wrong reasons.
+Example Name: Rex Calder
+Expertise: Makes officials cautious, draws Reeves attention, and helps when intimidation matters more than approval.
+
+Oathbound - People believe you keep promises no matter the cost.
+Example Name: Anya Stone
+Expertise: Builds trust quickly with honorable factions, frightened clients, and NPCs looking for a reliable agent.
+
+Debt Collector - You are known for making people pay what they owe.
+Example Name: Sable Cross
+Expertise: Helps with intimidation, criminal negotiations, bounty work, and recovering stolen or promised goods.
+
+Liberator - You have a reputation for freeing prisoners, slaves, hostages, or oppressed communities.
+Example Name: Imani Vale
+Expertise: Draws rebels, refugees, resistance cells, and people begging for rescue.
+
+Butcher - Whether fair or not, people believe you leave bodies behind.
+Example Name: Korrin Black
+Expertise: Frightens enemies, attracts violent employers, and makes peaceful NPCs wary or hostile.
+
+Relic Finder - You have a knack for locating things history tried to bury.
+Example Name: Dorian Flint
+Expertise: Helps with treasure leads, museum contacts, artifact rumors, and ruins nobody wants to enter.
+
+Clean Professional - You are known for doing jobs neatly, quietly, and on time.
+Example Name: Nessa Vale
+Expertise: Earns trust from fixers, spies, nobles, and clients who value discretion.
+
+Chaos Magnet - Trouble follows you, and everyone nearby knows it.
+Example Name: Pip Rook
+Expertise: Draws rumors, weird opportunities, reckless allies, and NPCs who want the impossible stirred up.
+
+Shield of the Weak - People believe you protect children, civilians, and anyone who cannot fight back.
+Example Name: Tomas Wren
+Expertise: Earns trust from communities, families, healers, and NPCs who need protection more than victory.
+
+Anointed Champion - A temple, spirit, deity, prophecy, or movement has marked you as important.
+Example Name: Sister Kael
+Expertise: Helps with faithful communities, sacred sites, religious authority, and supernatural obligations.
+
+Blacklisted - Someone powerful has warned people not to work with you.
+Example Name: Vex Ardent
+Expertise: Signals danger, reveals enemies, and opens doors with people who also hate that power.
+
+Arena Favorite - Crowds know you from pit fights, tournaments, duels, or blood sport.
+Example Name: Torga Nine-Bells
+Expertise: Helps with fighters, gamblers, promoters, fans, and anyone impressed by public violence.
+
+Disgraced Officer - You once had rank, authority, or a badge, and lost it.
+Example Name: Mara Dain
+Expertise: Helps with police procedure, command habits, old colleagues, and understanding institutional rot.
+
+Friend of Spirits - Spirits, ghosts, animals, or unseen things seem willing to deal with you.
+Example Name: Oren Moss
+Expertise: Helps with omens, haunted places, nature spirits, dead witnesses, and supernatural negotiations.
+
+No One's Fool - People know you are hard to trick.
+Example Name: Isha Vale
+Expertise: Helps with detecting scams, reading suspicious NPCs, resisting manipulation, and spotting bad deals.
+
+Soft Touch - People believe you can be moved by a sad story.
+Example Name: Pell Bright
+Expertise: Makes desperate NPCs approach you first, which can reveal hooks, lies, and hidden victims.
+
+Fixer's Favorite - Job brokers know you get results.
+Example Name: Cato Rey
+Expertise: Helps with paid work, introductions, better mission terms, and first notice of profitable opportunities.
+
+Unkillable - People are convinced you should already be dead.
+Example Name: Bren Ashfall
+Expertise: Intimidates enemies, reassures allies, and attracts people who need someone to survive the unsurvivable.
+
+Forbidden Student - You learned from a banned school, outlawed master, or sealed archive.
+Example Name: Nyx Orell
+Expertise: Helps with forbidden lore, secret techniques, illegal texts, and NPCs who fear or covet that knowledge.
+
+People's Hero - Ordinary people tell stories about you.
+Example Name: Lani Cross
+Expertise: Helps with shelter, food, local warnings, hidden routes, and communities willing to take risks for you.
+
+Cold Operator - You are known for staying calm when everyone else breaks.
+Example Name: Voss Nine
+Expertise: Helps with hostage scenes, negotiations under threat, crisis command, and NPCs who respect discipline.
+
+Lone Wolf - People believe you work best alone and do not need help.
+Example Name: Rhea Flint
+Expertise: Helps with solo infiltration, quiet intimidation, and NPCs who admire independence.
+
+Team Anchor - You are known as the one who keeps the crew together.
+Example Name: Mikal Stone
+Expertise: Helps with morale, mediation, rallying allies, and convincing scared NPCs to cooperate.
+
+Timeline Scarred - The Multiverse has visibly changed you.
+Example Name: Eno Grey
+Expertise: Helps with anomaly recognition, strange sympathy from other altered beings, and warnings about timeline danger.
+
+MPS Enemy - The Multiverse Preservation Society has reason to hate you.
+Example Name: Juno Ward
+Expertise: Attracts anti-MPS allies, alerts you to Preservation Society activity, and marks you as a threat to timeline manipulators.

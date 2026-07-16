@@ -1,7 +1,51 @@
-You begin with 3  Charisma Contacts.
+You begin with 3 + Charisma Contacts.
 
-Contacts are NPCs you know who can help you with:
-information
-equipment
-favors
-You may choose some now and fill in others as you play. You will be assigned Gold at level 1, which helps pay for favors and information.
+Contacts are NPCs you know who can help you with information, equipment, favors, introductions, cover stories, and off-the-books services. You may choose some now and fill in others as you play. Contacts can exist anywhere in the Multiverse; if you have a bartender contact, the GM can place a similar bartender in any setting.
+
+Fence - A criminal merchant who moves goods that cannot be sold openly.
+Example Name: Rook Vellum
+Expertise: Sells stolen items, appraises black-market gear, finds buyers for illegal loot, and knows who is looking for rare merchandise.
+
+Surgeon - A discreet medical expert who treats wounds without asking too many questions.
+Example Name: Dr. Selene Orak
+Expertise: Performs surgery, removes tracking devices, patches up injured Heroes, and identifies strange biological effects.
+
+Journalist - A professional investigator with sources in public records, politics, and street rumor.
+Example Name: Mina Cross
+Expertise: Finds leads, verifies rumors, exposes cover-ups, and gets the party access to people who want their story told.
+
+Cop - A law-enforcement contact who understands procedure, warrants, evidence, and local pressure.
+Example Name: Detective Jonas Pike
+Expertise: Checks criminal records, warns about raids, explains local law, and quietly points Heroes toward active investigations.
+
+Bartender - A social hub who hears every rumor before it becomes public.
+Example Name: Tavi Glass
+Expertise: Shares local gossip, introduces useful strangers, hides a message, and helps Heroes read the mood of a neighborhood.
+
+Fixer - A dealmaker who connects people, jobs, equipment, and favors.
+Example Name: Cass Meridian
+Expertise: Arranges meetings, finds temporary work, hires specialists, and negotiates access to restricted goods or locations.
+
+Mechanic - A practical repair expert who keeps vehicles, drones, armor, and field gear alive.
+Example Name: Bolt Navarro
+Expertise: Repairs vehicles, modifies equipment, identifies mechanical failures, and rigs emergency solutions from spare parts.
+
+Hacker - A digital infiltrator who knows networks, private systems, and data trails.
+Example Name: Zero Vale
+Expertise: Breaks into systems, erases records, traces signals, spoofs credentials, and finds hidden data on the private net.
+
+Smuggler - A transport specialist who moves people and cargo through places they should not reach.
+Example Name: Nix Calder
+Expertise: Bypasses checkpoints, hides contraband, arranges illegal passage, and knows routes that do not appear on official maps.
+
+Archivist - A scholar of records, histories, old maps, and timeline fragments.
+Example Name: Professor Ilyan Voss
+Expertise: Researches history, translates obscure documents, identifies artifacts, and explains why a forgotten detail matters.
+
+Occultist - A specialist in magic, spirits, rituals, curses, and impossible phenomena.
+Example Name: Mara Thorne
+Expertise: Identifies supernatural threats, interprets omens, finds ritual components, and explains magical consequences.
+
+Quartermaster - A supply contact who can get ordinary gear quickly and unusual gear with enough warning.
+Example Name: Gunny Vale
+Expertise: Locates weapons, armor, field kits, ammunition, disguises, and mission supplies before a dangerous assignment.

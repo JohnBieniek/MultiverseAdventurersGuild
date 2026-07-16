@@ -33,7 +33,9 @@ const fieldLabels = [
   'Description',
   'Mechanic',
   'Mechanics',
-  'Scores'
+  'Scores',
+  'Example Name',
+  'Expertise'
 ]
 
 const speciesNames = [
@@ -59,6 +61,7 @@ const statNames = ['strength', 'dexterity', 'endurance', 'intuition', 'education
 
 const skillNames = [
   'attack',
+  'athletics',
   'influence',
   'knowledge',
   'observation',
@@ -76,6 +79,7 @@ const statSkillAliases = {
   edu: 'education',
   cha: 'charisma',
   stealth: 'sneak',
+  athletic: 'athletics',
   tech: 'technology',
   'melee attack': 'attack',
   'ranged attack': 'attack',
@@ -176,6 +180,20 @@ function isTalentStart(lines, index) {
   return /^(Description|Mechanic|Mechanics)\s*[:-]/i.test(next)
 }
 
+function isContactStart(lines, index) {
+  return Boolean(
+    splitTitleLine(lines[index]) &&
+      lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
+  )
+}
+
+function isReputationStart(lines, index) {
+  return Boolean(
+    splitTitleLine(lines[index]) &&
+      lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
+  )
+}
+
 function splitCards(content, type) {
   const lines = getLines(content)
   const intro = []
@@ -186,7 +204,9 @@ function splitCards(content, type) {
     const startsCard =
       (type === 'species' && isSpeciesStart(line)) ||
       (type === 'archetype' && isArchetypeStart(lines, index)) ||
-      (type === 'talent' && isTalentStart(lines, index))
+      (type === 'talent' && isTalentStart(lines, index)) ||
+      (type === 'contact' && isContactStart(lines, index)) ||
+      (type === 'reputation' && isReputationStart(lines, index))
 
     if (startsCard) {
       if (activeCard) {
@@ -226,9 +246,9 @@ function splitCards(content, type) {
 }
 
 function renderInlineText(text) {
-  const labelMatch = text.match(/^([A-Za-z][A-Za-z ]{1,28})(?::|\s+-)\s*(.+)$/)
+  const labelMatch = text.match(/^([A-Za-z][A-Za-z ]{1,28}(?:\s+\([^)]*\))?)(?::|\s+-)\s*(.+)$/)
 
-  if (labelMatch && isFieldLabel(labelMatch[1])) {
+  if (labelMatch) {
     return (
       <>
         <strong>{labelMatch[1]}:</strong> {labelMatch[2]}
@@ -241,7 +261,7 @@ function renderInlineText(text) {
 
 function getTextBlockAnchor(sectionTitle, line) {
   const section = sectionTitle.toLowerCase()
-  const match = line.match(/^([A-Za-z]+)(?:\s+\([^)]*\))?\s+-/)
+  const match = line.match(/^([A-Za-z]+)(?:\s+\([^)]*\))?(?::|\s+-)/)
 
   if (!match) {
     return null
@@ -372,28 +392,41 @@ function renderCards(content, type, cardIndex) {
 
   return (
     <div className={`guide-card-layout guide-card-layout-${type}`}>
-      {intro.length > 0 && (
-        <div className="guide-card-intro">
-          {intro.map((line, index) => (
-            <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
+      <aside className="guide-item-sidebar" aria-label={`${type} list`}>
+        <h3>{type === 'archetype' ? 'Archetypes' : `${type.charAt(0).toUpperCase()}${type.slice(1)}s`}</h3>
+        <nav>
+          {cards.map((card) => (
+            <a key={card.name} href={`#${cardAnchor(type, card.name)}`}>
+              {card.name}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div className="guide-card-main">
+        {intro.length > 0 && (
+          <div className="guide-card-intro">
+            {intro.map((line, index) => (
+              <p key={`${line}-${index}`}>{renderInlineText(line)}</p>
+            ))}
+          </div>
+        )}
+
+        <div className="guide-card-grid">
+          {cards.map((card) => (
+            <article
+              key={card.name}
+              id={cardAnchor(type, card.name)}
+              className="guide-info-card"
+            >
+              <h3>{card.name}</h3>
+              {card.description && <p className="guide-card-summary">{card.description}</p>}
+              <div className="guide-card-body">
+                {card.lines.map((line, index) => renderCardField(line, index, cardIndex))}
+              </div>
+            </article>
           ))}
         </div>
-      )}
-
-      <div className="guide-card-grid">
-        {cards.map((card) => (
-          <article
-            key={card.name}
-            id={cardAnchor(type, card.name)}
-            className="guide-info-card"
-          >
-            <h3>{card.name}</h3>
-            {card.description && <p className="guide-card-summary">{card.description}</p>}
-            <div className="guide-card-body">
-              {card.lines.map((line, index) => renderCardField(line, index, cardIndex))}
-            </div>
-          </article>
-        ))}
       </div>
     </div>
   )

@@ -55,7 +55,8 @@ const sections = [
   },
   {
     title: 'Contacts',
-    content: contacts
+    content: contacts,
+    cardType: 'contact'
   },
   {
     title: 'Weapons',
@@ -63,7 +64,8 @@ const sections = [
   },
   {
     title: 'Reputation',
-    content: reputation
+    content: reputation,
+    cardType: 'reputation'
   },
   {
     title: 'Equipment',

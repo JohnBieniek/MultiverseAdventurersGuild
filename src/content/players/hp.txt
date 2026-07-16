@@ -1,4 +1,41 @@
-You begin with:
-1 Talent Slot
-10 + endurance HP
-Access to Force 1 Talents
+HP measures how much punishment your Hero can take before they are in serious danger.
+
+Starting HP: 10 + your Endurance score.
+
+Level HP: Heroes gain 6 HP per level after level 0. Your Endurance score is included in each level's HP total.
+
+Endurance increases are retroactive. If your Endurance improves later, apply that new bonus to every level you already have.
+
+Example: A level 3 Hero with Endurance 0 has 28 HP. If that Hero raises Endurance to +1, the bonus applies across all levels and their HP becomes 32.
+
+Taking Damage
+
+When an attack hits, subtract the damage from your current HP. Temporary HP is lost first. Normal healing cannot restore temporary HP unless a Talent specifically says it can.
+
+At 0 HP
+
+A Hero at 0 HP can only take a move action. They are still conscious enough to crawl, stagger, speak, or try to get out of danger, but they cannot fight normally.
+
+Below 0 HP
+
+After a Hero drops below 0 HP, no matter how far below, set them to -1 HP. They begin bleeding out.
+
+Bleeding Out
+
+At the start of each of their turns, a bleeding Hero loses 1 HP. At -5 HP, the Hero dies.
+
+Stabilizing
+
+Each turn, the Hero rolls to stabilize using Endurance as the modifier. The TN is 11S. On a success, the Hero stops bleeding out.
+
+A Hero can spend a Credit to automatically stabilize.
+
+Healing
+
+Healing in combat takes a move action and automatically stabilizes a Hero below 0 HP.
+
+Outside combat, healing restores the maximum amount, but it takes 1 minute to complete.
+
+Natural Recovery
+
+After sleep, a Hero fully heals and regains all energy points.

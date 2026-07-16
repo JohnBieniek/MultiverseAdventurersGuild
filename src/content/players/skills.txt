@@ -1,20 +1,22 @@
 Skills work with Stats to show what you are good at. Every Hero has every skill, but bonuses show specialization.
 
-Assign: +2, +2, +1, +1, +1, 0, 0, -1
+Assign: +2, +2, +1, +1, +1, 0, 0, 0, -1
 
-Attack (Str or Dex) - used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks.
+Attack (Str or Dex): Used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks.
 
-Influence (Cha) - intimidate, persuade, interrogate, acting, impersonation
+Athletics (Str, Dex, or End): Climbing, jumping, swimming, grappling, resisting knockback, enduring physical hazards, and other physical tasks not covered by another skill.
 
-Knowledge (Edu) - learned topics, research, magic theory.
+Influence (Cha): Intimidate, persuade, interrogate, acting, impersonation
 
-Observation (Intuition) - noticing details, perception
+Knowledge (Edu): Learned topics, research, magic theory.
 
-Outdoors (Intuition) - tracking, survival, navigation
+Observation (Intuition): Noticing details, perception
 
-Sneak (Dex) - stealth, sleight of hand, infiltration, disguise, and acting
+Outdoors (Intuition): Tracking, survival, navigation
 
-Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matrix search
+Sneak (Dex): Stealth, sleight of hand, infiltration, disguise, and acting
 
-Vehicle (Dex) - driving a car, piloting a starship, riding a horse
-"Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)
+Technology (Edu): Hacking, medicine, devices, engineering, disable traps, Matrix search
+
+Vehicle (Dex): Driving a car, piloting a starship, riding a horse
+"Pick the two most important skills and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in Attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 3 skills that are the least important and write in a (0). The remaining skills are (+1)."
