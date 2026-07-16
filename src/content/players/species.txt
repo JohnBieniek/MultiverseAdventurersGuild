@@ -16,7 +16,7 @@ Strengths: strength, technology, endurance
 
 Weaknesses - dexterity, charisma
 
-Talents: Ferocious Attack, Fearsome, ablative armor
+Talents: Ferocious Attack, Intimidating Presence, Ablative Armor
 
 Common Archetypes: Street Samurai, Merc, Sniper
 
@@ -34,7 +34,7 @@ Strengths: strength, endurance, technology
 
 Weaknesses: intuition,
 
-Talents: Mechanic(R)
+Talents: Technical Expertise (R)
 
 Common Archetypes: Street Doc, ex-military, driver
 
@@ -53,7 +53,7 @@ Strengths: Charisma, dexterity, outdoors
 
 Weaknesses: endurance, strength
 
-Talents: Charming(R), Goad
+Talents: Silver Tongue (R), Goad
 
 Common Archetypes: shaman, face, ex-company man, spy
 
@@ -72,7 +72,7 @@ Strengths: Charisma, knowledge, outdoors
 
 Weaknesses: strength, technology
 
-Talents: Fly, Debuffs, Charming, Detect Talents
+Talents: Fly, Reduce Movement, Silver Tongue, Detect Talents
 
 Common Archetypes: Shaman, Eco-terrorist
 
@@ -92,7 +92,7 @@ Strengths: Education, Technology, Knowledge
 
 Weaknesses: Charisma, outdoors, intuition.
 
-Talents: Techie, Drone, Hacker
+Talents: Technical Expertise, Control Drone, Hacker
 
 Common Archetypes: Driver, Hacker, Mad Bomber.
 
@@ -111,7 +111,7 @@ Strengths: strength, education, knowledge, outdoors
 
 Weaknesses: charisma (they simply don't relate well to other races), Technology
 
-Talents: Smart, Fearsome, Reach
+Talents: Genius, Intimidating Presence, Melee Reach (minor)
 
 Common Archetypes: street doc(talents), mage, street samurai
 
@@ -131,7 +131,7 @@ Strengths: charisma, outdoors, stealth, range weapon
 
 Weaknesses: technology, strength, knowledge
 
-Talents: Ambush, Camouflage, Charming
+Talents: Ambush, Shadowstep, Silver Tongue
 
 Common Archetypes: Thief, monk, performer
 

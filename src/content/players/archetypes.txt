@@ -27,7 +27,7 @@ Barbarian - You fight with emotion - rage. You may have some skill, but you rely
 Scores:
 Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
-Preferred talents: Ferocious Attack, Ablative Armor, Temporary HP
+Preferred talents: Ferocious Attack, Ablative Armor, Temporary Hit Points
 
 Personality: Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
@@ -70,7 +70,7 @@ Cleric - These are your healers. They derive power from worshipping their Deitie
 Scores:
 Strengths: Endurance, Influence, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Athletics, Observation
-Preferred talents: any Health, Ferocious Attack, Change of Fortune
+Preferred talents: Health, Ferocious Attack, Change of Fortune
 
 Personality:
 
@@ -100,7 +100,7 @@ Commando: You were a part of an elite military unit like the SEALs, SAS, or Spet
 Scores:
 Strength: Dexterity, Shadowstep, Attack, Ranged Weapon
 Weaknesses: Charisma, Knowledge, Vehicle
-Preferred Talents: Aim, Camouflage, Close Quarter Combat
+Preferred Talents: Aim, Shadowstep, Close Quarter Combat
 
 Personality:
 
@@ -115,7 +115,7 @@ Criminal: This is your basic criminal type. They lie, steal, and cheat their way
 Scores:
 Strengths: Dexterity, Technology, Sneak, Any Weapon
 Weaknesses: Endurance, Influence, Outdoors
-Preferred talents: Ambush, Shadowstep, Find/Remove Traps
+Preferred talents: Ambush, Shadowstep, Trap Sense
 
 Personality:
 
@@ -160,7 +160,7 @@ Ex-Company Man - a person who puts the Company above himself. They are very loya
 Scores:
 Strengths: Charisma, Education, Technology, Range Weapon
 Weaknesses: Strength, Outdoors, Sneak
-Talents: Silver Tongue, Concealed Weapon Specialist, Detect Lie
+Talents: Silver Tongue, Concealed Weapon Specialist, Truthsense
 
 Personality:
 1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-company men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
@@ -217,7 +217,7 @@ Fixer: You are the master at getting illicit gear. You have contacts all over an
 Scores:
 Strengths: Charisma, Influence, Observation, Any Melee Weapon
 Weaknesses: Strength, Athletics, Sneak
-Preferred talents: Silver Tongue, Aim, Detect Lie
+Preferred talents: Silver Tongue, Aim, Truthsense
 
 Personality:
 
@@ -262,7 +262,7 @@ Gun Bunny - it's all about the guns. This archetype collects guns. They categori
 Scores:
 Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
-Preferred talents: Aim, Close Quarters Combat, Concealed Weapon Specialist
+Preferred talents: Aim, Close Quarter Combat, Concealed Weapon Specialist
 
 Personality:
 
@@ -292,7 +292,7 @@ Mad Bomber: It's all about the boom! You are an expert in demolitions.
 Scores:
 Strengths: Education, Technology, Attack, Range Weapon (bombs that act like any Range Weapon)
 Weaknesses: Strength, Influence, Sneak.
-Preferred Talents: Techie, Close Quarters Combat (IED, you throw a bomb to attack. It acts as a range weapon), Critical Hit
+Preferred Talents: Technical Expertise, Flash/Bang, Critical Hit
 
 Personality:
 
@@ -307,7 +307,7 @@ Mage: These are your classic spellcasters. They learn their craft through study 
 Scores:
 Strengths: Education, Knowledge, Observation, Range Attack (Simple proxy - spirit)
 Weaknesses: Endurance, Sneak, Influence
-Preferred Talents: any non-combat talent
+Preferred Talents: Grand Illusion, Telekinesis, Detect Talents
 
 Personality:
 
@@ -352,7 +352,7 @@ Performer - Performers are floating entertainers. They can be seen on stage or i
 Scores:
 Strengths: Charisma, Influence, Knowledge, Range Weapon (Performing makes a magical range attack when played)
 Weaknesses: Endurance, Technology, Sneak
-Preferred talents: any Buff, Goad, Tactical Commander
+Preferred talents: Buffs, Goad, Tactical Commander
 
 Personality:
 
@@ -367,7 +367,7 @@ Private eye/ Investigator - whether you have a police background or are self-tau
 Scores:
 Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
-Preferred talents: Concealed Weapon Specialist, Silver Tongue, Detect Lie
+Preferred talents: Concealed Weapon Specialist, Silver Tongue, Truthsense
 
 Personality:
 
@@ -382,7 +382,7 @@ Screamer - you are what you drive. Screamers are masters at operating drones and
 Scores:
 Strengths: Dexterity, Vehicles, Technology, Range Attack (simple proxy: Drone)
 Weaknesses: Charisma, Influence, Athletics
-Preferred Talent: Control Drone, Transporter, Tech Expertise
+Preferred Talent: Control Drone, Transporter, Technical Expertise
 
 Personality:
 
@@ -412,7 +412,7 @@ Sniper: Your brain is a computer. You are constantly looking at the world in ter
 Scores:
 Strengths: Dexterity, Attack, Sneak, Range Attack
 Weaknesses: Charisma, Vehicle, Influence
-Preferred Talents: Ambush, Camouflage, Long Shot
+Preferred Talents: Ambush, Shadowstep, Long Shot
 
 Personality:
 
@@ -427,7 +427,7 @@ Street doc: a generic term for someone who heals people. These are people who wo
 Scores:
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
-Preferred talents: any in Health, Critical Hit, Bring on the Pain
+Preferred talents: Heal (Minor), Critical Hit, Bring on the Pain
 
 Personality:
 
@@ -442,7 +442,7 @@ Spy - you are all about gathering and leveraging intelligence. You have studied 
 Scores:
 Strengths: Intuition, Influence, Knowledge, Improvised Weapon
 Weaknesses: Endurance, Sneak, Technology
-Preferred Talents: Charming, Detect Lie, Goad
+Preferred Talents: Silver Tongue, Truthsense, Goad
 
 Personality:
 
