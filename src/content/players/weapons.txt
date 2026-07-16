@@ -50,15 +50,15 @@ Concealment: No concealment.
 Special Rules: Braced.
 Examples: Sniper rifle, machine gun, anti-materiel rifle, heavy crossbow.
 
-Paired Weapons - Fight with a weapon in each hand.
-Category: Rule
+Dual Wield - Fight with a weapon in each hand.
+Category: Fighting Style
 Melee: Two d6 melee weapons deal d8 damage and use the same special rules as a d8 melee weapon.
 Ranged: Two d4 ranged weapons deal d6 damage and use the same special rules as a d6 ranged weapon.
 
-Suppressors - Make ranged attacks harder to notice, but reduce impact.
-Category: Rule
-Mechanic: A suppressor does not make a weapon easier to conceal; it adds bulk. It can make it harder for bystanders or guards to notice where a shot came from, at the GM's discretion. Suppressed weapons reduce damage by one step: a pistol deals d4-1 damage, and a sniper rifle becomes a d8 weapon.
+Silenced - Make ranged attacks harder to notice, but reduce impact.
+Category: Fighting Style
+Mechanic: A silenced weapon is not easier to conceal; the suppressor adds bulk. It can make it harder for bystanders or guards to notice where a shot came from, at the GM's discretion. Silenced weapons reduce damage by one step: a pistol deals d4-1 damage, and a sniper rifle becomes a d8 weapon.
 
 Braced - Heavy ranged weapons need setup or support.
-Category: Rule
+Category: Fighting Style
 Mechanic: A braced weapon must be fired from a stable position, such as prone, mounted, rested on cover, or supported by a bipod or similar gear. The GM may deny the shot or apply disadvantage when the weapon is fired without bracing.
