@@ -38,7 +38,7 @@ Anti-Tech: You don't like technology and will do all you can to avoid dealing wi
 Bounty Hunter: You love the chase. You live for the thrill of finding and subduing your quarry, dead or alive.
 
 Scores:
-Strengths: Intuition, observation, outdoors, Any Weapon
+Strengths: Intuition, Observation, Outdoors, Any Weapon
 Weaknesses: Education, Athletics, Vehicle
 Preferred Talents: Pathfinder, Heightened Awareness, Ambush
 
@@ -291,7 +291,7 @@ Mad Bomber: It's all about the boom! You are an expert in demolitions.
 
 Scores:
 Strengths: Education, Technology, Attack, Range Weapon (bombs that act like any Range Weapon)
-Weaknesses: Strength, Influence, Sneak.
+Weaknesses: Strength, Influence, Sneak
 Preferred Talents: Technical Expertise, Flash/Bang, Critical Hit
 
 Personality:
@@ -380,7 +380,7 @@ World Weary - you are weary from seeing the same terrible things over and over a
 Screamer - you are what you drive. Screamers are masters at operating drones and vehicles. You express yourself in the way you manipulate vehicles. You relate better to tech than to people.
 
 Scores:
-Strengths: Dexterity, Vehicles, Technology, Range Attack (simple proxy: Drone)
+Strengths: Dexterity, Vehicle, Technology, Range Attack (simple proxy: Drone)
 Weaknesses: Charisma, Influence, Athletics
 Preferred Talent: Control Drone, Transporter, Technical Expertise
 
@@ -455,7 +455,7 @@ Ego - you believe you are so charming that you fail to recognize when your charm
 Street Samurai - At its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
 
 Scores:
-Strengths: Strength, Attack, Athletic, Melee Weapon
+Strengths: Strength, Attack, Athletics, Melee Weapon
 Weaknesses: Education, Knowledge, Influence
 Preferred Talents: Ferocious Attack, Parry, Intimidating Presence
 

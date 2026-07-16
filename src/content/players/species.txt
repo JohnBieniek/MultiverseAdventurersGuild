@@ -12,7 +12,7 @@ NPC species mods are shorthand to avoid full builds.
 Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your Cyberwear is Hard Wired.
 The Real Deal: Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
 
-Strengths: strength, technology, endurance
+Strengths: Strength, Technology, Endurance
 
 Weaknesses - dexterity, charisma
 
@@ -30,9 +30,9 @@ Rep: Dwarves are thought to be motivated by precious metals and gemstones. They 
 
 The Real Deal: Dwarves excel at tech. They horde precious metals and jewels. Not for accumulating wealth but for use in their tech designs.
 
-Strengths: strength, endurance, technology
+Strengths: Strength, Endurance, Technology
 
-Weaknesses: intuition,
+Weaknesses: Intuition
 
 Talents: Technical Expertise (R)
 
@@ -49,9 +49,9 @@ Rep: Elves are elegant and charming. They get along with everyone and are univer
 
 The Real Deal: Elves are charming and popular and are very entitled.
 
-Strengths: Charisma, dexterity, outdoors
+Strengths: Charisma, Dexterity, Outdoors
 
-Weaknesses: endurance, strength
+Weaknesses: Endurance, Strength
 
 Talents: Silver Tongue (R), Goad
 
@@ -68,9 +68,9 @@ Rep: Their size and ephemeral nature lead most people to not take them seriously
 
 The Real Deal: Their small size makes it difficult to survive in the real world. They tend to be mischievous in a passive-aggressive way.
 
-Strengths: Charisma, knowledge, outdoors
+Strengths: Charisma, Knowledge, Outdoors
 
-Weaknesses: strength, technology
+Weaknesses: Strength, Technology
 
 Talents: Fly, Reduce Movement, Silver Tongue, Detect Talents
 
@@ -90,7 +90,7 @@ The Real Deal: They can be really social when interacting to create and test tec
 
 Strengths: Education, Technology, Knowledge
 
-Weaknesses: Charisma, outdoors, intuition.
+Weaknesses: Charisma, Outdoors, Intuition
 
 Talents: Technical Expertise, Control Drone, Hacker
 
@@ -107,9 +107,9 @@ Rep: Giants are fierce and dangerous fighters. Their size is intimidating.
 
 The Real Deal: Giants use muscle and size because it's easy and obvious. They use this as a defense against the world. In reality, when with each other and trusted friends, they are very gentle and erudite. Giants value knowledge. They also have little to do with tech. Giants amass large quantities of paper-based books and share amongst themselves. Giants prefer to live in wilderness areas, abandoned cities, and towns, and form communities. A library is the perfect home for a giant.
 
-Strengths: strength, education, knowledge, outdoors
+Strengths: Strength, Education, Knowledge, Outdoors
 
-Weaknesses: charisma (they simply don't relate well to other races), Technology
+Weaknesses: Charisma (they simply don't relate well to other races), Technology
 
 Talents: Genius, Intimidating Presence, Melee Reach (minor)
 
@@ -127,9 +127,9 @@ Rep: Halflings are gregarious, lovers of food and parties, and often frivolous.
 
 The Real Deal: They live up to their rep, but they have a serious side.
 
-Strengths: charisma, outdoors, stealth, range weapon
+Strengths: Charisma, Outdoors, Stealth, Range Weapon
 
-Weaknesses: technology, strength, knowledge
+Weaknesses: Technology, Strength, Knowledge
 
 Talents: Ambush, Shadowstep, Silver Tongue
 
@@ -152,9 +152,9 @@ Rep: Orcs are a feral, dirty race. They breed like rabbits and have no manners. 
 
 The Real Deal: Many Orcs epitomize the rep, even lean into it. But just as many are trying to live good lives. This Species thrives in urban settings.
 
-Strengths: strength, endurance, attack
+Strengths: Strength, Endurance, Attack
 
-Weaknesses: charisma, knowledge, education
+Weaknesses: Charisma, Knowledge, Education
 
 Talents: Ferocious Attack
 

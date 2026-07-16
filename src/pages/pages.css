@@ -207,16 +207,12 @@
 .guide-item-sidebar {
   position: sticky;
   top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 0.6rem);
-  max-height: min(24rem, calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1.4rem));
+  max-height: calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1.4rem);
   overflow-y: auto;
   padding: 0.75rem;
   background: var(--shield-cream);
   border: 1px solid rgba(51, 97, 47, 0.18);
   border-radius: 8px;
-}
-
-.guide-card-layout-archetype .guide-item-sidebar {
-  max-height: min(18rem, calc(100vh - var(--sticky-nav-offset) - var(--guide-subnav-height) - 1.4rem));
 }
 
 .guide-item-sidebar h3 {
