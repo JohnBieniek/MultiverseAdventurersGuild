@@ -27,6 +27,8 @@
 /* Home Page */
 .home-page {
   min-height: auto;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -116,6 +118,8 @@
     left: 50%;
     width: min(2400px, calc(100vw - 80px));
     transform: translateX(-50%);
+    padding-left: 0;
+    padding-right: 0;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
