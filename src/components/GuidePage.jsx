@@ -275,7 +275,14 @@ function isContactStart(lines, index) {
 function isReputationStart(lines, index) {
   return Boolean(
     splitTitleLine(lines[index]) &&
-      lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
+      lines.slice(index + 1, index + 4).some((line) => /^Expertise:/i.test(line))
+  )
+}
+
+function isWeaponStart(lines, index) {
+  return Boolean(
+    splitTitleLine(lines[index]) &&
+      lines.slice(index + 1, index + 5).some((line) => /^Category:/i.test(line))
   )
 }
 
@@ -291,7 +298,8 @@ function splitCards(content, type) {
       (type === 'archetype' && isArchetypeStart(lines, index)) ||
       (type === 'talent' && isTalentStart(lines, index)) ||
       (type === 'contact' && isContactStart(lines, index)) ||
-      (type === 'reputation' && isReputationStart(lines, index))
+      (type === 'reputation' && isReputationStart(lines, index)) ||
+      (type === 'weapon' && isWeaponStart(lines, index))
 
     if (startsCard) {
       if (activeCard) {

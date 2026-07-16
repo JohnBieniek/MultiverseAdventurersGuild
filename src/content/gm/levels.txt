@@ -10,23 +10,23 @@ Advanced play. At this point, encourage your Heroes to read all the player mater
 
 Force, Energy, and Talents
 
-Force (F): Maximum power tier you can use (unlocked by level).
+Force (F): Maximum power tier you can use, unlocked by level.
 
-Energy (EN): Resource you spend to activate talents.
+Energy (EN): Resource you spend to activate Talents.
 
-Slots: Number of sustained combat talents you can keep active.
+Slots: Number of sustained combat Talents you can keep active.
 
-Force Energy Cost
+Force Energy Costs
 
-F1 1/1
+Force 1 (F1): 1 energy sustained, 1 energy as a one-shot.
 
-F2 4/2
+Force 2 (F2): 4 energy sustained, 2 energy as a one-shot.
 
-F3 9/4
+Force 3 (F3): 9 energy sustained, 4 energy as a one-shot.
 
-F4 16/8
+Force 4 (F4): 16 energy sustained, 8 energy as a one-shot.
 
-One-shots never occupy a slot. Sustained effects do.
+One-shots last for one roll or one immediate use and never occupy a slot. Sustained effects do occupy a slot.
 
 For experience, you pay for each increase. To achieve a star score of (+3) from (+0) I would pay 1 for a (+1), 4 more for a(+2) and 9 for a (+3). You pay for each step.
 

@@ -279,6 +279,10 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.guide-card-layout-weapon .guide-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
 .guide-info-card {
   background: white;
   border: 1px solid rgba(51, 97, 47, 0.18);

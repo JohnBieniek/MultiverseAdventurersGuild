@@ -1,6 +1,6 @@
-You begin with 3 + Charisma Contacts.
-
 Contacts are NPCs you know who can help you with information, equipment, favors, introductions, cover stories, and off-the-books services. You may choose some now and fill in others as you play. Contacts can exist anywhere in the Multiverse; if you have a bartender contact, the GM can place a similar bartender in any setting.
+
+You begin with 3 + Charisma Contacts.
 
 Alchemist - A practical specialist who handles alchemist needs when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
 Category: Medical and technical contacts

@@ -10,11 +10,11 @@ Pay off a contact - 1 credit will get basic information, more could yield more d
 
 A Hero can spend 1000 Credits to buy a grenade.
 
-Sneak a small weapon by security. Based on security level. Less than (0), 500 credits. 1000 for (0), and F * 2.
+Sneak a small weapon by security. Cost is based on security level: less than 0 costs 500 Credits, security level 0 costs 1000 Credits, and higher security costs 1000 Credits x 2 per security level.
 
 "Legitimate" ID. (AKA, Global Relevant Identification Number or GRIN) Many settings require a legal ID to pay for items, bribe contacts, purchase drones, or vehicle upgrades. An ID costs (0)/1000, 2/4000, 3/9000, 4/16000 per month. GRINs require a steady income to cover housing, food, and other essentials. Your GRIN level is also reflected in the way you live. Any time you make a purchase, your GRIN is scrutinized. The seller's security level is compared with the GRIN's level. For instance, if the seller has a (-2) and my GRIN is (+1), I have a (+2) to my roll. The TN to beat your Identity is 18S. Roll only when it would affect play. Grocery shopping, no. Getting into the cool club or a multinational, absolutely.
 
-Cover Identity - Half the cost for a legitimate Global Relevant Identification Number (GRIN). Max F3. Preestablished paper/identification for the adventure. Usable until burned, which occurs when the GRIN fails a security check. Also, any crimes associated with the GRIN remain active.
+Cover Identity - Half the cost for a legitimate Global Relevant Identification Number (GRIN). Maximum Force 3. Preestablished paper/identification for the adventure. Usable until burned, which occurs when the GRIN fails a security check. Also, any crimes associated with the GRIN remain active.
 
 Rumor Mill - 1000 Credits, social interaction reveals a solid, reliable lead. Twice per session.
 

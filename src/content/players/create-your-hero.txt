@@ -170,16 +170,17 @@ You get each turn:
 2 Combat Talent Activations
 1 Reaction (per round)
 Free actions (draw weapon, talk, etc.)
-Force (F): Maximum power tier you can use (unlocked by level).
-Energy (EN): Resource you spend to activate talents.
-Slots: Number of sustained combat talents you can keep active.
-Force Energy Cost
-F1 1/1
-F2 4/2
-F3 9/4
-F4 16/8
-Legendary powers
-The second number is the one-shot cost. One-shots never occupy a slot. Sustained effects do.
+Force (F): Maximum power tier you can use, unlocked by level.
+Energy (EN): Resource you spend to activate Talents.
+Slots: Number of sustained combat Talents you can keep active.
+
+Force Energy Costs:
+Force 1 (F1): 1 energy sustained, 1 energy as a one-shot.
+Force 2 (F2): 4 energy sustained, 2 energy as a one-shot.
+Force 3 (F3): 9 energy sustained, 4 energy as a one-shot.
+Force 4 (F4): 16 energy sustained, 8 energy as a one-shot.
+
+One-shots last for one roll or one immediate use and never occupy a slot. Sustained effects do occupy a slot.
 A street-mage (Dex 2, Attack 3, Enhancement +1) fires an energy bolt.
 Rolls: d20 + 2 + 3 + 1 = d20 + 6 vs target's Defense 15.
 Rolls 12 - total 18 = hit.
@@ -193,19 +194,19 @@ Force Access Rule (Hard Limit)
 You cannot activate or purchase Talents of a Force higher than your level allows.
 Players are rewarded with the following benefits at each level:
 Tagline: You've joined the Guild. You're raw, reckless, and ready to prove yourself.
-0: Access F1 Talents  1 Talent Slot, 10HP
+0: Access Force 1 (F1) Talents, 1 Talent Slot, 10 HP
 1: 2 Talents, (Choose 1: +1 Attack / +1 Defense / Talent +1) Talent,16HP, 3 energy
-2: Access F2 Talents, 22HP, 6 energy
+2: Access Force 2 (F2) Talents, 22 HP, 6 energy
 3: +1 Talent, 28 HP, 9 energy
 Tagline: You've survived the first missions. Now you're trusted to act on your own initiative.
 4:+1 Talent Slot, (Choose 1: +1 Attack / +1 Defense / +1 Talent), 34HP, 12 energy
-5: Access F3 Talents, +1 Talent, 40 HP, 15 energy
+5: Access Force 3 (F3) Talents, +1 Talent, 40 HP, 15 energy
 6: (Choose 1: +1 Attack / +1 Defense /+1 Talent), 46 HP, 18 energy
 Tagline: You are a legend in motion  the Guilds finest. Timelines bend around your choices.
 
 7: Talent slot, +1 Talent, 52 HP, 21 Energy
 8: (Choose 1: +1 Attack / +1 Defense / +1 Talent), 58 HP, 24 Energy
-9: Access F4 Talents, +1 Talent, 64 HP, 27 Energy
+9: Access Force 4 (F4) Talents, +1 Talent, 64 HP, 27 Energy
 10: 70 HP, 30 Energy  Final Guild Rank
 If you improve your Endurance score, the bonus applies retroactively to all levels. For example, at level 3 with a score of (0), my HP is 28. I buy (+1) endurance. The bonus applies to all levels, giving me 32 HP.
 You can switch your talents when you reach a new level.

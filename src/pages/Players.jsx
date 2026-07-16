@@ -60,7 +60,8 @@ const sections = [
   },
   {
     title: 'Weapons',
-    content: weapons
+    content: weapons,
+    cardType: 'weapon'
   },
   {
     title: 'Reputation',
