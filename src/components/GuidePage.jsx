@@ -100,6 +100,20 @@ const skillNames = [
   'vehicle'
 ]
 
+const guideSectionLinks = {
+  concept: '#archetypes',
+  'dice decide uncertain outcomes': '/gm#rolls',
+  gear: '#equipment',
+  reputation: '#reputation',
+  skills: '#skills',
+  stats: '#stats',
+  talents: '#talents'
+}
+
+const standaloneLineLinks = {
+  'Reputation in the world': '#reputation'
+}
+
 const statSkillAliases = {
   str: 'strength',
   dex: 'dexterity',
@@ -317,12 +331,20 @@ function splitCards(content, type) {
 }
 
 function renderInlineText(text) {
-  const labelMatch = text.match(/^([A-Za-z][A-Za-z ]{1,28}(?:\s+\([^)]*\))?)(?::|\s+-)\s*(.+)$/)
+  if (standaloneLineLinks[text]) {
+    return <a href={standaloneLineLinks[text]}>{text}</a>
+  }
+
+  const labelMatch = text.match(/^([A-Za-z][A-Za-z '/-]{1,34}(?:\s+\([^)]*\))?)(?::|\s+-)\s*(.+)$/)
 
   if (labelMatch) {
+    const label = labelMatch[1]
+    const sectionHref = guideSectionLinks[label.toLowerCase()]
+    const renderedLabel = sectionHref ? <a href={sectionHref}>{label}</a> : label
+
     return (
       <>
-        <strong>{labelMatch[1]}:</strong> {labelMatch[2]}
+        <strong>{renderedLabel}:</strong> {labelMatch[2]}
       </>
     )
   }
@@ -351,12 +373,46 @@ function getTextBlockAnchor(sectionTitle, line) {
   return null
 }
 
-function renderTextBlocks(content, sectionTitle) {
+function renderSectionMedia(section) {
+  if (!section.image && !section.download) {
+    return null
+  }
+
+  return (
+    <>
+      {section.image && (
+        <div className="guide-media">
+          <img src={section.image.src} alt={section.image.alt} />
+        </div>
+      )}
+
+      {section.download && (
+        <a
+          className="guide-download-button"
+          href={section.download.href}
+          download={section.download.filename}
+        >
+          {section.download.label}
+        </a>
+      )}
+    </>
+  )
+}
+
+function renderTextBlocks(content, sectionTitle, section) {
   const lines = getLines(content).filter(Boolean)
 
   return (
     <div className="guide-text-blocks">
       {lines.map((line, index) => {
+        if (line === '[character-sheet]') {
+          return (
+            <div key={`${line}-${index}`} className="guide-inline-media">
+              {renderSectionMedia(section)}
+            </div>
+          )
+        }
+
         const next = lines[index + 1] || ''
         const isSubhead =
           line.length < 48 &&
@@ -526,33 +582,21 @@ function buildCardIndex(sections) {
 }
 
 function renderSectionContent(section, cardIndex) {
+  const hasInlineMedia = section.content?.includes('[character-sheet]')
+
   return (
     <>
       {section.content ? (
         section.cardType ? (
           renderCards(section.content, section.cardType, cardIndex)
         ) : (
-          renderTextBlocks(section.content, section.title)
+          renderTextBlocks(section.content, section.title, section)
         )
       ) : (
         <p>{section.body}</p>
       )}
 
-      {section.image && (
-        <div className="guide-media">
-          <img src={section.image.src} alt={section.image.alt} />
-        </div>
-      )}
-
-      {section.download && (
-        <a
-          className="guide-download-button"
-          href={section.download.href}
-          download={section.download.filename}
-        >
-          {section.download.label}
-        </a>
-      )}
+      {!hasInlineMedia && renderSectionMedia(section)}
     </>
   )
 }

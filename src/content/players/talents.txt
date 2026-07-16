@@ -173,7 +173,7 @@ Mechanic: Add your Charisma score and (+1d4) to your initiative check. Use your 
 Trip
 
 Description: Cause the target to trip. It can be part of the attack.
-Mechanic: F2. Target makes an Resiliance 14S or is tripped and has the Prtoned condition. If four-legged or more than 8 tall, get a (+4) defense bonus to avoid the trip.
+Mechanic: F2. Target makes a Resilience 14S or is tripped and has the Prone condition. If four-legged or more than 8 tall, get a (+4) defense bonus to avoid the trip.
 
 AOE:
 These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50), medium (200), long (+200).
@@ -191,7 +191,7 @@ Cost: Attack action.
 
 Flash/Bang:
 Description: Victims are subjected to extreme sound, blast wave, and flash. This causes disorientation.
-Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a Resiliance 16S. If the target makes a successful Resiance save, they can resume their turn as usual. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
+Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a Resilience 16S. If the target makes a successful Resilience save, they can resume their turn as usual. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
 Duration: 1 turn.
 Cost: attack action.
 
@@ -204,7 +204,7 @@ Description: Your senses sharpen toextraordinary levels, allowing you to notice 
 Mechanic: The player becomes more aware of their surroundings. Improve observation skill: (+1d4)/ Force.
 
 Shadowstep:
-Description: Your movements become silent and instictive, making it easier to avoid detection.
+Description: Your movements become silent and instinctive, making it easier to avoid detection.
 Mechanic: The player improves the sneak skill: (+1d4)/ Force.
 
 Silver Tongue:
@@ -212,7 +212,7 @@ Description: Every word carries confidence and charisma. You effortlessly persua
 Mechanic: The player improves the influence skill: (+1d4)/ Force.
 
 Truthsense:
-Description: You instinctively recognize hesitation, deception, and jidden motives,
+Description: You instinctively recognize hesitation, deception, and hidden motives.
 Mechanic: (+d6)/F modifier to observation to determine truth.
 
 Intimidating Presence:
@@ -220,11 +220,11 @@ Description: Your sheer, physical presence radiates menace, making threats impos
 Mechanic: You intimidate as a subset of Influence, using your strength as the stat. Increase (+1d6)/F to intimidate.
 
 Trap Sense:
-Description: You instinctively notice dangerous mechanisms and understand how to disable them, rgardless of their technological or magical origin. This works at any tech level.
+Description: You instinctively notice dangerous mechanisms and understand how to disable them, regardless of their technological or magical origin. This works at any tech level.
 Mechanic: Target improves observation: traps by (+1d6)/F and Technology: remove Traps by (+1d6)/F.
 
 Pathfinder:
-Description: You become an excellent tracker, suvivakist, abd wilderness guide.
+Description: You become an excellent tracker, survivalist, and wilderness guide.
 Mechanic: The target improves the outdoors skill: (+1d4)/ Force.
 
 Technical Expertise:
@@ -232,11 +232,11 @@ Description: Your understanding of machines, electronics, and complex systems re
 Mechanic: The target improves the technology skill: (+1d4)/ Force.
 
 Genius:
-Description: Your mind preocesses information with incredible speed and accuracy.
+Description: Your mind processes information with incredible speed and accuracy.
 Mechanic: The player improves the knowledge skill: (+1d4)/ Force. Max F2.
 
 Transporter:
-Description: Whether behid the wheel, at the controls, or in the pilot;s seat, your reflexes and instinctsmake every vehicle feel like an extension of yourself.
+Description: Whether behind the wheel, at the controls, or in the pilot's seat, your reflexes and instincts make every vehicle feel like an extension of yourself.
 Mechanic: The target improves the Vehicle skill: (+1d4)/ Force. Max F2.
 
 Health:
@@ -398,7 +398,7 @@ Action: attack.
 
 End Talent:
 Description: This power works to end an already existing effect or stop a talent from being used
-Mechanics: The player succeeds if he has a higher force level. 2 beats 1 ECT. Level 4 talents can't be ended. The countering player knows the opponent's force level. This counts as a reaction.
+Mechanics: The player succeeds if he has a higher force level. 2 beats 1, etc. Level 4 talents can't be ended. The countering player knows the opponent's force level. This counts as a reaction.
 Duration: one use
 Cost: reaction
 Far sight/sound:

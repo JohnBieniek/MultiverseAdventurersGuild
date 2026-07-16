@@ -22,7 +22,7 @@ Defense
 
 Defense = 12 + defense bonus + Defense rating
 
-Heroes start with a Defense rating of 1 and a Defense of 13. Defense rating is a score from 1 to 9. Hereos get level 1 for free. Defense ratins are increased by the following table: 2 for 2, 2 for 3, 4 for 4, 5 for 4, 6 for 8, and 8 for 9. Defense can represent various types of armor, a high ability to evade attack. Let's say I wore level-one leather armor. That would make the Defense 13. Defense is a game mechanic. Things like a shield would be a part of that number if you chose. Examples of armor include leather and plate armor. Hides, amulet, off-hand weapon, Kevlar. Leather could be (+3), and plate could be (+1). Your choice of armor type doesn't lessen or increase the Defense. Your Defense could also be an effect caused by your innate ability to dodge attacks.
+Heroes start with a Defense rating of 1 and a Defense of 13. Defense rating is a score from 1 to 9. Heroes get level 1 for free. Defense ratings are increased by the following table: 2 for 2, 2 for 3, 4 for 4, 5 for 4, 6 for 8, and 8 for 9. Defense can represent various types of armor, a high ability to evade attack. Let's say I wore level-one leather armor. That would make the Defense 13. Defense is a game mechanic. Things like a shield would be a part of that number if you chose. Examples of armor include leather and plate armor. Hides, amulet, off-hand weapon, Kevlar. Leather could be (+3), and plate could be (+1). Your choice of armor type doesn't lessen or increase the Defense. Your Defense could also be an effect caused by your innate ability to dodge attacks.
 
 Initiative
 

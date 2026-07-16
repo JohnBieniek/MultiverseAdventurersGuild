@@ -1,30 +1,32 @@
-Each player creates one character (a hero, scoundrel, wizard, cyborg, etc.).
+At the table, the players and GM share the story, but they have different jobs.
+
+Players:
+Each player creates one character: a hero, scoundrel, wizard, cyborg, or anything else that fits the adventure.
 You decide what your character says and does.
-You role-play their personality, goals, and reactions.
+You role-play their personality, goals, choices, and reactions.
+
+The GM:
 Describes the world, locations, people, and dangers.
 Plays all non-player characters (NPCs).
-Decides when dice rolls are needed and what happens as a result.
-You usually choose:
-Concept  Who are you? (gunslinger, knight, hacker, alien)
-Stats  Strength, dexterity, education.
-Skills - sneak, attack, influence
-Talents - Silver Tongue, Ferocious Attack, Aim
-Gear  Weapons, armor, tools.
-Your character sheet is your reference during play.
-Most RPGs follow this rhythm:
-GM describes the situation
-You enter a dusty frontier town at sunset
-Heroes say what they do
-I scan the street for trouble.
-I head into the saloon.
+Decides when dice rolls are needed and describes what happens as a result.
 
-Dice decide uncertain outcomes
-Roll d20 + skill + stat = Basiuc Roll
+You usually choose:
+Concept - Who are you? Gunslinger, knight, hacker, alien, or something stranger.
+Stats - Strength, Dexterity, Education, and the other core traits.
+Skills - Sneak, Attack, Influence
+Talents - Silver Tongue, Ferocious Attack, Aim
+Gear - Weapons, armor, tools.
+Your character sheet is your reference during play.
+[character-sheet]
+
+Most RPGs follow this rhythm:
+GM describes the situation: You enter a dusty frontier town at sunset.
+Heroes say what they do: I scan the street for trouble. I head into the saloon.
+Dice decide uncertain outcomes: Roll d20 + skill + stat = Basic Roll.
+GM narrates the result: You spot armed men watching the door.
+Repeat: This loop continues for exploration, social scenes, and combat.
+
 High roll = success, low roll = failure or complication.
-GM narrates the result
-You spot armed men watching the door.
-Repeat
-This loop continues for exploration, social scenes, and combat.
 
 Dice add chance and tension.
 Rules keep things fair and consistent.

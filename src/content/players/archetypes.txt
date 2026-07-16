@@ -6,21 +6,11 @@ Career Path
 
 Players may move through different archetypes as they develop, such as the Ganger who becomes a Street Samurai. The path can be one or more archetypes. This movement reflects the Hero's progression.
 
-The Information is ordered this way:
+Suggested Scores: When you make a new Hero, assign these starting stat scores: +3, +2, +1, 0, 0, and -1. Use the archetype's Strengths and Weaknesses as a guide. Put +3 in the stat that matters most to the archetype, +2 in the next most important stat, and +1 in a supporting stat. Put -1 in a listed Weakness. The two remaining stats usually stay at 0.
 
-Character Archetype
+Strengths and Weaknesses may list stats, skills, or attack styles. Only the six stats use the starting score array: Strength, Dexterity, Endurance, Intuition, Education, and Charisma. Skills and attack styles tell you where to spend later choices and what kind of actions the archetype is built to do.
 
-Name/definition:
-
-Scores:
-
-Strengths:
-
-Weaknesses:
-
-Preferred talents:
-
-Personality:
+Example: A Barbarian lists Strength as a Strength and Education as a Weakness. A simple starting spread would be Strength +3, Endurance +2, Dexterity +1, Charisma 0, Intuition 0, and Education -1. A player could change that spread if their version of the archetype is different.
 
 Barbarian - You fight with emotion - rage. You may have some skill, but you rely on the rage to get you through. Typically, you come from a primitive background relative to the setting you are playing in.
 
@@ -53,7 +43,7 @@ Connected - You rely on contacts to help you with your bounties. You see every s
 Brainiac: Knowledge is power and you know everything. You are a brilliant problem solver and believe you are an expert on everything.
 
 Scores:
-Strength: Education, Knowledge, Technology, Any Weapon
+Strengths: Education, Knowledge, Technology, Any Weapon
 Weaknesses: Endurance, Attack, Athletics
 Preferred Talents: Hacker, Genius, Detect Talents
 
@@ -98,7 +88,7 @@ Keeper of taboos - You know which rules must not be broken, even when outsiders 
 Commando: You were a part of an elite military unit like the SEALs, SAS, or Spetsnaz. You were the best your military had to offer.
 
 Scores:
-Strength: Dexterity, Shadowstep, Attack, Ranged Weapon
+Strengths: Dexterity, Athletics, Attack, Ranged Weapon
 Weaknesses: Charisma, Knowledge, Vehicle
 Preferred Talents: Aim, Shadowstep, Close Quarter Combat
 
@@ -182,7 +172,7 @@ Bad reputation - You are no longer a cop for a reason: corrupt, brutal, incompet
 
 Plodding - you will usually solve your case, but you move slowly and carefully.
 
-Ex-military - You served in a legitimate military organization for a given country. People enlist for many reasons: patriotism, poverty, learning useful skills, escaping a particular circumstance, or becoming citizens (for those without a legitimate GRIN). Enlistees learn basic combat skills as well as transferable skill sets (computers, mechanics, communication, ECT). Soldiers train mostly with modern firearms.
+Ex-military - You served in a legitimate military organization for a given country. People enlist for many reasons: patriotism, poverty, learning useful skills, escaping a particular circumstance, or becoming citizens (for those without a legitimate GRIN). Enlistees learn basic combat skills as well as transferable skill sets (computers, mechanics, communication, etc.). Soldiers train mostly with modern firearms.
 
 Scores:
 Strengths: Dexterity, Attack, Athletics, Range Weapon

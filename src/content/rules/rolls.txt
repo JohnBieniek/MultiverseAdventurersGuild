@@ -42,7 +42,7 @@ Defense
 
 Weapon & physical attacks
 
-Resiliance
+Resilience
 
 Defense bonus +Str + Dex + End
 
