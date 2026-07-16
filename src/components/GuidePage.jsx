@@ -34,6 +34,7 @@ const fieldLabels = [
   'Mechanic',
   'Mechanics',
   'Scores',
+  'Category',
   'Example Name',
   'Expertise'
 ]

@@ -161,3 +161,11 @@ Expertise: Helps with anomaly recognition, strange sympathy from other altered b
 MPS Enemy - The Multiverse Preservation Society has reason to hate you.
 Example Name: Juno Ward
 Expertise: Attracts anti-MPS allies, alerts you to Preservation Society activity, and marks you as a threat to timeline manipulators.
+
+Masked Legend - People know the symbol, mask, armor, or calling card before they know your real name.
+Example Name: The Glass Falcon
+Expertise: Helps with dramatic entrances, frightening criminals, inspiring civilians, and hiding your identity behind a larger-than-life persona.
+
+Last Witness - You survived an event everyone else wants forgotten.
+Example Name: Vale Ash
+Expertise: Draws investigators, enemies, historians, and survivors who need testimony, confirmation, or the truth no official record contains.
