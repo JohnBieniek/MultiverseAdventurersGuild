@@ -147,7 +147,7 @@ Mechanic: Make a melee attack 5’/ F level. Max 2 levels.
 ?
 ?Multi-attack:
 
-Description: Use this when you want to attack more than once. This can simulate a shotgun, 2-handed weapon, double-tap, burst, or automatic fire, or AOE Talent. You can hit more than one target, but they must be within 10’ of one another. This doesn't stop anyone from firing their weapons on auto or two-weapon fighting. It just means you only hit once.
+Description: Use this when you want to attack more than once. This can simulate a shotgun, two-handed weapon, double-tap, burst, or automatic fire. You can hit more than one target, but they must be within 10 feet of one another. Use AOE when the attack fills an area instead of picking individual targets.
 Mechanic: Make 2 attacks. Roll for each. F3. 3 attacks for F4.
 ?
 ?Offensive Attack
@@ -193,24 +193,16 @@ Mechanic: F2. Target makes a TN 14 Resilience save or be tripped and gain the Pr
 ?
 ?
 AOE:
-These are area-of-effect weapons. Using Multi Attack can simulate this as well. Range is based on the weapon system employing the weapon: thrown (50’), medium (200), long (+200).
-?
-There are 4 shapes of the AOE.
-?
-Ground zero - you drop the AOE at your feet, but not on you. Doesn't require a to-hit roll. Affects all targets in adjacent squares around you.
-?
-Square - You aim an explosive at a square with a TN of 14. If you miss, the device scatters. It misses by 5 feet for every 2 points you miss on the roll. If a device misses, roll a d6. On a 1 or 2, miss a square to the left. 3 and 4 miss up the middle. 5 or 6 misses to the right. Odd on the roll indicates a shorted throw, even if it went too far. The square the explosive lands on and the surrounding 9 squares take full damage, halved on a successful 15T Athletic test.
-?
-Line - affects 9 squares in front of you. No roll needed to hit.
-?
-Cone - hits the first square in front of you, then widens to 2 squares, 3 squares, and 4 squares.
-?
-Frag: Type
-Description: This is the Big Bang. Fragments explode over the area, causing damage. The following types of damage are possible: standard frag, fire, electricity, acid, and ice.
-Mechanic: Targets take (+2d6)/F. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
+Description: You have mastered area-of-effect attacks: grenades, explosives, flamethrowers, spell bursts, shockwaves, and similar weapons that threaten a zone instead of one target.
+Mechanic: Choose a damage type such as standard frag, fire, electricity, acid, or ice. Targets in the affected area take +2d6 damage per Force used. Cost is Force + 3 energy, so Force 2 (F2) costs 7 energy. Minimum Force 2 and access to Force 2 Talents required. You may exclude 1 target from the effect for every 1 additional energy paid.
+Range: Use the weapon or effect delivering the AOE: thrown 50 feet, medium 200 feet, or long 200+ feet.
+Shapes: Choose ground zero, square, line, or cone.
+Ground zero: Drop the AOE at your feet, but not on yourself. No attack roll is required. It affects all targets in adjacent squares around you.
+Square: Aim at a square with a TN 14 attack roll. On a miss, the effect scatters 5 feet for every 2 points you missed by. Roll d6 for direction: 1-2 left, 3-4 straight, 5-6 right. Odd means the throw lands short; even means it goes long. The target square and the surrounding 9 squares take full damage, or half damage on a successful TN 15 Athletics test.
+Line: Affect 9 squares in a straight line in front of you. No attack roll is required.
+Cone: Affect the first square in front of you, then widen to 2 squares, 3 squares, and 4 squares.
 Duration: instant
 Cost: Attack action.
-?
 Flash/Bang:
 Description: Victims are subjected to extreme sound, blast wave, and flash. This causes disorientation.
 Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a TN 16 Resilience save. If the target makes a successful Resiance save, they can resume their turn as usual. The talent costs F+3 energy. So at F2, the attacker would pay 7 energy. Min F2 and access to Force 2 talents. The effect can exclude 1 target for every 1 energy paid.
