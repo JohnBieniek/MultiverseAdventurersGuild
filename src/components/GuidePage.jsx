@@ -554,9 +554,6 @@ function parseCardFields(lines) {
 
 function renderWeaponCard(card) {
   const fields = parseCardFields(card.lines)
-  const primaryLabels = new Set(['Category', 'Damage', 'Concealment'])
-  const primaryFields = fields.filter((field) => primaryLabels.has(field.label))
-  const detailFields = fields.filter((field) => !primaryLabels.has(field.label))
 
   return (
     <article
@@ -567,19 +564,9 @@ function renderWeaponCard(card) {
       <h3>{card.name}</h3>
       {card.description && <p className="guide-card-summary">{card.description}</p>}
 
-      {primaryFields.length > 0 && (
-        <div className="guide-weapon-meta">
-          {primaryFields.map((field) => (
-            <span key={field.label}>
-              <strong>{field.label}:</strong> {field.value}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {detailFields.length > 0 && (
+      {fields.length > 0 && (
         <div className="guide-weapon-details">
-          {detailFields.map((field, index) => (
+          {fields.map((field, index) => (
             field.label ? (
               <p key={`${field.label}-${index}`}>
                 <strong>{field.label}:</strong> {field.value}
