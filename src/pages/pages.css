@@ -382,15 +382,16 @@
 }
 
 .guide-chip-list a {
-  background: rgba(184, 135, 47, 0.16);
-  border-color: rgba(184, 135, 47, 0.32);
-  color: #725014;
+  background: rgba(196, 143, 38, 0.28);
+  border-color: rgba(122, 80, 10, 0.48);
+  color: #4f3207;
   font-weight: bold;
 }
 
 .guide-chip-list a:hover,
 .guide-chip-list a:focus-visible {
-  background: rgba(184, 135, 47, 0.26);
+  background: rgba(196, 143, 38, 0.42);
+  border-color: rgba(122, 80, 10, 0.68);
   outline: none;
 }
 
