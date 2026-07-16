@@ -8,12 +8,12 @@ The Guild is at odds with the Multiverse Preservation Society. For example, the 
 
 Contacts
 
-It's not what you know, but who you know. These are your contacts. You get 3 contacts +/- influence stat. Your contacts can provide work, information, equipment, etc. You can choose them during gameplay.
+Player Contacts: Use the player-facing Contacts list as a menu of NPCs the Heroes might already know. At character creation, each Hero begins with 3 + Charisma Contacts.
 
-Flesh them out. How do you know them? Do you owe/are you owed favors? What is the nature of the relationship?
+Ask each player how the Hero knows the contact, what the contact wants, and whether either side owes a favor. A contact should create a useful door into the mission, not solve the mission by themselves.
 
-Some examples are: a journalist, a cop, a criminal, a bartender.
+Contacts can provide work, information, equipment, introductions, cover stories, favors, and complications. A journalist might surface a lead, a cop might warn the party about heat, a criminal might move restricted gear, and a bartender might know who is lying low.
 
-You can use Gold to obtain information, favors, and more.
+Let Heroes spend Gold or Credits to ask for information, favors, and off-screen help. Price the help by risk, urgency, and how much the contact has to expose themselves.
 
-Your contacts exist throughout the Multiverse. So if you have a bartender contact, you can use them in any setting. They would act similarly in each Multiverse.
+Contacts exist throughout the Multiverse as recurring roles. If a Hero has a bartender contact, you can place a similar bartender in another setting who fills the same dramatic function while fitting the local world.

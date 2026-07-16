@@ -115,6 +115,7 @@ const guideSectionLinks = {
   concept: '#archetypes',
   'dice decide uncertain outcomes': '/gm#rolls',
   gear: '#equipment',
+  'player contacts': '/players#contacts',
   reputation: '#reputation',
   skills: '#skills',
   stats: '#stats',
