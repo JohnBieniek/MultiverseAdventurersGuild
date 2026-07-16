@@ -1,5 +1,6 @@
-Definition: an original model, universal pattern, or perfect example from which other things-like characters, objects, or behaviors - are copied or based.
-These are archetypes used throughout many settings. The idea is to give the player an outline to help build the character. The Hero can pick and choose based on the outlined information or even go in a different direction. After all, the character that goes against type is often more interesting. Players can pull items from other archetypes as well to help in defining their Hero. The players can interpret these archetypes however they want. Two players may have different views. That's what makes this interesting. These choices can be made after the initial tutorial of the 0 level.
+An archetype is a familiar character pattern: a role, attitude, and set of strengths that gives a Hero a clear starting shape. It is not a script. Use it as a launch point, then bend it, combine it, or push against it to make the Hero feel specific.
+
+These archetypes are used throughout many settings. They give players an outline for building a character without locking the Hero into one narrow path. A Hero can follow the listed ideas, borrow from other archetypes, or go in a different direction entirely. The character who goes against type is often the most interesting one. Different players may read the same archetype in different ways, and that is part of what makes them useful. These choices can be made after the initial tutorial of the 0 level.
 
 Career Path: Players may move through different archetypes as they develop, such as the Ganger who becomes a Street Samurai. The path can be one or more archetypes. This movement reflects the Hero's progression.
 
@@ -14,7 +15,7 @@ Barbarian - You fight with emotion - rage. You may have some skill, but you rely
 Scores: Strength +3, Dexterity +1, Endurance +2, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
-Preferred talents: Ferocious Attack, Ablative Armor, Vital Reserve
+Preferred Talents: Ferocious Attack, Ablative Armor, Vital Reserve
 
 Personality: Quick to take offense - all you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
@@ -57,7 +58,7 @@ Cleric - These are your healers. They derive power from worshipping their Deitie
 Scores: Strength 0, Dexterity -1, Endurance +3, Intuition 0, Education +1, Charisma +2
 Strengths: Endurance, Influence, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Athletics, Observation
-Preferred talents: Heal, Ferocious Attack, Change of Fortune
+Preferred Talents: Heal, Ferocious Attack, Change of Fortune
 
 Personality:
 
@@ -102,7 +103,7 @@ Criminal: This is your basic criminal type. They lie, steal, and cheat their way
 Scores: Strength 0, Dexterity +3, Endurance -1, Intuition +1, Education +2, Charisma 0
 Strengths: Dexterity, Technology, Sneak, Any Weapon
 Weaknesses: Endurance, Influence, Outdoors
-Preferred talents: Ambush, Shadowstep, Trap Sense
+Preferred Talents: Ambush, Shadowstep, Trap Sense
 
 Personality:
 
@@ -117,7 +118,7 @@ Druid - You worship nature. You express your worship through your relationship w
 Scores: Strength 0, Dexterity 0, Endurance +1, Intuition +3, Education -1, Charisma +2
 Strengths: Intuition, Outdoors, Influence, Melee Weapon
 Weaknesses: Education, Technology, Vehicle
-Preferred talents: Shapeshift, Pathfinder, Regeneration
+Preferred Talents: Shapeshift, Pathfinder, Regeneration
 
 Personality:
 
@@ -132,7 +133,7 @@ Eco Terrorist - Our planet is a living thing and you were born to protect it. At
 Scores: Strength 0, Dexterity +2, Endurance +1, Intuition +3, Education -1, Charisma 0
 Strengths: Intuition, Outdoors, Sneak, Any Weapon
 Weaknesses: Education, Vehicle, Technology
-Preferred talents: Detect Talents, Ferocious Attack, Disguise Self
+Preferred Talents: Detect Talents, Ferocious Attack, Disguise Self
 
 Personality:
 
@@ -142,7 +143,7 @@ Fanatical - You are right, everyone else is wrong. You believe what you believe 
 
 My cause - this is your pet cause; waters, anti-nuke, whatever.
 
-Ex-Company Man - a person who puts the Company above himself. They are very loyal employees and give up autonomy to the Company. When a Company Man defects, it is a serious tragedy. What did the employer say or do to destroy such loyalty? These Heroes will retain a great deal of information on how the company functions and who works for it. Ex-company men can fill several roles based on what they did for the company. Intelligence/security work and Negotiators are common.
+Ex-Company Man - a person who puts the Company above himself. They are very loyal employees and give up autonomy to the Company. When a Company Man defects, it is a serious tragedy. What did the employer say or do to destroy such loyalty? These Heroes will retain a great deal of information on how the company functions and who works for it. Ex-Company Men can fill several roles based on what they did for the company. Intelligence/security work and Negotiators are common.
 
 Scores: Strength -1, Dexterity +1, Endurance 0, Intuition 0, Education +2, Charisma +3
 Strengths: Charisma, Education, Technology, Range Weapon
@@ -150,16 +151,16 @@ Weaknesses: Strength, Outdoors, Sneak
 Talents: Silver Tongue, Weapon Smuggler, Truthsense
 
 Personality:
-1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-company men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
+1. Loyal - once a Company Man leaves his company, they will become intensely loyal to the team they join. They typically like to work with only one group. Ex-Company Men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
 2. StubbornThey are slow to acknowledge issues with where their loyalties lie. This makes it difficult for them to turn against their corporation and makes them so dangerous when they do.
 3. Ego - Company men see their loyalty as a higher calling. They see themselves as superior to the simple wage slaves.
 
-Ex-cop - You served as a peacekeeping officer for a paramilitary force.
+Ex-Cop - You served as a peacekeeping officer for a paramilitary force.
 
 Scores: Strength -1, Dexterity +2, Endurance 0, Intuition +3, Education +1, Charisma 0
 Strengths: Intuition, Observation, Attack, Range Weapon
 Weaknesses: Strength, Sneak, Outdoors
-Preferred talents: Push, Trip, Heightened Awareness
+Preferred Talents: Push, Trip, Heightened Awareness
 
 Personality:
 
@@ -189,7 +190,7 @@ Face: This is the con artist, influencer, interrogator, negotiator, and fast tal
 Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Any Weapon
 Weaknesses: Strength, Attack, Athletics
-Preferred talents: Silver Tongue, Goad, Tactical Commander
+Preferred Talents: Silver Tongue, Goad, Tactical Commander
 
 Personality:
 
@@ -204,7 +205,7 @@ Fixer: You are the master at getting illicit gear. You have contacts all over an
 Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +2, Education +1, Charisma +3
 Strengths: Charisma, Influence, Observation, Any Melee Weapon
 Weaknesses: Strength, Athletics, Sneak
-Preferred talents: Silver Tongue, Aim, Truthsense
+Preferred Talents: Silver Tongue, Aim, Truthsense
 
 Personality:
 
@@ -234,7 +235,7 @@ Gonzo Journalist - News is your life. You record everything that happens around 
 Scores: Strength -1, Dexterity 0, Endurance 0, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Melee Weapon
 Weaknesses: Attack, Outdoors, Sneak
-Preferred talents: Silver Tongue, Alertness, Ki Body
+Preferred Talents: Silver Tongue, Alertness, Ki Body
 
 Personality:
 
@@ -244,18 +245,18 @@ Famous - People notice you when you are in public. You thrill at the recognition
 
 Connected - your fame has put you in contact with the rich, famous, and powerful. Your contact list reflects this.
 
-Gun Bunny - it's all about the guns. This archetype collects guns. They categorize them. Name them. Have one for every occasion. Even ones they will never use. Guns are a fetish. They are always cleaning them, playing with them, organizing them. And best of all, shooting them. But make no mistake. They could shoot the wings off a fly at 1000 yards.
+Gunslinger - it's all about the guns. This archetype collects guns. They categorize them. Name them. Have one for every occasion. Even ones they will never use. Guns are a fetish. They are always cleaning them, playing with them, organizing them. And best of all, shooting them. But make no mistake. They could shoot the wings off a fly at 1000 yards.
 
 Scores: Strength 0, Dexterity +3, Endurance +1, Intuition +2, Education -1, Charisma 0
 Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
-Preferred talents: Aim, Close Quarter Combat, Weapon Smuggler
+Preferred Talents: Aim, Close Quarter Combat, Weapon Smuggler
 
 Personality:
 
-A gun for every occasion; clear a building, sniping, tuxedo, happy mood 
+A gun for every occasion: clearing a building, sniping, formal parties, happy moods.
 
-Have gun will travel - the gun Bunny will always be armed except for security checkpoints. And they will do anything to subvert these checkpoints.
+Have gun will travel - the Gunslinger will always be armed except for security checkpoints. And they will do anything to subvert these checkpoints.
 
 Calm: they are trained to fire their weapon between breaths for greater accuracy.
 
@@ -300,11 +301,11 @@ Personality:
 
 Deep thinker - Mages believe that their education is the source of their Talents. They approach problems methodically and consider research an integral part of their process.
 
-Combat shy - many mages see combat as a failure on their part to devise a better option. They also see combat as chaotic and an anathema to their ordered lives.
+Combat shy - many Mages see combat as a failure on their part to devise a better option. They also see combat as chaotic and an anathema to their ordered lives.
 
 Superiority Complex - Mages believe that their ability to manipulate the fabric of the universe with spells means they are masters of the universe.
 
-Mercenary - some ex-military move into this archetype. This archetype features combat arms, battle casters, Drivers, medics, and hackers. This archetype is simple - you get paid to fight for someone else's cause.
+Mercenary - some Ex-Military move into this archetype. This archetype features combat arms, battle casters, Drivers, medics, and hackers. This archetype is simple - you get paid to fight for someone else's cause.
 
 Scores: Strength +1, Dexterity +3, Endurance +2, Intuition 0, Education -1, Charisma 0
 Strengths: Dexterity, Attack, Sneak, Range Weapon
@@ -339,7 +340,7 @@ Performer - Performers are floating entertainers. They can be seen on stage or i
 Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Influence, Knowledge, Range Weapon (Performing makes a magical range attack when played)
 Weaknesses: Endurance, Technology, Sneak
-Preferred talents: Buffs, Goad, Tactical Commander
+Preferred Talents: Buffs, Goad, Tactical Commander
 
 Personality:
 
@@ -354,7 +355,7 @@ Private eye/ Investigator - whether you have a police background or are self-tau
 Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
 Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
-Preferred talents: Weapon Smuggler, Silver Tongue, Truthsense
+Preferred Talents: Weapon Smuggler, Silver Tongue, Truthsense
 
 Personality:
 
@@ -394,7 +395,7 @@ Lack of curiosity - You don't know or even care what you are smuggling.
 
 Friends in low places - your work tends to come from criminals. Your contacts tend to be from that group.
 
-Sniper: Your brain is a computer. You are constantly looking at the world in terms of sight lines, windage, range, and humidity. You arrive at your perch by slow, patient, quiet movements. You are invisible death. Most come from a military or Paramilitary background. You could combine an ex-cop, ex-military, or merc with a sniper.
+Sniper: Your brain is a computer. You are constantly looking at the world in terms of sight lines, windage, range, and humidity. You arrive at your perch by slow, patient, quiet movements. You are invisible death. Most come from a military or paramilitary background. You could combine an Ex-Cop, Ex-Military, or Mercenary with a Sniper.
 
 Scores: Strength 0, Dexterity +3, Endurance 0, Intuition +2, Education +1, Charisma -1
 Strengths: Dexterity, Attack, Sneak, Range Attack
@@ -409,12 +410,12 @@ Stealthy - you are a master at hiding.
 
 Accurate - you live by the motto, One shot, one Kill. You never multi-attack, preferring accuracy over volume.
 
-Street doc: a generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a street doc brings down the worst retribution the streets have to offer.
+Street Doc: a generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a Street Doc brings down the worst retribution the streets have to offer.
 
 Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +2, Education +3, Charisma +1
 Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
-Preferred talents: Heal, Critical Hit, Bring the Pain
+Preferred Talents: Heal, Critical Hit, Bring the Pain
 
 Personality:
 

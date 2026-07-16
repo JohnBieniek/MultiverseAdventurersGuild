@@ -278,7 +278,9 @@ function isArchetypeStart(lines, index) {
     return false
   }
 
-  return /^Scores:?$/i.test(nextNonEmptyLine(lines, index))
+  return lines
+    .slice(index + 1, index + 4)
+    .some((line) => /^Scores\s*:/i.test(line))
 }
 
 function isTalentStart(lines, index) {
