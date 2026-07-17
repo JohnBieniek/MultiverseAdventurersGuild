@@ -514,6 +514,19 @@
   gap: 0.45rem;
 }
 
+@media (min-width: 1921px) {
+  .guide-text-blocks .guide-stat-card {
+    display: inline-block;
+    width: calc((100% - 2rem) / 3);
+    margin: 1rem 1rem 1.25rem 0;
+    vertical-align: top;
+  }
+
+  .guide-text-blocks .guide-stat-card:nth-of-type(3n) {
+    margin-right: 0;
+  }
+}
+
 .guide-card-summary {
   margin-bottom: 0.9rem;
   color: #333;
