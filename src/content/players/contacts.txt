@@ -72,11 +72,6 @@ Category: Social and political contacts
 Example Name: Nyra Paddock
 Expertise: Commands followers, reads fanatic politics, offers shelter, and trades access for loyalty.
 
-Prosthetist (cybernetic or magical) - A practical specialist who fits, repairs, and upgrades cybernetic or magical prosthetics when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
-Category: Medical and technical contacts
-Example Name: Orin Quill
-Expertise: Fits prosthetics, repairs damaged replacements, sources specialized parts, and explains risks tied to implants or enchanted limbs.
-
 Demolitions expert - A specialist in explosives, controlled collapses, sabotage, and suspicious devices. They know how to open a wall, drop a bridge, disarm a trap, or explain why everyone should move back another hundred feet.
 Category: Medical and technical contacts
 Example Name: Petra Ravel
@@ -276,6 +271,11 @@ Private investigator - An information broker connected to private investigator c
 Category: Information contacts
 Example Name: Dara Holt
 Expertise: Runs surveillance, finds witnesses, follows money, checks alibis, and connects scattered clues.
+
+Prosthetist (cybernetic or magical) - A practical specialist who fits, repairs, and upgrades cybernetic or magical prosthetics when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
+Category: Medical and technical contacts
+Example Name: Orin Quill
+Expertise: Fits prosthetics, repairs damaged replacements, sources specialized parts, and explains risks tied to implants or enchanted limbs.
 
 Protest organizer - A social and political contact with influence around protest organizer networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
