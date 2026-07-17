@@ -8,6 +8,26 @@ The following stats define a vehicle.
 
 Size: (see chart)
 
+Size/HP/Armaments
+
+(-4) Micro - the size of a bee / 2 HP / none
+
+(-3) Up to the size of 2 loaves of bread / 4 HP / pistol
+
+(-2) The size of a person / 8 HP / medium
+
+(-1) Motorcycle / medium
+
+(0) Car / 20 HP / long
+
+(+1) Minivan or SUV / 30 HP
+
+(+2) Full-size truck, 6-seater airplane, or helicopter / 40 HP
+
+(+3) Semi, mid-sized plane, or attack helicopter / 80 HP
+
+(+4) Full-sized jet / 120 HP
+
 Mode: (ground or flying vehicle)
 
 Str: speed
@@ -23,26 +43,6 @@ All vehicles start with stats of (0). Players can spend experience to buy up the
 GM will determine acceptable sizes for the campaign.
 
 Speed in combat is relative. Out of combat, various modes of travel have their own speeds. Use logic or internet guidelines.
-
-Size/HP/Armaments
-
-(-4) Micro - the size of a bee/2/none
-
-(-3) Up to the size of 2 loaves of bread/4/pistol
-
-(-2) The size of a person/8/medium
-
-(-1) Motorcycle/medium
-
-(0) - Car/20/long
-
-(+1) Minivan/SUV/30
-
-(+2) Full-size truck/6-seater airplane/helicopter/40
-
-(+3) Semi/mid-sized plane/attack helicopter/80
-
-(+4) Full sized jet/120
 
 Speed in combat is relative.
 

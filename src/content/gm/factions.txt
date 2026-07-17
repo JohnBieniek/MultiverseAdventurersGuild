@@ -1,19 +1,335 @@
-Multiverse Adventurers Guild's Mission Statement:
+Factions
 
-To map and preserve timelines in flux.
+It is illegal for Guild members to belong to a faction. Factions are secret networks, rogue philosophies, and hidden agendas inside or near the Guild. They are useful for recurring villains, compromised allies, suspicious mission sponsors, and long-running campaign mysteries.
 
-The Guild has two jobs. Chart world histories and protect timelines.
+Use factions as pressure, not homework. A faction should create strange requests, divided loyalties, suspicious evidence, and missions that feel useful at first but become more dangerous once the Heroes understand who benefits.
 
-The Guild is at odds with the Multiverse Preservation Society. For example, the Society believed T-Kat Uma of the Nima Prefecture was causing a divergent timeline, so they assassinated him. The Guild felt T-Kat was central to the actual timeline, so they prevented the assassination.
+The Archivist Covenant (AC)
 
-Contacts
+Motto: "The timeline remembers everything."
 
-Player Contacts: Use the player-facing Contacts list as a menu of NPCs the Heroes might already know. At character creation, each Hero begins with 3 + Charisma Contacts.
+Secret Goal: The Archivist Covenant believes the multiverse's true timeline has been lost. They want to reconstruct the Primordial Canon by collecting data fragments from across realities.
 
-Ask each player how the Hero knows the contact, what the contact wants, and whether either side owes a favor. A contact should create a useful door into the mission, not solve the mission by themselves.
+What They Want: Prototype memory-extraction devices, quantum recorders, early AI logs, genetic samples from people who should not exist, and holographic or psychic event signatures.
 
-Contacts can provide work, information, equipment, introductions, cover stories, favors, and complications. A journalist might surface a lead, a cop might warn the party about heat, a criminal might move restricted gear, and a bartender might know who is lying low.
+Tells: AC agents over-document missions, keep secondary logs the Guild never asked for, and ask Heroes to retrieve items that seem trivial but oddly specific.
 
-Let Heroes spend Gold or Credits to ask for information, favors, and off-screen help. Price the help by risk, urgency, and how much the contact has to expose themselves.
+GM Uses: Heroes may collect fragments without realizing they are enabling a canon-reconstruction project. AC can oppose the Multiverse Preservation Society while still believing the Guild is too careless.
 
-Contacts exist throughout the Multiverse as recurring roles. If a Hero has a bartender contact, you can place a similar bartender in another setting who fills the same dramatic function while fitting the local world.
+AC Force 1 Operative
+
+Role: Recon and data runner.
+
+Stats: Strength 0, Dexterity +1, Endurance 0, Intuition +2, Education +2, Charisma 0
+
+Defense: 11
+
+Weapon: +1 light pistol or mnemonic baton
+
+HP: 10
+
+Damage: 1d6
+
+Talents: Analyze, Flash Cache
+
+Tactics: Avoids combat and tries to extract information, memories, or mission records.
+
+AC Force 2 Field Curator
+
+Role: Artifact handler and mission controller.
+
+Stats: Strength +1, Dexterity +1, Endurance +1, Intuition +3, Education +3, Charisma +1
+
+Defense: 13
+
+Weapon: +2 shock staff
+
+HP: 18
+
+Damage: 1d8
+
+Talents: Memory Spike, Chronal Insight
+
+Tactics: Uses psychic pressure and timeline knowledge to disable targets instead of killing them.
+
+AC Force 3 Chrono-Archivist
+
+Role: Handler.
+
+Stats: Strength +1, Dexterity +2, Endurance +2, Intuition +4, Education +4, Charisma +1
+
+Defense: 15
+
+Weapon: +3 temporal projector
+
+HP: 26
+
+Damage: 1d10
+
+Talents: Temporal Pause, Rewrite Echo
+
+Tactics: Controls the battlefield with soft time effects and forces Heroes to lose momentum.
+
+The Biocline Initiative (BI)
+
+Motto: "Perfect lineage makes a perfect multiverse."
+
+Secret Goal: Biocline tracks genetic drift across timelines. Its members believe the multiverse collapses when certain bloodlines diverge too far from their intended path.
+
+What They Want: DNA from saviors, tyrants, inventors, mythic heroes, and timeline anomalies. A casual handshake, lost hair sample, or standard medical kit can become the real mission objective.
+
+Tells: BI agents obsess over genealogy, baseline DNA, and anomalies. They carry medical technology above their station and request simple retrieval missions with suspiciously exact requirements.
+
+GM Uses: Heroes may discover that their work lets Biocline clone, alter, or erase bloodlines in other universes. BI can become a villain faction or a morally ugly ally.
+
+BI Force 1 Sample Collector
+
+Role: Stealth extractor.
+
+Stats: Strength 0, Dexterity +2, Endurance 0, Intuition +1, Education +1, Charisma 0
+
+Defense: 12
+
+Weapon: +1 tranquilizer dart gun
+
+HP: 12
+
+Damage: 1d6, plus sleep toxin on a critical hit
+
+Talents: Lift DNA, Burst Step
+
+Tactics: Takes samples, avoids fair fights, and runs when injured.
+
+BI Force 2 Field Biologist
+
+Role: Debuffer and medic.
+
+Stats: Strength +1, Dexterity +2, Endurance +1, Intuition +2, Education +2, Charisma 0
+
+Defense: 14
+
+Weapon: +2 gene-scraper blade
+
+HP: 20
+
+Damage: 1d8
+
+Talents: Genome Shock, Stasis Patch
+
+Tactics: Weakens physical stats and keeps more important BI assets alive.
+
+BI Force 3 Lineage Keeper
+
+Role: Handler.
+
+Stats: Strength +2, Dexterity +3, Endurance +2, Intuition +3, Education +4, Charisma +2
+
+Defense: 16
+
+Weapon: +3 genetic lash
+
+HP: 30
+
+Damage: 1d10
+
+Talents: Bloodline Anchor, Extraction Protocol, Clone Seed
+
+Tactics: Steals samples during combat and becomes more dangerous the longer the scene lasts.
+
+The Recursive Forgers (RF)
+
+Motto: "History is written by those who write the revisions."
+
+Secret Goal: Recursive Forgers manipulate documents, recordings, inscriptions, myths, and digital histories to edit reality through belief.
+
+What They Want: Timeline-editing tools, memetic refractors, propaganda AIs, ancient tablets, prophetic scrolls, holy icons, and any artifact that shapes culture.
+
+Tells: RF agents correct people's statements in conversation, replace mission notes with updated versions, and insist on retrieving the original copy of culturally important objects.
+
+GM Uses: RF works well for social missions, stealth retrieval, forgery investigations, and campaigns where the Heroes realize that the evidence has changed since they last looked.
+
+RF Force 1 Copyist
+
+Role: Infiltrator and document thief.
+
+Stats: Strength -1, Dexterity +1, Endurance 0, Intuition +2, Education +1, Charisma +1
+
+Defense: 11
+
+Weapon: +0 light dagger or inkwand
+
+HP: 9
+
+Damage: 1d6
+
+Talents: Forgery Swap, Minor Rewrite
+
+Tactics: Avoids combat and wins by replacing, revising, or mislabeling key evidence.
+
+RF Force 2 Revisionist
+
+Role: Mid-tier saboteur.
+
+Stats: Strength +1, Dexterity +2, Endurance +1, Intuition +3, Education +2, Charisma +2
+
+Defense: 13
+
+Weapon: +2 memetic injector
+
+HP: 18
+
+Damage: 1d8 psychic
+
+Talents: Rewrite Strike, Artifact Echo
+
+Tactics: Disrupts rolls and creates false items long enough to confuse the scene.
+
+RF Force 3 Codemaster
+
+Role: Handler.
+
+Stats: Strength +1, Dexterity +3, Endurance +2, Intuition +4, Education +4, Charisma +3
+
+Defense: 15
+
+Weapon: +3 quill-driver gauntlet
+
+HP: 24
+
+Damage: 1d10
+
+Talents: Major Revision, Phantom Archive, Cultural Rewrite
+
+Tactics: Forces rerolls, fills the field with false allies, and makes social reality unreliable.
+
+The Quantum Syndicate (QS)
+
+Motto: "What if the best timeline is the one where we profit?"
+
+Secret Goal: The Quantum Syndicate treats the multiverse as a marketplace. They trade weapons, spells, secrets, future knowledge, and contraband across timelines.
+
+What They Want: Weapons before they are invented, spells before they are discovered, cybernetics before they are legal, future war outcomes, disaster forecasts, and supply requisitions they can use as smuggling cover.
+
+Tells: QS agents never take missions unless there is a valuable junk item involved. They know too much about alternate futures and keep caches in dead timelines.
+
+GM Uses: QS can act as recurring enemy merchants, dark-market quest givers, or tempting allies who pay well at the cost of timeline integrity.
+
+QS Force 1 Runner
+
+Role: Courier and scavenger.
+
+Stats: Strength +1, Dexterity +2, Endurance 0, Intuition +1, Education 0, Charisma 0
+
+Defense: 12
+
+Weapon: +1 compact SMG
+
+HP: 13
+
+Damage: 1d6 + 1
+
+Talents: Market Swap, Phase Dash
+
+Tactics: Hits, grabs, trades, and escapes.
+
+QS Force 2 Enforcer
+
+Role: Black-market muscle.
+
+Stats: Strength +2, Dexterity +2, Endurance +2, Intuition +1, Education +1, Charisma 0
+
+Defense: 14
+
+Weapon: +3 chrono-shotgun
+
+HP: 22
+
+Damage: 1d10
+
+Talents: Temporal Buckshot, Illegal Mod
+
+Tactics: Uses brute force with just enough time-tech to stay unpredictable.
+
+QS Force 3 Broker
+
+Role: Handler and escape artist.
+
+Stats: Strength +2, Dexterity +3, Endurance +2, Intuition +3, Education +2, Charisma +3
+
+Defense: 16
+
+Weapon: +3 future-tech revolver
+
+HP: 28
+
+Damage: 1d10 + 2
+
+Talents: Market Prediction, Contraband Supply, Void Trade
+
+Tactics: Avoids decisive losses, calls in disposable help, and escapes before the bill comes due.
+
+The Echo Meridian Circle (EMC)
+
+Motto: "The echoes of the future whisper truths the Guild will not hear."
+
+Secret Goal: EMC believes the multiverse is dying from temporal acoustic collapse. They capture future echoes, prophecies, visions, and psychic shockwaves to prevent a cataclysm.
+
+What They Want: Future-vision siphons, temporal resonance detectors, dreamcatcher circuitry, items destined to cause major events, and people with strong future-echo signatures.
+
+Tells: EMC operatives speak cryptically about destiny, experience deja vu, know things before they happen, and request missions before the Guild officially issues them.
+
+GM Uses: EMC can help or hinder Heroes depending on how they interpret a future echo. Their missions work well when stopping an event may be just as dangerous as allowing it.
+
+EMC Force 1 Whisperer
+
+Role: Support seer.
+
+Stats: Strength -1, Dexterity +1, Endurance 0, Intuition +1, Education +2, Charisma +2
+
+Defense: 11
+
+Weapon: +0 resonant tuning wand
+
+HP: 10
+
+Damage: 1d6 psychic
+
+Talents: Echo Glimpse, Premonition
+
+Tactics: Supports allies, warns them before danger, and rarely fights alone.
+
+EMC Force 2 Echo Adept
+
+Role: Midline support.
+
+Stats: Strength 0, Dexterity +2, Endurance +1, Intuition +2, Education +3, Charisma +2
+
+Defense: 13
+
+Weapon: +2 psychic burst
+
+HP: 18
+
+Damage: 1d8
+
+Talents: Echo Feedback, Echo Shield
+
+Tactics: Removes reactions and protects itself while stronger allies reposition.
+
+EMC Force 3 Time-Singer
+
+Role: Handler.
+
+Stats: Strength 0, Dexterity +3, Endurance +2, Intuition +3, Education +4, Charisma +4
+
+Defense: 15
+
+Weapon: +3 temporal resonance wave
+
+HP: 26
+
+Damage: 1d10 psychic
+
+Talents: Echo Collapse, Foresight, Echo Anchor
+
+Tactics: Shuts down actions, blocks teleportation or time-step effects, and turns future knowledge into battlefield control.

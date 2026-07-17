@@ -15,6 +15,7 @@ import './pages.css'
 const sections = [
   {
     title: 'The Guild',
+    subtitle: 'Welcome to the Gateway to Adventure!',
     content: theGuild
   },
   {

@@ -1,0 +1,268 @@
+Multiverse Adventurers Guild Site Changelog
+
+This changelog summarizes the major content, rules, formatting, parser, and layout updates made while revising the site from the older public version at https://www.multiverseadventurersguild.com/ into the current project state.
+
+
+Core Site Structure and Navigation
+
+- Renamed the reusable guide renderer from GuidePage to Guide because it is a component, not a page.
+- Renamed src/components/GuidePage.jsx to src/components/Guide.jsx.
+- Updated Players, GM, and Rules pages to import and render the Guide component.
+- Renamed the CSS wrapper class from guide-page to guide.
+- Updated the related CSS comment from "Guide Pages" to "Guide component."
+- Removed stale GuidePage references from the source.
+- Changed the browser tab icon to use the G icon from public assets.
+- Tightened guide header spacing so Players, Rules, and GM headers align more consistently with inner section content.
+- Reduced page margins and sidebar whitespace at desktop sizes so reference pages have more usable reading space.
+- Adjusted wide-screen content widths for Players and other guide pages so text and subheader buttons fit better.
+- Tuned huge-resolution widths so pages do not become too wide on very large displays.
+
+
+Guide Parser and Reference Linking
+
+- Removed archetype and talent alias maps from the Guide component.
+- References now link only when the displayed name matches the actual card name.
+- Fixed content references instead of relying on aliases.
+- Updated Halfling Strengths from Stealth to Sneak so it matches the actual skill name.
+- Changed Screamer from Preferred Talent to Preferred Talents so it parses like the other archetypes.
+- Fixed contact parsing so Category, Example Name, and Expertise lines do not become separate cards.
+- Tightened contact card detection so a contact must use the pattern Name - description, followed by Category and Example Name.
+- Fixed the contact parser so Mechanic can be a contact name even though Mechanic is also a field label in talent cards.
+- Verified Locksmith and Mechanic render as separate contact cards.
+- Added support for automatic Fighting Styles grouping in the Weapons section based on Category: Fighting Style.
+
+
+Responsive Layout and Visual Design
+
+- Reduced guide page margins at desktop sizes to provide more room for content.
+- Reduced sidebar padding and gaps, especially around the Players page sidebar.
+- Adjusted subnavigation button sizing for 1920px, below 1920px, above 1920px, and very large screens.
+- Restored smaller subnavigation button sizing at 1920px and lower after widening page content.
+- Increased subnavigation button sizing only above 1920px.
+- Changed footer sizing at wide resolutions.
+- Made weapon cards display multiple per row on desktop:
+  - 1 column on mobile.
+  - 2 columns on desktop.
+  - 3 columns on wider desktop.
+- Added a Fighting Styles header before Fighting Style weapon cards.
+- Changed the Fighting Styles header color from red to black.
+- Set Contact cards to 1 column at 1920px and below.
+- Set Contact cards to 4 columns above 1920px.
+- Set Reputation cards to 3 columns on desktop and 4 columns above 1920px.
+- Made Archetype cards 2 columns on very wide monitors above 1920px.
+- Tried and then reverted multi-column Talent card layout on ultra-wide monitors.
+- Capped Buff Option cards to a maximum of 3 columns.
+- Adjusted Buff Option columns so they use the full available width rather than becoming skinny columns.
+- Changed card field labels such as Description, Mechanic, Minor Version, Major Version, Category, Example Name, and Expertise from red to belt gold, then changed them again to the title-bar green for better readability.
+- Kept Buff Option names such as Genius, Pathfinder, and Silver Tongue in red.
+
+
+Player Section Additions and Organization
+
+- Added a dedicated Reputation section to the Players page.
+- Added player-facing reputation text explaining how reputation shapes how the world reacts to a Hero.
+- Added multiple Reputation cards such as Gentle Healer and Liberator.
+- Added reputation navigation and card rendering support.
+- Updated roleplaying/how-to-play text to include Reputation in the world.
+- Updated the Players page section list to include Reputation.
+- Added a Weapons intro blurb explaining that weapons are both tools and signatures, and that players choose categories mechanically while describing them fictionally.
+- Added a Fighting Styles grouping to the Weapons section.
+
+
+Species Content Updates
+
+- Expanded thin Species descriptions so they are more robust and more useful to players.
+- Expanded Dwarf text with culture around craft, memory, rare materials, repair, and practical results.
+- Expanded Elf text to explain grace, status, presentation, charm, social pressure, and reputation.
+- Expanded Fairy text to explain magic, size, survival, hidden/urban communities, social reading, favors, and mischief.
+- Expanded Gnome text to explain systems, machines, code, traps, infrastructure, prototypes, and social habits.
+- Expanded Halfling text to explain living in a world built too large, mobility, friendliness, stealth, and survival.
+- Expanded Human text to avoid repeating adaptable and ambitious in both the intro and Rep.
+- Revised Human Rep to focus on restlessness, numbers, expansion, impatience, invention, and variety.
+- Expanded Giant text beyond height and population.
+- Added Giant culture around libraries, remote settlements, abandoned districts, wilderness, memory, patience, oral history, and shared knowledge.
+- Revised Giant Rep to focus on assumptions that Giants are slow, violent, and useful mainly for lifting, breaking, or intimidation.
+- Revised Giant Real Deal to highlight gentle, erudite, communal, low-tech, book-loving Giants.
+- Updated Giant Weaknesses from "Charisma (they simply don't relate well to other races), Technology" to "Charisma, Technology."
+- Moved the "do not relate well" idea into Giant Personality as Reserved.
+- Updated Giant Talents to Intimidating Presence, Melee Reach, and Pathfinder.
+- Updated Giant Common Archetypes to Barbarian, Druid, and Shaman.
+- Removed Brainiac from Giant Common Archetypes.
+- Removed Street Doc, Mage, and Street Samurai from Giant Common Archetypes because they fit less well with the revised Giant culture.
+- Revised Orc intro to be more nuanced and less one-note.
+- Revised Orc Rep to frame the harsher language as an outsider stereotype.
+- Revised Orc Real Deal to include builders, workers, parents, soldiers, neighbors, and city life.
+- Revised Cyborg text with clearer identity, bodily experience, Rep, and Real Deal.
+- Added a Rep section to Cyborg.
+- Revised SAI text and made SAI the primary displayed name.
+- Changed "Sai" style naming to "SAI (Sentient AI)."
+- Revised SAI Rep and Real Deal around fear, public myths, rarity, privacy, legal personhood, and survival.
+- Changed SAI Personality "Rude" to "Literal" for a more specific tone.
+- Cleaned Species personality formatting so trait names and text match the rest of the site.
+- Fixed Orc Personality formatting.
+- Made Species subheaders visually clearer so they do not blend into bold personality traits.
+- Updated Species Common Archetypes and Talent links after archetype and talent cleanup.
+
+
+Archetype Content Updates
+
+- Renamed Gun Bunny to Gunslinger.
+- Split Ninja/Monk into two separate archetypes: Ninja and Monk.
+- Made Monk less stealth-focused and more about discipline, endurance, movement, control, and direct close combat.
+- Kept Ninja focused on stealth, patience, and precise violence.
+- Realphabetized archetypes after splitting Ninja and Monk.
+- Fixed Private Eye/Investigator capitalization and intro wording.
+- Fixed Screamer intro capitalization.
+- Changed Driver references toward Screamer where appropriate.
+- Changed Gangers references to Ganger.
+- Changed Merc references to Mercenary.
+- Changed Street doctor/Street Doctor style references to Street Doc where the archetype is intended.
+- Removed Street Doc from Giant talent/archetype mistakes where it appeared as a talent.
+- Fixed archetype references so Street Doc is treated as an archetype, not a talent.
+- Cleaned Ex-Company Man personality formatting by removing numbered list formatting and making traits bold/label-style like the rest of the site.
+- Fixed missing spaces and punctuation in Ex-Company Man, including "StubbornThey."
+- Rewrote repeated personality traits so multiple archetypes do not reuse the same exact text.
+- Replaced repeated Loud and proud wording with more specific traits:
+  - Attention-Seeking for Face.
+  - Relentless Witness for Gonzo Journalist.
+  - Commanding Presence for Performer.
+- Rewrote repeated Jailbird variants for Criminal, Eco Terrorist, and Ganger.
+- Rewrote repeated Charming traits for Face, Fixer, and Spy.
+- Rewrote repeated Rude/Tactless traits for Barbarian/Screamer style entries.
+- Rewrote repeated Compassionate traits for Cleric and Street Doc.
+- Rewrote repeated Stealthy traits for Ninja and Sniper.
+- Fixed Fixer personality labels so they use proper trait names instead of loose sentence punctuation:
+  - Connected.
+  - In Control.
+  - Social Operator.
+- Cleaned capitalization across archetypes where entries began with lowercase words.
+- Replaced awkward "you are what you drive" capitalization with proper Screamer wording.
+- Cleaned general punctuation and consistency in archetype personality blocks.
+
+
+Contacts Updates
+
+- Split Locksmith and Mechanic into separate contacts.
+- Changed "Cybernetic or magical prosthetist" to "Prosthetist (cybernetic or magical)" with proper spelling.
+- Rewrote the Prosthetist description and expertise to fit cybernetic and magical prosthetics.
+- Fixed contact card parsing so contacts no longer split into separate Category and Example Name cards.
+- Fixed Locksmith and Mechanic merging into one card.
+- Replaced generic repeated contact expertise text such as "Provides X services, useful introductions, local warnings, and practical help tied to that field."
+- Rewrote many contact descriptions so they are role-specific instead of template-like.
+- Rewrote Alchemist, Artifact appraiser, Artificer, Caravan master, Claims investigator, Demolitions expert, Exorcist, Expedition outfitter, Ferryman, Fey emissary, Ghost informant, Guild lawyer, Guild quartermaster, Guild recruiter, Hacker, Interdimensional customs liaison, Locksmith, Mechanic, Mission handler, Monster bounty clerk, Monster handler, Necromancer, Pilot, Planar navigator, Poison specialist, Portal technician, Relic dealer, Resurrection specialist, Retired guildmaster, Rival adventurer, Salvager, Ship captain, Spirit medium, Sponsorship agent, Street doctor, Temple priest, Time traveler, Wilderness scout, Witch, and Wizard.
+- Replaced all duplicate contact Example Names.
+- Ensured all 76 contact Example Names have unique full names.
+- Ensured all 76 contact Example Names have unique first names.
+- Ensured all 76 contact Example Names have unique last names.
+- Verified contacts have 76 real headers and 76 category lines.
+- Adjusted contact card layout:
+  - 1 column at 1920px and below.
+  - 4 columns above 1920px.
+
+
+Weapons Updates
+
+- Added an intro blurb explaining weapon categories and fictional weapon descriptions.
+- Added or clarified Fighting Style weapon cards.
+- Added Dual Wield as a Fighting Style.
+- Added Silenced as a Fighting Style.
+- Added Braced as a Fighting Style.
+- Added an automatic Fighting Styles header before Fighting Style cards.
+- Changed the Fighting Styles header color to black.
+- Made weapon cards multi-column on desktop while preserving mobile layout.
+- Cleaned weapon card presentation and field labels.
+
+
+Talents Updates
+
+- Removed "Welcome to the Talented Multiverse" from the Talents intro.
+- Removed the "Overview" heading from the Talents intro.
+- Cleaned the Talents intro sentence "Some could represent better living through superior chemistry: drugs."
+- Replaced it with "They could be cyberwear, spells, specialized training, or chemical enhancements."
+- Standardized talent field labels and subheaders.
+- Changed Talent card subheaders such as Description, Mechanic, Minor Version, Major Version, Duration, and Action to use the title-bar green.
+- Kept Buff Option names red.
+- Standardized Talent timing fields:
+  - Replaced timing-style "Cost: Attack action" entries with "Action: Attack action."
+  - Replaced "Cost: move action" with "Action: Move action."
+  - Replaced "Action: attack." with "Action: Attack action."
+  - Replaced "Cost: reaction" with "Action: Reaction."
+  - Replaced "Cost: 1 minute" with "Action: 1 minute."
+- Reserved Cost language for energy, XP, or other actual costs.
+- Standardized Action punctuation.
+- Standardized Duration punctuation and capitalization.
+- Changed combat durations to "Duration: Combat + 5 minutes."
+- Changed "combat + five minutes" to "Combat + 5 minutes."
+- Changed "instant" to "Instant."
+- Changed "immediate" to "Immediate."
+- Changed "one use" to "One use."
+- Changed "one hour" to "One hour."
+- Converted Heal's extra action explanation into a Note so it does not conflict with the actual Action field.
+- Removed duplicate Action fields from talents.
+- Removed duplicate Duration fields from talents.
+- Verified no duplicate Action or Duration fields remain per talent.
+- Verified no timing-style Cost fields remain in Talents.
+- Capped Buff Option display to a maximum of 3 columns.
+- Adjusted Buff Options so columns stretch to use the full available width.
+- Reverted an experiment that made all Talent cards two columns on ultra-wide monitors.
+
+
+Rules and Character Creation Updates
+
+- Changed the Hero Defense formula from Defense rating x 2 to + Defense rating.
+- Updated players/defenses text to "Defense: 11 + Defense bonus + Defense rating."
+- Updated create-your-hero text to "Defense = 11 + Defense bonus + Defense rating."
+- Updated rules quick reference text to "12 + Defense Bonus + Defense rating."
+- Removed the Athletics clarification blurb from defenses:
+  - "Athletics remains a normal skill for physical tasks such as climbing, jumping, swimming, and other movement challenges. It is not one of your three defenses."
+- Removed the shorter Athletics clarification from create-your-hero.
+- Left vehicle armor multiplier wording alone because it applies to vehicle rules, not Hero Defense rating.
+
+
+Formatting, Capitalization, and Punctuation Cleanup
+
+- Fixed inconsistent capitalization at the start of archetype and personality descriptions.
+- Fixed "personallity" and similar typo issues where found in content.
+- Fixed punctuation and spacing issues across player-facing content.
+- Removed numbered personality lists where the rest of the site uses trait labels.
+- Cleaned bold/subheader presentation so section headers are visually distinct from personality trait names.
+- Removed parenthetical explanations from badge/chip lists.
+- Moved Giant's Charisma explanation out of the Weakness badge and into Personality.
+- Moved archetype Strengths explanations out of badges and into Note lines:
+  - Mad Bomber bombs as Range Weapon.
+  - Mage spirit proxy for Range Attack.
+  - Performer magical range attack through performance.
+  - Screamer drone proxy for Range Attack.
+- Standardized "Preferred Talents" label.
+- Standardized "Sneak" instead of "Stealth" when referring to the actual skill.
+- Standardized "SAI (Sentient AI)" naming.
+- Standardized "Ganger" instead of "Gangers" where the archetype is referenced.
+- Standardized "Screamer" instead of "Driver" where the archetype is referenced.
+- Standardized "Mercenary" instead of "Merc."
+
+
+Component and CSS Improvements
+
+- Added automatic card indexing for exact archetype, talent, subcard, contact, reputation, species, and weapon references.
+- Removed the alias resolver so data quality issues are visible and fixed in content.
+- Improved contact card detection with stricter parser checks.
+- Improved weapon card rendering with group headings.
+- Added helper logic to read card field values for category-based grouping.
+- Added card group heading styling.
+- Added per-card-type grid controls for weapons, contacts, reputations, archetypes, and talent subcards.
+- Changed card field label colors from red to gold, then to title green for legibility.
+- Kept card titles red where appropriate.
+- Kept Buff Option names red.
+- Adjusted guide subcard grid behavior so Buff Options cap at three columns but fill the available space.
+
+
+Validation Performed
+
+- Repeatedly ran production builds with npm.cmd run build after changes.
+- Verified builds passed after parser, content, style, and layout updates.
+- Audited archetype and talent references after alias removal.
+- Verified all archetype and talent references resolve exactly, including Buff Options.
+- Audited contact parsing and confirmed the expected number of contact cards.
+- Audited contact Example Names for duplicate full names, first names, and last names.
+- Audited Talent fields for duplicate Action and Duration entries after normalization.
+- Audited content for leftover timing-style Cost labels after changing them to Action.

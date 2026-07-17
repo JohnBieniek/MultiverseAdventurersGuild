@@ -92,6 +92,10 @@ const standaloneLineLinks = {
   'Reputation in the world': '#reputation'
 }
 
+const forcedInlineSubheads = new Set([
+  'how to navigate the rules'
+])
+
 const statSkillAliases = {
   str: 'strength',
   dex: 'dexterity',
@@ -377,6 +381,12 @@ function getTextBlockAnchor(sectionTitle, line) {
 }
 
 function isInlineSubhead(line, nextLine) {
+  const normalizedLine = line.replace(/\.$/, '').toLowerCase()
+
+  if (forcedInlineSubheads.has(normalizedLine)) {
+    return true
+  }
+
   return (
     line.length < 48 &&
     !line.endsWith('.') &&
@@ -827,7 +837,12 @@ function Guide({ title, intro, sections }) {
             id={slugify(section.title)}
             className="basic-section guide-section"
           >
-            <h2>{section.title}</h2>
+            <h2>
+              {section.title}
+              {section.subtitle && (
+                <span className="guide-section-subtitle">{section.subtitle}</span>
+              )}
+            </h2>
             {renderSectionContent(section, cardIndex)}
           </section>
         ))}

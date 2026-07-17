@@ -318,6 +318,14 @@
   margin-top: 0;
 }
 
+.guide-section-subtitle {
+  display: inline-block;
+  margin-left: 0.75rem;
+  color: #555;
+  font-size: 0.72em;
+  font-weight: 600;
+}
+
 .guide-text-blocks {
   color: #555;
   font-size: 1rem;

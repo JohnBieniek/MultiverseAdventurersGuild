@@ -14,7 +14,7 @@ Here are a few combat modifiers which cost nothing to use:
 
 Flank - (+2) to hit, when you are adjacent and attack an opponent when another Hero is also adjacent to that opponent. Both Heroes can benefit.
 
-Cover (+2) to Defense when making a ranged attack while behind a solid object.
+Cover (+2) to Defense against ranged attacks while behind a solid object.
 
 Threat Response - if you leave an area that another player/enemy can reach, they get a free attack against you if they have a reaction left.
 

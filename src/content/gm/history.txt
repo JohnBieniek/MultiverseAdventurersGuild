@@ -110,15 +110,15 @@ The Mission Board
 
 Operations range from:
 
-Preventing catastrophic Anchor disruption
+- Preventing catastrophic Anchor disruption
 
-Investigating anomalies
+- Investigating anomalies
 
-Escorting critical historical figures
+- Escorting critical historical figures
 
-Countering MPS intervention
+- Countering MPS intervention
 
-Cataloging emergent timelines
+- Cataloging emergent timelines
 
 Each assignment carries risks-including the risk of being overwritten by the timeline itself.
 

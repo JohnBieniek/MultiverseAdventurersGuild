@@ -16,10 +16,10 @@ In combat, each turn lasts 10 seconds.
 
 Status Effects
 
-Prone
+Prone - You are down on the ground. Standing costs 15 feet of movement as part of a move action.
 
-Cover
+Cover - You are protected by a solid object. Cover adds +2 to Defense against ranged attacks when the object is between you and the attack.
 
-Tripped
+Tripped - You fall Prone after failing the required save or check.
 
-Disarm
+Disarm - You drop a held weapon or item.
