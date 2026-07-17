@@ -406,6 +406,20 @@ function isFactionSectionStart(lines, index) {
   return /^The\s+/.test(lines[index]) && /^Motto:/i.test(lines[index + 1] || '')
 }
 
+function parseForceEnergyCost(line) {
+  const match = line.match(/^(Force\s+\d+\s+\(F\d+\)):\s+(\d+)\s+energy sustained,\s+(\d+)\s+energy as a one-shot\.$/i)
+
+  if (!match) {
+    return null
+  }
+
+  return {
+    force: match[1],
+    sustained: match[2],
+    oneShot: match[3]
+  }
+}
+
 function renderSectionMedia(section) {
   if (!section.image && !section.download) {
     return null
@@ -429,6 +443,31 @@ function renderSectionMedia(section) {
         </a>
       )}
     </>
+  )
+}
+
+function renderForceEnergyTable(rows, index) {
+  return (
+    <div key={`force-energy-costs-${index}`} className="guide-table-wrap">
+      <table className="guide-table">
+        <thead>
+          <tr>
+            <th>Force</th>
+            <th>Sustained</th>
+            <th>One-Shot</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.force}>
+              <td>{row.force}</td>
+              <td>{row.sustained} energy</td>
+              <td>{row.oneShot} energy</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -480,6 +519,49 @@ function renderTextBlocks(content, sectionTitle, section) {
     }
 
     const next = lines[index + 1] || ''
+    if (/^Force Energy Costs:?$/i.test(line)) {
+      const tableRows = []
+      let cursor = index + 1
+
+      while (cursor < lines.length) {
+        const row = parseForceEnergyCost(lines[cursor])
+
+        if (!row) {
+          break
+        }
+
+        tableRows.push(row)
+        cursor += 1
+      }
+
+      elements.push(
+        <h3 key={`${line}-${index}`} className="guide-inline-heading">
+          {line.replace(/:$/, '')}
+        </h3>
+      )
+
+      if (tableRows.length > 0) {
+        elements.push(renderForceEnergyTable(tableRows, index))
+        index = cursor - 1
+        continue
+      }
+    }
+
+    if (
+      sectionTitle === 'History' &&
+      line === 'The Guild' &&
+      next === 'To map and preserve timelines in flux'
+    ) {
+      elements.push(
+        <h3 key={`${line}-${index}`} className="guide-inline-heading">
+          {line}
+          <span className="guide-section-subtitle">{next}</span>
+        </h3>
+      )
+      index += 1
+      continue
+    }
+
     if (isInlineSubhead(line, next)) {
       elements.push(
         <h3 key={`${line}-${index}`} className="guide-inline-heading">
