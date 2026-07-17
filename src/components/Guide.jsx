@@ -258,7 +258,7 @@ function isContactStart(lines, index) {
 
   return Boolean(
     /\s+-\s+/.test(line) &&
-      splitTitleLine(line) &&
+      splitTitleLine(line, { allowFieldLabelName: true }) &&
       /^Category:/i.test(nextLine) &&
       lines.slice(index + 2, index + 5).some((line) => /^Example Name:/i.test(line))
   )
