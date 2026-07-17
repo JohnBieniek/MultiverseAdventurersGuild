@@ -67,8 +67,7 @@ const referenceAliases = {
     driver: 'screamer',
     'eco-terrorist': 'eco terrorist',
     gangers: 'ganger',
-    monk: 'ninja/monk',
-    ninja: 'ninja/monk',
+    'ninja/monk': 'ninja',
     thief: 'smuggler',
     merc: 'mercenary'
   },

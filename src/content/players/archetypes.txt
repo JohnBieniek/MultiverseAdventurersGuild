@@ -323,7 +323,7 @@ No honor - The only code is money.
 
 Next best thing - Mercs are always convinced that their next contract will set them up for life.
 
-Ninja/Monk - These are Heroes who favor stealth over all things. They derive their prowess from magical talents. They prefer attacks that don't compromise their stealth.
+Ninja - These are Heroes who favor stealth, patience, and precise violence. They derive their prowess from magical talents and prefer attacks that do not compromise their position.
 
 Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
 Strengths: Strength, Sneak, Athletics, Melee
@@ -337,6 +337,21 @@ Calm - Ninjas always act as if they are in full control over what is going on ar
 Shy - Ninjas live in the shadows. They stay in the background during social situations. They don't like the spotlight.
 
 Stealthy - You are a master at hiding.
+
+Monk - These are disciplined warriors who train the body, mind, and spirit as one weapon. Monks may be religious, philosophical, ascetic, or simply devoted to perfecting themselves through practice. They are less about hiding in shadows and more about control, endurance, movement, and decisive close combat.
+
+Scores: Strength +2, Dexterity +1, Endurance +3, Intuition 0, Education 0, Charisma -1
+Strengths: Endurance, Athletics, Attack, Melee
+Weaknesses: Charisma, Technology, Vehicle
+Preferred Talents: Ki Body, Parry, Wallrunner
+
+Personality:
+
+Disciplined - Monks train constantly and treat self-control as a survival skill.
+
+Centered - You try to stay calm even when the scene turns violent, strange, or overwhelming.
+
+Direct - You prefer honest action over deception. When a problem must be solved, you step forward.
 
 Performer - Performers are floating entertainers. They can be seen on stage or in your local pub. They tell stories with words and music that focus on historical themes. During missions, Performers are noted for supporting their party members using their own special magic. Performers use their performance to attack and the instrument serves as a weapon.
 

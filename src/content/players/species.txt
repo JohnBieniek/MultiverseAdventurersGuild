@@ -132,7 +132,7 @@ Weaknesses: Technology, Strength, Knowledge
 
 Talents: Ambush, Shadowstep, Silver Tongue
 
-Common Archetypes: Smuggler, Ninja/Monk, Performer
+Common Archetypes: Smuggler, Ninja, Monk, Performer
 
 Personality:
 Gregarious - Halflings are very social and the life of a party.
