@@ -283,10 +283,6 @@
     grid-template-columns: minmax(150px, 195px) minmax(0, 1fr);
   }
 
-  .guide-card-layout-weapon .guide-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .guide-item-sidebar {
     padding: 0.45rem;
   }
@@ -310,12 +306,6 @@
     min-height: 42px;
     padding: 0.42rem 0.95rem;
     font-size: 1.14rem;
-  }
-}
-
-@media (min-width: 1440px) {
-  .guide-card-layout-weapon .guide-card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -453,9 +443,21 @@
 .guide-card-group-heading {
   grid-column: 1 / -1;
   margin: 0.75rem 0 0;
-  color: var(--visor-red);
+  color: #111;
   font-size: 1.65rem;
   line-height: 1.15;
+}
+
+@media (min-width: 1024px) {
+  .guide-card-layout-weapon .guide-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .guide-card-layout-weapon .guide-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .guide-info-card {
