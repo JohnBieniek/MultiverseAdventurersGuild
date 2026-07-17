@@ -6,8 +6,6 @@ A drone costs 1500 credits. You choose the size at purchase.
 
 The following stats define a vehicle.
 
-Size: (see chart)
-
 Size/HP/Armaments
 
 (-4) Micro - the size of a bee / 2 HP / none

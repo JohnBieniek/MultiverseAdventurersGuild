@@ -12,12 +12,13 @@
 
 .nav-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: min(96vw, 1680px);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(12px, 1.5vw, 24px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.25rem;
 }
 
 .nav-logo {
@@ -28,6 +29,7 @@
   font-weight: bold;
   color: #fff;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-logo-icon {
@@ -44,7 +46,8 @@
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
+  flex: 0 0 auto;
 }
 
 .nav-item {
@@ -55,6 +58,7 @@
   color: #ecf0f1;
   transition: color 0.3s ease;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
