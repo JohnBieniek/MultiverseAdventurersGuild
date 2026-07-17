@@ -66,8 +66,8 @@ Ablative Armor:
 Description: Decrease incoming damage.
 Mechanic: Reduce 1 point of damage per attack per point of Force. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range. This range choice lasts until the end of combat + 5 minutes.
 Targets: For every 2 additional energy, affect one additional target.
-Duration: combat + 5 minutes
-Cost: move action.
+Duration: Combat + 5 minutes.
+Action: Move action.
 
 Aim
 
@@ -95,8 +95,8 @@ Ground zero: Drop the AOE at your feet, but not on yourself. No attack roll is r
 Square: Aim at a square with a TN 14 attack roll. On a miss, the effect scatters 5 feet for every 2 points you missed by. Roll d6 for direction: 1-2 left, 3-4 straight, 5-6 right. Odd means the throw lands short; even means it goes long. The target square and the surrounding 9 squares take full damage, or half damage on a successful TN 15 Athletics test.
 Line: Affect 9 squares in a straight line in front of you. No attack roll is required.
 Cone: Affect the first square in front of you, then widen to 2 squares, 3 squares, and 4 squares.
-Duration: instant
-Cost: Attack action.
+Duration: Instant.
+Action: Attack action.
 
 Bring the Pain
 
@@ -151,7 +151,7 @@ Mechanic: Add +1d6 per Force used to Observation checks made to determine truth.
 Change of Fortune:
 Description: Grant the target the ability to receive a one-time bonus as a modifier to d20 rolls. Can be taken to modify after rolling.
 Mechanic: Targets can change a TN or Defense up or down by 1d4 x Force x 2. This is a one-time buff. Pay energy equal to the Force used for one target. Pay 1 energy for each additional target.
-Duration: 8 hours
+Duration: 8 hours.
 Action: Attack action.
 
 Close Quarter Combat
@@ -164,12 +164,12 @@ Weapon Smuggler:
 Description: You excel at hiding weapons on your body or slipping them through security.
 Mechanic: Add your Sneak skill to the weapon's concealment TN. Spend Force 1 (F1) per weapon to roll +1d4 and add it to that concealment TN for each affected weapon.
 Duration: 8 hours.
-Action: 1 minute
+Action: 1 minute.
 
 Control Drone:
 Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: Force 1 (F1) to control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone gain +1d4 per Force used to all rolls, up to Force 2 (F2), including Defense. Drones can be operated out to 10 miles per Force used. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted with a TN 14 Observation check. At F2, the drone is the size of a fly and can be spotted with a TN 20 Observation check.
-Cost: Attack action.
-Duration: 8 hours
+Action: Attack action.
+Duration: 8 hours.
 
 Counterstrike
 
@@ -180,8 +180,8 @@ Mechanics: Spend a Force 2 (F2) one-shot to make a free attack. Counts as a reac
 Create Wall:
 Description: Create a wall that takes up a 10-foot space. The wall is 6 inches thick.
 Mechanic: Destroy a 10-foot section by doing damage to the wall. Attacks automatically hit. Each wall section has 20 HP per Force used. Create 2 sections on activation, plus 1 additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
-Duration: 5 minutes
-Action: attack.
+Duration: 5 minutes.
+Action: Attack action.
 
 Critical Hit
 
@@ -197,14 +197,14 @@ Mechanic: Increase your Defense (+1d4) and your attack by (-1d4). This is a free
 Detect life:
 Description: Detect the location of living organisms within the spell radius.
 Mechanic: Detect living creatures within 100 feet. Works through walls and debris. Force 1 (F1).
-Duration: 10 minutes
-Cost: move action.
+Duration: 10 minutes.
+Action: Move action.
 
 Detect Talents:
 Description: Allows the player to observe talents.
 Mechanic: This power has a range of Force squared x 10 feet. A level 2 force talent would cost 4 energy and have a range of 40 feet. This talent uses observation skill. This talent helps identify the talents present and their effect.
-Duration: 10 minutes
-Cost: attack action
+Duration: 10 minutes.
+Action: Attack action.
 
 Disarm:
 Description: Using a ranged or melee weapon, you cause the target to drop their weapon.
@@ -213,14 +213,14 @@ Mechanic: Force 2 (F2) one-shot only. Add +4 Defense to the target. On a success
 Disguise self:
 Description: Target may look like someone else. Target cannot change size, but may change Species within that restriction. Can't conceal weapons.
 Mechanics: Touch target. Force 2 (F2). Others must make a TN 22 Ego save.
-Duration: 8 hours
-Cost: 1 minute
+Duration: 8 hours.
+Action: 1 minute.
 
 Displacement:
 Description: You are not where you seem. Successful attacks miss 50% of the time.
 Mechanic: Force 3 (F3). When an attack hits, roll a d6. On a 1-3, you are hit. On a 4-6, you are missed.
-Duration: combat + 5 minutes
-Cost: Attack action
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Drunken Attack
 
@@ -231,8 +231,8 @@ Mechanic: Force 2 (F2). Your target cannot be set for the charge. You only need 
 End Talent:
 Description: This power works to end an already existing effect or stop a talent from being used.
 Mechanics: The player succeeds if they have a higher Force level. 2 beats 1, etc. Level 4 Talents can't be ended. The countering player knows the opponent's Force level. This counts as a reaction.
-Duration: one use
-Cost: reaction
+Duration: One use.
+Action: Reaction.
 
 Escape:
 Description: Leave a threatened zone safely.
@@ -241,8 +241,8 @@ Mechanic: Force 1 (F1). Not subject to reactive attack.
 Far Sense:
 Description: When using this Talent, choose whether to hear or see at a distance. Players can pay for both simultaneously. The power allows the user to project the spell's distance through any barrier and use the sense. Observation is used.
 Mechanics: This power has a range of Force squared x 100 feet. A Force 2 Talent costs 4 energy and has a range of 400 feet. This Talent uses the Observation skill. Once active in combat, you can use the skill action to make an Observation check.
-Duration: combat + 5 minutes
-Cost: attack action.
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Ferocious Attack
 
@@ -253,20 +253,20 @@ Mechanics: The player buffs the damage by +1d4 per Force used. It can't be combi
 Find secret doors:
 Description: Discover hidden doors and passages.
 Mechanic: Find all secret doors and passages in a room or corridor by spending Force 1 (F1).
-Duration: one hour
+Duration: One hour.
 Action: Skill action.
 
 Flash/Bang:
 Description: Victims are subjected to extreme sound, blast wave, and flash. This causes disorientation.
 Mechanic: Throw the effect like an AOE. Target loses its next turn unless they make a TN 16 Resilience save. If the target makes a successful Resilience save, they can resume their turn as usual. Cost is Force + 3 energy, so Force 2 (F2) costs 7 energy. Minimum Force 2 and access to Force 2 Talents required. The effect can exclude 1 target for every 1 energy paid.
 Duration: 1 turn.
-Cost: attack action.
+Action: Attack action.
 
 Fly:
 Description: Take to the air in combat or travel overland outside combat.
 Minor Version: At Force 1 (F1) or Force 2 (F2), fly in combat at 15 feet + 5 feet per Force used. Duration is combat + 5 minutes.
 Major Version: At Force 3 (F3), fly outside combat at the same speed as the party for 8 hours. In combat, this grants a 30-foot fly speed until combat ends, then reverts to the overland version.
-Cost: Move action.
+Action: Move action.
 
 Follow-on Attack:
 Description: When you drop your opponent, you may attack another enemy in an adjacent square.
@@ -281,8 +281,8 @@ Mechanic: Hero makes an attack using Influence versus the target's Ego. For exam
 Grand Illusion:
 Description: Create an illusion with audio, visual, thermal, and olfactory components based on force. An illusion can occupy a 10 cube.
 Mechanic: Force 1 (F1) creates audio or visual. Force 2 (F2) creates audio and visual. Force 3 (F3) adds thermal details. Force 4 (F4) adds smell. Targets disbelieve the illusion with a TN 12 Observation check, increased by twice the Force used, so an F3 illusion requires a TN 18 save. You use your move action to manipulate the illusion.
-Duration: combat + 5 minutes
-Cost: Attack action.
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Grapple:
 Description: You prevent the target from taking an action, and after the first round, start doing damage.
@@ -298,11 +298,11 @@ Description: Restore hit points to one or more friendly targets.
 Minor Version: At Force 1 (F1) or higher, restore +2d6 hit points per Force used to one touched target.
 Major Version: At Force 2 (F2) or higher, heal all friendly targets in short range for +1d6 + 1 hit point per Force used.
 Range: Touch by default. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
-Action: Heroes can make an attack action and also activate a healing Talent as a move action.
+Note: Heroes can make an attack action and also activate a healing Talent as a move action.
 Out of Combat: Healing HP outside of combat restores the maximum amount, but takes 1 minute to complete per activated healing Talent.
 Targets: For every 2 additional energy, affect one additional target with the minor version.
-Duration: immediate
-Cost: move action.
+Duration: Immediate.
+Action: Move action.
 
 Illusion:
 Description: Illusion Talents can be bought as self-only and then are paid for like one-shots. For 1 additional energy, you can activate at short range; 2 energy at medium range; and 3 energy at long range.
@@ -311,20 +311,20 @@ Implant Thought:
 Description: Give a short order (run away, drop your weapons, let us pass, do nothing). Target follows the implanted thought for the duration of the talent.
 Mechanics: Melee attack unless range increments are paid for. Target is aware of the attack unless the attacker pays an additional 2 energy. Target must make a TN 14 Ego roll to end the effect. Target rolls each turn in combat or every minute outside of combat. Force 2 (F2).
 Duration: 5 minutes.
-Action: Attack action
+Action: Attack action.
 
 Indestructible:
 Description: You are harder to kill.
 Mechanic: Any time you are dropped below 0 HP, you immediately stabilize at +1d4 HP and the Talent ends for that target. Costs Force 2 (F2) plus 1 energy per target. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
 Duration: 8 hours.
-Cost: Move action.
+Action: Move action.
 
 Invisibility:
 Description: You and any objects you carry become invisible. The target can still be heard.
 Minor Version: At Force 2 (F2), others can see you with a TN 26 Observation check. The Talent ends when you make an attack action.
 Major Version: At Force 3 (F3), others can see you with a TN 30 Observation check. Making an attack does not end the Talent.
-Duration: combat + 5 minutes
-Cost: Attack action
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Ki Body
 
@@ -347,8 +347,8 @@ Major Version: At Force 3 (F3), make a melee attack against a target up to 50 fe
 Mind Read:
 Description: Read the surface thoughts of the target.
 Mechanic: Roll a ranged attack versus Ego. Force 1 (F1). The target knows of the attack unless the player spends 2 energy to make it subtle. Talent requires 1 minute of concentration. Ask one question.
-Cost: Move action
-Duration: 10 minutes
+Action: Move action.
+Duration: 10 minutes.
 
 Multi-attack:
 
@@ -358,8 +358,8 @@ Mechanic: Make 2 attacks and roll for each at Force 3 (F3). Make 3 attacks at Fo
 Multiple Image:
 Description: Create images of yourself in combat.
 Mechanic: Create +1d4 images per Force used. Each image uses your Defense to be hit. Each attack that hits may hit you or an image. Roll randomly to determine. An image disappears when it is hit. Maximum Force 2.
-Duration: combat + 5 minutes
-Cost: Attack action.
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Offensive Attack
 
@@ -381,15 +381,15 @@ Mechanic: Move the target away by +3d6 feet per Force used.
 Reduce Movement:
 Description: The area around your target turns to quicksand, making movement difficult. Effective on any terrain. Used to slow down the target.
 Mechanic: Make a standard attack. If you hit, the target loses 50% movement per Force used. Maximum Force 2. Range long.
-Duration: combat + five minutes
-Cost: Attack action.
+Duration: Combat + 5 minutes.
+Action: Attack action.
 
 Regeneration:
 Description: Heal hit points.
 Mechanic: Heal +1d4 hit points per Force used each turn, up to full. You can't stack this Talent with itself. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
 Self-Only: This Talent can be purchased as self-only. If it is, use the one-shot energy price and it only affects you.
-Duration: combat + 5 minutes or until the target drops below 0 HP. Starts at Force 2 (F2).
-Cost: move action
+Duration: Combat + 5 minutes or until the target drops below 0 HP. Starts at Force 2 (F2).
+Action: Move action.
 
 Run
 
@@ -407,7 +407,7 @@ Shapeshift:
 Description: Change into an animal the size of a lion or smaller.
 Mechanics: Using your own scores as the base, you may rearrange your physical scores at activation. You have a natural melee weapon (bite, claw, etc.) that works as a melee weapon (+1d8). Force 2 (F2). It has any Talents you have. If the form has special abilities, you would use the appropriate Talent. If you wanted to fly, you would activate it for the new form. Can pay one-shot costs if it is used only in animal form.
 Duration: 8 hours.
-Cost: attack action
+Action: Attack action.
 
 Suppressive Fire:
 Description: Lay down a field of fire.
@@ -426,15 +426,15 @@ Description: Move instantly from one place to another, from short combat hops to
 Minor Version: At Force 1 (F1) or Force 2 (F2), teleport 40 feet + 10 feet per Force used as a move action. This does not provoke a reactive strike.
 Mass Version: At Force 3 (F3), move targets up to 100 feet in combat. Pay 1 additional energy per extra person. If the target is an enemy, you must make a successful attack roll.
 Major Version: At Force 3 (F3), teleport up to 100 miles outside combat. Pay 1 additional energy per Hero traveling with you.
-Duration: once.
-Cost: Move action for the minor version, attack action for the mass version, or 1 minute of uninterrupted concentration for the major version.
+Duration: Once.
+Action: Move action for the minor version, attack action for the mass version, or 1 minute of uninterrupted concentration for the major version.
 
 Vital Reserve:
 Description: Increase the HP total of the player touched.
 Mechanics: Increase HP by +2d4 + 1 per Force used. These hit points are used first. They can't be healed. Maximum Force 2. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
 Targets: For every 2 additional energy, affect one additional target.
-Duration: combat + 5 minutes
-Cost: Move action
+Duration: Combat + 5 minutes.
+Action: Move action.
 
 Trip
 
@@ -444,5 +444,5 @@ Mechanic: Force 2 (F2). Target must make a TN 14 Resilience save or be tripped a
 Wallrunner:
 Description: This talent allows for running up and down walls in Combat. You may end the turn on a surface other than the ground.
 Mechanic: You can run your movement up walls. Force 2 (F2). Can't run on ceilings.
-Duration: combat + five minutes
-Cost: move action.
+Duration: Combat + 5 minutes.
+Action: Move action.
