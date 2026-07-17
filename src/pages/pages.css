@@ -1,6 +1,7 @@
 .page {
   --visor-red: #b3352d;
   --belt-gold: #b8872f;
+  --belt-gold-text: #8a641d;
   min-height: calc(100vh - 200px);
   padding: 2rem 0;
 }
@@ -450,7 +451,7 @@
 
 @media (min-width: 1024px) {
   .guide-card-layout-contact .guide-card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .guide-card-layout-reputation .guide-card-grid {
@@ -518,7 +519,7 @@
 .guide-card-field > strong {
   display: block;
   margin-top: 0.2rem;
-  color: var(--visor-red);
+  color: var(--belt-gold-text);
   font-size: 1.08rem;
   line-height: 1.2;
 }
@@ -544,7 +545,7 @@
 
 .guide-subcard h4 {
   margin: 0 0 0.5rem;
-  color: var(--visor-red);
+  color: var(--belt-gold-text);
   font-size: 1.08rem;
   line-height: 1.2;
 }

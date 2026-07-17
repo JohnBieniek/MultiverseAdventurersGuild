@@ -254,11 +254,13 @@ function isTalentStart(lines, index) {
 
 function isContactStart(lines, index) {
   const line = lines[index]
+  const nextLine = lines[index + 1] || ''
 
   return Boolean(
     /\s+-\s+/.test(line) &&
-      splitTitleLine(line, { allowFieldLabelName: true }) &&
-      lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
+      splitTitleLine(line) &&
+      /^Category:/i.test(nextLine) &&
+      lines.slice(index + 2, index + 5).some((line) => /^Example Name:/i.test(line))
   )
 }
 

@@ -4,380 +4,380 @@ You begin with 3 + Charisma Contacts.
 
 Alchemist - A field chemist, potion-maker, and reagent expert who can turn strange ingredients into useful answers. Alchemists are especially valuable when a mission leaves the party poisoned, cursed by contact, covered in unknown residue, or carrying something that should not be opened indoors.
 Category: Medical and technical contacts
-Example Name: Pip Rook
+Example Name: Arlen Brisk
 Expertise: Brews potions, identifies reagents, neutralizes chemical hazards, and improvises field mixtures.
 
 Artifact appraiser - A specialist who knows the difference between junk with a dramatic history and an object that could reshape a mission. They can tell what a relic is worth, what it might do, and who might kill to reclaim it.
 Category: Guild-specific contacts
-Example Name: Cato Rey
+Example Name: Bexley Cinder
 Expertise: Identifies relics, estimates value, spots curses, and explains who might want an item back.
 
 Artificer - A builder of enchanted tools, weapon fittings, warded gear, and strange hybrid devices. They are the person to call when magic needs a casing, a battery, a trigger, or three extra safety warnings.
 Category: Medical and technical contacts
-Example Name: Eno Grey
+Example Name: Corin Dusk
 Expertise: Builds enchanted devices, repairs magical gear, tunes unstable items, and sources rare components.
 
 Bartender - An information broker connected to bartender circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Cato Rey
+Example Name: Delia Frost
 Expertise: Shares local gossip, introduces regulars, hides messages, and reads the room.
 
 Border agent - An authority-side contact with access to border agent procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Nix Calder
+Example Name: Eamon Gilt
 Expertise: Explains crossings, travel papers, checkpoint habits, contraband rules, and inspection schedules.
 
 Bureaucrat - An authority-side contact with access to bureaucrat procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Bolt Navarro
+Example Name: Farah Hallow
 Expertise: Finds forms, delays records, speeds approvals, and explains which office actually matters.
 
 Caravan master - A roadwise organizer who moves people and cargo through dangerous territory. They know which routes are watched, which guards are worth hiring, and what a journey will really cost.
 Category: Travel and logistics contacts
-Example Name: Tavi Glass
+Example Name: Garrick Iron
 Expertise: Arranges overland passage, cargo space, guard contracts, route advice, and supply stops.
 
 Cartographer - An information broker connected to cartographer circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Pip Rook
+Example Name: Hester Joss
 Expertise: Finds maps, marks hidden routes, compares terrain reports, and spots missing places.
 
 Claims investigator - A Guild examiner who decides whether a mission report, injury claim, salvage dispute, or bounty payout holds up. They know how Heroes exaggerate, how employers lie, and where the paperwork hides the truth.
 Category: Guild-specific contacts
-Example Name: Imani Vale
+Example Name: Ivo Kestrel
 Expertise: Reviews mission claims, verifies losses, traces fraud, and explains payout disputes.
 
 Corrupt official - An authority-side contact with access to corrupt official procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Tavi Glass
+Example Name: Jessa Lark
 Expertise: Sells permits, buries complaints, warns about raids, and points to bribable offices.
 
 Courier - An information broker connected to courier circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Voss Nine
+Example Name: Kael Morrow
 Expertise: Moves messages, tracks deliveries, knows drop points, and identifies reliable runners.
 
 Crime boss - A street-level operator tied to crime boss work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Gunny Vale
+Example Name: Liora Nox
 Expertise: Controls turf, settles debts, brokers underworld favors, and warns when local heat rises.
 
 Cult defector - An information broker connected to cult defector circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Oren Moss
+Example Name: Merrit Oath
 Expertise: Explains doctrine, names recruiters, identifies rituals, and knows where defectors hide.
 
 Cult leader - A social and political contact with influence around cult leader networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Tomas Wren
+Example Name: Nyra Paddock
 Expertise: Commands followers, reads fanatic politics, offers shelter, and trades access for loyalty.
 
 Prosthetist (cybernetic or magical) - A practical specialist who fits, repairs, and upgrades cybernetic or magical prosthetics when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
 Category: Medical and technical contacts
-Example Name: Tomas Wren
+Example Name: Orin Quill
 Expertise: Fits prosthetics, repairs damaged replacements, sources specialized parts, and explains risks tied to implants or enchanted limbs.
 
 Demolitions expert - A specialist in explosives, controlled collapses, sabotage, and suspicious devices. They know how to open a wall, drop a bridge, disarm a trap, or explain why everyone should move back another hundred feet.
 Category: Medical and technical contacts
-Example Name: Imani Vale
+Example Name: Petra Ravel
 Expertise: Sets charges, disarms explosives, reads blast damage, and predicts structural failure.
 
 Detective - An authority-side contact with access to detective procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Cass Meridian
+Example Name: Quen Sable
 Expertise: Reads crime scenes, checks records, interviews suspects, and follows evidence.
 
 Diplomat - An authority-side contact with access to diplomat procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Kira Dent
+Example Name: Rina Thorn
 Expertise: Opens negotiations, reads protocol, protects face, and translates threats into acceptable language.
 
 Engineer - A designer and problem-solver who understands structures, power systems, machinery, bridges, vehicles, facilities, and large technical plans. An Engineer can tell whether a wall will hold, how to bypass a reactor lockout, where a tunnel is likely to collapse, or what a strange device was built to do.
 Category: Medical and technical contacts
-Example Name: Lani Cross
+Example Name: Silas Umber
 Expertise: Designs repairs, analyzes machinery and structures, identifies weak points, and turns impossible technical problems into workable plans.
 
 Exorcist - A hardened spiritual specialist who deals with possession, hauntings, hostile blessings, and things that should not be sharing a body. They know when a problem needs mercy, force, ritual, or fire.
 Category: Magical and supernatural contacts
-Example Name: Bolt Navarro
+Example Name: Tessa Vane
 Expertise: Identifies possession, prepares rites, names banishing tools, and warns when a haunting is a trap.
 
 Expedition outfitter - A supplier who prepares parties for hostile terrain, long journeys, and missions where the nearest store is several disasters away. They know what gear gets used, what breaks first, and what people forget until it is too late.
 Category: Travel and logistics contacts
-Example Name: Rhea Flint
+Example Name: Ulric Warden
 Expertise: Supplies camps, rations, guides, hazard gear, pack animals, and mission-ready travel kits.
 
 Fence - A street-level operator tied to fence work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Mara Cross
+Example Name: Vela Yarrow
 Expertise: Sells stolen items, appraises black-market goods, and finds quiet buyers.
 
 Ferryman - A waterway guide who knows crossings, currents, hidden docks, and the people who live by tolls and river secrets. A good Ferryman can move a party quietly when roads are watched.
 Category: Travel and logistics contacts
-Example Name: Dorian Flint
+Example Name: Willa Zephyr
 Expertise: Knows crossings, currents, river tolls, quiet landings, and what moves after dark.
 
 Fey emissary - A courtly go-between for fey powers, mortal guests, and bargains with dangerous wording. They know etiquette, taboos, gift law, and the difference between a compliment and a binding promise.
 Category: Magical and supernatural contacts
-Example Name: Sable Dain
+Example Name: Xander Briar
 Expertise: Explains fey etiquette, bargains safely, carries messages, and names promises that should not be made.
 
 Fixer - A broker of jobs, favors, specialists, and introductions. A Fixer knows who needs work done, who can be trusted to do it, who is lying about the payout, and which doors open only when the right name is mentioned.
 Category: Street and underworld contacts
-Example Name: Rook Vellum
+Example Name: Yara Cobalt
 Expertise: Arranges jobs, specialists, illicit introductions, and hard-to-source gear.
 
 Forger - A street-level operator tied to forger work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Cass Meridian
+Example Name: Zane Drift
 Expertise: Creates false papers, seals, credentials, letters, and travel documents.
 
 Getaway driver - A street-level operator tied to getaway driver work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Zero Vale
+Example Name: Anika Ember
 Expertise: Plans escape routes, vehicle swaps, pursuit breaks, and fast extractions.
 
 Ghost informant - A dead source who still has opinions, grudges, and unfinished business. They can overhear old houses, remember forgotten crimes, and point Heroes toward secrets buried with the bodies.
 Category: Magical and supernatural contacts
-Example Name: Dorian Flint
+Example Name: Bram Fox
 Expertise: Reports old secrets, describes death scenes, haunts key places, and remembers buried names.
 
 Guild lawyer - A contract expert who keeps Heroes from being eaten alive by clauses, waivers, fines, and liability boards. They know when the Guild is protecting the team and when it is protecting itself.
 Category: Guild-specific contacts
-Example Name: Vale Ash
+Example Name: Cira Grove
 Expertise: Interprets Guild contracts, handles liability, disputes mission clauses, and protects Heroes from paperwork.
 
 Guild quartermaster - The person between Heroes and the equipment cage. They know what is in stock, what is reserved for favored teams, and what can be signed out if nobody asks too many questions.
 Category: Guild-specific contacts
-Example Name: Elian Voss
+Example Name: Dax Harbor
 Expertise: Issues gear, tracks inventory, finds replacements, and knows what the Guild will quietly lend.
 
 Guild recruiter - A talent scout who knows which hopefuls are ready, which teams are short-handed, and which applicants are trouble in a useful direction. They hear a lot before anyone becomes official.
 Category: Guild-specific contacts
-Example Name: Mikal Stone
+Example Name: Elara Ink
 Expertise: Spots talent, explains entry standards, introduces teams, and knows who is being watched.
 
 Guild representative - A social and political contact with influence around guild representative networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Varo Quinn
+Example Name: Fenn Javelin
 Expertise: Carries Guild authority, smooths local politics, defends mission legitimacy, and manages complaints.
 
 Hacker - A digital intruder, security breaker, and systems ghost who can get into places without crossing the street. They are useful when the lock is software, the witness is a camera, or the truth is buried in a server.
 Category: Medical and technical contacts
-Example Name: Rook Vellum
+Example Name: Gemma Kite
 Expertise: Breaks into systems, erases records, spoofs credentials, and traces signals.
 
 Informant - A street-level operator tied to informant work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Dorian Flint
+Example Name: Holt Ledger
 Expertise: Trades rumors, watches doors, identifies local players, and knows what people are afraid to say aloud.
 
 Interdimensional customs liaison - A specialist in portal crossings, quarantine rules, banned goods, and identity problems between realities. They can explain why a harmless item here is a felony three worlds over.
 Category: Guild-specific contacts
-Example Name: Jonas Pike
+Example Name: Iskra Moon
 Expertise: Handles portal declarations, banned goods, quarantine flags, identity checks, and dimensional paperwork.
 
 Journalist - An information broker connected to journalist circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Tomas Wren
+Example Name: Jory North
 Expertise: Finds leads, verifies rumors, exposes cover-ups, and reaches public sources.
 
 Judge - An authority-side contact with access to judge procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Gunny Vale
+Example Name: Kira Onyx
 Expertise: Explains warrants, rulings, sentences, court politics, and which evidence will survive scrutiny.
 
 Librarian - An information broker connected to librarian circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Mikal Stone
+Example Name: Ludo Prism
 Expertise: Finds books, archives, restricted stacks, citations, and forgotten references.
 
 Locksmith - A lock, key, vault, and access-control expert who understands how security is built and how it fails. They are useful for quiet entry, clean exits, and knowing whether someone else already picked the door.
 Category: Medical and technical contacts
-Example Name: Oren Moss
+Example Name: Mina Quartz
 Expertise: Opens locks, identifies key systems, copies access tools, and spots tampering.
 
 Mechanic - A hands-on repair expert for vehicles, drones, powered armor, field gear, and anything with moving parts. A Mechanic knows what broke, what can be patched for one more mission, and what will explode if someone keeps pushing it.
 Category: Medical and technical contacts
-Example Name: Voss Nine
+Example Name: Niall Rune
 Expertise: Repairs vehicles, drones, armor, and field equipment under pressure.
 
 Merchant prince - A social and political contact with influence around merchant prince networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Juno Ward
+Example Name: Oona Slate
 Expertise: Controls trade networks, arranges credit, applies market pressure, and knows who can be bought.
 
 Mission handler - The Guild contact who turns vague trouble into assigned work. They know the stated objective, the unstated politics, the payout limits, and which briefing details are probably incomplete.
 Category: Guild-specific contacts
-Example Name: Varo Quinn
+Example Name: Pax Timber
 Expertise: Assigns jobs, clarifies objectives, tracks complications, and knows which details were omitted.
 
 Monster bounty clerk - A records specialist who tracks monster contracts, kill confirmations, hazard ratings, and reward disputes. They know which bounties are routine and which ones keep losing teams.
 Category: Guild-specific contacts
-Example Name: Bren Ashfall
+Example Name: Rhea Underhill
 Expertise: Files bounty claims, verifies kills, checks reward tiers, and knows which hunts are underpriced.
 
 Monster handler - A containment and transport expert for dangerous living cargo. They know how to feed, calm, cage, sedate, move, or avoid things that do not fit neatly on a wagon.
 Category: Travel and logistics contacts
-Example Name: Vex Ardent
+Example Name: Soren Vale
 Expertise: Calms dangerous specimens, reads behavior, arranges containment, and knows feeding or transport needs.
 
 Necromancer - A death-magic specialist who studies corpses, ghosts, undead, and the legal gray areas around all three. They can be unsettling, but their answers are often useful.
 Category: Magical and supernatural contacts
-Example Name: Tavi Glass
+Example Name: Talia Wisp
 Expertise: Consults the dead, studies undead, and explains death magic.
 
 Noble - A social and political contact with influence around noble networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Mikal Stone
+Example Name: Uriel Xenon
 Expertise: Opens elite rooms, tracks family rivalries, arranges patronage, and knows which insults matter.
 
 Occult researcher - An information broker connected to occult researcher circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Elian Voss
+Example Name: Vera Yardley
 Expertise: Deciphers symbols, tracks forbidden texts, compares rituals, and identifies occult factions.
 
 Oracle - An information broker connected to oracle circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Imani Vale
+Example Name: Wynn Ashford
 Expertise: Reads omens, frames prophecies, warns of likely costs, and asks the questions Heroes avoid.
 
 Patron - A social and political contact with influence around patron networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Vale Ash
+Example Name: Xenia Black
 Expertise: Funds missions, offers protection, opens doors, and expects results in return.
 
 Pilot - A vehicle or spacecraft operator who knows routes, hazards, fuel, landing rights, and emergency exits. A Pilot can make travel possible when official transport is too slow or too visible.
 Category: Travel and logistics contacts
-Example Name: Selene Orak
+Example Name: Yorin Clay
 Expertise: Flies aircraft or spacecraft, reads hazards, and arranges emergency transport.
 
 Planar navigator - A guide through unstable routes, folded distances, hostile dimensions, and places that punish bad maps. They know which shortcuts are survivable and which ones only look open.
 Category: Travel and logistics contacts
-Example Name: Mara Thorne
+Example Name: Zara Dell
 Expertise: Charts planes, tracks gates, predicts transit hazards, and explains where reality gets thin.
 
 Poison specialist - A toxicologist who understands venoms, alchemical killers, antidotes, sedatives, and suspicious symptoms. They can save a victim, identify an assassin, or prepare something nobody should admit owning.
 Category: Medical and technical contacts
-Example Name: Sister Kael
+Example Name: Alden East
 Expertise: Identifies toxins, provides antidotes, and prepares poisons or sedatives.
 
 Portal technician - A hands-on expert for gates, lanes, anchors, transit locks, and portal failures. They know when a portal is safe, when it is lying, and when it needs to be shut down immediately.
 Category: Medical and technical contacts
-Example Name: Jonas Pike
+Example Name: Briar Fane
 Expertise: Stabilizes portals, diagnoses lane failures, and finds unsafe transit windows.
 
 Prison warden - An authority-side contact with access to prison warden procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Ilyan Voss
+Example Name: Calder Grim
 Expertise: Controls visitation, inmate records, guard routines, contraband routes, and release paperwork.
 
 Private investigator - An information broker connected to private investigator circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Mara Cross
+Example Name: Dara Holt
 Expertise: Runs surveillance, finds witnesses, follows money, checks alibis, and connects scattered clues.
 
 Protest organizer - A social and political contact with influence around protest organizer networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Mara Cross
+Example Name: Eli Ives
 Expertise: Mobilizes crowds, tracks grievances, negotiates demands, and knows when a march will turn dangerous.
 
 Relic dealer - A buyer and seller of old power, half-legal history, and items with owners who may still be looking. They know collectors, curses, provenances, and prices that should make people suspicious.
 Category: Magical and supernatural contacts
-Example Name: Noam Grey
+Example Name: Flora Jett
 Expertise: Buys relics, finds collectors, spots dangerous provenance, and knows which items attract trouble.
 
 Resurrection specialist - A Guild contact for death recovery, revival procedures, clone complications, and the paperwork nobody wants to read after a mission goes bad. They know what can be restored and what comes back changed.
 Category: Guild-specific contacts
-Example Name: Lani Cross
+Example Name: Galen Knox
 Expertise: Handles revival logistics, body recovery, clone issues, and death complications.
 
 Retired adventurer - An information broker connected to retired adventurer circles, public gossip, private records, or specialized knowledge. They help Heroes turn scattered clues into a usable lead before the trail goes cold.
 Category: Information contacts
-Example Name: Jonas Pike
+Example Name: Helia Lux
 Expertise: Shares mission scars, old maps, survival tricks, and names of threats that never stayed dead.
 
 Retired guildmaster - A former Guild leader with old authority, old grudges, and a long memory for decisions everyone else has tried to forget. They know why certain rules exist and who benefited from them.
 Category: Guild-specific contacts
-Example Name: Tomas Wren
+Example Name: Idris Mire
 Expertise: Knows Guild history, buried disputes, old favors, and which traditions still have teeth.
 
 Revolutionary - A social and political contact with influence around revolutionary networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Cato Rey
+Example Name: Juno Nash
 Expertise: Builds cells, moves manifestos, identifies sympathizers, and knows which symbols can spark a crowd.
 
 Rival adventurer - A competing Hero who wants the same jobs, the same glory, or the same revenge. They can be a problem, a measuring stick, or an ally when the threat is bigger than the rivalry.
 Category: Guild-specific contacts
-Example Name: Pip Rook
+Example Name: Keira Oak
 Expertise: Knows competing crews, mission gossip, field tactics, and which rivals might cooperate for a price.
 
 Safecracker - A street-level operator tied to safecracker work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Bolt Navarro
+Example Name: Leif Pike
 Expertise: Opens safes, vaults, sealed boxes, and mechanical security systems.
 
 Salvager - A recovery expert who strips value out of wrecks, ruins, battlefields, and abandoned machines. They know what can be sold, what can be repaired, and what should be left exactly where it is.
 Category: Travel and logistics contacts
-Example Name: Noam Grey
+Example Name: Maura Quest
 Expertise: Finds wrecks, strips useful parts, prices scrap, and knows what ruins are still dangerous.
 
 Ship captain - A commander with a crew, a route, a hold, and opinions about cargo nobody wants inspected. They can move Heroes across seas, stars, or stranger passages if the price and risk make sense.
 Category: Travel and logistics contacts
-Example Name: Cass Meridian
+Example Name: Nico Reed
 Expertise: Provides passage, cargo space, crew gossip, and maritime or starship routes.
 
 Smuggler - A street-level operator tied to smuggler work, criminal favors, and off-book problem solving. They know who controls the local heat, what costs extra, and which deals are traps.
 Category: Street and underworld contacts
-Example Name: Jonas Pike
+Example Name: Opal Stone
 Expertise: Moves people or cargo past checkpoints, patrols, customs, and hostile borders.
 
 Spirit medium - A living bridge to restless spirits, ancestral voices, and places where memory refuses to settle. They can ask the dead questions, but they cannot always control who answers.
 Category: Magical and supernatural contacts
-Example Name: Ilyan Voss
+Example Name: Piers Trace
 Expertise: Contacts spirits, interprets hauntings, negotiates unfinished business, and senses spiritual residue.
 
 Sponsorship agent - A reputation broker who turns Hero work into endorsements, patrons, speaking fees, and image problems. They know which victories sell and which scandals need burying fast.
 Category: Guild-specific contacts
-Example Name: Mara Cross
+Example Name: Quilla Upton
 Expertise: Finds sponsors, negotiates endorsements, protects public image, and monetizes heroic reputation.
 
 Spy handler - An authority-side contact with access to spy handler procedures, records, offices, or institutional rumor. They can explain what the system is doing and where the paperwork, patrols, or politics leave openings.
 Category: Government and authority contacts
-Example Name: Noam Grey
+Example Name: Rowan Vex
 Expertise: Runs assets, creates dead drops, checks cover stories, and warns when surveillance gets close.
 
 Street doctor - An off-record medical contact who treats wounds, infections, implants, and bad decisions without asking for an insurance card. They know how to keep someone alive when a hospital would ask too many questions.
 Category: Medical and technical contacts
-Example Name: Juno Ward
+Example Name: Sabine Wells
 Expertise: Provides off-record treatment, stabilizes wounded Heroes, and sources medical supplies.
 
 Temple priest - A religious contact with access to rites, sanctuary, doctrine, congregations, and sacred records. They can offer comfort, authority, and warnings when faith and politics overlap.
 Category: Magical and supernatural contacts
-Example Name: Pella Sparks
+Example Name: Torin Young
 Expertise: Offers blessings, sanctuary, doctrine, ritual aid, and access to temple records.
 
 Time traveler - A contact with memories, records, or scars from timelines that do not quite match this one. They can warn about patterns, paradoxes, and consequences that have not happened yet.
 Category: Magical and supernatural contacts
-Example Name: Torga Nine-Bells
+Example Name: Una Zale
 Expertise: Spots timeline damage, remembers alternate outcomes, warns about paradox, and knows what cannot be changed.
 
 Union organizer - A social and political contact with influence around union organizer networks, status games, and public pressure. They can open rooms, calm crowds, identify power players, or make a request sound legitimate.
 Category: Social and political contacts
-Example Name: Elian Voss
+Example Name: Viktor Ames
 Expertise: Organizes workers, calls strikes, reads labor politics, and turns workplace anger into leverage.
 
 Wilderness scout - A guide who reads tracks, weather, terrain, and the small signs that keep people alive outside settled places. They can lead the party through country where roads are wishful thinking.
 Category: Travel and logistics contacts
-Example Name: Gunny Vale
+Example Name: Whitney Bloom
 Expertise: Tracks trails, finds water, reads weather, avoids predators, and guides parties through hostile terrain.
 
 Witch - A folk-magic specialist with charms, curses, herb lore, favors, and sharp opinions about foolish bargains. They often know what official mages ignore.
 Category: Magical and supernatural contacts
-Example Name: Cass Meridian
+Example Name: Ysolde Crane
 Expertise: Provides charms, curses, folk magic, herbal lore, and occult warnings.
 
 Wizard - A trained arcane scholar who understands spells, rituals, magical theory, and the expensive ways magic goes wrong. They are useful when the answer is hidden in a formula, grimoire, or ward.
 Category: Magical and supernatural contacts
-Example Name: Selene Orak
+Example Name: Zeke Dawes
 Expertise: Identifies spells, magical theory, arcane risks, and ritual solutions.
