@@ -266,7 +266,8 @@ Intuitive - You synthesize information quickly.
 Mad Bomber - It's all about the boom! You are an expert in demolitions.
 
 Scores: Strength -1, Dexterity +2, Endurance 0, Intuition +1, Education +3, Charisma 0
-Strengths: Education, Technology, Attack, Range Weapon (bombs that act like any Range Weapon)
+Strengths: Education, Technology, Attack, Range Weapon
+Note: Bombs act like a Range Weapon for this archetype.
 Weaknesses: Strength, Influence, Sneak
 Preferred Talents: Technical Expertise, Flash/Bang, Critical Hit
 
@@ -281,7 +282,8 @@ Signature - Every bomb you make has something that is distinctly you. Maybe it's
 Mage - These are your classic spellcasters. They learn their craft through study and use Education. They tend to use items like rings, wands, brooches, and such as magic items. Mages tend to gather in like-minded groups as their magic works uniformly from one Mage to another. Mages tend to have a lot of non-combat talents that they view as spells. Mages will buy more talents and expand their energy points.
 
 Scores: Strength 0, Dexterity +1, Endurance -1, Intuition +2, Education +3, Charisma 0
-Strengths: Education, Knowledge, Observation, Range Attack (Simple proxy - spirit)
+Strengths: Education, Knowledge, Observation, Range Attack
+Note: Mages can use a simple spirit proxy for Range Attack.
 Weaknesses: Endurance, Sneak, Influence
 Preferred Talents: Grand Illusion, Telekinesis, Detect Talents
 
@@ -341,7 +343,8 @@ Stealthy - You move like silence is a weapon and treat being unseen as the first
 Performer - Performers are floating entertainers. They can be seen on stage or in your local pub. They tell stories with words and music that focus on historical themes. During missions, Performers are noted for supporting their party members using their own special magic. Performers use their performance to attack and the instrument serves as a weapon.
 
 Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Charisma +3
-Strengths: Charisma, Influence, Knowledge, Range Weapon (Performing makes a magical range attack when played)
+Strengths: Charisma, Influence, Knowledge, Range Weapon
+Note: Performing makes a magical range attack when played.
 Weaknesses: Endurance, Technology, Sneak
 Preferred Talents: Buffs, Goad, Tactical Commander
 
@@ -371,7 +374,8 @@ World Weary - You are weary from seeing the same terrible things over and over a
 Screamer - You are what you drive. Screamers are masters at operating drones and vehicles. You express yourself in the way you manipulate vehicles. You relate better to tech than to people.
 
 Scores: Strength 0, Dexterity +3, Endurance 0, Intuition +1, Education +2, Charisma -1
-Strengths: Dexterity, Vehicle, Technology, Range Attack (simple proxy: Drone)
+Strengths: Dexterity, Vehicle, Technology, Range Attack
+Note: Screamers can use a drone as a simple proxy for Range Attack.
 Weaknesses: Charisma, Influence, Athletics
 Preferred Talent: Control Drone, Transporter, Technical Expertise
 

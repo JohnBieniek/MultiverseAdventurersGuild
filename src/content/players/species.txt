@@ -110,17 +110,18 @@ The Real Deal: Giants use size because it is the first thing the world understan
 
 Strengths: Strength, Education, Knowledge, Outdoors
 
-Weaknesses: Charisma (they simply don't relate well to other races), Technology
+Weaknesses: Charisma, Technology
 
-Talents: Genius, Intimidating Presence, Melee Reach
+Talents: Intimidating Presence, Melee Reach, Pathfinder
 
-Common Archetypes: Street Doc, Mage, Street Samurai
+Common Archetypes: Barbarian, Druid, Shaman
 
 Personality:
 Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
 Inquisitive - Giants are constantly seeking out knowledge.
 Intimidating - Giants are naturally scary, even when they try not to be.
 Misunderstood - People assume Giants are dumb even when faced with contrary evidence.
+Reserved - Giants often struggle to relate to other Species, especially in crowded or fast-moving social spaces.
 Anti-Tech - They don't like technology and will do all they can to avoid dealing with it.
 
 Halfling - Halflings are a little over 3 feet tall, quick-footed, and easy to underestimate. They live in a world built too large for them, so many learn to move quietly, notice exits, make friends fast, and avoid fair fights. A Halfling Hero might be a cheerful scout, a careful smuggler, a performer, or the person who survives because nobody thought to watch the window.
