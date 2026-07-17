@@ -195,6 +195,8 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -244,6 +246,11 @@
 }
 
 @media (min-width: 1024px) {
+  .guide-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .guide-subnav {
     gap: 0.28rem;
     padding: 0.56rem 0 0.34rem;
