@@ -534,10 +534,15 @@
 
 .guide-subcard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
-  max-width: calc((230px * 3) + (0.75rem * 2));
+}
+
+@media (min-width: 1100px) {
+  .guide-subcard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .guide-subcard {
