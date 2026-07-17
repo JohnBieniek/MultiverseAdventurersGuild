@@ -381,7 +381,7 @@ function getTextBlockAnchor(sectionTitle, line) {
 }
 
 function isInlineSubhead(line, nextLine) {
-  const normalizedLine = line.replace(/\.$/, '').toLowerCase()
+  const normalizedLine = line.replace(/[.:\s]+$/, '').toLowerCase()
 
   if (forcedInlineSubheads.has(normalizedLine)) {
     return true
@@ -391,10 +391,19 @@ function isInlineSubhead(line, nextLine) {
     line.length < 48 &&
     !line.endsWith('.') &&
     !line.includes(',') &&
+    !/^[-+*]\s/.test(line) &&
     !/^[-+]?[\d(]/.test(line) &&
     !/^Description|Mechanic/i.test(line) &&
     nextLine.length > 0
   )
+}
+
+function isFactionStatBlockStart(line) {
+  return /^[A-Z]{2,4}\s+Force\s+\d+\s+/.test(line)
+}
+
+function isFactionSectionStart(lines, index) {
+  return /^The\s+/.test(lines[index]) && /^Motto:/i.test(lines[index + 1] || '')
 }
 
 function renderSectionMedia(section) {
@@ -423,43 +432,77 @@ function renderSectionMedia(section) {
   )
 }
 
+function renderFactionStatCard(name, lines, index) {
+  return (
+    <article key={`${name}-${index}`} className="guide-info-card guide-stat-card">
+      <h3>{name}</h3>
+      <div className="guide-card-body">
+        {lines.map((line, lineIndex) => (
+          <p key={`${line}-${lineIndex}`}>{renderInlineText(line)}</p>
+        ))}
+      </div>
+    </article>
+  )
+}
+
 function renderTextBlocks(content, sectionTitle, section) {
   const lines = getLines(content).filter(Boolean)
+  const elements = []
 
-  return (
-    <div className="guide-text-blocks">
-      {lines.map((line, index) => {
-        if (line === '[character-sheet]') {
-          return (
-            <div key={`${line}-${index}`} className="guide-inline-media">
-              {renderSectionMedia(section)}
-            </div>
-          )
-        }
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index]
 
-        const next = lines[index + 1] || ''
-        if (isInlineSubhead(line, next)) {
-          return (
-            <h3 key={`${line}-${index}`} className="guide-inline-heading">
-              {line}
-            </h3>
-          )
-        }
+    if (sectionTitle === 'Factions' && isFactionStatBlockStart(line)) {
+      const cardLines = []
+      let cursor = index + 1
 
-        const anchor = getTextBlockAnchor(sectionTitle, line)
+      while (
+        cursor < lines.length &&
+        !isFactionStatBlockStart(lines[cursor]) &&
+        !isFactionSectionStart(lines, cursor)
+      ) {
+        cardLines.push(lines[cursor])
+        cursor += 1
+      }
 
-        return (
-          <p
-            key={`${line}-${index}`}
-            id={anchor || undefined}
-            className={anchor ? 'guide-linked-entry' : undefined}
-          >
-            {renderInlineText(line)}
-          </p>
-        )
-      })}
-    </div>
-  )
+      elements.push(renderFactionStatCard(line, cardLines, index))
+      index = cursor - 1
+      continue
+    }
+
+    if (line === '[character-sheet]') {
+      elements.push(
+        <div key={`${line}-${index}`} className="guide-inline-media">
+          {renderSectionMedia(section)}
+        </div>
+      )
+      continue
+    }
+
+    const next = lines[index + 1] || ''
+    if (isInlineSubhead(line, next)) {
+      elements.push(
+        <h3 key={`${line}-${index}`} className="guide-inline-heading">
+          {line}
+        </h3>
+      )
+      continue
+    }
+
+    const anchor = getTextBlockAnchor(sectionTitle, line)
+
+    elements.push(
+      <p
+        key={`${line}-${index}`}
+        id={anchor || undefined}
+        className={anchor ? 'guide-linked-entry' : undefined}
+      >
+        {renderInlineText(line)}
+      </p>
+    )
+  }
+
+  return <div className="guide-text-blocks">{elements}</div>
 }
 
 function renderChip(label, item, cardIndex) {

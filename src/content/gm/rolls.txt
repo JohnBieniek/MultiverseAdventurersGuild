@@ -1,3 +1,5 @@
+Basic Roll
+
 The idea behind the game is to spend more time playing and less time going through the rules. The central dynamic of target number (TN) allows the GM to quickly factor in difficulty. TN modifiers are circumstantial. This also limits metagaming because it's not written down; it's in the GM's head. The key is that modifiers are determined by the GM, not by specific rules. This streamlines play.
 
 The following dynamic is the Basic Roll.

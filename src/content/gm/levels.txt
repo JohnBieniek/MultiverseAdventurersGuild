@@ -32,4 +32,36 @@ For experience, you pay for each increase. To achieve a stat score of (+3) from 
 
 Level
 
-See Level progression under The Basic Heroes Handbook.
+Level increases with every 10 XP. Players spend XP when they want, including in the middle of a mission. For every 10 XP, a Hero gains a level and certain advantages. They do not pay XP for the level benefits themselves.
+
+HP = the base HP a Hero has at each level before Endurance is applied. Add the Hero's Endurance score once for each level they have, including level 0. Slots indicate how many combat Talents they can have active at any given time.
+
+Force Access Rule
+
+Heroes cannot activate or purchase Talents of a Force higher than their level allows.
+
+0: Access Force 1 (F1) Talents, 1 Talent Slot, 10 HP
+
+1: 2 Talents, choose 1: +1 Attack, +1 Defense, or +1 Talent; 16 HP, 3 Energy
+
+2: Access Force 2 (F2) Talents, 22 HP, 6 Energy
+
+3: +1 Talent, 28 HP, 9 Energy
+
+4: +1 Talent Slot, choose 1: +1 Attack, +1 Defense, or +1 Talent; 34 HP, 12 Energy
+
+5: Access Force 3 (F3) Talents, +1 Talent, 40 HP, 15 Energy
+
+6: Choose 1: +1 Attack, +1 Defense, or +1 Talent; 46 HP, 18 Energy
+
+7: +1 Talent Slot, +1 Talent, 52 HP, 21 Energy
+
+8: Choose 1: +1 Attack, +1 Defense, or +1 Talent; 58 HP, 24 Energy
+
+9: Access Force 4 (F4) Talents, +1 Talent, 64 HP, 27 Energy
+
+10: 70 HP, 30 Energy, final Guild rank
+
+Endurance increases are retroactive. If a Hero improves Endurance, apply the new bonus to all levels they already have.
+
+Heroes can switch Talents when they reach a new level.

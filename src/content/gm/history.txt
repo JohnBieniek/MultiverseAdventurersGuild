@@ -1,4 +1,4 @@
-History of the Guild
+The Guild
 
 "To map and preserve timelines in flux."
 
@@ -108,17 +108,7 @@ Groups of diverse operatives: cybernetic soldiers, knights, witches, pilots, sha
 
 The Mission Board
 
-Operations range from:
-
-- Preventing catastrophic Anchor disruption
-
-- Investigating anomalies
-
-- Escorting critical historical figures
-
-- Countering MPS intervention
-
-- Cataloging emergent timelines
+Operations range from preventing catastrophic Anchor disruption, investigating anomalies, escorting critical historical figures, countering MPS intervention, and cataloging emergent timelines.
 
 Each assignment carries risks-including the risk of being overwritten by the timeline itself.
 

@@ -506,6 +506,14 @@
   line-height: 1.15;
 }
 
+.guide-stat-card {
+  margin: 1rem 0 1.25rem;
+}
+
+.guide-stat-card .guide-card-body {
+  gap: 0.45rem;
+}
+
 .guide-card-summary {
   margin-bottom: 0.9rem;
   color: #333;
