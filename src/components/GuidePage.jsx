@@ -239,7 +239,7 @@ function isFieldLabel(label) {
   return fieldLabels.some((field) => field.toLowerCase() === label.toLowerCase())
 }
 
-function splitTitleLine(line) {
+function splitTitleLine(line, { allowFieldLabelName = false } = {}) {
   const match = line.match(/^(.{2,45}?)(?:\s+-\s+|:\s+)(.+)$/)
 
   if (!match) {
@@ -248,7 +248,7 @@ function splitTitleLine(line) {
 
   const name = match[1].trim().replace(/:$/, '')
 
-  if (isFieldLabel(name)) {
+  if (!allowFieldLabelName && isFieldLabel(name)) {
     return null
   }
 
@@ -302,7 +302,7 @@ function isTalentStart(lines, index) {
 
 function isContactStart(lines, index) {
   return Boolean(
-    splitTitleLine(lines[index]) &&
+    splitTitleLine(lines[index], { allowFieldLabelName: true }) &&
       lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
   )
 }
@@ -351,7 +351,7 @@ function splitCards(content, type) {
           lines: []
         }
       } else {
-        const title = splitTitleLine(line)
+        const title = splitTitleLine(line, { allowFieldLabelName: type === 'contact' })
         activeCard = {
           name: title.name,
           description: title.description,

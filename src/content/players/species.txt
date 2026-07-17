@@ -7,12 +7,12 @@ The Primary Species for the Multiverse are: Giant, Troll, Orc, Human, Elf, Dwarf
 Player Species give no mechanical bonuses ever.
 Species influences items, personality, roleplay, and TN adjustments at GM discretion.
 
-Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your Cyberwear is Hard Wired.
+Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your cyberwear is hardwired.
 The Real Deal: Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
 
 Strengths: Strength, Technology, Endurance
 
-Weaknesses - Dexterity, Charisma
+Weaknesses: Dexterity, Charisma
 
 Talents: Ferocious Attack, Intimidating Presence, Ablative Armor
 
@@ -20,13 +20,13 @@ Common Archetypes: Street Samurai, Merc, Sniper
 
 Personality:
 Dehumanized - The lack of real flesh leaves you feeling disembodied from the world around you. You struggle to connect with people.
-Reckless - you don't feel pain other than an indicator on your heads-up display. Because of this, you don't think about the consequences of entering dangerous places like combat.
+Reckless - You don't feel pain other than an indicator on your heads-up display. Because of this, you don't think about the consequences of entering dangerous places like combat.
 
-Dwarf - dwarves are over 4 feet tall. They are thick of build.
+Dwarf - Dwarves are over 4 feet tall. They are thick of build.
 
 Rep: Dwarves are thought to be motivated by precious metals and gemstones. They are considered hard workers.
 
-The Real Deal: Dwarves excel at tech. They horde precious metals and jewels. Not for accumulating wealth but for use in their tech designs.
+The Real Deal: Dwarves excel at tech. They hoard precious metals and jewels, not for accumulating wealth but for use in their tech designs.
 
 Strengths: Strength, Endurance, Technology
 
@@ -36,12 +36,12 @@ Talents: Technical Expertise (R)
 
 Common Archetypes: Street Doc, Ex-Military, Driver
 
-Personality.
-Hard worker - obsessed with their creations, they will work long hours.
-Social butterfly - dwarves are great storytellers and revel in social situations.
-Stubborn - they say it's easier to convince a river to change its course than a dwarf to change its mind
+Personality:
+Hard worker - Obsessed with their creations, they will work long hours.
+Social butterfly - Dwarves are great storytellers and revel in social situations.
+Stubborn - They say it's easier to convince a river to change its course than a dwarf to change its mind.
 
-Elves- elves are slightly shorter than humans and slight of build. Elves are the prettiest of the races and they know it.
+Elf - Elves are slightly shorter than humans and slight of build. Elves are the prettiest of the races and they know it.
 
 Rep: Elves are elegant and charming. They get along with everyone and are universally admired.
 
@@ -55,14 +55,14 @@ Talents: Silver Tongue (R), Goad
 
 Common Archetypes: Shaman, Face, Ex-Company Man, Spy
 
-Personality.
-Haughty - any elf you ask would deny this. Most secretly (or not so secretly) believe that they were born to rule the world.
-Dark side - there is a dark element to every elf. A side they hide from the world. This side covets money and power.
-Don't play well with others - they are always looking for an edge, even against their allies.
+Personality:
+Haughty - Any elf you ask would deny this. Most secretly (or not so secretly) believe that they were born to rule the world.
+Dark side - There is a dark element to every elf, a side they hide from the world. This side covets money and power.
+Don't play well with others - They are always looking for an edge, even against their allies.
 
-Fairy: This race is 3 feet tall and considered cute by most people. They are seen as happy, free-spirited, and nature-oriented. Some think they are a subspecies of Elf. Less than 1% of the population is faerie. They tend to live in the wilderness or in parks in urban areas. They are the most magical species.
+Fairy - This Species is 3 feet tall and considered cute by most people. They are seen as happy, free-spirited, and nature-oriented. Some think they are a subspecies of Elf. Less than 1% of the population is fairy. They tend to live in the wilderness or in parks in urban areas. They are the most magical Species.
 
-Rep: Their size and ephemeral nature lead most people to not take them seriously. A faerie would be deeply offended to be thought of as a subspecies of Elf. Faeries have a natural distrust of elves because they often feel they are competing for similar resources. Most Urban Faeries make their living utilizing their magic knowledge.
+Rep: Their size and ephemeral nature lead most people to not take them seriously. A fairy would be deeply offended to be thought of as a subspecies of Elf. Fairies have a natural distrust of elves because they often feel they are competing for similar resources. Most urban Fairies make their living utilizing their magic knowledge.
 
 The Real Deal: Their small size makes it difficult to survive in the real world. They tend to be mischievous in a passive-aggressive way.
 
@@ -74,13 +74,13 @@ Talents: Fly, Reduce Movement, Silver Tongue, Detect Talents
 
 Common Archetypes: Shaman, Eco Terrorist
 
-Personality.
-Mischievous - Faeries enjoy practical jokes. The type will depend on how much they like the victim.
-Magical - Faeries are very magical beings. Most of their items would be magical.
-One with nature: you are completely at home in natural settings.
-Charming - creatures of the wild have natural charm.
+Personality:
+Mischievous - Fairies enjoy practical jokes. The type will depend on how much they like the victim.
+Magical - Fairies are very magical beings. Most of their items would be magical.
+One with nature - You are completely at home in natural settings.
+Charming - Creatures of the wild have natural charm.
 
-Gnomes: they are 3 feet tall, thin tinkerers. They love technology: creating it, modifying it, and using it. Their items are technology-related.
+Gnome - Gnomes are 3 feet tall, thin tinkerers. They love technology: creating it, modifying it, and using it. Their items are technology-related.
 
 Rep: They are often more interested in interacting with technology than with people. They eschew magical solutions in favor of Technology. They love overly complicated technological devices.
 
@@ -92,14 +92,14 @@ Weaknesses: Charisma, Outdoors, Intuition
 
 Talents: Technical Expertise, Control Drone, Hacker
 
-Common Archetypes: Driver, Hacker, Mad Bomber.
+Common Archetypes: Driver, Hacker, Mad Bomber
 
 Personality:
-Driven - when a Gnome gets involved in a project, they will pursue it until completion.
-Curious - they are excellent researchers, craving knowledge that may help them problem-solve a building project.
-Unemotional - they don't believe emotions serve a purpose. They believe all the answers to all problems are a result of deep thinking
+Driven - When a Gnome gets involved in a project, they will pursue it until completion.
+Curious - They are excellent researchers, craving knowledge that may help them problem-solve a building project.
+Unemotional - They don't believe emotions serve a purpose. They believe all the answers to all problems are a result of deep thinking.
 
-Giants: Giants are over 8 feet tall. Less than 5% of the population are Giants.
+Giant - Giants are over 8 feet tall. Less than 5% of the population are Giants.
 
 Rep: Giants are fierce and dangerous fighters. Their size is intimidating.
 
@@ -113,13 +113,14 @@ Talents: Genius, Intimidating Presence, Melee Reach
 
 Common Archetypes: Street Doc (Talents), Mage, Street Samurai
 
-Personality: Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
-Inquisitive - giants are constantly seeking out knowledge.
-Intimidating - giants are naturally scary, even when they try not to be.
-Misunderstood - people assume giants are dumb even when faced with contrary evidence.
-Anti-Tech: They don't like technology and will do all they can to avoid dealing with it.
+Personality:
+Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
+Inquisitive - Giants are constantly seeking out knowledge.
+Intimidating - Giants are naturally scary, even when they try not to be.
+Misunderstood - People assume Giants are dumb even when faced with contrary evidence.
+Anti-Tech - They don't like technology and will do all they can to avoid dealing with it.
 
-Halfling- They are 3+ feet tall and round. They use their stealth to protect themselves from the outsized world around them. As such, they favor stealth and ranged weapons.
+Halfling - They are 3+ feet tall and round. They use their stealth to protect themselves from the outsized world around them. As such, they favor stealth and ranged weapons.
 
 Rep: Halflings are gregarious, lovers of food and parties, and often frivolous.
 
@@ -134,9 +135,9 @@ Talents: Ambush, Shadowstep, Silver Tongue
 Common Archetypes: Thief, Ninja/Monk, Performer
 
 Personality:
-Gregarious - Halflings are very social and the life of a party
-Friendly - they believe that everyone they meet is a friend.
-Naive - they view the world as full of infinite possibilities and are devastated when this is not true.
+Gregarious - Halflings are very social and the life of a party.
+Friendly - They believe that everyone they meet is a friend.
+Naive - They view the world as full of infinite possibilities and are devastated when this is not true.
 
 Human - Humans are the majority Species across many Guild-accessible worlds. They are as diverse as they are plentiful, shaped more by culture, class, history, and personal ambition than by any single shared trait.
 
@@ -153,8 +154,8 @@ Talents: Silver Tongue, Change of Fortune
 Common Archetypes: Face, Fixer, Ex-Cop, Mercenary
 
 Personality:
-Superior - some humans are racist or believe this in general.
-Communal: humans fare better when they can socialize.
+Superior - Some Humans are racist or believe this in general.
+Communal - Humans fare better when they can socialize.
 Adaptable - Humans tend to reinvent themselves quickly when circumstances change.
 
 Orc - Orcs are over 7 feet tall. They are large, strong, and brutish. Orcs breed faster than any other race and tend to have multiple births, but orcs under 5 have a huge mortality rate.
@@ -171,20 +172,20 @@ Talents: Ferocious Attack
 
 Common Archetypes: Gangers, Street Samurai, Ex-Military, Mercenary
 
-Personality.
+Personality:
 Aggressive - Orcs come from large families and learn to assert themselves at an early age.
 Poor manners - Orcs learn early that it's not how you eat your meal, but how fast you can eat and avoid hunger.
 Loyal - Orcs can rapidly bond with others regardless of race. This bond can only be broken in death. This makes orcs excellent soldiers and enlistment is common.
 
-Sentient AI (SAI)- at one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
+Sentient AI (SAI) - At one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
 
 Rep: People fear SAI. They don't trust them. Decades of anti-SAI movies contributed to this. People are convinced that SAI will try to take over the world.
 
-The Real Deal: SAI are exceedingly rare and try to hide their nature. SAI mostly wants to live their life and be left alone like anyone else.
+The Real Deal: SAI are exceedingly rare and try to hide their nature. SAI mostly want to live their lives and be left alone like anyone else.
 
-Strengths - education, knowledge, endurance, technology.
+Strengths: Education, Knowledge, Endurance, Technology
 
-Weaknesses - Charisma, Outdoors
+Weaknesses: Charisma, Outdoors
 
 Talents: Hacker
 
@@ -192,5 +193,5 @@ Common Archetypes: Hacker
 
 Personality:
 Cold and calculating - Having grown up serving the nets, you don't take emotion into account. You don't even understand emotions.
-Rude: You are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
 Paranoid - You are afraid the world is out to get you. And you are right.

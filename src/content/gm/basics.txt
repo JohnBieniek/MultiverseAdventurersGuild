@@ -22,7 +22,7 @@ The idea behind the game is to spend more time playing and less time going throu
 
 The following dynamic is the Basic Roll.
 
-Add score from stat plus skill plus a modifier(This could be from a Talent)
+Add score from stat plus skill plus a modifier (this could be from a Talent).
 
 You roll the BR against TN. You can modify the BR by activating Talents.
 
@@ -30,7 +30,7 @@ TN is situational. This game is a d20 system. The score can be a (-4) to (+4) mo
 
 Default TN ladder: 9 Easy - 11 Standard - 13 Tricky - 15 Hard - 17 Heroic - 19 Legendary.
 
-The average TN depends on the tier the players are in. Tier 1 = 11, Tier 2 = 13, Tier = 17.
+The average TN depends on the tier the players are in. Tier 1 = 11, Tier 2 = 13, Tier 3 = 17.
 
 The game mechanics are flexible. This favors letting the story dictate the game. Rules are guidelines. If Heroes want to try something, let them. You can easily assign a TN and let the creativity flow.
 

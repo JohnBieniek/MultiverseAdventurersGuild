@@ -24,7 +24,7 @@ Use this process during Session Zero to build your hero in about 15 minutes. Her
 Think about the kind of hero you want to play. Any genre, any era, any setting is allowed in the Multiverse - cyborgs, cowgirls, witches, knights, superheroes, detectives, monks, and everything in between.
 Pick the Archetype that best matches your concept. Archetypes give your character direction, style, a few suggested Talents, and ideas about your Hero's personality.
 You can change your Archetype early in the campaign as you get familiar with the system.
-Giant, Troll, Orc, Human, Elf, Dwarf, and Halfling are the basic races. You can create any Species you want. These are known as the Exotics. Fairy is an example of an Exotic
+Giant, Troll, Orc, Human, Elf, Dwarf, and Halfling are the basic races. You can create any Species you want. These are known as the Exotics. Fairy is an example of an Exotic.
 Select a Species that fits your concept or the setting. Species give you flavor and descriptive traits.
 
 If you're unsure, your GM will summarize races available in the current campaign.
@@ -35,11 +35,11 @@ Assign the following values:
 Stats (St)
 Strength - this represents melee attacks.
 Dexterity - this represents making ranged attacks and controlling vehicles.
-Endurance - this represents a character's ability to handle physically grueling tasks and affects hit points. It also reflects stamina.Ex. Hit points, staying alive below 0 hit points.
+Endurance - this represents a character's ability to handle physically grueling tasks and affects hit points. It also reflects stamina. Ex. Hit points, staying alive below 0 hit points.
 Intuition - this represents knowing things outside your education. This is that gut feeling you get or the ability to take disparate pieces of information and draw a conclusion. Ex. Initiative, solving problems.
 Education - this is what you have learned in life. It could be a college education or things learned by experience.
-Charisma - this is your ability to use your personality to get people to do your bidding. Ex Fast talk, intimidate, contacts.
-For your character, you get to assign the scores (+3, +2,+1,0,0,-1). The assigned number is the score. This is paired with a descriptor (which explains the score ie. (+2) St - vat muscle).
+Charisma - this is your ability to use your personality to get people to do your bidding. Ex. Fast talk, intimidate, contacts.
+For your character, you get to assign the scores (+3, +2, +1, 0, 0, -1). The assigned number is the score. This is paired with a descriptor (which explains the score, i.e. (+2) St - vat muscle).
 
 "Pick your most important Stat and write in (+3). Now look at your least important stat. Write in a (-1). Pick your next most important stat. Write in a (+2). Of the three stats left, put a (+1) into the most important stat and (0)s in the remaining stats."
 These numbers are your base scores.
@@ -59,7 +59,7 @@ Sneak (Dex) - stealth, sleight of hand, infiltration, disguise, and acting
 Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matrix search
 
 Vehicle (Dex) - driving a car, piloting a starship, riding a horse
-"Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)
+"Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)."
 Your defenses protect you from harm:
 Defense = 11 + Defense bonus + (Defense rating x 2)
 Resilience = Defense bonus + Strength + Dexterity + Endurance
@@ -77,7 +77,7 @@ Examples:
 (+1) Education - Street-taught scavenger tech.
 (-1) Sneak - Loud, heavy boots
 Items help define who you are and where you come from. Think of these as gear for your Hero, except they don't have a price tag on them
-You begin with 3  Charisma Contacts.
+You begin with 3 + Charisma Contacts.
 
 Contacts are NPCs you know who can help you with:
 information
@@ -115,7 +115,7 @@ Range
 d4
 Pistol
 Automatic Conceal
-Rovolver, handgun, sling, slingshot
+Revolver, handgun, sling, slingshot
 d6
 Submachine Gun
 Conceal with a TN 15 Observation check
@@ -194,22 +194,22 @@ You cannot activate or purchase Talents of a Force higher than your level allows
 Players are rewarded with the following benefits at each level:
 Tagline: You've joined the Guild. You're raw, reckless, and ready to prove yourself.
 0: Access Force 1 (F1) Talents, 1 Talent Slot, 10 HP
-1: 2 Talents, (Choose 1: +1 Attack / +1 Defense / Talent +1) Talent,16HP, 3 energy
+1: 2 Talents, (Choose 1: +1 Attack / +1 Defense / Talent +1) Talent, 16 HP, 3 energy
 2: Access Force 2 (F2) Talents, 22 HP, 6 energy
 3: +1 Talent, 28 HP, 9 energy
 Tagline: You've survived the first missions. Now you're trusted to act on your own initiative.
-4:+1 Talent Slot, (Choose 1: +1 Attack / +1 Defense / +1 Talent), 34HP, 12 energy
+4: +1 Talent Slot, (Choose 1: +1 Attack / +1 Defense / +1 Talent), 34 HP, 12 energy
 5: Access Force 3 (F3) Talents, +1 Talent, 40 HP, 15 energy
-6: (Choose 1: +1 Attack / +1 Defense /+1 Talent), 46 HP, 18 energy
-Tagline: You are a legend in motion  the Guilds finest. Timelines bend around your choices.
+6: (Choose 1: +1 Attack / +1 Defense / +1 Talent), 46 HP, 18 energy
+Tagline: You are a legend in motion, the Guild's finest. Timelines bend around your choices.
 
 7: Talent slot, +1 Talent, 52 HP, 21 Energy
 8: (Choose 1: +1 Attack / +1 Defense / +1 Talent), 58 HP, 24 Energy
 9: Access Force 4 (F4) Talents, +1 Talent, 64 HP, 27 Energy
-10: 70 HP, 30 Energy  Final Guild Rank
+10: 70 HP, 30 Energy, Final Guild Rank
 If you improve your Endurance score, the bonus applies retroactively to all levels. For example, at level 3 with a score of (0), my HP is 28. I buy (+1) endurance. The bonus applies to all levels, giving me 32 HP.
 You can switch your talents when you reach a new level.
 MAG is a blended system. You gain specific advantages as you reach each level, but you can also spend XP whenever you want.
 A player earns 3 XP per playing session. These can be used to improve attributes, skills, talents, and energy. The GM can adjust this XP award up or down depending on how fast or slow they want the campaign to progress. (0) level is essentially a Tutorial for beginning players.
 0 / Untrained/ 0
-You must pay for each level of the score. For instance if I went from (0) to (3) I would pay one point for a score of (+1) another four points to increase it to (+2) and a final nine points for a (+3) for a total of fourteen points.
+You must pay for each level of the score. For instance, if I went from (0) to (3), I would pay one point for a score of (+1), another four points to increase it to (+2), and a final nine points for a (+3), for a total of fourteen points.

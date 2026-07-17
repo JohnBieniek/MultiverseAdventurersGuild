@@ -182,7 +182,7 @@ Description: Make an immediate counterattack at an opponent who just hit you wit
 Mechanics: Spend a Force 2 (F2) one-shot to make a free attack. Counts as a reaction.
 
 Create Wall:
-Description: Create a wall that takes up a 10 space. The wall is 6 thick
+Description: Create a wall that takes up a 10-foot space. The wall is 6 inches thick.
 Mechanic: Destroy a 10-foot section by doing damage to the wall. Attacks automatically hit. Each wall section has 20 HP per Force used. Create 2 sections on activation, plus 1 additional section per point of energy. The wall can make a 90-degree turn every 2 sections. Counts as cover. Once per casting.
 Duration: 5 minutes
 Action: attack.
@@ -193,7 +193,7 @@ Description: You turn 19 into a critical hit.
 
 Mechanics: When the player rolls a natural 19, it is a critical hit if the roll would hit. This is not automatic. Force 2 (F2). Can be used as a reaction by paying the F2 one-shot cost to make it a critical hit.
 
-Defensive strike
+Defensive Strike
 
 Description: You attack cautiously. This could represent attacking from cover.
 Mechanic: Increase your Defense (+1d4) and your attack by (-1d4). This is a free talent and costs no energy. If a Hero ends their move behind cover, add (+d4) to Defense.
@@ -230,11 +230,11 @@ Drunken Attack
 
 Description: You move in unpredictable fits and starts, putting your target at a disadvantage. Combined with charge, it eliminates the need for a straight line to attack.
 
-Mechanic: Force 2 (F2). Your target can not be set for the charge. You only need to move 10, but not in a straight line.
+Mechanic: Force 2 (F2). Your target cannot be set for the charge. You only need to move 10, but not in a straight line.
 
 End Talent:
-Description: This power works to end an already existing effect or stop a talent from being used
-Mechanics: The player succeeds if he has a higher force level. 2 beats 1, etc. Level 4 talents can't be ended. The countering player knows the opponent's force level. This counts as a reaction.
+Description: This power works to end an already existing effect or stop a talent from being used.
+Mechanics: The player succeeds if they have a higher Force level. 2 beats 1, etc. Level 4 Talents can't be ended. The countering player knows the opponent's Force level. This counts as a reaction.
 Duration: one use
 Cost: reaction
 
@@ -242,9 +242,9 @@ Escape:
 Description: Leave a threatened zone safely.
 Mechanic: Force 1 (F1). Not subject to reactive attack.
 
-Sar sense:
-Description - When using this talent, choose whether to hear or see at a distance. Players can pay for both simultaneously. The power allows the user to project the spell's distance through any barrier and use the sense. Observation is used.
-Mechanics - This power has a range of Force squared x 100 feet. A Force 2 Talent costs 4 energy and has a range of 400 feet. This Talent uses the Observation skill. Once active in combat, you can use the skill action to make an Observation check.
+Far Sense:
+Description: When using this Talent, choose whether to hear or see at a distance. Players can pay for both simultaneously. The power allows the user to project the spell's distance through any barrier and use the sense. Observation is used.
+Mechanics: This power has a range of Force squared x 100 feet. A Force 2 Talent costs 4 energy and has a range of 400 feet. This Talent uses the Observation skill. Once active in combat, you can use the skill action to make an Observation check.
 Duration: combat + 5 minutes
 Cost: attack action.
 
@@ -383,7 +383,7 @@ Description: An attack that can be combined with the attack roll. The attack mov
 Mechanic: Move the target away by +3d6 feet per Force used.
 
 Reduce Movement:
-Description: The area around your target turns to quicksand, making movement difficult. Effective on any terrain. Used to slow down the target,
+Description: The area around your target turns to quicksand, making movement difficult. Effective on any terrain. Used to slow down the target.
 Mechanic: Make a standard attack. If you hit, the target loses 50% movement per Force used. Maximum Force 2. Range long.
 Duration: combat + five minutes
 Cost: Attack action.
@@ -392,7 +392,7 @@ Regeneration:
 Description: Heal hit points.
 Mechanic: Heal +1d4 hit points per Force used each turn, up to full. You can't stack this Talent with itself. Activate by touching the target. For 1 additional energy, activate at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range.
 Self-Only: This Talent can be purchased as self-only. If it is, use the one-shot energy price and it only affects you.
-Duration - combat + 5 minutes or until the target drops below 0 HP. Starts at Force 2 (F2).
+Duration: combat + 5 minutes or until the target drops below 0 HP. Starts at Force 2 (F2).
 Cost: move action
 
 Run

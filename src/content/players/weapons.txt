@@ -1,4 +1,4 @@
-You start with one Weapon Enhancement for either Melee or Ranged. Weapon categories describe damage, concealment, and common examples. Rename the weapon however you want for the setting: a d8 melee weapon might be a longsword, fire axe, shock baton, or bone club. Heroes are rewarded for fighting at melee range because of the increased risk, so melee damage is slightly more serious than ranged damage.
+Weapons are both tools and signatures. Pick the category that matches how the weapon works at the table, then name and describe it to fit your Hero and the current setting. A d8 melee weapon might be a longsword, fire axe, shock baton, bone club, or manifested psychic blade. You start with one Weapon Enhancement for either Melee or Ranged, and melee weapons hit a little harder because closing the distance puts you in greater danger.
 
 Unarmed or Tiny Melee - Small, natural, or improvised close-range attacks.
 Category: Melee

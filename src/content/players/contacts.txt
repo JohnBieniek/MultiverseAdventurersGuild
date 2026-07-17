@@ -72,10 +72,10 @@ Category: Social and political contacts
 Example Name: Tomas Wren
 Expertise: Provides cult leader services, useful introductions, local warnings, and practical help tied to that field.
 
-Cybernetic or magical prosthetist - A practical specialist who handles cybernetic or magical prosthetist needs when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
+Prosthetist (cybernetic or magical) - A practical specialist who fits, repairs, and upgrades cybernetic or magical prosthetics when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
 Category: Medical and technical contacts
 Example Name: Tomas Wren
-Expertise: Provides cybernetic or magical prosthetist services, useful introductions, local warnings, and practical help tied to that field.
+Expertise: Fits prosthetics, repairs damaged replacements, sources specialized parts, and explains risks tied to implants or enchanted limbs.
 
 Demolitions expert - A practical specialist who handles demolitions expert needs when official channels are too slow, expensive, or dangerous. They understand field pressure, scarce supplies, and the kinds of injuries or devices Heroes bring back from missions.
 Category: Medical and technical contacts
