@@ -11,9 +11,9 @@
   padding: 20px;
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1600px) {
   .main-content {
-    max-width: min(2600px, calc(100vw - 180px));
+    max-width: min(2600px, calc(100vw - 120px));
     padding: 10px;
   }
 }
