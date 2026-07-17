@@ -13,7 +13,7 @@
 
 @media (min-width: 1024px) {
   .main-content {
-    max-width: min(2600px, calc(100vw - 40px));
+    max-width: min(2200px, calc(100vw - 40px));
     padding: 10px;
   }
 }

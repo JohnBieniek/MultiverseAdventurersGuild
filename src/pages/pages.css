@@ -250,9 +250,9 @@
   }
 
   .guide-subnav a {
-    min-height: 36px;
-    padding: 0.32rem 0.78rem;
-    font-size: 1.02rem;
+    min-height: 30px;
+    padding: 0.22rem 0.6rem;
+    font-size: 0.88rem;
   }
 
   .guide-section h2 {
@@ -287,6 +287,18 @@
   .guide-item-sidebar .guide-sidebar-subitem {
     margin-left: 0.35rem;
     padding-left: 0.35rem;
+  }
+}
+
+@media (min-width: 1921px) {
+  .guide-subnav {
+    gap: 0.5rem;
+  }
+
+  .guide-subnav a {
+    min-height: 42px;
+    padding: 0.42rem 0.95rem;
+    font-size: 1.14rem;
   }
 }
 
