@@ -19,3 +19,17 @@
   line-height: 1.25;
   color: #bdc3c7;
 }
+
+@media (min-width: 1921px) {
+  .footer {
+    padding: 0.5rem 0;
+  }
+
+  .footer-bottom {
+    max-width: 1800px;
+  }
+
+  .footer-bottom p {
+    font-size: 1.08rem;
+  }
+}

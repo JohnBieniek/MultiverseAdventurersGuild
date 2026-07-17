@@ -243,6 +243,23 @@
     padding: 0.22rem 0.6rem;
     font-size: 0.88rem;
   }
+
+  .guide-section h2 {
+    font-size: 2.15rem;
+  }
+
+  .guide-inline-heading {
+    font-size: 1.45rem;
+  }
+
+  .guide-item-sidebar h3 {
+    font-size: 1.05rem;
+  }
+
+  .guide-card-field > strong,
+  .guide-subcard h4 {
+    font-size: 1.22rem;
+  }
 }
 
 .guide-section {
