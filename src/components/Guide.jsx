@@ -253,8 +253,11 @@ function isTalentStart(lines, index) {
 }
 
 function isContactStart(lines, index) {
+  const line = lines[index]
+
   return Boolean(
-    splitTitleLine(lines[index], { allowFieldLabelName: true }) &&
+    /\s+-\s+/.test(line) &&
+      splitTitleLine(line, { allowFieldLabelName: true }) &&
       lines.slice(index + 1, index + 4).some((line) => /^Example Name:/i.test(line))
   )
 }
@@ -624,6 +627,42 @@ function renderInfoCard(card, type, cardIndex) {
   )
 }
 
+function getCardFieldValue(card, fieldName) {
+  const fieldPrefix = new RegExp(`^${fieldName}:\\s*(.+)$`, 'i')
+  const fieldLine = card.lines.find((line) => fieldPrefix.test(line))
+  return fieldLine?.match(fieldPrefix)?.[1]?.trim() || ''
+}
+
+function buildCardElements(cards, type, cardIndex) {
+  const elements = []
+  let hasShownFightingStylesHeading = false
+
+  cards.forEach((card) => {
+    if (
+      type === 'weapon' &&
+      !hasShownFightingStylesHeading &&
+      getCardFieldValue(card, 'Category').toLowerCase() === 'fighting style'
+    ) {
+      elements.push(
+        <h3 key="weapon-fighting-styles-heading" className="guide-card-group-heading">
+          Fighting Styles
+        </h3>
+      )
+      hasShownFightingStylesHeading = true
+    }
+
+    elements.push(
+      type === 'weapon' ? (
+        renderWeaponCard(card)
+      ) : (
+        renderInfoCard(card, type, cardIndex)
+      )
+    )
+  })
+
+  return elements
+}
+
 function renderCards(content, type, cardIndex) {
   const { intro, cards } = splitCards(content, type)
 
@@ -671,13 +710,7 @@ function renderCards(content, type, cardIndex) {
         )}
 
         <div className="guide-card-grid">
-          {cards.map((card) => (
-            type === 'weapon' ? (
-              renderWeaponCard(card)
-            ) : (
-              renderInfoCard(card, type, cardIndex)
-            )
-          ))}
+          {buildCardElements(cards, type, cardIndex)}
         </div>
       </div>
     </div>

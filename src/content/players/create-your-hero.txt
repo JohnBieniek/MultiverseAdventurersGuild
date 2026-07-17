@@ -61,10 +61,10 @@ Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matri
 Vehicle (Dex) - driving a car, piloting a starship, riding a horse
 "Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)."
 Your defenses protect you from harm:
-Defense = 11 + Defense bonus + (Defense rating x 2)
+Defense = 11 + Defense bonus + Defense rating
 Resilience = Defense bonus + Strength + Dexterity + Endurance
 Ego = Defense bonus + Intuition + Education + Charisma
-Defense is used when enemies try to hit you. Resilience resists physical danger and body-based effects. Ego resists fear, influence, mental attacks, and willpower-based effects. Athletics remains a normal skill for climbing, jumping, swimming, and similar physical tasks.
+Defense is used when enemies try to hit you. Resilience resists physical danger and body-based effects. Ego resists fear, influence, mental attacks, and willpower-based effects.
 You begin with:
 1 Talent Slot
 10 + endurance HP
