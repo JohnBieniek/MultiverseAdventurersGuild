@@ -19,7 +19,7 @@ Preferred Talents: Ferocious Attack, Ablative Armor, Vital Reserve
 
 Personality: Quick to take offense - All you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
-Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Blunt - You say what you mean and see little value in softening it for people who cannot handle the truth.
 
 Anti-Tech - You don't like technology and will do all you can to avoid dealing with it by using low-tech weapons.
 
@@ -64,7 +64,7 @@ Personality:
 
 True Believer - They are religious and follow the directions of their Deity.
 
-Compassionate - They care deeply about the world around them and the people who inhabit it.
+Merciful - Clerics are drawn to suffering and feel responsible for answering it, even when mercy is inconvenient.
 
 Militant - Clerics believe that it is not only enough to heal the world, but also important to fight against their enemies. As such, Clerics make good fighters and use Ferocious Attack to their advantage.
 
@@ -92,7 +92,7 @@ Preferred Talents: Ambush, Shadowstep, Trap Sense
 
 Personality:
 
-Jailbird - You've done some time and will do more. It's just the cost of doing business.
+Jailbird - Prison time is part of the life you chose, and you treat it as the cost of doing business.
 
 Compulsive Liar - You can tell when a criminal lies - their lips move!
 
@@ -122,7 +122,7 @@ Preferred Talents: Detect Talents, Ferocious Attack, Disguise Self
 
 Personality:
 
-Jailbird - You've done some time and will do more. It's just the cost of doing business.
+Record of Arrests - Your activism has put you in cells before, and you expect it will happen again.
 
 Fanatical - You are right, everyone else is wrong. You believe what you believe and nothing will change that.
 
@@ -182,11 +182,11 @@ Preferred Talents: Silver Tongue, Goad, Tactical Commander
 
 Personality:
 
-Charming - This is how you manipulate. You believe you can make anyone like you.
+Charming - You treat charm as a tool and believe almost anyone can be moved by the right smile, story, or pressure point.
 
 Slow to the draw - You try so hard to talk your way out of combat that you are slow to react when the fight starts.
 
-Loud and proud - Everything about your personality is overblown. You are a giant neon sign screaming look at me!
+Attention-Seeking - You make yourself impossible to ignore. Your confidence can open doors, but it can also turn every room into a stage.
 
 Fixer - You are the master at getting illicit gear. You have contacts all over and know how to mix and match these assets to get jobs done. You work closely with Operators.
 
@@ -197,11 +197,11 @@ Preferred Talents: Silver Tongue, Aim, Truthsense
 
 Personality:
 
-I've gotta guy for that! You know people everywhere and love putting together teams.
+Connected - You know people everywhere and love putting together teams.
 
-In control. Your ability to connect with many different groups of people leaves you with the feeling that you can get out of anything.
+In Control - Your ability to connect with many different groups of people leaves you with the feeling that you can get out of anything.
 
-Charming - This is how you manipulate. You believe you can make anyone like you.
+Social Operator - You know how to make people feel useful, connected, and just indebted enough to answer your calls.
 
 Ganger - You learned early on that to survive on the streets, you couldn't do it alone. The gangs were a natural family. You joined at a young age and were all in. Gangers typically come from poverty. The gang creates an instant safety net.
 
@@ -216,7 +216,7 @@ Life is cheap - You know you won't grow old, so you put it all on the line every
 
 Quick to take offense - All you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
-Jailbird - You've done some time and will do more. It's just the cost of doing business.
+Street Record - You have done time, know the system, and treat arrest as a hazard that comes with the life.
 
 Gonzo Journalist - News is your life. You record everything that happens around you and provide running commentary.
 
@@ -227,7 +227,7 @@ Preferred Talents: Silver Tongue, Alertness, Ki Body
 
 Personality:
 
-Loud and proud - Everything about your personality is overblown. You are a giant neon sign screaming look at me!
+Relentless Witness - You put yourself where the story is loudest and make sure everyone knows what you saw.
 
 Famous - People notice you when you are in public. You thrill at the recognition, but sometimes this interferes with your mission.
 
@@ -336,7 +336,7 @@ Calm - Ninjas always act as if they are in full control over what is going on ar
 
 Shy - Ninjas live in the shadows. They stay in the background during social situations. They don't like the spotlight.
 
-Stealthy - You are a master at hiding.
+Stealthy - You move like silence is a weapon and treat being unseen as the first step of every plan.
 
 Performer - Performers are floating entertainers. They can be seen on stage or in your local pub. They tell stories with words and music that focus on historical themes. During missions, Performers are noted for supporting their party members using their own special magic. Performers use their performance to attack and the instrument serves as a weapon.
 
@@ -347,7 +347,7 @@ Preferred Talents: Buffs, Goad, Tactical Commander
 
 Personality:
 
-Loud and proud - Everything about your personality is overblown. You are a giant neon sign screaming look at me!
+Commanding Presence - You know how to hold a room, pull attention, and make even danger feel like part of the performance.
 
 Inquisitive - Performers are constantly seeking out knowledge.
 
@@ -381,7 +381,7 @@ Don't touch this - Screamers treat their vehicles and drones like close friends 
 
 Need for speed - Drivers have one speed, fast. This is why they are known as screamers. Take a ride with one and you'll see.
 
-Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Tactless - You spend more time with engines and drones than people, and it shows whenever diplomacy is required.
 
 Shaman - You are a spiritual guide, healer, and negotiator with forces most people barely understand. You speak for ancestors, nature spirits, local gods, or the unseen powers of a place.
 
@@ -424,7 +424,7 @@ Personality:
 
 Patient - You have waited days in place to take your shot.
 
-Stealthy - You are a master at hiding.
+Stealthy - You can stay still, quiet, and unnoticed long after most people would give themselves away.
 
 Accurate - You live by the motto, one shot, one kill. You never multi-attack, preferring accuracy over volume.
 
@@ -439,7 +439,7 @@ Personality:
 
 Manipulative - You view each person you meet as a potential asset and constantly strive to bend them to your will.
 
-Charming - This is how you manipulate. You believe you can make anyone like you.
+Charming - You make people feel chosen, understood, or flattered right before you turn that trust into leverage.
 
 Ego - You believe you are so charming that you fail to recognize when your charms fail.
 
@@ -452,7 +452,7 @@ Preferred Talents: Heal, Critical Hit, Bring the Pain
 
 Personality:
 
-Compassionate - They care deeply about the world around them and the people who inhabit it.
+Compassionate - Street Docs care about the people bleeding in front of them, even when those people cannot pay.
 
 Hippocratic oath - Do no harm. This frequently comes in conflict with living on the streets. Do you see the oath as meaning you won't attack others? Or do your vows account for the realities of surviving on the streets?
 

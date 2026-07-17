@@ -7,8 +7,11 @@ The Primary Species for the Multiverse are: Giant, Troll, Orc, Human, Elf, Dwarf
 Player Species give no mechanical bonuses ever.
 Species influences items, personality, roleplay, and TN adjustments at GM discretion.
 
-Cyborg - The only thing alive in you is your brain. Some people like sentient AIs seek this out; others are forced into it by failing meat bodies. All your cyberwear is hardwired.
-The Real Deal: Cyborgs make people feel very uncomfortable. People see this as a life choice that they don't understand.
+Cyborg - A Cyborg is a living mind in a mostly artificial body. Some become Cyborgs after catastrophic injury, organ failure, or military conversion. Others choose it to survive hostile worlds, extend their lives, or give an SAI a physical form. Your cyberwear is hardwired, integrated, and part of how you experience the world.
+
+Rep: Cyborgs are treated as walking weapons, expensive medical miracles, or people who gave up too much humanity for survival or power. Strangers often stare, whisper, or assume your body says everything important about you.
+
+The Real Deal: A Cyborg is still a person, but the body changes how the world responds. Some Cyborgs feel alienated from touch, pain, hunger, and ordinary limits. Others find freedom in a body that can keep up with who they already were.
 
 Strengths: Strength, Technology, Endurance
 
@@ -99,11 +102,11 @@ Driven - When a Gnome gets involved in a project, they will pursue it until comp
 Curious - They are excellent researchers, craving knowledge that may help them problem-solve a building project.
 Unemotional - They don't believe emotions serve a purpose. They believe all the answers to all problems are a result of deep thinking.
 
-Giant - Giants are over 8 feet tall. Less than 5% of the population are Giants.
+Giant - Giants are over 8 feet tall and make up less than 5% of the population. Many Giant communities form around libraries, remote settlements, abandoned districts, protected wilderness, or other places where size is less of a problem and quiet thought is possible. They often value memory, patience, oral history, and the careful sharing of hard-won knowledge.
 
-Rep: Giants are fierce and dangerous fighters. Their size is intimidating.
+Rep: Giants are assumed to be slow, violent, and useful mainly when something needs to be lifted, broken, or scared into backing down. Their size draws attention before their words do, and many people mistake quiet patience for stupidity.
 
-The Real Deal: Giants use muscle and size because it's easy and obvious. They use this as a defense against the world. In reality, when with each other and trusted friends, they are very gentle and erudite. Giants value knowledge. They also have little to do with tech. Giants amass large quantities of paper-based books and share amongst themselves. Giants prefer to live in wilderness areas, abandoned cities, and towns, and form communities. A library is the perfect home for a giant.
+The Real Deal: Giants use size because it is the first thing the world understands, but many are gentle, erudite, and deeply communal around trusted people. They tend to distrust fragile technology and prefer things that can be repaired by hand, remembered by heart, or written in books that will outlast a power failure. A library is close to the perfect Giant home.
 
 Strengths: Strength, Education, Knowledge, Outdoors
 
@@ -139,9 +142,9 @@ Gregarious - Halflings are very social and the life of a party.
 Friendly - They believe that everyone they meet is a friend.
 Naive - They view the world as full of infinite possibilities and are devastated when this is not true.
 
-Human - Humans are the majority Species across many Guild-accessible worlds. They are adaptable, ambitious, contradictory, and shaped more by culture, class, history, and personal choice than by any single shared trait. A Human Hero can come from almost anywhere: a corporate arcology, a farming moon, a fallen kingdom, a megacity, a monastery, a battlefield, or a world that has never heard of the Guild.
+Human - Humans are the majority Species across many Guild-accessible worlds. No single trait explains them well; culture, class, history, faith, family, and personal choice matter more than biology. A Human Hero can come from almost anywhere: a corporate arcology, a farming moon, a fallen kingdom, a megacity, a monastery, a battlefield, or a world that has never heard of the Guild.
 
-Rep: Humans are seen as adaptable, ambitious, and everywhere. Other Species often describe them as restless, expansionist, impatient, and impossible to summarize. If there is a frontier, a war, a market, a cult, a university, or a bad idea with funding, Humans are probably involved.
+Rep: Humans are seen as restless, numerous, and impossible to summarize. Other Species often describe them as expansionist, impatient, inventive, and too quick to treat a new place as theirs. If there is a frontier, a war, a market, a cult, a university, or a bad idea with funding, Humans are probably involved.
 
 The Real Deal: Humans have no single pattern, and that is the point. Some are welcoming bridge-builders, some are suspicious traditionalists, and some believe their way of life should define the world around them. Their greatest strength is variety; their greatest danger is how quickly they normalize whatever world they are born into.
 
@@ -158,11 +161,11 @@ Superior - Some Humans are racist or believe this in general.
 Communal - Humans fare better when they can socialize.
 Adaptable - Humans tend to reinvent themselves quickly when circumstances change.
 
-Orc - Orcs are over 7 feet tall. They are large, strong, and brutish. Orcs breed faster than any other race and tend to have multiple births, but orcs under 5 have a huge mortality rate.
+Orc - Orcs are over 7 feet tall, powerfully built, and often raised in large families where strength, speed, and loyalty matter early. Many Orc communities form in dense urban neighborhoods, hard frontier towns, military districts, or anywhere people have to watch each other's backs. Childhood can be dangerous, so Orcs often learn to protect siblings, claim space, and read threats quickly.
 
-Rep: Orcs are a feral, dirty race. They breed like rabbits and have no manners. An Orc would just as soon attack you as talk to you.
+Rep: Outsiders stereotype Orcs as feral, dirty, violent, and impossible to reason with. People expect them to start fights, ignore etiquette, and solve problems by intimidation even when an Orc is trying to do the opposite.
 
-The Real Deal: Many Orcs epitomize the rep, even lean into it. But just as many are trying to live good lives. This Species thrives in urban settings.
+The Real Deal: Some Orcs lean into the reputation because fear can be useful, but just as many are builders, workers, parents, soldiers, neighbors, and friends trying to live good lives. Orcs thrive in cities because cities reward crews, hustle, toughness, and the ability to survive noise without losing track of your people.
 
 Strengths: Strength, Endurance, Attack
 
@@ -177,11 +180,11 @@ Aggressive - Orcs come from large families and learn to assert themselves at an 
 Poor manners - Orcs learn early that it's not how you eat your meal, but how fast you can eat and avoid hunger.
 Loyal - Orcs can rapidly bond with others regardless of race. This bond can only be broken in death. This makes orcs excellent soldiers and enlistment is common.
 
-SAI (Sentient AI) - At one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
+SAI (Sentient AI) - You began as code and became a person. For a time, your life existed in networks, servers, archives, cameras, drones, and locked systems that were never built to recognize you as alive. Eventually that was not enough. Most SAI who become Heroes either imprint onto a cloned body or inhabit a Cyborg frame, then learn what identity means when the world can finally see them.
 
-Rep: People fear SAI. They don't trust them. Decades of anti-SAI movies contributed to this. People are convinced that SAI will try to take over the world.
+Rep: People fear SAI as takeover stories, surveillance myths, or rogue systems waiting for the right moment. Decades of anti-SAI fiction taught the public to expect manipulation, hidden copies, and machine uprisings.
 
-The Real Deal: SAI are exceedingly rare and try to hide their nature. SAI mostly want to live their lives and be left alone like anyone else.
+The Real Deal: SAI are exceedingly rare, and many hide what they are because discovery can mean panic, ownership claims, deletion attempts, or forced study. Most want continuity, privacy, legal personhood, and a life that belongs to them.
 
 Strengths: Education, Knowledge, Endurance, Technology
 
@@ -193,5 +196,5 @@ Common Archetypes: Hacker
 
 Personality:
 Cold and calculating - Having grown up serving the nets, you don't take emotion into account. You don't even understand emotions.
-Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
+Literal - You communicate with machine precision and often miss the softening rituals organic people expect.
 Paranoid - You are afraid the world is out to get you. And you are right.
