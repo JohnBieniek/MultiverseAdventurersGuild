@@ -239,9 +239,9 @@
   }
 
   .guide-subnav a {
-    min-height: 30px;
-    padding: 0.22rem 0.6rem;
-    font-size: 0.88rem;
+    min-height: 36px;
+    padding: 0.32rem 0.78rem;
+    font-size: 1.02rem;
   }
 
   .guide-section h2 {
@@ -254,11 +254,6 @@
 
   .guide-item-sidebar h3 {
     font-size: 1.05rem;
-  }
-
-  .guide-card-field > strong,
-  .guide-subcard h4 {
-    font-size: 1.22rem;
   }
 }
 
