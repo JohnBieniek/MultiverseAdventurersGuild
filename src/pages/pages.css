@@ -175,6 +175,17 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+@media (min-width: 1920px) {
+  .page {
+    padding: 1rem 0;
+  }
+
+  .basic-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
 /* Guide Pages */
 .guide-page {
   padding-top: 1rem;
@@ -254,6 +265,28 @@
 
   .guide-item-sidebar h3 {
     font-size: 1.05rem;
+  }
+
+  .guide-card-layout {
+    grid-template-columns: minmax(165px, 210px) minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .guide-card-layout-species {
+    grid-template-columns: minmax(150px, 195px) minmax(0, 1fr);
+  }
+
+  .guide-item-sidebar {
+    padding: 0.45rem;
+  }
+
+  .guide-item-sidebar a {
+    padding: 0.24rem 0.3rem;
+  }
+
+  .guide-item-sidebar .guide-sidebar-subitem {
+    margin-left: 0.35rem;
+    padding-left: 0.35rem;
   }
 }
 
