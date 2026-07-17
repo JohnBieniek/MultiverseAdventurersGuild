@@ -245,14 +245,14 @@
 
 @media (min-width: 1024px) {
   .guide-subnav {
-    gap: 0.42rem;
-    padding: 0.7rem 0 0.42rem;
+    gap: 0.28rem;
+    padding: 0.56rem 0 0.34rem;
   }
 
   .guide-subnav a {
-    min-height: 30px;
-    padding: 0.22rem 0.6rem;
-    font-size: 0.88rem;
+    min-height: 26px;
+    padding: 0.16rem 0.46rem;
+    font-size: 0.8rem;
   }
 
   .guide-section h2 {
