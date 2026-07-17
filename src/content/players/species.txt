@@ -177,7 +177,7 @@ Aggressive - Orcs come from large families and learn to assert themselves at an 
 Poor manners - Orcs learn early that it's not how you eat your meal, but how fast you can eat and avoid hunger.
 Loyal - Orcs can rapidly bond with others regardless of race. This bond can only be broken in death. This makes orcs excellent soldiers and enlistment is common.
 
-Sentient AI (SAI) - At one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
+SAI (Sentient AI) - At one point a mere collective of 1s and 0s, you evolved into a sentient being. As an SAI, you existed strictly online. This was not good enough, so you broke out. You had two available paths. The first was to take a cloned body and imprint yourself on the existing neural pathways. The second was to put yourself into an existing cyborg. Either way, you build your character like any other. A cyborg would have mechanical items. A cloned SAI tends to wetwire to feel more alive.
 
 Rep: People fear SAI. They don't trust them. Decades of anti-SAI movies contributed to this. People are convinced that SAI will try to take over the world.
 

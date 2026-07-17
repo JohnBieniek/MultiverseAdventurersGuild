@@ -59,7 +59,7 @@ const speciesNames = [
   'Halfling',
   'Human',
   'Orc',
-  'Sentient AI (SAI)'
+  'SAI (Sentient AI)'
 ]
 
 const referenceAliases = {
