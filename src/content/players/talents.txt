@@ -1,10 +1,6 @@
-Welcome to the Talented Multiverse
-
-Overview
-
 Be the best version of yourself.
 
-Talents are the engine that runs the game. You use them to define how your character interacts with the world. They could be cyberwear. They can represent spells you cast. Some could represent better living through superior chemistry: drugs.
+Talents are the engine that runs the game. You use them to define how your character interacts with the world. They could be cyberwear, spells, specialized training, or chemical enhancements.
 
 Cost and Force
 
