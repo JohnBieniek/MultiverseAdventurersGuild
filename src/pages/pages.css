@@ -413,6 +413,18 @@
   gap: 0.35rem;
 }
 
+.guide-card-field > strong {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--visor-red);
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.guide-card-field:first-child > strong {
+  margin-top: 0;
+}
+
 .guide-subcard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

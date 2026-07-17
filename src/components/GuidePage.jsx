@@ -52,10 +52,10 @@ const fieldLabels = [
 const speciesNames = [
   'Cyborg',
   'Dwarf',
-  'Elves',
+  'Elf',
   'Fairy',
-  'Gnomes',
-  'Giants',
+  'Gnome',
+  'Giant',
   'Halfling',
   'Human',
   'Orc',
