@@ -243,7 +243,7 @@
   transform: translateY(-2px);
 }
 
-@media (min-width: 1921px) {
+@media (min-width: 1920px) {
   .guide-subnav {
     gap: 0.42rem;
     padding: 0.7rem 0 0.42rem;
