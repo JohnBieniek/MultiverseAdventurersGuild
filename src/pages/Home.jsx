@@ -22,17 +22,17 @@ function Home() {
       </section>
 
       <section className="featured-content">
-        <Link className="content-card" to="/gm">
-          <h2>GM</h2>
-          <p>Tools, notes, and guidance for running sessions across the multiverse.</p>
+        <Link className="content-card" to="/rules">
+          <h2>Rules</h2>
+          <p>Keep shared rulings and table procedures easy to find.</p>
         </Link>
         <Link className="content-card" to="/players">
           <h2>Players</h2>
           <p>Resources for characters, table expectations, and getting ready to play.</p>
         </Link>
-        <Link className="content-card" to="/rules">
-          <h2>Rules</h2>
-          <p>Keep shared rulings and table procedures easy to find.</p>
+        <Link className="content-card" to="/gm">
+          <h2>Game Masters</h2>
+          <p>Tools, notes, and guidance for running sessions across the multiverse.</p>
         </Link>
       </section>
     </div>
