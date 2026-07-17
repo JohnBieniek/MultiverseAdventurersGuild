@@ -1,4 +1,4 @@
-import GuidePage from '../components/GuidePage'
+import Guide from '../components/Guide'
 import rolls from '../content/rules/rolls.txt?raw'
 import actionEconomy from '../content/rules/action-economy.txt?raw'
 import levelProgression from '../content/rules/level-progression.txt?raw'
@@ -51,7 +51,7 @@ const sections = [
 
 function Rules() {
   return (
-    <GuidePage
+    <Guide
       title="Rules"
       intro="Core table references for resolving action, managing risk, and keeping scenes moving."
       sections={sections}

@@ -1,4 +1,4 @@
-import GuidePage from '../components/GuidePage'
+import Guide from '../components/Guide'
 import theGuild from '../content/gm/the-guild.txt?raw'
 import basics from '../content/gm/basics.txt?raw'
 import levels from '../content/gm/levels.txt?raw'
@@ -61,7 +61,7 @@ const sections = [
 
 function GM() {
   return (
-    <GuidePage
+    <Guide
       title="GM"
       intro="Game Master references for running missions, shaping the multiverse, and keeping play moving."
       sections={sections}

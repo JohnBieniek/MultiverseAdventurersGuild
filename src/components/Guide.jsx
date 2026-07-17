@@ -62,40 +62,6 @@ const speciesNames = [
   'SAI (Sentient AI)'
 ]
 
-const referenceAliases = {
-  archetype: {
-    driver: 'screamer',
-    'eco-terrorist': 'eco terrorist',
-    gangers: 'ganger',
-    'ninja/monk': 'ninja',
-    thief: 'smuggler',
-    merc: 'mercenary'
-  },
-  talent: {
-    'any buff': 'buffs',
-    'any health': 'health',
-    'any in health': 'health',
-    'any non-combat talent': 'buffs',
-    camouflage: 'shadowstep',
-    'close quarters combat': 'close quarter combat',
-    'concealed weapon specialist': 'weapon smuggler',
-    concealment: 'weapon smuggler',
-    'concealed weapom specialist': 'concealed weapon specialist',
-    'detect lies': 'truthsense',
-    'detect lie': 'truthsense',
-    drone: 'control drone',
-    fearsome: 'intimidating presence',
-    'find/remove traps': 'trap sense',
-    mechanic: 'technical expertise',
-    reach: 'melee reach',
-    smart: 'genius',
-    'temporary hp': 'vital reserve',
-    'temporary hit points': 'vital reserve',
-    'tech expertise': 'technical expertise',
-    techie: 'technical expertise'
-  }
-}
-
 const statNames = ['strength', 'dexterity', 'endurance', 'intuition', 'education', 'charisma']
 
 const skillNames = [
@@ -183,19 +149,6 @@ function getStatSkillTarget(name) {
   }
 
   return null
-}
-
-function resolveReferenceAlias(type, name) {
-  const aliases = referenceAliases[type] || {}
-  let lookupName = name.toLowerCase()
-  const seen = new Set()
-
-  while (aliases[lookupName] && !seen.has(lookupName)) {
-    seen.add(lookupName)
-    lookupName = aliases[lookupName]
-  }
-
-  return lookupName
 }
 
 function splitListItems(value) {
@@ -511,8 +464,7 @@ function renderChip(label, item, cardIndex) {
 
   const targetType = /archetype/i.test(label) ? 'archetype' : 'talent'
   const normalizedName = normalizeReferenceName(item)
-  const lookupName = resolveReferenceAlias(targetType, normalizedName)
-  const href = cardIndex.get(`${targetType}:${lookupName}`)
+  const href = cardIndex.get(`${targetType}:${normalizedName.toLowerCase()}`)
 
   if (href) {
     return (
@@ -790,7 +742,7 @@ function renderSectionContent(section, cardIndex) {
   )
 }
 
-function GuidePage({ title, intro, sections }) {
+function Guide({ title, intro, sections }) {
   const cardIndex = buildCardIndex(sections)
   const subnavRef = useRef(null)
 
@@ -819,7 +771,7 @@ function GuidePage({ title, intro, sections }) {
   }, [sections])
 
   return (
-    <div className="page guide-page">
+    <div className="page guide">
       <header className="guide-header">
         <h1>{title}</h1>
         <p>{intro}</p>
@@ -849,4 +801,4 @@ function GuidePage({ title, intro, sections }) {
   )
 }
 
-export default GuidePage
+export default Guide

@@ -130,7 +130,7 @@ Rep: Halflings are seen as friendly, hungry, funny, and harmless. People invite 
 
 The Real Deal: Many Halflings do love comfort, food, stories, and good company, but that does not make them foolish. Their friendliness is often a survival tool. Their serious side appears when someone threatens their home, crew, or chosen family.
 
-Strengths: Charisma, Outdoors, Stealth, Range Weapon
+Strengths: Charisma, Outdoors, Sneak, Range Weapon
 
 Weaknesses: Technology, Strength, Knowledge
 

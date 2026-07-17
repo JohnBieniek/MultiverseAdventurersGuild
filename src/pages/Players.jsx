@@ -1,4 +1,4 @@
-import GuidePage from '../components/GuidePage'
+import Guide from '../components/Guide'
 import howToPlay from '../content/players/roleplaying.txt?raw'
 import species from '../content/players/species.txt?raw'
 import archetypes from '../content/players/archetypes.txt?raw'
@@ -81,7 +81,7 @@ const sections = [
 
 function Players() {
   return (
-    <GuidePage
+    <Guide
       title="Players"
       intro="Player-facing references for building heroes, understanding the table, and jumping into adventure."
       sections={sections}
