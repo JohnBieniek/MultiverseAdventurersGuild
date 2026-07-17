@@ -68,21 +68,6 @@ Compassionate - They care deeply about the world around them and the people who 
 
 Militant - Clerics believe that it is not only enough to heal the world, but also important to fight against their enemies. As such, Clerics make good fighters and use Ferocious Attack to their advantage.
 
-Shaman - You are a spiritual guide, healer, and negotiator with forces most people barely understand. You speak for ancestors, nature spirits, local gods, or the unseen powers of a place.
-
-Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +3, Education +1, Charisma +2
-Strengths: Intuition, Outdoors, Knowledge, Influence
-Weaknesses: Technology, Vehicle, Attack
-Preferred Talents: Detect Talents, Heal, Pathfinder
-
-Personality:
-
-Spirit-touched - You treat spirits, omens, dreams, and signs as part of ordinary life.
-
-Mediator - You prefer to bargain with unseen powers before forcing a confrontation.
-
-Keeper of taboos - You know which rules must not be broken, even when outsiders think they are superstition.
-
 Commando - You were a part of an elite military unit like the SEALs, SAS, or Spetsnaz. You were the best your military had to offer.
 
 Scores: Strength +1, Dexterity +3, Endurance +2, Intuition 0, Education 0, Charisma -1
@@ -323,21 +308,6 @@ No honor - The only code is money.
 
 Next best thing - Mercs are always convinced that their next contract will set them up for life.
 
-Ninja - These are Heroes who favor stealth, patience, and precise violence. They derive their prowess from magical talents and prefer attacks that do not compromise their position.
-
-Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
-Strengths: Strength, Sneak, Athletics, Melee
-Weaknesses: Education, Technology, Vehicle
-Preferred Talents: Ki Body, Parry, Shadowstep
-
-Personality:
-
-Calm - Ninjas always act as if they are in full control over what is going on around them.
-
-Shy - Ninjas live in the shadows. They stay in the background during social situations. They don't like the spotlight.
-
-Stealthy - You are a master at hiding.
-
 Monk - These are disciplined warriors who train the body, mind, and spirit as one weapon. Monks may be religious, philosophical, ascetic, or simply devoted to perfecting themselves through practice. They are less about hiding in shadows and more about control, endurance, movement, and decisive close combat.
 
 Scores: Strength +2, Dexterity +1, Endurance +3, Intuition 0, Education 0, Charisma -1
@@ -352,6 +322,21 @@ Disciplined - Monks train constantly and treat self-control as a survival skill.
 Centered - You try to stay calm even when the scene turns violent, strange, or overwhelming.
 
 Direct - You prefer honest action over deception. When a problem must be solved, you step forward.
+
+Ninja - These are Heroes who favor stealth, patience, and precise violence. They derive their prowess from magical talents and prefer attacks that do not compromise their position.
+
+Scores: Strength +3, Dexterity +2, Endurance +1, Intuition 0, Education -1, Charisma 0
+Strengths: Strength, Sneak, Athletics, Melee
+Weaknesses: Education, Technology, Vehicle
+Preferred Talents: Ki Body, Parry, Shadowstep
+
+Personality:
+
+Calm - Ninjas always act as if they are in full control over what is going on around them.
+
+Shy - Ninjas live in the shadows. They stay in the background during social situations. They don't like the spotlight.
+
+Stealthy - You are a master at hiding.
 
 Performer - Performers are floating entertainers. They can be seen on stage or in your local pub. They tell stories with words and music that focus on historical themes. During missions, Performers are noted for supporting their party members using their own special magic. Performers use their performance to attack and the instrument serves as a weapon.
 
@@ -398,6 +383,21 @@ Need for speed - Drivers have one speed, fast. This is why they are known as scr
 
 Rude - You are blunt and abrupt. Social norms confuse you. You see things in black or white.
 
+Shaman - You are a spiritual guide, healer, and negotiator with forces most people barely understand. You speak for ancestors, nature spirits, local gods, or the unseen powers of a place.
+
+Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +3, Education +1, Charisma +2
+Strengths: Intuition, Outdoors, Knowledge, Influence
+Weaknesses: Technology, Vehicle, Attack
+Preferred Talents: Detect Talents, Heal, Pathfinder
+
+Personality:
+
+Spirit-touched - You treat spirits, omens, dreams, and signs as part of ordinary life.
+
+Mediator - You prefer to bargain with unseen powers before forcing a confrontation.
+
+Keeper of taboos - You know which rules must not be broken, even when outsiders think they are superstition.
+
 Smuggler - You are an expert at getting illicit goods from one place to another.
 
 Scores: Strength -1, Dexterity +3, Endurance 0, Intuition +1, Education 0, Charisma +2
@@ -428,21 +428,6 @@ Stealthy - You are a master at hiding.
 
 Accurate - You live by the motto, one shot, one kill. You never multi-attack, preferring accuracy over volume.
 
-Street Doc - A generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a Street Doc brings down the worst retribution the streets have to offer.
-
-Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +2, Education +3, Charisma +1
-Strengths: Education, Technology, Knowledge, Melee Weapon
-Weaknesses: Dexterity, Attack, Sneak
-Preferred Talents: Heal, Critical Hit, Bring the Pain
-
-Personality:
-
-Compassionate - They care deeply about the world around them and the people who inhabit it.
-
-Hippocratic oath - Do no harm. This frequently comes in conflict with living on the streets. Do you see the oath as meaning you won't attack others? Or do your vows account for the realities of surviving on the streets?
-
-Heal the world - You will heal anyone at any time. You would even heal your enemies, but only after defeating them.
-
 Spy - You are all about gathering and leveraging intelligence. You have studied people and understand how to manipulate them. You are good at synthesizing information from diverse sources and discerning the truth behind it.
 
 Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +2, Education +1, Charisma +3
@@ -457,6 +442,21 @@ Manipulative - You view each person you meet as a potential asset and constantly
 Charming - This is how you manipulate. You believe you can make anyone like you.
 
 Ego - You believe you are so charming that you fail to recognize when your charms fail.
+
+Street Doc - A generic term for someone who heals people. These are people who work either part-time or full-time, rendering aid to those who are poor. Doctors, nurses, medics, magic, self-taught. These people are well respected on the streets because they are desperately needed. Harming a Street Doc brings down the worst retribution the streets have to offer.
+
+Scores: Strength 0, Dexterity -1, Endurance 0, Intuition +2, Education +3, Charisma +1
+Strengths: Education, Technology, Knowledge, Melee Weapon
+Weaknesses: Dexterity, Attack, Sneak
+Preferred Talents: Heal, Critical Hit, Bring the Pain
+
+Personality:
+
+Compassionate - They care deeply about the world around them and the people who inhabit it.
+
+Hippocratic oath - Do no harm. This frequently comes in conflict with living on the streets. Do you see the oath as meaning you won't attack others? Or do your vows account for the realities of surviving on the streets?
+
+Heal the world - You will heal anyone at any time. You would even heal your enemies, but only after defeating them.
 
 Street Samurai - At its core, this is the quintessential fighter class of cyberpunk. Style is just as important as the ability to put your enemies on the ground. The typical Samurai comes from poverty or an Irrelevant background. Street Samurai learn at a very young age that maximum violence is the best defense. Samurai prefer Japanese samurai culture, but this is generally a warped Western view. The Katana is the preferred weapon. Samurai use many Tech Items.
 
