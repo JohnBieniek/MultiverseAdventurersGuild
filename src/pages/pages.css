@@ -451,7 +451,7 @@
 
 @media (min-width: 1024px) {
   .guide-card-layout-contact .guide-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .guide-card-layout-reputation .guide-card-grid {
@@ -465,10 +465,6 @@
 
 @media (min-width: 1921px) {
   .guide-card-layout-archetype .guide-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .guide-card-layout-talent .guide-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -541,6 +537,7 @@
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
+  max-width: calc((230px * 3) + (0.75rem * 2));
 }
 
 .guide-subcard {
