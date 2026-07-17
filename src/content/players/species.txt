@@ -16,7 +16,7 @@ Weaknesses: Dexterity, Charisma
 
 Talents: Ferocious Attack, Intimidating Presence, Ablative Armor
 
-Common Archetypes: Street Samurai, Merc, Sniper
+Common Archetypes: Street Samurai, Mercenary, Sniper
 
 Personality:
 Dehumanized - The lack of real flesh leaves you feeling disembodied from the world around you. You struggle to connect with people.
@@ -32,9 +32,9 @@ Strengths: Strength, Endurance, Technology
 
 Weaknesses: Intuition
 
-Talents: Technical Expertise (R)
+Talents: Technical Expertise
 
-Common Archetypes: Street Doc, Ex-Military, Driver
+Common Archetypes: Street Doc, Ex-Military, Screamer
 
 Personality:
 Hard worker - Obsessed with their creations, they will work long hours.
@@ -51,7 +51,7 @@ Strengths: Charisma, Dexterity, Outdoors
 
 Weaknesses: Endurance, Strength
 
-Talents: Silver Tongue (R), Goad
+Talents: Silver Tongue, Goad
 
 Common Archetypes: Shaman, Face, Ex-Company Man, Spy
 
@@ -92,7 +92,7 @@ Weaknesses: Charisma, Outdoors, Intuition
 
 Talents: Technical Expertise, Control Drone, Hacker
 
-Common Archetypes: Driver, Hacker, Mad Bomber
+Common Archetypes: Screamer, Hacker, Mad Bomber
 
 Personality:
 Driven - When a Gnome gets involved in a project, they will pursue it until completion.
@@ -111,7 +111,7 @@ Weaknesses: Charisma (they simply don't relate well to other races), Technology
 
 Talents: Genius, Intimidating Presence, Melee Reach
 
-Common Archetypes: Street Doc (Talents), Mage, Street Samurai
+Common Archetypes: Street Doc, Mage, Street Samurai
 
 Personality:
 Communal - Giants tend to live in groups. Isolated Giants tend to become angry and violent.
@@ -132,7 +132,7 @@ Weaknesses: Technology, Strength, Knowledge
 
 Talents: Ambush, Shadowstep, Silver Tongue
 
-Common Archetypes: Thief, Ninja/Monk, Performer
+Common Archetypes: Smuggler, Ninja/Monk, Performer
 
 Personality:
 Gregarious - Halflings are very social and the life of a party.
@@ -170,7 +170,7 @@ Weaknesses: Charisma, Knowledge, Education
 
 Talents: Ferocious Attack
 
-Common Archetypes: Gangers, Street Samurai, Ex-Military, Mercenary
+Common Archetypes: Ganger, Street Samurai, Ex-Military, Mercenary
 
 Personality:
 Aggressive - Orcs come from large families and learn to assert themselves at an early age.
