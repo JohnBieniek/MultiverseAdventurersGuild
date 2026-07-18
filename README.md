@@ -89,16 +89,16 @@ npm run build
 
 This will create an optimized production build in the `dist/` directory.
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare Workers
 
-Build the site and deploy the generated `dist` directory with Wrangler:
+This project deploys its Vite output as Cloudflare Worker static assets. Build and deploy with:
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name multiverse-adventurers-guild
+npx wrangler deploy
 ```
 
-For first-time setup, authenticate with Cloudflare before deploying:
+The Worker is configured in `wrangler.jsonc` as `multiverseadventurersguild-beta`. For first-time local setup, authenticate with Cloudflare before deploying:
 
 ```bash
 npx wrangler login
