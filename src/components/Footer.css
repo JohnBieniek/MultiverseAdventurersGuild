@@ -20,6 +20,13 @@
   color: #bdc3c7;
 }
 
+@media (max-width: 768px) {
+  .footer-rights {
+    display: block;
+    white-space: nowrap;
+  }
+}
+
 @media (min-width: 1920px) {
   .footer {
     padding: 0.5rem 0;
