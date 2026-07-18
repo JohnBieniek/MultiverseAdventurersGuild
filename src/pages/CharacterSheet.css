@@ -1,5 +1,5 @@
 .sheet-page { --green:#183d28; --green2:#2f6339; --gold:#c8993b; --ink:#18211b; padding:1rem 0 2rem; color:var(--ink); }
-@media(max-width:700px){.sheet-page .skill-name{font-size:.99rem!important}.sheet-page .skill-name .skill-stat-full{font-size:.68rem}}
+@media(max-width:700px){.sheet-page .skill-name{font-size:.99rem!important}.sheet-page .skill-name .skill-stat-full{font-size:.68rem}.sheet-page .table-talents .table-row textarea.auto-textarea{max-height:none}}
 @media(max-width:700px){.sheet-page .vital-grid>.vital:first-child{grid-column:1/-1;justify-self:center;width:calc(50% - .15rem);box-sizing:border-box;border-right:0}.sheet-page .vital-grid>.vital:last-child{grid-column:auto;justify-self:stretch;width:auto}}
 @media(min-width:1921px){.sheet-page{position:relative;left:50%;width:75vw;max-width:none;transform:translateX(-50%)}.sheet-page.sheet-library{max-width:none;margin-left:0;margin-right:0}}
 .sheet-page button,.sheet-page input,.sheet-page select,.sheet-page textarea { font:inherit; }

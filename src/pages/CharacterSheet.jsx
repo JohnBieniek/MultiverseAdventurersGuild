@@ -779,7 +779,7 @@ function CharacterSheet() {
       }}
     </EditableTable>
     <EditableTable title="Talents" icon="✹" subtitle={`Talents Acquired: ${talentsAcquired}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
-      {(row,i)=><><label className="talent-field"><span>Talent</span><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/></label><label className="talent-field"><span>Ability / Cost</span><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/></label><label className="talent-field"><span>Duration</span><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/></label><label className="talent-field"><span>Notes</span><AutoTextarea value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/></label><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
+      {(row,i)=><><label className="talent-field"><span>Talent</span><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/></label><label className="talent-field"><span>Ability / Cost</span><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/></label><label className="talent-field"><span>Duration</span><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/></label><label className="talent-field"><span>Notes</span><AutoTextarea fitOnMobile value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/></label><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
     </EditableTable>
     <EditableTable title="Items & Traits" icon="⚗" rows={character.items} add={() => addRow('items',{name:'',description:''})} columns={['Item / Trait','Description','']}>
       {(row,i)=><><input aria-label="Item or trait" placeholder="Item / Trait" value={row.name} onChange={e=>update(['items',i,'name'],e.target.value)}/><AutoTextarea placeholder="Description" value={row.description ?? [row.bonus,row.appliesTo].filter(Boolean).join(' — ')} onChange={value=>update(['items',i,'description'],value)}/><button className="icon-button" onClick={()=>deleteRow('items',row.id)}>×</button></>}
@@ -801,7 +801,7 @@ function IdentityChoice({ label, value, options, onChange }) { const existing = 
 function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''} title={expertise}>{custom ? <div className="identity-custom"><input autoFocus aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
 function NumberInput({ value, onChange }) { return <input className="number-input" type="number" value={value} onChange={e => onChange(e.target.value)}/> }
 function AttackEquation({ label, statLabel, stat, attack, modifier }) { const total = number(stat) + number(attack) + number(modifier); const statShort = statLabel === 'Strength' ? 'STR' : 'DEX'; return <div className="attack-equation"><h3>{label}</h3><div className="attack-equation-values"><span><small><span className="attack-label-full">{statLabel}</span><span className="attack-label-short">{statShort}</span></small><strong>{signed(stat)}</strong></span><span><small><span className="attack-label-full">Attack Skill</span><span className="attack-label-short">Skill</span></small><strong>{signed(attack)}</strong></span><span><small><span className="attack-label-full">Modifier</span><span className="attack-label-short">Mod</span></small><strong>{signed(modifier)}</strong></span><span className="attack-equation-total"><small>Total</small><strong>{signed(total)}</strong></span></div></div> }
-function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '' }) {
+function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '', fitOnMobile = false }) {
   const ref = useRef(null)
   const resize = element => {
     if (!element) return
@@ -809,11 +809,11 @@ function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '' }) {
     const styles = window.getComputedStyle(element)
     const lineHeight = parseFloat(styles.lineHeight) || 18
     const chrome = ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth'].reduce((total, property) => total + (parseFloat(styles[property]) || 0), 0)
-    const maximum = lineHeight * maxLines + chrome
+    const maximum = fitOnMobile && window.matchMedia('(max-width: 700px)').matches ? Infinity : lineHeight * maxLines + chrome
     element.style.height = `${Math.min(element.scrollHeight, maximum)}px`
     element.style.overflowY = element.scrollHeight > maximum ? 'auto' : 'hidden'
   }
-  useEffect(() => resize(ref.current), [value, maxLines])
+  useEffect(() => resize(ref.current), [value, maxLines, fitOnMobile])
   useEffect(() => {
     if (!ref.current || !window.ResizeObserver) return undefined
     const observer = new ResizeObserver(() => resize(ref.current))
