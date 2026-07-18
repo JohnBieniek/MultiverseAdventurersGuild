@@ -65,6 +65,10 @@
   color: #f7eed3;
 }
 
+.gm-label-mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar {
     min-height: 56px;
@@ -97,5 +101,13 @@
   .nav-logo span {
     min-width: 0;
     overflow-wrap: anywhere;
+  }
+
+  .gm-label-full {
+    display: none;
+  }
+
+  .gm-label-mobile {
+    display: inline;
   }
 }

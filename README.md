@@ -89,6 +89,21 @@ npm run build
 
 This will create an optimized production build in the `dist/` directory.
 
+## Deploying to Cloudflare Workers
+
+This project deploys its Vite output as Cloudflare Worker static assets. Build and deploy with:
+
+```bash
+npm run build
+npx wrangler deploy
+```
+
+The Worker is configured in `wrangler.jsonc` as `multiverseadventurersguild-beta`. For first-time local setup, authenticate with Cloudflare before deploying:
+
+```bash
+npx wrangler login
+```
+
 ## Technologies Used
 
 - React 18

@@ -34,6 +34,10 @@ function Home() {
           <h2>Game Masters</h2>
           <p>Tools, notes, and guidance for running sessions across the multiverse.</p>
         </Link>
+        <Link className="content-card" to="/character-sheet">
+          <h2>Characters</h2>
+          <p>Create, save, load, and play your Hero with automatic rules and built-in dice rolls.</p>
+        </Link>
       </section>
     </div>
   )
