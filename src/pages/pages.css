@@ -819,6 +819,11 @@
     padding: 1rem 0;
   }
 
+  .home-page {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+
   .page h1 {
     font-size: 1.8rem;
   }
