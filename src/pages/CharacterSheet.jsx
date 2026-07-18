@@ -510,14 +510,6 @@ function CharacterSheet() {
     })
     const archetype = archetypeOptions.find(option => option.name === character.archetype)
     const talentAllowance = talentAllowanceForLevel(character.level)
-    if (talentAllowance === 0) {
-      const levelZeroTalents = talents.filter(talent => {
-        const blank = !talent.name?.trim() && !talent.ability?.trim() && !talent.duration?.trim() && !talent.notes?.trim()
-        return !blank && !['archetype', 'level-progression'].includes(talent.source)
-      })
-      if (levelZeroTalents.length !== talents.length) changed = true
-      talents = levelZeroTalents
-    }
     const previousTalentAllowance = character.talentRowsGrantedForLevel
     let talentRowsGrantedForLevel = previousTalentAllowance
     let removedBlankTalentRows = character.removedBlankTalentRows
@@ -723,7 +715,7 @@ function CharacterSheet() {
 
   const skillTotal = (key, stat) => number(character.stats[stat]) + Object.values(character.skills[key]).reduce((sum, value) => sum + number(value), 0)
   const combatSlots = 1 + (computed.level >= 4 ? 1 : 0) + (computed.level >= 7 ? 1 : 0)
-  const talentsKnown = Math.max(talentAllowanceForLevel(computed.level), character.talents.filter(talent => talent.name?.trim()).length)
+  const talentsAcquired = Math.max(talentAllowanceForLevel(computed.level), character.talents.length)
   const addRow = (key, shape) => update([key], [...character[key], { ...shape, id: crypto.randomUUID() }])
   const deleteRow = (key, id) => update([key], character[key].filter(row => row.id !== id))
   const deleteTalent = row => setCharacter(current => ({ ...current, talents: current.talents.filter(talent => talent.id !== row.id), removedBlankTalentRows: row.name?.trim() || row.ability?.trim() || row.duration?.trim() || row.notes?.trim() ? current.removedBlankTalentRows : number(current.removedBlankTalentRows) + 1, updatedAt: Date.now() }))
@@ -786,7 +778,7 @@ function CharacterSheet() {
         return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => update(['weapons',i,'name'],e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value={row.type} onChange={e => update(['weapons',i,'type'],e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
       }}
     </EditableTable>
-    <EditableTable title="Talents" icon="✹" subtitle={`Talents Known: ${talentsKnown}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
+    <EditableTable title="Talents" icon="✹" subtitle={`Talents Acquired: ${talentsAcquired}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
       {(row,i)=><><label className="talent-field"><span>Talent</span><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/></label><label className="talent-field"><span>Ability / Cost</span><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/></label><label className="talent-field"><span>Duration</span><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/></label><label className="talent-field"><span>Notes</span><AutoTextarea value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/></label><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
     </EditableTable>
     <EditableTable title="Items & Traits" icon="⚗" rows={character.items} add={() => addRow('items',{name:'',description:''})} columns={['Item / Trait','Description','']}>
