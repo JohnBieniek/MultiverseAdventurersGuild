@@ -53,6 +53,9 @@ function Navigation() {
             <Link to="/gm" className="nav-link">Game Masters</Link>
           </li>
           <li className="nav-item">
+            <Link to="/character-sheet" className="nav-link">Characters</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/contact" className="nav-link">Contact</Link>
           </li>
         </ul>
