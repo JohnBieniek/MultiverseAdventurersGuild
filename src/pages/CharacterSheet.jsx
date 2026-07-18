@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { FaBolt, FaBookOpen, FaBrain, FaBullseye, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaDumbbell, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMagic, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
-import { GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
+import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaBullseye, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaDumbbell, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMagic, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
+import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 import talentsText from '../content/players/talents.txt?raw'
 import speciesText from '../content/players/species.txt?raw'
 import archetypesText from '../content/players/archetypes.txt?raw'
 import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
+const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const stats = [
-  ['strength', 'Strength', 'STR', FaDumbbell], ['dexterity', 'Dexterity', 'DEX', FaHandPaper],
+  ['strength', 'Strength', 'STR', GiBiceps], ['dexterity', 'Dexterity', 'DEX', FaHandPaper],
   ['endurance', 'Endurance', 'END', FaHeart], ['intuition', 'Intuition', 'INT', FaBrain],
   ['education', 'Education', 'EDU', FaBookOpen], ['charisma', 'Charisma', 'CHA', FaCommentDots],
 ]
@@ -18,8 +19,8 @@ const skillDefs = [
   ['outdoors', 'Outdoors', 'intuition', FaTree], ['sneak', 'Sneak', 'dexterity', FaUserSecret],
   ['technology', 'Technology', 'education', FaMicrochip], ['vehicle', 'Vehicle', 'dexterity', FaCar],
 ]
-const sectionIcons = { 'Combat Summary': GiBroadsword, Stats: FaChartBar, Skills: FaStar, Attack: GiCrossedAxes, Weapons: GiCrossedSwords, Talents: FaSun, 'Items & Traits': FaFlask, Contacts: FaUsers, 'Session Notes': FaStickyNote }
-const vitalIcons = { Initiative: FaCrosshairs, 'HP Current': FaHeartbeat, 'HP Max': FaHeart, Defense: FaShieldAlt, Resilience: FaHeart, Ego: FaBrain, 'Energy Current': FaBolt, 'Energy Max': FaBolt, 'Max Force': FaSun }
+const sectionIcons = { 'Combat Summary': GiBroadsword, Stats: FaChartBar, Skills: FaStar, Attack: GiCrossedAxes, Weapons: GiCrossedSwords, Talents: FaAsterisk, 'Items & Traits': FaFlask, Contacts: FaUsers, 'Session Notes': FaStickyNote }
+const vitalIcons = { Initiative: FaCrosshairs, HP: FaHeartbeat, Defense: FaShieldAlt, Resilience: FaHeart, Ego: FaBrain, Energy: FaBolt, 'Max Force': FaSun }
 const startingStatArray = [3, 2, 1, 0, 0, -1]
 const weaponTypes = [
   ['Unarmed / Tiny Melee', 'melee', 4, 0], ['Light Melee', 'melee', 6, 0],
@@ -27,6 +28,50 @@ const weaponTypes = [
   ['Holdout Ranged', 'ranged', 4, 0], ['Compact Ranged', 'ranged', 6, 0],
   ['Longarm Ranged', 'ranged', 8, 0], ['Heavy Ranged', 'ranged', 10, 0],
 ]
+const weaponLoadouts = {
+  Barbarian: [['Notched Seax','Light Melee'],['Stonehead War Club','Medium Melee'],['Worldsplitter Greataxe','Heavy Melee'],['Iron Throwing Axe','Holdout Ranged']],
+  'Bounty Hunter': [['Capture Knife','Light Melee'],['Arc-Cuff Shock Baton','Medium Melee'],['Sleeve Dartcaster','Holdout Ranged'],['Tracker Carbine','Longarm Ranged']],
+  Brainiac: [['Laser Scalpel','Light Melee'],['Telescoping Logic Staff','Medium Melee'],['Palm-Sized Beam Emitter','Holdout Ranged']],
+  Cleric: [['Consecrated Dirk','Light Melee'],['Reliquary Warhammer','Medium Melee'],['Bolt of Judgment','Holdout Ranged']],
+  Commando: [['Black-Ops Combat Knife','Light Melee'],['Tactical Tomahawk','Medium Melee'],['Suppressed Service Pistol','Holdout Ranged'],['Modular Assault Rifle','Longarm Ranged']],
+  Criminal: [['Spring-Loaded Switchblade','Light Melee'],['Weighted Tire Thumper','Medium Melee'],['Filed-Off Snub Revolver','Holdout Ranged']],
+  Druid: [['Moon-Crescent Sickle','Light Melee'],['Living Oak Staff','Medium Melee'],['Thornspitter Seedpod','Holdout Ranged']],
+  'Eco Terrorist': [['Fieldcraft Knife','Light Melee'],['Brush-Clearing Machete','Medium Melee'],['Recurve Hunting Bow','Compact Ranged']],
+  'Ex-Company Man': [['Monofilament Letter Opener','Light Melee'],['Executive Shock Cane','Medium Melee'],['Biometric Holdout Pistol','Holdout Ranged']],
+  'Ex-Cop': [['Patrol Utility Knife','Light Melee'],['Expandable Riot Baton','Medium Melee'],['Department-Issue Sidearm','Holdout Ranged'],['Less-Lethal Riot Shotgun','Longarm Ranged']],
+  'Ex-Military': [['Trench Knife','Light Melee'],['Entrenching Tool','Medium Melee'],['Veteran\'s Service Pistol','Holdout Ranged'],['Battle-Worn Pulse Rifle','Longarm Ranged']],
+  Face: [['Jeweled Stiletto','Light Melee'],['Silver-Headed Sword Cane','Medium Melee'],['Pearl-Grip Pocket Pistol','Holdout Ranged']],
+  Fixer: [['Ledger Knife','Light Melee'],['Chrome Pipe Wrench','Medium Melee'],['Unregistered Compact Pistol','Holdout Ranged']],
+  Ganger: [['Neon-Edged Kukri','Light Melee'],['Chain-Wrapped Slugger','Medium Melee'],['Homemade Zip Gun','Holdout Ranged'],['Spraypainted Machine Pistol','Compact Ranged']],
+  'Gonzo Journalist': [['Boot-Hidden Penknife','Light Melee'],['Armored Camera Monopod','Medium Melee'],['Press-Pass Derringer','Holdout Ranged']],
+  Gunslinger: [['Buffalo-Horn Bowie Knife','Light Melee'],['Weathered Cavalry Saber','Medium Melee'],['Last-Chance Derringer','Holdout Ranged'],['Silver-Comet Revolver','Holdout Ranged'],['Mesa Wind Lever Rifle','Longarm Ranged']],
+  Hacker: [['Ceramic Data Knife','Light Melee'],['Overclocked Shock Baton','Medium Melee'],['Ghost-Key Smart Pistol','Holdout Ranged']],
+  'Mad Bomber': [['Demolition Knife','Light Melee'],['Blast-Shield Crowbar','Medium Melee'],['Jury-Rigged Grenade Launcher','Compact Ranged']],
+  Mage: [['Runed Athame','Light Melee'],['Astrolabe Staff','Medium Melee'],['Prismatic Force Dart','Holdout Ranged']],
+  Mercenary: [['Contractor Combat Knife','Light Melee'],['Carbon-Steel Machete','Medium Melee'],['Reliable Heavy Pistol','Holdout Ranged'],['Short-Barrel Battle Carbine','Longarm Ranged']],
+  Monk: [['Iron Palm Technique','Unarmed / Tiny Melee'],['Seven-Ring Temple Staff','Medium Melee']],
+  Ninja: [['Shadowglass Kunai','Light Melee'],['Night-Reed Katana','Medium Melee'],['Whispering Shuriken','Holdout Ranged'],['Lacquered Shortbow','Compact Ranged']],
+  Performer: [['Tuning-Fork Dagger','Light Melee'],['Ironwood Battle Lute','Medium Melee'],['Shattering High Note','Holdout Ranged']],
+  'Private Eye/Investigator': [['Casebook Switchblade','Light Melee'],['Lead-Cored Walking Cane','Medium Melee'],['Rainy-Night Revolver','Holdout Ranged']],
+  Screamer: [['Pit-Crew Utility Blade','Light Melee'],['Torque-Bar Club','Medium Melee'],['Dashboard-Locked Autopistol','Holdout Ranged']],
+  Shaman: [['Ancestor-Bone Knife','Light Melee'],['Totem-Crowned Spirit Staff','Medium Melee'],['Vengeful Spirit Dart','Holdout Ranged']],
+  Smuggler: [['Vacuum-Sealed Vibroknife','Light Melee'],['Cargo-Bay Collapsible Baton','Medium Melee'],['Customs-Runner Holdout','Holdout Ranged'],['Cut-Down Boarding Blaster','Compact Ranged']],
+  Sniper: [['Silent Field Knife','Light Melee'],['Climber\'s Hatchet','Medium Melee'],['Close-Defense Sidearm','Holdout Ranged'],['Horizon-Piercer Rifle','Heavy Ranged']],
+  Spy: [['Sleeve-Hidden Garrote','Unarmed / Tiny Melee'],['Diplomat\'s Concealed Rapier','Medium Melee'],['Cufflink Flechette Pistol','Holdout Ranged']],
+  'Street Doc': [['Trauma Scalpel','Light Melee'],['Defibrillator Shock Baton','Medium Melee'],['Mercy-Dart Tranquilizer','Holdout Ranged']],
+  'Street Samurai': [['White-Handle Tanto','Light Melee'],['Crimson Circuit Katana','Medium Melee'],['Clan-Locked Smart Pistol','Holdout Ranged'],['Ronin Compact SMG','Compact Ranged']],
+  Warlock: [['Pact-Signed Sacrificial Dagger','Light Melee'],['Void-Iron Hexblade','Medium Melee'],['Eldritch Starbolt','Holdout Ranged']],
+}
+const populateArchetypeWeapons = (existingWeapons, archetypeName) => {
+  const weapons = existingWeapons.filter(weapon => weapon.source !== 'archetype').map(weapon => ({ ...weapon }))
+  ;(weaponLoadouts[archetypeName] || []).forEach(([name, type]) => {
+    const weapon = { id: crypto.randomUUID(), name, type, enhancement: 0, notes: '', source: 'archetype' }
+    const emptyIndex = weapons.findIndex(entry => !entry.name?.trim() && !entry.notes?.trim() && !number(entry.enhancement))
+    if (emptyIndex >= 0) weapons[emptyIndex] = { ...weapon, id: weapons[emptyIndex].id || weapon.id }
+    else weapons.push(weapon)
+  })
+  return weapons
+}
 const number = value => Number(value) || 0
 const talentCatalog = (() => {
   const lines = talentsText.split(/\r?\n/).map(line => line.trim())
@@ -35,7 +80,7 @@ const talentCatalog = (() => {
     const buff = line.match(/^Buff Option:\s*(.+)$/i)
     if (buff) { headings.push({ name: buff[1].replace(/:$/, ''), index }); return }
     const next = lines.slice(index + 1).find(Boolean) || ''
-    if (/^Description:/i.test(next) && !line.includes(': ')) headings.push({ name: line.replace(/:$/, ''), index })
+    if (line && /^Description:/i.test(next) && !line.includes(': ')) headings.push({ name: line.replace(/:$/, ''), index })
   })
   return headings.map((heading, index) => {
     const block = lines.slice(heading.index + 1, headings[index + 1]?.index ?? lines.length).filter(Boolean)
@@ -64,7 +109,7 @@ const archetypeOptions = (() => {
     const strengths = (block.find(entry => /^Strengths:/i.test(entry)) || '').replace(/^Strengths:\s*/i, '').split(',').map(value => value.trim())
     const weaknesses = (block.find(entry => /^Weaknesses:/i.test(entry)) || '').replace(/^Weaknesses:\s*/i, '').split(',').map(value => value.trim())
     const personalityIndex = block.findIndex(entry => /^Personality:/i.test(entry))
-    const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality:\s*/i, '')).map(entry => entry.match(/^(.+?)\s+-\s+.+$/)?.[1]?.trim()).filter(Boolean)
+    const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality:\s*/i, '')).map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null }).filter(Boolean)
     return {
       name: line.split(' - ')[0].trim(), strengths, weaknesses, traits,
       stats: Object.fromEntries(stats.map(([key, label]) => [key, number(scoresLine.match(new RegExp(`${label}\\s+([+-]?\\d+)`, 'i'))?.[1])])),
@@ -91,10 +136,22 @@ function CharacterSheet() {
   const [characters, setCharacters] = useState(() => {
     try { return JSON.parse(localStorage.getItem(STORE_KEY)) || [] } catch { return [] }
   })
-  const [character, setCharacter] = useState(null)
+  const [character, setCharacter] = useState(() => {
+    try {
+      const activeId = localStorage.getItem(ACTIVE_CHARACTER_KEY)
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY)) || []
+      const active = saved.find(hero => hero.id === activeId)
+      return active ? structuredClone(active) : null
+    } catch { return null }
+  })
   const [roll, setRoll] = useState(null)
   const [notice, setNotice] = useState('')
   const fileRef = useRef(null)
+
+  useEffect(() => {
+    if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
+    else localStorage.removeItem(ACTIVE_CHARACTER_KEY)
+  }, [character])
 
   useEffect(() => {
     if (!character) return
@@ -107,7 +164,19 @@ function CharacterSheet() {
       if (ability !== row.ability || notes !== row.notes) changed = true
       return { ...row, ability, notes }
     })
-    if (changed) setCharacter(current => ({ ...current, talents, updatedAt: Date.now() }))
+    const archetype = archetypeOptions.find(option => option.name === character.archetype)
+    const items = character.items.map(row => {
+      const trait = archetype?.traits.find(option => option.name === row.name)
+      const legacyArchetypeRow = row.source === 'archetype' || row.bonus === 'Archetype trait' || row.appliesTo === character.archetype || /^Archetype trait\s*[—-]/i.test(row.description || '')
+      if (!trait || !legacyArchetypeRow) return row
+      if (row.description === trait.description && !row.bonus && !row.appliesTo) return row
+      changed = true
+      return { ...row, description: trait.description, bonus: '', appliesTo: '', source: 'archetype' }
+    })
+    const needsWeaponLoadout = Boolean(archetype && character.weaponLoadoutAppliedFor !== character.archetype)
+    const weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype) : character.weapons
+    if (needsWeaponLoadout) changed = true
+    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, weaponLoadoutAppliedFor: needsWeaponLoadout ? character.archetype : current.weaponLoadoutAppliedFor, updatedAt: Date.now() }))
   }, [character])
 
   useEffect(() => {
@@ -175,17 +244,18 @@ function CharacterSheet() {
     priority.slice(3, 6).forEach(key => { allocation[key] = 1 })
     setCharacter(current => {
       const items = current.items.filter(item => item.source !== 'archetype').map(item => ({ ...item }))
-      preset.traits.forEach(name => {
-        const trait = { id: crypto.randomUUID(), name, bonus: 'Archetype trait', appliesTo: preset.name, source: 'archetype' }
-        const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
+      preset.traits.forEach(({ name, description }) => {
+        const trait = { id: crypto.randomUUID(), name, description, source: 'archetype' }
+        const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.description || '').trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
         if (emptyIndex >= 0) items[emptyIndex] = { ...trait, id: items[emptyIndex].id || trait.id }
         else items.push(trait)
       })
+      const weapons = populateArchetypeWeapons(current.weapons, preset.name)
       return {
         ...current, archetype: preset.name, stats: { ...current.stats, ...preset.stats },
         attackSkill: allocation.attack,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
-        items, updatedAt: Date.now(),
+        items, weapons, weaponLoadoutAppliedFor: preset.name, updatedAt: Date.now(),
       }
     })
     flash(`${preset.name} starting scores, skills, and traits applied`)
@@ -261,7 +331,7 @@ function CharacterSheet() {
       <Field label="Hero name" value={character.name} onChange={v => update(['name'], v)} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={v => update(['species'], v)}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} onChange={applyArchetype}/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
-      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP Current" editable value={character.currentHp} onChange={v => update(['currentHp'], v)}/><Vital label="HP Max" value={computed.maxHp}/><Vital label="Defense" value={computed.defense}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy Current" editable value={character.currentEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Energy Max" value={computed.maxEnergy}/><Vital label="Max Force" value={computed.maxForce}/></div>
+      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><Vital label="Defense" value={computed.defense}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
     </section>
 
     <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong>{label} <span>({short})</span></strong></div><ScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
@@ -285,7 +355,14 @@ function CharacterSheet() {
     <section className="sheet-section"><SectionTitle icon="✦" title="Attack" subtitle="Attack skill applies to melee and ranged attacks"/><div className="attack-summary"><label className="field"><span>Attack skill</span><ScoreControl label="Attack skill" value={character.attackSkill} options={[-1, 0, 1, 2]} onChange={v => update(['attackSkill'], v)}/></label><Field label="Modifier" type="number" value={character.attackModifier} onChange={v => update(['attackModifier'], v)}/><div><span>Melee total</span><strong>{signed(number(character.stats.strength) + number(character.attackSkill) + number(character.attackModifier))}</strong></div><div><span>Ranged total</span><strong>{signed(number(character.stats.dexterity) + number(character.attackSkill) + number(character.attackModifier))}</strong></div><Field label="Defense bonus" type="number" value={character.defenseBonus} onChange={v => update(['defenseBonus'], v)}/><Field label="Defense rating" type="number" value={character.defenseRating} onChange={v => update(['defenseRating'], v)}/></div></section>
 
     <EditableTable title="Weapons" icon="⚔" rows={character.weapons} add={() => addRow('weapons', { name: '', type: weaponTypes[0][0], enhancement: 0, notes: '' })} remove={id => deleteRow('weapons', id)} columns={['Name','Type','Enhancement','Notes','']}>{(row, i) => <><input aria-label="Weapon name" value={row.name} onChange={e => update(['weapons',i,'name'],e.target.value)}/><select aria-label="Weapon type" value={row.type} onChange={e => update(['weapons',i,'type'],e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/><input aria-label="Weapon notes" value={row.notes} onChange={e => update(['weapons',i,'notes'],e.target.value)}/><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>}</EditableTable>
-    <div className="sheet-columns lower"><EditableTable title="Talents" icon="✹" rows={character.talents} add={() => addRow('talents',{name:'',ability:'',notes:''})} columns={['Talent','Ability / Cost','Notes','']}>{(row,i)=><><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/><input value={row.notes} onChange={e=>update(['talents',i,'notes'],e.target.value)}/><button className="icon-button" onClick={()=>deleteRow('talents',row.id)}>×</button></>}</EditableTable><EditableTable title="Items & Traits" icon="⚗" rows={character.items} add={() => addRow('items',{name:'',bonus:'',appliesTo:''})} columns={['Name','Bonus','Applies to','']}>{(row,i)=><><input value={row.name} onChange={e=>update(['items',i,'name'],e.target.value)}/><input value={row.bonus} onChange={e=>update(['items',i,'bonus'],e.target.value)}/><input value={row.appliesTo} onChange={e=>update(['items',i,'appliesTo'],e.target.value)}/><button className="icon-button" onClick={()=>deleteRow('items',row.id)}>×</button></>}</EditableTable></div>
+    <div className="sheet-columns lower">
+      <EditableTable title="Talents" icon="✹" rows={character.talents} add={() => addRow('talents',{name:'',ability:'',notes:''})} columns={['Talent','Ability / Cost','Notes','']}>
+        {(row,i)=><><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/><input value={row.notes} onChange={e=>update(['talents',i,'notes'],e.target.value)}/><button className="icon-button" onClick={()=>deleteRow('talents',row.id)}>×</button></>}
+      </EditableTable>
+      <EditableTable title="Items & Traits" icon="⚗" rows={character.items} add={() => addRow('items',{name:'',description:''})} columns={['Item / Trait','Description','']}>
+        {(row,i)=><><input value={row.name} onChange={e=>update(['items',i,'name'],e.target.value)}/><textarea rows="2" value={row.description ?? [row.bonus,row.appliesTo].filter(Boolean).join(' — ')} onChange={e=>update(['items',i,'description'],e.target.value)}/><button className="icon-button" onClick={()=>deleteRow('items',row.id)}>×</button></>}
+      </EditableTable>
+    </div>
     <div className="sheet-columns lower"><EditableTable title="Contacts" icon="♟" rows={character.contacts} add={() => addRow('contacts',{name:'',role:''})} columns={['Name','Relationship / Role','']}>{(row,i)=><><input value={row.name} onChange={e=>update(['contacts',i,'name'],e.target.value)}/><input value={row.role} onChange={e=>update(['contacts',i,'role'],e.target.value)}/><button className="icon-button" onClick={()=>deleteRow('contacts',row.id)}>×</button></>}</EditableTable><section className="sheet-section notes"><SectionTitle icon="✎" title="Session Notes"/><textarea value={character.notes} onChange={e=>update(['notes'],e.target.value)} placeholder="Conditions, mission clues, inventory, reminders…"/></section></div>
     {notice && <div className="toast">{notice}</div>}{roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>} 
   </div>
@@ -297,7 +374,7 @@ function NumberInput({ value, onChange }) { return <input className="number-inpu
 function ScoreControl({ label, value, options, onChange, isOptionDisabled = () => false }) { const hasPreset = value !== '' && options.includes(number(value)); return <div className="score-control"><select aria-label={`${label} preset`} value={hasPreset ? number(value) : ''} onChange={e => onChange(e.target.value)}><option value="">Custom</option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select><input aria-label={`${label} custom value`} type="number" min="-4" max="4" value={value} onChange={e => onChange(e.target.value)}/></div> }
 function TalentControl({ value, onChange }) { return <div className="talent-control"><select aria-label="Choose a talent" value={talentNames.includes(value) ? value : ''} onChange={e => onChange(e.target.value)}><option value="">Choose a talent</option>{talentNames.map(name => <option value={name} key={name}>{name}</option>)}</select></div> }
 function SectionTitle({ title, subtitle }) { const reminders = { 'Combat Summary': 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', Attack: 'One Skill is used for both melee and ranged attacks. Talents can add damage.', Skills: `${subtitle} You can activate one Skill per turn.`, Talents: 'You can activate two Talents per turn. Sustained combat Talents occupy your available Talent Slots.', Weapons: 'You can attack once each turn, or move an extra 30 feet instead.' }; const note = reminders[title] || subtitle; const Icon = sectionIcons[title] || FaStar; return <div className="section-title"><h2><span><Icon/></span>{title}</h2>{note && <p>{note}</p>}</div> }
-function Vital({ label, value, max, editable, onChange, roll }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<span>{label}</span>{editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : <strong>{value}</strong>}{max !== undefined && <small>/ {max} max</small>}{roll && <button className="roll-button" onClick={roll}>Roll</button>}</div> }
+function Vital({ label, value, max, editable, onChange, roll }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<span>{label}</span>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : <strong>{value}</strong>}{roll && <button className="roll-button" onClick={roll}>Roll</button>}</div> }
 function EditableTable({ title, icon, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; return <div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className="die-result">{roll.natural}</div><div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div> }
