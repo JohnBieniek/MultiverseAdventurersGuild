@@ -50,7 +50,7 @@ function Navigation() {
             <Link to="/players" className="nav-link">Players</Link>
           </li>
           <li className="nav-item">
-            <Link to="/gm" className="nav-link">Game Masters</Link>
+            <Link to="/gm" className="nav-link"><span className="gm-label-full">Game Masters</span><span className="gm-label-mobile">GMs</span></Link>
           </li>
           <li className="nav-item">
             <Link to="/character-sheet" className="nav-link">Characters</Link>
