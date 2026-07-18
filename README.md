@@ -89,6 +89,21 @@ npm run build
 
 This will create an optimized production build in the `dist/` directory.
 
+## Deploying to Cloudflare Pages
+
+Build the site and deploy the generated `dist` directory with Wrangler:
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name multiverse-adventurers-guild
+```
+
+For first-time setup, authenticate with Cloudflare before deploying:
+
+```bash
+npx wrangler login
+```
+
 ## Technologies Used
 
 - React 18
