@@ -748,10 +748,10 @@ function CharacterSheet() {
           const statScore = character.stats[defaultStat]
           return <div className="skill-row" key={key}>
             <strong className="skill-name"><Icon/><span>{label} <small className="skill-stat-full">({statName})</small><small className="skill-stat-short">({statShort})</small></span></strong>
-            <output className="skill-stat">{signed(statScore)}</output>
-            <SkillScoreControl label={`${label} ability`} value={character.skills[key].ability} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable(key, option)} onChange={v => update(['skills', key, 'ability'], v)}/>
-            {['modifier','buffs','debuffs'].map(field => <NumberInput key={field} value={character.skills[key][field]} onChange={v => update(['skills', key, field], field === 'debuffs' ? -Math.abs(number(v)) : v)}/>)}
-            <div className="skill-total"><output>{signed(total)}</output><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div>
+            <div className="skill-field"><small>Stat</small><output className="skill-stat">{signed(statScore)}</output></div>
+            <div className="skill-field"><small>Ability</small><SkillScoreControl label={`${label} ability`} value={character.skills[key].ability} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable(key, option)} onChange={v => update(['skills', key, 'ability'], v)}/></div>
+            {['modifier','buffs','debuffs'].map(field => <div className="skill-field" key={field}><small>{field === 'modifier' ? 'Mod' : field === 'buffs' ? 'Buff' : 'Debuff'}</small><NumberInput value={character.skills[key][field]} onChange={v => update(['skills', key, field], field === 'debuffs' ? -Math.abs(number(v)) : v)}/></div>)}
+            <div className="skill-total"><small>Total</small><output>{signed(total)}</output><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div>
           </div>
         })}
       </section></div>
@@ -767,7 +767,7 @@ function CharacterSheet() {
       }}
     </EditableTable>
     <EditableTable title="Talents" icon="✹" subtitle={`Talents Known: ${talentsKnown}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
-      {(row,i)=><><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/><AutoTextarea value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
+      {(row,i)=><><label className="talent-field"><span>Talent</span><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/></label><label className="talent-field"><span>Ability / Cost</span><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/></label><label className="talent-field"><span>Duration</span><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/></label><label className="talent-field"><span>Notes</span><AutoTextarea value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/></label><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
     </EditableTable>
     <EditableTable title="Items & Traits" icon="⚗" rows={character.items} add={() => addRow('items',{name:'',description:''})} columns={['Item / Trait','Description','']}>
       {(row,i)=><><input aria-label="Item or trait" placeholder="Item / Trait" value={row.name} onChange={e=>update(['items',i,'name'],e.target.value)}/><AutoTextarea value={row.description ?? [row.bonus,row.appliesTo].filter(Boolean).join(' — ')} onChange={value=>update(['items',i,'description'],value)}/><button className="icon-button" onClick={()=>deleteRow('items',row.id)}>×</button></>}
