@@ -1,5 +1,5 @@
 .sheet-page { --green:#183d28; --green2:#2f6339; --gold:#c8993b; --ink:#18211b; padding:1rem 0 2rem; color:var(--ink); }
-@media(min-width:1921px){.sheet-page{position:relative;left:50%;width:75vw;max-width:none;transform:translateX(-50%)}.sheet-library{max-width:none}}
+@media(min-width:1921px){.sheet-page{position:relative;left:50%;width:75vw;max-width:none;transform:translateX(-50%)}.sheet-library{max-width:none;margin-left:0;margin-right:0}}
 .sheet-page button,.sheet-page input,.sheet-page select,.sheet-page textarea { font:inherit; }
 .sheet-page button { border:1px solid #b9c4bb; border-radius:7px; background:#fff; padding:.5rem .75rem; color:var(--ink); font-weight:700; }
 .sheet-page button:hover { border-color:var(--green2); background:#f4f8f3; }

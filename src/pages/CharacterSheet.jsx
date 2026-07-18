@@ -97,6 +97,20 @@ function CharacterSheet() {
   const fileRef = useRef(null)
 
   useEffect(() => {
+    if (!character) return
+    let changed = false
+    const talents = character.talents.map(row => {
+      const talent = talentCatalog.find(option => option.name === row.name)
+      if (!talent) return row
+      const ability = row.ability || talent.ability
+      const notes = row.notes || talent.notes
+      if (ability !== row.ability || notes !== row.notes) changed = true
+      return { ...row, ability, notes }
+    })
+    if (changed) setCharacter(current => ({ ...current, talents, updatedAt: Date.now() }))
+  }, [character])
+
+  useEffect(() => {
     if (!character || character.autoSave === false) return
     setCharacters(current => {
       const saved = { ...character, updatedAt: Date.now() }
