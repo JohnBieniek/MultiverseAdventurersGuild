@@ -1,5 +1,6 @@
 .sheet-page { --green:#183d28; --green2:#2f6339; --gold:#c8993b; --ink:#18211b; padding:1rem 0 2rem; color:var(--ink); }
 @media(max-width:700px){.sheet-page .skill-name{font-size:.99rem!important}.sheet-page .skill-name .skill-stat-full{font-size:.68rem}}
+@media(max-width:700px){.sheet-page .vital-grid>.vital:first-child{grid-column:1/-1;justify-self:center;width:calc(50% - .15rem);box-sizing:border-box;border-right:0}.sheet-page .vital-grid>.vital:last-child{grid-column:auto;justify-self:stretch;width:auto}}
 @media(min-width:1921px){.sheet-page{position:relative;left:50%;width:75vw;max-width:none;transform:translateX(-50%)}.sheet-page.sheet-library{max-width:none;margin-left:0;margin-right:0}}
 .sheet-page button,.sheet-page input,.sheet-page select,.sheet-page textarea { font:inherit; }
 .sheet-page select{appearance:none;-webkit-appearance:none;padding-right:2rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23303830' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .7rem center;background-size:.65rem auto}
