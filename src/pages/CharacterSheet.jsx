@@ -771,7 +771,7 @@ function CharacterSheet() {
             <div className="skill-field"><small>Stat</small><output className="skill-stat">{signed(statScore)}</output></div>
             <div className="skill-field"><small>Ability</small><SkillScoreControl label={`${label} ability`} value={character.skills[key].ability} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable(key, option)} onChange={v => update(['skills', key, 'ability'], v)}/></div>
             {['modifier','buffs','debuffs'].map(field => <div className="skill-field" key={field}><small>{field === 'modifier' ? 'Modifier' : field === 'buffs' ? 'Buffs' : 'Debuffs'}</small><NumberInput value={character.skills[key][field]} onChange={v => update(['skills', key, field], field === 'debuffs' ? -Math.abs(number(v)) : v)}/></div>)}
-            <div className="skill-total"><small>Total</small><output>{signed(total)}</output><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div>
+            <div className="skill-total"><small>Total</small><div className="skill-total-actions"><output>{signed(total)}</output><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div></div>
           </div>
         })}
       </section></div>
