@@ -501,7 +501,13 @@ function CharacterSheet() {
   useEffect(() => {
     if (!character) return
     let changed = false
-    let talents = character.talents
+    let talents = character.talents.map(row => {
+      if (row.duration?.trim()) return row
+      const catalogTalent = talentCatalog.find(talent => talent.name === row.name)
+      if (!catalogTalent?.duration) return row
+      changed = true
+      return { ...row, duration: catalogTalent.duration }
+    })
     const archetype = archetypeOptions.find(option => option.name === character.archetype)
     const talentAllowance = talentAllowanceForLevel(character.level)
     const previousTalentAllowance = character.talentRowsGrantedForLevel
