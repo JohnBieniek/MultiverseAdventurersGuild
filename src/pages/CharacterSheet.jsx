@@ -456,7 +456,7 @@ const populateArchetypeTalents = (existingTalents, archetype, maximumTalents) =>
     else talents.push(talent)
   })
   const remainingTalentRows = Math.max(0, maximumTalents - talents.length)
-  if (remainingTalentRows) talents.push(...blankRows(remainingTalentRows, { name: '', ability: '', duration: '', notes: '' }))
+  if (remainingTalentRows) talents.push(...blankRows(remainingTalentRows, { name: '', ability: '', duration: '', notes: '', source: 'level-progression' }))
   return talents
 }
 const blankRows = (count, shape) => Array.from({ length: count }, () => ({ ...shape, id: crypto.randomUUID() }))
@@ -510,12 +510,20 @@ function CharacterSheet() {
     })
     const archetype = archetypeOptions.find(option => option.name === character.archetype)
     const talentAllowance = talentAllowanceForLevel(character.level)
+    if (talentAllowance === 0) {
+      const levelZeroTalents = talents.filter(talent => {
+        const blank = !talent.name?.trim() && !talent.ability?.trim() && !talent.duration?.trim() && !talent.notes?.trim()
+        return !blank && !['archetype', 'level-progression'].includes(talent.source)
+      })
+      if (levelZeroTalents.length !== talents.length) changed = true
+      talents = levelZeroTalents
+    }
     const previousTalentAllowance = character.talentRowsGrantedForLevel
     let talentRowsGrantedForLevel = previousTalentAllowance
     let removedBlankTalentRows = character.removedBlankTalentRows
     if (removedBlankTalentRows == null) {
       const missingTalentRows = Math.max(0, talentAllowance - talents.length)
-      if (missingTalentRows) talents = [...talents, ...blankRows(missingTalentRows, { name: '', ability: '', duration: '', notes: '' })]
+      if (missingTalentRows) talents = [...talents, ...blankRows(missingTalentRows, { name: '', ability: '', duration: '', notes: '', source: 'level-progression' })]
       removedBlankTalentRows = 0
       changed = true
     }
@@ -523,7 +531,19 @@ function CharacterSheet() {
       talentRowsGrantedForLevel = talentAllowance
       changed = true
     } else if (talentAllowance > previousTalentAllowance) {
-      talents = [...talents, ...blankRows(talentAllowance - previousTalentAllowance, { name: '', ability: '', duration: '', notes: '' })]
+      talents = [...talents, ...blankRows(talentAllowance - previousTalentAllowance, { name: '', ability: '', duration: '', notes: '', source: 'level-progression' })]
+      talentRowsGrantedForLevel = talentAllowance
+      changed = true
+    } else if (talentAllowance < previousTalentAllowance) {
+      let rowsToRetract = previousTalentAllowance - talentAllowance
+      talents = [...talents]
+      for (let index = talents.length - 1; index >= 0 && rowsToRetract > 0; index -= 1) {
+        const talent = talents[index]
+        const blank = !talent.name?.trim() && !talent.ability?.trim() && !talent.duration?.trim() && !talent.notes?.trim()
+        if (!blank && !['archetype', 'level-progression'].includes(talent.source)) continue
+        talents.splice(index, 1)
+        rowsToRetract -= 1
+      }
       talentRowsGrantedForLevel = talentAllowance
       changed = true
     }
