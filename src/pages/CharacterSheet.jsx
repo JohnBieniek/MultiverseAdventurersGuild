@@ -68,6 +68,8 @@ const weaponLoadouts = {
 const weaponStyleByArchetype = {
   Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Brainiac: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
 }
+const weaponVariantDescriptors = ['Balanced', 'Battle-Worn', 'Blackened', 'Custom', 'Engraved', 'Masterwork', 'Reinforced', 'Relic', 'Runed', 'Veteran']
+const expandWeaponNames = names => names.flatMap(name => weaponVariantDescriptors.map((descriptor, index) => index ? `${descriptor} ${name}` : name))
 const weaponStylePools = {
   modern: {
     'Unarmed / Tiny Melee': ['Knuckle-Duster', 'Palm Sap', 'Garrote Wire', 'Weighted Gloves'],
@@ -186,7 +188,7 @@ const populateArchetypeWeapons = (existingWeapons, archetypeName) => {
     const style = weaponStyleByArchetype[archetypeName] || 'modern'
     const specificPool = archetypeWeaponVariants[archetypeName]?.[slotIndex]
     const generalPool = [defaultName, ...(weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || [])]
-    const pool = (specificPool || generalPool).filter(name => !usedNames.has(name))
+    const pool = expandWeaponNames(specificPool || generalPool).filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
     const weapon = { id: crypto.randomUUID(), name, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
@@ -265,10 +267,12 @@ const archetypeItemVariations = {
   Warlock: [['Hellglass Eye', '(+2) Intuition — Reveals bargains, bindings, and the attention of distant powers.'], ['Ashen Summoner’s Coat', '(+1) Sneak — Swallows light and the traces left by forbidden rituals.']],
 }
 const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
+const itemVariantDescriptors = ['Field-Tested', 'Handcrafted', 'Heirloom', 'Journeyman', 'Masterwork', 'Mission-Worn', 'Personalized', 'Reinforced', 'Signature', 'Veteran']
+const expandItemCandidates = candidates => candidates.flatMap(candidate => itemVariantDescriptors.map((descriptor, index) => index ? [`${descriptor} ${candidate[0]}`, candidate[1]] : candidate))
 const populateArchetypeItems = (existingItems, archetypeName) => {
   const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
   const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
-  const candidates = [...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])]
+  const candidates = expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])])
   const selectedItems = candidates.map(candidate => ({ candidate, order: Math.random() })).sort((a, b) => a.order - b.order).slice(0, 3).map(entry => entry.candidate)
   selectedItems.forEach(([name, description]) => {
     const item = { id: crypto.randomUUID(), name, description, source: 'archetype-item' }
@@ -363,14 +367,20 @@ const specializedContactNames = {
   'Time traveler': ['After', 'Anachron', 'Before', 'Clockwise', 'Continuum', 'Daybreak-7', 'Epoch', 'Elsewhen', 'Future Perfect', 'Hourglass', 'Janus-12', 'Last Tuesday', 'Loop', 'Meridian-0', 'Neverwhen', 'Next Year', 'Paradox', 'Retrograde', 'Secondhand', 'Soon', 'Tachyon', 'Tomorrow-9', 'Tuesday Again', 'When', 'Yesterday-Prime'],
   'Cult leader': ['Apostle Veyra', 'Brother Zenith', 'Chosen Orison', 'Daughter Radiant', 'Elder Seraph', 'Father Halcyon', 'Hierophant Lux', 'Mother Dominion', 'Oracle Ascendant', 'Pastor Rapture', 'Preceptor Sol', 'Prophet Auric', 'Reverend Ecstasy', 'Saint Vesper', 'Shepherd Crown', 'Sister Mercy', 'Speaker Eternal', 'The Anointed', 'Voice Celestial', 'Abbot Triumph', 'Canon Glory', 'Deacon Promise', 'Guru Sublime', 'Imam Infinite', 'Pontiff Dawn'],
 }
+const contactNameSuffixes = ['', 'Jr.', 'Sr.', 'II', 'III']
+const expandSpecializedContactNames = names => names.flatMap(name => contactNameSuffixes.map(suffix => suffix ? `${name} ${suffix}` : name))
 const contactNamePools = Object.fromEntries(contactCatalog.map(({ type, category, example }) => {
-  if (specializedContactNames[type]) return [type, specializedContactNames[type]]
+  if (specializedContactNames[type]) return [type, expandSpecializedContactNames(specializedContactNames[type])]
   const theme = contactNameThemes[category] || contactNameThemes['Information contacts']
   const offset = [...type].reduce((total, character) => total + character.charCodeAt(0), 0) % 5
   const names = example ? [example] : []
-  if (theme.names) theme.names.forEach((name, index) => { const candidate = theme.names[(index + offset) % theme.names.length]; if (names.length < 25 && !names.includes(candidate)) names.push(candidate) })
-  else (contactGivenNames[category] || contactGivenNames['Information contacts']).forEach((givenName, index, givenNames) => { const selectedIndex = (index + offset) % givenNames.length; const selectedGivenName = givenNames[selectedIndex]; const selectedSurname = (contactSurnames[category] || contactSurnames['Information contacts'])[selectedIndex]; const candidate = `${selectedGivenName} ${selectedSurname}`; const existingParts = names.map(name => name.toLowerCase().split(/\s+/)); const repeatsName = existingParts.some(parts => parts[0] === selectedGivenName.toLowerCase() || parts.at(-1) === selectedSurname.toLowerCase()); if (names.length < 25 && !repeatsName) names.push(candidate) })
-  return [type, names.slice(0, 25)]
+  if (theme.names) theme.names.forEach((name, index) => contactNameSuffixes.forEach(suffix => { const candidate = [theme.names[(index + offset) % theme.names.length], suffix].filter(Boolean).join(' '); if (names.length < 125 && !names.includes(candidate)) names.push(candidate) }))
+  else {
+    const givenNames = contactGivenNames[category] || contactGivenNames['Information contacts']
+    const surnames = contactSurnames[category] || contactSurnames['Information contacts']
+    givenNames.forEach((givenName, index) => surnames.slice(0, 5).forEach((_, surnameOffset) => { const candidate = `${givenName} ${surnames[(index + offset + surnameOffset) % surnames.length]}`; if (names.length < 125 && !names.includes(candidate)) names.push(candidate) }))
+  }
+  return [type, names.slice(0, 125)]
 }))
 const archetypeContactRoles = {
   Barbarian: ['Wilderness scout', 'Shaman', 'Caravan master', 'Witch', 'Ferryman'],
