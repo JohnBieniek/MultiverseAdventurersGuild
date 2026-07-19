@@ -68,14 +68,10 @@ const weaponLoadouts = {
 const weaponStyleByArchetype = {
   Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Brainiac: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
 }
-const weaponMakerMarks = {
-  modern: ['', 'Aegis', 'Bastion', 'Kestrel', 'Vanguard'], fantasy: ['', 'Anvilborn', 'Kingsroad', 'Redkeep', 'Thornwall'],
-  cyber: ['', 'Arclight', 'Ghostline', 'Ironbyte', 'Neon Forge'], mystic: ['', 'Astra', 'Eidolon', 'Solstice', 'Veilcross'],
-  science: ['', 'Curie', 'Faraday', 'Kepler', 'Turing'], street: ['', 'Black Alley', 'Five Points', 'Red Hook', 'Southside'],
-  elegant: ['', 'Bellacourt', 'Montrose', 'St. James', 'Valmont'], western: ['', 'Abilene', 'Deadwood', 'Laramie', 'Tombstone'],
-  martial: ['', 'Crane School', 'Jade Court', 'Red Lotus', 'White Tiger'],
-}
-const expandWeaponNames = (names, style) => names.flatMap(name => (weaponMakerMarks[style] || weaponMakerMarks.modern).map(mark => mark ? `${mark} ${name}` : name))
+const multiverseWeaponMakers = ['Abyssal Crown', 'Aetherline', 'Amber Circuit', 'Andromeda Forge', 'Ash Meridian', 'Astral Loom', 'Black Comet', 'Brass Horizon', 'Broken Halo', 'Cinder Vault', 'Clockwork Sun', 'Crimson Orbit', 'Dawn Engine', 'Deepwell', 'Dragon Gate', 'Dreaming Anvil', 'Eclipse Foundry', 'Ember Choir', 'Farstar', 'Fifth Moon', 'Glass Citadel', 'Gravestone Works', 'Green Nova', 'Hollow Crown', 'Iron Nebula', 'Ivory Signal', 'Jade Tempest', 'Last Parallax', 'Lightning Archive', 'Lost Atlas', 'Midnight Assembly', 'Mirror Forge', 'Ninefold', 'Obsidian Choir', 'Orichalcum Works', 'Pale Meteor', 'Phoenix Circuit', 'Quantum Pilgrim', 'Redshift', 'Riftwalker', 'Silver Labyrinth', 'Skygrave', 'Solar Reliquary', 'Starless Sea', 'Stormglass', 'Thorn Engine', 'Titan Wake', 'Umbral Foundry', 'Void Lantern', 'Worldroot']
+const nameOffset = name => [...name].reduce((total, character) => total + character.charCodeAt(0), 0)
+const selectionsForName = (name, values, count) => Array.from({ length: count }, (_, index) => values[(nameOffset(name) + index * 11) % values.length])
+const expandWeaponNames = names => names.flatMap(name => [name, ...selectionsForName(name, multiverseWeaponMakers, 4).map(maker => `${maker} ${name}`)])
 const weaponStylePools = {
   modern: {
     'Unarmed / Tiny Melee': ['Knuckle-Duster', 'Palm Sap', 'Garrote Wire', 'Weighted Gloves'],
@@ -152,7 +148,7 @@ const weaponStylePools = {
     'Light Melee': ['Buffalo-Horn Bowie', 'Arkansas Toothpick', 'Bone-Handle Skinner', 'Frontier Boot Knife'],
     'Medium Melee': ['Weathered Cavalry Saber', 'Trail Boss Hatchet', 'Mesquite War Club', 'Railroad Spike Hammer'],
     'Heavy Melee': ['Prospector Sledge', 'Buffalo Rifle Stock Club', 'Logging Greataxe', 'Long-Handle Pickaxe'],
-    'Holdout Ranged': ['Remington Double Derringer', 'Colt Sheriff’s Model', 'Smith & Wesson Schofield', 'Pepperbox Pistol'],
+    'Holdout Ranged': ['Borderland Double Derringer', 'Sheriff’s Short-Barrel Revolver', 'Schofield-Pattern Sidearm', 'Pepperbox Pistol'],
     'Compact Ranged': ['Mare’s Leg Carbine', 'Coach Gun', 'Volcanic Repeating Pistol', 'Cut-Down Winchester'],
     'Longarm Ranged': ['Winchester 1873', 'Sharps Buffalo Rifle', 'Henry Repeating Rifle', 'Colt Lightning Carbine'],
     'Heavy Ranged': ['Gatling Gun', 'Buffalo-Bore Wall Gun', 'Dynamite Projector', 'Tripod Maxim Gun'],
@@ -179,7 +175,7 @@ const minimumWeaponNamesPerType = 20
 const weaponNamePool = (archetypeName, type, extraNames = []) => {
   const style = weaponStyleByArchetype[archetypeName] || 'modern'
   const baseNames = weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || []
-  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames], style))]
+  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames]))]
   if (names.length < minimumWeaponNamesPerType) throw new Error(`${archetypeName} needs at least ${minimumWeaponNamesPerType} names for ${type}`)
   return names
 }
@@ -290,19 +286,9 @@ const archetypeItemVariations = {
   Warlock: [['Hellglass Eye', '(+2) Intuition — Reveals bargains, bindings, and the attention of distant powers.'], ['Ashen Summoner’s Coat', '(+1) Sneak — Swallows light and the traces left by forbidden rituals.']],
 }
 const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
-const itemNameHistories = [
-  name => name,
-  name => `${name}, recovered from Kharad-Zul`,
-  name => `${name}, issued at Neon Shard Station`,
-  name => `${name} carried out of the Glass Desert`,
-  name => `${name}, registered in New Carthage`,
-  name => `${name} traded through the Far Gate`,
-  name => `${name}, made beneath Veyra's Moon`,
-  name => `${name}, salvaged from Earth-Prime`,
-  name => `${name} marked by the Clockwork Vatican`,
-  name => `${name}, provenance: the Drowned Archive`,
-]
-const expandItemCandidates = candidates => candidates.flatMap(candidate => itemNameHistories.map(makeName => [makeName(candidate[0]), candidate[1]]))
+const multiverseItemModels = ['Aetherwake', 'Amberlight', 'Ashfall', 'Astral Key', 'Blackglass', 'Brightcoil', 'Cinderheart', 'Clockstar', 'Crimson Echo', 'Dawnchime', 'Deepwell', 'Dreamwire', 'Eclipse', 'Emberline', 'Evernight', 'Farstar', 'Ghostkey', 'Glasswing', 'Gravemark', 'Greenfire', 'Hollow Sun', 'Iron Halo', 'Ivory Pulse', 'Jade Signal', 'Kingshade', 'Lightning Thread', 'Lost Compass', 'Midnight Bell', 'Mirrorwake', 'Moonspoke', 'Ninefold', 'Obsidian Hymn', 'Orichalcum', 'Pale Comet', 'Phoenix', 'Quantum Rose', 'Redshift', 'Riftglass', 'Silver Thorn', 'Skyfire', 'Solaris', 'Starfall', 'Stormkey', 'Sunspoke', 'Thornlight', 'Titan Song', 'Umbral', 'Voidlight', 'Wayfinder', 'Worldroot']
+const itemKind = name => name.trim().split(/\s+/).at(-1)
+const expandItemCandidates = candidates => candidates.flatMap(candidate => [candidate, ...selectionsForName(candidate[0], multiverseItemModels, 9).map(model => [`${model} ${itemKind(candidate[0])}`, candidate[1]])])
 const itemScoreCoverage = ([, description]) => description.match(/^\([^)]+\)\s+([A-Za-z]+)/)?.[1].toLowerCase() || ''
 const populateArchetypeItems = (existingItems, archetypeName) => {
   const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
