@@ -319,7 +319,7 @@ const talentCatalog = (() => {
     const buff = line.match(/^Buff Option:\s*(.+)$/i)
     if (buff) { headings.push({ name: buff[1].replace(/:$/, ''), index }); return }
     const next = lines.slice(index + 1).find(Boolean) || ''
-    if (line && /^Description:/i.test(next) && !line.includes(': ')) headings.push({ name: line.replace(/:$/, ''), index })
+    if (line && /^Description:/i.test(next) && !line.includes(': ') && !/^Buffs:?$/i.test(line)) headings.push({ name: line.replace(/:$/, ''), index })
   })
   const buffOptionNames = new Set(lines.map(line => line.match(/^Buff Option:\s*(.+)$/i)?.[1]?.replace(/:$/, '')).filter(Boolean))
   const buffsStart = lines.findIndex(line => /^Buffs:$/i.test(line))

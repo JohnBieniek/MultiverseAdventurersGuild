@@ -346,7 +346,7 @@ Scores: Strength 0, Dexterity 0, Endurance -1, Intuition +1, Education +2, Chari
 Strengths: Charisma, Influence, Knowledge, Range Weapon
 Note: Performing makes a magical range attack when played.
 Weaknesses: Endurance, Technology, Sneak
-Preferred Talents: Buffs, Goad, Tactical Commander
+Preferred Talents: Silver Tongue, Goad, Tactical Commander
 
 Personality:
 
