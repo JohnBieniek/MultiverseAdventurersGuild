@@ -68,8 +68,14 @@ const weaponLoadouts = {
 const weaponStyleByArchetype = {
   Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Brainiac: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
 }
-const weaponVariantDescriptors = ['Balanced', 'Battle-Worn', 'Blackened', 'Custom', 'Engraved', 'Masterwork', 'Reinforced', 'Relic', 'Runed', 'Veteran']
-const expandWeaponNames = names => names.flatMap(name => weaponVariantDescriptors.map((descriptor, index) => index ? `${descriptor} ${name}` : name))
+const weaponMakerMarks = {
+  modern: ['', 'Aegis', 'Bastion', 'Kestrel', 'Vanguard'], fantasy: ['', 'Anvilborn', 'Kingsroad', 'Redkeep', 'Thornwall'],
+  cyber: ['', 'Arclight', 'Ghostline', 'Ironbyte', 'Neon Forge'], mystic: ['', 'Astra', 'Eidolon', 'Solstice', 'Veilcross'],
+  science: ['', 'Curie', 'Faraday', 'Kepler', 'Turing'], street: ['', 'Black Alley', 'Five Points', 'Red Hook', 'Southside'],
+  elegant: ['', 'Bellacourt', 'Montrose', 'St. James', 'Valmont'], western: ['', 'Abilene', 'Deadwood', 'Laramie', 'Tombstone'],
+  martial: ['', 'Crane School', 'Jade Court', 'Red Lotus', 'White Tiger'],
+}
+const expandWeaponNames = (names, style) => names.flatMap(name => (weaponMakerMarks[style] || weaponMakerMarks.modern).map(mark => mark ? `${mark} ${name}` : name))
 const weaponStylePools = {
   modern: {
     'Unarmed / Tiny Melee': ['Knuckle-Duster', 'Palm Sap', 'Garrote Wire', 'Weighted Gloves'],
@@ -173,7 +179,7 @@ const minimumWeaponNamesPerType = 20
 const weaponNamePool = (archetypeName, type, extraNames = []) => {
   const style = weaponStyleByArchetype[archetypeName] || 'modern'
   const baseNames = weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || []
-  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames]))]
+  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames], style))]
   if (names.length < minimumWeaponNamesPerType) throw new Error(`${archetypeName} needs at least ${minimumWeaponNamesPerType} names for ${type}`)
   return names
 }
@@ -284,8 +290,19 @@ const archetypeItemVariations = {
   Warlock: [['Hellglass Eye', '(+2) Intuition — Reveals bargains, bindings, and the attention of distant powers.'], ['Ashen Summoner’s Coat', '(+1) Sneak — Swallows light and the traces left by forbidden rituals.']],
 }
 const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
-const itemVariantDescriptors = ['Field-Tested', 'Handcrafted', 'Heirloom', 'Journeyman', 'Masterwork', 'Mission-Worn', 'Personalized', 'Reinforced', 'Signature', 'Veteran']
-const expandItemCandidates = candidates => candidates.flatMap(candidate => itemVariantDescriptors.map((descriptor, index) => index ? [`${descriptor} ${candidate[0]}`, candidate[1]] : candidate))
+const itemNameHistories = [
+  name => name,
+  name => `${name} of the First Expedition`,
+  name => `${name} from the Crossroads`,
+  name => `${name}, Guild Registry Seven`,
+  name => `${name} of the Last Watch`,
+  name => `${name} from the Old Quarter`,
+  name => `${name}, Wayfinder Pattern`,
+  name => `${name} of the Far Gate`,
+  name => `${name} from a Fallen World`,
+  name => `${name}, Archive Provenance`,
+]
+const expandItemCandidates = candidates => candidates.flatMap(candidate => itemNameHistories.map(makeName => [makeName(candidate[0]), candidate[1]]))
 const itemScoreCoverage = ([, description]) => description.match(/^\([^)]+\)\s+([A-Za-z]+)/)?.[1].toLowerCase() || ''
 const populateArchetypeItems = (existingItems, archetypeName) => {
   const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
