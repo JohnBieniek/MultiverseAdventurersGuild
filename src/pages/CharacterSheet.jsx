@@ -292,15 +292,15 @@ const archetypeItemVariations = {
 const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
 const itemNameHistories = [
   name => name,
-  name => `${name} of the First Expedition`,
-  name => `${name} from the Crossroads`,
-  name => `${name}, Guild Registry Seven`,
-  name => `${name} of the Last Watch`,
-  name => `${name} from the Old Quarter`,
-  name => `${name}, Wayfinder Pattern`,
-  name => `${name} of the Far Gate`,
-  name => `${name} from a Fallen World`,
-  name => `${name}, Archive Provenance`,
+  name => `${name}, recovered from Kharad-Zul`,
+  name => `${name}, issued at Neon Shard Station`,
+  name => `${name} carried out of the Glass Desert`,
+  name => `${name}, registered in New Carthage`,
+  name => `${name} traded through the Far Gate`,
+  name => `${name}, made beneath Veyra's Moon`,
+  name => `${name}, salvaged from Earth-Prime`,
+  name => `${name} marked by the Clockwork Vatican`,
+  name => `${name}, provenance: the Drowned Archive`,
 ]
 const expandItemCandidates = candidates => candidates.flatMap(candidate => itemNameHistories.map(makeName => [makeName(candidate[0]), candidate[1]]))
 const itemScoreCoverage = ([, description]) => description.match(/^\([^)]+\)\s+([A-Za-z]+)/)?.[1].toLowerCase() || ''
