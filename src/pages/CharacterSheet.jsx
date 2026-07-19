@@ -165,10 +165,177 @@ const weaponStylePools = {
   },
 }
 const archetypeWeaponVariants = {
+  Barbarian: [
+    ['Notched Seax', 'Wolf-Tooth Skinner', 'Rimefang Dirk', 'Boar-Tusk Scramasax', 'Ashwood Hunting Knife'],
+    ['Stonehead War Club', 'Mammoth-Rib Maul', 'Thunder-Oak Cudgel', 'Skullsplitter Mace', 'Bear-Claw Hammer'],
+    ['Worldsplitter Greataxe', 'Frost-Giant Cleaver', 'Avalanche Maul', 'Red Winter Greatsword', 'Clanbreaker Axe'],
+    ['Iron Throwing Axe', 'Raven-Feather Franciska', 'Stormstone Hurling Hammer', 'Wolf-Moon Tomahawk', 'Bone-Handled Throwing Knife'],
+  ],
+  'Bounty Hunter': [
+    ['Capture Knife', 'Warrant-Edge Cutter', 'Tracker’s Skinning Blade', 'Bail-Jumper Shiv', 'Live-Capture Talon'],
+    ['Arc-Cuff Shock Baton', 'Restraint-Rig Truncheon', 'Skiptrace Stun Rod', 'Marshal’s Capture Club', 'Fugitive Hook'],
+    ['Sleeve Dartcaster', 'Warrant-Tag Needler', 'Bounty Seal Holdout', 'Sleeper-Dart Palmgun', 'Last-Chance Stunner'],
+    ['Tracker Carbine', 'Skiptrace Repeater', 'Long-Warrant Rifle', 'Quarry Mark Carbine', 'Dead-or-Alive Longarm'],
+  ],
+  Brainiac: [
+    ['Laser Scalpel', 'Molecular Sample Knife', 'Cryo-Edge Dissector', 'Photon Microcutter', 'Monofilament Lab Blade'],
+    ['Telescoping Logic Staff', 'Graviton Calibration Rod', 'Proof-by-Induction Baton', 'Field-Theory Resonator', 'Collapsible Research Staff'],
+    ['Palm-Sized Beam Emitter', 'Pocket Particle Projector', 'Hypothesis Tester', 'Microcoil Demonstrator', 'Portable Ray Apparatus'],
+  ],
+  Cleric: [
+    ['Consecrated Dirk', 'Mercy Blade', 'Pilgrim’s Reliquary Knife', 'Saintbone Lancet', 'Votive Flame Dagger'],
+    ['Reliquary Warhammer', 'Bell of Final Rites', 'Sanctuary Mace', 'Martyr’s Crozier', 'Dawn-Chapel Hammer'],
+    ['Bolt of Judgment', 'Saint’s Rebuke', 'Halo Shard', 'Vesper Lance', 'Litany of Fire'],
+  ],
+  Commando: [
+    ['Black-Ops Combat Knife', 'Night-Insertion Blade', 'SERE Field Knife', 'Silent Entry Cutter', 'Squad-Breacher Tanto'],
+    ['Tactical Tomahawk', 'Close-Quarters Breach Axe', 'Boarding Baton', 'Entrenching Hammer', 'Shock-Entry Machete'],
+    ['Suppressed Service Pistol', 'Low-Signature Sidearm', 'Mission Clock Holdout', 'Wet-Work Pistol', 'Ghost-Team Handgun'],
+    ['Modular Assault Rifle', 'Squad Automatic Carbine', 'Overwatch Battle Rifle', 'Mission-Adaptive Longarm', 'Breach-Team Rifle'],
+  ],
+  Criminal: [
+    ['Spring-Loaded Switchblade', 'Evidence-Bag Razor', 'Back-Alley Stiletto', 'Lockup Shiv', 'Getaway Knife'],
+    ['Weighted Tire Thumper', 'Debt-Collector’s Baton', 'Safehouse Crowbar', 'Bookmaker’s Sap', 'Alleyway Slugger'],
+    ['Filed-Off Snub Revolver', 'Burner Pistol', 'Untraceable Pocket Gun', 'Drop-Piece Derringer', 'Getaway Holdout'],
+  ],
+  Druid: [
+    ['Moon-Crescent Sickle', 'Mistletoe Pruning Blade', 'Briarhook Knife', 'Antler-Handled Seax', 'Green Moon Sickle'],
+    ['Living Oak Staff', 'Rootspeaker Cudgel', 'Storm-Bent Shepherd’s Crook', 'Ironbark Quarterstaff', 'Standing-Stone Maul'],
+    ['Thornspitter Seedpod', 'Wasp-Nest Sling', 'Bramble Dart', 'Sunseed Burst', 'Sporecap Stinger'],
+  ],
+  'Eco Terrorist': [
+    ['Fieldcraft Knife', 'Pipeline Cutter', 'Rewilding Machete', 'Saboteur’s Pruning Blade', 'Clearcut Scalpel'],
+    ['Brush-Clearing Machete', 'Bolt-Cutter War Club', 'Barricade Sledge', 'Tree-Spike Hammer', 'Refinery Wrench'],
+    ['Recurve Hunting Bow', 'Dronehunter Crossbow', 'Ranger’s Takedown Bow', 'Silent Protest Launcher', 'Canopy Shortbow'],
+  ],
+  'Ex-Company Man': [
+    ['Monofilament Letter Opener', 'Severance-Package Blade', 'Boardroom Ceramic Knife', 'Golden-Parachute Stiletto', 'Hostile-Takeover Cutter'],
+    ['Executive Shock Cane', 'Compliance Baton', 'Corner-Office Walking Stick', 'Acquisition Hammer', 'Performance-Review Rod'],
+    ['Biometric Holdout Pistol', 'Executive Protection Sidearm', 'Expense-Account Derringer', 'Shareholder’s Veto', 'Golden-Handcuff Pistol'],
+  ],
+  'Ex-Cop': [
+    ['Patrol Utility Knife', 'Evidence-Room Cutter', 'Old Precinct Blade', 'Backup Rescue Knife', 'Badge-Notched Folder'],
+    ['Expandable Riot Baton', 'Retired Patrol Truncheon', 'Crowd-Control Tonfa', 'Interrogation-Room Sap', 'Blue-Line Nightstick'],
+    ['Department-Issue Sidearm', 'Off-Duty Backup Pistol', 'Evidence-Locker Revolver', 'Plainclothes Holdout', 'Retirement-Plaque Pistol'],
+    ['Less-Lethal Riot Shotgun', 'Old Precinct Carbine', 'Barricade Response Gun', 'Patrol-Rack Shotgun', 'Fugitive Taskforce Rifle'],
+  ],
+  'Ex-Military': [
+    ['Trench Knife', 'Demobilized Bayonet', 'Unit-Issue Fighting Blade', 'Campaign Utility Knife', 'Veteran’s Boot Dagger'],
+    ['Entrenching Tool', 'Breaching Hatchet', 'Field-Sapper Hammer', 'Mess-Hall Cleaver', 'Decommissioned Shock Baton'],
+    ['Veteran’s Service Pistol', 'War-Trophy Sidearm', 'Unit-Armorer’s Handgun', 'Last-Magazine Pistol', 'Campaign Holdout'],
+    ['Battle-Worn Pulse Rifle', 'Demilled Service Carbine', 'Old-Regiment Battle Rifle', 'Campaign-Surplus Longarm', 'Unit-Marked Assault Gun'],
+  ],
+  Face: [
+    ['Jeweled Stiletto', 'Corsage Needle', 'Diplomat’s Letter Opener', 'Gala-Night Dirk', 'Perfume-Vial Blade'],
+    ['Silver-Headed Sword Cane', 'Salon Duelling Saber', 'Ambassador’s War Fan', 'Velvet-Rope Cane', 'Courtier’s Foil'],
+    ['Pearl-Grip Pocket Pistol', 'Opera-Box Derringer', 'Champagne-Cork Stunner', 'Cufflink Dartcaster', 'Invitation-Only Holdout'],
+  ],
+  Fixer: [
+    ['Ledger Knife', 'Favor-Cutting Razor', 'Broker’s Sample Blade', 'Contract Shiv', 'Introduction Fee'],
+    ['Chrome Pipe Wrench', 'Negotiator’s Persuader', 'Supply-Chain Crowbar', 'Collection-Day Baton', 'Market-Maker Club'],
+    ['Unregistered Compact Pistol', 'Escrow Holdout', 'Brokered Sidearm', 'No-Questions Handgun', 'Finder’s Fee'],
+  ],
+  Ganger: [
+    ['Neon-Edged Kukri', 'Block-Color Switchblade', 'Tagger’s Razor', 'Corner-Crew Karambit', 'Turf-Line Shiv'],
+    ['Chain-Wrapped Slugger', 'Street-Sign Cleaver', 'Corner-Store Bat', 'Graffiti-Crew Crowbar', 'Block Captain’s Club'],
+    ['Homemade Zip Gun', 'Shoebox Derringer', 'Corner Holdout', 'Tape-Grip Pistol', 'One-Shot Special'],
+    ['Spraypainted Machine Pistol', 'Block-War SMG', 'Stolen Patrol Carbine', 'Crew-Color Scattergun', 'Drive-By Compact'],
+  ],
   'Gonzo Journalist': [
     ['Boot-Hidden Penknife', 'Pressroom Letter Opener', 'Darkroom Utility Blade', 'Ceramic Editorial Knife', 'Reporter’s Multitool Blade'],
     ['Armored Camera Monopod', 'Broadcast Microphone Boom', 'Steel Camera Tripod', 'Lead-Lined Equipment Case', 'Satellite-Uplink Mast'],
     ['Press-Pass Derringer', 'Pocket Pepper Spray', 'Civilian Taser', 'Flashbulb Stunner', 'Sonic Recorder Burst'],
+  ],
+  Gunslinger: [
+    ['Buffalo-Horn Bowie Knife', 'Coyote-Fang Skinner', 'Riverboat Dirk', 'Boot-Hill Toothpick', 'Silver-Mine Bowie'],
+    ['Weathered Cavalry Saber', 'Railroad Camp Hatchet', 'Marshal’s Sabre', 'Comanche Moon War Club', 'Dust-Trail Machete'],
+    ['Last-Chance Derringer', 'Sleeve-Hidden Pepperbox', 'Gambler’s Palmgun', 'Undertaker’s Backup', 'Ace-in-the-Hole'],
+    ['Silver-Comet Revolver', 'High-Noon Sixgun', 'Widowmaker Peacemaker', 'Red Mesa Hand Cannon', 'Graveyard Shift Revolver'],
+    ['Mesa Wind Lever Rifle', 'Long-Ride Winchester', 'Buffalo Trail Rifle', 'Canyon Echo Repeater', 'Sunset Territory Longarm'],
+  ],
+  Hacker: [
+    ['Ceramic Data Knife', 'Rootkit Shiv', 'Air-Gap Cutter', 'Kernel-Panic Blade', 'Backdoor Scalpel'],
+    ['Overclocked Shock Baton', 'Firewall Breaker', 'Packet-Loss Truncheon', 'Admin-Access Rod', 'Crashloop Club'],
+    ['Ghost-Key Smart Pistol', 'Zero-Day Holdout', 'Black-Ice Needler', 'Proxychain Pistol', 'Kill-Switch Sidearm'],
+  ],
+  'Mad Bomber': [
+    ['Demolition Knife', 'Fuse-Cutting Razor', 'Blasting-Cap Crimper', 'Wirestripper Shiv', 'Det-Cord Blade'],
+    ['Blast-Shield Crowbar', 'Bunker-Buster Sledge', 'Ordnance Wrench', 'Cratermaker Hammer', 'Misfire Baton'],
+    ['Jury-Rigged Grenade Launcher', 'Mailbox Mortar', 'Laughing Fuse Projector', 'Remote Surprise', 'Shrapnel Choir'],
+  ],
+  Mage: [
+    ['Runed Athame', 'Comet-Iron Ritual Knife', 'Mnemonic Wandblade', 'Seven-Sigil Dagger', 'Leyline Lancet'],
+    ['Astrolabe Staff', 'Paradox Rod', 'Nine-Sphere Scepter', 'World-Axis Quarterstaff', 'Grimoire-Bound Cane'],
+    ['Prismatic Force Dart', 'Thesis of Flame', 'Sigilbolt', 'Arcane Rebuttal', 'Falling-Star Hex'],
+  ],
+  Mercenary: [
+    ['Contractor Combat Knife', 'Invoice-Notched Blade', 'Hazard-Pay Kukri', 'Campaign Utility Cutter', 'Retainer’s Fighting Knife'],
+    ['Carbon-Steel Machete', 'Breach-Clause Hatchet', 'Contract War Club', 'Overtime Sledge', 'Hostile-Worksite Baton'],
+    ['Reliable Heavy Pistol', 'Escrow Sidearm', 'Contract-Killer Handgun', 'Hazard-Bonus Revolver', 'Final-Payment Pistol'],
+    ['Short-Barrel Battle Carbine', 'Campaign Contractor Rifle', 'Clause-Seventeen Shotgun', 'Retainer Battle Gun', 'Paid-in-Full Longarm'],
+  ],
+  Monk: [
+    ['Iron Palm Technique', 'Stone-Bell Fist', 'Empty-Hand Thunder', 'Five-Animal Strike', 'Quiet Mountain Hand'],
+    ['Seven-Ring Temple Staff', 'Pilgrim’s Ironwood Pole', 'Echoing Monastery Cane', 'Hundred-Step Quarterstaff', 'Abbot’s Moon Staff'],
+  ],
+  Ninja: [
+    ['Shadowglass Kunai', 'Moonless Tanto', 'Silent-Reed Karambit', 'Roof-Tile Blade', 'Ink-Black Shuriken Knife'],
+    ['Night-Reed Katana', 'Rain-Cut Ninjatō', 'Hidden-Clan Kusarigama', 'Crane-Shadow Staff', 'No-Moon Wakizashi'],
+    ['Whispering Shuriken', 'Sleeve-Star Volley', 'Poisoned Hairpin', 'Smoke-Egg Dart', 'Cicada Needle'],
+    ['Lacquered Shortbow', 'Rooftop Repeating Crossbow', 'Silent Matchlock', 'Black-Bamboo Bow', 'Windless Dartcaster'],
+  ],
+  Performer: [
+    ['Tuning-Fork Dagger', 'Backstage Prop Knife', 'Encore Stiletto', 'Conductor’s Razor', 'Finale Blade'],
+    ['Ironwood Battle Lute', 'Orchestra-Pit Maul', 'Stage-Crook Staff', 'Grand Piano Leg', 'Applause Baton'],
+    ['Shattering High Note', 'Thunderous Encore', 'Cutting Refrain', 'Glassbreaking Aria', 'Final-Chord Burst'],
+  ],
+  'Private Eye/Investigator': [
+    ['Casebook Switchblade', 'Evidence-Tag Knife', 'Raincoat Razor', 'Cold-Case Dirk', 'Desk-Drawer Blade'],
+    ['Lead-Cored Walking Cane', 'Stakeout Sap', 'Stakeout Tire Iron', 'Case-Closing Crowbar', 'Third-Floor Nightstick'],
+    ['Rainy-Night Revolver', 'Desk-Drawer Automatic', 'Cold-Case Holdout', 'Unmarked Sidearm', 'Last-Clue Pistol'],
+  ],
+  Screamer: [
+    ['Pit-Crew Utility Blade', 'Crash-Cage Cutter', 'Redline Knife', 'Trackside Rescue Blade', 'Fuel-Line Razor'],
+    ['Torque-Bar Club', 'Piston-Rod Baton', 'Pit-Lane Wrench', 'Axle-Shaft Maul', 'Roll-Cage Breaker'],
+    ['Dashboard-Locked Autopistol', 'Glovebox Handgun', 'Starting-Grid Holdout', 'Checkered-Flag Pistol', 'Road-Rage Sidearm'],
+  ],
+  Shaman: [
+    ['Ancestor-Bone Knife', 'Dreamwalker Sickle', 'Spirit-Name Blade', 'Totem-Carving Dirk', 'Ghostroad Athame'],
+    ['Totem-Crowned Spirit Staff', 'Thunderbird Crook', 'Ancestor-Voice Drumstick', 'Worldtree Branch', 'Medicine-Wheel Hammer'],
+    ['Vengeful Spirit Dart', 'Ancestor’s Warning', 'Ghost-Eagle Feather', 'Dreaming Serpent Bolt', 'Totem-Flame Spark'],
+  ],
+  Smuggler: [
+    ['Vacuum-Sealed Vibroknife', 'Customs-Slit Blade', 'Cargo-Tape Cutter', 'Hidden-Compartment Shiv', 'Manifest Razor'],
+    ['Cargo-Bay Collapsible Baton', 'Dockworker’s Persuader', 'False-Bottom Crowbar', 'Airlock Wrench', 'Freight-Hook Club'],
+    ['Customs-Runner Holdout', 'Checkpoint Derringer', 'Manifest-Case Pistol', 'Sleeper-Cabin Sidearm', 'Contraband Needler'],
+    ['Cut-Down Boarding Blaster', 'Cargo-Deck Scattergun', 'Blockade-Runner Carbine', 'Hidden-Crate SMG', 'Freeport Boarding Gun'],
+  ],
+  Sniper: [
+    ['Fairbairn-Sykes Fighting Knife', 'Hide-Site Utility Blade', 'Wind-Reading Skinner', 'Observation-Post Dirk', 'Long-Wait Knife'],
+    ['Estwing Camp Axe', 'Blind-Cutting Hatchet', 'Tripod Hammer', 'Range-Stake Tomahawk', 'Spotter’s Machete'],
+    ['Kestrel .45 Pistol', 'Hideout Backup Gun', 'Spotter’s Sidearm', 'Close-Range Insurance', 'Last-Position Holdout'],
+    ['Barrett M82 Anti-Materiel Rifle', 'Horizon-Piercer Rifle', 'One-Mile Verdict', 'Ghost-Wind Cannon', 'Counter-Sniper Longshot'],
+  ],
+  Spy: [
+    ['Sleeve-Hidden Garrote', 'Watchband Monowire', 'Buttonhole Blade', 'Dead-Drop Razor', 'Opera-Glove Strangler'],
+    ['Diplomat’s Concealed Rapier', 'Embassy Sword Cane', 'False-Passport Saber', 'Attaché-Case Baton', 'Ballroom Foil'],
+    ['Cufflink Flechette Pistol', 'Lipstick Needler', 'Passport-Stamp Derringer', 'Dead-Drop Holdout', 'Embassy Escape Pistol'],
+  ],
+  'Street Doc': [
+    ['Trauma Scalpel', 'Bone-Saw Fighting Blade', 'Suture Cutter', 'Back-Alley Lancet', 'Triage Knife'],
+    ['Defibrillator Shock Baton', 'Trauma-Bay Crutch', 'Oxygen-Tank Club', 'Surgical Mallet', 'Ambulance Pry Bar'],
+    ['Mercy-Dart Tranquilizer', 'Anesthetic Needler', 'Triage Pistol', 'No-Questions Sedative Gun', 'Emergency-Room Holdout'],
+  ],
+  'Street Samurai': [
+    ['White-Handle Tanto', 'Neon-Clan Wakizashi', 'Honor-Debt Blade', 'Chrome Petal Knife', 'Ronin’s Last Tanto'],
+    ['Crimson Circuit Katana', 'Ghostline Ninjatō', 'Shogun-Protocol Saber', 'Rain-Slick Monoblade', 'Clanless Moon Katana'],
+    ['Clan-Locked Smart Pistol', 'Ronin’s Backup Sidearm', 'Honor-Code Holdout', 'Shrine-Gate Needler', 'Chrome Chrysanthemum Pistol'],
+    ['Ronin Compact SMG', 'Dojo-War Machine Pistol', 'Clan Banner Carbine', 'Shogunate Street Sweeper', 'Neon Daimyo SMG'],
+  ],
+  Warlock: [
+    ['Pact-Signed Sacrificial Dagger', 'Debt-Collector’s Athame', 'Patron-Tooth Knife', 'Oathblood Dirk', 'Fine-Print Blade'],
+    ['Void-Iron Hexblade', 'Infernal Clause Greatsword', 'Patron’s Black Cane', 'Debtchain Flail', 'Covenant Breaker'],
+    ['Eldritch Starbolt', 'Patron’s Displeasure', 'Hell-Signed Dart', 'Void Contract Missile', 'Usurer’s Flame'],
   ],
 }
 const minimumWeaponNamesPerType = 20
@@ -207,7 +374,7 @@ const populateArchetypeWeapons = (existingWeapons, archetypeName) => {
   const usedNames = new Set()
   ;(weaponLoadouts[archetypeName] || []).forEach(([defaultName, type], slotIndex) => {
     const specificPool = archetypeWeaponVariants[archetypeName]?.[slotIndex]
-    const pool = weaponNamePool(archetypeName, type, specificPool || [defaultName]).filter(name => !usedNames.has(name))
+    const pool = (specificPool?.length ? expandWeaponNames(specificPool) : weaponNamePool(archetypeName, type, [defaultName])).filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
     const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
@@ -489,6 +656,10 @@ const archetypeOptions = (() => {
 archetypeOptions.forEach(({ name }) => {
   weaponTypes.forEach(([type]) => weaponNamePool(name, type))
   contactRolesForArchetype(name).forEach(role => { if (!contactNamePools[role]) throw new Error(`${name} has an unknown contact role: ${role}`) })
+})
+Object.entries(weaponLoadouts).forEach(([archetypeName, loadout]) => {
+  const variants = archetypeWeaponVariants[archetypeName] || []
+  if (variants.length !== loadout.length || variants.some(names => names.length < 5)) throw new Error(`${archetypeName} needs five curated names for every weapon slot`)
 })
 const talentAllowanceForLevel = level => {
   const currentLevel = Math.max(0, Math.min(10, number(level)))
