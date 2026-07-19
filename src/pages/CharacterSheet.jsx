@@ -169,6 +169,25 @@ const archetypeWeaponVariants = {
     ['Press-Pass Derringer', 'Pocket Pepper Spray', 'Civilian Taser', 'Flashbulb Stunner', 'Sonic Recorder Burst'],
   ],
 }
+const minimumWeaponNamesPerType = 20
+const weaponNamePool = (archetypeName, type, extraNames = []) => {
+  const style = weaponStyleByArchetype[archetypeName] || 'modern'
+  const baseNames = weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || []
+  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames]))]
+  if (names.length < minimumWeaponNamesPerType) throw new Error(`${archetypeName} needs at least ${minimumWeaponNamesPerType} names for ${type}`)
+  return names
+}
+const generatedWeaponNamesForType = (archetypeName, type) => {
+  const loadout = weaponLoadouts[archetypeName] || []
+  const extras = loadout.flatMap(([defaultName, loadoutType], slotIndex) => loadoutType === type ? (archetypeWeaponVariants[archetypeName]?.[slotIndex] || [defaultName]) : [])
+  return weaponNamePool(archetypeName, type, extras)
+}
+const weaponNameIsUnedited = (weapon, archetypeName) => {
+  if (weapon.nameCustomized) return false
+  if (!weapon.name?.trim()) return true
+  if (weapon.generatedName) return weapon.name === weapon.generatedName
+  return weapon.source === 'archetype' && generatedWeaponNamesForType(archetypeName, weapon.type).includes(weapon.name)
+}
 const characterDataVersion = 0
 const weaponNotesByType = {
   'Unarmed / Tiny Melee': 'Automatically concealed.',
@@ -185,13 +204,11 @@ const populateArchetypeWeapons = (existingWeapons, archetypeName) => {
   const weapons = existingWeapons.filter(weapon => weapon.source !== 'archetype').map(weapon => ({ ...weapon }))
   const usedNames = new Set()
   ;(weaponLoadouts[archetypeName] || []).forEach(([defaultName, type], slotIndex) => {
-    const style = weaponStyleByArchetype[archetypeName] || 'modern'
     const specificPool = archetypeWeaponVariants[archetypeName]?.[slotIndex]
-    const generalPool = [defaultName, ...(weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || [])]
-    const pool = expandWeaponNames(specificPool || generalPool).filter(name => !usedNames.has(name))
+    const pool = weaponNamePool(archetypeName, type, specificPool || [defaultName]).filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
-    const weapon = { id: crypto.randomUUID(), name, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
+    const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
     const emptyIndex = weapons.findIndex(entry => !entry.name?.trim() && !entry.notes?.trim() && !number(entry.enhancement))
     if (emptyIndex >= 0) weapons[emptyIndex] = { ...weapon, id: weapons[emptyIndex].id || weapon.id }
     else weapons.push(weapon)
@@ -269,11 +286,19 @@ const archetypeItemVariations = {
 const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
 const itemVariantDescriptors = ['Field-Tested', 'Handcrafted', 'Heirloom', 'Journeyman', 'Masterwork', 'Mission-Worn', 'Personalized', 'Reinforced', 'Signature', 'Veteran']
 const expandItemCandidates = candidates => candidates.flatMap(candidate => itemVariantDescriptors.map((descriptor, index) => index ? [`${descriptor} ${candidate[0]}`, candidate[1]] : candidate))
+const itemScoreCoverage = ([, description]) => description.match(/^\([^)]+\)\s+([A-Za-z]+)/)?.[1].toLowerCase() || ''
 const populateArchetypeItems = (existingItems, archetypeName) => {
   const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
   const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
   const candidates = expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])])
-  const selectedItems = candidates.map(candidate => ({ candidate, order: Math.random() })).sort((a, b) => a.order - b.order).slice(0, 3).map(entry => entry.candidate)
+  const selectedItems = []
+  const coveredScores = new Set()
+  shuffled(candidates).forEach(candidate => {
+    const coverage = itemScoreCoverage(candidate)
+    if (selectedItems.length >= 3 || (coverage && coveredScores.has(coverage))) return
+    selectedItems.push(candidate)
+    if (coverage) coveredScores.add(coverage)
+  })
   selectedItems.forEach(([name, description]) => {
     const item = { id: crypto.randomUUID(), name, description, source: 'archetype-item' }
     const emptyIndex = items.findIndex(entry => !entry.name?.trim() && !String(entry.description || '').trim() && !String(entry.bonus || '').trim() && !entry.appliesTo?.trim())
@@ -283,6 +308,7 @@ const populateArchetypeItems = (existingItems, archetypeName) => {
   return [...items, ...traits]
 }
 const number = value => Number(value) || 0
+const abbreviateTalentDuration = value => String(value || '').replace(/\bminutes?\b/gi, 'min')
 const talentCatalog = (() => {
   const lines = talentsText.split(/\r?\n/).map(line => line.trim())
   const headings = []
@@ -305,7 +331,7 @@ const talentCatalog = (() => {
     const durationText = (block.find(line => /^Duration:/i.test(line)) || '').replace(/^Duration:\s*/i, '')
     const durationNote = durationText.match(/\s*\(((?:Special )?note:[\s\S]+)\)\s*$/i)?.[1] || ''
     const parsedDuration = durationNote ? durationText.replace(/\s*\((?:Special )?note:[\s\S]+\)\s*$/i, '').trim() : durationText
-    const duration = parsedDuration || (buffOptionNames.has(heading.name) ? buffDuration : '')
+    const duration = abbreviateTalentDuration(parsedDuration || (buffOptionNames.has(heading.name) ? buffDuration : ''))
     const details = block.filter(line => /^(Action|Cost|Energy Cost):/i.test(line))
     const joined = block.join(' ')
     const minimum = joined.match(/Minimum Force\s*(?:is\s*)?(\d)/i)?.[1]
@@ -417,6 +443,16 @@ const archetypeContactRoles = {
   'Street Samurai': ['Fixer', 'Mechanic', 'Fence', 'Street doctor', 'Crime boss'],
   Warlock: ['Cult leader', 'Occult researcher', 'Necromancer', 'Fey emissary', 'Artifact appraiser'],
 }
+const versatileContactRoles = ['Bartender', 'Fixer', 'Informant', 'Retired adventurer', 'Mission handler', 'Guild quartermaster', 'Street doctor', 'Journalist', 'Courier', 'Mechanic', 'Pilot', 'Diplomat', 'Fence', 'Wilderness scout', 'Artifact appraiser', 'Detective', 'Engineer', 'Smuggler', 'Librarian', 'Forger']
+const contactRolesForArchetype = archetypeName => {
+  const preferredRoles = archetypeContactRoles[archetypeName] || []
+  const offset = [...archetypeName].reduce((total, character) => total + character.charCodeAt(0), 0) % versatileContactRoles.length
+  const rotatedRoles = versatileContactRoles.map((_, index) => versatileContactRoles[(index + offset) % versatileContactRoles.length])
+  const roles = [...new Set([...preferredRoles, ...rotatedRoles])].slice(0, 15)
+  if (roles.length < 15) throw new Error(`${archetypeName} needs 15 contact roles`)
+  return roles
+}
+const shuffled = values => values.map(value => ({ value, order: Math.random() })).sort((a, b) => a.order - b.order).map(entry => entry.value)
 const contactNameKey = name => {
   const words = String(name).trim().toLowerCase().split(/\s+/)
   if (['the', 'dr.', 'doctor', 'mister', 'miss', 'captain'].includes(words[0])) return words.slice(0, 2).join(' ')
@@ -444,11 +480,15 @@ const archetypeOptions = (() => {
     const personalityIndex = block.findIndex(entry => /^Personality:/i.test(entry))
     const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality:\s*/i, '')).map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null }).filter(Boolean)
     return {
-      name: line.split(' - ')[0].trim(), strengths, weaknesses, preferredTalents, traits,
+      name: line.split(' - ')[0].trim(), description: line.slice(line.indexOf(' - ') + 3).trim(), strengths, weaknesses, preferredTalents, traits,
       stats: Object.fromEntries(stats.map(([key, label]) => [key, number(scoresLine.match(new RegExp(`${label}\\s+([+-]?\\d+)`, 'i'))?.[1])])),
     }
   }).sort((a, b) => a.name.localeCompare(b.name))
 })()
+archetypeOptions.forEach(({ name }) => {
+  weaponTypes.forEach(([type]) => weaponNamePool(name, type))
+  contactRolesForArchetype(name).forEach(role => { if (!contactNamePools[role]) throw new Error(`${name} has an unknown contact role: ${role}`) })
+})
 const talentAllowanceForLevel = level => {
   const currentLevel = Math.max(0, Math.min(10, number(level)))
   if (currentLevel === 0) return 0
@@ -512,6 +552,8 @@ function CharacterSheet() {
     if (!character) return
     let changed = false
     let talents = character.talents.map(row => {
+      const abbreviatedDuration = abbreviateTalentDuration(row.duration)
+      if (abbreviatedDuration !== (row.duration || '')) { changed = true; return { ...row, duration: abbreviatedDuration } }
       if (row.duration?.trim()) return row
       const catalogTalent = talentCatalog.find(talent => talent.name === row.name)
       if (!catalogTalent?.duration) return row
@@ -603,6 +645,30 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
+  const setWeaponName = (index, name) => setCharacter(current => {
+    const copy = structuredClone(current)
+    copy.weapons[index].name = name
+    copy.weapons[index].nameCustomized = true
+    copy.updatedAt = Date.now()
+    return copy
+  })
+  const setWeaponType = (index, type) => setCharacter(current => {
+    const copy = structuredClone(current)
+    const weapon = copy.weapons[index]
+    const refreshName = weaponNameIsUnedited(weapon, current.archetype)
+    weapon.type = type
+    if (!weapon.notes?.trim()) weapon.notes = weaponNotesByType[type] || ''
+    if (refreshName) {
+      const usedNames = new Set(copy.weapons.filter((_, weaponIndex) => weaponIndex !== index).map(entry => entry.name).filter(Boolean))
+      const availableNames = generatedWeaponNamesForType(current.archetype, type).filter(name => !usedNames.has(name))
+      const name = availableNames[Math.floor(Math.random() * availableNames.length)] || generatedWeaponNamesForType(current.archetype, type)[0] || ''
+      weapon.name = name
+      weapon.generatedName = name
+      weapon.nameCustomized = false
+    }
+    copy.updatedAt = Date.now()
+    return copy
+  })
   const save = () => {
     const saved = { ...character, currentHp: Math.min(number(character.currentHp), computed.maxHp), updatedAt: Date.now() }
     const next = [...characters.filter(item => item.id !== saved.id), saved].sort((a, b) => b.updatedAt - a.updatedAt)
@@ -645,7 +711,7 @@ function CharacterSheet() {
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
       const contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
       const requiredContacts = Math.max(0, 3 + number(preset.stats.charisma))
-      const roles = archetypeContactRoles[preset.name] || ['Fixer', 'Informant', 'Retired adventurer', 'Mission handler', 'Bartender']
+      const roles = shuffled(contactRolesForArchetype(preset.name))
       const usedNames = new Set(contacts.map(contact => contact.name).filter(Boolean))
       let populatedContacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim()).length
       for (let roleIndex = 0; populatedContacts < requiredContacts; roleIndex += 1) {
@@ -752,7 +818,7 @@ function CharacterSheet() {
   return <div className="sheet-page">
     <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={() => setCharacter(newCharacter())}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
-      <Field label="Hero name" value={character.name} onChange={v => update(['name'], v)} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={v => update(['species'], v)}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} onChange={chooseArchetype}/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
+      <Field label="Hero name" value={character.name} onChange={v => update(['name'], v)} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={v => update(['species'], v)}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype}/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
@@ -785,7 +851,7 @@ function CharacterSheet() {
         const weaponType = weaponTypes.find(type => type[0] === row.type) || weaponTypes[0]
         const damageStat = weaponType[1] === 'melee' ? character.stats.strength : character.stats.dexterity
         const damageModifier = number(damageStat) + number(row.enhancement)
-        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => update(['weapons',i,'name'],e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value={row.type} onChange={e => update(['weapons',i,'type'],e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
+        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value={row.type} onChange={e => setWeaponType(i,e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
       }}
     </EditableTable>
     <EditableTable title="Talents" icon="✹" subtitle={`Talents Acquired: ${talentsAcquired}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
@@ -807,8 +873,8 @@ function CharacterSheet() {
 }
 
 function Field({ label, onChange, wide, ...props }) { return <label className={`field ${wide ? 'wide' : ''}`}><span>{label}</span><input {...props} onChange={e => onChange(e.target.value)}/></label> }
-function IdentityChoice({ label, value, options, onChange }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <label className="field identity-choice"><span>{label}</span>{custom ? <div className="identity-custom"><input autoFocus aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label={`Choose ${label}`} value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom {label.toLowerCase()}…</option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select>}</label> }
-function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''} title={expertise}>{custom ? <div className="identity-custom"><input autoFocus aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
+function IdentityChoice({ label, value, options, tooltip = '', onChange }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <label className="field identity-choice" data-tooltip={tooltip}><span>{label}</span>{custom ? <div className="identity-custom"><input autoFocus aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label={`Choose ${label}`} value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom {label.toLowerCase()}…</option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select>}</label> }
+function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''}>{custom ? <div className="identity-custom"><input autoFocus aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
 function NumberInput({ value, onChange }) { return <input className="number-input" type="number" value={value} onChange={e => onChange(e.target.value)}/> }
 function AttackEquation({ label, statLabel, stat, attack, modifier }) { const total = number(stat) + number(attack) + number(modifier); const statShort = statLabel === 'Strength' ? 'STR' : 'DEX'; return <div className="attack-equation"><h3>{label}</h3><div className="attack-equation-values"><span><small><span className="attack-label-full">{statLabel}</span><span className="attack-label-short">{statShort}</span></small><strong>{signed(stat)}</strong></span><span><small><span className="attack-label-full">Attack Skill</span><span className="attack-label-short">Skill</span></small><strong>{signed(attack)}</strong></span><span><small><span className="attack-label-full">Modifier</span><span className="attack-label-short">Mod</span></small><strong>{signed(modifier)}</strong></span><span className="attack-equation-total"><small>Total</small><strong>{signed(total)}</strong></span></div></div> }
 function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '', fitOnMobile = false }) {
