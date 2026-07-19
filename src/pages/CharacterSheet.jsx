@@ -396,19 +396,17 @@ const specializedContactNames = {
   'Time traveler': ['After', 'Anachron', 'Before', 'Clockwise', 'Continuum', 'Daybreak-7', 'Epoch', 'Elsewhen', 'Future Perfect', 'Hourglass', 'Janus-12', 'Last Tuesday', 'Loop', 'Meridian-0', 'Neverwhen', 'Next Year', 'Paradox', 'Retrograde', 'Secondhand', 'Soon', 'Tachyon', 'Tomorrow-9', 'Tuesday Again', 'When', 'Yesterday-Prime'],
   'Cult leader': ['Apostle Veyra', 'Brother Zenith', 'Chosen Orison', 'Daughter Radiant', 'Elder Seraph', 'Father Halcyon', 'Hierophant Lux', 'Mother Dominion', 'Oracle Ascendant', 'Pastor Rapture', 'Preceptor Sol', 'Prophet Auric', 'Reverend Ecstasy', 'Saint Vesper', 'Shepherd Crown', 'Sister Mercy', 'Speaker Eternal', 'The Anointed', 'Voice Celestial', 'Abbot Triumph', 'Canon Glory', 'Deacon Promise', 'Guru Sublime', 'Imam Infinite', 'Pontiff Dawn'],
 }
-const contactNameSuffixes = ['', 'Jr.', 'Sr.', 'II', 'III']
-const expandSpecializedContactNames = names => names.flatMap(name => contactNameSuffixes.map(suffix => suffix ? `${name} ${suffix}` : name))
 const contactNamePools = Object.fromEntries(contactCatalog.map(({ type, category, example }) => {
-  if (specializedContactNames[type]) return [type, expandSpecializedContactNames(specializedContactNames[type])]
   const theme = contactNameThemes[category] || contactNameThemes['Information contacts']
   const offset = [...type].reduce((total, character) => total + character.charCodeAt(0), 0) % 5
-  const names = example ? [example] : []
-  if (theme.names) theme.names.forEach((name, index) => contactNameSuffixes.forEach(suffix => { const candidate = [theme.names[(index + offset) % theme.names.length], suffix].filter(Boolean).join(' '); if (names.length < 125 && !names.includes(candidate)) names.push(candidate) }))
-  else {
-    const givenNames = contactGivenNames[category] || contactGivenNames['Information contacts']
-    const surnames = contactSurnames[category] || contactSurnames['Information contacts']
-    givenNames.forEach((givenName, index) => surnames.slice(0, 5).forEach((_, surnameOffset) => { const candidate = `${givenName} ${surnames[(index + offset + surnameOffset) % surnames.length]}`; if (names.length < 125 && !names.includes(candidate)) names.push(candidate) }))
-  }
+  const names = [...(specializedContactNames[type] || []), ...(example ? [example] : [])]
+  if (theme.names) theme.names.forEach((_, index) => { const candidate = theme.names[(index + offset) % theme.names.length]; if (!names.includes(candidate)) names.push(candidate) })
+  const givenNames = contactGivenNames[category] || contactGivenNames['Information contacts']
+  const surnames = contactSurnames[category] || contactSurnames['Information contacts']
+  givenNames.forEach((givenName, givenIndex) => surnames.forEach((_, surnameIndex) => {
+    const candidate = `${givenName} ${surnames[(surnameIndex + givenIndex + offset) % surnames.length]}`
+    if (names.length < 125 && !names.includes(candidate)) names.push(candidate)
+  }))
   return [type, names.slice(0, 125)]
 }))
 const archetypeContactRoles = {
