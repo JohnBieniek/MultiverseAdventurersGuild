@@ -409,13 +409,13 @@ const contactNamePools = Object.fromEntries(contactCatalog.map(({ type, category
   return [type, names.slice(0, 125)]
 }))
 const archetypeContactRoles = {
-  Barbarian: ['Wilderness scout', 'Shaman', 'Caravan master', 'Witch', 'Ferryman'],
+  Barbarian: ['Wilderness scout', 'Monster handler', 'Caravan master', 'Witch', 'Ferryman'],
   'Bounty Hunter': ['Informant', 'Fixer', 'Detective', 'Fence', 'Monster bounty clerk', 'Getaway driver'],
   Brainiac: ['Librarian', 'Engineer', 'Artifact appraiser', 'Occult researcher', 'Portal technician'],
   Cleric: ['Temple priest', 'Exorcist', 'Resurrection specialist', 'Spirit medium', 'Cult defector'],
   Commando: ['Guild quartermaster', 'Spy handler', 'Demolitions expert', 'Mission handler', 'Pilot'],
   Criminal: ['Fence', 'Forger', 'Corrupt official', 'Crime boss', 'Safecracker', 'Street doctor'],
-  Druid: ['Wilderness scout', 'Witch', 'Monster handler', 'Shaman', 'Expedition outfitter'],
+  Druid: ['Wilderness scout', 'Witch', 'Monster handler', 'Spirit medium', 'Expedition outfitter'],
   'Eco Terrorist': ['Protest organizer', 'Wilderness scout', 'Revolutionary', 'Demolitions expert', 'Street doctor'],
   'Ex-Company Man': ['Fixer', 'Corrupt official', 'Spy handler', 'Guild lawyer', 'Mission handler'],
   'Ex-Cop': ['Detective', 'Informant', 'Judge', 'Prison warden', 'Street doctor'],
