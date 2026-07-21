@@ -79,3 +79,7 @@
 @media(max-width:700px){.table-contacts .table-row>.contact-field:first-child{grid-column:1;grid-row:1}.table-contacts .table-row>.contact-field:nth-child(2){grid-column:1/-1;grid-row:2}.table-contacts .table-row>.icon-button{grid-column:2;grid-row:1}.contact-field{display:grid;grid-template-columns:38px minmax(0,1fr);align-items:center;gap:.35rem;width:100%}.contact-field>span{display:block;color:#59655b;font-size:.58rem;font-weight:900;text-transform:uppercase}.contact-field>*{box-sizing:border-box;width:100%;min-width:0}}
 @media(min-width:701px){.skill-head,.skill-row{grid-template-columns:minmax(160px,1fr) 58px 96px 56px 56px 68px 8ch 125px}.skill-head>span:nth-child(7),.skill-row>*:nth-child(7){grid-column:8}}
 @media(min-width:701px){.stat-row{grid-template-columns:minmax(135px,1fr) 145px 4ch 58px}.stat-row>.roll-button{grid-column:4}}
+
+/* Keep linked labels, help controls, and score columns distinct at desktop widths. */
+.stat-name strong{min-width:0;white-space:normal;line-height:1.05}.stat-name span{display:block;margin-top:.12rem;font-size:.68rem}.stat-name,.skill-name{box-sizing:border-box}
+@media(min-width:701px){.skill-head,.skill-row{grid-template-columns:minmax(150px,1fr) 58px 112px 68px 58px 76px 8ch 118px;column-gap:.55rem}.skill-head>span{overflow:hidden;text-align:center}.skill-head>span:first-child{text-align:left}.skill-head>span:nth-child(7),.skill-row>*:nth-child(7){grid-column:8}}

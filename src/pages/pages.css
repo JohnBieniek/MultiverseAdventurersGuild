@@ -605,6 +605,7 @@
 .guide-skill-item-list span {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-width: 0;
   padding: 0.5rem 0.6rem;
   border: 1px solid rgba(51, 97, 47, 0.16);
@@ -614,6 +615,7 @@
   font-size: 0.82rem;
   font-weight: 700;
   line-height: 1.25;
+  text-align: center;
 }
 
 @media (max-width: 900px) {
