@@ -976,7 +976,16 @@ function Guide({ title, intro, sections }) {
 
     const targetId = decodeURIComponent(location.hash.slice(1))
     const frame = window.requestAnimationFrame(() => {
-      document.getElementById(targetId)?.scrollIntoView({ block: 'start' })
+      const target = document.getElementById(targetId)
+
+      if (!target) {
+        return
+      }
+
+      const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 0
+      const subnavHeight = subnavRef.current?.getBoundingClientRect().height || 0
+      const targetTop = window.scrollY + target.getBoundingClientRect().top
+      window.scrollTo({ top: Math.max(0, targetTop - navbarHeight - subnavHeight - 16), behavior: 'auto' })
     })
 
     return () => window.cancelAnimationFrame(frame)
