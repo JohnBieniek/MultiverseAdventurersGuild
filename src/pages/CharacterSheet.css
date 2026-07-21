@@ -82,4 +82,4 @@
 
 /* Keep linked labels, help controls, and score columns distinct at desktop widths. */
 .stat-name strong{min-width:0;white-space:normal;line-height:1.05}.stat-name span{display:block;margin-top:.12rem;font-size:.68rem}.stat-name,.skill-name{box-sizing:border-box}
-@media(min-width:701px){.skill-head,.skill-row{grid-template-columns:minmax(150px,1fr) 58px 112px 68px 58px 76px 8ch 118px;column-gap:.55rem}.skill-head>span{overflow:hidden;text-align:center}.skill-head>span:first-child{text-align:left}.skill-head>span:nth-child(7),.skill-row>*:nth-child(7){grid-column:8}}
+@media(min-width:701px){.skill-head,.skill-row{grid-template-columns:minmax(140px,1fr) 58px 112px 68px 58px 76px 118px;column-gap:.5rem}.skill-head>span{overflow:hidden;text-align:center}.skill-head>span:first-child{text-align:left}.skill-head>span:nth-child(7),.skill-row>*:nth-child(7){grid-column:auto}.skill-name .skill-stat-full{display:block;margin-top:.12rem;font-size:.66rem;line-height:1}.skill-name>a,.skill-name strong,.skill-name strong>a{min-width:0}.skill-name strong>a>span{display:block;line-height:1.05}}
