@@ -334,6 +334,10 @@
   scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 1rem);
 }
 
+.guide [id] {
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 1.5rem);
+}
+
 .guide-section h2 {
   margin-top: 0;
 }
