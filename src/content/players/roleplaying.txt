@@ -72,7 +72,7 @@ Character Growth
 
 Over time, characters usually gain new options and a changing place in the world.
 
-Experience Points: XP are gained at a rate of 3 per session. Every 10 XP leads to a new level and further benefits.
+Experience Points: XP are gained at a rate of 3 per session. Track total XP earned and unspent XP separately. Every 10 total XP earned grants a new Level and its benefits; spending unspent XP on improvements does not delay leveling.
 
 New Talents: You gain new Talents at certain levels.
 

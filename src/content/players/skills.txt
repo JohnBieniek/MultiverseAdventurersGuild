@@ -2,7 +2,7 @@ Skills work with Stats to show what you are good at. Every Hero has every skill,
 
 Assign: +2, +2, +1, +1, +1, 0, 0, 0, -1
 
-Attack (Str or Dex): Used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks.
+Attack (Str or Dex): Used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks. Every Hero starts with a +1 modifier in either Melee Attack or Ranged Attack. Choose one when creating the Hero. Improve that modifier one step at a time: +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP. Each increase is purchased separately.
 Example Items: Grip-Memory Combat Gloves | Ricochet Calculator Lens | Employer-Agnostic Smartlink | Echoing Temple Handwraps | Knuckle-Plated Smart Gloves
 
 Athletics (Str, Dex, or End): Climbing, jumping, swimming, grappling, resisting knockback, enduring physical hazards, and other physical tasks not covered by another skill.

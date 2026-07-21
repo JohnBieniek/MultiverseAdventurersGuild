@@ -28,12 +28,15 @@ const skillDefs = [
   ['technology', 'Technology', 'education', FaMicrochip, 'Hack systems, practice medicine, operate or repair devices, engineer solutions, disable traps, and search digital networks.'],
   ['vehicle', 'Vehicle', 'dexterity', FaCar, 'Drive, pilot, ride, maneuver, or control vehicles and mounts—from cars and horses to aircraft and starships.'],
 ]
-const attackSkillDescription = 'Make attacks and use offensive Talents. Buy Attack once; it applies to both melee attacks using Strength and ranged attacks using Dexterity.'
+const attackSkillDescription = 'Make attacks and use offensive Talents. Buy Attack once; it applies to melee attacks using Strength and ranged attacks using Dexterity. Each Hero starts with a +1 modifier in either Melee or Ranged Attack. Improve that modifier one step at a time by spending 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4.'
 const sectionIcons = { 'Combat Summary': GiBroadsword, Stats: FaChartBar, Skills: FaStar, Attack: GiCrossedAxes, Weapons: GiCrossedSwords, Talents: FaAsterisk, 'Items & Traits': FaFlask, Contacts: FaUsers, 'Session Notes': FaStickyNote }
 const sectionGuideLinks = { Stats: '/players#stats', Skills: '/players#skills', Weapons: '/players#weapons', Talents: '/players#talents', 'Items & Traits': '/players#equipment', Contacts: '/players#contacts' }
 const vitalIcons = { Initiative: FaCrosshairs, HP: FaHeartbeat, Defense: FaShieldAlt, Resilience: FaHeart, Ego: FaBrain, Energy: FaBolt, 'Max Force': FaSun }
+const vitalRuleLinks = { Initiative: '/rules#combat-initiative', HP: '/players#hp', Defense: '/players#defense-defense', Resilience: '/players#defense-resilience', Ego: '/players#defense-ego', Energy: '/rules#level-progression-force-energy-and-talents', 'Max Force': '/rules#level-progression-force-energy-and-talents' }
 const startingStatArray = [3, 2, 1, 0, 0, -1]
 const startingSkillArray = [2, 2, 1, 1, 1, 0, 0, 0, -1]
+const defenseUpgradeCosts = { 2: 2, 3: 2, 4: 4, 5: 4, 6: 8, 7: 8 }
+const defenseXpSpent = rating => Object.entries(defenseUpgradeCosts).reduce((total, [score, cost]) => total + (number(rating) >= number(score) ? cost : 0), 0)
 const weaponTypes = [
   ['Unarmed / Tiny Melee', 'melee', 4, 0], ['Light Melee', 'melee', 6, 0],
   ['Medium Melee', 'melee', 8, 0], ['Heavy Melee', 'melee', 10, -2],
@@ -662,6 +665,14 @@ const archetypeOptions = (() => {
     }
   }).sort((a, b) => a.name.localeCompare(b.name))
 })()
+const attackFocusForArchetype = archetype => {
+  const strengths = (archetype?.strengths || []).join(' ').toLowerCase()
+  const hasMeleeFocus = /\bmelee\b/.test(strengths)
+  const hasRangedFocus = /\b(range|ranged)\b/.test(strengths)
+  if (hasRangedFocus && !hasMeleeFocus) return 'ranged'
+  if (hasMeleeFocus && !hasRangedFocus) return 'melee'
+  return number(archetype?.stats?.dexterity) > number(archetype?.stats?.strength) ? 'ranged' : 'melee'
+}
 archetypeOptions.forEach(({ name }) => {
   weaponTypes.forEach(([type]) => weaponNamePool(name, type))
   contactRolesForArchetype(name).forEach(role => { if (!contactNamePools[role]) throw new Error(`${name} has an unknown contact role: ${role}`) })
@@ -695,7 +706,7 @@ const newCharacter = () => ({
   id: crypto.randomUUID(), name: 'New Hero', species: '', archetype: '', level: 0, xp: 0,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
-  attackSkill: '', attackModifier: 0, defenseBonus: 0, defenseRating: 0,
+  attackSkill: '', meleeAttackModifier: 1, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
   currentHp: 10, temporaryHp: 0, currentEnergy: 0,
   weapons: blankRows(2, { name: '', type: 'Unarmed / Tiny Melee', enhancement: 0, notes: '' }),
   talents: [],
@@ -778,7 +789,23 @@ function CharacterSheet() {
     if (needsWeaponLoadout) changed = true
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
     if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype); changed = true }
-    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, updatedAt: Date.now() }))
+    let meleeAttackModifier = character.meleeAttackModifier
+    let rangedAttackModifier = character.rangedAttackModifier
+    if (meleeAttackModifier == null || rangedAttackModifier == null) {
+      const focus = attackFocusForArchetype(archetype)
+      const legacyModifier = Math.max(1, number(character.attackModifier))
+      meleeAttackModifier = focus === 'melee' ? legacyModifier : 0
+      rangedAttackModifier = focus === 'ranged' ? legacyModifier : 0
+      changed = true
+    }
+    let defenseRating = character.defenseRating
+    let defenseCostVersion = character.defenseCostVersion
+    if (defenseCostVersion == null) {
+      defenseRating = number(defenseRating) + 1
+      defenseCostVersion = 1
+      changed = true
+    }
+    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, updatedAt: Date.now() }))
   }, [character])
 
   useEffect(() => {
@@ -801,7 +828,7 @@ function CharacterSheet() {
       maxForce: level >= 9 ? 4 : level >= 5 ? 3 : level >= 2 ? 2 : 1,
       slots: level >= 7 ? 3 : level >= 4 ? 2 : 1,
       initiative: number(s.intuition),
-      defense: 11 + number(character.defenseBonus) + number(character.defenseRating),
+      defense: 10 + number(character.defenseBonus) + number(character.defenseRating),
       resilience: number(character.defenseBonus) + number(s.strength) + number(s.dexterity) + number(s.endurance),
       ego: number(character.defenseBonus) + number(s.intuition) + number(s.education) + number(s.charisma),
     }
@@ -890,6 +917,7 @@ function CharacterSheet() {
       })
       const weapons = populateArchetypeWeapons(current.weapons, preset.name)
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
+      const attackFocus = attackFocusForArchetype(preset)
       const contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
       const requiredContacts = Math.max(0, 3 + number(preset.stats.charisma))
       const roles = shuffled(contactRolesForArchetype(preset.name))
@@ -907,6 +935,8 @@ function CharacterSheet() {
       return {
         ...current, archetype: preset.name, stats: { ...current.stats, ...preset.stats },
         attackSkill: allocation.attack,
+        meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
+        rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
         items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), updatedAt: Date.now(),
       }
@@ -950,7 +980,8 @@ function CharacterSheet() {
   const attackRoll = weapon => {
     const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
     const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity
-    const modifier = number(stat) + number(character.attackSkill) + number(character.attackModifier)
+    const attackModifier = type[1] === 'melee' ? character.meleeAttackModifier : character.rangedAttackModifier
+    const modifier = number(stat) + number(character.attackSkill) + number(attackModifier)
     const natural = rollDie(20), total = natural + modifier
     setRoll({ kind: 'attack', label: weapon.name || type[0], natural, modifier, total, tn: null,
       hit: natural !== 1, weapon, die: type[2], stat: number(stat) })
@@ -1025,7 +1056,7 @@ function CharacterSheet() {
         })}
       </section></div>
 
-    <section className="sheet-section"><SectionTitle icon="✦" title="Attack" subtitle="Attack skill applies to melee and ranged attacks"/><div className="attack-summary"><label className="field attack-control"><span><a className="sheet-reference-link" href="/players#skill-attack"><span className="attack-label-full">Attack skill</span><span className="attack-label-short">Skill</span></a><InfoTooltip label="Attack" description={attackSkillDescription}/></span><SkillScoreControl label="Attack skill" value={character.attackSkill} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable('attack', option)} onChange={v => update(['attackSkill'], v)}/></label><label className="field attack-control"><span><span className="attack-label-full">Modifier</span><span className="attack-label-short">Modifier</span></span><input type="number" value={character.attackModifier} onChange={e => update(['attackModifier'], e.target.value)}/></label><AttackEquation label="Melee" statLabel="Strength" stat={character.stats.strength} attack={character.attackSkill} modifier={character.attackModifier}/><AttackEquation label="Ranged" statLabel="Dexterity" stat={character.stats.dexterity} attack={character.attackSkill} modifier={character.attackModifier}/></div></section>
+    <section className="sheet-section"><SectionTitle icon="✦" title="Attack" subtitle="Attack skill applies to melee and ranged attacks"/><div className="attack-summary"><label className="field attack-control"><span><a className="sheet-reference-link" href="/players#skill-attack"><span className="attack-label-full">Attack skill</span><span className="attack-label-short">Skill</span></a><InfoTooltip label="Attack" description={attackSkillDescription}/></span><SkillScoreControl label="Attack skill" value={character.attackSkill} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable('attack', option)} onChange={v => update(['attackSkill'], v)}/></label><div className="field attack-control"><span>Attack modifiers</span><div className="attack-modifier-fields"><label><small>Melee</small><input aria-label="Melee attack modifier" type="number" value={character.meleeAttackModifier} onChange={e => update(['meleeAttackModifier'], e.target.value)}/></label><label><small>Ranged</small><input aria-label="Ranged attack modifier" type="number" value={character.rangedAttackModifier} onChange={e => update(['rangedAttackModifier'], e.target.value)}/></label></div></div><AttackEquation label="Melee" statLabel="Strength" stat={character.stats.strength} attack={character.attackSkill} modifier={character.meleeAttackModifier}/><AttackEquation label="Ranged" statLabel="Dexterity" stat={character.stats.dexterity} attack={character.attackSkill} modifier={character.rangedAttackModifier}/></div></section>
 
     <EditableTable title="Weapons" icon="⚔" rows={character.weapons} add={() => addRow('weapons', { name: '', type: weaponTypes[0][0], enhancement: 0, notes: '' })} remove={id => deleteRow('weapons', id)} columns={['Name','Type','Enhancement','Damage','Notes','']}>
       {(row, i) => {
@@ -1084,15 +1115,19 @@ function SkillScoreControl({ label, value, options, onChange, isOptionDisabled =
 function TalentControl({ value, onChange }) { return <div className="talent-control"><select aria-label="Choose a talent" value={talentNames.includes(value) ? value : ''} onChange={e => onChange(e.target.value)}><option value="">Choose a talent</option>{talentNames.map(name => <option value={name} key={name}>{name}</option>)}</select></div> }
 function SectionTitle({ title, subtitle }) {
   const startingArray = title === 'Stats' || title === 'Skills' ? subtitle : ''
-  const reminders = { 'Combat Summary': 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', Attack: 'One Skill is used for both melee and ranged attacks. Talents can add damage.', Skills: 'You can activate one Skill per turn.', Contacts: subtitle || 'You begin with 3 + Charisma Contacts.', Talents: 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.', 'Items & Traits': 'Items explain why your Stats and Skills look the way they do. They do not change numbers; they describe your Hero through equipment, Species, Archetype, and background. Examples: (+2) Strength — Giant Species; (−1) Sneak — loud, heavy boots. Treat them like character-defining gear without a price tag. Traits describe your Hero’s personality, beliefs, habits, and complications. Use them as roleplaying prompts; they do not change numbers unless a rule specifically says otherwise.', Weapons: 'You can have as many weapons as you like. You can attack once each turn, or move an extra 30 feet instead.' }
+  const reminders = { 'Combat Summary': 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', Attack: 'One Skill is used for both melee and ranged attacks. Each Hero starts with +1 in one Attack modifier. Improve it one step at a time: +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP.', Skills: 'You can activate one Skill per turn.', Contacts: subtitle || 'You begin with 3 + Charisma Contacts.', Talents: 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.', 'Items & Traits': 'Items explain why your Stats and Skills look the way they do. They do not change numbers; they describe your Hero through equipment, Species, Archetype, and background. Examples: (+2) Strength — Giant Species; (−1) Sneak — loud, heavy boots. Treat them like character-defining gear without a price tag. Traits describe your Hero’s personality, beliefs, habits, and complications. Use them as roleplaying prompts; they do not change numbers unless a rule specifically says otherwise.', Weapons: 'You can have as many weapons as you like. You can attack once each turn, or move an extra 30 feet instead.' }
   const note = reminders[title] || (startingArray ? '' : subtitle)
   const Icon = sectionIcons[title] || FaStar
   const guideLink = sectionGuideLinks[title]
   const heading = <><span><Icon/></span>{title}</>
   return <div className="section-title"><h2>{guideLink ? <a className="section-guide-link" href={guideLink}>{heading}</a> : heading}{startingArray && <InfoTooltip label={`${title} starting array`} description={startingArray}/>}</h2>{(startingArray || note) && <p className={!note ? 'starting-array-only' : undefined}>{startingArray && <span className="starting-array-note">{startingArray} </span>}{note}</p>}{title === 'Talents' && subtitle && <strong className="section-metric">{subtitle}</strong>}</div>
 }
-function Vital({ label, value, max, editable, onChange, roll, children }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<span>{label}</span>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : roll ? <div className="vital-roll-value"><strong>{value}</strong><button className="roll-button" onClick={roll}>Roll</button></div> : <strong>{value}</strong>}{children}</div> }
-function DefenseVital({ value, bonus, rating, onBonus, onRating }) { return <div className="vital defense-vital"><FaShieldAlt className="vital-icon"/><span>Defense</span><div className="defense-controls"><label><span>Bonus</span><input aria-label="Bonus" type="number" value={bonus} onChange={event => onBonus(event.target.value)}/></label><strong aria-label="Defense total">{value}</strong><label><span>Rating</span><input aria-label="Rating" type="number" value={rating} onChange={event => onRating(event.target.value)}/></label></div></div> }
+function Vital({ label, value, max, editable, onChange, roll, children }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<a className="vital-rule-link" href={vitalRuleLinks[label]}>{label}</a>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : roll ? <div className="vital-roll-value"><strong>{value}</strong><button className="roll-button" onClick={roll}>Roll</button></div> : <strong>{value}</strong>}{children}</div> }
+function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
+  const normalizedRating = number(rating)
+  const nextCost = defenseUpgradeCosts[normalizedRating + 1]
+  return <div className="vital defense-vital"><FaShieldAlt className="vital-icon"/><a className="vital-rule-link" href={vitalRuleLinks.Defense}>Defense</a><div className="defense-controls"><label><span>Other</span><input aria-label="Other Defense bonuses" type="number" value={bonus} onChange={event => onBonus(event.target.value)}/></label><strong aria-label="Defense total">{value}</strong><label><span>Rating</span><input aria-label="Defense rating" type="number" min="1" max="7" value={rating} onChange={event => onRating(event.target.value)}/></label></div><small className="defense-xp-summary">{defenseXpSpent(normalizedRating)} XP spent{nextCost ? ` · Next +1: ${nextCost} XP` : ' · Maximum rating'}</small></div>
+}
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }

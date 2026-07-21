@@ -378,6 +378,10 @@ function getTextBlockAnchor(sectionTitle, line) {
     return statSkillAnchor('skill', name)
   }
 
+  if (section === 'defenses' && ['defense', 'resilience', 'ego'].includes(name)) {
+    return `defense-${name}`
+  }
+
   return null
 }
 
@@ -563,7 +567,7 @@ function renderTextBlocks(content, sectionTitle, section) {
       }
 
       elements.push(
-        <h3 key={`${line}-${index}`} className="guide-inline-heading">
+        <h3 key={`${line}-${index}`} id={`${slugify(sectionTitle)}-${slugify(line.replace(/:$/, ''))}`} className="guide-inline-heading">
           {line.replace(/:$/, '')}
         </h3>
       )
@@ -592,7 +596,7 @@ function renderTextBlocks(content, sectionTitle, section) {
 
     if (isInlineSubhead(line, next)) {
       elements.push(
-        <h3 key={`${line}-${index}`} className="guide-inline-heading">
+        <h3 key={`${line}-${index}`} id={`${slugify(sectionTitle)}-${slugify(line)}`} className="guide-inline-heading">
           {line}
         </h3>
       )

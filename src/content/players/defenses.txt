@@ -1,6 +1,6 @@
 Your defenses protect you from harm and harmful effects.
 
-Defense: 11 + Defense bonus + Defense rating
+Defense: 10 + Defense rating + other Defense bonuses
 
 Resilience: Defense bonus + Strength + Dexterity + Endurance
 
@@ -8,6 +8,22 @@ Ego: Defense bonus + Intuition + Education + Charisma
 
 Defense is the target number enemies roll against when they try to hit you.
 
-Resilience is used to resist physical danger, poison, pain, forced movement, exhaustion, and other body-based effects.
+Every Hero starts at Defense 11: a base value of 10 plus a free +1 Defense rating. The rating can be increased to +7 with unspent XP. You must buy every rating in order; you cannot skip a rating.
 
-Ego is used to resist fear, influence, mental attacks, illusions, possession, and other willpower-based effects.
+Defense Rating Upgrade Costs
+
++1: Free (Defense 11; 0 XP total)
++2: 2 XP (Defense 12; 2 XP total)
++3: 2 XP (Defense 13; 4 XP total)
++4: 4 XP (Defense 14; 8 XP total)
++5: 4 XP (Defense 15; 12 XP total)
++6: 8 XP (Defense 16; 20 XP total)
++7: 8 XP (Defense 17; 28 XP total)
+
+For example, increasing Defense rating from +1 to +4 costs 8 XP total: 2 XP for +2, 2 XP for +3, and 4 XP for +4. These are the explicit Defense costs; they are not calculated as half of the Stat and Skill progression costs.
+
+This table applies only to the Defense rating used against weapon and physical attacks. Resilience and Ego cannot be purchased or upgraded with XP. They are calculated only from their listed Stats and any Defense bonuses granted by another rule, such as Level progression. Other Defense bonuses do not change the Defense rating's XP cost.
+
+Resilience is a calculated value used to resist physical danger, poison, pain, forced movement, exhaustion, and other body-based effects.
+
+Ego is a calculated value used to resist fear, influence, mental attacks, illusions, possession, and other willpower-based effects.

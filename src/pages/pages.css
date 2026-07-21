@@ -398,6 +398,7 @@
 
 .guide-inline-heading {
   margin: 1.4rem 0 0.45rem;
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 1rem);
   color: #223829;
   font-size: 1.25rem;
 }

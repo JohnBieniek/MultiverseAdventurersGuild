@@ -6,6 +6,8 @@ The formula is:
 
 Str/Dex + attack skill + Range or Melee weapon enhancement + modifier vs target number of 12 modified by defensive bonus + defense = Defense.
 
+Every Hero starts with a +1 modifier in either Melee Attack or Ranged Attack. Choose one when creating the Hero. Improve that modifier one step at a time: +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP. Each increase is purchased separately.
+
 Range weapons can be used at point-blank range with a (-2) modifier to the attack.
 
 Grappling - see Grappling Talent
@@ -20,9 +22,9 @@ Threat Response - if you leave an area that another player/enemy can reach, they
 
 Defense
 
-Defense = 12 + defense bonus + Defense rating
+Defense = 10 + Defense rating + other Defense bonuses
 
-Heroes start with a Defense rating of 1 and a Defense of 13. Defense rating is a score from 1 to 9. Heroes get level 1 for free. Defense ratings are increased by the following table: 2 for 2, 2 for 3, 4 for 4, 5 for 4, 6 for 8, and 8 for 9. Defense can represent various types of armor, a high ability to evade attack. Let's say I wore level-one leather armor. That would make the Defense 13. Defense is a game mechanic. Things like a shield would be a part of that number if you chose. Examples of armor include leather and plate armor. Hides, amulet, off-hand weapon, Kevlar. Leather could be (+3), and plate could be (+1). Your choice of armor type doesn't lessen or increase the Defense. Your Defense could also be an effect caused by your innate ability to dodge attacks.
+Heroes start with a Defense rating of +1 for free, producing a starting Defense of 11 before other bonuses. Higher ratings are purchased in order with unspent XP: +2 costs 2 XP, +3 costs 2 XP, +4 costs 4 XP, +5 costs 4 XP, +6 costs 8 XP, and +7 costs 8 XP. The cumulative cost is 0, 2, 4, 8, 12, 20, or 28 XP for ratings +1 through +7. These explicit costs are not calculated as half of Stat progression. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas. Defense can represent armor or a high ability to evade attacks. A shield, leather, plate, hides, an amulet, an off-hand weapon, or Kevlar can explain the rating without changing its cost. Your choice of armor type does not independently increase or reduce Defense.
 
 Initiative
 

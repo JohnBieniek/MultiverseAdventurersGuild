@@ -38,7 +38,7 @@ Defenses
 
 Defense
 
-12 + Defense Bonus + Defense rating
+10 + Defense rating + other Defense bonuses
 
 Weapon & physical attacks
 
@@ -46,11 +46,15 @@ Resilience
 
 Defense bonus + Str + Dex + End
 
+Calculated only; it cannot be purchased or upgraded directly.
+
 Grapples, knockback, physical hazards
 
 Ego
 
 Defense bonus + Int + Edu + Cha
+
+Calculated only; it cannot be purchased or upgraded directly.
 
 Fear, charm, illusion, mental effects
 

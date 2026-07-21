@@ -28,11 +28,45 @@ Force 4 (F4): 16 energy sustained, 8 energy as a one-shot.
 
 One-shots last for one roll or one immediate use and never occupy a slot. Sustained effects do occupy a slot.
 
-For experience, you pay for each increase. To achieve a stat score of (+3) from (+0), I would pay 1 for a (+1), 4 more for a (+2), and 9 for a (+3). You pay for each step.
+Tracking XP
+
+Track two XP totals. Total XP earned determines a Hero's Level and never decreases when they buy an improvement. Unspent XP is the amount currently available to spend.
+
+10 total XP earned = Level 1
+
+20 total XP earned = Level 2
+
+30 total XP earned = Level 3
+
+Continue at 10 total XP per Level, up to Level 10.
+
+Reaching a Level automatically grants everything listed for that Level, including HP, Energy, Talent Slots, Force access, Talents, Attack bonuses, or Defense bonuses. Heroes do not spend XP on those Level benefits, and spending unspent XP never delays Level progression.
+
+Buying Improvements
+
+Talents: Purchase any eligible Talent for 5 XP. A Hero cannot purchase a Talent above their currently unlocked Force Level.
+
+Stats, Skills, and Attack Modifiers use the same escalating step costs:
+
++1 (Trained): 1 XP
+
++2 (Expert): 4 XP
+
++3 (Master): 9 XP
+
++4 (Legend): 16 XP
+
+Each increase is purchased separately. Increasing a score from 0 to +3 costs 1 XP for +1, 4 XP for +2, and 9 XP for +3, for 14 XP total. Increasing a score from +2 to +3 costs only the next step: 9 XP.
+
+Defense Rating has its own progression. Every Hero begins at +1 for free, giving Defense 11 from base 10. Later ratings must be purchased in order: +2 costs 2 XP, +3 costs 2 XP, +4 costs 4 XP, +5 costs 4 XP, +6 costs 8 XP, and +7 costs 8 XP. The cumulative costs are 0, 2, 4, 8, 12, 20, and 28 XP. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas.
+
+Energy: XP can be spent to buy additional Energy, but the XP cost for additional Energy has not yet been defined.
+
+Heroes may spend unspent XP whenever they choose, including during a mission. They may also switch their Talents whenever they reach a new Level.
 
 Level
 
-Level increases with every 10 XP. Players spend XP when they want, including in the middle of a mission. For every 10 XP, a Hero gains a level and certain advantages. They do not pay XP for the level benefits themselves.
+Level is based on total XP earned, not unspent XP. Every 10 total XP grants the next Level and its listed advantages.
 
 HP = the base HP a Hero has at each level before Endurance is applied. Add the Hero's Endurance score once for each level they have, including level 0. Slots indicate how many combat Talents they can have active at any given time.
 
