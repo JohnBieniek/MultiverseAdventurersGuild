@@ -569,6 +569,7 @@
 .guide-skill-card {
   margin: 1rem 0;
   overflow: hidden;
+  scroll-margin-top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap) + var(--guide-subnav-height) + 1rem);
   border: 1px solid rgba(51, 97, 47, 0.2);
   border-radius: 10px;
   background: #fff;

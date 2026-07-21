@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 
 function slugify(title) {
   return title
@@ -942,6 +943,7 @@ function renderSectionContent(section, cardIndex) {
 function Guide({ title, intro, sections }) {
   const cardIndex = buildCardIndex(sections)
   const subnavRef = useRef(null)
+  const location = useLocation()
 
   useLayoutEffect(() => {
     const subnav = subnavRef.current
@@ -966,6 +968,19 @@ function Guide({ title, intro, sections }) {
       document.documentElement.style.removeProperty('--guide-subnav-height')
     }
   }, [sections])
+
+  useLayoutEffect(() => {
+    if (!location.hash) {
+      return undefined
+    }
+
+    const targetId = decodeURIComponent(location.hash.slice(1))
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ block: 'start' })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash, sections])
 
   return (
     <div className="page guide">
