@@ -484,12 +484,39 @@ function renderFactionStatCard(name, lines, index) {
   )
 }
 
+function renderSkillCard(line, exampleLine, index, sectionTitle) {
+  const name = line.match(/^([^(:]+)(?:\s*\([^)]+\))?:/)?.[1]?.trim() || 'Skill'
+  const anchor = getTextBlockAnchor(sectionTitle, line)
+  const items = exampleLine.replace(/^Example Items:\s*/i, '').split('|').map((item) => item.trim()).filter(Boolean)
+
+  return (
+    <article key={`${name}-${index}`} id={anchor || undefined} className="guide-skill-card">
+      <p className="guide-skill-description">{renderInlineText(line)}</p>
+      <div className="guide-skill-examples">
+        <strong>Example items</strong>
+        <div className="guide-skill-item-list">
+          {items.map((item) => <span key={item}>{item}</span>)}
+        </div>
+      </div>
+    </article>
+  )
+}
+
 function renderTextBlocks(content, sectionTitle, section) {
   const lines = getLines(content).filter(Boolean)
   const elements = []
 
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index]
+
+    const isSkillEntry = sectionTitle === 'Skills' && /^(?:Attack|Athletics|Influence|Knowledge|Observation|Outdoors|Sneak|Technology|Vehicle)\b.*:/.test(line)
+    const isStatEntry = sectionTitle === 'Stats' && /^(?:Strength|Dexterity|Endurance|Intuition|Education|Charisma)\b.*:/.test(line)
+
+    if ((isSkillEntry || isStatEntry) && /^Example Items:/i.test(lines[index + 1] || '')) {
+      elements.push(renderSkillCard(line, lines[index + 1], index, sectionTitle))
+      index += 1
+      continue
+    }
 
     if (sectionTitle === 'Factions' && isFactionStatBlockStart(line)) {
       const cardLines = []

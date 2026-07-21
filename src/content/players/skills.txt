@@ -3,20 +3,29 @@ Skills work with Stats to show what you are good at. Every Hero has every skill,
 Assign: +2, +2, +1, +1, +1, 0, 0, 0, -1
 
 Attack (Str or Dex): Used for every attack or offensive Talent. You buy it once and use it for melee and ranged attacks.
+Example Items: Grip-Memory Combat Gloves | Ricochet Calculator Lens | Employer-Agnostic Smartlink | Echoing Temple Handwraps | Knuckle-Plated Smart Gloves
 
 Athletics (Str, Dex, or End): Climbing, jumping, swimming, grappling, resisting knockback, enduring physical hazards, and other physical tasks not covered by another skill.
+Example Items: Climbing Claws and Silk Line | Climber’s Living-Vine Harness | Patrol-Grade Pursuit Boots | All-Terrain Broadcast Boots | Campaign-Worn Marching Boots
 
 Influence (Cha): Intimidate, persuade, interrogate, acting, impersonation
+Example Items: Restraint and Warrant Kit | Retired Detective Badge | Whisper Coaching Earpiece | Talking Drum | Tea Set of Patient Questions
 
 Knowledge (Edu): Learned topics, research, magic theory.
+Example Items: Pocket Omnilibrary | Illuminated Prayer Book | Black-Market Appraiser’s Handbook | Dog-Eared Procedure Handbook | Taboo-Knot Cord
 
 Observation (Intuition): Noticing details, perception
+Example Items: Targeting Monocle | Forensic Field Kit | Weatherwise Acorn Charm | Deja-Vu Packet Analyzer | Spirit-Track Moccasins
 
 Outdoors (Intuition): Tracking, survival, navigation
+Example Items: Mantle of Living Leaves | Seed-Bomb Bandolier | Fugitive-Scent Sampler | Smoke-Reading War Paint | Graffiti-Route AR Mask
 
 Sneak (Dex): Stealth, sleight of hand, infiltration, disguise, and acting
+Example Items: Chameleon-Lined Coat | Boots of Elvenkind | Adaptive Camouflage Cloak | Magnetic Rooftop Tabi | False-Bottom Cargo Coat
 
 Technology (Edu): Hacking, medicine, devices, engineering, disable traps, Matrix search
+Example Items: Professional Lock Roll | Spell-Geometry Monocle | Sleeve of Balanced Tools | Gunsmith’s Personal Toolkit | Ghostline Neural Implant
 
 Vehicle (Dex): Driving a car, piloting a starship, riding a horse
+Example Items: Overclocked Control Yoke | Dust-Trail Riding Boots | Route-Scrambler Nav Unit | Corner-Predicting Visor | Engine-Song Diagnostic Implant
 "Pick the two most important skills and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in Attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 3 skills that are the least important and write in a (0). The remaining skills are (+1)."

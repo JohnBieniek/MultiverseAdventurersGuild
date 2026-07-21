@@ -5,17 +5,23 @@ Assign the following values:
 +3, +2, +1, 0, 0, -1
 Stats (St)
 
-Strength: This represents melee attacks.
+Strength: Your ability to lift, hit hard, and manipulate the world through physical means. Strength powers melee attacks and feats of raw force, such as forcing open a door, moving something heavy, or holding an opponent in place.
+Example Items: Bearskin War Cloak | Mammoth-Bone Grip Wraps | Climbing Claws and Silk Line | Ironroot Walking Staff | Knuckle-Plated Smart Gloves
 
-Dexterity: This represents making ranged attacks and controlling vehicles.
+Dexterity: Your precision, coordination, and physical control. Dexterity helps you strike accurately, hit weak spots, sneak, use sleight of hand, and handle ranged weapons or vehicles.
+Example Items: Tactical Assault Harness | Quickdraw Holster Array | Shadow-Silk Shinobi Suit | Clockmaker’s Tremor Dampers | Reflex-Accelerator Spine
 
-Endurance: This represents a character's ability to handle physically grueling tasks and affects hit points. It also reflects stamina. Ex. Hit points, staying alive below 0 hit points.
+Endurance: Your stamina, toughness, and ability to keep going through pain, fatigue, injury, illness, and other physically grueling conditions. Endurance affects Hit Points and helps you stay alive when you fall below 0 Hit Points.
+Example Items: Iron-Shod Trail Boots | Reliquary of Steadfast Hearts | Ballistic Combat Armor | Rebreather of the Last Forest | Pain-Partition Neural Clip
 
-Intuition: This represents knowing things outside your education. This is that gut feeling you get or the ability to take disparate pieces of information and draw a conclusion. Ex. Initiative, solving problems.
+Intuition: Your instincts and ability to notice patterns, read a situation, solve problems, and reach conclusions without relying only on formal learning. Intuition represents gut feelings, awareness, and connecting separate clues. It also affects Initiative.
+Example Items: Ancestor-Totem Necklace | Predictive Lens Array | Leyline Compass | Marked-Card Data Deck | Wind-Ghost Prayer Ribbons
 
-Education: This is what you have learned in life. It could be a college education or things learned by experience.
+Education: What you have learned through school, training, research, or life experience. Education helps you recall facts, understand specialized subjects, and apply learned knowledge to a problem.
+Example Items: Thesis-Archive Mnemonic Crown | Illuminated Prayer Book | Dog-Eared Procedure Handbook | Explosives Chemistry Field Manual | Memory-Vault Implant
 
-Charisma: This is your ability to use your personality to get people to do your bidding. Ex. Fast talk, intimidate, contacts.
+Charisma: Your force of personality and ability to connect with or sway others. Charisma covers persuasion, intimidation, performance, leadership, and fast talk. It also affects how many Contacts your Hero begins with.
+Example Items: Consecrated Vestments | Duelist’s Longcoat | Resonant Signature Instrument | Interrogator’s Voice Modulator | Poker-Face Biofeedback Ring
 For your character, you get to assign the scores (+3, +2,+1,0,0,-1). The assigned number is the score. This is paired with a descriptor (which explains the score ie. (+2) St - vat muscle).
 
 "Pick your most important Stat and write in (+3). Now look at your least important stat. Write in a (-1). Pick your next most important stat. Write in a (+2). Of the three stats left, put a (+1) into the most important stat and (0)s in the remaining stats."
