@@ -918,7 +918,7 @@ function CharacterSheet() {
       const weapons = populateArchetypeWeapons(current.weapons, preset.name)
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
       const attackFocus = attackFocusForArchetype(preset)
-      const contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
+      let contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
       const requiredContacts = Math.max(0, 3 + number(preset.stats.charisma))
       const roles = shuffled(contactRolesForArchetype(preset.name))
       const usedNames = new Set(contacts.map(contact => contact.name).filter(Boolean))
@@ -932,8 +932,12 @@ function CharacterSheet() {
         else contacts.push(generated)
         populatedContacts += 1
       }
+      contacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
+      const species = current.species?.trim()
+        ? current.species
+        : speciesNames[Math.floor(Math.random() * speciesNames.length)] || ''
       return {
-        ...current, archetype: preset.name, stats: { ...current.stats, ...preset.stats },
+        ...current, species, archetype: preset.name, stats: { ...current.stats, ...preset.stats },
         attackSkill: allocation.attack,
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
