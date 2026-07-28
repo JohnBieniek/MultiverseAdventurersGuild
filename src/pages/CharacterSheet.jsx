@@ -780,6 +780,7 @@ function CharacterSheet() {
   })
   const [roll, setRoll] = useState(null)
   const [pendingArchetype, setPendingArchetype] = useState('')
+  const [pendingDelete, setPendingDelete] = useState(null)
   const [notice, setNotice] = useState('')
   const fileRef = useRef(null)
 
@@ -1035,9 +1036,12 @@ function CharacterSheet() {
     else update(['archetype'], name)
   }
   const flash = text => { setNotice(text); window.setTimeout(() => setNotice(''), 2200) }
-  const remove = id => {
-    if (!window.confirm('Delete this locally saved character?')) return
-    const next = characters.filter(item => item.id !== id); setCharacters(next); localStorage.setItem(STORE_KEY, JSON.stringify(next))
+  const remove = () => {
+    if (!pendingDelete) return
+    const next = characters.filter(item => item.id !== pendingDelete.id)
+    setCharacters(next)
+    localStorage.setItem(STORE_KEY, JSON.stringify(next))
+    setPendingDelete(null)
   }
   const importFile = event => {
     const file = event.target.files?.[0]; if (!file) return
@@ -1084,8 +1088,17 @@ function CharacterSheet() {
       <div className="library-actions"><button className="primary" onClick={() => setCharacter(newCharacter())}>＋ Create New Hero</button><button onClick={() => fileRef.current.click()}>⇧ Upload Character</button></div>
       <input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} />
     </div>
-    <section className="saved-library"><h2>Saved Heroes</h2>{characters.length === 0 ? <div className="empty-state"><strong>No saved Heroes yet</strong><span>Your characters stay in this browser using local storage.</span></div> : <div className="character-grid">{characters.map(hero => <article className="character-card" key={hero.id}><div><span>LEVEL {hero.level || 0}</span><h3>{hero.name}</h3><p>{[hero.species, hero.archetype].filter(Boolean).join(' • ') || 'Unwritten legend'}</p></div><div className="card-actions"><button className="primary" onClick={() => setCharacter(structuredClone(hero))}>Load</button><button className="danger" onClick={() => remove(hero.id)}>Delete</button></div></article>)}</div>}</section>
+    <section className="saved-library"><h2>Saved Heroes</h2>{characters.length === 0 ? <div className="empty-state"><strong>No saved Heroes yet</strong><span>Your characters stay in this browser using local storage.</span></div> : <div className="character-grid">{characters.map(hero => <article className="character-card" key={hero.id}><div><span>LEVEL {hero.level || 0}</span><h3>{hero.name}</h3><p>{[hero.species, hero.archetype].filter(Boolean).join(' • ') || 'Unwritten legend'}</p></div><div className="card-actions"><button className="primary" onClick={() => setCharacter(structuredClone(hero))}>Load</button><button className="danger" onClick={() => setPendingDelete({ id: hero.id, name: hero.name })}>Delete</button></div></article>)}</div>}</section>
     {notice && <div className="toast">{notice}</div>}
+    {pendingDelete && <ConfirmModal
+      eyebrow="DELETE HERO"
+      title={`Delete ${pendingDelete.name || 'this Hero'}?`}
+      message="This permanently removes the locally saved character from this browser."
+      confirmLabel="Delete Character"
+      close={() => setPendingDelete(null)}
+      confirm={remove}
+      destructive
+    />}
   </div>
 
   const skillTotal = (key, stat) => number(character.stats[stat]) + Object.values(character.skills[key]).reduce((sum, value) => sum + number(value), 0)
@@ -1219,4 +1232,5 @@ function EditableTable({ title, icon, subtitle, rows, columns, add, children }) 
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
 function ArchetypePrompt({ name, close, chooseOnly, applyDefaults }) { return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt" role="dialog" aria-modal="true" aria-labelledby="archetype-prompt-title"><button type="button" className="modal-close" onClick={close}>×</button><span className="eyebrow">ARCHETYPE SETUP</span><h2 id="archetype-prompt-title">Use the {name} starting package?</h2><p>The starting package fills suggested Stats, Skills, Talents, weapons, Items, Traits, and Contacts appropriate to your level. Existing custom entries are preserved wherever possible.</p><div className="archetype-prompt-actions"><button type="button" onClick={() => chooseOnly(name)}>Choose Archetype Only</button><button type="button" className="primary" onClick={() => applyDefaults(name)}>Use Starting Package</button></div></div></div>, document.body) }
+function ConfirmModal({ eyebrow, title, message, confirmLabel, close, confirm, destructive = false }) { return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt" role="alertdialog" aria-modal="true" aria-labelledby="confirmation-modal-title" aria-describedby="confirmation-modal-description"><button type="button" className="modal-close" aria-label="Close" onClick={close}>×</button><span className="eyebrow">{eyebrow}</span><h2 id="confirmation-modal-title">{title}</h2><p id="confirmation-modal-description">{message}</p><div className="archetype-prompt-actions"><button type="button" onClick={close}>Cancel</button><button type="button" className={destructive ? 'danger-confirm' : 'primary'} onClick={confirm}>{confirmLabel}</button></div></div></div>, document.body) }
 export default CharacterSheet
