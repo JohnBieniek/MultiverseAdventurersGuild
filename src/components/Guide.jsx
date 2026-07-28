@@ -949,6 +949,17 @@ function Guide({ title, intro, sections }) {
   const subnavRef = useRef(null)
   const location = useLocation()
 
+  const alignHashTarget = () => {
+    if (!location.hash) return
+    const targetId = decodeURIComponent(location.hash.slice(1))
+    const target = document.getElementById(targetId)
+    if (!target) return
+    const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 0
+    const subnavHeight = subnavRef.current?.getBoundingClientRect().height || 0
+    const targetTop = window.scrollY + target.getBoundingClientRect().top
+    window.scrollTo({ top: Math.max(0, targetTop - navbarHeight - subnavHeight - 24), behavior: 'auto' })
+  }
+
   useLayoutEffect(() => {
     const subnav = subnavRef.current
 
@@ -978,21 +989,20 @@ function Guide({ title, intro, sections }) {
       return undefined
     }
 
-    const targetId = decodeURIComponent(location.hash.slice(1))
-    const frame = window.requestAnimationFrame(() => {
-      const target = document.getElementById(targetId)
-
-      if (!target) {
-        return
-      }
-
-      const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 0
-      const subnavHeight = subnavRef.current?.getBoundingClientRect().height || 0
-      const targetTop = window.scrollY + target.getBoundingClientRect().top
-      window.scrollTo({ top: Math.max(0, targetTop - navbarHeight - subnavHeight - 16), behavior: 'auto' })
+    let secondFrame
+    const firstFrame = window.requestAnimationFrame(() => {
+      alignHashTarget()
+      secondFrame = window.requestAnimationFrame(alignHashTarget)
     })
+    const settledLayout = window.setTimeout(alignHashTarget, 150)
+    const loadedLayout = window.setTimeout(alignHashTarget, 400)
 
-    return () => window.cancelAnimationFrame(frame)
+    return () => {
+      window.cancelAnimationFrame(firstFrame)
+      if (secondFrame) window.cancelAnimationFrame(secondFrame)
+      window.clearTimeout(settledLayout)
+      window.clearTimeout(loadedLayout)
+    }
   }, [location.hash, sections])
 
   return (
