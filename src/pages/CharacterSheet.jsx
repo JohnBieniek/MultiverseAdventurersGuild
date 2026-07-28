@@ -7,6 +7,7 @@ import speciesText from '../content/players/species.txt?raw'
 import archetypesText from '../content/players/archetypes.txt?raw'
 import contactsText from '../content/players/contacts.txt?raw'
 import { randomCharacterName } from '../data/characterNames'
+import { archetypeTraitPools, speciesTraitPools } from '../data/randomTraits'
 import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
@@ -511,8 +512,8 @@ const itemScoresForCharacter = character => ({
   attack: number(character.attackSkill),
 })
 const populateArchetypeItems = (existingItems, archetypeName, scoreValues) => {
-  const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
-  const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
+  const traits = existingItems.filter(item => ['archetype', 'archetype-trait', 'species-trait'].includes(item.source)).map(item => ({ ...item, source: item.source === 'species-trait' ? item.source : 'archetype-trait' }))
+  const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'species-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
   const candidates = expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])])
     .map(candidate => fitItemToScores(candidate, scoreValues))
     .filter(Boolean)
@@ -566,10 +567,22 @@ const talentCatalog = (() => {
   }).filter((talent, index, all) => all.findIndex(item => item.name === talent.name) === index).sort((a, b) => a.name.localeCompare(b.name))
 })()
 const talentNames = talentCatalog.map(talent => talent.name)
-const speciesNames = (() => {
+const traitsFromBlock = block => {
+  const personalityIndex = block.findIndex(entry => /^Personality Traits:/i.test(entry))
+  return block.slice(personalityIndex < 0 ? block.length : personalityIndex)
+    .map(entry => entry.replace(/^Personality Traits:\s*/i, ''))
+    .map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null })
+    .filter(Boolean)
+}
+const speciesOptions = (() => {
   const lines = speciesText.split(/\r?\n/).map(line => line.trim())
-  return lines.map((line, index) => ({ line, next: lines.slice(index + 1).find(Boolean) || '' })).filter(({ line, next }) => line.includes(' - ') && /^Rep:/i.test(next)).map(({ line }) => line.split(' - ')[0].trim()).sort((a, b) => a.localeCompare(b))
+  const headings = lines.map((line, index) => ({ line, index, next: lines.slice(index + 1).find(Boolean) || '' })).filter(({ line, next }) => line.includes(' - ') && /^Rep:/i.test(next))
+  return headings.map(({ line, index }, headingIndex) => ({
+    name: line.split(' - ')[0].trim(),
+    traits: traitsFromBlock(lines.slice(index, headings[headingIndex + 1]?.index ?? lines.length)),
+  })).sort((a, b) => a.name.localeCompare(b.name))
 })()
+const speciesNames = speciesOptions.map(species => species.name)
 const contactCatalog = (() => {
   const lines = contactsText.split(/\r?\n/).map(line => line.trim())
   const headings = lines.map((line, index) => ({ line, index })).filter(({ line, index }) => line.includes(' - ') && /^Category:/i.test(lines.slice(index + 1).find(Boolean) || ''))
@@ -700,14 +713,27 @@ const archetypeOptions = (() => {
     const strengths = (block.find(entry => /^Strengths:/i.test(entry)) || '').replace(/^Strengths:\s*/i, '').split(',').map(value => value.trim())
     const weaknesses = (block.find(entry => /^Weaknesses:/i.test(entry)) || '').replace(/^Weaknesses:\s*/i, '').split(',').map(value => value.trim())
     const preferredTalents = (block.find(entry => /^(Preferred Talents|Talents):/i.test(entry)) || '').replace(/^(Preferred Talents|Talents):\s*/i, '').split(',').map(value => value.trim()).filter(Boolean)
-    const personalityIndex = block.findIndex(entry => /^Personality Traits:/i.test(entry))
-    const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality Traits:\s*/i, '')).map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null }).filter(Boolean)
+    const traits = traitsFromBlock(block)
     return {
       name: line.split(' - ')[0].trim(), description: line.slice(line.indexOf(' - ') + 3).trim(), strengths, weaknesses, preferredTalents, traits,
       stats: Object.fromEntries(stats.map(([key, label]) => [key, number(scoresLine.match(new RegExp(`${label}\\s+([+-]?\\d+)`, 'i'))?.[1])])),
     }
   }).sort((a, b) => a.name.localeCompare(b.name))
 })()
+const randomStartingTraits = (speciesName, archetype, usedNames = new Set()) => {
+  const speciesExamples = speciesOptions.find(option => option.name === speciesName)?.traits || []
+  const speciesCandidates = shuffled([...(speciesExamples || []), ...(speciesTraitPools[speciesName] || [])]).map(trait => ({ ...trait, source: 'species-trait' }))
+  const archetypeCandidates = shuffled([...(archetype.traits || []), ...(archetypeTraitPools[archetype.name] || [])]).map(trait => ({ ...trait, source: 'archetype-trait' }))
+  const selected = []
+  const pick = candidates => candidates.find(trait => !usedNames.has(trait.name) && !selected.some(chosen => chosen.name === trait.name))
+  const speciesTrait = pick(speciesCandidates)
+  if (speciesTrait) selected.push(speciesTrait)
+  const archetypeTrait = pick(archetypeCandidates)
+  if (archetypeTrait) selected.push(archetypeTrait)
+  const thirdTrait = pick(shuffled([...speciesCandidates, ...archetypeCandidates]))
+  if (thirdTrait) selected.push(thirdTrait)
+  return selected
+}
 const attackFocusForArchetype = archetype => {
   const strengths = (archetype?.strengths || []).join(' ').toLowerCase()
   const hasMeleeFocus = /\bmelee\b/.test(strengths)
@@ -1029,11 +1055,17 @@ function CharacterSheet() {
     priority.slice(0, 3).forEach(key => { allocation[key] = 0 })
     priority.slice(3, 6).forEach(key => { allocation[key] = 1 })
     setCharacter(current => {
-      const manualItems = current.items.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source))
+      const userSelectedSpecies = Boolean(current.species?.trim() && current.speciesSource === 'user')
+      const randomSpeciesChoices = speciesNames.filter(speciesName => speciesName !== current.species)
+      const species = userSelectedSpecies
+        ? current.species
+        : randomSpeciesChoices[Math.floor(Math.random() * randomSpeciesChoices.length)] || speciesNames[0] || ''
+      const manualItems = current.items.filter(item => !['archetype', 'archetype-trait', 'species-trait', 'archetype-item'].includes(item.source))
       const packageItemScores = { ...preset.stats, ...allocation }
       const items = populateArchetypeItems(manualItems, preset.name, packageItemScores)
-      preset.traits.forEach(({ name, description }) => {
-        const trait = { id: crypto.randomUUID(), name, description, source: 'archetype-trait' }
+      const usedItemNames = new Set(items.map(item => item.name?.trim()).filter(Boolean))
+      randomStartingTraits(species, preset, usedItemNames).forEach(({ name, description, source }) => {
+        const trait = { id: crypto.randomUUID(), name, description, source }
         const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.description || '').trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
         if (emptyIndex >= 0) items[emptyIndex] = { ...trait, id: items[emptyIndex].id || trait.id }
         else items.push(trait)
@@ -1056,11 +1088,6 @@ function CharacterSheet() {
         populatedContacts += 1
       }
       contacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
-      const userSelectedSpecies = Boolean(current.species?.trim() && current.speciesSource === 'user')
-      const randomSpeciesChoices = speciesNames.filter(speciesName => speciesName !== current.species)
-      const species = userSelectedSpecies
-        ? current.species
-        : randomSpeciesChoices[Math.floor(Math.random() * randomSpeciesChoices.length)] || speciesNames[0] || ''
       const userSelectedName = current.characterNameSource === 'user' || (current.characterNameSource == null && current.name?.trim() && current.name !== 'New Hero')
       const characterName = userSelectedName ? current.name : randomCharacterName(species, preset.name) || current.name
       return {
