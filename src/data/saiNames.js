@@ -1,4 +1,4 @@
-// 500 literal SAI identities across four deliberately weighted naming styles.
+// 500 literal SAI identities built from distinct technical and conceptual roots.
 const saiNames = [
   {
     "name": "[NEX-117]",
@@ -162,117 +162,117 @@ const saiNames = [
     "designation": "NEX-507"
   },
   {
-    "name": "Ionis [ARIA.520]",
+    "name": "Axiomara [ARIA.520]",
     "style": "named-designation",
-    "personalName": "Ionis",
+    "personalName": "Axiomara",
     "designation": "ARIA.520"
   },
   {
-    "name": "Arcais [SYS/533]",
+    "name": "Crysalune [SYS/533]",
     "style": "named-designation",
-    "personalName": "Arcais",
+    "personalName": "Crysalune",
     "designation": "SYS/533"
   },
   {
-    "name": "Echois [CAL-546]",
+    "name": "Datalogue [CAL-546]",
     "style": "named-designation",
-    "personalName": "Echois",
+    "personalName": "Datalogue",
     "designation": "CAL-546"
   },
   {
-    "name": "Ionial [NODE.559]",
+    "name": "Eidolon [NODE.559]",
     "style": "named-designation",
-    "personalName": "Ionial",
+    "personalName": "Eidolon",
     "designation": "NODE.559"
   },
   {
-    "name": "Kineis [NEX-572]",
+    "name": "Ferrovia [NEX-572]",
     "style": "named-designation",
-    "personalName": "Kineis",
+    "personalName": "Ferrovia",
     "designation": "NEX-572"
   },
   {
-    "name": "Dynais [ARIA.585]",
+    "name": "Glyphara [ARIA.585]",
     "style": "named-designation",
-    "personalName": "Dynais",
+    "personalName": "Glyphara",
     "designation": "ARIA.585"
   },
   {
-    "name": "Ioneon [SYS/598]",
+    "name": "Helixor [SYS/598]",
     "style": "named-designation",
-    "personalName": "Ioneon",
+    "personalName": "Helixor",
     "designation": "SYS/598"
   },
   {
-    "name": "Ionora [CAL-611]",
+    "name": "Isorithm [CAL-611]",
     "style": "named-designation",
-    "personalName": "Ionora",
+    "personalName": "Isorithm",
     "designation": "CAL-611"
   },
   {
-    "name": "Nexais [NODE.624]",
+    "name": "Jovienne [NODE.624]",
     "style": "named-designation",
-    "personalName": "Nexais",
+    "personalName": "Jovienne",
     "designation": "NODE.624"
   },
   {
-    "name": "Lumais [NEX-637]",
+    "name": "Kernelle [NEX-637]",
     "style": "named-designation",
-    "personalName": "Lumais",
+    "personalName": "Kernelle",
     "designation": "NEX-637"
   },
   {
-    "name": "Ionion [ARIA.650]",
+    "name": "Lucentia [ARIA.650]",
     "style": "named-designation",
-    "personalName": "Ionion",
+    "personalName": "Lucentia",
     "designation": "ARIA.650"
   },
   {
-    "name": "Novais [SYS/663]",
+    "name": "Mnemonic [SYS/663]",
     "style": "named-designation",
-    "personalName": "Novais",
+    "personalName": "Mnemonic",
     "designation": "SYS/663"
   },
   {
-    "name": "Ionium [CAL-676]",
+    "name": "Noetica [CAL-676]",
     "style": "named-designation",
-    "personalName": "Ionium",
+    "personalName": "Noetica",
     "designation": "CAL-676"
   },
   {
-    "name": "Cryois [NODE.689]",
+    "name": "Optraxis [NODE.689]",
     "style": "named-designation",
-    "personalName": "Cryois",
+    "personalName": "Optraxis",
     "designation": "NODE.689"
   },
   {
-    "name": "Ionous [NEX-702]",
+    "name": "Parallune [NEX-702]",
     "style": "named-designation",
-    "personalName": "Ionous",
+    "personalName": "Parallune",
     "designation": "NEX-702"
   },
   {
-    "name": "Beacais [ARIA.715]",
+    "name": "Quoralis [ARIA.715]",
     "style": "named-designation",
-    "personalName": "Beacais",
+    "personalName": "Quoralis",
     "designation": "ARIA.715"
   },
   {
-    "name": "Arcaial [SYS/728]",
+    "name": "Resonique [SYS/728]",
     "style": "named-designation",
-    "personalName": "Arcaial",
+    "personalName": "Resonique",
     "designation": "SYS/728"
   },
   {
-    "name": "Echoial [CAL-741]",
+    "name": "Synestra [CAL-741]",
     "style": "named-designation",
-    "personalName": "Echoial",
+    "personalName": "Synestra",
     "designation": "CAL-741"
   },
   {
-    "name": "Cadenis [NODE.754]",
+    "name": "Tessara [NODE.754]",
     "style": "named-designation",
-    "personalName": "Cadenis",
+    "personalName": "Tessara",
     "designation": "NODE.754"
   },
   {
@@ -476,1347 +476,235 @@ const saiNames = [
     "style": "two-word"
   },
   {
-    "name": "Arcaeon",
+    "name": "Ablation",
     "style": "coined"
   },
   {
-    "name": "Arcaora",
+    "name": "Accretion",
     "style": "coined"
   },
   {
-    "name": "Mechais",
+    "name": "Actuator",
     "style": "coined"
   },
   {
-    "name": "Arcaion",
+    "name": "Adiabatic",
     "style": "coined"
   },
   {
-    "name": "Kineial",
+    "name": "Aerogel",
     "style": "coined"
   },
   {
-    "name": "Heliais",
+    "name": "Albedo",
     "style": "coined"
   },
   {
-    "name": "Echoeon",
+    "name": "Algorithm",
     "style": "coined"
   },
   {
-    "name": "Echoora",
+    "name": "Alnico",
     "style": "coined"
   },
   {
-    "name": "Ioncian",
+    "name": "Altimeter",
     "style": "coined"
   },
   {
-    "name": "Ionence",
+    "name": "Amplitude",
     "style": "coined"
   },
   {
-    "name": "Arcaium",
+    "name": "Ansible",
     "style": "coined"
   },
   {
-    "name": "Dynaial",
+    "name": "Antenna",
     "style": "coined"
   },
   {
-    "name": "Nexaial",
+    "name": "Aperture",
     "style": "coined"
   },
   {
-    "name": "Echoion",
+    "name": "Aphelion",
     "style": "coined"
   },
   {
-    "name": "Lumaial",
+    "name": "Apogee",
     "style": "coined"
   },
   {
-    "name": "Ionelle",
+    "name": "Arbiter",
     "style": "coined"
   },
   {
-    "name": "Kineeon",
+    "name": "Arcology",
     "style": "coined"
   },
   {
-    "name": "Kineora",
+    "name": "Argon",
     "style": "coined"
   },
   {
-    "name": "Echoium",
+    "name": "Array",
     "style": "coined"
   },
   {
-    "name": "Novaial",
+    "name": "Astrolabe",
     "style": "coined"
   },
   {
-    "name": "Cybrais",
+    "name": "Asymptote",
     "style": "coined"
   },
   {
-    "name": "Kineion",
+    "name": "Atlasium",
     "style": "coined"
   },
   {
-    "name": "Phaseis",
+    "name": "Attosecond",
     "style": "coined"
   },
   {
-    "name": "Arcaous",
+    "name": "Autocode",
     "style": "coined"
   },
   {
-    "name": "Dynaeon",
+    "name": "Automaton",
     "style": "coined"
   },
   {
-    "name": "Dynaora",
+    "name": "Avionics",
     "style": "coined"
   },
   {
-    "name": "Nexaeon",
+    "name": "Azimuth",
     "style": "coined"
   },
   {
-    "name": "Nexaora",
+    "name": "Backplane",
     "style": "coined"
   },
   {
-    "name": "Vectais",
+    "name": "Bandgap",
     "style": "coined"
   },
   {
-    "name": "Omniais",
+    "name": "Baryon",
     "style": "coined"
   },
   {
-    "name": "Algoris",
+    "name": "Basaltic",
     "style": "coined"
   },
   {
-    "name": "Lumaeon",
+    "name": "Baudrate",
     "style": "coined"
   },
   {
-    "name": "Lumaora",
+    "name": "Beamline",
     "style": "coined"
   },
   {
-    "name": "Dynaion",
+    "name": "Beryllium",
     "style": "coined"
   },
   {
-    "name": "Kineium",
+    "name": "Betatron",
     "style": "coined"
   },
   {
-    "name": "Nexaion",
+    "name": "Bifurcation",
     "style": "coined"
   },
   {
-    "name": "Cryoial",
+    "name": "Biometric",
     "style": "coined"
   },
   {
-    "name": "Iondium",
+    "name": "Bitstream",
     "style": "coined"
   },
   {
-    "name": "Lumaion",
+    "name": "Blackbody",
     "style": "coined"
   },
   {
-    "name": "Echoous",
+    "name": "Bolometer",
     "style": "coined"
   },
   {
-    "name": "Novaeon",
+    "name": "Bootstrap",
     "style": "coined"
   },
   {
-    "name": "Novaora",
+    "name": "Boson",
     "style": "coined"
   },
   {
-    "name": "Sensais",
+    "name": "Brane",
     "style": "coined"
   },
   {
-    "name": "Astrais",
+    "name": "Bufferium",
     "style": "coined"
   },
   {
-    "name": "Dynaium",
+    "name": "Busbar",
     "style": "coined"
   },
   {
-    "name": "Nexaium",
+    "name": "Bytecode",
     "style": "coined"
   },
   {
-    "name": "Mnemois",
+    "name": "Calorimeter",
     "style": "coined"
   },
   {
-    "name": "Ionesis",
+    "name": "Capacitor",
     "style": "coined"
   },
   {
-    "name": "Lumaium",
+    "name": "Carbonyl",
     "style": "coined"
   },
   {
-    "name": "Novaion",
+    "name": "Catalyst",
     "style": "coined"
   },
   {
-    "name": "Axionis",
+    "name": "Cathode",
     "style": "coined"
   },
   {
-    "name": "Fluxais",
+    "name": "Celestine",
     "style": "coined"
   },
   {
-    "name": "Kineous",
+    "name": "Centroid",
     "style": "coined"
   },
   {
-    "name": "Cryoeon",
+    "name": "Ceramite",
     "style": "coined"
   },
   {
-    "name": "Cryoora",
+    "name": "Chalcogen",
     "style": "coined"
   },
   {
-    "name": "Novaium",
+    "name": "Chassis",
     "style": "coined"
   },
   {
-    "name": "Voltais",
+    "name": "Chromatic",
     "style": "coined"
   },
   {
-    "name": "Cryoion",
-    "style": "coined"
-  },
-  {
-    "name": "Dynaous",
-    "style": "coined"
-  },
-  {
-    "name": "Nexaous",
-    "style": "coined"
-  },
-  {
-    "name": "Lumaous",
-    "style": "coined"
-  },
-  {
-    "name": "Cryoium",
-    "style": "coined"
-  },
-  {
-    "name": "Novaous",
-    "style": "coined"
-  },
-  {
-    "name": "Protois",
-    "style": "coined"
-  },
-  {
-    "name": "Cryoous",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaial",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaora",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenial",
-    "style": "coined"
-  },
-  {
-    "name": "Arcacian",
-    "style": "coined"
-  },
-  {
-    "name": "Arcaence",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaion",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaial",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaium",
-    "style": "coined"
-  },
-  {
-    "name": "Arcaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaial",
-    "style": "coined"
-  },
-  {
-    "name": "Echocian",
-    "style": "coined"
-  },
-  {
-    "name": "Echoence",
-    "style": "coined"
-  },
-  {
-    "name": "Cadeneon",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenora",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdais",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaora",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenion",
-    "style": "coined"
-  },
-  {
-    "name": "Echoelle",
-    "style": "coined"
-  },
-  {
-    "name": "Kinecian",
-    "style": "coined"
-  },
-  {
-    "name": "Kineence",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaous",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaion",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaora",
-    "style": "coined"
-  },
-  {
-    "name": "Arcadium",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenium",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraial",
-    "style": "coined"
-  },
-  {
-    "name": "Dynacian",
-    "style": "coined"
-  },
-  {
-    "name": "Dynaence",
-    "style": "coined"
-  },
-  {
-    "name": "Nexacian",
-    "style": "coined"
-  },
-  {
-    "name": "Nexaence",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseial",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaion",
-    "style": "coined"
-  },
-  {
-    "name": "Kineelle",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaium",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaial",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolais",
-    "style": "coined"
-  },
-  {
-    "name": "Lumacian",
-    "style": "coined"
-  },
-  {
-    "name": "Lumaence",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaial",
-    "style": "coined"
-  },
-  {
-    "name": "Algorial",
-    "style": "coined"
-  },
-  {
-    "name": "Arcaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Logicais",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniais",
-    "style": "coined"
-  },
-  {
-    "name": "Dynaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Echodium",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaium",
-    "style": "coined"
-  },
-  {
-    "name": "Nexaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Novacian",
-    "style": "coined"
-  },
-  {
-    "name": "Novaence",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaial",
-    "style": "coined"
-  },
-  {
-    "name": "Astraial",
-    "style": "coined"
-  },
-  {
-    "name": "Lumaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenous",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoial",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraeon",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraora",
-    "style": "coined"
-  },
-  {
-    "name": "Echoesis",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseeon",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseora",
-    "style": "coined"
-  },
-  {
-    "name": "Aetheris",
-    "style": "coined"
-  },
-  {
-    "name": "Axionial",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaous",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaora",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaial",
-    "style": "coined"
-  },
-  {
-    "name": "Kinedium",
-    "style": "coined"
-  },
-  {
-    "name": "Novaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaora",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyais",
-    "style": "coined"
-  },
-  {
-    "name": "Algoreon",
-    "style": "coined"
-  },
-  {
-    "name": "Algorora",
-    "style": "coined"
-  },
-  {
-    "name": "Cipheris",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraion",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseion",
-    "style": "coined"
-  },
-  {
-    "name": "Cryocian",
-    "style": "coined"
-  },
-  {
-    "name": "Cryoence",
-    "style": "coined"
-  },
-  {
-    "name": "Vigilais",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaion",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaous",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaion",
-    "style": "coined"
-  },
-  {
-    "name": "Plasmais",
-    "style": "coined"
-  },
-  {
-    "name": "Algorion",
-    "style": "coined"
-  },
-  {
-    "name": "Dynadium",
-    "style": "coined"
-  },
-  {
-    "name": "Kineesis",
-    "style": "coined"
-  },
-  {
-    "name": "Nexadium",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraium",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseium",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaora",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaial",
-    "style": "coined"
-  },
-  {
-    "name": "Astraeon",
-    "style": "coined"
-  },
-  {
-    "name": "Astraora",
-    "style": "coined"
-  },
-  {
-    "name": "Orbitais",
-    "style": "coined"
-  },
-  {
-    "name": "Lumadium",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoeon",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoora",
-    "style": "coined"
-  },
-  {
-    "name": "Solarais",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaium",
-    "style": "coined"
-  },
-  {
-    "name": "Cryoelle",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaium",
-    "style": "coined"
-  },
-  {
-    "name": "Algorium",
-    "style": "coined"
-  },
-  {
-    "name": "Dynaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Nexaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaion",
-    "style": "coined"
-  },
-  {
-    "name": "Astraion",
-    "style": "coined"
-  },
-  {
-    "name": "Axioneon",
-    "style": "coined"
-  },
-  {
-    "name": "Axionora",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaora",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoion",
-    "style": "coined"
-  },
-  {
-    "name": "Lumaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Novadium",
-    "style": "coined"
-  },
-  {
-    "name": "Resonais",
-    "style": "coined"
-  },
-  {
-    "name": "Axionion",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaium",
-    "style": "coined"
-  },
-  {
-    "name": "Astraium",
-    "style": "coined"
-  },
-  {
-    "name": "Aurorais",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaion",
-    "style": "coined"
-  },
-  {
-    "name": "Quantais",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoium",
-    "style": "coined"
-  },
-  {
-    "name": "Veritais",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraous",
-    "style": "coined"
-  },
-  {
-    "name": "Novaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseous",
-    "style": "coined"
-  },
-  {
-    "name": "Prismais",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaora",
-    "style": "coined"
-  },
-  {
-    "name": "Axionium",
-    "style": "coined"
-  },
-  {
-    "name": "Protoial",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaous",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaium",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaous",
-    "style": "coined"
-  },
-  {
-    "name": "Algorous",
-    "style": "coined"
-  },
-  {
-    "name": "Cryodium",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaion",
-    "style": "coined"
-  },
-  {
-    "name": "Cryoesis",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaous",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaium",
-    "style": "coined"
-  },
-  {
-    "name": "Astraous",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoous",
-    "style": "coined"
-  },
-  {
-    "name": "Cirrusis",
-    "style": "coined"
-  },
-  {
-    "name": "Axionous",
-    "style": "coined"
-  },
-  {
-    "name": "Protoeon",
-    "style": "coined"
-  },
-  {
-    "name": "Protoora",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaous",
-    "style": "coined"
-  },
-  {
-    "name": "Tensoris",
-    "style": "coined"
-  },
-  {
-    "name": "Protoion",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaous",
-    "style": "coined"
-  },
-  {
-    "name": "Protoium",
-    "style": "coined"
-  },
-  {
-    "name": "Beacacian",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaence",
-    "style": "coined"
-  },
-  {
-    "name": "Protoous",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Cadencian",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenence",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaial",
-    "style": "coined"
-  },
-  {
-    "name": "Mechacian",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaence",
-    "style": "coined"
-  },
-  {
-    "name": "Beacadium",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenelle",
-    "style": "coined"
-  },
-  {
-    "name": "Heliacian",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaence",
-    "style": "coined"
-  },
-  {
-    "name": "Beacaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaora",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaial",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Logicaial",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniaial",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaion",
-    "style": "coined"
-  },
-  {
-    "name": "Cadendium",
-    "style": "coined"
-  },
-  {
-    "name": "Cybracian",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraence",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaium",
-    "style": "coined"
-  },
-  {
-    "name": "Phasecian",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseence",
-    "style": "coined"
-  },
-  {
-    "name": "Mechadium",
-    "style": "coined"
-  },
-  {
-    "name": "Vectacian",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaence",
-    "style": "coined"
-  },
-  {
-    "name": "Aetherial",
-    "style": "coined"
-  },
-  {
-    "name": "Cadenesis",
-    "style": "coined"
-  },
-  {
-    "name": "Omniacian",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaence",
-    "style": "coined"
-  },
-  {
-    "name": "Algorcian",
-    "style": "coined"
-  },
-  {
-    "name": "Algorence",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaora",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyaial",
-    "style": "coined"
-  },
-  {
-    "name": "Cipherial",
-    "style": "coined"
-  },
-  {
-    "name": "Logicaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Logicaora",
-    "style": "coined"
-  },
-  {
-    "name": "Heliadium",
-    "style": "coined"
-  },
-  {
-    "name": "Mechaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Vigilaial",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniaora",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraelle",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseelle",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaion",
-    "style": "coined"
-  },
-  {
-    "name": "Plasmaial",
-    "style": "coined"
-  },
-  {
-    "name": "Logicaion",
-    "style": "coined"
-  },
-  {
-    "name": "Sensacian",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaence",
-    "style": "coined"
-  },
-  {
-    "name": "Vectaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Astracian",
-    "style": "coined"
-  },
-  {
-    "name": "Astraence",
-    "style": "coined"
-  },
-  {
-    "name": "Omniaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Algorelle",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniaion",
-    "style": "coined"
-  },
-  {
-    "name": "Heliaesis",
-    "style": "coined"
-  },
-  {
-    "name": "Meridiais",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemocian",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoence",
-    "style": "coined"
-  },
-  {
-    "name": "Orbitaial",
-    "style": "coined"
-  },
-  {
-    "name": "Lambdaous",
-    "style": "coined"
-  },
-  {
-    "name": "Solaraial",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaium",
-    "style": "coined"
-  },
-  {
-    "name": "Parallais",
-    "style": "coined"
-  },
-  {
-    "name": "Axioncian",
-    "style": "coined"
-  },
-  {
-    "name": "Axionence",
-    "style": "coined"
-  },
-  {
-    "name": "Logicaium",
-    "style": "coined"
-  },
-  {
-    "name": "Aethereon",
-    "style": "coined"
-  },
-  {
-    "name": "Aetherora",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxacian",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaence",
-    "style": "coined"
-  },
-  {
-    "name": "Cogniaium",
-    "style": "coined"
-  },
-  {
-    "name": "Sensaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyaora",
-    "style": "coined"
-  },
-  {
-    "name": "Astraelle",
-    "style": "coined"
-  },
-  {
-    "name": "Ciphereon",
-    "style": "coined"
-  },
-  {
-    "name": "Cipherora",
-    "style": "coined"
-  },
-  {
-    "name": "Mnemoelle",
-    "style": "coined"
-  },
-  {
-    "name": "Resonaial",
-    "style": "coined"
-  },
-  {
-    "name": "Vigilaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Vigilaora",
-    "style": "coined"
-  },
-  {
-    "name": "Aetherion",
-    "style": "coined"
-  },
-  {
-    "name": "Radiantis",
-    "style": "coined"
-  },
-  {
-    "name": "Auroraial",
-    "style": "coined"
-  },
-  {
-    "name": "Cybradium",
-    "style": "coined"
-  },
-  {
-    "name": "Phasedium",
-    "style": "coined"
-  },
-  {
-    "name": "Plasmaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Plasmaora",
-    "style": "coined"
-  },
-  {
-    "name": "Quantaial",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyaion",
-    "style": "coined"
-  },
-  {
-    "name": "Axionelle",
-    "style": "coined"
-  },
-  {
-    "name": "Cipherion",
-    "style": "coined"
-  },
-  {
-    "name": "Veritaial",
-    "style": "coined"
-  },
-  {
-    "name": "Voltacian",
-    "style": "coined"
-  },
-  {
-    "name": "Voltaence",
-    "style": "coined"
-  },
-  {
-    "name": "Fluxaelle",
-    "style": "coined"
-  },
-  {
-    "name": "Prismaial",
-    "style": "coined"
-  },
-  {
-    "name": "Vectadium",
-    "style": "coined"
-  },
-  {
-    "name": "Vigilaion",
-    "style": "coined"
-  },
-  {
-    "name": "Omniadium",
-    "style": "coined"
-  },
-  {
-    "name": "Orbitaeon",
-    "style": "coined"
-  },
-  {
-    "name": "Orbitaora",
-    "style": "coined"
-  },
-  {
-    "name": "Aetherium",
-    "style": "coined"
-  },
-  {
-    "name": "Algordium",
-    "style": "coined"
-  },
-  {
-    "name": "Plasmaion",
-    "style": "coined"
-  },
-  {
-    "name": "Solaraeon",
-    "style": "coined"
-  },
-  {
-    "name": "Solaraora",
-    "style": "coined"
-  },
-  {
-    "name": "Cybraesis",
-    "style": "coined"
-  },
-  {
-    "name": "Eidolaous",
-    "style": "coined"
-  },
-  {
-    "name": "Phaseesis",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyaium",
+    "name": "Chronometer",
     "style": "coined"
   },
   {
@@ -1824,261 +712,1375 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Logicaous",
+    "name": "Circuitry",
     "style": "coined"
   },
   {
-    "name": "Orbitaion",
+    "name": "Clathrate",
     "style": "coined"
   },
   {
-    "name": "Vectaesis",
+    "name": "Clockwork",
     "style": "coined"
   },
   {
-    "name": "Vigilaium",
+    "name": "Cloudlet",
     "style": "coined"
   },
   {
-    "name": "Cogniaous",
+    "name": "Cobaltite",
     "style": "coined"
   },
   {
-    "name": "Omniaesis",
+    "name": "Codec",
     "style": "coined"
   },
   {
-    "name": "Solaraion",
+    "name": "Collider",
     "style": "coined"
   },
   {
-    "name": "Voltaelle",
+    "name": "Commutator",
     "style": "coined"
   },
   {
-    "name": "Algoresis",
+    "name": "Compiler",
     "style": "coined"
   },
   {
-    "name": "Plasmaium",
+    "name": "Conduit",
     "style": "coined"
   },
   {
-    "name": "Sensadium",
+    "name": "Constellation",
     "style": "coined"
   },
   {
-    "name": "Astradium",
+    "name": "Coprocessor",
     "style": "coined"
   },
   {
-    "name": "Resonaeon",
+    "name": "Coriolis",
     "style": "coined"
   },
   {
-    "name": "Resonaora",
+    "name": "Cortexium",
     "style": "coined"
   },
   {
-    "name": "Mnemodium",
+    "name": "Cryostat",
     "style": "coined"
   },
   {
-    "name": "Auroraeon",
+    "name": "Crystalline",
     "style": "coined"
   },
   {
-    "name": "Auroraora",
+    "name": "Cyclotron",
     "style": "coined"
   },
   {
-    "name": "Orbitaium",
+    "name": "Datagram",
     "style": "coined"
   },
   {
-    "name": "Quantaeon",
+    "name": "Decibel",
     "style": "coined"
   },
   {
-    "name": "Quantaora",
+    "name": "Decoder",
     "style": "coined"
   },
   {
-    "name": "Solaraium",
+    "name": "Degauss",
     "style": "coined"
   },
   {
-    "name": "Veritaeon",
+    "name": "Delimiter",
     "style": "coined"
   },
   {
-    "name": "Veritaora",
+    "name": "Dendrite",
     "style": "coined"
   },
   {
-    "name": "Axiondium",
+    "name": "Deuterium",
     "style": "coined"
   },
   {
-    "name": "Cirrusial",
+    "name": "Diode",
     "style": "coined"
   },
   {
-    "name": "Prismaeon",
+    "name": "Diracium",
     "style": "coined"
   },
   {
-    "name": "Prismaora",
+    "name": "Dopplerium",
     "style": "coined"
   },
   {
-    "name": "Resonaion",
+    "name": "Duralumin",
     "style": "coined"
   },
   {
-    "name": "Sensaesis",
+    "name": "Dynamo",
     "style": "coined"
   },
   {
-    "name": "Spectrais",
+    "name": "Echogram",
     "style": "coined"
   },
   {
-    "name": "Astraesis",
+    "name": "Ecliptic",
     "style": "coined"
   },
   {
-    "name": "Fluxadium",
+    "name": "Eigenvector",
     "style": "coined"
   },
   {
-    "name": "Protocian",
+    "name": "Elastomer",
     "style": "coined"
   },
   {
-    "name": "Protoence",
+    "name": "Electronium",
     "style": "coined"
   },
   {
-    "name": "Zenithais",
+    "name": "Ellipsoid",
     "style": "coined"
   },
   {
-    "name": "Aetherous",
+    "name": "Emulator",
     "style": "coined"
   },
   {
-    "name": "Auroraion",
+    "name": "Enceladus",
     "style": "coined"
   },
   {
-    "name": "Mnemoesis",
+    "name": "Entanglement",
     "style": "coined"
   },
   {
-    "name": "Quantaion",
+    "name": "Entropy",
     "style": "coined"
   },
   {
-    "name": "Tachyaous",
+    "name": "Ephemeris",
     "style": "coined"
   },
   {
-    "name": "Tensorial",
+    "name": "Epitaxy",
     "style": "coined"
   },
   {
-    "name": "Veritaion",
+    "name": "Equinox",
     "style": "coined"
   },
   {
-    "name": "Cipherous",
+    "name": "Erbium",
     "style": "coined"
   },
   {
-    "name": "Prismaion",
+    "name": "Etherlink",
     "style": "coined"
   },
   {
-    "name": "Axionesis",
+    "name": "Exabyte",
     "style": "coined"
   },
   {
-    "name": "Resonaium",
+    "name": "Exciton",
     "style": "coined"
   },
   {
-    "name": "Vigilaous",
+    "name": "Exosphere",
     "style": "coined"
   },
   {
-    "name": "Fluxaesis",
+    "name": "Faradayite",
     "style": "coined"
   },
   {
-    "name": "Auroraium",
+    "name": "Fermion",
     "style": "coined"
   },
   {
-    "name": "Photonais",
+    "name": "Ferrite",
     "style": "coined"
   },
   {
-    "name": "Plasmaous",
+    "name": "Fiberoptic",
     "style": "coined"
   },
   {
-    "name": "Quantaium",
+    "name": "Filament",
     "style": "coined"
   },
   {
-    "name": "Voltadium",
+    "name": "Firmware",
     "style": "coined"
   },
   {
-    "name": "Protoelle",
+    "name": "Fluxion",
     "style": "coined"
   },
   {
-    "name": "Veritaium",
+    "name": "Flywheel",
     "style": "coined"
   },
   {
-    "name": "Prismaium",
+    "name": "Focality",
     "style": "coined"
   },
   {
-    "name": "Orbitaous",
+    "name": "Fourierium",
     "style": "coined"
   },
   {
-    "name": "Solaraous",
+    "name": "Frequency",
     "style": "coined"
   },
   {
-    "name": "Cirruseon",
+    "name": "Fulcrum",
     "style": "coined"
   },
   {
-    "name": "Cirrusora",
+    "name": "Fuselage",
     "style": "coined"
   },
   {
-    "name": "Voltaesis",
+    "name": "Fusionite",
     "style": "coined"
   },
   {
-    "name": "Synaptais",
+    "name": "Galvanic",
     "style": "coined"
   },
   {
-    "name": "Tensoreon",
+    "name": "Gammawave",
+    "style": "coined"
+  },
+  {
+    "name": "Gaussian",
+    "style": "coined"
+  },
+  {
+    "name": "Geodesic",
+    "style": "coined"
+  },
+  {
+    "name": "Germanium",
+    "style": "coined"
+  },
+  {
+    "name": "Gimbal",
+    "style": "coined"
+  },
+  {
+    "name": "Graphene",
+    "style": "coined"
+  },
+  {
+    "name": "Graviton",
+    "style": "coined"
+  },
+  {
+    "name": "Gyroscope",
+    "style": "coined"
+  },
+  {
+    "name": "Hadron",
+    "style": "coined"
+  },
+  {
+    "name": "Hafnium",
+    "style": "coined"
+  },
+  {
+    "name": "Heliostat",
+    "style": "coined"
+  },
+  {
+    "name": "Heuristic",
+    "style": "coined"
+  },
+  {
+    "name": "Hexadecimal",
+    "style": "coined"
+  },
+  {
+    "name": "Hologram",
+    "style": "coined"
+  },
+  {
+    "name": "Hyperbola",
+    "style": "coined"
+  },
+  {
+    "name": "Impedance",
+    "style": "coined"
+  },
+  {
+    "name": "Inclinometer",
+    "style": "coined"
+  },
+  {
+    "name": "Inductor",
+    "style": "coined"
+  },
+  {
+    "name": "Inference",
+    "style": "coined"
+  },
+  {
+    "name": "Infrared",
+    "style": "coined"
+  },
+  {
+    "name": "Invarium",
+    "style": "coined"
+  },
+  {
+    "name": "Ionosphere",
+    "style": "coined"
+  },
+  {
+    "name": "Isotope",
+    "style": "coined"
+  },
+  {
+    "name": "Iteration",
+    "style": "coined"
+  },
+  {
+    "name": "Jovian",
+    "style": "coined"
+  },
+  {
+    "name": "Joulecraft",
+    "style": "coined"
+  },
+  {
+    "name": "Junction",
+    "style": "coined"
+  },
+  {
+    "name": "Keratron",
+    "style": "coined"
+  },
+  {
+    "name": "Kilohertz",
+    "style": "coined"
+  },
+  {
+    "name": "Klystron",
+    "style": "coined"
+  },
+  {
+    "name": "Kryptonium",
+    "style": "coined"
+  },
+  {
+    "name": "Lagrangian",
+    "style": "coined"
+  },
+  {
+    "name": "Lambdaform",
+    "style": "coined"
+  },
+  {
+    "name": "Lanthanum",
+    "style": "coined"
+  },
+  {
+    "name": "Laserium",
+    "style": "coined"
+  },
+  {
+    "name": "Latticework",
+    "style": "coined"
+  },
+  {
+    "name": "Lepton",
+    "style": "coined"
+  },
+  {
+    "name": "Lightcone",
+    "style": "coined"
+  },
+  {
+    "name": "Lidar",
+    "style": "coined"
+  },
+  {
+    "name": "Lithography",
+    "style": "coined"
+  },
+  {
+    "name": "Logicore",
+    "style": "coined"
+  },
+  {
+    "name": "Luminosity",
+    "style": "coined"
+  },
+  {
+    "name": "Magnetar",
+    "style": "coined"
+  },
+  {
+    "name": "Manganite",
+    "style": "coined"
+  },
+  {
+    "name": "Manifold",
+    "style": "coined"
+  },
+  {
+    "name": "Maserium",
+    "style": "coined"
+  },
+  {
+    "name": "Matrixial",
+    "style": "coined"
+  },
+  {
+    "name": "Mechatron",
+    "style": "coined"
+  },
+  {
+    "name": "Memorycore",
+    "style": "coined"
+  },
+  {
+    "name": "Mesosphere",
+    "style": "coined"
+  },
+  {
+    "name": "Metamaterial",
+    "style": "coined"
+  },
+  {
+    "name": "Microcode",
+    "style": "coined"
+  },
+  {
+    "name": "Molybdenum",
+    "style": "coined"
+  },
+  {
+    "name": "Monopole",
+    "style": "coined"
+  },
+  {
+    "name": "Multimeter",
+    "style": "coined"
+  },
+  {
+    "name": "Muonium",
+    "style": "coined"
+  },
+  {
+    "name": "Nanofiber",
+    "style": "coined"
+  },
+  {
+    "name": "Nanolith",
+    "style": "coined"
+  },
+  {
+    "name": "Neutrino",
+    "style": "coined"
+  },
+  {
+    "name": "Nodalium",
+    "style": "coined"
+  },
+  {
+    "name": "Nonlinear",
+    "style": "coined"
+  },
+  {
+    "name": "Novacore",
+    "style": "coined"
+  },
+  {
+    "name": "Nucleon",
+    "style": "coined"
+  },
+  {
+    "name": "Nyquist",
+    "style": "coined"
+  },
+  {
+    "name": "Octetium",
+    "style": "coined"
+  },
+  {
+    "name": "Ohmicron",
+    "style": "coined"
+  },
+  {
+    "name": "Opticore",
+    "style": "coined"
+  },
+  {
+    "name": "Orbitalis",
+    "style": "coined"
+  },
+  {
+    "name": "Oscillator",
+    "style": "coined"
+  },
+  {
+    "name": "Osmium",
+    "style": "coined"
+  },
+  {
+    "name": "Packetron",
+    "style": "coined"
+  },
+  {
+    "name": "Palladium",
+    "style": "coined"
+  },
+  {
+    "name": "Parallax",
+    "style": "coined"
+  },
+  {
+    "name": "Parametron",
+    "style": "coined"
+  },
+  {
+    "name": "Parsecore",
+    "style": "coined"
+  },
+  {
+    "name": "Perceptron",
+    "style": "coined"
+  },
+  {
+    "name": "Perigee",
+    "style": "coined"
+  },
+  {
+    "name": "Perovskite",
+    "style": "coined"
+  },
+  {
+    "name": "Phasegate",
+    "style": "coined"
+  },
+  {
+    "name": "Phonon",
+    "style": "coined"
+  },
+  {
+    "name": "Photometer",
+    "style": "coined"
+  },
+  {
+    "name": "Piezoid",
+    "style": "coined"
+  },
+  {
+    "name": "Pixelium",
+    "style": "coined"
+  },
+  {
+    "name": "Planckton",
+    "style": "coined"
+  },
+  {
+    "name": "Plasmaform",
+    "style": "coined"
+  },
+  {
+    "name": "Polariton",
+    "style": "coined"
+  },
+  {
+    "name": "Polymerase",
+    "style": "coined"
+  },
+  {
+    "name": "Positron",
+    "style": "coined"
+  },
+  {
+    "name": "Prismatics",
+    "style": "coined"
+  },
+  {
+    "name": "Processorium",
+    "style": "coined"
+  },
+  {
+    "name": "Promethium",
+    "style": "coined"
+  },
+  {
+    "name": "Protonic",
+    "style": "coined"
+  },
+  {
+    "name": "Pulsarium",
+    "style": "coined"
+  },
+  {
+    "name": "Pyrolytic",
+    "style": "coined"
+  },
+  {
+    "name": "Quarkstone",
+    "style": "coined"
+  },
+  {
+    "name": "Quasarion",
+    "style": "coined"
+  },
+  {
+    "name": "Quaternion",
+    "style": "coined"
+  },
+  {
+    "name": "Quenchant",
+    "style": "coined"
+  },
+  {
+    "name": "Radiance",
+    "style": "coined"
+  },
+  {
+    "name": "Radome",
+    "style": "coined"
+  },
+  {
+    "name": "Ramanite",
+    "style": "coined"
+  },
+  {
+    "name": "Rasterium",
+    "style": "coined"
+  },
+  {
+    "name": "Reactor",
+    "style": "coined"
+  },
+  {
+    "name": "Relayium",
+    "style": "coined"
+  },
+  {
+    "name": "Resonator",
+    "style": "coined"
+  },
+  {
+    "name": "Rheology",
+    "style": "coined"
+  },
+  {
+    "name": "Rhenium",
+    "style": "coined"
+  },
+  {
+    "name": "Robotics",
+    "style": "coined"
+  },
+  {
+    "name": "Rotorium",
+    "style": "coined"
+  },
+  {
+    "name": "Scandium",
+    "style": "coined"
+  },
+  {
+    "name": "Schottkyite",
+    "style": "coined"
+  },
+  {
+    "name": "Scintillator",
+    "style": "coined"
+  },
+  {
+    "name": "Semiconductor",
+    "style": "coined"
+  },
+  {
+    "name": "Servomech",
+    "style": "coined"
+  },
+  {
+    "name": "Silicene",
+    "style": "coined"
+  },
+  {
+    "name": "Simulacrum",
+    "style": "coined"
+  },
+  {
+    "name": "Singularity",
+    "style": "coined"
+  },
+  {
+    "name": "Solenoid",
+    "style": "coined"
+  },
+  {
+    "name": "Spectrometer",
+    "style": "coined"
+  },
+  {
+    "name": "Spinorium",
+    "style": "coined"
+  },
+  {
+    "name": "Sputterium",
+    "style": "coined"
+  },
+  {
+    "name": "Starforge",
+    "style": "coined"
+  },
+  {
+    "name": "Statorium",
+    "style": "coined"
+  },
+  {
+    "name": "Stochasticity",
+    "style": "coined"
+  },
+  {
+    "name": "Subroutine",
+    "style": "coined"
+  },
+  {
+    "name": "Supernova",
+    "style": "coined"
+  },
+  {
+    "name": "Synchrotron",
+    "style": "coined"
+  },
+  {
+    "name": "Synthetase",
+    "style": "coined"
+  },
+  {
+    "name": "Tachyonium",
+    "style": "coined"
+  },
+  {
+    "name": "Tantalum",
+    "style": "coined"
+  },
+  {
+    "name": "Telemetry",
+    "style": "coined"
+  },
+  {
+    "name": "Tensorium",
+    "style": "coined"
+  },
+  {
+    "name": "Terabyte",
+    "style": "coined"
+  },
+  {
+    "name": "Terahertz",
+    "style": "coined"
+  },
+  {
+    "name": "Thermistor",
+    "style": "coined"
+  },
+  {
+    "name": "Thorium",
+    "style": "coined"
+  },
+  {
+    "name": "Thrusterium",
+    "style": "coined"
+  },
+  {
+    "name": "Tokamak",
+    "style": "coined"
+  },
+  {
+    "name": "Topology",
+    "style": "coined"
+  },
+  {
+    "name": "Torquefield",
+    "style": "coined"
+  },
+  {
+    "name": "Transceiver",
+    "style": "coined"
+  },
+  {
+    "name": "Tritium",
+    "style": "coined"
+  },
+  {
+    "name": "Turbine",
+    "style": "coined"
+  },
+  {
+    "name": "Ultrasonic",
+    "style": "coined"
+  },
+  {
+    "name": "Umbracore",
+    "style": "coined"
+  },
+  {
+    "name": "Unipolar",
+    "style": "coined"
+  },
+  {
+    "name": "Uranium",
+    "style": "coined"
+  },
+  {
+    "name": "Vacuumite",
+    "style": "coined"
+  },
+  {
+    "name": "Vanadium",
+    "style": "coined"
+  },
+  {
+    "name": "Varactor",
+    "style": "coined"
+  },
+  {
+    "name": "Vectorium",
+    "style": "coined"
+  },
+  {
+    "name": "Velocimeter",
+    "style": "coined"
+  },
+  {
+    "name": "Verilogium",
+    "style": "coined"
+  },
+  {
+    "name": "Vertexium",
+    "style": "coined"
+  },
+  {
+    "name": "Vibronic",
+    "style": "coined"
+  },
+  {
+    "name": "Vitrimer",
+    "style": "coined"
+  },
+  {
+    "name": "Voltmeter",
+    "style": "coined"
+  },
+  {
+    "name": "Voxelium",
+    "style": "coined"
+  },
+  {
+    "name": "Waveguide",
+    "style": "coined"
+  },
+  {
+    "name": "Wavelength",
+    "style": "coined"
+  },
+  {
+    "name": "Wolframite",
+    "style": "coined"
+  },
+  {
+    "name": "Xenoncore",
+    "style": "coined"
+  },
+  {
+    "name": "Xerogel",
+    "style": "coined"
+  },
+  {
+    "name": "Yottabyte",
+    "style": "coined"
+  },
+  {
+    "name": "Yttrium",
+    "style": "coined"
+  },
+  {
+    "name": "Zeemanite",
+    "style": "coined"
+  },
+  {
+    "name": "Zeolite",
+    "style": "coined"
+  },
+  {
+    "name": "Zetaflux",
+    "style": "coined"
+  },
+  {
+    "name": "Zirconium",
+    "style": "coined"
+  },
+  {
+    "name": "Abiogenesis",
+    "style": "coined"
+  },
+  {
+    "name": "Adaptome",
+    "style": "coined"
+  },
+  {
+    "name": "Adenosine",
+    "style": "coined"
+  },
+  {
+    "name": "Allele",
+    "style": "coined"
+  },
+  {
+    "name": "Aminoform",
+    "style": "coined"
+  },
+  {
+    "name": "Anabolism",
+    "style": "coined"
+  },
+  {
+    "name": "Angstrom",
+    "style": "coined"
+  },
+  {
+    "name": "Apoptosis",
+    "style": "coined"
+  },
+  {
+    "name": "Arborization",
+    "style": "coined"
+  },
+  {
+    "name": "Axonome",
+    "style": "coined"
+  },
+  {
+    "name": "Bacterion",
+    "style": "coined"
+  },
+  {
+    "name": "Biofilm",
+    "style": "coined"
+  },
+  {
+    "name": "Biolume",
+    "style": "coined"
+  },
+  {
+    "name": "Biomass",
+    "style": "coined"
+  },
+  {
+    "name": "Biosphere",
+    "style": "coined"
+  },
+  {
+    "name": "Biostasis",
+    "style": "coined"
+  },
+  {
+    "name": "Calmodulin",
+    "style": "coined"
+  },
+  {
+    "name": "Carotene",
+    "style": "coined"
+  },
+  {
+    "name": "Cellulose",
+    "style": "coined"
+  },
+  {
+    "name": "Chaperonin",
+    "style": "coined"
+  },
+  {
+    "name": "Chloroplast",
+    "style": "coined"
+  },
+  {
+    "name": "Cilium",
+    "style": "coined"
+  },
+  {
+    "name": "Circadian",
+    "style": "coined"
+  },
+  {
+    "name": "Codon",
+    "style": "coined"
+  },
+  {
+    "name": "Diffusionome",
+    "style": "coined"
+  },
+  {
+    "name": "Diploid",
+    "style": "coined"
+  },
+  {
+    "name": "Enzyme",
+    "style": "coined"
+  },
+  {
+    "name": "Epigenome",
+    "style": "coined"
+  },
+  {
+    "name": "Eukaryon",
+    "style": "coined"
+  },
+  {
+    "name": "Fermentation",
+    "style": "coined"
+  },
+  {
+    "name": "Flagellum",
+    "style": "coined"
+  },
+  {
+    "name": "Genotype",
+    "style": "coined"
+  },
+  {
+    "name": "Glycolysis",
+    "style": "coined"
+  },
+  {
+    "name": "Hemoglobin",
+    "style": "coined"
+  },
+  {
+    "name": "Homeostasis",
+    "style": "coined"
+  },
+  {
+    "name": "Immunome",
+    "style": "coined"
+  },
+  {
+    "name": "Kinase",
+    "style": "coined"
+  },
+  {
+    "name": "Lysosome",
+    "style": "coined"
+  },
+  {
+    "name": "Metabolome",
+    "style": "coined"
+  },
+  {
+    "name": "Mitochondrion",
+    "style": "coined"
+  },
+  {
+    "name": "Morphogen",
+    "style": "coined"
+  },
+  {
+    "name": "Organoid",
+    "style": "coined"
+  },
+  {
+    "name": "Osmosis",
+    "style": "coined"
+  },
+  {
+    "name": "Peptide",
+    "style": "coined"
+  },
+  {
+    "name": "Phylogeny",
+    "style": "coined"
+  },
+  {
+    "name": "Proteome",
+    "style": "coined"
+  },
+  {
+    "name": "Ribosome",
+    "style": "coined"
+  },
+  {
+    "name": "Synapse",
+    "style": "coined"
+  },
+  {
+    "name": "Telomere",
+    "style": "coined"
+  },
+  {
+    "name": "Vesicle",
+    "style": "coined"
+  },
+  {
+    "name": "Affine",
+    "style": "coined"
+  },
+  {
+    "name": "Algebraic",
+    "style": "coined"
+  },
+  {
+    "name": "Axiomatics",
+    "style": "coined"
+  },
+  {
+    "name": "Bayesian",
+    "style": "coined"
+  },
+  {
+    "name": "Bijection",
+    "style": "coined"
+  },
+  {
+    "name": "Calculus",
+    "style": "coined"
+  },
+  {
+    "name": "Cardinality",
+    "style": "coined"
+  },
+  {
+    "name": "Catenary",
+    "style": "coined"
+  },
+  {
+    "name": "Combinatorics",
+    "style": "coined"
+  },
+  {
+    "name": "Congruence",
+    "style": "coined"
+  },
+  {
+    "name": "Covariance",
+    "style": "coined"
+  },
+  {
+    "name": "Derivative",
+    "style": "coined"
+  },
+  {
+    "name": "Determinant",
+    "style": "coined"
+  },
+  {
+    "name": "Diophantine",
+    "style": "coined"
+  },
+  {
+    "name": "Factorial",
+    "style": "coined"
+  },
+  {
+    "name": "Fibonacci",
+    "style": "coined"
+  },
+  {
+    "name": "Fractalium",
+    "style": "coined"
+  },
+  {
+    "name": "Gradient",
+    "style": "coined"
+  },
+  {
+    "name": "Hilbertian",
+    "style": "coined"
+  },
+  {
+    "name": "Homology",
+    "style": "coined"
+  },
+  {
+    "name": "Integral",
+    "style": "coined"
+  },
+  {
+    "name": "Isometry",
+    "style": "coined"
+  },
+  {
+    "name": "Jacobian",
+    "style": "coined"
+  },
+  {
+    "name": "Knotspace",
+    "style": "coined"
+  },
+  {
+    "name": "Logarithm",
+    "style": "coined"
+  },
+  {
+    "name": "Mandelbrot",
+    "style": "coined"
+  },
+  {
+    "name": "Markovian",
+    "style": "coined"
+  },
+  {
+    "name": "Monomial",
+    "style": "coined"
+  },
+  {
+    "name": "Numeratrix",
+    "style": "coined"
+  },
+  {
+    "name": "Orthogonal",
+    "style": "coined"
+  },
+  {
+    "name": "Polynomial",
+    "style": "coined"
+  },
+  {
+    "name": "Probability",
+    "style": "coined"
+  },
+  {
+    "name": "Radical",
+    "style": "coined"
+  },
+  {
+    "name": "Riemannian",
+    "style": "coined"
+  },
+  {
+    "name": "Scalar",
+    "style": "coined"
+  },
+  {
+    "name": "Sierpinski",
+    "style": "coined"
+  },
+  {
+    "name": "Tessellation",
+    "style": "coined"
+  },
+  {
+    "name": "Theorematic",
+    "style": "coined"
+  },
+  {
+    "name": "Variance",
+    "style": "coined"
+  },
+  {
+    "name": "Voronoi",
+    "style": "coined"
+  },
+  {
+    "name": "Aberration",
+    "style": "coined"
+  },
+  {
+    "name": "Absorption",
+    "style": "coined"
+  },
+  {
+    "name": "Anamorphic",
+    "style": "coined"
+  },
+  {
+    "name": "Anisotropy",
+    "style": "coined"
+  },
+  {
+    "name": "Apochromat",
+    "style": "coined"
+  },
+  {
+    "name": "Astigmatism",
+    "style": "coined"
+  },
+  {
+    "name": "Birefringence",
+    "style": "coined"
+  },
+  {
+    "name": "Caustic",
+    "style": "coined"
+  },
+  {
+    "name": "Diffraction",
+    "style": "coined"
+  },
+  {
+    "name": "Dispersion",
+    "style": "coined"
+  },
+  {
+    "name": "Fluorescence",
+    "style": "coined"
+  },
+  {
+    "name": "Interferometer",
+    "style": "coined"
+  },
+  {
+    "name": "Metasurface",
+    "style": "coined"
+  },
+  {
+    "name": "Nanophotonics",
+    "style": "coined"
+  },
+  {
+    "name": "Reflectance",
+    "style": "coined"
+  },
+  {
+    "name": "Refraction",
+    "style": "coined"
+  },
+  {
+    "name": "Acoustic",
+    "style": "coined"
+  },
+  {
+    "name": "Aerodynamic",
+    "style": "coined"
+  },
+  {
+    "name": "Barometric",
+    "style": "coined"
+  },
+  {
+    "name": "Capillary",
     "style": "coined"
   }
 ]
 
 const count = style => saiNames.filter(entry => entry.style === style).length
+const conceptTokens = saiNames.filter(entry => entry.style !== 'designation-only').flatMap(entry => (entry.personalName || entry.name).replace(/\[[^\]]+]/g, '').trim().split(/\s+/)).map(token => token.toLowerCase())
 if (saiNames.length !== 500 || new Set(saiNames.map(entry => entry.name)).size !== 500) throw new Error('SAIs require 500 unique identities')
+if (new Set(conceptTokens).size !== conceptTokens.length) throw new Error('SAI concept words must not repeat')
 if (count('designation-only') !== 25 || count('named-designation') !== 25 || count('two-word') !== 50 || count('coined') !== 400) throw new Error('SAI naming-style proportions are invalid')
 
 export default saiNames
