@@ -2,6 +2,7 @@ import cyborgNames from './cyborgNames.js'
 import humanNames from './humanNames.js'
 import orcNames from './orcNames.js'
 import saiNames from './saiNames.js'
+import archetypeNames from './archetypeNames.js'
 
 const characterNamesBySpecies = {
   Cyborg: cyborgNames.map(entry => entry.name),
@@ -3027,6 +3028,11 @@ const conventionalNameSpecies = ['Dwarf', 'Elf', 'Gnome', 'Giant', 'Halfling', '
 const nameComponents = (species, name) => { const parts = name.split(/\s+/); return { first: parts[0], last: species === 'Giant' ? parts.slice(1).join(' ') : parts.at(-1) } }
 if (import.meta.env?.DEV) {
   const issues = []
+  const allArchetypeNames = Object.values(archetypeNames).flat()
+  const existingNames = new Set(Object.values(characterNamesBySpecies).flat())
+  if (Object.values(archetypeNames).some(names => names.length !== 50 || new Set(names).size !== 50)) issues.push('Every archetype should have 50 unique names')
+  if (new Set(allArchetypeNames).size !== allArchetypeNames.length) issues.push('Archetype names should be globally unique')
+  if (allArchetypeNames.some(name => existingNames.has(name))) issues.push('Archetype names should not overlap species names')
   const fairyFirsts = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/)[0])
   const fairyBynames = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/).slice(1).join(' ')).filter(Boolean)
   if (new Set(fairyFirsts).size !== 500 || fairyBynames.length !== 125 || new Set(fairyBynames).size !== 125 || fairyBynames.some(name => !/^(of |the )/.test(name))) issues.push('Fairies should have unique personal names and only folklore-style optional bynames')
@@ -3043,6 +3049,12 @@ if (import.meta.env?.DEV) {
   if (issues.length) console.warn('Character name catalog validation:', issues)
 }
 
-export const randomCharacterName = (species, archetype = '') => { if (species === 'Cyborg') { const matching = cyborgNames.filter(entry => !archetype || entry.archetype === archetype); const choices = matching.length ? matching : cyborgNames; return choices[Math.floor(Math.random() * choices.length)]?.name || '' } const names = characterNamesBySpecies[species]; return names?.[Math.floor(Math.random() * names.length)] || '' }
+export const randomCharacterName = (species, archetype = '') => {
+  const speciesPool = species === 'Cyborg'
+    ? cyborgNames.map(entry => entry.name)
+    : characterNamesBySpecies[species] || []
+  const pool = [...speciesPool, ...(archetypeNames[archetype] || [])]
+  return pool[Math.floor(Math.random() * pool.length)] || ''
+}
 
 export default characterNamesBySpecies
