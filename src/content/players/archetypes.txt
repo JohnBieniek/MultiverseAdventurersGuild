@@ -17,7 +17,7 @@ Strengths: Strength, Attack, Outdoors, Melee Attack
 Weaknesses: Education, Technology, Vehicle
 Preferred Talents: Ferocious Attack, Ablative Armor, Vital Reserve
 
-Personality: Quick to take offense - All you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
+Personality Traits: Quick to take offense - All you have is your reputation. If anyone calls it into doubt, you react quickly and violently.
 
 Blunt - You say what you mean and see little value in softening it for people who cannot handle the truth.
 
@@ -30,7 +30,7 @@ Strengths: Intuition, Observation, Outdoors, Any Weapon
 Weaknesses: Education, Athletics, Vehicle
 Preferred Talents: Pathfinder, Heightened Awareness, Ambush
 
-Personality:
+Personality Traits:
 
 Relentless - You are focused, on point, and never quit.
 
@@ -45,7 +45,7 @@ Strengths: Education, Knowledge, Technology, Any Weapon
 Weaknesses: Endurance, Attack, Athletics
 Preferred Talents: Hacker, Genius, Detect Talents
 
-Personality:
+Personality Traits:
 
 Slow to act - You want to have all the information before you make a decision.
 
@@ -60,7 +60,7 @@ Strengths: Endurance, Influence, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Athletics, Observation
 Preferred Talents: Heal, Ferocious Attack, Change of Fortune
 
-Personality:
+Personality Traits:
 
 True Believer - They are religious and follow the directions of their Deity.
 
@@ -75,7 +75,7 @@ Strengths: Dexterity, Athletics, Attack, Ranged Weapon
 Weaknesses: Charisma, Knowledge, Vehicle
 Preferred Talents: Aim, Shadowstep, Close Quarter Combat
 
-Personality:
+Personality Traits:
 
 No man left behind - Ever!
 
@@ -90,7 +90,7 @@ Strengths: Dexterity, Technology, Sneak, Any Weapon
 Weaknesses: Endurance, Influence, Outdoors
 Preferred Talents: Ambush, Shadowstep, Trap Sense
 
-Personality:
+Personality Traits:
 
 Jailbird - Prison time is part of the life you chose, and you treat it as the cost of doing business.
 
@@ -105,7 +105,7 @@ Strengths: Intuition, Outdoors, Influence, Melee Weapon
 Weaknesses: Education, Technology, Vehicle
 Preferred Talents: Shapeshift, Pathfinder, Regeneration
 
-Personality:
+Personality Traits:
 
 One with nature - You are completely at home in natural settings. You don't like technology and will do all you can to avoid dealing with it, including using low-tech weapons.
 
@@ -120,7 +120,7 @@ Strengths: Intuition, Outdoors, Sneak, Any Weapon
 Weaknesses: Education, Vehicle, Technology
 Preferred Talents: Detect Talents, Ferocious Attack, Disguise Self
 
-Personality:
+Personality Traits:
 
 Record of Arrests - Your activism has put you in cells before, and you expect it will happen again.
 
@@ -135,7 +135,7 @@ Strengths: Charisma, Education, Technology, Range Weapon
 Weaknesses: Strength, Outdoors, Sneak
 Talents: Silver Tongue, Weapon Smuggler, Truthsense
 
-Personality:
+Personality Traits:
 
 Loyal - Once a Company Man leaves his company, they become intensely loyal to the team they join. They typically like to work with only one group. Ex-Company Men can make good leaders, but they view the world in terms of how they can serve their masters. This makes them struggle to figure out what is best for them and the team.
 
@@ -150,7 +150,7 @@ Strengths: Intuition, Observation, Attack, Range Weapon
 Weaknesses: Strength, Sneak, Outdoors
 Preferred Talents: Push, Trip, Heightened Awareness
 
-Personality:
+Personality Traits:
 
 Cog - Your value is in following orders, no matter the consequences.
 
@@ -165,7 +165,7 @@ Strengths: Dexterity, Attack, Athletics, Range Weapon
 Weaknesses: Charisma, Influence, Knowledge
 Preferred Talents: Aim, Shadowstep, Pathfinder
 
-Personality:
+Personality Traits:
 
 Follow orders - Military service highlights structure and command. Soldiers learn to work within these command structures.
 
@@ -180,7 +180,7 @@ Strengths: Charisma, Influence, Knowledge, Any Weapon
 Weaknesses: Strength, Attack, Athletics
 Preferred Talents: Silver Tongue, Goad, Tactical Commander
 
-Personality:
+Personality Traits:
 
 Charming - You treat charm as a tool and believe almost anyone can be moved by the right smile, story, or pressure point.
 
@@ -195,7 +195,7 @@ Strengths: Charisma, Influence, Observation, Any Melee Weapon
 Weaknesses: Strength, Athletics, Sneak
 Preferred Talents: Silver Tongue, Aim, Truthsense
 
-Personality:
+Personality Traits:
 
 Connected - You know people everywhere and love putting together teams.
 
@@ -210,7 +210,7 @@ Strengths: Strength, Attack, Sneak, Melee Weapon
 Weaknesses: Education, Knowledge, Outdoors
 Preferred Talents: Ferocious Attack, Push, Intimidating Presence
 
-Personality:
+Personality Traits:
 
 Life is cheap - You know you won't grow old, so you put it all on the line every day.
 
@@ -225,7 +225,7 @@ Strengths: Charisma, Influence, Knowledge, Melee Weapon
 Weaknesses: Attack, Outdoors, Sneak
 Preferred Talents: Silver Tongue, Alertness, Ki Body
 
-Personality:
+Personality Traits:
 
 Relentless Witness - You put yourself where the story is loudest and make sure everyone knows what you saw.
 
@@ -240,7 +240,7 @@ Strengths: Dexterity, Attack, Technology, Range Weapon
 Weaknesses: Education, Sneak, Athletics
 Preferred Talents: Aim, Close Quarter Combat, Weapon Smuggler
 
-Personality:
+Personality Traits:
 
 A gun for every occasion - Clearing a building, sniping, formal parties, happy moods.
 
@@ -255,7 +255,7 @@ Strengths: Education, Attack, Technology, Range Weapon
 Weaknesses: Strength, Influence, Athletics
 Preferred Talents: Alertness, Bring the Pain, Hacker
 
-Personality:
+Personality Traits:
 
 Gloating - You are a master of the universe and not afraid to let the whole world know.
 
@@ -271,7 +271,7 @@ Note: Bombs act like a Range Weapon for this archetype.
 Weaknesses: Strength, Influence, Sneak
 Preferred Talents: Technical Expertise, Flash/Bang, Critical Hit
 
-Personality:
+Personality Traits:
 
 Weird - People sense there is just something off about you.
 
@@ -287,7 +287,7 @@ Note: Mages can use a simple spirit proxy for Range Attack.
 Weaknesses: Endurance, Sneak, Influence
 Preferred Talents: Grand Illusion, Telekinesis, Detect Talents
 
-Personality:
+Personality Traits:
 
 Deep thinker - Mages believe that their education is the source of their Talents. They approach problems methodically and consider research an integral part of their process.
 
@@ -302,7 +302,7 @@ Strengths: Dexterity, Attack, Sneak, Range Weapon
 Weaknesses: Education, Knowledge, Influence
 Preferred Talents: Bring the Pain, Heal, Aim
 
-Personality:
+Personality Traits:
 
 It's just a job - The merc has no emotional commitment to the job at hand. They can walk away at a moment's notice.
 
@@ -317,7 +317,7 @@ Strengths: Endurance, Athletics, Attack, Melee
 Weaknesses: Charisma, Technology, Vehicle
 Preferred Talents: Ki Body, Parry, Wallrunner
 
-Personality:
+Personality Traits:
 
 Disciplined - Monks train constantly and treat self-control as a survival skill.
 
@@ -332,7 +332,7 @@ Strengths: Strength, Sneak, Athletics, Melee
 Weaknesses: Education, Technology, Vehicle
 Preferred Talents: Ki Body, Parry, Shadowstep
 
-Personality:
+Personality Traits:
 
 Calm - Ninjas always act as if they are in full control over what is going on around them.
 
@@ -348,7 +348,7 @@ Note: Performing makes a magical range attack when played.
 Weaknesses: Endurance, Technology, Sneak
 Preferred Talents: Silver Tongue, Goad, Tactical Commander
 
-Personality:
+Personality Traits:
 
 Commanding Presence - You know how to hold a room, pull attention, and make even danger feel like part of the performance.
 
@@ -363,7 +363,7 @@ Strengths: Charisma, Knowledge, Technology, Range Weapon
 Weaknesses: Endurance, Outdoors, Sneak
 Preferred Talents: Weapon Smuggler, Silver Tongue, Truthsense
 
-Personality:
+Personality Traits:
 
 Inquisitive - Private eyes are constantly seeking out knowledge.
 
@@ -379,7 +379,7 @@ Note: Screamers can use a drone as a simple proxy for Range Attack.
 Weaknesses: Charisma, Influence, Athletics
 Preferred Talents: Control Drone, Transporter, Technical Expertise
 
-Personality:
+Personality Traits:
 
 Don't touch this - Screamers treat their vehicles and drones like close friends and they don't want you messing with them.
 
@@ -394,7 +394,7 @@ Strengths: Intuition, Outdoors, Knowledge, Influence
 Weaknesses: Technology, Vehicle, Attack
 Preferred Talents: Detect Talents, Heal, Pathfinder
 
-Personality:
+Personality Traits:
 
 Spirit-touched - You treat spirits, omens, dreams, and signs as part of ordinary life.
 
@@ -409,7 +409,7 @@ Strengths: Dexterity, Sneak, Influence, Range Weapon
 Weaknesses: Strength, Knowledge, Outdoors
 Preferred Talents: Shadowstep, Critical Hit, Control Drone
 
-Personality:
+Personality Traits:
 
 Cool under pressure - The hairier the situation, the calmer you get.
 
@@ -424,7 +424,7 @@ Strengths: Dexterity, Attack, Sneak, Range Attack
 Weaknesses: Charisma, Vehicle, Influence
 Preferred Talents: Ambush, Shadowstep, Long Shot
 
-Personality:
+Personality Traits:
 
 Patient - You have waited days in place to take your shot.
 
@@ -439,7 +439,7 @@ Strengths: Intuition, Influence, Knowledge, Improvised Weapon
 Weaknesses: Endurance, Sneak, Technology
 Preferred Talents: Silver Tongue, Truthsense, Goad
 
-Personality:
+Personality Traits:
 
 Manipulative - You view each person you meet as a potential asset and constantly strive to bend them to your will.
 
@@ -454,7 +454,7 @@ Strengths: Education, Technology, Knowledge, Melee Weapon
 Weaknesses: Dexterity, Attack, Sneak
 Preferred Talents: Heal, Critical Hit, Bring the Pain
 
-Personality:
+Personality Traits:
 
 Compassionate - Street Docs care about the people bleeding in front of them, even when those people cannot pay.
 
@@ -469,7 +469,7 @@ Strengths: Strength, Attack, Athletics, Melee Weapon
 Weaknesses: Education, Knowledge, Influence
 Preferred Talents: Ferocious Attack, Parry, Intimidating Presence
 
-Personality:
+Personality Traits:
 
 The Code - Courage, honor, loyalty (generally to those who hire them).
 
@@ -484,7 +484,7 @@ Strengths: Education, Knowledge, Influence, Range Attack
 Weaknesses: Strength, Sneak, Athletics
 Preferred Talents: Implant Thought, Detect Talents, End Talent
 
-Personality:
+Personality Traits:
 
 Subservient - A Warlock doesn't ask, What should I do in this situation? The Warlock asks, What would my Master want me to do in this situation?
 

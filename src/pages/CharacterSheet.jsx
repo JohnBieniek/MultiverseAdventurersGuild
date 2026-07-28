@@ -700,8 +700,8 @@ const archetypeOptions = (() => {
     const strengths = (block.find(entry => /^Strengths:/i.test(entry)) || '').replace(/^Strengths:\s*/i, '').split(',').map(value => value.trim())
     const weaknesses = (block.find(entry => /^Weaknesses:/i.test(entry)) || '').replace(/^Weaknesses:\s*/i, '').split(',').map(value => value.trim())
     const preferredTalents = (block.find(entry => /^(Preferred Talents|Talents):/i.test(entry)) || '').replace(/^(Preferred Talents|Talents):\s*/i, '').split(',').map(value => value.trim()).filter(Boolean)
-    const personalityIndex = block.findIndex(entry => /^Personality:/i.test(entry))
-    const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality:\s*/i, '')).map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null }).filter(Boolean)
+    const personalityIndex = block.findIndex(entry => /^Personality Traits:/i.test(entry))
+    const traits = block.slice(personalityIndex < 0 ? block.length : personalityIndex).map(entry => entry.replace(/^Personality Traits:\s*/i, '')).map(entry => { const match = entry.match(/^(.+?)\s+-\s+(.+)$/); return match ? { name: match[1].trim(), description: match[2].trim() } : null }).filter(Boolean)
     return {
       name: line.split(' - ')[0].trim(), description: line.slice(line.indexOf(' - ') + 3).trim(), strengths, weaknesses, preferredTalents, traits,
       stats: Object.fromEntries(stats.map(([key, label]) => [key, number(scoresLine.match(new RegExp(`${label}\\s+([+-]?\\d+)`, 'i'))?.[1])])),
