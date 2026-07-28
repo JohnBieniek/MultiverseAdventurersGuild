@@ -1,4 +1,4 @@
-// 500 Cyborg identities: 450 independently chosen monikers and 50 designations.
+// 500 Cyborg identities: 450 complete, independently chosen monikers and 50 designations.
 const cyborgNames = [
   {
     "name": "Aftershock",
@@ -421,8 +421,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Pathfinder",
-    "identity": "Pathfinder",
+    "name": "Trailblazer",
+    "identity": "Trailblazer",
     "archetype": "Commando",
     "origin": "Orc",
     "style": "self-chosen"
@@ -477,8 +477,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Ballisti",
-    "identity": "Ballisti",
+    "name": "Ballistic",
+    "identity": "Ballistic",
     "archetype": "Commando",
     "origin": "Orc",
     "style": "self-chosen"
@@ -610,8 +610,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Raincaller",
-    "identity": "Raincaller",
+    "name": "Cloudherald",
+    "identity": "Cloudherald",
     "archetype": "Druid",
     "origin": "Human",
     "style": "self-chosen"
@@ -652,8 +652,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Mosshear",
-    "identity": "Mosshear",
+    "name": "Mossheart",
+    "identity": "Mossheart",
     "archetype": "Druid",
     "origin": "Giant",
     "style": "self-chosen"
@@ -680,8 +680,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Overgrow",
-    "identity": "Overgrow",
+    "name": "Overgrowth",
+    "identity": "Overgrowth",
     "archetype": "Druid",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -757,8 +757,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Restorat",
-    "identity": "Restorat",
+    "name": "Restoration",
+    "identity": "Restoration",
     "archetype": "Eco Terrorist",
     "origin": "Orc",
     "style": "self-chosen"
@@ -855,22 +855,22 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Proxy",
-    "identity": "Proxy",
+    "name": "Intermediary",
+    "identity": "Intermediary",
     "archetype": "Ex-Company Man",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Disavowe",
-    "identity": "Disavowe",
+    "name": "Disavowed",
+    "identity": "Disavowed",
     "archetype": "Ex-Company Man",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Corporat",
-    "identity": "Corporat",
+    "name": "Corporate",
+    "identity": "Corporate",
     "archetype": "Ex-Company Man",
     "origin": "Orc",
     "style": "self-chosen"
@@ -939,8 +939,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Beatwalk",
-    "identity": "Beatwalk",
+    "name": "Beatwalker",
+    "identity": "Beatwalker",
     "archetype": "Ex-Cop",
     "origin": "Elf",
     "style": "self-chosen"
@@ -953,8 +953,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Procedur",
-    "identity": "Procedur",
+    "name": "Procedural",
+    "identity": "Procedural",
     "archetype": "Ex-Cop",
     "origin": "Gnome",
     "style": "self-chosen"
@@ -967,8 +967,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Streetwi",
-    "identity": "Streetwi",
+    "name": "Streetwise",
+    "identity": "Streetwise",
     "archetype": "Ex-Cop",
     "origin": "Halfling",
     "style": "self-chosen"
@@ -1037,8 +1037,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Marchste",
-    "identity": "Marchste",
+    "name": "Marchsteel",
+    "identity": "Marchsteel",
     "archetype": "Ex-Military",
     "origin": "Orc",
     "style": "self-chosen"
@@ -1051,15 +1051,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Decorate",
-    "identity": "Decorate",
+    "name": "Decorated",
+    "identity": "Decorated",
     "archetype": "Ex-Military",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Discharg",
-    "identity": "Discharg",
+    "name": "Discharged",
+    "identity": "Discharged",
     "archetype": "Ex-Military",
     "origin": "Human",
     "style": "self-chosen"
@@ -1156,22 +1156,22 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Masterwo",
-    "identity": "Masterwo",
+    "name": "Masterwork",
+    "identity": "Masterwork",
     "archetype": "Cog",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Calibrat",
-    "identity": "Calibrat",
+    "name": "Calibrator",
+    "identity": "Calibrator",
     "archetype": "Cog",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Handbuil",
-    "identity": "Handbuil",
+    "name": "Handbuilt",
+    "identity": "Handbuilt",
     "archetype": "Cog",
     "origin": "Human",
     "style": "self-chosen"
@@ -1191,8 +1191,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Firstlight",
-    "identity": "Firstlight",
+    "name": "Dawnprime",
+    "identity": "Dawnprime",
     "archetype": "Face",
     "origin": "Halfling",
     "style": "self-chosen"
@@ -1226,8 +1226,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Spotligh",
-    "identity": "Spotligh",
+    "name": "Spotlight",
+    "identity": "Spotlight",
     "archetype": "Face",
     "origin": "Human",
     "style": "self-chosen"
@@ -1296,8 +1296,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Handshake",
-    "identity": "Handshake",
+    "name": "Dealwire",
+    "identity": "Dealwire",
     "archetype": "Fixer",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -1366,8 +1366,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Resource",
-    "identity": "Resource",
+    "name": "Resourceful",
+    "identity": "Resourceful",
     "archetype": "Fixer",
     "origin": "Fairy",
     "style": "self-chosen"
@@ -1555,8 +1555,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Uncensor",
-    "identity": "Uncensor",
+    "name": "Uncensored",
+    "identity": "Uncensored",
     "archetype": "Gonzo Journalist",
     "origin": "Elf",
     "style": "self-chosen"
@@ -1681,8 +1681,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Coldboot",
-    "identity": "Coldboot",
+    "name": "Wakecycle",
+    "identity": "Wakecycle",
     "archetype": "Hacker",
     "origin": "Gnome",
     "style": "self-chosen"
@@ -1702,8 +1702,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "ZeroDay",
-    "identity": "ZeroDay",
+    "name": "Daybreaker",
+    "identity": "Daybreaker",
     "archetype": "Hacker",
     "origin": "Fairy",
     "style": "self-chosen"
@@ -1730,8 +1730,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Encrypte",
-    "identity": "Encrypte",
+    "name": "Cryptsealed",
+    "identity": "Cryptsealed",
     "archetype": "Hacker",
     "origin": "Human",
     "style": "self-chosen"
@@ -1744,22 +1744,22 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Airgappe",
-    "identity": "Airgappe",
+    "name": "Airgapped",
+    "identity": "Airgapped",
     "archetype": "Hacker",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Unpatche",
-    "identity": "Unpatche",
+    "name": "Unpatched",
+    "identity": "Unpatched",
     "archetype": "Hacker",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Jailbrok",
-    "identity": "Jailbrok",
+    "name": "Jailbroken",
+    "identity": "Jailbroken",
     "archetype": "Hacker",
     "origin": "Fairy",
     "style": "self-chosen"
@@ -1800,8 +1800,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Payload",
-    "identity": "Payload",
+    "name": "Warhead",
+    "identity": "Warhead",
     "archetype": "Mad Bomber",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -1856,8 +1856,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Detonat",
-    "identity": "Detonat",
+    "name": "Detonator",
+    "identity": "Detonator",
     "archetype": "Mad Bomber",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -1940,8 +1940,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Enchante",
-    "identity": "Enchante",
+    "name": "Enchanted",
+    "identity": "Enchanted",
     "archetype": "Mage",
     "origin": "Giant",
     "style": "self-chosen"
@@ -2045,15 +2045,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Professi",
-    "identity": "Professi",
+    "name": "Professional",
+    "identity": "Professional",
     "archetype": "Mercenary",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Freelanc",
-    "identity": "Freelanc",
+    "name": "Freelancer",
+    "identity": "Freelancer",
     "archetype": "Mercenary",
     "origin": "Giant",
     "style": "self-chosen"
@@ -2129,15 +2129,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Discipl",
-    "identity": "Discipl",
+    "name": "Discipline",
+    "identity": "Discipline",
     "archetype": "Monk",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Weightle",
-    "identity": "Weightle",
+    "name": "Weightless",
+    "identity": "Weightless",
     "archetype": "Monk",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -2234,8 +2234,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Soundles",
-    "identity": "Soundles",
+    "name": "Soundless",
+    "identity": "Soundless",
     "archetype": "Ninja",
     "origin": "Human",
     "style": "self-chosen"
@@ -2297,8 +2297,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Stagefir",
-    "identity": "Stagefir",
+    "name": "Stagefire",
+    "identity": "Stagefire",
     "archetype": "Performer",
     "origin": "Gnome",
     "style": "self-chosen"
@@ -2402,22 +2402,22 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Shoeleat",
-    "identity": "Shoeleat",
+    "name": "Shoeleather",
+    "identity": "Shoeleather",
     "archetype": "Private Eye/Investigator",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Inquirin",
-    "identity": "Inquirin",
+    "name": "Inquisitive",
+    "identity": "Inquisitive",
     "archetype": "Private Eye/Investigator",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Tenaciou",
-    "identity": "Tenaciou",
+    "name": "Tenacious",
+    "identity": "Tenacious",
     "archetype": "Private Eye/Investigator",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -2486,8 +2486,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Overstee",
-    "identity": "Overstee",
+    "name": "Limiterless",
+    "identity": "Limiterless",
     "archetype": "Screamer",
     "origin": "Fairy",
     "style": "self-chosen"
@@ -2507,8 +2507,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Overcloc",
-    "identity": "Overcloc",
+    "name": "Overclocked",
+    "identity": "Overclocked",
     "archetype": "Screamer",
     "origin": "Elf",
     "style": "self-chosen"
@@ -2605,8 +2605,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Backchannel",
-    "identity": "Backchannel",
+    "name": "Undernet",
+    "identity": "Undernet",
     "archetype": "Smuggler",
     "origin": "Orc",
     "style": "self-chosen"
@@ -2668,22 +2668,22 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Unmanife",
-    "identity": "Unmanife",
+    "name": "Unmanifested",
+    "identity": "Unmanifested",
     "archetype": "Smuggler",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Borderle",
-    "identity": "Borderle",
+    "name": "Borderless",
+    "identity": "Borderless",
     "archetype": "Smuggler",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Unsearch",
-    "identity": "Unsearch",
+    "name": "Unsearchable",
+    "identity": "Unsearchable",
     "archetype": "Smuggler",
     "origin": "Human",
     "style": "self-chosen"
@@ -2773,15 +2773,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Motionle",
-    "identity": "Motionle",
+    "name": "Motionless",
+    "identity": "Motionless",
     "archetype": "Sniper",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Farseein",
-    "identity": "Farseein",
+    "name": "Farseeing",
+    "identity": "Farseeing",
     "archetype": "Sniper",
     "origin": "Giant",
     "style": "self-chosen"
@@ -2864,15 +2864,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Classifi",
-    "identity": "Classifi",
+    "name": "Classified",
+    "identity": "Classified",
     "archetype": "Spy",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Counterf",
-    "identity": "Counterf",
+    "name": "Counterfeit",
+    "identity": "Counterfeit",
     "archetype": "Spy",
     "origin": "Halfling",
     "style": "self-chosen"
@@ -2955,15 +2955,15 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Emergenc",
-    "identity": "Emergenc",
+    "name": "Emergency",
+    "identity": "Emergency",
     "archetype": "Street Doc",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Unlicens",
-    "identity": "Unlicens",
+    "name": "Unlicensed",
+    "identity": "Unlicensed",
     "archetype": "Street Doc",
     "origin": "Human",
     "style": "self-chosen"
@@ -3046,8 +3046,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Cybernet",
-    "identity": "Cybernet",
+    "name": "Cybernetic",
+    "identity": "Cybernetic",
     "archetype": "Street Samurai",
     "origin": "Fairy",
     "style": "self-chosen"
@@ -3144,8 +3144,8 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Forbidde",
-    "identity": "Forbidde",
+    "name": "Forbidden",
+    "identity": "Forbidden",
     "archetype": "Warlock",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -3452,10 +3452,13 @@ const cyborgNames = [
   }
 ]
 
-const monikers = cyborgNames.filter(entry => entry.style !== 'designation').map(entry => entry.identity.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase())
+const cutoffArtifacts = ["Pathfinder","Raincaller","Proxy","Firstlight","Handshake","Coldboot","ZeroDay","Payload","Backchannel","Ballisti","Mosshear","Overgrow","Restorat","Disavowe","Corporat","Beatwalk","Procedur","Streetwi","Marchste","Decorate","Discharg","Masterwo","Calibrat","Handbuil","Spotligh","Resource","Uncensor","Encrypte","Airgappe","Unpatche","Jailbrok","Detonat","Enchante","Professi","Freelanc","Discipl","Weightle","Soundles","Stagefir","Shoeleat","Inquirin","Tenaciou","Overstee","Overcloc","Unmanife","Borderle","Unsearch","Motionle","Farseein","Classifi","Counterf","Emergenc","Unlicens","Cybernet","Forbidde"]
+const monikers = cyborgNames.filter(entry => entry.style !== 'designation').map(entry => entry.identity)
+const normalizedMonikers = monikers.map(name => name.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase())
 const count = style => cyborgNames.filter(entry => entry.style === style).length
 if (cyborgNames.length !== 500 || new Set(cyborgNames.map(entry => entry.name)).size !== 500) throw new Error('Cyborg identities must be unique')
-if (new Set(monikers).size !== monikers.length) throw new Error('Cyborg monikers must be independently unique')
+if (new Set(normalizedMonikers).size !== normalizedMonikers.length) throw new Error('Cyborg monikers must be independently unique')
+if (monikers.some(name => cutoffArtifacts.includes(name))) throw new Error('Cyborg monikers contain a known cutoff artifact')
 if (count('designation') !== 50 || count('self-chosen') !== 450) throw new Error('Cyborg identity-style proportions are invalid')
 if (cyborgNames.some(entry => entry.name.split(/\s+/).length > 1)) throw new Error('Cyborg identities must be a single moniker or designation')
 
