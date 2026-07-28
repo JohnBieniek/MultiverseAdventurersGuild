@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext js,jsx"
+    "lint": "eslint src --ext js,jsx",
+    "prepare": "node scripts/setup-git-hooks.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

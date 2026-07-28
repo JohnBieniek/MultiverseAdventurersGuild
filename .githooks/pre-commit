@@ -1,0 +1,4 @@
+#!/bin/sh
+
+node scripts/increment-version.mjs || exit 1
+git add src/data/appVersion.js
