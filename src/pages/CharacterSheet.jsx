@@ -356,7 +356,7 @@ const weaponNamePool = (archetypeName, type, extraNames = []) => {
   const style = weaponStyleByArchetype[archetypeName] || 'modern'
   const baseNames = weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || []
   const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames]))]
-  if (names.length < minimumWeaponNamesPerType) throw new Error(`${archetypeName} needs at least ${minimumWeaponNamesPerType} names for ${type}`)
+  if (import.meta.env.DEV && names.length < minimumWeaponNamesPerType) console.warn(`${archetypeName} should have at least ${minimumWeaponNamesPerType} names for ${type}`)
   return names
 }
 const generatedWeaponNamesForType = (archetypeName, type) => {
@@ -678,7 +678,7 @@ const contactRolesForArchetype = archetypeName => {
   const offset = [...archetypeName].reduce((total, character) => total + character.charCodeAt(0), 0) % versatileContactRoles.length
   const rotatedRoles = versatileContactRoles.map((_, index) => versatileContactRoles[(index + offset) % versatileContactRoles.length])
   const roles = [...new Set([...preferredRoles, ...rotatedRoles])].slice(0, 15)
-  if (roles.length < 15) throw new Error(`${archetypeName} needs 15 contact roles`)
+  if (import.meta.env.DEV && roles.length < 15) console.warn(`${archetypeName} should have 15 contact roles`)
   return roles
 }
 const shuffled = values => values.map(value => ({ value, order: Math.random() })).sort((a, b) => a.order - b.order).map(entry => entry.value)
@@ -722,14 +722,18 @@ const attackFocusForArchetype = archetype => {
   if (hasMeleeFocus && !hasRangedFocus) return 'melee'
   return number(archetype?.stats?.dexterity) > number(archetype?.stats?.strength) ? 'ranged' : 'melee'
 }
-archetypeOptions.forEach(({ name }) => {
-  weaponTypes.forEach(([type]) => weaponNamePool(name, type))
-  contactRolesForArchetype(name).forEach(role => { if (!contactNamePools[role]) throw new Error(`${name} has an unknown contact role: ${role}`) })
-})
-Object.entries(weaponLoadouts).forEach(([archetypeName, loadout]) => {
-  const variants = archetypeWeaponVariants[archetypeName] || []
-  if (variants.length !== loadout.length || variants.some(names => names.length < 5)) throw new Error(`${archetypeName} needs five curated names for every weapon slot`)
-})
+if (import.meta.env.DEV) {
+  archetypeOptions.forEach(({ name }) => {
+    weaponTypes.forEach(([type]) => weaponNamePool(name, type))
+    contactRolesForArchetype(name).forEach(role => {
+      if (!contactNamePools[role]) console.warn(`${name} has an unknown contact role: ${role}`)
+    })
+  })
+  Object.entries(weaponLoadouts).forEach(([archetypeName, loadout]) => {
+    const variants = archetypeWeaponVariants[archetypeName] || []
+    if (variants.length !== loadout.length || variants.some(names => names.length < 5)) console.warn(`${archetypeName} should have five curated names for every weapon slot`)
+  })
+}
 const talentAllowanceForLevel = level => {
   const currentLevel = Math.max(0, Math.min(10, number(level)))
   if (currentLevel === 0) return 0

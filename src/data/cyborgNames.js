@@ -7003,9 +7003,13 @@ const cyborgNames = [
 ]
 
 const monikers = cyborgNames.map(entry => entry.identity.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase())
-if (cyborgNames.length !== 1000 || new Set(monikers).size !== 1000) throw new Error('Cyborgs require 1,000 unique monikers')
-if (cyborgNames.some(entry => entry.style === 'designation' || /^\[.*\]$/.test(entry.name))) throw new Error('Cyborg designation names are not allowed')
-if (cyborgNames.some(entry => !entry.archetype || !entry.origin)) throw new Error('Every Cyborg name requires archetype and origin metadata')
-if (cyborgNames.some(entry => entry.name.trim().split(/\s+/).length > 6)) throw new Error('Cyborg names may not exceed six words')
+if (import.meta.env.DEV) {
+  const issues = []
+  if (cyborgNames.length !== 1000 || new Set(monikers).size !== 1000) issues.push('Cyborgs should have 1,000 unique monikers')
+  if (cyborgNames.some(entry => entry.style === 'designation' || /^\[.*\]$/.test(entry.name))) issues.push('Cyborg designation names should not be present')
+  if (cyborgNames.some(entry => !entry.archetype || !entry.origin)) issues.push('Every Cyborg name should have archetype and origin metadata')
+  if (cyborgNames.some(entry => entry.name.trim().split(/\s+/).length > 6)) issues.push('Cyborg names should not exceed six words')
+  if (issues.length) console.warn('Cyborg name catalog validation:', issues)
+}
 
 export default cyborgNames

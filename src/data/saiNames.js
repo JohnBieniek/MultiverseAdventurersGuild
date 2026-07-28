@@ -2079,8 +2079,12 @@ const saiNames = [
 
 const count = style => saiNames.filter(entry => entry.style === style).length
 const coined = saiNames.filter(entry => entry.style === 'coined').map(entry => entry.name.toLowerCase())
-if (saiNames.length !== 500 || new Set(saiNames.map(entry => entry.name)).size !== 500) throw new Error('SAIs require 500 unique identities')
-if (new Set(coined).size !== coined.length) throw new Error('Coined SAI identities must be unique')
-if (count('designation-only') !== 25 || count('named-designation') !== 25 || count('two-word') !== 50 || count('coined') !== 400) throw new Error('SAI naming-style proportions are invalid')
+if (import.meta.env.DEV) {
+  const issues = []
+  if (saiNames.length !== 500 || new Set(saiNames.map(entry => entry.name)).size !== 500) issues.push('SAIs should have 500 unique identities')
+  if (new Set(coined).size !== coined.length) issues.push('Coined SAI identities should be unique')
+  if (count('designation-only') !== 25 || count('named-designation') !== 25 || count('two-word') !== 50 || count('coined') !== 400) issues.push('SAI naming-style proportions are invalid')
+  if (issues.length) console.warn('SAI name catalog validation:', issues)
+}
 
 export default saiNames

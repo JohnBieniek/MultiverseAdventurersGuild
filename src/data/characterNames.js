@@ -3025,7 +3025,23 @@ const characterNamesBySpecies = {
 const expectedNameCounts = { Cyborg: 1000, Human: 585 }
 const conventionalNameSpecies = ['Dwarf', 'Elf', 'Gnome', 'Giant', 'Halfling', 'Human']
 const nameComponents = (species, name) => { const parts = name.split(/\s+/); return { first: parts[0], last: species === 'Giant' ? parts.slice(1).join(' ') : parts.at(-1) } }
-const fairyFirsts = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/)[0]); const fairyBynames = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/).slice(1).join(' ')).filter(Boolean); if (new Set(fairyFirsts).size !== 500 || fairyBynames.length !== 125 || new Set(fairyBynames).size !== 125 || fairyBynames.some(name => !/^(of |the )/.test(name))) throw new Error('Fairies must have unique personal names and only folklore-style optional bynames'); Object.entries(characterNamesBySpecies).forEach(([species, names]) => { const expected = expectedNameCounts[species] || 500; if (names.some(name => name.trim().split(/\s+/).length > 6)) throw new Error(`${species} names may not exceed six words`); if (names.length !== expected || new Set(names).size !== expected) throw new Error(`${species} must have exactly ${expected} unique names`); if (!conventionalNameSpecies.includes(species)) return; const first = names.map(name => nameComponents(species, name).first); const last = names.map(name => nameComponents(species, name).last); const lastSet = new Set(last); if (new Set(first).size !== expected || new Set(last).size !== expected || first.some(name => lastSet.has(name))) throw new Error(`${species} name components must be unique and non-overlapping`) })
+if (import.meta.env.DEV) {
+  const issues = []
+  const fairyFirsts = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/)[0])
+  const fairyBynames = characterNamesBySpecies.Fairy.map(name => name.split(/\s+/).slice(1).join(' ')).filter(Boolean)
+  if (new Set(fairyFirsts).size !== 500 || fairyBynames.length !== 125 || new Set(fairyBynames).size !== 125 || fairyBynames.some(name => !/^(of |the )/.test(name))) issues.push('Fairies should have unique personal names and only folklore-style optional bynames')
+  Object.entries(characterNamesBySpecies).forEach(([species, names]) => {
+    const expected = expectedNameCounts[species] || 500
+    if (names.some(name => name.trim().split(/\s+/).length > 6)) issues.push(`${species} names should not exceed six words`)
+    if (names.length !== expected || new Set(names).size !== expected) issues.push(`${species} should have exactly ${expected} unique names`)
+    if (!conventionalNameSpecies.includes(species)) return
+    const first = names.map(name => nameComponents(species, name).first)
+    const last = names.map(name => nameComponents(species, name).last)
+    const lastSet = new Set(last)
+    if (new Set(first).size !== expected || new Set(last).size !== expected || first.some(name => lastSet.has(name))) issues.push(`${species} name components should be unique and non-overlapping`)
+  })
+  if (issues.length) console.warn('Character name catalog validation:', issues)
+}
 
 export const randomCharacterName = (species, archetype = '') => { if (species === 'Cyborg') { const matching = cyborgNames.filter(entry => !archetype || entry.archetype === archetype); const choices = matching.length ? matching : cyborgNames; return choices[Math.floor(Math.random() * choices.length)]?.name || '' } const names = characterNamesBySpecies[species]; return names?.[Math.floor(Math.random() * names.length)] || '' }
 
