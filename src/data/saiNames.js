@@ -2079,7 +2079,7 @@ const saiNames = [
 
 const count = style => saiNames.filter(entry => entry.style === style).length
 const coined = saiNames.filter(entry => entry.style === 'coined').map(entry => entry.name.toLowerCase())
-if (import.meta.env.DEV) {
+if (import.meta.env?.DEV) {
   const issues = []
   if (saiNames.length !== 500 || new Set(saiNames.map(entry => entry.name)).size !== 500) issues.push('SAIs should have 500 unique identities')
   if (new Set(coined).size !== coined.length) issues.push('Coined SAI identities should be unique')

@@ -2804,7 +2804,7 @@ const orcNames = [
 
 const primary = orcNames.map(entry => entry.givenName)
 const titled = orcNames.filter(entry => entry.title)
-if (import.meta.env.DEV) {
+if (import.meta.env?.DEV) {
   const issues = []
   if (orcNames.length !== 500 || new Set(primary).size !== 500) issues.push('Orcs should have 500 unique given names')
   if (orcNames.filter(entry => entry.form === 'apostrophe').length !== 125) issues.push('Only 25% of Orc names should use apostrophes')

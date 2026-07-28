@@ -7003,7 +7003,7 @@ const cyborgNames = [
 ]
 
 const monikers = cyborgNames.map(entry => entry.identity.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase())
-if (import.meta.env.DEV) {
+if (import.meta.env?.DEV) {
   const issues = []
   if (cyborgNames.length !== 1000 || new Set(monikers).size !== 1000) issues.push('Cyborgs should have 1,000 unique monikers')
   if (cyborgNames.some(entry => entry.style === 'designation' || /^\[.*\]$/.test(entry.name))) issues.push('Cyborg designation names should not be present')
