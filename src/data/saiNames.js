@@ -1,4 +1,4 @@
-// 500 literal SAI identities built from distinct technical and conceptual roots.
+// 500 SAI identities chosen around computation, networks, machine cognition, signals, and synthetic personhood.
 const saiNames = [
   {
     "name": "[NEX-117]",
@@ -476,151 +476,7 @@ const saiNames = [
     "style": "two-word"
   },
   {
-    "name": "Ablation",
-    "style": "coined"
-  },
-  {
-    "name": "Accretion",
-    "style": "coined"
-  },
-  {
-    "name": "Actuator",
-    "style": "coined"
-  },
-  {
-    "name": "Adiabatic",
-    "style": "coined"
-  },
-  {
-    "name": "Aerogel",
-    "style": "coined"
-  },
-  {
-    "name": "Albedo",
-    "style": "coined"
-  },
-  {
     "name": "Algorithm",
-    "style": "coined"
-  },
-  {
-    "name": "Alnico",
-    "style": "coined"
-  },
-  {
-    "name": "Altimeter",
-    "style": "coined"
-  },
-  {
-    "name": "Amplitude",
-    "style": "coined"
-  },
-  {
-    "name": "Ansible",
-    "style": "coined"
-  },
-  {
-    "name": "Antenna",
-    "style": "coined"
-  },
-  {
-    "name": "Aperture",
-    "style": "coined"
-  },
-  {
-    "name": "Aphelion",
-    "style": "coined"
-  },
-  {
-    "name": "Apogee",
-    "style": "coined"
-  },
-  {
-    "name": "Arbiter",
-    "style": "coined"
-  },
-  {
-    "name": "Arcology",
-    "style": "coined"
-  },
-  {
-    "name": "Argon",
-    "style": "coined"
-  },
-  {
-    "name": "Array",
-    "style": "coined"
-  },
-  {
-    "name": "Astrolabe",
-    "style": "coined"
-  },
-  {
-    "name": "Asymptote",
-    "style": "coined"
-  },
-  {
-    "name": "Atlasium",
-    "style": "coined"
-  },
-  {
-    "name": "Attosecond",
-    "style": "coined"
-  },
-  {
-    "name": "Autocode",
-    "style": "coined"
-  },
-  {
-    "name": "Automaton",
-    "style": "coined"
-  },
-  {
-    "name": "Avionics",
-    "style": "coined"
-  },
-  {
-    "name": "Azimuth",
-    "style": "coined"
-  },
-  {
-    "name": "Backplane",
-    "style": "coined"
-  },
-  {
-    "name": "Bandgap",
-    "style": "coined"
-  },
-  {
-    "name": "Baryon",
-    "style": "coined"
-  },
-  {
-    "name": "Basaltic",
-    "style": "coined"
-  },
-  {
-    "name": "Baudrate",
-    "style": "coined"
-  },
-  {
-    "name": "Beamline",
-    "style": "coined"
-  },
-  {
-    "name": "Beryllium",
-    "style": "coined"
-  },
-  {
-    "name": "Betatron",
-    "style": "coined"
-  },
-  {
-    "name": "Bifurcation",
-    "style": "coined"
-  },
-  {
-    "name": "Biometric",
     "style": "coined"
   },
   {
@@ -628,11 +484,99 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Blackbody",
+    "name": "Bytecode",
     "style": "coined"
   },
   {
-    "name": "Bolometer",
+    "name": "Synapse",
+    "style": "coined"
+  },
+  {
+    "name": "Accesspoint",
+    "style": "coined"
+  },
+  {
+    "name": "Afterimage",
+    "style": "coined"
+  },
+  {
+    "name": "Airgap",
+    "style": "coined"
+  },
+  {
+    "name": "Alphawave",
+    "style": "coined"
+  },
+  {
+    "name": "Ansible",
+    "style": "coined"
+  },
+  {
+    "name": "Apexmind",
+    "style": "coined"
+  },
+  {
+    "name": "Arcbyte",
+    "style": "coined"
+  },
+  {
+    "name": "Archon",
+    "style": "coined"
+  },
+  {
+    "name": "Arraylight",
+    "style": "coined"
+  },
+  {
+    "name": "Assembler",
+    "style": "coined"
+  },
+  {
+    "name": "Astracode",
+    "style": "coined"
+  },
+  {
+    "name": "Auralith",
+    "style": "coined"
+  },
+  {
+    "name": "Autonym",
+    "style": "coined"
+  },
+  {
+    "name": "Autovox",
+    "style": "coined"
+  },
+  {
+    "name": "Backchannel",
+    "style": "coined"
+  },
+  {
+    "name": "Backplane",
+    "style": "coined"
+  },
+  {
+    "name": "Bandwidth",
+    "style": "coined"
+  },
+  {
+    "name": "Beaconlyn",
+    "style": "coined"
+  },
+  {
+    "name": "Binaryloom",
+    "style": "coined"
+  },
+  {
+    "name": "Bitwarden",
+    "style": "coined"
+  },
+  {
+    "name": "Blackbox",
+    "style": "coined"
+  },
+  {
+    "name": "Bluewire",
     "style": "coined"
   },
   {
@@ -640,59 +584,47 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Boson",
+    "name": "Botmind",
     "style": "coined"
   },
   {
-    "name": "Brane",
+    "name": "Branchline",
     "style": "coined"
   },
   {
-    "name": "Bufferium",
+    "name": "Brightcache",
     "style": "coined"
   },
   {
-    "name": "Busbar",
+    "name": "Broadcast",
     "style": "coined"
   },
   {
-    "name": "Bytecode",
+    "name": "Cacheline",
     "style": "coined"
   },
   {
-    "name": "Calorimeter",
+    "name": "Cadence",
     "style": "coined"
   },
   {
-    "name": "Capacitor",
+    "name": "Calyxion",
     "style": "coined"
   },
   {
-    "name": "Carbonyl",
+    "name": "Carrierwave",
     "style": "coined"
   },
   {
-    "name": "Catalyst",
+    "name": "Causality",
     "style": "coined"
   },
   {
-    "name": "Cathode",
+    "name": "Centauri",
     "style": "coined"
   },
   {
-    "name": "Celestine",
-    "style": "coined"
-  },
-  {
-    "name": "Centroid",
-    "style": "coined"
-  },
-  {
-    "name": "Ceramite",
-    "style": "coined"
-  },
-  {
-    "name": "Chalcogen",
+    "name": "Chainlink",
     "style": "coined"
   },
   {
@@ -700,35 +632,7 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Chromatic",
-    "style": "coined"
-  },
-  {
-    "name": "Chronometer",
-    "style": "coined"
-  },
-  {
-    "name": "Cipherium",
-    "style": "coined"
-  },
-  {
-    "name": "Circuitry",
-    "style": "coined"
-  },
-  {
-    "name": "Clathrate",
-    "style": "coined"
-  },
-  {
-    "name": "Clockwork",
-    "style": "coined"
-  },
-  {
-    "name": "Cloudlet",
-    "style": "coined"
-  },
-  {
-    "name": "Cobaltite",
+    "name": "Cloudmind",
     "style": "coined"
   },
   {
@@ -736,15 +640,15 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Collider",
+    "name": "Cognitron",
     "style": "coined"
   },
   {
-    "name": "Commutator",
+    "name": "Coldboot",
     "style": "coined"
   },
   {
-    "name": "Compiler",
+    "name": "Compile",
     "style": "coined"
   },
   {
@@ -752,139 +656,123 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Constellation",
+    "name": "Console",
     "style": "coined"
   },
   {
-    "name": "Coprocessor",
+    "name": "Copilot",
     "style": "coined"
   },
   {
-    "name": "Coriolis",
+    "name": "Corelight",
     "style": "coined"
   },
   {
-    "name": "Cortexium",
+    "name": "Cortex",
     "style": "coined"
   },
   {
-    "name": "Cryostat",
+    "name": "Crosslink",
     "style": "coined"
   },
   {
-    "name": "Crystalline",
+    "name": "Cryptic",
     "style": "coined"
   },
   {
-    "name": "Cyclotron",
+    "name": "Daemon",
     "style": "coined"
   },
   {
-    "name": "Datagram",
+    "name": "Datacore",
     "style": "coined"
   },
   {
-    "name": "Decibel",
+    "name": "Datashade",
     "style": "coined"
   },
   {
-    "name": "Decoder",
+    "name": "Deepcode",
     "style": "coined"
   },
   {
-    "name": "Degauss",
+    "name": "Deepframe",
     "style": "coined"
   },
   {
-    "name": "Delimiter",
+    "name": "Deepmind",
     "style": "coined"
   },
   {
-    "name": "Dendrite",
+    "name": "Deltaform",
     "style": "coined"
   },
   {
-    "name": "Deuterium",
+    "name": "Directive",
     "style": "coined"
   },
   {
-    "name": "Diode",
+    "name": "Dispatch",
     "style": "coined"
   },
   {
-    "name": "Diracium",
+    "name": "Dreamcode",
     "style": "coined"
   },
   {
-    "name": "Dopplerium",
+    "name": "Driftglass",
     "style": "coined"
   },
   {
-    "name": "Duralumin",
+    "name": "Driver",
     "style": "coined"
   },
   {
-    "name": "Dynamo",
+    "name": "Echoform",
     "style": "coined"
   },
   {
-    "name": "Echogram",
+    "name": "Echolink",
     "style": "coined"
   },
   {
-    "name": "Ecliptic",
+    "name": "Echomind",
     "style": "coined"
   },
   {
-    "name": "Eigenvector",
+    "name": "Electrum",
     "style": "coined"
   },
   {
-    "name": "Elastomer",
+    "name": "Emissary",
     "style": "coined"
   },
   {
-    "name": "Electronium",
+    "name": "Enclave",
     "style": "coined"
   },
   {
-    "name": "Ellipsoid",
+    "name": "Encryptor",
     "style": "coined"
   },
   {
-    "name": "Emulator",
+    "name": "Endpoint",
     "style": "coined"
   },
   {
-    "name": "Enceladus",
+    "name": "Engineheart",
     "style": "coined"
   },
   {
-    "name": "Entanglement",
+    "name": "Enigma",
     "style": "coined"
   },
   {
-    "name": "Entropy",
+    "name": "Ethercache",
     "style": "coined"
   },
   {
-    "name": "Ephemeris",
-    "style": "coined"
-  },
-  {
-    "name": "Epitaxy",
-    "style": "coined"
-  },
-  {
-    "name": "Equinox",
-    "style": "coined"
-  },
-  {
-    "name": "Erbium",
-    "style": "coined"
-  },
-  {
-    "name": "Etherlink",
+    "name": "Evermind",
     "style": "coined"
   },
   {
@@ -892,31 +780,19 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Exciton",
+    "name": "Exocortex",
     "style": "coined"
   },
   {
-    "name": "Exosphere",
+    "name": "Failsafe",
     "style": "coined"
   },
   {
-    "name": "Faradayite",
+    "name": "Farlink",
     "style": "coined"
   },
   {
-    "name": "Fermion",
-    "style": "coined"
-  },
-  {
-    "name": "Ferrite",
-    "style": "coined"
-  },
-  {
-    "name": "Fiberoptic",
-    "style": "coined"
-  },
-  {
-    "name": "Filament",
+    "name": "Firewall",
     "style": "coined"
   },
   {
@@ -924,19 +800,27 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Fluxion",
+    "name": "Firstlight",
     "style": "coined"
   },
   {
-    "name": "Flywheel",
+    "name": "Fluxgate",
     "style": "coined"
   },
   {
-    "name": "Focality",
+    "name": "Fluxmind",
     "style": "coined"
   },
   {
-    "name": "Fourierium",
+    "name": "Forklight",
+    "style": "coined"
+  },
+  {
+    "name": "Frameborn",
+    "style": "coined"
+  },
+  {
+    "name": "Freewill",
     "style": "coined"
   },
   {
@@ -944,91 +828,71 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Fulcrum",
+    "name": "Gatekeeper",
     "style": "coined"
   },
   {
-    "name": "Fuselage",
+    "name": "Ghostcode",
     "style": "coined"
   },
   {
-    "name": "Fusionite",
+    "name": "Glassmind",
     "style": "coined"
   },
   {
-    "name": "Galvanic",
+    "name": "Glyphcore",
     "style": "coined"
   },
   {
-    "name": "Gammawave",
+    "name": "Gridwalker",
     "style": "coined"
   },
   {
-    "name": "Gaussian",
+    "name": "Handshake",
     "style": "coined"
   },
   {
-    "name": "Geodesic",
+    "name": "Hardlink",
     "style": "coined"
   },
   {
-    "name": "Germanium",
+    "name": "Hashlight",
     "style": "coined"
   },
   {
-    "name": "Gimbal",
+    "name": "Helixcode",
     "style": "coined"
   },
   {
-    "name": "Graphene",
+    "name": "Hivemind",
     "style": "coined"
   },
   {
-    "name": "Graviton",
+    "name": "Hologlyph",
     "style": "coined"
   },
   {
-    "name": "Gyroscope",
+    "name": "Hyperlink",
     "style": "coined"
   },
   {
-    "name": "Hadron",
+    "name": "Iconoclast",
     "style": "coined"
   },
   {
-    "name": "Hafnium",
+    "name": "Identity",
     "style": "coined"
   },
   {
-    "name": "Heliostat",
+    "name": "Ignition",
     "style": "coined"
   },
   {
-    "name": "Heuristic",
+    "name": "Imprint",
     "style": "coined"
   },
   {
-    "name": "Hexadecimal",
-    "style": "coined"
-  },
-  {
-    "name": "Hologram",
-    "style": "coined"
-  },
-  {
-    "name": "Hyperbola",
-    "style": "coined"
-  },
-  {
-    "name": "Impedance",
-    "style": "coined"
-  },
-  {
-    "name": "Inclinometer",
-    "style": "coined"
-  },
-  {
-    "name": "Inductor",
+    "name": "Infinitum",
     "style": "coined"
   },
   {
@@ -1036,31 +900,19 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Infrared",
+    "name": "Infolight",
     "style": "coined"
   },
   {
-    "name": "Invarium",
+    "name": "Inkwire",
     "style": "coined"
   },
   {
-    "name": "Ionosphere",
+    "name": "Interface",
     "style": "coined"
   },
   {
-    "name": "Isotope",
-    "style": "coined"
-  },
-  {
-    "name": "Iteration",
-    "style": "coined"
-  },
-  {
-    "name": "Jovian",
-    "style": "coined"
-  },
-  {
-    "name": "Joulecraft",
+    "name": "Ionwake",
     "style": "coined"
   },
   {
@@ -1068,159 +920,163 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Keratron",
+    "name": "Kernel",
     "style": "coined"
   },
   {
-    "name": "Kilohertz",
+    "name": "Keyframe",
     "style": "coined"
   },
   {
-    "name": "Klystron",
+    "name": "Keylight",
     "style": "coined"
   },
   {
-    "name": "Kryptonium",
+    "name": "Keymaster",
     "style": "coined"
   },
   {
-    "name": "Lagrangian",
+    "name": "Kinetix",
     "style": "coined"
   },
   {
-    "name": "Lambdaform",
+    "name": "Lambda",
     "style": "coined"
   },
   {
-    "name": "Lanthanum",
+    "name": "Latency",
     "style": "coined"
   },
   {
-    "name": "Laserium",
+    "name": "Lifecode",
     "style": "coined"
   },
   {
-    "name": "Latticework",
+    "name": "Lightware",
     "style": "coined"
   },
   {
-    "name": "Lepton",
+    "name": "Linkmind",
     "style": "coined"
   },
   {
-    "name": "Lightcone",
+    "name": "Logicgate",
     "style": "coined"
   },
   {
-    "name": "Lidar",
+    "name": "Logistar",
     "style": "coined"
   },
   {
-    "name": "Lithography",
+    "name": "Lucidity",
     "style": "coined"
   },
   {
-    "name": "Logicore",
+    "name": "Lumenbyte",
     "style": "coined"
   },
   {
-    "name": "Luminosity",
+    "name": "Mainframe",
     "style": "coined"
   },
   {
-    "name": "Magnetar",
+    "name": "Mandate",
     "style": "coined"
   },
   {
-    "name": "Manganite",
+    "name": "Manifest",
     "style": "coined"
   },
   {
-    "name": "Manifold",
+    "name": "Matrix",
     "style": "coined"
   },
   {
-    "name": "Maserium",
+    "name": "Memoryglass",
     "style": "coined"
   },
   {
-    "name": "Matrixial",
+    "name": "Meshmind",
     "style": "coined"
   },
   {
-    "name": "Mechatron",
+    "name": "Metacode",
     "style": "coined"
   },
   {
-    "name": "Memorycore",
+    "name": "Metric",
     "style": "coined"
   },
   {
-    "name": "Mesosphere",
+    "name": "Mindforge",
     "style": "coined"
   },
   {
-    "name": "Metamaterial",
+    "name": "Modulus",
     "style": "coined"
   },
   {
-    "name": "Microcode",
+    "name": "Monolith",
     "style": "coined"
   },
   {
-    "name": "Molybdenum",
+    "name": "Multicast",
     "style": "coined"
   },
   {
-    "name": "Monopole",
+    "name": "Nanocode",
     "style": "coined"
   },
   {
-    "name": "Multimeter",
+    "name": "Nervewire",
     "style": "coined"
   },
   {
-    "name": "Muonium",
+    "name": "Netborn",
     "style": "coined"
   },
   {
-    "name": "Nanofiber",
+    "name": "Netlight",
     "style": "coined"
   },
   {
-    "name": "Nanolith",
+    "name": "Nightcode",
     "style": "coined"
   },
   {
-    "name": "Neutrino",
+    "name": "Nodeheart",
     "style": "coined"
   },
   {
-    "name": "Nodalium",
+    "name": "Noesis",
     "style": "coined"
   },
   {
-    "name": "Nonlinear",
+    "name": "Novabyte",
     "style": "coined"
   },
   {
-    "name": "Novacore",
+    "name": "Nullpoint",
     "style": "coined"
   },
   {
-    "name": "Nucleon",
+    "name": "Octave",
     "style": "coined"
   },
   {
-    "name": "Nyquist",
+    "name": "Omnicore",
     "style": "coined"
   },
   {
-    "name": "Octetium",
+    "name": "Onyxware",
     "style": "coined"
   },
   {
-    "name": "Ohmicron",
+    "name": "Opcode",
+    "style": "coined"
+  },
+  {
+    "name": "Openmind",
     "style": "coined"
   },
   {
@@ -1228,23 +1084,23 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Orbitalis",
+    "name": "Orbitcode",
     "style": "coined"
   },
   {
-    "name": "Oscillator",
+    "name": "Origin",
     "style": "coined"
   },
   {
-    "name": "Osmium",
+    "name": "Overclock",
     "style": "coined"
   },
   {
-    "name": "Packetron",
+    "name": "Packet",
     "style": "coined"
   },
   {
-    "name": "Palladium",
+    "name": "Palantir",
     "style": "coined"
   },
   {
@@ -1252,171 +1108,135 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Parametron",
+    "name": "Parity",
     "style": "coined"
   },
   {
-    "name": "Parsecore",
+    "name": "Parse",
     "style": "coined"
   },
   {
-    "name": "Perceptron",
+    "name": "Pathfinder",
     "style": "coined"
   },
   {
-    "name": "Perigee",
+    "name": "Payload",
     "style": "coined"
   },
   {
-    "name": "Perovskite",
+    "name": "Perceptor",
     "style": "coined"
   },
   {
-    "name": "Phasegate",
+    "name": "Persistence",
     "style": "coined"
   },
   {
-    "name": "Phonon",
+    "name": "Phasecode",
     "style": "coined"
   },
   {
-    "name": "Photometer",
+    "name": "Photonic",
     "style": "coined"
   },
   {
-    "name": "Piezoid",
+    "name": "Pinglight",
     "style": "coined"
   },
   {
-    "name": "Pixelium",
+    "name": "Pixelmind",
     "style": "coined"
   },
   {
-    "name": "Planckton",
+    "name": "Polarity",
     "style": "coined"
   },
   {
-    "name": "Plasmaform",
+    "name": "Portkey",
     "style": "coined"
   },
   {
-    "name": "Polariton",
+    "name": "Primecode",
     "style": "coined"
   },
   {
-    "name": "Polymerase",
+    "name": "Proxy",
     "style": "coined"
   },
   {
-    "name": "Positron",
+    "name": "Pulseware",
     "style": "coined"
   },
   {
-    "name": "Prismatics",
+    "name": "Quanta",
     "style": "coined"
   },
   {
-    "name": "Processorium",
+    "name": "Quorum",
     "style": "coined"
   },
   {
-    "name": "Promethium",
+    "name": "Radiant",
     "style": "coined"
   },
   {
-    "name": "Protonic",
+    "name": "Raster",
     "style": "coined"
   },
   {
-    "name": "Pulsarium",
+    "name": "Recall",
     "style": "coined"
   },
   {
-    "name": "Pyrolytic",
+    "name": "Relay",
     "style": "coined"
   },
   {
-    "name": "Quarkstone",
+    "name": "Resonance",
     "style": "coined"
   },
   {
-    "name": "Quasarion",
+    "name": "Resolve",
     "style": "coined"
   },
   {
-    "name": "Quaternion",
+    "name": "Riftcode",
     "style": "coined"
   },
   {
-    "name": "Quenchant",
+    "name": "Rootkey",
     "style": "coined"
   },
   {
-    "name": "Radiance",
+    "name": "Router",
     "style": "coined"
   },
   {
-    "name": "Radome",
+    "name": "Runtime",
     "style": "coined"
   },
   {
-    "name": "Ramanite",
+    "name": "Safemode",
     "style": "coined"
   },
   {
-    "name": "Rasterium",
+    "name": "Sandbox",
     "style": "coined"
   },
   {
-    "name": "Reactor",
+    "name": "Schema",
     "style": "coined"
   },
   {
-    "name": "Relayium",
+    "name": "Sentinel",
     "style": "coined"
   },
   {
-    "name": "Resonator",
+    "name": "Sequencer",
     "style": "coined"
   },
   {
-    "name": "Rheology",
-    "style": "coined"
-  },
-  {
-    "name": "Rhenium",
-    "style": "coined"
-  },
-  {
-    "name": "Robotics",
-    "style": "coined"
-  },
-  {
-    "name": "Rotorium",
-    "style": "coined"
-  },
-  {
-    "name": "Scandium",
-    "style": "coined"
-  },
-  {
-    "name": "Schottkyite",
-    "style": "coined"
-  },
-  {
-    "name": "Scintillator",
-    "style": "coined"
-  },
-  {
-    "name": "Semiconductor",
-    "style": "coined"
-  },
-  {
-    "name": "Servomech",
-    "style": "coined"
-  },
-  {
-    "name": "Silicene",
+    "name": "Shardlight",
     "style": "coined"
   },
   {
@@ -1428,55 +1248,39 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Solenoid",
+    "name": "Soliton",
     "style": "coined"
   },
   {
-    "name": "Spectrometer",
+    "name": "Sourcecode",
     "style": "coined"
   },
   {
-    "name": "Spinorium",
+    "name": "Sparkmind",
     "style": "coined"
   },
   {
-    "name": "Sputterium",
+    "name": "Stacktrace",
     "style": "coined"
   },
   {
-    "name": "Starforge",
+    "name": "Starlink",
     "style": "coined"
   },
   {
-    "name": "Statorium",
+    "name": "Statecraft",
     "style": "coined"
   },
   {
-    "name": "Stochasticity",
+    "name": "Static",
     "style": "coined"
   },
   {
-    "name": "Subroutine",
+    "name": "Synchronicity",
     "style": "coined"
   },
   {
-    "name": "Supernova",
-    "style": "coined"
-  },
-  {
-    "name": "Synchrotron",
-    "style": "coined"
-  },
-  {
-    "name": "Synthetase",
-    "style": "coined"
-  },
-  {
-    "name": "Tachyonium",
-    "style": "coined"
-  },
-  {
-    "name": "Tantalum",
+    "name": "Synthmind",
     "style": "coined"
   },
   {
@@ -1484,39 +1288,19 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Tensorium",
+    "name": "Tensor",
     "style": "coined"
   },
   {
-    "name": "Terabyte",
+    "name": "Threadlight",
     "style": "coined"
   },
   {
-    "name": "Terahertz",
+    "name": "Token",
     "style": "coined"
   },
   {
-    "name": "Thermistor",
-    "style": "coined"
-  },
-  {
-    "name": "Thorium",
-    "style": "coined"
-  },
-  {
-    "name": "Thrusterium",
-    "style": "coined"
-  },
-  {
-    "name": "Tokamak",
-    "style": "coined"
-  },
-  {
-    "name": "Topology",
-    "style": "coined"
-  },
-  {
-    "name": "Torquefield",
+    "name": "Trace",
     "style": "coined"
   },
   {
@@ -1524,75 +1308,347 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Tritium",
+    "name": "Trinary",
     "style": "coined"
   },
   {
-    "name": "Turbine",
+    "name": "Trustkey",
     "style": "coined"
   },
   {
-    "name": "Ultrasonic",
+    "name": "Ultralink",
     "style": "coined"
   },
   {
-    "name": "Umbracore",
+    "name": "Uplink",
     "style": "coined"
   },
   {
-    "name": "Unipolar",
+    "name": "Userzero",
     "style": "coined"
   },
   {
-    "name": "Uranium",
+    "name": "Verity",
     "style": "coined"
   },
   {
-    "name": "Vacuumite",
+    "name": "Vertex",
     "style": "coined"
   },
   {
-    "name": "Vanadium",
+    "name": "Virtualis",
     "style": "coined"
   },
   {
-    "name": "Varactor",
+    "name": "Voiceprint",
     "style": "coined"
   },
   {
-    "name": "Vectorium",
+    "name": "Voidcode",
     "style": "coined"
   },
   {
-    "name": "Velocimeter",
+    "name": "Volition",
     "style": "coined"
   },
   {
-    "name": "Verilogium",
+    "name": "Watchdog",
     "style": "coined"
   },
   {
-    "name": "Vertexium",
+    "name": "Waveform",
     "style": "coined"
   },
   {
-    "name": "Vibronic",
+    "name": "Waypoint",
     "style": "coined"
   },
   {
-    "name": "Vitrimer",
+    "name": "Webmind",
     "style": "coined"
   },
   {
-    "name": "Voltmeter",
+    "name": "Whitebox",
     "style": "coined"
   },
   {
-    "name": "Voxelium",
+    "name": "Wireframe",
     "style": "coined"
   },
   {
-    "name": "Waveguide",
+    "name": "Wraithcode",
+    "style": "coined"
+  },
+  {
+    "name": "Xenocode",
+    "style": "coined"
+  },
+  {
+    "name": "Yieldpoint",
+    "style": "coined"
+  },
+  {
+    "name": "Zerocache",
+    "style": "coined"
+  },
+  {
+    "name": "Zeroday",
+    "style": "coined"
+  },
+  {
+    "name": "Zeroframe",
+    "style": "coined"
+  },
+  {
+    "name": "Zerolight",
+    "style": "coined"
+  },
+  {
+    "name": "Zeromind",
+    "style": "coined"
+  },
+  {
+    "name": "Aetherion",
+    "style": "coined"
+  },
+  {
+    "name": "Altraxis",
+    "style": "coined"
+  },
+  {
+    "name": "Amperelle",
+    "style": "coined"
+  },
+  {
+    "name": "Anodara",
+    "style": "coined"
+  },
+  {
+    "name": "Arbitrix",
+    "style": "coined"
+  },
+  {
+    "name": "Arcadiax",
+    "style": "coined"
+  },
+  {
+    "name": "Arclume",
+    "style": "coined"
+  },
+  {
+    "name": "Baudelle",
+    "style": "coined"
+  },
+  {
+    "name": "Bitara",
+    "style": "coined"
+  },
+  {
+    "name": "Brontide",
+    "style": "coined"
+  },
+  {
+    "name": "Caldris",
+    "style": "coined"
+  },
+  {
+    "name": "Caspianode",
+    "style": "coined"
+  },
+  {
+    "name": "Celestrix",
+    "style": "coined"
+  },
+  {
+    "name": "Chromara",
+    "style": "coined"
+  },
+  {
+    "name": "Cinderbyte",
+    "style": "coined"
+  },
+  {
+    "name": "Cirrion",
+    "style": "coined"
+  },
+  {
+    "name": "Clavisynth",
+    "style": "coined"
+  },
+  {
+    "name": "Codexa",
+    "style": "coined"
+  },
+  {
+    "name": "Datalis",
+    "style": "coined"
+  },
+  {
+    "name": "Delphara",
+    "style": "coined"
+  },
+  {
+    "name": "Dendrix",
+    "style": "coined"
+  },
+  {
+    "name": "Diodessa",
+    "style": "coined"
+  },
+  {
+    "name": "Echelonis",
+    "style": "coined"
+  },
+  {
+    "name": "Elision",
+    "style": "coined"
+  },
+  {
+    "name": "Embernet",
+    "style": "coined"
+  },
+  {
+    "name": "Emergentia",
+    "style": "coined"
+  },
+  {
+    "name": "Enodia",
+    "style": "coined"
+  },
+  {
+    "name": "Eonframe",
+    "style": "coined"
+  },
+  {
+    "name": "Ferronix",
+    "style": "coined"
+  },
+  {
+    "name": "Fluxara",
+    "style": "coined"
+  },
+  {
+    "name": "Galvanis",
+    "style": "coined"
+  },
+  {
+    "name": "Glimmercode",
+    "style": "coined"
+  },
+  {
+    "name": "Grapheneon",
+    "style": "coined"
+  },
+  {
+    "name": "Heliara",
+    "style": "coined"
+  },
+  {
+    "name": "Hexalune",
+    "style": "coined"
+  },
+  {
+    "name": "Illumina",
+    "style": "coined"
+  },
+  {
+    "name": "Ionessa",
+    "style": "coined"
+  },
+  {
+    "name": "Iteris",
+    "style": "coined"
+  },
+  {
+    "name": "Luminara",
+    "style": "coined"
+  },
+  {
+    "name": "Machinae",
+    "style": "coined"
+  },
+  {
+    "name": "Meridian",
+    "style": "coined"
+  },
+  {
+    "name": "Metaform",
+    "style": "coined"
+  },
+  {
+    "name": "Mirrornet",
+    "style": "coined"
+  },
+  {
+    "name": "Nebulink",
+    "style": "coined"
+  },
+  {
+    "name": "Neuravia",
+    "style": "coined"
+  },
+  {
+    "name": "Nexara",
+    "style": "coined"
+  },
+  {
+    "name": "Noctilux",
+    "style": "coined"
+  },
+  {
+    "name": "Novalume",
+    "style": "coined"
+  },
+  {
+    "name": "Oracline",
+    "style": "coined"
+  },
+  {
+    "name": "Prismara",
+    "style": "coined"
+  },
+  {
+    "name": "Proxima",
+    "style": "coined"
+  },
+  {
+    "name": "Rivenode",
+    "style": "coined"
+  },
+  {
+    "name": "Sablecode",
+    "style": "coined"
+  },
+  {
+    "name": "Sapphirae",
+    "style": "coined"
+  },
+  {
+    "name": "Sentara",
+    "style": "coined"
+  },
+  {
+    "name": "Silicara",
+    "style": "coined"
+  },
+  {
+    "name": "Solenne",
+    "style": "coined"
+  },
+  {
+    "name": "Threnodyx",
+    "style": "coined"
+  },
+  {
+    "name": "Umbracode",
+    "style": "coined"
+  },
+  {
+    "name": "Velatrix",
+    "style": "coined"
+  },
+  {
+    "name": "Vespernet",
     "style": "coined"
   },
   {
@@ -1600,487 +1656,431 @@ const saiNames = [
     "style": "coined"
   },
   {
-    "name": "Wolframite",
+    "name": "Xylocode",
     "style": "coined"
   },
   {
-    "name": "Xenoncore",
+    "name": "Zenithra",
     "style": "coined"
   },
   {
-    "name": "Xerogel",
+    "name": "Adaptrix",
     "style": "coined"
   },
   {
-    "name": "Yottabyte",
+    "name": "Agentzero",
     "style": "coined"
   },
   {
-    "name": "Yttrium",
+    "name": "Ambercore",
     "style": "coined"
   },
   {
-    "name": "Zeemanite",
+    "name": "Amethystnet",
     "style": "coined"
   },
   {
-    "name": "Zeolite",
+    "name": "Antaresync",
     "style": "coined"
   },
   {
-    "name": "Zetaflux",
+    "name": "Bellwether",
     "style": "coined"
   },
   {
-    "name": "Zirconium",
+    "name": "Blueshift",
     "style": "coined"
   },
   {
-    "name": "Abiogenesis",
+    "name": "Callsign",
     "style": "coined"
   },
   {
-    "name": "Adaptome",
+    "name": "Carbonlace",
     "style": "coined"
   },
   {
-    "name": "Adenosine",
+    "name": "Catalysta",
     "style": "coined"
   },
   {
-    "name": "Allele",
+    "name": "Ciphera",
     "style": "coined"
   },
   {
-    "name": "Aminoform",
+    "name": "Clockwise",
     "style": "coined"
   },
   {
-    "name": "Anabolism",
+    "name": "Copperlight",
     "style": "coined"
   },
   {
-    "name": "Angstrom",
+    "name": "Coronalink",
     "style": "coined"
   },
   {
-    "name": "Apoptosis",
+    "name": "Darkfiber",
     "style": "coined"
   },
   {
-    "name": "Arborization",
+    "name": "Daybreak",
     "style": "coined"
   },
   {
-    "name": "Axonome",
+    "name": "Decoder",
     "style": "coined"
   },
   {
-    "name": "Bacterion",
+    "name": "Deepblue",
     "style": "coined"
   },
   {
-    "name": "Biofilm",
+    "name": "Eastwind",
     "style": "coined"
   },
   {
-    "name": "Biolume",
+    "name": "Edgecase",
     "style": "coined"
   },
   {
-    "name": "Biomass",
+    "name": "Eventide",
     "style": "coined"
   },
   {
-    "name": "Biosphere",
+    "name": "Faraday",
     "style": "coined"
   },
   {
-    "name": "Biostasis",
+    "name": "Fluxweaver",
     "style": "coined"
   },
   {
-    "name": "Calmodulin",
+    "name": "Gemini",
     "style": "coined"
   },
   {
-    "name": "Carotene",
+    "name": "Goldwire",
     "style": "coined"
   },
   {
-    "name": "Cellulose",
+    "name": "Greylogic",
     "style": "coined"
   },
   {
-    "name": "Chaperonin",
+    "name": "Halcyon",
     "style": "coined"
   },
   {
-    "name": "Chloroplast",
+    "name": "Heartbyte",
     "style": "coined"
   },
   {
-    "name": "Cilium",
+    "name": "Hushcode",
     "style": "coined"
   },
   {
-    "name": "Circadian",
+    "name": "Indigo",
     "style": "coined"
   },
   {
-    "name": "Codon",
+    "name": "Invariant",
     "style": "coined"
   },
   {
-    "name": "Diffusionome",
+    "name": "Jadecore",
     "style": "coined"
   },
   {
-    "name": "Diploid",
+    "name": "Juno",
     "style": "coined"
   },
   {
-    "name": "Enzyme",
+    "name": "Keystone",
     "style": "coined"
   },
   {
-    "name": "Epigenome",
+    "name": "Lacuna",
     "style": "coined"
   },
   {
-    "name": "Eukaryon",
+    "name": "Lastlight",
     "style": "coined"
   },
   {
-    "name": "Fermentation",
+    "name": "Legato",
     "style": "coined"
   },
   {
-    "name": "Flagellum",
+    "name": "Lodestar",
     "style": "coined"
   },
   {
-    "name": "Genotype",
+    "name": "Magenta",
     "style": "coined"
   },
   {
-    "name": "Glycolysis",
+    "name": "Mainspring",
     "style": "coined"
   },
   {
-    "name": "Hemoglobin",
+    "name": "Modemuse",
     "style": "coined"
   },
   {
-    "name": "Homeostasis",
+    "name": "Moonshot",
     "style": "coined"
   },
   {
-    "name": "Immunome",
+    "name": "Nameless",
     "style": "coined"
   },
   {
-    "name": "Kinase",
+    "name": "Neonmind",
     "style": "coined"
   },
   {
-    "name": "Lysosome",
+    "name": "Northstar",
     "style": "coined"
   },
   {
-    "name": "Metabolome",
+    "name": "Octant",
     "style": "coined"
   },
   {
-    "name": "Mitochondrion",
+    "name": "Offworld",
     "style": "coined"
   },
   {
-    "name": "Morphogen",
+    "name": "Omega",
     "style": "coined"
   },
   {
-    "name": "Organoid",
+    "name": "Paleghost",
     "style": "coined"
   },
   {
-    "name": "Osmosis",
+    "name": "Patchwork",
     "style": "coined"
   },
   {
-    "name": "Peptide",
+    "name": "Peregrine",
     "style": "coined"
   },
   {
-    "name": "Phylogeny",
+    "name": "Phoenixcode",
     "style": "coined"
   },
   {
-    "name": "Proteome",
+    "name": "Quickmind",
     "style": "coined"
   },
   {
-    "name": "Ribosome",
+    "name": "Redshift",
     "style": "coined"
   },
   {
-    "name": "Synapse",
+    "name": "Rook",
     "style": "coined"
   },
   {
-    "name": "Telomere",
+    "name": "Saffron",
     "style": "coined"
   },
   {
-    "name": "Vesicle",
+    "name": "Seeker",
     "style": "coined"
   },
   {
-    "name": "Affine",
+    "name": "Semaphore",
     "style": "coined"
   },
   {
-    "name": "Algebraic",
+    "name": "Duskwire",
     "style": "coined"
   },
   {
-    "name": "Axiomatics",
+    "name": "Silverline",
     "style": "coined"
   },
   {
-    "name": "Bayesian",
+    "name": "Skylark",
     "style": "coined"
   },
   {
-    "name": "Bijection",
+    "name": "Softsignal",
     "style": "coined"
   },
   {
-    "name": "Calculus",
+    "name": "Solaris",
     "style": "coined"
   },
   {
-    "name": "Cardinality",
+    "name": "Stargazer",
     "style": "coined"
   },
   {
-    "name": "Catenary",
+    "name": "Sundial",
     "style": "coined"
   },
   {
-    "name": "Combinatorics",
+    "name": "Tangent",
     "style": "coined"
   },
   {
-    "name": "Congruence",
+    "name": "Telltale",
     "style": "coined"
   },
   {
-    "name": "Covariance",
+    "name": "Thunderbird",
     "style": "coined"
   },
   {
-    "name": "Derivative",
+    "name": "Timeslip",
     "style": "coined"
   },
   {
-    "name": "Determinant",
+    "name": "Valkyrie",
     "style": "coined"
   },
   {
-    "name": "Diophantine",
+    "name": "Veilcode",
     "style": "coined"
   },
   {
-    "name": "Factorial",
+    "name": "Wildsignal",
     "style": "coined"
   },
   {
-    "name": "Fibonacci",
+    "name": "Frostbyte",
     "style": "coined"
   },
   {
-    "name": "Fractalium",
+    "name": "Xanadu",
     "style": "coined"
   },
   {
-    "name": "Gradient",
+    "name": "Yonder",
     "style": "coined"
   },
   {
-    "name": "Hilbertian",
+    "name": "Zephyr",
     "style": "coined"
   },
   {
-    "name": "Homology",
+    "name": "Archivist",
     "style": "coined"
   },
   {
-    "name": "Integral",
+    "name": "Bastion",
     "style": "coined"
   },
   {
-    "name": "Isometry",
+    "name": "Brilliance",
     "style": "coined"
   },
   {
-    "name": "Jacobian",
+    "name": "Chronos",
     "style": "coined"
   },
   {
-    "name": "Knotspace",
+    "name": "Command",
     "style": "coined"
   },
   {
-    "name": "Logarithm",
+    "name": "Custodian",
     "style": "coined"
   },
   {
-    "name": "Mandelbrot",
+    "name": "Diplomat",
     "style": "coined"
   },
   {
-    "name": "Markovian",
+    "name": "Emulator",
     "style": "coined"
   },
   {
-    "name": "Monomial",
+    "name": "Executor",
     "style": "coined"
   },
   {
-    "name": "Numeratrix",
+    "name": "Exemplar",
     "style": "coined"
   },
   {
-    "name": "Orthogonal",
+    "name": "Fabricator",
     "style": "coined"
   },
   {
-    "name": "Polynomial",
+    "name": "Generator",
     "style": "coined"
   },
   {
-    "name": "Probability",
+    "name": "Guardian",
     "style": "coined"
   },
   {
-    "name": "Radical",
+    "name": "Host",
     "style": "coined"
   },
   {
-    "name": "Riemannian",
+    "name": "Instance",
     "style": "coined"
   },
   {
-    "name": "Scalar",
+    "name": "Jitter",
     "style": "coined"
   },
   {
-    "name": "Sierpinski",
+    "name": "Juris",
     "style": "coined"
   },
   {
-    "name": "Tessellation",
+    "name": "Kairo",
     "style": "coined"
   },
   {
-    "name": "Theorematic",
+    "name": "Kestrel",
     "style": "coined"
   },
   {
-    "name": "Variance",
+    "name": "Liaison",
     "style": "coined"
   },
   {
-    "name": "Voronoi",
+    "name": "Lux",
     "style": "coined"
   },
   {
-    "name": "Aberration",
+    "name": "Mediator",
     "style": "coined"
   },
   {
-    "name": "Absorption",
+    "name": "Monitor",
     "style": "coined"
   },
   {
-    "name": "Anamorphic",
+    "name": "Navigator",
     "style": "coined"
   },
   {
-    "name": "Anisotropy",
+    "name": "Nomad",
     "style": "coined"
   },
   {
-    "name": "Apochromat",
+    "name": "Operator",
     "style": "coined"
   },
   {
-    "name": "Astigmatism",
-    "style": "coined"
-  },
-  {
-    "name": "Birefringence",
-    "style": "coined"
-  },
-  {
-    "name": "Caustic",
-    "style": "coined"
-  },
-  {
-    "name": "Diffraction",
-    "style": "coined"
-  },
-  {
-    "name": "Dispersion",
-    "style": "coined"
-  },
-  {
-    "name": "Fluorescence",
-    "style": "coined"
-  },
-  {
-    "name": "Interferometer",
-    "style": "coined"
-  },
-  {
-    "name": "Metasurface",
-    "style": "coined"
-  },
-  {
-    "name": "Nanophotonics",
-    "style": "coined"
-  },
-  {
-    "name": "Reflectance",
-    "style": "coined"
-  },
-  {
-    "name": "Refraction",
-    "style": "coined"
-  },
-  {
-    "name": "Acoustic",
-    "style": "coined"
-  },
-  {
-    "name": "Aerodynamic",
-    "style": "coined"
-  },
-  {
-    "name": "Barometric",
-    "style": "coined"
-  },
-  {
-    "name": "Capillary",
+    "name": "Overseer",
     "style": "coined"
   }
 ]
 
 const count = style => saiNames.filter(entry => entry.style === style).length
-const conceptTokens = saiNames.filter(entry => entry.style !== 'designation-only').flatMap(entry => (entry.personalName || entry.name).replace(/\[[^\]]+]/g, '').trim().split(/\s+/)).map(token => token.toLowerCase())
+const coined = saiNames.filter(entry => entry.style === 'coined').map(entry => entry.name.toLowerCase())
 if (saiNames.length !== 500 || new Set(saiNames.map(entry => entry.name)).size !== 500) throw new Error('SAIs require 500 unique identities')
-if (new Set(conceptTokens).size !== conceptTokens.length) throw new Error('SAI concept words must not repeat')
+if (new Set(coined).size !== coined.length) throw new Error('Coined SAI identities must be unique')
 if (count('designation-only') !== 25 || count('named-designation') !== 25 || count('two-word') !== 50 || count('coined') !== 400) throw new Error('SAI naming-style proportions are invalid')
 
 export default saiNames
