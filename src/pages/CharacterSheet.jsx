@@ -750,6 +750,7 @@ const populateArchetypeTalents = (existingTalents, archetype, maximumTalents) =>
 }
 const blankRows = (count, shape) => Array.from({ length: count }, () => ({ ...shape, id: crypto.randomUUID() }))
 const xpForLevel = level => Math.max(0, Math.min(10, number(level))) * 10
+const levelForXp = xp => Math.max(0, Math.min(10, Math.floor(number(xp) / 10)))
 const normalizeXpTracking = character => {
   const legacyXp = number(character.xp)
   const legacyXpWasSet = character.xpManuallySet ?? legacyXp !== 0
@@ -795,6 +796,8 @@ function CharacterSheet() {
   const [pendingDelete, setPendingDelete] = useState(null)
   const [notice, setNotice] = useState('')
   const fileRef = useRef(null)
+  const totalXpEditValue = useRef(null)
+  const totalXpArrowChange = useRef(false)
 
   useEffect(() => {
     if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
@@ -913,12 +916,23 @@ function CharacterSheet() {
       updatedAt: Date.now(),
     }
   })
-  const setTotalXp = totalXp => setCharacter(current => ({
-    ...current,
-    totalXp,
-    totalXpManuallySet: true,
-    updatedAt: Date.now(),
-  }))
+  const setTotalXp = totalXp => setCharacter(current => {
+    const previousTotal = totalXpEditValue.current ?? number(current.totalXp)
+    if (totalXp === '') return { ...current, totalXp, totalXpManuallySet: true, updatedAt: Date.now() }
+    const nextTotal = Math.max(0, number(totalXp))
+    const difference = nextTotal - previousTotal
+    const adjustUnspent = difference > 0 || (totalXpArrowChange.current && difference < 0)
+    totalXpEditValue.current = nextTotal
+    totalXpArrowChange.current = false
+    return {
+      ...current,
+      level: Math.max(number(current.level), levelForXp(nextTotal)),
+      totalXp,
+      unspentXp: adjustUnspent ? Math.max(0, number(current.unspentXp) + difference) : current.unspentXp,
+      totalXpManuallySet: true,
+      updatedAt: Date.now(),
+    }
+  })
   const setUnspentXp = unspentXp => setCharacter(current => ({
     ...current,
     unspentXp,
@@ -1148,7 +1162,7 @@ function CharacterSheet() {
   return <div className="sheet-page">
     <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={() => setCharacter(newCharacter())}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
-      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><div className="identity-utility-row"><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="Total XP" type="number" min="0" value={character.totalXp} onChange={setTotalXp}/><Field label="Unspent XP" type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></div></header>
+      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><div className="identity-utility-row"><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="Total XP" type="number" min="0" value={character.totalXp} onFocus={() => { totalXpEditValue.current = number(character.totalXp) }} onKeyDown={event => { if (event.key === 'ArrowUp' || event.key === 'ArrowDown') totalXpArrowChange.current = true }} onKeyUp={() => { totalXpArrowChange.current = false }} onMouseDown={event => { const bounds = event.currentTarget.getBoundingClientRect(); if (event.clientX >= bounds.right - 24) totalXpArrowChange.current = true }} onMouseUp={() => { totalXpArrowChange.current = false }} onBlur={() => { totalXpEditValue.current = null; totalXpArrowChange.current = false }} onChange={setTotalXp}/><Field label="Unspent XP" type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
