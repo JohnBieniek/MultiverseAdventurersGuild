@@ -750,8 +750,20 @@ const populateArchetypeTalents = (existingTalents, archetype, maximumTalents) =>
 }
 const blankRows = (count, shape) => Array.from({ length: count }, () => ({ ...shape, id: crypto.randomUUID() }))
 const xpForLevel = level => Math.max(0, Math.min(10, number(level))) * 10
+const normalizeXpTracking = character => {
+  const legacyXp = number(character.xp)
+  const legacyXpWasSet = character.xpManuallySet ?? legacyXp !== 0
+  return {
+    ...character,
+    totalXp: character.totalXp ?? legacyXp,
+    unspentXp: character.unspentXp ?? legacyXp,
+    totalXpManuallySet: character.totalXpManuallySet ?? legacyXpWasSet,
+    unspentXpManuallySet: character.unspentXpManuallySet ?? legacyXpWasSet,
+  }
+}
 const newCharacter = () => ({
-  id: crypto.randomUUID(), name: 'New Hero', species: '', speciesSource: '', archetype: '', level: 0, xp: 0, xpManuallySet: false,
+  id: crypto.randomUUID(), name: 'New Hero', species: '', speciesSource: '', archetype: '', level: 0,
+  totalXp: 0, unspentXp: 0, totalXpManuallySet: false, unspentXpManuallySet: false,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
   attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
@@ -775,7 +787,7 @@ function CharacterSheet() {
       const activeId = localStorage.getItem(ACTIVE_CHARACTER_KEY)
       const saved = JSON.parse(localStorage.getItem(STORE_KEY)) || []
       const active = saved.find(hero => hero.id === activeId)
-      return active ? structuredClone(active) : null
+      return active ? normalizeXpTracking(structuredClone(active)) : null
     } catch { return null }
   })
   const [roll, setRoll] = useState(null)
@@ -892,19 +904,25 @@ function CharacterSheet() {
     return copy
   })
   const setLevel = level => setCharacter(current => {
-    const xpManuallySet = current.xpManuallySet ?? number(current.xp) !== 0
+    const normalized = normalizeXpTracking(current)
     return {
-      ...current,
+      ...normalized,
       level,
-      xp: xpManuallySet ? current.xp : xpForLevel(level),
-      xpManuallySet,
+      totalXp: normalized.totalXpManuallySet ? normalized.totalXp : xpForLevel(level),
+      unspentXp: normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(level),
       updatedAt: Date.now(),
     }
   })
-  const setXp = xp => setCharacter(current => ({
+  const setTotalXp = totalXp => setCharacter(current => ({
     ...current,
-    xp,
-    xpManuallySet: true,
+    totalXp,
+    totalXpManuallySet: true,
+    updatedAt: Date.now(),
+  }))
+  const setUnspentXp = unspentXp => setCharacter(current => ({
+    ...current,
+    unspentXp,
+    unspentXpManuallySet: true,
     updatedAt: Date.now(),
   }))
   const setContactRole = (index, role) => setCharacter(current => {
@@ -1049,7 +1067,7 @@ function CharacterSheet() {
     reader.onload = () => { try {
       const data = JSON.parse(reader.result)
       if (!data.name || !data.stats || !data.skills) throw new Error()
-      setCharacter({ ...newCharacter(), ...data, id: crypto.randomUUID(), updatedAt: Date.now() }); flash('Character imported')
+      setCharacter({ ...newCharacter(), ...normalizeXpTracking(data), id: crypto.randomUUID(), updatedAt: Date.now() }); flash('Character imported')
     } catch { flash('That file is not a valid MAG character') } }
     reader.readAsText(file); event.target.value = ''
   }
@@ -1088,7 +1106,7 @@ function CharacterSheet() {
       <div className="library-actions"><button className="primary" onClick={() => setCharacter(newCharacter())}>＋ Create New Hero</button><button onClick={() => fileRef.current.click()}>⇧ Upload Character</button></div>
       <input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} />
     </div>
-    <section className="saved-library"><h2>Saved Heroes</h2>{characters.length === 0 ? <div className="empty-state"><strong>No saved Heroes yet</strong><span>Your characters stay in this browser using local storage.</span></div> : <div className="character-grid">{characters.map(hero => <article className="character-card" key={hero.id}><div><span>LEVEL {hero.level || 0}</span><h3>{hero.name}</h3><p>{[hero.species, hero.archetype].filter(Boolean).join(' • ') || 'Unwritten legend'}</p></div><div className="card-actions"><button className="primary" onClick={() => setCharacter(structuredClone(hero))}>Load</button><button className="danger" onClick={() => setPendingDelete({ id: hero.id, name: hero.name })}>Delete</button></div></article>)}</div>}</section>
+    <section className="saved-library"><h2>Saved Heroes</h2>{characters.length === 0 ? <div className="empty-state"><strong>No saved Heroes yet</strong><span>Your characters stay in this browser using local storage.</span></div> : <div className="character-grid">{characters.map(hero => <article className="character-card" key={hero.id}><div><span>LEVEL {hero.level || 0}</span><h3>{hero.name}</h3><p>{[hero.species, hero.archetype].filter(Boolean).join(' • ') || 'Unwritten legend'}</p></div><div className="card-actions"><button className="primary" onClick={() => setCharacter(normalizeXpTracking(structuredClone(hero)))}>Load</button><button className="danger" onClick={() => setPendingDelete({ id: hero.id, name: hero.name })}>Delete</button></div></article>)}</div>}</section>
     {notice && <div className="toast">{notice}</div>}
     {pendingDelete && <ConfirmModal
       eyebrow="DELETE HERO"
@@ -1130,7 +1148,7 @@ function CharacterSheet() {
   return <div className="sheet-page">
     <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={() => setCharacter(newCharacter())}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
-      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="XP" type="number" min="0" value={character.xp} onChange={setXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
+      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="Total XP" type="number" min="0" value={character.totalXp} onChange={setTotalXp}/><Field label="Unspent XP" type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
