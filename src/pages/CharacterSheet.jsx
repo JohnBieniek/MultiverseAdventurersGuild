@@ -752,7 +752,7 @@ const populateArchetypeTalents = (existingTalents, archetype, maximumTalents) =>
 }
 const blankRows = (count, shape) => Array.from({ length: count }, () => ({ ...shape, id: crypto.randomUUID() }))
 const newCharacter = () => ({
-  id: crypto.randomUUID(), name: 'New Hero', species: '', archetype: '', level: 0, xp: 0,
+  id: crypto.randomUUID(), name: 'New Hero', species: '', speciesSource: '', archetype: '', level: 0, xp: 0,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
   attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
@@ -995,7 +995,7 @@ function CharacterSheet() {
         populatedContacts += 1
       }
       contacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
-      const userSelectedSpecies = current.species?.trim() && (current.speciesSource === 'user' || current.speciesSource == null)
+      const userSelectedSpecies = Boolean(current.species?.trim() && current.speciesSource === 'user')
       const randomSpeciesChoices = speciesNames.filter(speciesName => speciesName !== current.species)
       const species = userSelectedSpecies
         ? current.species
