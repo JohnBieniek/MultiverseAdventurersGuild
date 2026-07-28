@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaBullseye, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaDumbbell, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMagic, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
+import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
 import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 import talentsText from '../content/players/talents.txt?raw'
 import speciesText from '../content/players/species.txt?raw'
 import archetypesText from '../content/players/archetypes.txt?raw'
 import contactsText from '../content/players/contacts.txt?raw'
+import { randomCharacterName } from '../data/characterNames'
 import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
@@ -464,15 +465,63 @@ const archetypeItemVariations = {
   'Street Samurai': [['Threat-Outline Cybereyes', '(+2) Observation — Mark concealed weapons and imminent movement.'], ['Magnetic Rooftop Tabi', '(+1) Sneak — Grip steel architecture without scraping or slipping.']],
   Warlock: [['Hellglass Eye', '(+2) Intuition — Reveals bargains, bindings, and the attention of distant powers.'], ['Ashen Summoner’s Coat', '(+1) Sneak — Swallows light and the traces left by forbidden rituals.']],
 }
-const itemLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
+const itemDataVersion = 1
+const itemLoadoutMarker = archetypeName => `${itemDataVersion}:${archetypeName}`
 const multiverseItemModels = ['Aetherwake', 'Amberlight', 'Ashfall', 'Astral Key', 'Blackglass', 'Brightcoil', 'Cinderheart', 'Clockstar', 'Crimson Echo', 'Dawnchime', 'Deepwell', 'Dreamwire', 'Eclipse', 'Emberline', 'Evernight', 'Farstar', 'Ghostkey', 'Glasswing', 'Gravemark', 'Greenfire', 'Hollow Sun', 'Iron Halo', 'Ivory Pulse', 'Jade Signal', 'Kingshade', 'Lightning Thread', 'Lost Compass', 'Midnight Bell', 'Mirrorwake', 'Moonspoke', 'Ninefold', 'Obsidian Hymn', 'Orichalcum', 'Pale Comet', 'Phoenix', 'Quantum Rose', 'Redshift', 'Riftglass', 'Silver Thorn', 'Skyfire', 'Solaris', 'Starfall', 'Stormkey', 'Sunspoke', 'Thornlight', 'Titan Song', 'Umbral', 'Voidlight', 'Wayfinder', 'Worldroot']
-const itemKind = name => name.trim().split(/\s+/).at(-1)
-const expandItemCandidates = candidates => candidates.flatMap(candidate => [candidate, ...selectionsForName(candidate[0], multiverseItemModels, 9).map(model => [`${model} ${itemKind(candidate[0])}`, candidate[1]])])
-const itemScoreCoverage = ([, description]) => description.match(/^\([^)]+\)\s+([A-Za-z]+)/)?.[1].toLowerCase() || ''
-const populateArchetypeItems = (existingItems, archetypeName) => {
+const itemDescriptionEffects = {
+  attack: ['anticipates the wielder’s next committed strike', 'corrects grip and alignment at the instant of impact', 'stores practiced attack patterns in responsive material', 'sharpens timing when a fight becomes chaotic', 'translates drilled motion into a cleaner opening'],
+  athletics: ['redistributes strain before balance can break', 'finds secure purchase on hostile surfaces', 'supports explosive movement without wasting momentum', 'adjusts its tension to the wearer’s changing leverage', 'turns awkward terrain into a dependable route'],
+  charisma: ['projects a presence tailored to the surrounding culture', 'amplifies the wearer’s chosen emotional register', 'makes posture and expression unusually memorable', 'shapes first impressions before a word is spoken', 'carries subtle signals of confidence and status'],
+  dexterity: ['responds to minute changes in hand position', 'removes hesitation from delicate physical adjustments', 'stabilizes fine movement during sudden danger', 'matches its resistance to split-second corrections', 'keeps precise motion consistent under pressure'],
+  education: ['indexes specialist knowledge around the current problem', 'surfaces a relevant lesson before memory can fail', 'connects formal training to evidence in the field', 'preserves expert annotations in an adaptive archive', 'organizes technical doctrine into immediate guidance'],
+  endurance: ['spreads fatigue across self-adjusting support layers', 'regulates heat and impact during prolonged exertion', 'hardens only where the next strain will land', 'keeps essential protection effective after hours of use', 'conserves the wearer’s strength through hostile conditions'],
+  influence: ['supplies the exact social detail needed to establish credibility', 'frames requests with cues the listener already trusts', 'tracks obligations and leverage during negotiation', 'reinforces authority through carefully chosen signals', 'adapts its presentation to the balance of power in the room'],
+  intuition: ['draws attention toward patterns that do not consciously register', 'reacts to danger a heartbeat before certainty arrives', 'turns subtle environmental changes into instinctive warnings', 'highlights the most consequential detail in an uncertain scene', 'helps incomplete impressions settle into a useful hunch'],
+  observation: ['isolates meaningful traces from surrounding noise', 'brings concealed motion and irregularities into focus', 'compares the scene against a live baseline of expected details', 'marks small contradictions for immediate review', 'reveals evidence normally lost to distance or distraction'],
+  outdoors: ['reads local weather and terrain through embedded sensors', 'adapts its surface to the surrounding ecosystem', 'preserves a trail of environmental signs for later study', 'identifies safe passage through unfamiliar natural hazards', 'responds to changes in wind, soil, water, and living growth'],
+  sneak: ['breaks up the signals most likely to reveal its wearer', 'adapts texture and sound to nearby cover', 'dampens the small disturbances left by careful movement', 'masks its profile against shifting light and terrain', 'suppresses telltale noise at the moment concealment matters'],
+  technology: ['reconfigures its tools around the machine currently being handled', 'translates unfamiliar systems into workable controls', 'tests interfaces safely before committing a command', 'keeps a library of field repairs for incompatible technology', 'exposes hidden connections inside complex devices'],
+  vehicle: ['predicts control drift before it becomes a dangerous correction', 'matches its feedback to the current vehicle’s handling', 'maps acceleration and terrain into a stable control rhythm', 'filters mechanical noise into useful driving cues', 'turns changing traction into immediate route guidance'],
+}
+const textHash = value => [...value].reduce((total, character) => ((total * 31) + character.charCodeAt(0)) >>> 0, 0)
+const uniqueItemDescription = (name, baseDescription) => {
+  const match = baseDescription.match(/^(\([^)]+\)\s+([A-Za-z]+))\s+[^A-Za-z0-9]+\s+/)
+  const prefix = match?.[1] || ''
+  const score = match?.[2]?.toLowerCase() || ''
+  const effects = itemDescriptionEffects[score] || ['adapts its unusual construction to the problem at hand']
+  const effect = effects[textHash(name) % effects.length]
+  return `${prefix ? `${prefix} — ` : ''}${name} ${effect}.`
+}
+const expandItemCandidates = candidates => candidates.flatMap(candidate => [
+  candidate,
+  ...selectionsForName(candidate[0], multiverseItemModels, 9).map(model => {
+    const name = `${model} ${candidate[0]}`
+    return [name, uniqueItemDescription(name, candidate[1])]
+  }),
+])
+const itemScoreDetails = description => {
+  const match = description.match(/^\(\+(\d+)\)\s+([A-Za-z]+)/)
+  return { bonus: number(match?.[1]), score: match?.[2]?.toLowerCase() || '' }
+}
+const itemScoreCoverage = ([, description]) => itemScoreDetails(description).score
+const fitItemToScores = (candidate, scoreValues) => {
+  const { bonus, score } = itemScoreDetails(candidate[1])
+  const scoreValue = number(scoreValues[score])
+  if (!score || scoreValue <= 0) return null
+  const fittedBonus = Math.min(Math.max(1, bonus), scoreValue)
+  return [candidate[0], candidate[1].replace(/^\(\+\d+\)/, `(+${fittedBonus})`)]
+}
+const itemScoresForCharacter = character => ({
+  ...Object.fromEntries(stats.map(([key]) => [key, number(character.stats?.[key])])),
+  ...Object.fromEntries(skillDefs.map(([key]) => [key, number(character.skills?.[key]?.ability)])),
+  attack: number(character.attackSkill),
+})
+const populateArchetypeItems = (existingItems, archetypeName, scoreValues) => {
   const traits = existingItems.filter(item => item.source === 'archetype' || item.source === 'archetype-trait').map(item => ({ ...item, source: 'archetype-trait' }))
   const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
   const candidates = expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])])
+    .map(candidate => fitItemToScores(candidate, scoreValues))
+    .filter(Boolean)
   const selectedItems = []
   const coveredScores = new Set()
   shuffled(candidates).forEach(candidate => {
@@ -788,7 +837,7 @@ function CharacterSheet() {
     const weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype) : character.weapons
     if (needsWeaponLoadout) changed = true
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
-    if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype); changed = true }
+    if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character)); changed = true }
     let meleeAttackModifier = character.meleeAttackModifier
     let rangedAttackModifier = character.rangedAttackModifier
     if (meleeAttackModifier == null || rangedAttackModifier == null) {
@@ -853,6 +902,18 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
+  const setSpecies = species => setCharacter(current => ({
+    ...current,
+    species,
+    speciesSource: 'user',
+    updatedAt: Date.now(),
+  }))
+  const setCharacterName = name => setCharacter(current => ({
+    ...current,
+    name,
+    characterNameSource: 'user',
+    updatedAt: Date.now(),
+  }))
   const setWeaponName = (index, name) => setCharacter(current => {
     const copy = structuredClone(current)
     copy.weapons[index].name = name
@@ -908,7 +969,8 @@ function CharacterSheet() {
     priority.slice(3, 6).forEach(key => { allocation[key] = 1 })
     setCharacter(current => {
       const manualItems = current.items.filter(item => !['archetype', 'archetype-trait', 'archetype-item'].includes(item.source))
-      const items = populateArchetypeItems(manualItems, preset.name)
+      const packageItemScores = { ...preset.stats, ...allocation }
+      const items = populateArchetypeItems(manualItems, preset.name, packageItemScores)
       preset.traits.forEach(({ name, description }) => {
         const trait = { id: crypto.randomUUID(), name, description, source: 'archetype-trait' }
         const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.description || '').trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
@@ -933,11 +995,17 @@ function CharacterSheet() {
         populatedContacts += 1
       }
       contacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
-      const species = current.species?.trim()
+      const userSelectedSpecies = current.species?.trim() && (current.speciesSource === 'user' || current.speciesSource == null)
+      const randomSpeciesChoices = speciesNames.filter(speciesName => speciesName !== current.species)
+      const species = userSelectedSpecies
         ? current.species
-        : speciesNames[Math.floor(Math.random() * speciesNames.length)] || ''
+        : randomSpeciesChoices[Math.floor(Math.random() * randomSpeciesChoices.length)] || speciesNames[0] || ''
+      const userSelectedName = current.characterNameSource === 'user' || (current.characterNameSource == null && current.name?.trim() && current.name !== 'New Hero')
+      const characterName = userSelectedName ? current.name : randomCharacterName(species, preset.name) || current.name
       return {
-        ...current, species, archetype: preset.name, stats: { ...current.stats, ...preset.stats },
+        ...current, name: characterName, characterNameSource: userSelectedName ? 'user' : 'starting-package',
+        species, speciesSource: userSelectedSpecies ? 'user' : 'starting-package',
+        archetype: preset.name, stats: { ...current.stats, ...preset.stats },
         attackSkill: allocation.attack,
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
@@ -1034,7 +1102,7 @@ function CharacterSheet() {
   return <div className="sheet-page">
     <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={() => setCharacter(newCharacter())}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
-      <Field label="Hero name" value={character.name} onChange={v => update(['name'], v)} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={v => update(['species'], v)}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype}/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
+      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
@@ -1090,7 +1158,7 @@ function CharacterSheet() {
 
 function Field({ label, onChange, wide, ...props }) { return <label className={`field ${wide ? 'wide' : ''}`}><span>{label}</span><input {...props} onChange={e => onChange(e.target.value)}/></label> }
 function InfoTooltip({ label, description }) { return <button type="button" className="info-tooltip" aria-label={`What does ${label} do?`} data-tooltip={description}>?</button> }
-function IdentityChoice({ label, value, options, tooltip = '', onChange }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <label className="field identity-choice" data-tooltip={tooltip}><span>{label}</span>{custom ? <div className="identity-custom"><input autoFocus aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label={`Choose ${label}`} value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom {label.toLowerCase()}…</option>{options.map(option => <option value={option} key={option}>{option}</option>)}</select>}</label> }
+function IdentityChoice({ label, value, options, tooltip = '', onChange, allowReselect = false }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; const option = name => <option value={name} key={name} onClick={() => { if (allowReselect && name === value) onChange(name) }}>{name}</option>; return <label className="field identity-choice" data-tooltip={tooltip}><span>{label}</span>{custom ? <div className="identity-custom"><input autoFocus aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option)}</select></div> : <select aria-label={`Choose ${label}`} value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom {label.toLowerCase()}…</option>{options.map(option)}</select>}</label> }
 function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''}>{custom ? <div className="identity-custom"><input autoFocus aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
 function NumberInput({ value, onChange }) { return <input className="number-input" type="number" value={value} onChange={e => onChange(e.target.value)}/> }
 function AttackEquation({ label, statLabel, stat, attack, modifier }) { const total = number(stat) + number(attack) + number(modifier); const statShort = statLabel === 'Strength' ? 'STR' : 'DEX'; return <div className="attack-equation"><h3>{label}</h3><div className="attack-equation-values"><span><small><span className="attack-label-full">{statLabel}</span><span className="attack-label-short">{statShort}</span></small><strong>{signed(stat)}</strong></span><span><small><span className="attack-label-full">Skill</span><span className="attack-label-short">Skill</span></small><strong>{signed(attack)}</strong></span><span><small><span className="attack-label-full">Modifier</span><span className="attack-label-short">Mod</span></small><strong>{signed(modifier)}</strong></span><span className="attack-equation-total"><small>Total</small><strong>{signed(total)}</strong></span></div></div> }
