@@ -749,8 +749,9 @@ const populateArchetypeTalents = (existingTalents, archetype, maximumTalents) =>
   return talents
 }
 const blankRows = (count, shape) => Array.from({ length: count }, () => ({ ...shape, id: crypto.randomUUID() }))
+const xpForLevel = level => Math.max(0, Math.min(10, number(level))) * 10
 const newCharacter = () => ({
-  id: crypto.randomUUID(), name: 'New Hero', species: '', speciesSource: '', archetype: '', level: 0, xp: 0,
+  id: crypto.randomUUID(), name: 'New Hero', species: '', speciesSource: '', archetype: '', level: 0, xp: 0, xpManuallySet: false,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
   attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
@@ -889,6 +890,22 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
+  const setLevel = level => setCharacter(current => {
+    const xpManuallySet = current.xpManuallySet ?? number(current.xp) !== 0
+    return {
+      ...current,
+      level,
+      xp: xpManuallySet ? current.xp : xpForLevel(level),
+      xpManuallySet,
+      updatedAt: Date.now(),
+    }
+  })
+  const setXp = xp => setCharacter(current => ({
+    ...current,
+    xp,
+    xpManuallySet: true,
+    updatedAt: Date.now(),
+  }))
   const setContactRole = (index, role) => setCharacter(current => {
     const copy = structuredClone(current)
     const contact = copy.contacts[index]
@@ -1100,7 +1117,7 @@ function CharacterSheet() {
   return <div className="sheet-page">
     <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={() => setCharacter(newCharacter())}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
-      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={v => update(['level'], v)}/><Field label="XP" type="number" min="0" value={character.xp} onChange={v => update(['xp'], v)}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
+      <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="XP" type="number" min="0" value={character.xp} onChange={setXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
