@@ -1,2928 +1,2759 @@
-// 500 literal Cyborg identities with globally distinct name tokens.
+// 500 Cyborg identities: 450 independently chosen monikers and 50 designations.
 const cyborgNames = [
   {
-    "name": "Warhide Bimbolt",
+    "name": "Aftershock",
+    "identity": "Aftershock",
+    "archetype": "Barbarian",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Berserker",
+    "identity": "Berserker",
+    "archetype": "Barbarian",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Bloodrush",
+    "identity": "Bloodrush",
+    "archetype": "Barbarian",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Breakstone",
+    "identity": "Breakstone",
+    "archetype": "Barbarian",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Clamor",
+    "identity": "Clamor",
+    "archetype": "Barbarian",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Earthshaker",
+    "identity": "Earthshaker",
+    "archetype": "Barbarian",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Grimhide",
+    "identity": "Grimhide",
+    "archetype": "Barbarian",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hardcase",
+    "identity": "Hardcase",
+    "archetype": "Barbarian",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Warhide",
     "identity": "Warhide",
-    "heritage": "Bimbolt",
     "archetype": "Barbarian",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Ragecoil Dornovar",
+    "name": "Ragecoil",
     "identity": "Ragecoil",
-    "heritage": "Dornovar",
     "archetype": "Barbarian",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Mammoth Corawick",
+    "name": "Mammoth",
     "identity": "Mammoth",
-    "heritage": "Corawick",
     "archetype": "Barbarian",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Redaxis Lumiglint",
-    "identity": "Redaxis",
-    "heritage": "Lumiglint",
-    "archetype": "Barbarian",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Ironium Mokug",
-    "identity": "Ironium",
-    "heritage": "Mokug",
-    "archetype": "Barbarian",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Bonequake Mornahild",
+    "name": "Bonequake",
     "identity": "Bonequake",
-    "heritage": "Mornahild",
     "archetype": "Barbarian",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Wildheart Sereorin",
+    "name": "Wildheart",
     "identity": "Wildheart",
-    "heritage": "Sereorin",
     "archetype": "Barbarian",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Feral Zaradan",
+    "name": "Feral",
     "identity": "Feral",
-    "heritage": "Zaradan",
-    "archetype": "Barbarian",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Blooded Bimsprocket",
-    "identity": "Blooded",
-    "heritage": "Bimsprocket",
-    "archetype": "Barbarian",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Thunderex Dornadar",
-    "identity": "Thunderex",
-    "heritage": "Dornadar",
-    "archetype": "Barbarian",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Untamed Corameadow",
-    "identity": "Untamed",
-    "heritage": "Corameadow",
-    "archetype": "Barbarian",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Ashenyn Lumiwhim",
-    "identity": "Ashenyn",
-    "heritage": "Lumiwhim",
-    "archetype": "Barbarian",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Savage Mokmokzug",
-    "identity": "Savage",
-    "heritage": "Mokmokzug",
-    "archetype": "Barbarian",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Feralos Mornavorn",
-    "identity": "Feralos",
-    "heritage": "Mornavorn",
     "archetype": "Barbarian",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Deadyx Sereeth",
-    "identity": "Deadyx",
-    "heritage": "Sereeth",
+    "name": "Blackstamp",
+    "identity": "Blackstamp",
     "archetype": "Bounty Hunter",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Warrant Zarasen",
+    "name": "Catchwire",
+    "identity": "Catchwire",
+    "archetype": "Bounty Hunter",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Deadletter",
+    "identity": "Deadletter",
+    "archetype": "Bounty Hunter",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Gravesight",
+    "identity": "Gravesight",
+    "archetype": "Bounty Hunter",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Manacle",
+    "identity": "Manacle",
+    "archetype": "Bounty Hunter",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Quarry",
+    "identity": "Quarry",
+    "archetype": "Bounty Hunter",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Reckoner",
+    "identity": "Reckoner",
+    "archetype": "Bounty Hunter",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Tracehound",
+    "identity": "Tracehound",
+    "archetype": "Bounty Hunter",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Warrant",
     "identity": "Warrant",
-    "heritage": "Zarasen",
     "archetype": "Bounty Hunter",
-    "origin": "Human",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Longtrail Bimcog",
+    "name": "Longtrail",
     "identity": "Longtrail",
-    "heritage": "Bimcog",
     "archetype": "Bounty Hunter",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Coldzen Dornrik",
-    "identity": "Coldzen",
-    "heritage": "Dornrik",
-    "archetype": "Bounty Hunter",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Lastion Corabarrow",
-    "identity": "Lastion",
-    "heritage": "Corabarrow",
-    "archetype": "Bounty Hunter",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Hound Lumilark",
+    "name": "Hound",
     "identity": "Hound",
-    "heritage": "Lumilark",
     "archetype": "Bounty Hunter",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Verdict Mokzun",
+    "name": "Verdict",
     "identity": "Verdict",
-    "heritage": "Mokzun",
     "archetype": "Bounty Hunter",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Relentle Mornamund",
-    "identity": "Relentle",
-    "heritage": "Mornamund",
-    "archetype": "Bounty Hunter",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Marked Sereune",
+    "name": "Marked",
     "identity": "Marked",
-    "heritage": "Sereune",
     "archetype": "Bounty Hunter",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Patient Zaraev",
+    "name": "Patient",
     "identity": "Patient",
-    "heritage": "Zaraev",
-    "archetype": "Bounty Hunter",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Finalium Bimwickspark",
-    "identity": "Finalium",
-    "heritage": "Bimwickspark",
-    "archetype": "Bounty Hunter",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Ironboun Dornek",
-    "identity": "Ironboun",
-    "heritage": "Dornek",
-    "archetype": "Bounty Hunter",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Trailw Corastead",
-    "identity": "Trailw",
-    "heritage": "Corastead",
-    "archetype": "Bounty Hunter",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Relentleix Lumibelle",
-    "identity": "Relentleix",
-    "heritage": "Lumibelle",
     "archetype": "Bounty Hunter",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Afterth Mokrak",
-    "identity": "Afterth",
-    "heritage": "Mokrak",
+    "name": "Abacus",
+    "identity": "Abacus",
     "archetype": "Brainiac",
     "origin": "Orc",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Deepex Mornayra",
-    "identity": "Deepex",
-    "heritage": "Mornayra",
+    "name": "Brightmind",
+    "identity": "Brightmind",
     "archetype": "Brainiac",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Brightora Sereiel",
-    "identity": "Brightora",
-    "heritage": "Sereiel",
+    "name": "Cerebrum",
+    "identity": "Cerebrum",
     "archetype": "Brainiac",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Corollar Zaraval",
-    "identity": "Corollar",
-    "heritage": "Zaraval",
+    "name": "Deepthink",
+    "identity": "Deepthink",
     "archetype": "Brainiac",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Mnemonic Bimdocket",
-    "identity": "Mnemonic",
-    "heritage": "Bimdocket",
+    "name": "Foresight",
+    "identity": "Foresight",
     "archetype": "Brainiac",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Longos Dornund",
-    "identity": "Longos",
-    "heritage": "Dornund",
+    "name": "Logician",
+    "identity": "Logician",
     "archetype": "Brainiac",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Second Coracroft",
+    "name": "Polymath",
+    "identity": "Polymath",
+    "archetype": "Brainiac",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Theorem",
+    "identity": "Theorem",
+    "archetype": "Brainiac",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Intellection",
+    "identity": "Intellection",
+    "archetype": "Brainiac",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ratiocinator",
+    "identity": "Ratiocinator",
+    "archetype": "Brainiac",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Cognition",
+    "identity": "Cognition",
+    "archetype": "Brainiac",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Second",
     "identity": "Second",
-    "heritage": "Coracroft",
     "archetype": "Brainiac",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Recursiv Lumimoth",
-    "identity": "Recursiv",
-    "heritage": "Lumimoth",
-    "archetype": "Brainiac",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Lucidous Mokakzug",
-    "identity": "Lucidous",
-    "heritage": "Mokakzug",
-    "archetype": "Brainiac",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Peerless Mornaskar",
+    "name": "Peerless",
     "identity": "Peerless",
-    "heritage": "Mornaskar",
     "archetype": "Brainiac",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Abstract Sereyra",
+    "name": "Abstract",
     "identity": "Abstract",
-    "heritage": "Sereyra",
-    "archetype": "Brainiac",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Cerebral Zaraian",
-    "identity": "Cerebral",
-    "heritage": "Zaraian",
-    "archetype": "Brainiac",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Exacting Bimwhistle",
-    "identity": "Exacting",
-    "heritage": "Bimwhistle",
-    "archetype": "Brainiac",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Recursivis Dorngrim",
-    "identity": "Recursivis",
-    "heritage": "Dorngrim",
     "archetype": "Brainiac",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Mercyum Coravale",
-    "identity": "Mercyum",
-    "heritage": "Coravale",
+    "name": "Absolver",
+    "identity": "Absolver",
     "archetype": "Cleric",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Reliquar Lumifizz",
-    "identity": "Reliquar",
-    "heritage": "Lumifizz",
+    "name": "Benediction",
+    "identity": "Benediction",
     "archetype": "Cleric",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Vigilium Mokthar",
-    "identity": "Vigilium",
-    "heritage": "Mokthar",
+    "name": "Censer",
+    "identity": "Censer",
     "archetype": "Cleric",
     "origin": "Orc",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Lastune Mornagrom",
-    "identity": "Lastune",
-    "heritage": "Mornagrom",
+    "name": "Gracekeeper",
+    "identity": "Gracekeeper",
     "archetype": "Cleric",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Graceeon Sereiora",
-    "identity": "Graceeon",
-    "heritage": "Sereiora",
+    "name": "Hallow",
+    "identity": "Hallow",
     "archetype": "Cleric",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Absoluti Zarayan",
-    "identity": "Absoluti",
-    "heritage": "Zarayan",
+    "name": "Mercyhand",
+    "identity": "Mercyhand",
     "archetype": "Cleric",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Kindly Bimgleam",
+    "name": "Reliquary",
+    "identity": "Reliquary",
+    "archetype": "Cleric",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Vesper",
+    "identity": "Vesper",
+    "archetype": "Cleric",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Sacrament",
+    "identity": "Sacrament",
+    "archetype": "Cleric",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Chaplain",
+    "identity": "Chaplain",
+    "archetype": "Cleric",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ordained",
+    "identity": "Ordained",
+    "archetype": "Cleric",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Kindly",
     "identity": "Kindly",
-    "heritage": "Bimgleam",
     "archetype": "Cleric",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Giant",
+    "style": "self-chosen"
   },
   {
-    "name": "Consecra Dornvar",
-    "identity": "Consecra",
-    "heritage": "Dornvar",
-    "archetype": "Cleric",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Penitent Corafen",
+    "name": "Penitent",
     "identity": "Penitent",
-    "heritage": "Corafen",
     "archetype": "Cleric",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Radiantyn Lumipetal",
-    "identity": "Radiantyn",
-    "heritage": "Lumipetal",
-    "archetype": "Cleric",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Hallowed Mokgarzug",
-    "identity": "Hallowed",
-    "heritage": "Mokgarzug",
-    "archetype": "Cleric",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Faithful Mornavald",
+    "name": "Faithful",
     "identity": "Faithful",
-    "heritage": "Mornavald",
-    "archetype": "Cleric",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Reverent Sereanor",
-    "identity": "Reverent",
-    "heritage": "Sereanor",
-    "archetype": "Cleric",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Consecraian Zaraora",
-    "identity": "Consecraian",
-    "heritage": "Zaraora",
     "archetype": "Cleric",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Breachpo Bimbolta",
-    "identity": "Breachpo",
-    "heritage": "Bimbolta",
+    "name": "Beachhead",
+    "identity": "Beachhead",
     "archetype": "Commando",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Hard Dornovara",
+    "name": "Breachline",
+    "identity": "Breachline",
+    "archetype": "Commando",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hardpoint",
+    "identity": "Hardpoint",
+    "archetype": "Commando",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Overwatch",
+    "identity": "Overwatch",
+    "archetype": "Commando",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Pathfinder",
+    "identity": "Pathfinder",
+    "archetype": "Commando",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Shockfront",
+    "identity": "Shockfront",
+    "archetype": "Commando",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Strongpoint",
+    "identity": "Strongpoint",
+    "archetype": "Commando",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Vanguard",
+    "identity": "Vanguard",
+    "archetype": "Commando",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hard",
     "identity": "Hard",
-    "heritage": "Dornovara",
     "archetype": "Commando",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Overwatc Corawicka",
-    "identity": "Overwatc",
-    "heritage": "Corawicka",
-    "archetype": "Commando",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Fireteam Lumiglinta",
+    "name": "Fireteam",
     "identity": "Fireteam",
-    "heritage": "Lumiglinta",
     "archetype": "Commando",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Firstara Mokuga",
-    "identity": "Firstara",
-    "heritage": "Mokuga",
-    "archetype": "Commando",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Stack Mornahilda",
+    "name": "Stack",
     "identity": "Stack",
-    "heritage": "Mornahilda",
     "archetype": "Commando",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Blackum Sereorina",
-    "identity": "Blackum",
-    "heritage": "Sereorina",
-    "archetype": "Commando",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Tactical Zaradana",
+    "name": "Tactical",
     "identity": "Tactical",
-    "heritage": "Zaradana",
     "archetype": "Commando",
-    "origin": "Human",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Ballisti Bimsprocketa",
+    "name": "Ballisti",
     "identity": "Ballisti",
-    "heritage": "Bimsprocketa",
     "archetype": "Commando",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Forward Dornadara",
+    "name": "Forward",
     "identity": "Forward",
-    "heritage": "Dornadara",
-    "archetype": "Commando",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Hardened Corameadowa",
-    "identity": "Hardened",
-    "heritage": "Corameadowa",
-    "archetype": "Commando",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Silentix Lumiwhima",
-    "identity": "Silentix",
-    "heritage": "Lumiwhima",
-    "archetype": "Commando",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Missionus Mokmoka",
-    "identity": "Missionus",
-    "heritage": "Mokmoka",
-    "archetype": "Commando",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Tacticalex Mornavorna",
-    "identity": "Tacticalex",
-    "heritage": "Mornavorna",
     "archetype": "Commando",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Nightora Sereetha",
-    "identity": "Nightora",
-    "heritage": "Sereetha",
+    "name": "Underledger",
+    "identity": "Underledger",
     "archetype": "Criminal",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "False Zarasena",
+    "name": "Contraband",
+    "identity": "Contraband",
+    "archetype": "Criminal",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ghostprint",
+    "identity": "Ghostprint",
+    "archetype": "Criminal",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Lockpick",
+    "identity": "Lockpick",
+    "archetype": "Criminal",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Nightwork",
+    "identity": "Nightwork",
+    "archetype": "Criminal",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Outlaw",
+    "identity": "Outlaw",
+    "archetype": "Criminal",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Pilfer",
+    "identity": "Pilfer",
+    "archetype": "Criminal",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Smokescreen",
+    "identity": "Smokescreen",
+    "archetype": "Criminal",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "False",
     "identity": "False",
-    "heritage": "Zarasena",
     "archetype": "Criminal",
-    "origin": "Human",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Clean Bimcoga",
+    "name": "Clean",
     "identity": "Clean",
-    "heritage": "Bimcoga",
     "archetype": "Criminal",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Lockstep Dornrika",
+    "name": "Lockstep",
     "identity": "Lockstep",
-    "heritage": "Dornrika",
     "archetype": "Criminal",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Blackyx Corabarrowa",
-    "identity": "Blackyx",
-    "heritage": "Corabarrowa",
-    "archetype": "Criminal",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Inside Lumilarka",
+    "name": "Inside",
     "identity": "Inside",
-    "heritage": "Lumilarka",
     "archetype": "Criminal",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Quietous Mokzuna",
-    "identity": "Quietous",
-    "heritage": "Mokzuna",
-    "archetype": "Criminal",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Unlisted Mornamunda",
+    "name": "Unlisted",
     "identity": "Unlisted",
-    "heritage": "Mornamunda",
     "archetype": "Criminal",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Stolen Sereunea",
+    "name": "Stolen",
     "identity": "Stolen",
-    "heritage": "Sereunea",
-    "archetype": "Criminal",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Ghosted Zaraeva",
-    "identity": "Ghosted",
-    "heritage": "Zaraeva",
-    "archetype": "Criminal",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Crooked Bimwicka",
-    "identity": "Crooked",
-    "heritage": "Bimwicka",
-    "archetype": "Criminal",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Hiddenis Dorneka",
-    "identity": "Hiddenis",
-    "heritage": "Dorneka",
-    "archetype": "Criminal",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Namelessum Corasteada",
-    "identity": "Namelessum",
-    "heritage": "Corasteada",
-    "archetype": "Criminal",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Unlistedaxis Lumibellea",
-    "identity": "Unlistedaxis",
-    "heritage": "Lumibellea",
     "archetype": "Criminal",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Greenium Mokraka",
-    "identity": "Greenium",
-    "heritage": "Mokraka",
+    "name": "Bramble",
+    "identity": "Bramble",
     "archetype": "Druid",
     "origin": "Orc",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Rootsong Mornayraa",
+    "name": "Cloudroot",
+    "identity": "Cloudroot",
+    "archetype": "Druid",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Greenward",
+    "identity": "Greenward",
+    "archetype": "Druid",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Raincaller",
+    "identity": "Raincaller",
+    "archetype": "Druid",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Seedheart",
+    "identity": "Seedheart",
+    "archetype": "Druid",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Thornwake",
+    "identity": "Thornwake",
+    "archetype": "Druid",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Wildwood",
+    "identity": "Wildwood",
+    "archetype": "Druid",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Winterbloom",
+    "identity": "Winterbloom",
+    "archetype": "Druid",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Rootsong",
     "identity": "Rootsong",
-    "heritage": "Mornayraa",
     "archetype": "Druid",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Wildeon Sereiela",
-    "identity": "Wildeon",
-    "heritage": "Sereiela",
-    "archetype": "Druid",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Rainix Zaravala",
-    "identity": "Rainix",
-    "heritage": "Zaravala",
-    "archetype": "Druid",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Oldus Bimdocketa",
-    "identity": "Oldus",
-    "heritage": "Bimdocketa",
-    "archetype": "Druid",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Thornwak Dornunda",
-    "identity": "Thornwak",
-    "heritage": "Dornunda",
-    "archetype": "Druid",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Mosshear Coracrofta",
+    "name": "Mosshear",
     "identity": "Mosshear",
-    "heritage": "Coracrofta",
     "archetype": "Druid",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Giant",
+    "style": "self-chosen"
   },
   {
-    "name": "Verdant Lumimotha",
+    "name": "Verdant",
     "identity": "Verdant",
-    "heritage": "Lumimotha",
     "archetype": "Druid",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Seasonal Mokaka",
+    "name": "Seasonal",
     "identity": "Seasonal",
-    "heritage": "Mokaka",
     "archetype": "Druid",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Livingos Mornaskara",
-    "identity": "Livingos",
-    "heritage": "Mornaskara",
-    "archetype": "Druid",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Primal Sereyraa",
+    "name": "Primal",
     "identity": "Primal",
-    "heritage": "Sereyraa",
     "archetype": "Druid",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Overgrow Zaraiana",
+    "name": "Overgrow",
     "identity": "Overgrow",
-    "heritage": "Zaraiana",
-    "archetype": "Druid",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Earthen Bimwhistlea",
-    "identity": "Earthen",
-    "heritage": "Bimwhistlea",
-    "archetype": "Druid",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Verdantzen Dorngrima",
-    "identity": "Verdantzen",
-    "heritage": "Dorngrima",
     "archetype": "Druid",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Greenion Coravalea",
-    "identity": "Greenion",
-    "heritage": "Coravalea",
+    "name": "Blightbane",
+    "identity": "Blightbane",
     "archetype": "Eco Terrorist",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Lastrix Lumifizza",
-    "identity": "Lastrix",
-    "heritage": "Lumifizza",
+    "name": "Reclaimer",
+    "identity": "Reclaimer",
     "archetype": "Eco Terrorist",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Toxic Mokthara",
+    "name": "Sporestorm",
+    "identity": "Sporestorm",
+    "archetype": "Eco Terrorist",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Wildjustice",
+    "identity": "Wildjustice",
+    "archetype": "Eco Terrorist",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Worldscar",
+    "identity": "Worldscar",
+    "archetype": "Eco Terrorist",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Toxic",
     "identity": "Toxic",
-    "heritage": "Mokthara",
     "archetype": "Eco Terrorist",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Seed Mornagroma",
+    "name": "Seed",
     "identity": "Seed",
-    "heritage": "Mornagroma",
     "archetype": "Eco Terrorist",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Clearcut Sereioraa",
+    "name": "Clearcut",
     "identity": "Clearcut",
-    "heritage": "Sereioraa",
     "archetype": "Eco Terrorist",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Rewild Zarayana",
+    "name": "Rewild",
     "identity": "Rewild",
-    "heritage": "Zarayana",
     "archetype": "Eco Terrorist",
-    "origin": "Human",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Ash Bimgleama",
+    "name": "Ash",
     "identity": "Ash",
-    "heritage": "Bimgleama",
     "archetype": "Eco Terrorist",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Radical Dornvara",
-    "identity": "Radical",
-    "heritage": "Dornvara",
-    "archetype": "Eco Terrorist",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Restorat Corafena",
+    "name": "Restorat",
     "identity": "Restorat",
-    "heritage": "Corafena",
     "archetype": "Eco Terrorist",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Unbroken Lumipetala",
+    "name": "Unbroken",
     "identity": "Unbroken",
-    "heritage": "Lumipetala",
     "archetype": "Eco Terrorist",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Giant",
+    "style": "self-chosen"
   },
   {
-    "name": "Vengeful Mokgara",
+    "name": "Vengeful",
     "identity": "Vengeful",
-    "heritage": "Mokgara",
     "archetype": "Eco Terrorist",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Canopy Mornavalda",
+    "name": "Canopy",
     "identity": "Canopy",
-    "heritage": "Mornavalda",
-    "archetype": "Eco Terrorist",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Watershe Sereanora",
-    "identity": "Watershe",
-    "heritage": "Sereanora",
-    "archetype": "Eco Terrorist",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Radicalyn Zaraoraa",
-    "identity": "Radicalyn",
-    "heritage": "Zaraoraa",
     "archetype": "Eco Terrorist",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Goldenial Bimboltb",
-    "identity": "Goldenial",
-    "heritage": "Bimboltb",
+    "name": "Buyout",
+    "identity": "Buyout",
     "archetype": "Ex-Company Man",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Exit Dornovarb",
+    "name": "Deadstock",
+    "identity": "Deadstock",
+    "archetype": "Ex-Company Man",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Severance",
+    "identity": "Severance",
+    "archetype": "Ex-Company Man",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Shareholder",
+    "identity": "Shareholder",
+    "archetype": "Ex-Company Man",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Turncoat",
+    "identity": "Turncoat",
+    "archetype": "Ex-Company Man",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Writeoff",
+    "identity": "Writeoff",
+    "archetype": "Ex-Company Man",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Boardroom",
+    "identity": "Boardroom",
+    "archetype": "Ex-Company Man",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Corneroffice",
+    "identity": "Corneroffice",
+    "archetype": "Ex-Company Man",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Exit",
     "identity": "Exit",
-    "heritage": "Dornovarb",
     "archetype": "Ex-Company Man",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Hostile Corawickb",
+    "name": "Hostile",
     "identity": "Hostile",
-    "heritage": "Corawickb",
     "archetype": "Ex-Company Man",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Oldian Lumiglintb",
-    "identity": "Oldian",
-    "heritage": "Lumiglintb",
-    "archetype": "Ex-Company Man",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Severanc Mokugb",
-    "identity": "Severanc",
-    "heritage": "Mokugb",
-    "archetype": "Ex-Company Man",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Boardroo Mornahildb",
-    "identity": "Boardroo",
-    "heritage": "Mornahildb",
-    "archetype": "Ex-Company Man",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Proxy Sereorinb",
+    "name": "Proxy",
     "identity": "Proxy",
-    "heritage": "Sereorinb",
     "archetype": "Ex-Company Man",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Executiv Zaradanb",
-    "identity": "Executiv",
-    "heritage": "Zaradanb",
-    "archetype": "Ex-Company Man",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Disavowe Bimsprocketb",
+    "name": "Disavowe",
     "identity": "Disavowe",
-    "heritage": "Bimsprocketb",
     "archetype": "Ex-Company Man",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Corporat Dornadarb",
+    "name": "Corporat",
     "identity": "Corporat",
-    "heritage": "Dornadarb",
     "archetype": "Ex-Company Man",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Legacy Corameadowb",
+    "name": "Legacy",
     "identity": "Legacy",
-    "heritage": "Corameadowb",
-    "archetype": "Ex-Company Man",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Platin Lumiwhimb",
-    "identity": "Platin",
-    "heritage": "Lumiwhimb",
-    "archetype": "Ex-Company Man",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Offbook Mokmokb",
-    "identity": "Offbook",
-    "heritage": "Mokmokb",
-    "archetype": "Ex-Company Man",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Executivune Mornavornb",
-    "identity": "Executivune",
-    "heritage": "Mornavornb",
     "archetype": "Ex-Company Man",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Coldeon Sereethb",
-    "identity": "Coldeon",
-    "heritage": "Sereethb",
+    "name": "Backbadge",
+    "identity": "Backbadge",
     "archetype": "Ex-Cop",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Oldix Zarasenb",
-    "identity": "Oldix",
-    "heritage": "Zarasenb",
+    "name": "Bluefall",
+    "identity": "Bluefall",
     "archetype": "Ex-Cop",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Blueus Bimcogb",
-    "identity": "Blueus",
-    "heritage": "Bimcogb",
+    "name": "Gumshoe",
+    "identity": "Gumshoe",
     "archetype": "Ex-Cop",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Finalex Dornrikb",
-    "identity": "Finalex",
-    "heritage": "Dornrikb",
+    "name": "Coldcase",
+    "identity": "Coldcase",
     "archetype": "Ex-Cop",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Beatwalk Corabarrowb",
+    "name": "Oldshield",
+    "identity": "Oldshield",
+    "archetype": "Ex-Cop",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Precinct",
+    "identity": "Precinct",
+    "archetype": "Ex-Cop",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Renegade",
+    "identity": "Renegade",
+    "archetype": "Ex-Cop",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Watchman",
+    "identity": "Watchman",
+    "archetype": "Ex-Cop",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Beatwalk",
     "identity": "Beatwalk",
-    "heritage": "Corabarrowb",
     "archetype": "Ex-Cop",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Thinyn Lumilarkb",
-    "identity": "Thinyn",
-    "heritage": "Lumilarkb",
-    "archetype": "Ex-Cop",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Case Mokzunb",
+    "name": "Case",
     "identity": "Case",
-    "heritage": "Mokzunb",
     "archetype": "Ex-Cop",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Retiredos Mornamundb",
-    "identity": "Retiredos",
-    "heritage": "Mornamundb",
-    "archetype": "Ex-Cop",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Watchful Sereuneb",
-    "identity": "Watchful",
-    "heritage": "Sereuneb",
-    "archetype": "Ex-Cop",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Procedur Zaraevb",
+    "name": "Procedur",
     "identity": "Procedur",
-    "heritage": "Zaraevb",
     "archetype": "Ex-Cop",
-    "origin": "Human",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Dogged Bimwickb",
+    "name": "Dogged",
     "identity": "Dogged",
-    "heritage": "Bimwickb",
     "archetype": "Ex-Cop",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Streetwi Dornekb",
+    "name": "Streetwi",
     "identity": "Streetwi",
-    "heritage": "Dornekb",
     "archetype": "Ex-Cop",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Unbadged Corasteadb",
+    "name": "Unbadged",
     "identity": "Unbadged",
-    "heritage": "Corasteadb",
-    "archetype": "Ex-Cop",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Retiredrix Lumibelleb",
-    "identity": "Retiredrix",
-    "heritage": "Lumibelleb",
     "archetype": "Ex-Cop",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Oldara Mokrakb",
-    "identity": "Oldara",
-    "heritage": "Mokrakb",
+    "name": "Battleworn",
+    "identity": "Battleworn",
     "archetype": "Ex-Military",
     "origin": "Orc",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Campaign Mornayrab",
-    "identity": "Campaign",
-    "heritage": "Mornayrab",
+    "name": "Campaigner",
+    "identity": "Campaigner",
     "archetype": "Ex-Military",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Unit Sereielb",
-    "identity": "Unit",
-    "heritage": "Sereielb",
+    "name": "Dogtag",
+    "identity": "Dogtag",
     "archetype": "Ex-Military",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Marchste Zaravalb",
-    "identity": "Marchste",
-    "heritage": "Zaravalb",
+    "name": "Lastpost",
+    "identity": "Lastpost",
     "archetype": "Ex-Military",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Lastium Bimdocketb",
-    "identity": "Lastium",
-    "heritage": "Bimdocketb",
+    "name": "Mustang",
+    "identity": "Mustang",
     "archetype": "Ex-Military",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Field Dornundb",
-    "identity": "Field",
-    "heritage": "Dornundb",
+    "name": "Retread",
+    "identity": "Retread",
     "archetype": "Ex-Military",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Veteran Coracroftb",
+    "name": "Veteran",
     "identity": "Veteran",
-    "heritage": "Coracroftb",
     "archetype": "Ex-Military",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Decorate Lumimothb",
+    "name": "Unit",
+    "identity": "Unit",
+    "archetype": "Ex-Military",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Marchste",
+    "identity": "Marchste",
+    "archetype": "Ex-Military",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Field",
+    "identity": "Field",
+    "archetype": "Ex-Military",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Decorate",
     "identity": "Decorate",
-    "heritage": "Lumimothb",
     "archetype": "Ex-Military",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Battlew Mokakb",
-    "identity": "Battlew",
-    "heritage": "Mokakb",
-    "archetype": "Ex-Military",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Discharg Mornaskarb",
+    "name": "Discharg",
     "identity": "Discharg",
-    "heritage": "Mornaskarb",
     "archetype": "Ex-Military",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Regiment Sereyrab",
+    "name": "Regiment",
     "identity": "Regiment",
-    "heritage": "Sereyrab",
     "archetype": "Ex-Military",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Service Zaraianb",
+    "name": "Service",
     "identity": "Service",
-    "heritage": "Zaraianb",
-    "archetype": "Ex-Military",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Frontlin Bimwhistleb",
-    "identity": "Frontlin",
-    "heritage": "Bimwhistleb",
-    "archetype": "Ex-Military",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Decorateos Dorngrimb",
-    "identity": "Decorateos",
-    "heritage": "Dorngrimb",
     "archetype": "Ex-Military",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Prime Coravaleb",
-    "identity": "Prime",
-    "heritage": "Coravaleb",
+    "name": "Caliper",
+    "identity": "Caliper",
     "archetype": "Cog",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Fine Lumifizzb",
+    "name": "Clockmind",
+    "identity": "Clockmind",
+    "archetype": "Cog",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Finegrain",
+    "identity": "Finegrain",
+    "archetype": "Cog",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Measure",
+    "identity": "Measure",
+    "archetype": "Cog",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Plumbline",
+    "identity": "Plumbline",
+    "archetype": "Cog",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Primework",
+    "identity": "Primework",
+    "archetype": "Cog",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Tolerance",
+    "identity": "Tolerance",
+    "archetype": "Cog",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Truelevel",
+    "identity": "Truelevel",
+    "archetype": "Cog",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Fine",
     "identity": "Fine",
-    "heritage": "Lumifizzb",
     "archetype": "Cog",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Maker Moktharb",
+    "name": "Maker",
     "identity": "Maker",
-    "heritage": "Moktharb",
     "archetype": "Cog",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Clockhea Mornagromb",
-    "identity": "Clockhea",
-    "heritage": "Mornagromb",
-    "archetype": "Cog",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "True Sereiorab",
+    "name": "True",
     "identity": "True",
-    "heritage": "Sereiorab",
     "archetype": "Cog",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Brightrix Zarayanb",
-    "identity": "Brightrix",
-    "heritage": "Zarayanb",
-    "archetype": "Cog",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Masterwo Bimgleamb",
+    "name": "Masterwo",
     "identity": "Masterwo",
-    "heritage": "Bimgleamb",
     "archetype": "Cog",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Giant",
+    "style": "self-chosen"
   },
   {
-    "name": "Calibrat Dornvarb",
+    "name": "Calibrat",
     "identity": "Calibrat",
-    "heritage": "Dornvarb",
     "archetype": "Cog",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Precisio Corafenb",
-    "identity": "Precisio",
-    "heritage": "Corafenb",
-    "archetype": "Cog",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Handbuil Lumipetalb",
+    "name": "Handbuil",
     "identity": "Handbuil",
-    "heritage": "Lumipetalb",
-    "archetype": "Cog",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Ingeniou Mokgarb",
-    "identity": "Ingeniou",
-    "heritage": "Mokgarb",
-    "archetype": "Cog",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Tempered Mornavaldb",
-    "identity": "Tempered",
-    "heritage": "Mornavaldb",
-    "archetype": "Cog",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Artifice Sereanorb",
-    "identity": "Artifice",
-    "heritage": "Sereanorb",
-    "archetype": "Cog",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Calibratix Zaraorab",
-    "identity": "Calibratix",
-    "heritage": "Zaraorab",
     "archetype": "Cog",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Firstus Bimboltc",
-    "identity": "Firstus",
-    "heritage": "Bimboltc",
+    "name": "Allure",
+    "identity": "Allure",
     "archetype": "Face",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Velvetex Dornovarc",
-    "identity": "Velvetex",
-    "heritage": "Dornovarc",
+    "name": "Charmcraft",
+    "identity": "Charmcraft",
     "archetype": "Face",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Spotligh Corawickc",
+    "name": "Firstlight",
+    "identity": "Firstlight",
+    "archetype": "Face",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Magnetism",
+    "identity": "Magnetism",
+    "archetype": "Face",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Silvertongue",
+    "identity": "Silvertongue",
+    "archetype": "Face",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Velvetvoice",
+    "identity": "Velvetvoice",
+    "archetype": "Face",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Winsome",
+    "identity": "Winsome",
+    "archetype": "Face",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Spotligh",
     "identity": "Spotligh",
-    "heritage": "Corawickc",
     "archetype": "Face",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Openyn Lumiglintc",
-    "identity": "Openyn",
-    "heritage": "Lumiglintc",
-    "archetype": "Face",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Easy Mokugc",
+    "name": "Easy",
     "identity": "Easy",
-    "heritage": "Mokugc",
     "archetype": "Face",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Good Mornahildc",
+    "name": "Good",
     "identity": "Good",
-    "heritage": "Mornahildc",
     "archetype": "Face",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Silveryx Sereorinc",
-    "identity": "Silveryx",
-    "heritage": "Sereorinc",
-    "archetype": "Face",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Magnetic Zaradanc",
-    "identity": "Magnetic",
-    "heritage": "Zaradanc",
-    "archetype": "Face",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Tailored Bimsprocketc",
+    "name": "Tailored",
     "identity": "Tailored",
-    "heritage": "Bimsprocketc",
     "archetype": "Face",
-    "origin": "Gnome",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Charming Dornadarc",
-    "identity": "Charming",
-    "heritage": "Dornadarc",
-    "archetype": "Face",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Polished Corameadowc",
+    "name": "Polished",
     "identity": "Polished",
-    "heritage": "Corameadowc",
     "archetype": "Face",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Graci Lumiwhimc",
+    "name": "Graci",
     "identity": "Graci",
-    "heritage": "Lumiwhimc",
     "archetype": "Face",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Beloved Mokmokc",
+    "name": "Beloved",
     "identity": "Beloved",
-    "heritage": "Mokmokc",
-    "archetype": "Face",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Magneticis Mornavornc",
-    "identity": "Magneticis",
-    "heritage": "Mornavornc",
     "archetype": "Face",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Openum Sereethc",
-    "identity": "Openum",
-    "heritage": "Sereethc",
+    "name": "Broker",
+    "identity": "Broker",
     "archetype": "Fixer",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Rare Zarasenc",
+    "name": "Crossroads",
+    "identity": "Crossroads",
+    "archetype": "Fixer",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Favorbank",
+    "identity": "Favorbank",
+    "archetype": "Fixer",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Handshake",
+    "identity": "Handshake",
+    "archetype": "Fixer",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Middleman",
+    "identity": "Middleman",
+    "archetype": "Fixer",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Openline",
+    "identity": "Openline",
+    "archetype": "Fixer",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Switchboard",
+    "identity": "Switchboard",
+    "archetype": "Fixer",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Waymaker",
+    "identity": "Waymaker",
+    "archetype": "Fixer",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Linkmaster",
+    "identity": "Linkmaster",
+    "archetype": "Fixer",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Rare",
     "identity": "Rare",
-    "heritage": "Zarasenc",
     "archetype": "Fixer",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Favor Bimcogc",
-    "identity": "Favor",
-    "heritage": "Bimcogc",
-    "archetype": "Fixer",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Right Dornrikc",
+    "name": "Right",
     "identity": "Right",
-    "heritage": "Dornrikc",
     "archetype": "Fixer",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Back Corabarrowc",
+    "name": "Back",
     "identity": "Back",
-    "heritage": "Corabarrowc",
     "archetype": "Fixer",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Dwarf",
+    "style": "self-chosen"
   },
   {
-    "name": "Supply Lumilarkc",
+    "name": "Supply",
     "identity": "Supply",
-    "heritage": "Lumilarkc",
     "archetype": "Fixer",
-    "origin": "Fairy",
-    "style": "heritage"
+    "origin": "Halfling",
+    "style": "self-chosen"
   },
   {
-    "name": "Handshak Mokzunc",
-    "identity": "Handshak",
-    "heritage": "Mokzunc",
-    "archetype": "Fixer",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Connecte Mornamundc",
-    "identity": "Connecte",
-    "heritage": "Mornamundc",
-    "archetype": "Fixer",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Resource Sereunec",
+    "name": "Resource",
     "identity": "Resource",
-    "heritage": "Sereunec",
-    "archetype": "Fixer",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Wholesal Zaraevc",
-    "identity": "Wholesal",
-    "heritage": "Zaraevc",
-    "archetype": "Fixer",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Discrete Bimwickc",
-    "identity": "Discrete",
-    "heritage": "Bimwickc",
-    "archetype": "Fixer",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Brokered Dornekc",
-    "identity": "Brokered",
-    "heritage": "Dornekc",
-    "archetype": "Fixer",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Wellstoc Corasteadc",
-    "identity": "Wellstoc",
-    "heritage": "Corasteadc",
-    "archetype": "Fixer",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Connecteian Lumibellec",
-    "identity": "Connecteian",
-    "heritage": "Lumibellec",
     "archetype": "Fixer",
     "origin": "Fairy",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Block Mokrakc",
+    "name": "Backalley",
+    "identity": "Backalley",
+    "archetype": "Ganger",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Wardboss",
+    "identity": "Wardboss",
+    "archetype": "Ganger",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hardknuckle",
+    "identity": "Hardknuckle",
+    "archetype": "Ganger",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Localboy",
+    "identity": "Localboy",
+    "archetype": "Ganger",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Turfguard",
+    "identity": "Turfguard",
+    "archetype": "Ganger",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Yardboss",
+    "identity": "Yardboss",
+    "archetype": "Ganger",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Rumblejack",
+    "identity": "Rumblejack",
+    "archetype": "Ganger",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Block",
     "identity": "Block",
-    "heritage": "Mokrakc",
     "archetype": "Ganger",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Fairy",
+    "style": "self-chosen"
   },
   {
-    "name": "Corner Mornayrac",
-    "identity": "Corner",
-    "heritage": "Mornayrac",
-    "archetype": "Ganger",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Oldion Sereielc",
-    "identity": "Oldion",
-    "heritage": "Sereielc",
-    "archetype": "Ganger",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Streetrix Zaravalc",
-    "identity": "Streetrix",
-    "heritage": "Zaravalc",
-    "archetype": "Ganger",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Blockborn Bimdocketc",
-    "identity": "Blockborn",
-    "heritage": "Bimdocketc",
-    "archetype": "Ganger",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Home Dornundc",
+    "name": "Home",
     "identity": "Home",
-    "heritage": "Dornundc",
     "archetype": "Ganger",
-    "origin": "Dwarf",
-    "style": "heritage"
+    "origin": "Orc",
+    "style": "self-chosen"
   },
   {
-    "name": "Alley Coracroftc",
+    "name": "Alley",
     "identity": "Alley",
-    "heritage": "Coracroftc",
     "archetype": "Ganger",
-    "origin": "Halfling",
-    "style": "heritage"
+    "origin": "Giant",
+    "style": "self-chosen"
   },
   {
-    "name": "Local Lumimothc",
-    "identity": "Local",
-    "heritage": "Lumimothc",
-    "archetype": "Ganger",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Scarred Mokakc",
+    "name": "Scarred",
     "identity": "Scarred",
-    "heritage": "Mokakc",
     "archetype": "Ganger",
-    "origin": "Orc",
-    "style": "heritage"
+    "origin": "Elf",
+    "style": "self-chosen"
   },
   {
-    "name": "Loyal Mornaskarc",
+    "name": "Loyal",
     "identity": "Loyal",
-    "heritage": "Mornaskarc",
     "archetype": "Ganger",
-    "origin": "Giant",
-    "style": "heritage"
+    "origin": "Human",
+    "style": "self-chosen"
   },
   {
-    "name": "Neighbor Sereyrac",
+    "name": "Neighbor",
     "identity": "Neighbor",
-    "heritage": "Sereyrac",
     "archetype": "Ganger",
-    "origin": "Elf",
-    "style": "heritage"
+    "origin": "Gnome",
+    "style": "self-chosen"
   },
   {
-    "name": "Graffiti Zaraianc",
+    "name": "Graffiti",
     "identity": "Graffiti",
-    "heritage": "Zaraianc",
-    "archetype": "Ganger",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Concrete Bimwhistlec",
-    "identity": "Concrete",
-    "heritage": "Bimwhistlec",
-    "archetype": "Ganger",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Localex Dorngrimc",
-    "identity": "Localex",
-    "heritage": "Dorngrimc",
     "archetype": "Ganger",
     "origin": "Dwarf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Hot Coravalec",
-    "identity": "Hot",
-    "heritage": "Coravalec",
+    "name": "Dateline",
+    "identity": "Dateline",
     "archetype": "Gonzo Journalist",
     "origin": "Halfling",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Deadline Lumifizzc",
-    "identity": "Deadline",
-    "heritage": "Lumifizzc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Byline Moktharc",
-    "identity": "Byline",
-    "heritage": "Moktharc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Truth Mornagromc",
-    "identity": "Truth",
-    "heritage": "Mornagromc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Giant",
-    "style": "heritage"
-  },
-  {
-    "name": "Front Sereiorac",
-    "identity": "Front",
-    "heritage": "Sereiorac",
-    "archetype": "Gonzo Journalist",
-    "origin": "Elf",
-    "style": "heritage"
-  },
-  {
-    "name": "Live Zarayanc",
-    "identity": "Live",
-    "heritage": "Zarayanc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Human",
-    "style": "heritage"
-  },
-  {
-    "name": "Unfiltered Bimgleamc",
-    "identity": "Unfiltered",
-    "heritage": "Bimgleamc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Gnome",
-    "style": "heritage"
-  },
-  {
-    "name": "Breaking Dornvarc",
-    "identity": "Breaking",
-    "heritage": "Dornvarc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Dwarf",
-    "style": "heritage"
-  },
-  {
-    "name": "Uncensor Corafenc",
-    "identity": "Uncensor",
-    "heritage": "Corafenc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Halfling",
-    "style": "heritage"
-  },
-  {
-    "name": "Embedded Lumipetalc",
-    "identity": "Embedded",
-    "heritage": "Lumipetalc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Fairy",
-    "style": "heritage"
-  },
-  {
-    "name": "Fearless Mokgarc",
-    "identity": "Fearless",
-    "heritage": "Mokgarc",
-    "archetype": "Gonzo Journalist",
-    "origin": "Orc",
-    "style": "heritage"
-  },
-  {
-    "name": "Eyewitness Mornavaldc",
+    "name": "Eyewitness",
     "identity": "Eyewitness",
-    "heritage": "Mornavaldc",
+    "archetype": "Gonzo Journalist",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Frontpage",
+    "identity": "Frontpage",
+    "archetype": "Gonzo Journalist",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hotcopy",
+    "identity": "Hotcopy",
     "archetype": "Gonzo Journalist",
     "origin": "Giant",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Unedited Sereanorc",
-    "identity": "Unedited",
-    "heritage": "Sereanorc",
+    "name": "Livewire",
+    "identity": "Livewire",
     "archetype": "Gonzo Journalist",
     "origin": "Elf",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Breakingaxis Zaraorac",
-    "identity": "Breakingaxis",
-    "heritage": "Zaraorac",
+    "name": "Newsbreak",
+    "identity": "Newsbreak",
     "archetype": "Gonzo Journalist",
     "origin": "Human",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Highium Bimboltd",
-    "identity": "Highium",
-    "heritage": "Bimboltd",
+    "name": "Truthhound",
+    "identity": "Truthhound",
+    "archetype": "Gonzo Journalist",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Unedited",
+    "identity": "Unedited",
+    "archetype": "Gonzo Journalist",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hot",
+    "identity": "Hot",
+    "archetype": "Gonzo Journalist",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Byline",
+    "identity": "Byline",
+    "archetype": "Gonzo Journalist",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Live",
+    "identity": "Live",
+    "archetype": "Gonzo Journalist",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Unfiltered",
+    "identity": "Unfiltered",
+    "archetype": "Gonzo Journalist",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Uncensor",
+    "identity": "Uncensor",
+    "archetype": "Gonzo Journalist",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Embedded",
+    "identity": "Embedded",
+    "archetype": "Gonzo Journalist",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Quickbrace",
+    "identity": "Quickbrace",
     "archetype": "Gunslinger",
     "origin": "Gnome",
-    "style": "heritage"
+    "style": "self-chosen"
   },
   {
-    "name": "Quick",
-    "identity": "Quick",
+    "name": "Deadeye",
+    "identity": "Deadeye",
     "archetype": "Gunslinger",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Lasteon",
-    "identity": "Lasteon",
+    "name": "Gunmetal",
+    "identity": "Gunmetal",
     "archetype": "Gunslinger",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Longix",
-    "identity": "Longix",
+    "name": "Hairtrigger",
+    "identity": "Hairtrigger",
     "archetype": "Gunslinger",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Deadus",
-    "identity": "Deadus",
+    "name": "Highnoon",
+    "identity": "Highnoon",
     "archetype": "Gunslinger",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Longex",
-    "identity": "Longex",
+    "name": "Longshot",
+    "identity": "Longshot",
     "archetype": "Gunslinger",
     "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Sidewinder",
+    "identity": "Sidewinder",
+    "archetype": "Gunslinger",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Peacemaker",
+    "identity": "Peacemaker",
+    "archetype": "Gunslinger",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ricochet",
+    "identity": "Ricochet",
+    "archetype": "Gunslinger",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Sightline",
     "identity": "Sightline",
     "archetype": "Gunslinger",
-    "origin": "Elf",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Fastdraw",
     "identity": "Fastdraw",
     "archetype": "Gunslinger",
-    "origin": "Human",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Truehand",
     "identity": "Truehand",
     "archetype": "Gunslinger",
-    "origin": "Gnome",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Dustborn",
     "identity": "Dustborn",
     "archetype": "Gunslinger",
-    "origin": "Dwarf",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Steady",
     "identity": "Steady",
     "archetype": "Gunslinger",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Lonesome",
-    "identity": "Lonesome",
-    "archetype": "Gunslinger",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Frontierous",
-    "identity": "Frontierous",
-    "archetype": "Gunslinger",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Fastdrawzen",
-    "identity": "Fastdrawzen",
-    "archetype": "Gunslinger",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Rootion",
-    "identity": "Rootion",
+    "name": "Backdoor",
+    "identity": "Backdoor",
     "archetype": "Hacker",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Zerorix",
-    "identity": "Zerorix",
+    "name": "Cipherpunk",
+    "identity": "Cipherpunk",
     "archetype": "Hacker",
     "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Coldboot",
+    "identity": "Coldboot",
+    "archetype": "Hacker",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Nullroot",
+    "identity": "Nullroot",
+    "archetype": "Hacker",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Packetknife",
+    "identity": "Packetknife",
+    "archetype": "Hacker",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "ZeroDay",
+    "identity": "ZeroDay",
+    "archetype": "Hacker",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Side",
     "identity": "Side",
     "archetype": "Hacker",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Nullis",
-    "identity": "Nullis",
-    "archetype": "Hacker",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Coldum",
-    "identity": "Coldum",
-    "archetype": "Hacker",
-    "origin": "Halfling",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Dark",
     "identity": "Dark",
     "archetype": "Hacker",
-    "origin": "Fairy",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Freeware",
     "identity": "Freeware",
     "archetype": "Hacker",
-    "origin": "Orc",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Encrypte",
     "identity": "Encrypte",
     "archetype": "Hacker",
-    "origin": "Giant",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Rooted",
     "identity": "Rooted",
     "archetype": "Hacker",
-    "origin": "Elf",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Airgappe",
     "identity": "Airgappe",
     "archetype": "Hacker",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Recursivus",
-    "identity": "Recursivus",
-    "archetype": "Hacker",
-    "origin": "Gnome",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Unpatche",
     "identity": "Unpatche",
     "archetype": "Hacker",
-    "origin": "Dwarf",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Jailbrok",
     "identity": "Jailbrok",
     "archetype": "Hacker",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Encrypteyn",
-    "identity": "Encrypteyn",
-    "archetype": "Hacker",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Finalial",
-    "identity": "Finalial",
+    "name": "Blastcap",
+    "identity": "Blastcap",
     "archetype": "Mad Bomber",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Blast",
-    "identity": "Blast",
+    "name": "Deadman",
+    "identity": "Deadman",
     "archetype": "Mad Bomber",
     "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Firecracker",
+    "identity": "Firecracker",
+    "archetype": "Mad Bomber",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Fusebox",
+    "identity": "Fusebox",
+    "archetype": "Mad Bomber",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hotwire",
+    "identity": "Hotwire",
+    "archetype": "Mad Bomber",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Payload",
+    "identity": "Payload",
+    "archetype": "Mad Bomber",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Redbutton",
+    "identity": "Redbutton",
+    "archetype": "Mad Bomber",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Timer",
+    "identity": "Timer",
+    "archetype": "Mad Bomber",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Ticktock",
     "identity": "Ticktock",
     "archetype": "Mad Bomber",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Redian",
-    "identity": "Redian",
-    "archetype": "Mad Bomber",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Aftersho",
-    "identity": "Aftersho",
-    "archetype": "Mad Bomber",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Controll",
-    "identity": "Controll",
-    "archetype": "Mad Bomber",
-    "origin": "Dwarf",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Loud",
     "identity": "Loud",
     "archetype": "Mad Bomber",
-    "origin": "Halfling",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Volatile",
     "identity": "Volatile",
     "archetype": "Mad Bomber",
-    "origin": "Fairy",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Timed",
     "identity": "Timed",
     "archetype": "Mad Bomber",
-    "origin": "Orc",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Shaped",
     "identity": "Shaped",
     "archetype": "Mad Bomber",
-    "origin": "Giant",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Detonat",
     "identity": "Detonat",
     "archetype": "Mad Bomber",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Unstable",
-    "identity": "Unstable",
-    "archetype": "Mad Bomber",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Explosiv",
-    "identity": "Explosiv",
-    "archetype": "Mad Bomber",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Volatileune",
-    "identity": "Volatileune",
-    "archetype": "Mad Bomber",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Spellfra",
-    "identity": "Spellfra",
+    "name": "Arcanist",
+    "identity": "Arcanist",
     "archetype": "Mage",
     "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hexlight",
+    "identity": "Hexlight",
+    "archetype": "Mage",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Leywalker",
+    "identity": "Leywalker",
+    "archetype": "Mage",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Manaforge",
+    "identity": "Manaforge",
+    "archetype": "Mage",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Runesmith",
+    "identity": "Runesmith",
+    "archetype": "Mage",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Spellbound",
+    "identity": "Spellbound",
+    "archetype": "Mage",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Thaumaturge",
+    "identity": "Thaumaturge",
+    "archetype": "Mage",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Witchwire",
+    "identity": "Witchwire",
+    "archetype": "Mage",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Leyline",
     "identity": "Leyline",
     "archetype": "Mage",
-    "origin": "Fairy",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Runewire",
     "identity": "Runewire",
     "archetype": "Mage",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Brightex",
-    "identity": "Brightex",
-    "archetype": "Mage",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Arcane",
-    "identity": "Arcane",
-    "archetype": "Mage",
-    "origin": "Elf",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Mana",
     "identity": "Mana",
     "archetype": "Mage",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Nineial",
-    "identity": "Nineial",
-    "archetype": "Mage",
-    "origin": "Gnome",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Enchante",
     "identity": "Enchante",
     "archetype": "Mage",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Thaumic",
-    "identity": "Thaumic",
-    "archetype": "Mage",
-    "origin": "Halfling",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Runed",
     "identity": "Runed",
     "archetype": "Mage",
-    "origin": "Fairy",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Mystic",
     "identity": "Mystic",
     "archetype": "Mage",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Aetheric",
-    "identity": "Aetheric",
-    "archetype": "Mage",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Sorcerou",
-    "identity": "Sorcerou",
-    "archetype": "Mage",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Enchanterix",
-    "identity": "Enchanterix",
-    "archetype": "Mage",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Paygrade",
-    "identity": "Paygrade",
+    "name": "Freeblade",
+    "identity": "Freeblade",
     "archetype": "Mercenary",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Contract",
-    "identity": "Contract",
+    "name": "Gunhand",
+    "identity": "Gunhand",
     "archetype": "Mercenary",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Escrow",
-    "identity": "Escrow",
+    "name": "Payday",
+    "identity": "Payday",
     "archetype": "Mercenary",
     "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Retainer",
+    "identity": "Retainer",
+    "archetype": "Mercenary",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Soldier",
     "identity": "Soldier",
     "archetype": "Mercenary",
-    "origin": "Fairy",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Warbond",
+    "identity": "Warbond",
+    "archetype": "Mercenary",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hiredgun",
+    "identity": "Hiredgun",
+    "archetype": "Mercenary",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Paygrade",
+    "identity": "Paygrade",
+    "archetype": "Mercenary",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Escrow",
+    "identity": "Escrow",
+    "archetype": "Mercenary",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Hazard",
     "identity": "Hazard",
     "archetype": "Mercenary",
-    "origin": "Orc",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Cashfire",
     "identity": "Cashfire",
     "archetype": "Mercenary",
-    "origin": "Giant",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Terms",
     "identity": "Terms",
     "archetype": "Mercenary",
-    "origin": "Elf",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Professi",
     "identity": "Professi",
     "archetype": "Mercenary",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Retained",
-    "identity": "Retained",
-    "archetype": "Mercenary",
-    "origin": "Gnome",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Freelanc",
     "identity": "Freelanc",
     "archetype": "Mercenary",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Expensiv",
-    "identity": "Expensiv",
-    "archetype": "Mercenary",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Contractyn",
-    "identity": "Contractyn",
-    "archetype": "Mercenary",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Battlepa",
-    "identity": "Battlepa",
-    "archetype": "Mercenary",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Professios",
-    "identity": "Professios",
-    "archetype": "Mercenary",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Stillyx",
-    "identity": "Stillyx",
+    "name": "Centerline",
+    "identity": "Centerline",
     "archetype": "Monk",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Emptyian",
-    "identity": "Emptyian",
+    "name": "Emptyhand",
+    "identity": "Emptyhand",
     "archetype": "Monk",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Quietune",
-    "identity": "Quietune",
+    "name": "Evenstep",
+    "identity": "Evenstep",
     "archetype": "Monk",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Sevenzen",
-    "identity": "Sevenzen",
+    "name": "Flowstate",
+    "identity": "Flowstate",
     "archetype": "Monk",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Centerli",
-    "identity": "Centerli",
+    "name": "Stillwater",
+    "identity": "Stillwater",
     "archetype": "Monk",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Patientrix",
-    "identity": "Patientrix",
+    "name": "Truebalance",
+    "identity": "Truebalance",
     "archetype": "Monk",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Openara",
-    "identity": "Openara",
+    "name": "Ironcalm",
+    "identity": "Ironcalm",
     "archetype": "Monk",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Centered",
-    "identity": "Centered",
+    "name": "Wayfarer",
+    "identity": "Wayfarer",
     "archetype": "Monk",
     "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Equanimity",
+    "identity": "Equanimity",
+    "archetype": "Monk",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Koan",
+    "identity": "Koan",
+    "archetype": "Monk",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Discipl",
     "identity": "Discipl",
     "archetype": "Monk",
-    "origin": "Elf",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Weightle",
     "identity": "Weightle",
     "archetype": "Monk",
-    "origin": "Human",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Mindful",
     "identity": "Mindful",
     "archetype": "Monk",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Templeune",
-    "identity": "Templeune",
-    "archetype": "Monk",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Untroubl",
-    "identity": "Untroubl",
-    "archetype": "Monk",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Emptyix",
-    "identity": "Emptyix",
+    "name": "Moonblade",
+    "identity": "Moonblade",
     "archetype": "Ninja",
     "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Veilstrike",
+    "identity": "Veilstrike",
+    "archetype": "Ninja",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Quietknife",
+    "identity": "Quietknife",
+    "archetype": "Ninja",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Shadowless",
+    "identity": "Shadowless",
+    "archetype": "Ninja",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Softfall",
+    "identity": "Softfall",
+    "archetype": "Ninja",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Whisperstep",
+    "identity": "Whisperstep",
+    "archetype": "Ninja",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Shuriken",
+    "identity": "Shuriken",
+    "archetype": "Ninja",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Silkblade",
+    "identity": "Silkblade",
+    "archetype": "Ninja",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Moonless",
     "identity": "Moonless",
     "archetype": "Ninja",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Silkex",
-    "identity": "Silkex",
-    "archetype": "Ninja",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Hiddenora",
-    "identity": "Hiddenora",
-    "archetype": "Ninja",
-    "origin": "Elf",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Nocturne",
     "identity": "Nocturne",
     "archetype": "Ninja",
-    "origin": "Human",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Roofline",
     "identity": "Roofline",
     "archetype": "Ninja",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Quietos",
-    "identity": "Quietos",
-    "archetype": "Ninja",
-    "origin": "Dwarf",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Unseen",
     "identity": "Unseen",
     "archetype": "Ninja",
-    "origin": "Halfling",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Soundles",
     "identity": "Soundles",
     "archetype": "Ninja",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Applause",
+    "identity": "Applause",
+    "archetype": "Performer",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Curtaincall",
+    "identity": "Curtaincall",
+    "archetype": "Performer",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ovation",
+    "identity": "Ovation",
+    "archetype": "Performer",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Headliner",
+    "identity": "Headliner",
+    "archetype": "Performer",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Veiled",
-    "identity": "Veiled",
-    "archetype": "Ninja",
+    "name": "Showstopper",
+    "identity": "Showstopper",
+    "archetype": "Performer",
     "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Patientzen",
-    "identity": "Patientzen",
-    "archetype": "Ninja",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Midnightion",
-    "identity": "Midnightion",
-    "archetype": "Ninja",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Smokecla",
-    "identity": "Smokecla",
-    "archetype": "Ninja",
-    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Songbird",
     "identity": "Songbird",
     "archetype": "Performer",
-    "origin": "Gnome",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Encore",
     "identity": "Encore",
     "archetype": "Performer",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Brightum",
-    "identity": "Brightum",
-    "archetype": "Performer",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Headlineaxis",
-    "identity": "Headlineaxis",
-    "archetype": "Performer",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Velvetium",
-    "identity": "Velvetium",
-    "archetype": "Performer",
-    "origin": "Orc",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Standing",
     "identity": "Standing",
     "archetype": "Performer",
-    "origin": "Giant",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Stagefir",
     "identity": "Stagefir",
     "archetype": "Performer",
-    "origin": "Elf",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Resonant",
     "identity": "Resonant",
     "archetype": "Performer",
-    "origin": "Human",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Melodic",
     "identity": "Melodic",
     "archetype": "Performer",
-    "origin": "Gnome",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Dazzling",
     "identity": "Dazzling",
     "archetype": "Performer",
-    "origin": "Dwarf",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Virtuoso",
     "identity": "Virtuoso",
     "archetype": "Performer",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Showstop",
-    "identity": "Showstop",
-    "archetype": "Performer",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Harmonicial",
-    "identity": "Harmonicial",
-    "archetype": "Performer",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Loose",
-    "identity": "Loose",
+    "name": "Cluefinder",
+    "identity": "Cluefinder",
     "archetype": "Private Eye/Investigator",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Rainyx",
-    "identity": "Rainyx",
+    "name": "Greycell",
+    "identity": "Greycell",
     "archetype": "Private Eye/Investigator",
     "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hunch",
+    "identity": "Hunch",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Lamplight",
+    "identity": "Lamplight",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "LooseThread",
+    "identity": "LooseThread",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Questioner",
+    "identity": "Questioner",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Sleuth",
+    "identity": "Sleuth",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Tellmark",
+    "identity": "Tellmark",
+    "archetype": "Private Eye/Investigator",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Casefile",
     "identity": "Casefile",
     "archetype": "Private Eye/Investigator",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Nightous",
-    "identity": "Nightous",
-    "archetype": "Private Eye/Investigator",
-    "origin": "Gnome",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Missing",
     "identity": "Missing",
     "archetype": "Private Eye/Investigator",
-    "origin": "Dwarf",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Shoeleat",
     "identity": "Shoeleat",
     "archetype": "Private Eye/Investigator",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Hardrix",
-    "identity": "Hardrix",
-    "archetype": "Private Eye/Investigator",
-    "origin": "Fairy",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Inquirin",
     "identity": "Inquirin",
     "archetype": "Private Eye/Investigator",
-    "origin": "Orc",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Tenaciou",
     "identity": "Tenaciou",
     "archetype": "Private Eye/Investigator",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Sonicboom",
+    "identity": "Sonicboom",
+    "archetype": "Screamer",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Feedback",
+    "identity": "Feedback",
+    "archetype": "Screamer",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Howler",
+    "identity": "Howler",
+    "archetype": "Screamer",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Loudmouth",
+    "identity": "Loudmouth",
+    "archetype": "Screamer",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Observan",
-    "identity": "Observan",
-    "archetype": "Private Eye/Investigator",
+    "name": "Overtone",
+    "identity": "Overtone",
+    "archetype": "Screamer",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Raincoat",
-    "identity": "Raincoat",
-    "archetype": "Private Eye/Investigator",
+    "name": "Shriek",
+    "identity": "Shriek",
+    "archetype": "Screamer",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Suspicio",
-    "identity": "Suspicio",
-    "archetype": "Private Eye/Investigator",
+    "name": "Thunderlung",
+    "identity": "Thunderlung",
+    "archetype": "Screamer",
     "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Methodic",
-    "identity": "Methodic",
-    "archetype": "Private Eye/Investigator",
-    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Redline",
     "identity": "Redline",
     "archetype": "Screamer",
-    "origin": "Halfling",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Ampstorm",
     "identity": "Ampstorm",
     "archetype": "Screamer",
-    "origin": "Fairy",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Overstee",
     "identity": "Overstee",
     "archetype": "Screamer",
-    "origin": "Orc",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Burnout",
     "identity": "Burnout",
     "archetype": "Screamer",
-    "origin": "Giant",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Fast",
     "identity": "Fast",
     "archetype": "Screamer",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Slipstre",
-    "identity": "Slipstre",
-    "archetype": "Screamer",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Greenial",
-    "identity": "Greenial",
-    "archetype": "Screamer",
-    "origin": "Gnome",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Overcloc",
     "identity": "Overcloc",
     "archetype": "Screamer",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Turbocha",
-    "identity": "Turbocha",
-    "archetype": "Screamer",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Roadborn",
-    "identity": "Roadborn",
-    "archetype": "Screamer",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Fullthro",
-    "identity": "Fullthro",
-    "archetype": "Screamer",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Cornerwi",
-    "identity": "Cornerwi",
-    "archetype": "Screamer",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Highocta",
-    "identity": "Highocta",
-    "archetype": "Screamer",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Spiritrix",
-    "identity": "Spiritrix",
+    "name": "Forebear",
+    "identity": "Forebear",
     "archetype": "Shaman",
     "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Dreamwalker",
+    "identity": "Dreamwalker",
+    "archetype": "Shaman",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Omen",
+    "identity": "Omen",
+    "archetype": "Shaman",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Spiritbridge",
+    "identity": "Spiritbridge",
+    "archetype": "Shaman",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Totemheart",
+    "identity": "Totemheart",
+    "archetype": "Shaman",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Trance",
+    "identity": "Trance",
+    "archetype": "Shaman",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Visionquest",
+    "identity": "Visionquest",
+    "archetype": "Shaman",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Soulkeeper",
+    "identity": "Soulkeeper",
+    "archetype": "Shaman",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Medicinewheel",
+    "identity": "Medicinewheel",
+    "archetype": "Shaman",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Psychopomp",
+    "identity": "Psychopomp",
+    "archetype": "Shaman",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Ancestor",
     "identity": "Ancestor",
     "archetype": "Shaman",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Dreamis",
-    "identity": "Dreamis",
-    "archetype": "Shaman",
     "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Ghostum",
-    "identity": "Ghostum",
-    "archetype": "Shaman",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Totem",
-    "identity": "Totem",
-    "archetype": "Shaman",
-    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Other",
     "identity": "Other",
     "archetype": "Shaman",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Veilune",
-    "identity": "Veilune",
-    "archetype": "Shaman",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Ancestra",
-    "identity": "Ancestra",
-    "archetype": "Shaman",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Visiona",
-    "identity": "Visiona",
-    "archetype": "Shaman",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Spiritb",
-    "identity": "Spiritb",
-    "archetype": "Shaman",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Trancebo",
-    "identity": "Trancebo",
-    "archetype": "Shaman",
-    "origin": "Dwarf",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Ritual",
     "identity": "Ritual",
     "archetype": "Shaman",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Dreamingyn",
-    "identity": "Dreamingyn",
-    "archetype": "Shaman",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Falseial",
-    "identity": "Falseial",
+    "name": "Backchannel",
+    "identity": "Backchannel",
     "archetype": "Smuggler",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Quietum",
-    "identity": "Quietum",
+    "name": "Cargojack",
+    "identity": "Cargojack",
     "archetype": "Smuggler",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Openyx",
-    "identity": "Openyx",
+    "name": "Freeport",
+    "identity": "Freeport",
     "archetype": "Smuggler",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Hiddenian",
-    "identity": "Hiddenian",
+    "name": "Hiddenhold",
+    "identity": "Hiddenhold",
     "archetype": "Smuggler",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Nightune",
-    "identity": "Nightune",
+    "name": "Slipstream",
+    "identity": "Slipstream",
     "archetype": "Smuggler",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Freezen",
-    "identity": "Freezen",
+    "name": "Waybill",
+    "identity": "Waybill",
     "archetype": "Smuggler",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Customsion",
-    "identity": "Customsion",
+    "name": "Moonrunner",
+    "identity": "Moonrunner",
     "archetype": "Smuggler",
     "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Starcargo",
+    "identity": "Starcargo",
+    "archetype": "Smuggler",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Lowsign",
+    "identity": "Lowsign",
+    "archetype": "Smuggler",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Unmanife",
     "identity": "Unmanife",
     "archetype": "Smuggler",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Contraba",
-    "identity": "Contraba",
-    "archetype": "Smuggler",
-    "origin": "Orc",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Borderle",
     "identity": "Borderle",
     "archetype": "Smuggler",
-    "origin": "Giant",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Unsearch",
     "identity": "Unsearch",
     "archetype": "Smuggler",
-    "origin": "Elf",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Offroute",
     "identity": "Offroute",
     "archetype": "Smuggler",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Sealed",
-    "identity": "Sealed",
-    "archetype": "Smuggler",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Farune",
-    "identity": "Farune",
+    "name": "Farpoint",
+    "identity": "Farpoint",
+    "archetype": "Sniper",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Longglass",
+    "identity": "Longglass",
+    "archetype": "Sniper",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Marksman",
+    "identity": "Marksman",
+    "archetype": "Sniper",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Onebreath",
+    "identity": "Onebreath",
+    "archetype": "Sniper",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Pinpoint",
+    "identity": "Pinpoint",
+    "archetype": "Sniper",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Windreader",
+    "identity": "Windreader",
+    "archetype": "Sniper",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Bullseye",
+    "identity": "Bullseye",
+    "archetype": "Sniper",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Killzone",
+    "identity": "Killzone",
+    "archetype": "Sniper",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Rangefinder",
+    "identity": "Rangefinder",
     "archetype": "Sniper",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -2935,162 +2766,50 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Coldix",
-    "identity": "Coldix",
-    "archetype": "Sniper",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Longus",
-    "identity": "Longus",
-    "archetype": "Sniper",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Stillex",
-    "identity": "Stillex",
-    "archetype": "Sniper",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Lastora",
-    "identity": "Lastora",
-    "archetype": "Sniper",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
     "name": "Wind",
     "identity": "Wind",
     "archetype": "Sniper",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Distantial",
-    "identity": "Distantial",
-    "archetype": "Sniper",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Patientos",
-    "identity": "Patientos",
-    "archetype": "Sniper",
-    "origin": "Dwarf",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Motionle",
     "identity": "Motionle",
     "archetype": "Sniper",
-    "origin": "Halfling",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Farseein",
     "identity": "Farseein",
     "archetype": "Sniper",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Measured",
-    "identity": "Measured",
-    "archetype": "Sniper",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Silentzen",
-    "identity": "Silentzen",
-    "archetype": "Sniper",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
-    "name": "Secondion",
-    "identity": "Secondion",
+    "name": "Alias",
+    "identity": "Alias",
     "archetype": "Spy",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
-    "name": "Deeprix",
-    "identity": "Deeprix",
+    "name": "Coverstory",
+    "identity": "Coverstory",
     "archetype": "Spy",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Falseara",
-    "identity": "Falseara",
+    "name": "DeadDrop",
+    "identity": "DeadDrop",
     "archetype": "Spy",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Deadis",
-    "identity": "Deadis",
-    "archetype": "Spy",
-    "origin": "Dwarf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Double",
-    "identity": "Double",
-    "archetype": "Spy",
-    "origin": "Halfling",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Quietaxis",
-    "identity": "Quietaxis",
-    "archetype": "Spy",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Unknown",
-    "identity": "Unknown",
-    "archetype": "Spy",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Covert",
-    "identity": "Covert",
-    "archetype": "Spy",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Diplomateon",
-    "identity": "Diplomateon",
-    "archetype": "Spy",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Unmade",
-    "identity": "Unmade",
-    "archetype": "Spy",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Classifi",
-    "identity": "Classifi",
-    "archetype": "Spy",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Counterf",
-    "identity": "Counterf",
+    "name": "Mole",
+    "identity": "Mole",
     "archetype": "Spy",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -3103,22 +2822,78 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Nightyn",
-    "identity": "Nightyn",
+    "name": "Tradecraft",
+    "identity": "Tradecraft",
+    "archetype": "Spy",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Cryptonym",
+    "identity": "Cryptonym",
+    "archetype": "Spy",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Cutout",
+    "identity": "Cutout",
+    "archetype": "Spy",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Double",
+    "identity": "Double",
+    "archetype": "Spy",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Unknown",
+    "identity": "Unknown",
+    "archetype": "Spy",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Unmade",
+    "identity": "Unmade",
+    "archetype": "Spy",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Classifi",
+    "identity": "Classifi",
+    "archetype": "Spy",
+    "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Counterf",
+    "identity": "Counterf",
+    "archetype": "Spy",
+    "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Bonepatch",
+    "identity": "Bonepatch",
     "archetype": "Street Doc",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Mercyial",
-    "identity": "Mercyial",
+    "name": "Lifeline",
+    "identity": "Lifeline",
     "archetype": "Street Doc",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
-    "name": "Backos",
-    "identity": "Backos",
+    "name": "Pulsecheck",
+    "identity": "Pulsecheck",
     "archetype": "Street Doc",
     "origin": "Giant",
     "style": "self-chosen"
@@ -3131,156 +2906,212 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Lastian",
-    "identity": "Lastian",
+    "name": "Suture",
+    "identity": "Suture",
     "archetype": "Street Doc",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Bloodlig",
-    "identity": "Bloodlig",
+    "name": "Triage",
+    "identity": "Triage",
     "archetype": "Street Doc",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Nozen",
-    "identity": "Nozen",
+    "name": "Bonesaw",
+    "identity": "Bonesaw",
     "archetype": "Street Doc",
     "origin": "Dwarf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Medkit",
+    "identity": "Medkit",
+    "archetype": "Street Doc",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Clinical",
     "identity": "Clinical",
     "archetype": "Street Doc",
-    "origin": "Halfling",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Sterile",
     "identity": "Sterile",
     "archetype": "Street Doc",
-    "origin": "Fairy",
+    "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Lifehold",
     "identity": "Lifehold",
     "archetype": "Street Doc",
-    "origin": "Orc",
+    "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Emergenc",
     "identity": "Emergenc",
     "archetype": "Street Doc",
-    "origin": "Giant",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Unlicens",
     "identity": "Unlicens",
     "archetype": "Street Doc",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Surgical",
-    "identity": "Surgical",
-    "archetype": "Street Doc",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
-    "name": "Chrome",
-    "identity": "Chrome",
+    "name": "ChromeRonin",
+    "identity": "ChromeRonin",
     "archetype": "Street Samurai",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
-    "name": "Honor",
-    "identity": "Honor",
+    "name": "Honorbound",
+    "identity": "Honorbound",
     "archetype": "Street Samurai",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Neon",
-    "identity": "Neon",
+    "name": "NeonBlade",
+    "identity": "NeonBlade",
     "archetype": "Street Samurai",
     "origin": "Halfling",
+    "style": "self-chosen"
+  },
+  {
+    "name": "RedSteel",
+    "identity": "RedSteel",
+    "archetype": "Street Samurai",
+    "origin": "Fairy",
+    "style": "self-chosen"
+  },
+  {
+    "name": "SwordSaint",
+    "identity": "SwordSaint",
+    "archetype": "Street Samurai",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "WarriorCode",
+    "identity": "WarriorCode",
+    "archetype": "Street Samurai",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "ZeroMercy",
+    "identity": "ZeroMercy",
+    "archetype": "Street Samurai",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Bushido",
+    "identity": "Bushido",
+    "archetype": "Street Samurai",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Edgewalker",
+    "identity": "Edgewalker",
+    "archetype": "Street Samurai",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Clanless",
     "identity": "Clanless",
     "archetype": "Street Samurai",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Redus",
-    "identity": "Redus",
-    "archetype": "Street Samurai",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Lastex",
-    "identity": "Lastex",
-    "archetype": "Street Samurai",
-    "origin": "Giant",
+    "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Steel",
     "identity": "Steel",
     "archetype": "Street Samurai",
-    "origin": "Elf",
+    "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Cybernet",
     "identity": "Cybernet",
     "archetype": "Street Samurai",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Oathboun",
-    "identity": "Oathboun",
-    "archetype": "Street Samurai",
-    "origin": "Gnome",
+    "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Ronin",
     "identity": "Ronin",
     "archetype": "Street Samurai",
+    "origin": "Orc",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Ashpact",
+    "identity": "Ashpact",
+    "archetype": "Warlock",
+    "origin": "Giant",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Debtkeeper",
+    "identity": "Debtkeeper",
+    "archetype": "Warlock",
+    "origin": "Elf",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Demonbound",
+    "identity": "Demonbound",
+    "archetype": "Warlock",
+    "origin": "Human",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Hellmark",
+    "identity": "Hellmark",
+    "archetype": "Warlock",
+    "origin": "Gnome",
+    "style": "self-chosen"
+  },
+  {
+    "name": "Oathbreaker",
+    "identity": "Oathbreaker",
+    "archetype": "Warlock",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
-    "name": "Neonyx",
-    "identity": "Neonyx",
-    "archetype": "Street Samurai",
+    "name": "Voidbargain",
+    "identity": "Voidbargain",
+    "archetype": "Warlock",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
-    "name": "Honorbou",
-    "identity": "Honorbou",
-    "archetype": "Street Samurai",
+    "name": "Nethermark",
+    "identity": "Nethermark",
+    "archetype": "Warlock",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
-    "name": "Bladebor",
-    "identity": "Bladebor",
-    "archetype": "Street Samurai",
+    "name": "Covenanter",
+    "identity": "Covenanter",
+    "archetype": "Warlock",
     "origin": "Orc",
     "style": "self-chosen"
   },
@@ -3292,85 +3123,29 @@ const cyborgNames = [
     "style": "self-chosen"
   },
   {
-    "name": "Patronion",
-    "identity": "Patronion",
-    "archetype": "Warlock",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Blackrix",
-    "identity": "Blackrix",
-    "archetype": "Warlock",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
     "name": "Debt",
     "identity": "Debt",
     "archetype": "Warlock",
-    "origin": "Gnome",
+    "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Hell",
     "identity": "Hell",
     "archetype": "Warlock",
-    "origin": "Dwarf",
+    "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Bound",
     "identity": "Bound",
     "archetype": "Warlock",
-    "origin": "Halfling",
+    "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Forbidde",
     "identity": "Forbidde",
-    "archetype": "Warlock",
-    "origin": "Fairy",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Pactboun",
-    "identity": "Pactboun",
-    "archetype": "Warlock",
-    "origin": "Orc",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Eldritch",
-    "identity": "Eldritch",
-    "archetype": "Warlock",
-    "origin": "Giant",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Oathscareon",
-    "identity": "Oathscareon",
-    "archetype": "Warlock",
-    "origin": "Elf",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Infernal",
-    "identity": "Infernal",
-    "archetype": "Warlock",
-    "origin": "Human",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Whispere",
-    "identity": "Whispere",
-    "archetype": "Warlock",
-    "origin": "Gnome",
-    "style": "self-chosen"
-  },
-  {
-    "name": "Accursed",
-    "identity": "Accursed",
     "archetype": "Warlock",
     "origin": "Dwarf",
     "style": "self-chosen"
@@ -3677,11 +3452,11 @@ const cyborgNames = [
   }
 ]
 
-const tokens = cyborgNames.flatMap(entry => entry.name.split(/\s+/).map(token => token.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase()).filter(Boolean))
+const monikers = cyborgNames.filter(entry => entry.style !== 'designation').map(entry => entry.identity.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase())
 const count = style => cyborgNames.filter(entry => entry.style === style).length
 if (cyborgNames.length !== 500 || new Set(cyborgNames.map(entry => entry.name)).size !== 500) throw new Error('Cyborg identities must be unique')
-if (new Set(tokens).size !== tokens.length) throw new Error('Cyborg name tokens must not repeat')
-if (count('designation') !== 50 || count('heritage') !== 225 || count('self-chosen') !== 225) throw new Error('Cyborg identity-style proportions are invalid')
-if (cyborgNames.some(entry => entry.name.split(/\s+/).length > 2)) throw new Error('Cyborg identities may not exceed two parts')
+if (new Set(monikers).size !== monikers.length) throw new Error('Cyborg monikers must be independently unique')
+if (count('designation') !== 50 || count('self-chosen') !== 450) throw new Error('Cyborg identity-style proportions are invalid')
+if (cyborgNames.some(entry => entry.name.split(/\s+/).length > 1)) throw new Error('Cyborg identities must be a single moniker or designation')
 
 export default cyborgNames
