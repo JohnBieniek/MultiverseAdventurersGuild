@@ -909,7 +909,7 @@ function CharacterSheet() {
       ...normalized,
       level,
       totalXp: normalized.totalXpManuallySet ? normalized.totalXp : xpForLevel(level),
-      unspentXp: normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(level),
+      unspentXp: normalized.totalXpManuallySet || normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(level),
       updatedAt: Date.now(),
     }
   })
