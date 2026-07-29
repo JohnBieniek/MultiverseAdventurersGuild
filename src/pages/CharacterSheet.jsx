@@ -79,6 +79,973 @@ const weaponLoadouts = {
   'Street Samurai': [['White-Handle Tanto','Light Melee'],['Crimson Circuit Katana','Medium Melee'],['Clan-Locked Smart Pistol','Holdout Ranged'],['Ronin Compact SMG','Compact Ranged']],
   Warlock: [['Pact-Signed Sacrificial Dagger','Light Melee'],['Void-Iron Hexblade','Medium Melee'],['Eldritch Starbolt','Holdout Ranged']],
 }
+const suppliedDescriptorOptions = {
+  "MELEE": {
+    "name": "Melee Weapon",
+    "types": {
+      "hardwired": [
+        "Cyber Arm Blade",
+        "Monofilament Whip",
+        "Power Fist",
+        "Vibroblade",
+        "Energy Baton"
+      ],
+      "wetwired": [
+        "Bone Density Mod",
+        "Bio-Enhanced Reflex Strikes",
+        "Muscle Fiber Overcharge",
+        "Clawed Limb Mod"
+      ],
+      "magic": [
+        "Flaming Sword",
+        "Shadow Blade",
+        "Arcane Hammer",
+        "Holy Weapon",
+        "Spirit Strike"
+      ],
+      "racial": [
+        "Orcish War Axe",
+        "Dwarven Hammer",
+        "Elven Rapier",
+        "Giant’s Club"
+      ],
+      "archetype": [
+        "Soldier’s Combat Training",
+        "Gladiator’s Mastery",
+        "Brawler’s Technique",
+        "Knight’s Discipline"
+      ],
+      "chemical": [
+        "Adrenaline Booster",
+        "Combat Stimulant",
+        "Strength Serum",
+        "Berserker Compound"
+      ]
+    },
+    "standard": [
+      "Combat Knife",
+      "Short Sword",
+      "Broad Sword",
+      "Greatsword",
+      "War Hammer",
+      "Poleaxe",
+      "Shock Glove",
+      "Monofilament Whip",
+      "Power Fist",
+      "Bio-talon",
+      "Vibro-Dagger",
+      "Rune Blade",
+      "Mace",
+      "Ceramic Kukri",
+      "Hookblade",
+      "Longword",
+      "2 handed sword",
+      "katana"
+    ],
+    "improvised": []
+  },
+  "RNG": {
+    "name": "Ranged Weapons",
+    "types": {
+      "hardwired": [
+        "Smartgun Link",
+        "Auto-Target Scope",
+        "Cyber Optic Reticle",
+        "Stabilizer Arm",
+        "Drone-Assisted Rifle"
+      ],
+      "wetwired": [
+        "Reflex Nerve Mod",
+        "Bio-Steady Grip",
+        "Enhanced Eye–Hand Coordination",
+        "Muscle Stabilization Therapy"
+      ],
+      "magic": [
+        "Lightning Bow",
+        "Wand of Firebolts",
+        "Magic Missile Focus",
+        "Elemental Shot Rune",
+        "Spellgun",
+        "elemental attack (fire, electricity, water, cold, wind)",
+        "harm talent",
+        "telekinetic"
+      ],
+      "racial": [
+        "Elven Archer Lineage",
+        "Dwarven Crossbow Craft",
+        "Orcish Throwing Instinct"
+      ],
+      "archetype": [
+        "Marksman’s Training",
+        "Sniper’s Discipline",
+        "Hunter’s Technique",
+        "Gunfighter’s Style"
+      ],
+      "chemical": [
+        "Focus Serum",
+        "Reflex Booster",
+        "Combat Drug",
+        "Aim Enhancer Compound"
+      ]
+    },
+    "standard": [
+      "Throwing Knife",
+      "Sling",
+      "Shortbow",
+      "Longbow",
+      "Crossbow",
+      "Hand Crossbow",
+      "Recurve Bow",
+      "Blowgun",
+      "Dart Gun",
+      "Light Pistol",
+      "Heavy Pistol",
+      "Revolver",
+      "Shotgun",
+      "Submachine Gun",
+      "Assault Rifle",
+      "Hunting Rifle",
+      "Sniper Rifle",
+      "Tranquilizer Gun",
+      "Energy Carbine",
+      "laz gun/rifle"
+    ],
+    "improvised": []
+  },
+  "UNM": {
+    "name": "Unarmed",
+    "types": {
+      "hardwired": [
+        "Cyber Fist",
+        "Hydraulic Arm",
+        "Reinforced Knuckles",
+        "Shock Gauntlet",
+        "Servo-Driven Strike System"
+      ],
+      "wetwired": [
+        "Bone Density Mod",
+        "Bio-Electric Pulse Gland",
+        "Reflex Muscle Enhancement",
+        "Adrenal Surge Node"
+      ],
+      "magic": [
+        "Fist of Flame",
+        "Lightning Punch",
+        "Divine Smite Strike",
+        "Ki-Infused Blow",
+        "Spirit Claw"
+      ],
+      "racial": [
+        "Orcish Brawler Lineage",
+        "Giant’s Grip"
+      ],
+      "archetype": [
+        "Monk’s Discipline",
+        "Brawler’s Technique",
+        "Martial Artist’s Focus",
+        "Street Fighter Training"
+      ],
+      "chemical": [
+        "Combat Stimulant",
+        "Reflex Enhancer",
+        "Pain Suppressant Serum",
+        "Muscle Boost Compound"
+      ]
+    },
+    "standard": [],
+    "improvised": [
+      "Broken Bottle",
+      "Lead Pipe",
+      "Crowbar",
+      "Chair Leg",
+      "Frying Pan",
+      "Baseball Bat",
+      "Wrench",
+      "Glass Shard",
+      "Belt with Buckle",
+      "Chain",
+      "Rope with Knot",
+      "Heavy Book",
+      "Rock / Brick",
+      "Garden Hoe",
+      "Rusted Nails (in a rag)",
+      "Metal Flashlight",
+      "Broken Chair",
+      "Folding Chair",
+      "Steel Cable Coil",
+      "Iron Rod",
+      "Spray Can & Lighter (improvised incendiary)",
+      "Tin Can with Nails (shrapnel)",
+      "Sharp Spoon",
+      "club",
+      "staff."
+    ]
+  },
+  "ARM": {
+    "name": "Armor",
+    "types": {
+      "hardwired": [
+        "Power Armor",
+        "Reactive Plating",
+        "Servo-Assisted Exosuit",
+        "Ballistic Mesh Weave",
+        "Kinetic Dampening Field"
+      ],
+      "wetwired": [
+        "Bio-Reinforced Skin",
+        "Gene-Toughened Tissue",
+        "Adaptive Muscle Layer",
+        "Organic Armor Growth"
+      ],
+      "magic": [
+        "Enchanted Armor",
+        "Shielding Ward",
+        "Mystic Barrier",
+        "Stoneskin Rune",
+        "Holy Aegis"
+      ],
+      "racial": [
+        "Dwarven Forgeplate",
+        "Orcish Battlehide",
+        "Giant’s Endurance"
+      ],
+      "archetype": [
+        "Soldier’s Training",
+        "Knight’s Discipline",
+        "Guardian’s Stance",
+        "Gladiator’s Conditioning"
+      ],
+      "chemical": [
+        "Dermal Hardener Serum",
+        "Pain Suppressant",
+        "Combat Stimulant",
+        "Resilience Drug"
+      ]
+    },
+    "standard": [
+      "Padded Armor",
+      "Leather Armor",
+      "Reinforced Jacket",
+      "Chain Shirt",
+      "Kevlar Vest",
+      "Chainmail",
+      "Tactical Armor",
+      "Scale Mail",
+      "Breastplate",
+      "Combat Suit",
+      "Half-Plate",
+      "Powered Vest",
+      "Full Plate",
+      "Riot Armor",
+      "Exo-Frame Suit",
+      "Stealth Weave Suit",
+      "Ballistic Coat",
+      "Nano-Mesh Armor",
+      "Environmental Suit",
+      "dodgy",
+      "shield"
+    ],
+    "improvised": []
+  },
+  "ST": {
+    "name": "Strength",
+    "types": {
+      "hardwired": [
+        "Cyberarm",
+        "Hydraulic Muscles",
+        "Servo-Boost Frame",
+        "Exo-Skeleton Ring",
+        "Reinforced Bone Lattice",
+        "Power Gauntlet"
+      ],
+      "wetwired": [
+        "Vat-Grown Muscles",
+        "Gene-Spliced Tendons",
+        "Regenerative Hormone Pump",
+        "Bone Density Serum"
+      ],
+      "magic": [
+        "Blessing of Giants",
+        "Strength of the Bear",
+        "Titan’s Tattoo",
+        "War God’s Favor",
+        "Enchanted Gauntlets",
+        "Rune of Might"
+      ],
+      "racial": [
+        "Orcish Bulk",
+        "Giant Heritage",
+        "Dwarven Endurance"
+      ],
+      "archetype": [
+        "Barbarian’s Fury",
+        "Soldier’s Training",
+        "Martial Conditioning",
+        "Brawler’s Build"
+      ],
+      "chemical": [
+        "Combat Stims",
+        "Adrenaline Injector",
+        "Titan Serum",
+        "Muscle Fiber Tonic",
+        "Combat Drug"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "DX": {
+    "name": "Dexterity",
+    "types": {
+      "hardwired": [
+        "Neural Reflex Booster",
+        "Motion-Assisted Joints",
+        "Cyber Reflex Spine",
+        "Balance Gyro",
+        "Smartgrip Fingers",
+        "Targeting Reticle"
+      ],
+      "wetwired": [
+        "Reflex Gland Enhancement",
+        "Gene-Tuned Nervous System",
+        "Adrenal Reflex Pump",
+        "Tendon Reinforcement Therapy"
+      ],
+      "magic": [
+        "Cat’s Grace",
+        "Boots of Balance",
+        "Spirit of Wind",
+        "Enchanted Reflex Rune",
+        "Chrono-Sense Tattoo"
+      ],
+      "racial": [
+        "Elven Agility",
+        "Fey Reflexes"
+      ],
+      "archetype": [
+        "Gunslinger’s Draw",
+        "Acrobat’s Flow",
+        "Rogue’s Precision",
+        "Duelist’s Stance"
+      ],
+      "chemical": [
+        "Reflex Stims",
+        "Focus Tonic",
+        "Combat Neuro-Accelerant",
+        "Reaction Mod"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "EN": {
+    "name": "Endurance",
+    "types": {
+      "hardwired": [
+        "Subdermal Armor",
+        "Reinforced Skeleton",
+        "Cyber-Heart",
+        "Internal Cooling System",
+        "Respiratory Filters",
+        "Nanite Repair Mesh"
+      ],
+      "wetwired": [
+        "Gene-Stabilized Metabolism",
+        "Bio-Regen Tissues",
+        "Enhanced Immune Matrix",
+        "Hormonal Resilience Therapy"
+      ],
+      "magic": [
+        "Aura of Vitality",
+        "Enduring Spirit",
+        "Stonehide Charm",
+        "Blessing of Fortitude",
+        "Regeneration Tattoo"
+      ],
+      "racial": [
+        "Dwarven Constitution",
+        "Giant’s Stamina",
+        "Orcish Toughness"
+      ],
+      "archetype": [
+        "Soldier’s Discipline",
+        "Monk’s Conditioning",
+        "Survivor’s Grit",
+        "Marathoner’s Training"
+      ],
+      "chemical": [
+        "Pain Suppressant",
+        "Enduro-Drug",
+        "Metabolic Booster",
+        "Combat Stimulant",
+        "Blood Oxygen Enhancer"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "INU": {
+    "name": "Intuition",
+    "types": {
+      "hardwired": [
+        "Predictive Algorithm Implant",
+        "Tactical HUD",
+        "Sensory Sync Node",
+        "Neural Pattern Reader",
+        "Micro-AI Assistant"
+      ],
+      "wetwired": [
+        "Gene-Tuned Perception",
+        "Neuro-Adaptive Cortex",
+        "Instinct Reinforcement Therapy",
+        "Empathic Sensory Mod"
+      ],
+      "magic": [
+        "Third Eye Rune",
+        "Divination Charm",
+        "Spirit Insight",
+        "Precognition Tattoo",
+        "Foresight Blessing"
+      ],
+      "racial": [
+        "Elven Awareness",
+        "Fey Perception"
+      ],
+      "archetype": [
+        "Investigator’s Instinct",
+        "Scout’s Awareness",
+        "Gambler’s Read",
+        "Detective’s Hunch"
+      ],
+      "chemical": [
+        "Focus Enhancer",
+        "Clarity Serum",
+        "Neural Accelerator",
+        "Sensory Boost Compound"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "EDU": {
+    "name": "Education",
+    "types": {
+      "hardwired": [
+        "Datajack Interface",
+        "Knowledge Chipset",
+        "Memory Storage Implant",
+        "Neural Uplink",
+        "Cognitive Augmentor"
+      ],
+      "wetwired": [
+        "Gene-Boosted Memory",
+        "Cognitive Optimization Therapy",
+        "Neural Growth Enhancement",
+        "Bio-Learning Adaptation"
+      ],
+      "magic": [
+        "Tome of Wisdom",
+        "Scholar’s Rune",
+        "Arcane Insight",
+        "Blessing of Knowledge",
+        "Lorekeeper’s Tattoo"
+      ],
+      "racial": [
+        "Elven Scholar Lineage",
+        "Dwarven Craft Memory"
+      ],
+      "archetype": [
+        "Academic Training",
+        "Researcher’s Discipline",
+        "Engineer’s Schooling",
+        "Historian’s Study"
+      ],
+      "chemical": [
+        "Nootropic Compound",
+        "Focus Serum",
+        "Neural Enhancer",
+        "Study Stimulant"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "CHA": {
+    "name": "Charisma",
+    "types": {
+      "hardwired": [
+        "Voice Modulator",
+        "Emotion Projection Implant",
+        "Facial Sculpt Mod",
+        "Holo-Aura Projector",
+        "Neural Empathy Synth"
+      ],
+      "wetwired": [
+        "Pheromone Regulation",
+        "Emotional Resonance Gland",
+        "Bio-Aesthetic Enhancement",
+        "Empathic Neuro-Sync"
+      ],
+      "magic": [
+        "Charm Spell",
+        "Aura of Command",
+        "Enchantment Sigil",
+        "Glamour Rune",
+        "Spirit of Persuasion"
+      ],
+      "racial": [
+        "Elven Grace",
+        "Fey Presence"
+      ],
+      "archetype": [
+        "Diplomat’s Training",
+        "Performer’s Flair",
+        "Leader’s Bearing",
+        "Con Artist’s Confidence"
+      ],
+      "chemical": [
+        "Social Enhancer",
+        "Charisma Booster",
+        "Confidence Serum",
+        "Empathy Stimulant",
+        "Skills"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "ATK": {
+    "name": "Attack",
+    "types": {
+      "hardwired": [
+        "Smartgun Link",
+        "Targeting Reticle",
+        "Cyber-Optic Scope",
+        "Servo Arm",
+        "Weapon Sync Implant"
+      ],
+      "wetwired": [
+        "Reflex-Splice Tendons",
+        "Precision Muscle Mod",
+        "Neural Strike Pathway",
+        "Combat Instinct Gland"
+      ],
+      "magic": [
+        "Weapon of Power",
+        "Flaming Blade",
+        "Arcane Strike",
+        "Lightning Touch",
+        "Channelled Smite"
+      ],
+      "racial": [
+        "Orcish Fury",
+        "Giant’s Might"
+      ],
+      "archetype": [
+        "Soldier’s Training",
+        "Duelist’s Discipline",
+        "Hunter’s Aim",
+        "Gladiator’s Focus"
+      ],
+      "chemical": [
+        "Rage Injector",
+        "Adrenal Surge",
+        "Combat Stimulant",
+        "Focus Serum"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "INF": {
+    "name": "Influence",
+    "types": {
+      "hardwired": [
+        "Neural Persuasion Chip",
+        "Vocal Modulator",
+        "Emotion Mapping Implant",
+        "Eye Contact Optimizer",
+        "Empathy Synthesizer"
+      ],
+      "wetwired": [
+        "Pheromone Control Gland",
+        "Empathic Resonance Therapy",
+        "Gene-Tuned Presence",
+        "Neurochemical Rapport Mod"
+      ],
+      "magic": [
+        "Aura of Command",
+        "Silver Tongue Spell",
+        "Enchantment Sigil",
+        "Glamour Ward",
+        "Charm Rune"
+      ],
+      "racial": [
+        "Elven Charm",
+        "Fey Diplomacy"
+      ],
+      "archetype": [
+        "Politician’s Tact",
+        "Diplomat’s Training",
+        "Negotiator’s Patience",
+        "Performer’s Charisma"
+      ],
+      "chemical": [
+        "Confidence Booster",
+        "Social Enhancer",
+        "Truth Serum",
+        "Influence Compound"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "KNW": {
+    "name": "Knowledge",
+    "types": {
+      "hardwired": [
+        "Datajack Uplink",
+        "Infochip Archive",
+        "Cognitive Processor",
+        "Research AI Link",
+        "Neural Database Implant"
+      ],
+      "wetwired": [
+        "Gene-Boosted Memory",
+        "Cognitive Expansion Therapy",
+        "Bio-Learning Enhancement",
+        "Neural Pattern Optimizer"
+      ],
+      "magic": [
+        "Tome of Secrets",
+        "Lore Rune",
+        "Arcane Insight",
+        "Divination Sigil",
+        "Blessing of Wisdom"
+      ],
+      "racial": [
+        "Dwarven Craft Lore",
+        "Elven History"
+      ],
+      "archetype": [
+        "Scholar’s Study",
+        "Investigator’s Training",
+        "Engineer’s Research",
+        "Historian’s Discipline"
+      ],
+      "chemical": [
+        "Nootropic Injection",
+        "Focus Compound",
+        "Learning Serum",
+        "Clarity Stimulant"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "OBS": {
+    "name": "Observation",
+    "types": {
+      "hardwired": [
+        "Cyber Optics",
+        "Multi-Spectrum Scanner",
+        "Audio Filter Implant",
+        "Sensor Array",
+        "Targeting HUD"
+      ],
+      "wetwired": [
+        "Gene-Tuned Eyes",
+        "Enhanced Sensory Cortex",
+        "Pheromone Detection Gland",
+        "Reflexive Perception Node"
+      ],
+      "magic": [
+        "True Sight Rune",
+        "Clairvoyance Charm",
+        "Diviner’s Focus",
+        "Eagle Eye Enchantment",
+        "Spirit Sight"
+      ],
+      "racial": [
+        "Elven Eyes",
+        "Dwarven Detail Sense"
+      ],
+      "archetype": [
+        "Detective’s Focus",
+        "Hunter’s Awareness",
+        "Scout’s Vigilance",
+        "Sniper’s Patience"
+      ],
+      "chemical": [
+        "Focus Enhancer",
+        "Perception Booster",
+        "Awareness Drug",
+        "Sensory Stimulant"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "OUT": {
+    "name": "Outdoors",
+    "types": {
+      "hardwired": [
+        "Environmental Filter Implant",
+        "Climate Suit Interface",
+        "Terrain Scanner",
+        "GPS Neural Link",
+        "Drone Pathfinder"
+      ],
+      "wetwired": [
+        "Adaptive Physiology",
+        "Thermal Regulation Gland",
+        "Enhanced Lung Capacity",
+        "Bio-Camouflage Skin"
+      ],
+      "magic": [
+        "Nature’s Blessing",
+        "Hunter’s Mark",
+        "Beast Tongue Rune",
+        "Druidic Ward",
+        "Weather Sense Charm"
+      ],
+      "racial": [
+        "Elven Survival Instincts",
+        "Orcish Endurance",
+        "Dwarven Pathfinder"
+      ],
+      "archetype": [
+        "Ranger’s Training",
+        "Explorer’s Instinct",
+        "Hunter’s Discipline",
+        "Survivalist’s Craft"
+      ],
+      "chemical": [
+        "Endurance Booster",
+        "Adrenaline Surge",
+        "Anti-Fatigue Compound",
+        "Focus Serum"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "SNK": {
+    "name": "Sneak",
+    "types": {
+      "hardwired": [
+        "Optical Camouflage Implant",
+        "Sound Dampening Pads",
+        "Thermal Masking Mesh",
+        "Cloak Field Generator",
+        "Stealth Subroutine"
+      ],
+      "wetwired": [
+        "Adaptive Skin Pigmentation",
+        "Silent Respiration Mod",
+        "Flex-Muscle Gene Mod",
+        "Pheromone Suppression Gland"
+      ],
+      "magic": [
+        "Invisibility Spell",
+        "Shadow Walk",
+        "Silence Ward",
+        "Illusion Veil",
+        "Ghost Step Charm"
+      ],
+      "racial": [
+        "Halfling Nimbleness",
+        "Elven Shadowstep"
+      ],
+      "archetype": [
+        "Thief’s Training",
+        "Assassin’s Patience",
+        "Scout’s Evasion",
+        "Spy’s Discipline"
+      ],
+      "chemical": [
+        "Reflex Suppressant",
+        "Stealth Serum",
+        "Nerve Calmer",
+        "Focus Injection"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "TECH": {
+    "name": "Technology",
+    "types": {
+      "hardwired": [
+        "Cyber Interface Jack",
+        "Neural Uplink",
+        "Drone Control Modulator",
+        "Tech Manipulator Arm",
+        "Circuit Integration Implant"
+      ],
+      "wetwired": [
+        "Gene-Linked Neural Pathway",
+        "Bio-Interface Growth",
+        "Organic Processor Node",
+        "Adaptive Synapse Bridge"
+      ],
+      "magic": [
+        "Arcane Circuit",
+        "Infused Device",
+        "Enchanted Gear",
+        "Spell-Powered Machine"
+      ],
+      "racial": [
+        "Dwarven Engineer",
+        "Constructed Heritage",
+        "Machineborn"
+      ],
+      "archetype": [
+        "Mechanic’s Training",
+        "Engineer’s Discipline",
+        "Inventor’s Craft",
+        "Hacker’s Expertise"
+      ],
+      "chemical": [
+        "Focus Stimulant",
+        "Logic Enhancer",
+        "Neural Drive Compound",
+        "Productivity Booster"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  },
+  "VEH": {
+    "name": "Vehicle",
+    "types": {
+      "hardwired": [
+        "Neural Drive Link",
+        "Vehicle Control Modulator",
+        "Gyro-Balance Implant",
+        "Motion Sync Harness",
+        "Pilot Interface Chip"
+      ],
+      "wetwired": [
+        "Reflex Sync Gland",
+        "Bio-Adapted Inner Ear",
+        "Endurance Conditioning Therapy",
+        "Enhanced Vestibular Mod"
+      ],
+      "magic": [
+        "Pilot’s Blessing",
+        "Wind Guidance Charm",
+        "Mechanized Familiar",
+        "Speed Rune",
+        "Arcane Stabilizer"
+      ],
+      "racial": [
+        "Dwarven Mechanist",
+        "Orcish Driver",
+        "Faerie Sky Pilot"
+      ],
+      "archetype": [
+        "Driver’s Training",
+        "Ace Pilot Discipline",
+        "Wheelman’s Reflex",
+        "Racer’s Instinct"
+      ],
+      "chemical": [
+        "Focus Injector",
+        "Reaction Enhancer",
+        "Combat Drive Stimulant",
+        "Clarity Serum",
+        "Health Mods"
+      ]
+    },
+    "standard": [],
+    "improvised": []
+  }
+}
+const descriptorTypesByStyle = {
+  modern: ['hardwired', 'chemical', 'archetype'],
+  fantasy: ['magic', 'wetwired', 'archetype'],
+  cyber: ['hardwired', 'wetwired', 'chemical', 'archetype'],
+  mystic: ['magic', 'wetwired', 'archetype'],
+  science: ['hardwired', 'wetwired', 'chemical', 'archetype'],
+  street: ['chemical', 'hardwired', 'archetype'],
+  elegant: ['magic', 'hardwired', 'archetype'],
+  western: ['chemical', 'archetype'],
+  martial: ['magic', 'wetwired', 'chemical', 'archetype'],
+}
+const racialDescriptorTerms = {
+  Cyborg: ['cyber', 'machineborn', 'constructed'],
+  Dwarf: ['dwarf', 'dwarven'],
+  Elf: ['elf', 'elven'],
+  Fairy: ['fairy', 'faerie', 'fey'],
+  Gnome: ['gnome', 'gnomish'],
+  Giant: ['giant'],
+  Halfling: ['halfling'],
+  Human: ['human'],
+  Orc: ['orc', 'orcish'],
+  SAI: ['machineborn', 'constructed'],
+}
+const archetypeDescriptorTerms = {
+  Barbarian: ['barbarian', 'berserker', 'brawler', 'gladiator', 'survivor', 'martial'],
+  'Bounty Hunter': ['hunter', 'ranger', 'scout', 'investigator'],
+  Brainiac: ['academic', 'researcher', 'scholar', 'historian', 'engineer', 'inventor'],
+  Cleric: ['cleric', 'healer', 'guardian', 'paladin', 'devotion'],
+  Commando: ['soldier', 'marksman', 'combat', 'defender', 'guardian'],
+  Criminal: ['rogue', 'thief', 'con artist', 'brawler', 'wheelman', 'gambler'],
+  Druid: ['druid', 'ranger', 'hunter', 'survivalist', 'explorer'],
+  'Eco Terrorist': ['ranger', 'survivalist', 'infiltrator', 'saboteur', 'explorer'],
+  'Ex-Company Man': ['diplomat', 'leader', 'negotiator', 'academic', 'spy'],
+  'Ex-Cop': ['detective', 'investigator', 'soldier', 'marksman', 'guardian'],
+  'Ex-Military': ['soldier', 'combat', 'marksman', 'defender', 'survivor', 'marathoner'],
+  Face: ['diplomat', 'performer', 'leader', 'con artist', 'politician', 'negotiator', 'actor'],
+  Fixer: ['negotiator', 'con artist', 'politician', 'mechanic', 'diplomat'],
+  Ganger: ['street fighter', 'brawler', 'wheelman', 'gunfighter', 'survivor'],
+  'Gonzo Journalist': ['investigator', 'researcher', 'detective', 'explorer'],
+  Gunslinger: ['gunslinger', 'gunfighter', 'marksman', 'duelist'],
+  Hacker: ['hacker', 'engineer', 'inventor', 'researcher', 'mechanic'],
+  'Mad Bomber': ['engineer', 'inventor', 'mechanic', 'saboteur'],
+  Mage: ['mage', 'illusionist', 'mystic', 'scholar', 'mentalist'],
+  Mercenary: ['soldier', 'combat', 'marksman', 'gladiator', 'survivor'],
+  Monk: ['monk', 'martial artist', 'acrobat', 'mystic', 'discipline'],
+  Ninja: ['ninja', 'assassin', 'infiltrator', 'shadow dancer', 'acrobat', 'scout'],
+  Performer: ['performer', 'actor', 'acrobat', 'diplomat'],
+  'Private Eye/Investigator': ['investigator', 'detective', 'researcher', 'mentalist'],
+  Screamer: ['driver', 'pilot', 'wheelman', 'racer', 'mechanic'],
+  Shaman: ['mystic', 'healer', 'oracle', 'druid'],
+  Smuggler: ['pilot', 'driver', 'wheelman', 'infiltrator', 'negotiator'],
+  Sniper: ['sniper', 'marksman', 'hunter', 'scout'],
+  Spy: ['spy', 'infiltrator', 'assassin', 'actor', 'master of disguise'],
+  'Street Doc': ['medic', 'healer', 'field surgeon', 'researcher'],
+  'Street Samurai': ['duelist', 'martial artist', 'soldier', 'guardian', 'combat'],
+  Warlock: ['mystic', 'mage', 'illusionist', 'mentalist'],
+}
+const racialDescriptorMatches = (name, species) => (racialDescriptorTerms[species] || []).some(term => name.toLowerCase().includes(term))
+const archetypeDescriptorMatches = (name, archetypeName) => (archetypeDescriptorTerms[archetypeName] || []).some(term => name.toLowerCase().includes(term))
+const descriptorMatchesCharacter = (name, descriptorType, archetypeName, species) => descriptorType === 'racial'
+  ? racialDescriptorMatches(name, species)
+  : descriptorType !== 'archetype' || archetypeDescriptorMatches(name, archetypeName)
+const descriptorTypesFor = (archetypeName, species) => {
+  const style = weaponStyleByArchetype[archetypeName] || 'modern'
+  return [...(descriptorTypesByStyle[style] || descriptorTypesByStyle.modern), ...(species ? ['racial'] : [])]
+}
+const suppliedWeaponStandardByType = {
+  'Unarmed / Tiny Melee': suppliedDescriptorOptions.UNM.improvised,
+  'Light Melee': ['Combat Knife', 'Short Sword', 'Shock Glove', 'Bio-talon', 'Vibro-Dagger', 'Ceramic Kukri', 'Hookblade'],
+  'Medium Melee': ['Broad Sword', 'War Hammer', 'Poleaxe', 'Rune Blade', 'Mace', 'Longword', 'katana', 'Baseball Bat', 'Crowbar', 'Lead Pipe', 'Frying Pan', 'Wrench', 'Chair Leg', 'Chain', 'Staff'],
+  'Heavy Melee': ['Greatsword', '2 handed sword', 'Rock / Brick', 'Folding Chair', 'Steel Cable Coil', 'Iron Rod'],
+  'Holdout Ranged': ['Throwing Knife', 'Sling', 'Hand Crossbow', 'Blowgun', 'Dart Gun', 'Light Pistol'],
+  'Compact Ranged': ['Shortbow', 'Recurve Bow', 'Heavy Pistol', 'Revolver', 'Submachine Gun', 'Tranquilizer Gun'],
+  'Longarm Ranged': ['Longbow', 'Crossbow', 'Shotgun', 'Assault Rifle', 'Hunting Rifle', 'Energy Carbine', 'laz gun/rifle'],
+  'Heavy Ranged': ['Sniper Rifle'],
+}
+const suppliedWeaponNames = (archetypeName, type, species) => {
+  const family = type === 'Unarmed / Tiny Melee' ? suppliedDescriptorOptions.UNM : type.includes('Melee') ? suppliedDescriptorOptions.MELEE : suppliedDescriptorOptions.RNG
+  const typeNames = descriptorTypesFor(archetypeName, species).flatMap(descriptorType => {
+    const names = family.types[descriptorType] || []
+    return names.filter(name => descriptorMatchesCharacter(name, descriptorType, archetypeName, species))
+  })
+  return [...typeNames, ...(suppliedWeaponStandardByType[type] || [])]
+}
 const weaponStyleByArchetype = {
   Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Brainiac: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
 }
@@ -353,25 +1320,25 @@ const archetypeWeaponVariants = {
   ],
 }
 const minimumWeaponNamesPerType = 20
-const weaponNamePool = (archetypeName, type, extraNames = []) => {
+const weaponNamePool = (archetypeName, type, extraNames = [], species = '') => {
   const style = weaponStyleByArchetype[archetypeName] || 'modern'
   const baseNames = weaponStylePools[style]?.[type] || weaponStylePools.modern[type] || []
-  const names = [...new Set(expandWeaponNames([...extraNames, ...baseNames]))]
+  const names = [...new Set([...expandWeaponNames([...extraNames, ...baseNames]), ...suppliedWeaponNames(archetypeName, type, species)])]
   if (import.meta.env.DEV && names.length < minimumWeaponNamesPerType) console.warn(`${archetypeName} should have at least ${minimumWeaponNamesPerType} names for ${type}`)
   return names
 }
-const generatedWeaponNamesForType = (archetypeName, type) => {
+const generatedWeaponNamesForType = (archetypeName, type, species = '') => {
   const loadout = weaponLoadouts[archetypeName] || []
   const extras = loadout.flatMap(([defaultName, loadoutType], slotIndex) => loadoutType === type ? (archetypeWeaponVariants[archetypeName]?.[slotIndex] || [defaultName]) : [])
-  return weaponNamePool(archetypeName, type, extras)
+  return weaponNamePool(archetypeName, type, extras, species)
 }
-const weaponNameIsUnedited = (weapon, archetypeName) => {
+const weaponNameIsUnedited = (weapon, archetypeName, species = '') => {
   if (weapon.nameCustomized) return false
   if (!weapon.name?.trim()) return true
   if (weapon.generatedName) return weapon.name === weapon.generatedName
-  return weapon.source === 'archetype' && generatedWeaponNamesForType(archetypeName, weapon.type).includes(weapon.name)
+  return weapon.source === 'archetype' && generatedWeaponNamesForType(archetypeName, weapon.type, species).includes(weapon.name)
 }
-const characterDataVersion = 0
+const characterDataVersion = 1
 const weaponNotesByType = {
   'Unarmed / Tiny Melee': 'Automatically concealed.',
   'Light Melee': 'Automatically concealed.',
@@ -382,13 +1349,14 @@ const weaponNotesByType = {
   'Longarm Ranged': 'TN 12 Observation to conceal.',
   'Heavy Ranged': 'Cannot be concealed; must be fired from a braced position.',
 }
-const weaponLoadoutMarker = archetypeName => `${characterDataVersion}:${archetypeName}`
-const populateArchetypeWeapons = (existingWeapons, archetypeName) => {
+const weaponLoadoutMarker = (archetypeName, species = '') => `${characterDataVersion}:${archetypeName}:${species}`
+const populateArchetypeWeapons = (existingWeapons, archetypeName, species = '') => {
   const weapons = existingWeapons.filter(weapon => weapon.source !== 'archetype').map(weapon => ({ ...weapon }))
   const usedNames = new Set()
   ;(weaponLoadouts[archetypeName] || []).forEach(([defaultName, type], slotIndex) => {
     const specificPool = archetypeWeaponVariants[archetypeName]?.[slotIndex]
-    const pool = (specificPool?.length ? expandWeaponNames(specificPool) : weaponNamePool(archetypeName, type, [defaultName])).filter(name => !usedNames.has(name))
+    const specificNames = specificPool?.length ? expandWeaponNames(specificPool) : []
+    const pool = [...specificNames, ...weaponNamePool(archetypeName, type, [defaultName], species)].filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
     const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
@@ -466,7 +1434,80 @@ const archetypeItemVariations = {
   'Street Samurai': [['Threat-Outline Cybereyes', '(+2) Observation — Mark concealed weapons and imminent movement.'], ['Magnetic Rooftop Tabi', '(+1) Sneak — Grip steel architecture without scraping or slipping.']],
   Warlock: [['Hellglass Eye', '(+2) Intuition — Reveals bargains, bindings, and the attention of distant powers.'], ['Ashen Summoner’s Coat', '(+1) Sneak — Swallows light and the traces left by forbidden rituals.']],
 }
-const itemDataVersion = 2
+const suppliedScoreDescriptorTargets = [
+  ['ST', 'strength', 'Strength'], ['DX', 'dexterity', 'Dexterity'], ['EN', 'endurance', 'Endurance'],
+  ['INU', 'intuition', 'Intuition'], ['EDU', 'education', 'Education'], ['CHA', 'charisma', 'Charisma'],
+  ['ATK', 'attack', 'Attack'], ['INF', 'influence', 'Influence'], ['KNW', 'knowledge', 'Knowledge'],
+  ['OBS', 'observation', 'Observation'], ['OUT', 'outdoors', 'Outdoors'], ['SNK', 'sneak', 'Sneak'],
+  ['TECH', 'technology', 'Technology'], ['VEH', 'vehicle', 'Vehicle'], ['ARM', 'defense', 'Defense'],
+]
+const descriptorMethodDescriptions = {
+  hardwired: 'Installed machinery converts intent into consistent, precisely controlled performance.',
+  wetwired: 'Engineered organic changes make the enhanced response feel instinctive rather than externally assisted.',
+  magic: 'A sustained supernatural effect reinforces the capability whenever practiced effort reaches its limit.',
+  racial: 'A species-linked tradition or physical inheritance provides a distinctive foundation for the talent.',
+  archetype: 'Specialized experience turns repeated training into reliable performance under pressure.',
+  chemical: 'A controlled enhancement regimen temporarily pushes the body or mind beyond its ordinary response.',
+  standard: 'Purpose-built protection and practical construction make the benefit dependable without exotic enhancement.',
+}
+const descriptorScorePurposes = {
+  strength: 'It supports lifting, forceful movement, and powerful close combat.',
+  dexterity: 'It sharpens balance, coordination, reaction time, and fine control.',
+  endurance: 'It sustains effort and protects the body through pain, fatigue, and hostile conditions.',
+  intuition: 'It accelerates pattern recognition and helps danger register before conscious analysis catches up.',
+  education: 'It preserves learned information and makes specialized training easier to retrieve and apply.',
+  charisma: 'It strengthens presence, emotional projection, and the confidence needed to command attention.',
+  attack: 'It makes offensive timing and weapon placement more accurate when a fight becomes chaotic.',
+  influence: 'It improves social reading and helps words land with the intended pressure or reassurance.',
+  knowledge: 'It organizes research and recall so obscure facts become useful at the moment they matter.',
+  observation: 'It reveals small changes, concealed threats, and evidence that ordinary attention overlooks.',
+  outdoors: 'It improves navigation, environmental adaptation, tracking, and survival away from settled ground.',
+  sneak: 'It suppresses the signs of movement and helps the user exploit cover, timing, and distraction.',
+  technology: 'It supports rapid diagnosis, interface control, repair, and manipulation of unfamiliar systems.',
+  vehicle: 'It synchronizes perception and control during difficult maneuvers, unstable terrain, and high speed.',
+  defense: 'It absorbs, redirects, or avoids incoming force before a solid hit can cause serious harm.',
+}
+const descriptorVariationDetails = [
+  'The effect remains subtle until the character is tested.',
+  'Careful calibration keeps the assistance from overwhelming practiced judgment.',
+  'Its limitations are understood well enough to be useful rather than reckless.',
+  'Repeated use has made the response part of the character’s normal rhythm.',
+  'The benefit is most visible when circumstances become unpredictable.',
+  'Maintenance and discipline keep the advantage reliable between missions.',
+  'The design favors controlled responses over dramatic but wasteful output.',
+  'Long familiarity lets the character compensate for its few remaining weaknesses.',
+  'A deliberately narrow focus prevents the benefit from becoming a dangerous crutch.',
+  'The response strengthens gradually as stress rises instead of activating all at once.',
+  'Its feedback is clear enough to guide action without demanding attention.',
+  'Field repairs have made it less elegant but more dependable than the original design.',
+  'The character has practiced with it until activation requires almost no conscious thought.',
+  'Redundant safeguards preserve the benefit when one component or technique fails.',
+  'It performs best during sustained effort rather than a single uncontrolled burst.',
+  'Personal adjustments make the response difficult for anybody else to reproduce.',
+  'Its construction prioritizes survival and repeatable results over comfort.',
+  'The advantage comes from consistency rather than replacing the character’s own decisions.',
+  'A conservative operating limit leaves enough reserve for emergencies.',
+  'Experience has taught exactly when to trust the assistance and when to ignore it.',
+  'The mechanism remains useful across different environments without constant adjustment.',
+]
+const suppliedItemCandidates = (archetypeName, species = '') => suppliedScoreDescriptorTargets.flatMap(([code, score, label]) => {
+  const category = suppliedDescriptorOptions[code]
+  if (!category) return []
+  const typed = descriptorTypesFor(archetypeName, species).flatMap(descriptorType => {
+    const names = category.types[descriptorType] || []
+    const allowedNames = names.filter(name => descriptorMatchesCharacter(name, descriptorType, archetypeName, species))
+    return allowedNames.map((name, index) => [
+      name,
+      `(+3) ${label} — ${descriptorMethodDescriptions[descriptorType]} ${descriptorScorePurposes[score]} ${descriptorVariationDetails[index % descriptorVariationDetails.length]}`,
+    ])
+  })
+  const standardArmor = code === 'ARM' ? category.standard.map((name, index) => [
+    name,
+    `(+3) ${label} — ${descriptorMethodDescriptions.standard} ${descriptorScorePurposes[score]} ${descriptorVariationDetails[index % descriptorVariationDetails.length]}`,
+  ]) : []
+  return [...typed, ...standardArmor]
+})
+const itemDataVersion = 3
 const itemLoadoutMarker = archetypeName => `${itemDataVersion}:${archetypeName}`
 const multiverseItemModels = ['Aetherwake', 'Amberlight', 'Ashfall', 'Astral Key', 'Blackglass', 'Brightcoil', 'Cinderheart', 'Clockstar', 'Crimson Echo', 'Dawnchime', 'Deepwell', 'Dreamwire', 'Eclipse', 'Emberline', 'Evernight', 'Farstar', 'Ghostkey', 'Glasswing', 'Gravemark', 'Greenfire', 'Hollow Sun', 'Iron Halo', 'Ivory Pulse', 'Jade Signal', 'Kingshade', 'Lightning Thread', 'Lost Compass', 'Midnight Bell', 'Mirrorwake', 'Moonspoke', 'Ninefold', 'Obsidian Hymn', 'Orichalcum', 'Pale Comet', 'Phoenix', 'Quantum Rose', 'Redshift', 'Riftglass', 'Silver Thorn', 'Skyfire', 'Solaris', 'Starfall', 'Stormkey', 'Sunspoke', 'Thornlight', 'Titan Song', 'Umbral', 'Voidlight', 'Wayfinder', 'Worldroot']
 const itemVariationDetails = [
@@ -510,19 +1551,22 @@ const itemScoresForCharacter = character => ({
   ...Object.fromEntries(stats.map(([key]) => [key, number(character.stats?.[key])])),
   ...Object.fromEntries(skillDefs.map(([key]) => [key, number(character.skills?.[key]?.ability)])),
   attack: number(character.attackSkill),
+  defense: number(character.defenseRating),
 })
-const populateArchetypeItems = (existingItems, archetypeName, scoreValues) => {
+const populateArchetypeItems = (existingItems, archetypeName, scoreValues, species = '') => {
   const traits = existingItems.filter(item => ['archetype', 'archetype-trait', 'species-trait'].includes(item.source)).map(item => ({ ...item, source: item.source === 'species-trait' ? item.source : 'archetype-trait' }))
   const items = existingItems.filter(item => !['archetype', 'archetype-trait', 'species-trait', 'archetype-item'].includes(item.source)).map(item => ({ ...item }))
-  const candidates = expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])])
+  const candidates = [...expandItemCandidates([...(archetypeItemLoadouts[archetypeName] || []), ...(archetypeItemVariations[archetypeName] || [])]), ...suppliedItemCandidates(archetypeName, species)]
     .map(candidate => fitItemToScores(candidate, scoreValues))
     .filter(Boolean)
   const selectedItems = []
   const coveredScores = new Set()
+  const selectedNames = new Set()
   shuffled(candidates).forEach(candidate => {
     const coverage = itemScoreCoverage(candidate)
-    if (selectedItems.length >= 3 || (coverage && coveredScores.has(coverage))) return
+    if (selectedItems.length >= 3 || selectedNames.has(candidate[0]) || (coverage && coveredScores.has(coverage))) return
     selectedItems.push(candidate)
+    selectedNames.add(candidate[0])
     if (coverage) coveredScores.add(coverage)
   })
   selectedItems.forEach(([name, description]) => {
@@ -876,11 +1920,11 @@ function CharacterSheet() {
       changed = true
     }
     let items = character.items
-    const needsWeaponLoadout = Boolean(archetype && character.weaponLoadoutAppliedFor !== weaponLoadoutMarker(character.archetype))
-    const weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype) : character.weapons
+    const needsWeaponLoadout = Boolean(archetype && character.weaponLoadoutAppliedFor !== weaponLoadoutMarker(character.archetype, character.species))
+    const weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype, character.species) : character.weapons
     if (needsWeaponLoadout) changed = true
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
-    if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character)); changed = true }
+    if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character), character.species); changed = true }
     let meleeAttackModifier = character.meleeAttackModifier
     let rangedAttackModifier = character.rangedAttackModifier
     if (meleeAttackModifier == null || rangedAttackModifier == null) {
@@ -897,7 +1941,7 @@ function CharacterSheet() {
       defenseCostVersion = 1
       changed = true
     }
-    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, updatedAt: Date.now() }))
+    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, updatedAt: Date.now() }))
   }, [character])
 
   useEffect(() => {
@@ -1011,13 +2055,13 @@ function CharacterSheet() {
   const setWeaponType = (index, type) => setCharacter(current => {
     const copy = structuredClone(current)
     const weapon = copy.weapons[index]
-    const refreshName = weaponNameIsUnedited(weapon, current.archetype)
+    const refreshName = weaponNameIsUnedited(weapon, current.archetype, current.species)
     weapon.type = type
     if (!weapon.notes?.trim()) weapon.notes = weaponNotesByType[type] || ''
     if (refreshName) {
       const usedNames = new Set(copy.weapons.filter((_, weaponIndex) => weaponIndex !== index).map(entry => entry.name).filter(Boolean))
-      const availableNames = generatedWeaponNamesForType(current.archetype, type).filter(name => !usedNames.has(name))
-      const name = availableNames[Math.floor(Math.random() * availableNames.length)] || generatedWeaponNamesForType(current.archetype, type)[0] || ''
+      const availableNames = generatedWeaponNamesForType(current.archetype, type, current.species).filter(name => !usedNames.has(name))
+      const name = availableNames[Math.floor(Math.random() * availableNames.length)] || generatedWeaponNamesForType(current.archetype, type, current.species)[0] || ''
       weapon.name = name
       weapon.generatedName = name
       weapon.nameCustomized = false
@@ -1061,8 +2105,8 @@ function CharacterSheet() {
         ? current.species
         : randomSpeciesChoices[Math.floor(Math.random() * randomSpeciesChoices.length)] || speciesNames[0] || ''
       const manualItems = current.items.filter(item => !['archetype', 'archetype-trait', 'species-trait', 'archetype-item'].includes(item.source))
-      const packageItemScores = { ...preset.stats, ...allocation }
-      const items = populateArchetypeItems(manualItems, preset.name, packageItemScores)
+      const packageItemScores = { ...preset.stats, ...allocation, defense: Math.max(1, number(current.defenseRating)) }
+      const items = populateArchetypeItems(manualItems, preset.name, packageItemScores, species)
       const usedItemNames = new Set(items.map(item => item.name?.trim()).filter(Boolean))
       randomStartingTraits(species, preset, usedItemNames).forEach(({ name, description, source }) => {
         const trait = { id: crypto.randomUUID(), name, description, source }
@@ -1070,7 +2114,7 @@ function CharacterSheet() {
         if (emptyIndex >= 0) items[emptyIndex] = { ...trait, id: items[emptyIndex].id || trait.id }
         else items.push(trait)
       })
-      const weapons = populateArchetypeWeapons(current.weapons, preset.name)
+      const weapons = populateArchetypeWeapons(current.weapons, preset.name, species)
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
       const attackFocus = attackFocusForArchetype(preset)
       let contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
@@ -1098,7 +2142,7 @@ function CharacterSheet() {
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
-        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), updatedAt: Date.now(),
+        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name, species), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), updatedAt: Date.now(),
       }
     })
     flash(`${preset.name} starting scores, skills, and traits applied`)
