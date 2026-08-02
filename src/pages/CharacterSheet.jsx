@@ -2083,6 +2083,27 @@ function CharacterSheet() {
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
         return
       }
+      if (request.intent === 'read-list') {
+        const list = commandKey(request.list)
+        const named = entries => entries.map(entry => entry.name?.trim()).filter(Boolean)
+        if (list === 'talents') {
+          const names = named(character.talents)
+          reply(names.length ? `${character.name}'s Talents are ${names.join(', ')}.` : `${character.name} has no Talents listed.`)
+        } else if (list === 'contacts') {
+          const contacts = character.contacts.filter(contact => contact.name?.trim() || contact.role?.trim()).map(contact => [contact.name, contact.role].filter(Boolean).join(', '))
+          reply(contacts.length ? `${character.name}'s Contacts are ${contacts.join('; ')}.` : `${character.name} has no Contacts listed.`)
+        } else if (list === 'weapons') {
+          const weapons = character.weapons.filter(weapon => weapon.name?.trim()).map(weapon => `${weapon.name}, ${weapon.type}`)
+          reply(weapons.length ? `${character.name}'s weapons are ${weapons.join('; ')}.` : `${character.name} has no weapons listed.`)
+        } else if (list === 'traits') {
+          const traits = named(character.items.filter(item => String(item.source || '').includes('trait')))
+          reply(traits.length ? `${character.name}'s Traits are ${traits.join(', ')}.` : `${character.name} has no generated Traits identified. Check the Items and Traits section for custom entries.`)
+        } else if (list === 'items') {
+          const items = named(character.items.filter(item => !String(item.source || '').includes('trait')))
+          reply(items.length ? `${character.name}'s Items are ${items.join(', ')}.` : `${character.name} has no Items listed.`)
+        } else reply(`I could not read the list ${request.list}.`)
+        return
+      }
       if (request.intent === 'preview-score' || request.intent === 'change-score') {
         const requestedKey = commandKey(request.score)
         const operation = request.operation || 'set'
@@ -2161,13 +2182,18 @@ function CharacterSheet() {
         return
       }
       if (request.intent === 'roll-check') {
-        const key = commandKey(request.check)
+        const cleanedCheck = String(request.check || '').replace(/^(?:a|an|my|the)\s+/i, '').replace(/\s+(?:skill|stat)?\s*(?:check|test|roll)$/i, '').trim()
+        const key = commandKey(cleanedCheck)
         const vitalModifiers = { ego: computed.ego, resilience: computed.resilience, initiative: computed.initiative }
-        let label = request.check
+        let label = cleanedCheck
         let modifier = vitalModifiers[key]
         if (modifier == null) {
           const skill = skillDefs.find(([skillKey, skillLabel]) => commandKey(skillKey) === key || commandKey(skillLabel) === key)
           if (skill) { label = skill[1]; modifier = number(character.stats[skill[2]]) + skillEntryTotal(character.skills[skill[0]]) }
+        }
+        if (modifier == null) {
+          const stat = stats.find(([statKey, statLabel, short]) => [statKey, statLabel, short].some(value => commandKey(value) === key))
+          if (stat) { label = stat[1]; modifier = number(character.stats[stat[0]]) }
         }
         if (modifier == null) { reply(`I could not find a roll named ${request.check}.`); return }
         const natural = rollDie(20)
