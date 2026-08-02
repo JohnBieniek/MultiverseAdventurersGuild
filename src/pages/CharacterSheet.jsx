@@ -2079,7 +2079,7 @@ function CharacterSheet() {
       const reply = message => request.reply?.(message)
       if (request.intent === 'read-vital') {
         const vital = commandKey(request.vital)
-        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP` }
+        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP`, totalxp: `${character.totalXp} Total XP`, unspentxp: `${character.unspentXp} Unspent XP` }
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
         return
       }
@@ -2102,6 +2102,34 @@ function CharacterSheet() {
           const items = named(character.items.filter(item => !String(item.source || '').includes('trait')))
           reply(items.length ? `${character.name}'s Items are ${items.join(', ')}.` : `${character.name} has no Items listed.`)
         } else reply(`I could not read the list ${request.list}.`)
+        return
+      }
+      if (request.intent === 'preview-progression' || request.intent === 'change-progression') {
+        const operation = request.operation || 'set'
+        const amount = Math.max(0, number(request.amount))
+        const currentValue = request.key === 'level' ? number(character.level) : request.key === 'unspent-xp' ? number(character.unspentXp) : number(character.totalXp)
+        let nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+        nextValue = request.key === 'level' ? Math.max(0, Math.min(10, nextValue)) : Math.max(0, nextValue)
+        const label = request.key === 'level' ? 'Level' : request.key === 'unspent-xp' ? 'Unspent XP' : 'Total XP'
+        if (request.intent === 'preview-progression') {
+          reply(`Change ${label} from ${currentValue} to ${nextValue}?`)
+          return
+        }
+        if (request.key === 'level') {
+          if (nextValue > currentValue) setLevelUp(nextValue)
+          setCharacter(current => {
+            const normalized = normalizeXpTracking(current)
+            return { ...normalized, level: nextValue, totalXp: normalized.totalXpManuallySet ? normalized.totalXp : xpForLevel(nextValue), unspentXp: normalized.totalXpManuallySet || normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(nextValue), talentRowsGrantedForLevel: Math.max(number(normalized.talentRowsGrantedForLevel), talentAllowanceForLevel(nextValue)), updatedAt: Date.now() }
+          })
+        } else if (request.key === 'unspent-xp') {
+          setCharacter(current => ({ ...current, unspentXp: nextValue, unspentXpManuallySet: true, updatedAt: Date.now() }))
+        } else {
+          const increase = Math.max(0, nextValue - currentValue)
+          const nextLevel = Math.max(number(character.level), levelForXp(nextValue))
+          if (nextLevel > number(character.level)) setLevelUp(nextLevel)
+          setCharacter(current => ({ ...current, level: Math.max(number(current.level), levelForXp(nextValue)), totalXp: nextValue, unspentXp: increase ? number(current.unspentXp) + increase : current.unspentXp, totalXpManuallySet: true, updatedAt: Date.now() }))
+        }
+        reply(`${label} changed from ${currentValue} to ${nextValue}.`)
         return
       }
       if (request.intent === 'preview-score' || request.intent === 'change-score') {
