@@ -2328,6 +2328,38 @@ function CharacterSheet() {
         reply(`${talent.name} added to ${character.name}. Remember to subtract 5 XP if this Talent was purchased.`)
         return
       }
+      if (request.intent === 'roll-expression') {
+        const expression = String(request.expression || '').toLowerCase()
+        const terms = expression.match(/[+-]?(?:(?:\d*)d\d+|\d+)/g) || []
+        let diceCount = 0
+        let total = 0
+        const details = []
+        for (const rawTerm of terms) {
+          const sign = rawTerm.startsWith('-') ? -1 : 1
+          const term = rawTerm.replace(/^[+-]/, '')
+          if (/d/i.test(term)) {
+            const [countText, sidesText] = term.split('d')
+            const count = countText ? Number(countText) : 1
+            const sides = Number(sidesText)
+            if (!Number.isInteger(count) || count < 1 || count > 100 || !Number.isInteger(sides) || sides < 2 || sides > 1000 || diceCount + count > 100) {
+              reply('Dice expressions may use up to 100 dice, with die sizes from d2 through d1000.')
+              return
+            }
+            const rolls = Array.from({ length: count }, () => rollDie(sides))
+            const subtotal = rolls.reduce((sum, roll) => sum + roll, 0) * sign
+            diceCount += count
+            total += subtotal
+            details.push(`${sign < 0 ? 'minus ' : ''}${count}d${sides} rolled ${rolls.join(', ')}`)
+          } else {
+            const modifier = Number(term) * sign
+            total += modifier
+            details.push(`${modifier >= 0 ? 'plus ' : 'minus '}${Math.abs(modifier)}`)
+          }
+        }
+        if (!terms.length) { reply(`I could not understand the dice expression ${request.expression}.`); return }
+        reply(`${expression} result: ${details.join('; ')}. Total ${total}.`)
+        return
+      }
       if (request.intent === 'roll-die') {
         const sides = Math.max(2, Math.min(100, number(request.sides)))
         const result = rollDie(sides)

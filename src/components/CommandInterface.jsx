@@ -350,6 +350,14 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
+      const diceExpressionMatch = spokenCommand.match(/^roll\s+(.+)$/i)
+      if (diceExpressionMatch) {
+        const expression = diceExpressionMatch[1].toLowerCase().replace(/\bplus\b/g, '+').replace(/\bminus\b/g, '-').replace(/\s+/g, '')
+        if (/^(?:\d*)d\d+(?:[+-](?:(?:\d*)d\d+|\d+))*$/i.test(expression)) {
+          respond(characterCommand({ intent: 'roll-expression', expression }))
+          return
+        }
+      }
       const dieMatch = spokenCommand.match(/^roll(?:\s+a)?\s+d(\d+)$/i)
       if (dieMatch) { respond(characterCommand({ intent: 'roll-die', sides: dieMatch[1] })); return }
       if (/^roll(?:\s+the)?\s+damage$/i.test(spokenCommand)) { respond(characterCommand({ intent: 'roll-damage' })); return }
