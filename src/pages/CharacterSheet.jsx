@@ -2117,6 +2117,32 @@ function CharacterSheet() {
         else reply(`I could not find the available options for ${request.list}.`)
         return
       }
+      if (request.intent === 'read-attack-total') {
+        const melee = request.mode === 'melee'
+        const statLabel = melee ? 'Strength' : 'Dexterity'
+        const stat = number(melee ? character.stats.strength : character.stats.dexterity)
+        const modifier = number(melee ? character.meleeAttackModifier : character.rangedAttackModifier)
+        const total = stat + number(character.attackSkill) + modifier
+        reply(`${melee ? 'Melee' : 'Ranged'} total to hit is ${signed(total)}: ${signed(stat)} ${statLabel}, ${signed(character.attackSkill)} Attack Skill, and ${signed(modifier)} ${melee ? 'Melee' : 'Ranged'} Attack modifier.`)
+        return
+      }
+      if (request.intent === 'read-weapon') {
+        const matches = findWeapons(String(request.weapon || '').replace(/\s+weapon$/i, ''))
+        if (!matches.length) { reply(`I could not find a carried weapon matching ${request.weapon}.`); return }
+        const bestRank = Math.floor(matches[0].score)
+        const bestMatches = matches.filter(match => Math.floor(match.score) === bestRank)
+        if (bestMatches.length > 1) { reply(`${request.weapon} matches more than one carried weapon: ${bestMatches.map(match => match.weapon.name || match.weapon.type).join(', ')}. Say more of the weapon's name.`); return }
+        const weapon = matches[0].weapon
+        const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
+        const statLabel = type[1] === 'melee' ? 'Strength' : 'Dexterity'
+        const stat = number(type[1] === 'melee' ? character.stats.strength : character.stats.dexterity)
+        const enhancement = number(weapon.enhancement)
+        const damageModifier = stat + enhancement
+        const damage = `d${type[2]} ${signed(damageModifier)}`
+        if (request.damageOnly) { reply(`${weapon.name || type[0]} deals ${damage} damage: ${signed(stat)} ${statLabel} and ${signed(enhancement)} Enhancement.`); return }
+        reply(`${weapon.name || 'Unnamed weapon'}. Type: ${type[0]}. Damage: ${damage}. Enhancement: ${signed(enhancement)}. Notes: ${weapon.notes?.trim() || 'None listed.'}`)
+        return
+      }
       if (request.intent === 'preview-add-weapon' || request.intent === 'add-weapon') {
         const requestedType = commandKey(request.type)
         const aliases = {
@@ -2274,13 +2300,20 @@ function CharacterSheet() {
         return
       }
       if (request.intent === 'explain-entry') {
-        const key = commandKey(request.entry)
+        const key = commandKey(String(request.entry || '').replace(/\s+weapon$/i, ''))
         const candidates = [
+          ...character.weapons.filter(weapon => weapon.name?.trim()).map(weapon => {
+            const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
+            const stat = number(type[1] === 'melee' ? character.stats.strength : character.stats.dexterity)
+            const damage = `d${type[2]} ${signed(stat + number(weapon.enhancement))}`
+            return { kind: 'Weapon', name: weapon.name, aliases: [weapon.type], description: `Type: ${weapon.type}. Damage: ${damage}. Enhancement: ${signed(weapon.enhancement)}. Notes: ${weapon.notes?.trim() || 'None listed.'}` }
+          }),
           ...character.items.filter(item => item.name?.trim()).map(item => ({ kind: String(item.source || '').includes('trait') ? 'Trait' : 'Item', name: item.name, description: item.description || 'No description is listed.' })),
           ...talentCatalog.map(talent => ({ kind: 'Talent', name: talent.name, description: `${talent.ability ? `${talent.ability}. ` : ''}${talent.notes || 'No additional description is available.'}${talent.duration ? ` Duration: ${talent.duration}.` : ''}` })),
         ]
-        const exact = candidates.filter(entry => commandKey(entry.name) === key)
-        const partial = exact.length ? exact : candidates.filter(entry => commandKey(entry.name).includes(key) || key.includes(commandKey(entry.name)))
+        const entryKeys = entry => [entry.name, ...(entry.aliases || [])].map(commandKey)
+        const exact = candidates.filter(entry => entryKeys(entry).includes(key))
+        const partial = exact.length ? exact : candidates.filter(entry => entryKeys(entry).some(entryKey => entryKey.includes(key) || key.includes(entryKey)))
         if (!partial.length) { reply(`I could not find an Item, Trait, or Talent matching ${request.entry}.`); return }
         if (partial.length > 1) { reply(`${request.entry} matches ${partial.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
         const entry = partial[0]

@@ -357,6 +357,18 @@ function CommandInterface() {
         respond(preview)
         return
       }
+      const readAttackTotalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+(?:(?:attack\s+)?total(?:\s+to\s+hit)?|to[ -]?hit(?:\s+(?:total|bonus))?|attack\s+bonus)$/i)
+      if (readAttackTotalMatch) {
+        const mode = /^(?:melee|close)/i.test(readAttackTotalMatch[1]) ? 'melee' : 'ranged'
+        respond(characterCommand({ intent: 'read-attack-total', mode }))
+        return
+      }
+      const readWeaponDamageMatch = spokenCommand.match(/^(?:what(?:'s| is)|tell me|read)\s+(?:the\s+)?damage(?:\s+(?:of|for))\s+(?:my\s+|the\s+)?(.+?)(?:\s+weapon)?$/i)
+        || spokenCommand.match(/^how\s+much\s+damage\s+does\s+(?:my\s+|the\s+)?(.+?)(?:\s+weapon)?\s+do$/i)
+      if (readWeaponDamageMatch) {
+        respond(characterCommand({ intent: 'read-weapon', weapon: readWeaponDamageMatch[1], damageOnly: true }))
+        return
+      }
       const explainEntryMatch = spokenCommand.match(/^(?:what does|what is|explain|read|tell me about)\s+(?:my\s+|the\s+)?(.+?)(?:\s+(?:talent|item|trait))?(?:\s+do)?$/i)
       if (explainEntryMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|force|energy|level|xp|experience|attack|melee|ranged|range|distance|close)/i.test(explainEntryMatch[1])) {
         respond(characterCommand({ intent: 'explain-entry', entry: explainEntryMatch[1] }))
