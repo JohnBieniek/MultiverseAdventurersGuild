@@ -2081,6 +2081,17 @@ function CharacterSheet() {
       }
       return row[right.length]
     }
+    const commandPhonetic = value => String(value || '').toLowerCase().match(/[a-z]+/g)?.map(word => {
+      const codes = { b: '1', f: '1', p: '1', v: '1', c: '2', g: '2', j: '2', k: '2', q: '2', s: '2', x: '2', z: '2', d: '3', t: '3', l: '4', m: '5', n: '5', r: '6' }
+      let previous = codes[word[0]] || ''
+      let tail = ''
+      for (const letter of word.slice(1)) {
+        const code = codes[letter] || ''
+        if (code && code !== previous) tail += code
+        previous = code
+      }
+      return `${tail}000`.slice(0, 3)
+    }).join('-') || ''
     const knownCommandOption = (options, requestedValue) => {
       const exact = options.find(option => commandKey(option) === commandKey(requestedValue))
       if (exact) return exact
@@ -2088,7 +2099,11 @@ function CharacterSheet() {
       const closest = ranked[0]
       const requestedLength = commandKey(requestedValue).length
       const uniqueClosest = closest && ranked.filter(candidate => candidate.distance === closest.distance).length === 1
-      return uniqueClosest && closest.distance <= 2 && closest.distance / Math.max(requestedLength, commandKey(closest.option).length, 1) <= .25 ? closest.option : requestedValue
+      if (uniqueClosest && closest.distance <= 2 && closest.distance / Math.max(requestedLength, commandKey(closest.option).length, 1) <= .25) return closest.option
+      const requestedPhonetic = commandPhonetic(requestedValue)
+      const phoneticMatches = ranked.filter(candidate => commandPhonetic(candidate.option) === requestedPhonetic
+        && candidate.distance <= Math.max(2, Math.ceil(Math.max(requestedLength, commandKey(candidate.option).length) * .5)))
+      return requestedPhonetic && phoneticMatches.length === 1 ? phoneticMatches[0].option : requestedValue
     }
     const findTalent = query => {
       const key = commandKey(query)
