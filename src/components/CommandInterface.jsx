@@ -364,7 +364,8 @@ function CommandInterface() {
       const dieMatch = spokenCommand.match(/^roll(?:\s+a)?\s+d(\d+)$/i)
       if (dieMatch) { respond(characterCommand({ intent: 'roll-die', sides: dieMatch[1] })); return }
       if (/^roll(?:\s+the)?\s+damage$/i.test(spokenCommand)) { respond(characterCommand({ intent: 'roll-damage' })); return }
-      const weaponMatch = spokenCommand.match(/^roll(?:\s+to\s+hit|\s+an?\s+attack)?\s+with\s+(?:my\s+|the\s+)?(.+?)(?:\s+weapon)?$/i)
+      const weaponMatch = spokenCommand.match(/^(?:roll(?:\s+to\s+hit|\s+an?\s+attack)?|attack|strike|shoot|fire)\s+with\s+(?:my\s+|the\s+)?(.+?)(?:\s+weapon)?$/i)
+        || spokenCommand.match(/^use\s+(?:my\s+|the\s+)?(.+?)(?:\s+weapon)?\s+to\s+(?:attack|strike|shoot|fire)$/i)
       if (weaponMatch) { respond(characterCommand({ intent: 'roll-weapon', weapon: weaponMatch[1] })); return }
       const rollMatch = spokenCommand.match(/^roll(?:\s+my)?\s+(.+)$/i)
       if (rollMatch) { respond(characterCommand({ intent: 'roll-check', check: rollMatch[1] })); return }

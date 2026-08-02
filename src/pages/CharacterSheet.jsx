@@ -2070,9 +2070,19 @@ function CharacterSheet() {
       const key = commandKey(query)
       return talentCatalog.find(talent => commandKey(talent.name) === key) || talentCatalog.filter(talent => commandKey(talent.name).includes(key) || key.includes(commandKey(talent.name))).find(() => true)
     }
-    const findWeapon = query => {
+    const findWeapons = query => {
       const key = commandKey(query)
-      return character.weapons.find(weapon => commandKey(weapon.name) === key || commandKey(weapon.type) === key) || character.weapons.find(weapon => commandKey(weapon.name).includes(key) || commandKey(weapon.type).includes(key) || key.includes(commandKey(weapon.type)))
+      if (!key) return []
+      return character.weapons.map(weapon => {
+        const name = commandKey(weapon.name)
+        const type = commandKey(weapon.type)
+        let score = Infinity
+        if (name === key) score = 0
+        else if (type === key) score = 1
+        else if (name.includes(key)) score = 2 + ((name.length - key.length) / Math.max(name.length, 1))
+        else if (type.includes(key) || key.includes(type)) score = 3 + (Math.abs(type.length - key.length) / Math.max(type.length, key.length, 1))
+        return { weapon, score }
+      }).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
     }
     const handleCommand = event => {
       const request = event.detail || {}
@@ -2292,8 +2302,12 @@ function CharacterSheet() {
         return
       }
       if (request.intent === 'roll-weapon') {
-        const weapon = findWeapon(request.weapon)
-        if (!weapon) { reply(`I could not find a carried weapon matching ${request.weapon}.`); return }
+        const matches = findWeapons(request.weapon)
+        if (!matches.length) { reply(`I could not find a carried weapon matching ${request.weapon}.`); return }
+        const bestRank = Math.floor(matches[0].score)
+        const bestMatches = matches.filter(match => Math.floor(match.score) === bestRank)
+        if (bestMatches.length > 1) { reply(`${request.weapon} matches more than one carried weapon: ${bestMatches.map(match => match.weapon.name || match.weapon.type).join(', ')}. Say more of the weapon's name.`); return }
+        const weapon = matches[0].weapon
         const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
         const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity
         const attackModifier = type[1] === 'melee' ? character.meleeAttackModifier : character.rangedAttackModifier
