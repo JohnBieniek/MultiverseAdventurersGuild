@@ -2101,6 +2101,12 @@ function CharacterSheet() {
         reply(values[request.field] || values.all)
         return
       }
+      if (request.intent === 'read-options') {
+        if (request.list === 'skills') reply(`The Skills are Attack, ${skillDefs.map(([, label]) => label).join(', ')}. Attack has its own section and applies to both melee and ranged attacks.`)
+        else if (request.list === 'stats') reply(`The Stats are ${stats.map(([, label]) => label).join(', ')}.`)
+        else reply(`I could not find the available options for ${request.list}.`)
+        return
+      }
       if (request.intent === 'preview-identity' || request.intent === 'change-identity') {
         const field = ['name', 'species', 'archetype'].includes(request.field) ? request.field : ''
         if (!field || !String(request.value || '').trim()) { reply('Tell me whether to change the name, Species, or Archetype and what its new value should be.'); return }

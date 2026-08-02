@@ -200,6 +200,14 @@ function CommandInterface() {
       return
     }
     if (onCharacterSheet) {
+      const optionListMatch = spokenCommand.match(/^(?:what|which)\s+(skills?|stats?|statistics?)\s+(?:are there|are available|exist|can i use)$/i)
+        || spokenCommand.match(/^(?:what|which)\s+are\s+(?:the\s+)?(?:available\s+|all\s+)?(skills?|stats?|statistics?)$/i)
+        || spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all|\s+the)?\s+(skills?|stats?|statistics?)$/i)
+      if (optionListMatch) {
+        const list = /^skill/i.test(optionListMatch[1]) ? 'skills' : 'stats'
+        respond(characterCommand({ intent: 'read-options', list }))
+        return
+      }
       const listMatch = spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all)?\s+(?:of\s+)?(?:my\s+)?(talents?|contacts?|weapons?|items?|traits?)$/i)
         || spokenCommand.match(/^(?:what|which)\s+(talents?|contacts?|weapons?|items?|traits?)\s+(?:do i have|am i carrying|are listed)$/i)
         || spokenCommand.match(/^(?:what|which|who)\s+are\s+my\s+(talents?|contacts?|weapons?|items?|traits?)$/i)
