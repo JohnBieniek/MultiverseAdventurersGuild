@@ -1372,6 +1372,12 @@ const legacyGeneratedWeaponNotes = {
   'Longarm Ranged': 'TN 12 Observation to conceal.',
   'Heavy Ranged': 'Cannot be concealed; must be fired from a braced position.',
 }
+const weaponNotesAreUnedited = weapon => {
+  if (weapon.notesCustomized) return false
+  if (!weapon.notes?.trim()) return true
+  if (weapon.generatedNotes != null) return weapon.notes === weapon.generatedNotes
+  return weapon.notes === weaponNotesByType[weapon.type] || weapon.notes === legacyGeneratedWeaponNotes[weapon.type]
+}
 const weaponLoadoutMarker = (archetypeName, species = '') => `${characterDataVersion(archetypeName)}:${archetypeName}:${species}`
 const populateArchetypeWeapons = (existingWeapons, archetypeName, species = '') => {
   const weapons = existingWeapons.filter(weapon => weapon.source !== 'archetype').map(weapon => ({ ...weapon }))
@@ -1383,7 +1389,8 @@ const populateArchetypeWeapons = (existingWeapons, archetypeName, species = '') 
     const pool = (katanaOnly ? specificNames : [...specificNames, ...weaponNamePool(archetypeName, type, [defaultName], species)]).filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
-    const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
+    const generatedNotes = weaponNotesByType[type] || 'Archetype starting weapon.'
+    const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: generatedNotes, generatedNotes, notesCustomized: false, source: 'archetype' }
     const emptyIndex = weapons.findIndex(entry => !entry.name?.trim() && !entry.notes?.trim() && !number(entry.enhancement))
     if (emptyIndex >= 0) weapons[emptyIndex] = { ...weapon, id: weapons[emptyIndex].id || weapon.id }
     else weapons.push(weapon)
@@ -2114,12 +2121,24 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
+  const setWeaponNotes = (index, notes) => setCharacter(current => {
+    const copy = structuredClone(current)
+    copy.weapons[index].notes = notes
+    copy.weapons[index].notesCustomized = true
+    copy.updatedAt = Date.now()
+    return copy
+  })
   const setWeaponType = (index, type) => setCharacter(current => {
     const copy = structuredClone(current)
     const weapon = copy.weapons[index]
     const refreshName = weaponNameIsUnedited(weapon, current.archetype, current.species)
+    const refreshNotes = weaponNotesAreUnedited(weapon)
     weapon.type = type
-    if (!weapon.notes?.trim()) weapon.notes = weaponNotesByType[type] || ''
+    if (refreshNotes) {
+      weapon.notes = weaponNotesByType[type] || ''
+      weapon.generatedNotes = weapon.notes
+      weapon.notesCustomized = false
+    }
     if (refreshName) {
       const usedNames = new Set(copy.weapons.filter((_, weaponIndex) => weaponIndex !== index).map(entry => entry.name).filter(Boolean))
       const availableNames = generatedWeaponNamesForType(current.archetype, type, current.species).filter(name => !usedNames.has(name))
@@ -2356,7 +2375,7 @@ function CharacterSheet() {
         const weaponType = weaponTypes.find(type => type[0] === row.type) || weaponTypes[0]
         const damageStat = weaponType[1] === 'melee' ? character.stats.strength : character.stats.dexterity
         const damageModifier = number(damageStat) + number(row.enhancement)
-        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value="__current__" onChange={e => setWeaponType(i,e.target.value)}><option value="__current__" hidden>{row.type}</option>{weaponTypes.map(type => <option key={type[0]} value={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
+        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value="__current__" onChange={e => setWeaponType(i,e.target.value)}><option value="__current__" hidden>{row.type}</option>{weaponTypes.map(type => <option key={type[0]} value={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => setWeaponNotes(i,value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
       }}
     </EditableTable>
 
