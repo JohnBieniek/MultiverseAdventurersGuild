@@ -309,9 +309,14 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const readAttackTotalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+(?:(?:attack\s+)?total(?:\s+to\s+hit)?|to[ -]?hit(?:\s+(?:total|bonus))?|attack\s+bonus)$/i)
-      if (readAttackTotalMatch) {
-        const mode = /^(?:melee|close)/i.test(readAttackTotalMatch[1]) ? 'melee' : 'ranged'
+      const attackTotalQuestion = /^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+/i.test(spokenCommand)
+        && /(?:attack|to[ -]?hit|hit\s+bonus|attack\s+bonus|attack\s+total|total\s+attack|total)/i.test(spokenCommand)
+        && !/(?:modifier|\bmod\b|skill|damage|weapon)/i.test(spokenCommand)
+      const attackTotalModeMatch = spokenCommand.match(/\b(melee|close(?:\s+combat)?|ranged|range|distance)\b/i)
+      const shortAttackTotalMatch = spokenCommand.match(/^(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+(?:(?:attack\s+)?total|to[ -]?hit|hit\s+bonus|attack\s+bonus)$/i)
+      if ((attackTotalQuestion && attackTotalModeMatch) || shortAttackTotalMatch) {
+        const requestedMode = attackTotalModeMatch?.[1] || shortAttackTotalMatch[1]
+        const mode = /^(?:melee|close)/i.test(requestedMode) ? 'melee' : 'ranged'
         respond(characterCommand({ intent: 'read-attack-total', mode }))
         return
       }
