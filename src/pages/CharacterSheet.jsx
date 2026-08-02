@@ -1671,10 +1671,16 @@ const traitsFromBlock = block => {
 const speciesOptions = (() => {
   const lines = speciesText.split(/\r?\n/).map(line => line.trim())
   const headings = lines.map((line, index) => ({ line, index, next: lines.slice(index + 1).find(Boolean) || '' })).filter(({ line, next }) => line.includes(' - ') && /^Rep:/i.test(next))
-  return headings.map(({ line, index }, headingIndex) => ({
-    name: line.split(' - ')[0].trim(),
-    traits: traitsFromBlock(lines.slice(index, headings[headingIndex + 1]?.index ?? lines.length)),
-  })).sort((a, b) => a.name.localeCompare(b.name))
+  return headings.map(({ line, index }, headingIndex) => {
+    const block = lines.slice(index, headings[headingIndex + 1]?.index ?? lines.length)
+    return {
+      name: line.split(' - ')[0].trim(),
+      description: line.slice(line.indexOf(' - ') + 3).trim(),
+      reputation: (block.find(entry => /^Rep:/i.test(entry)) || '').replace(/^Rep:\s*/i, ''),
+      reality: (block.find(entry => /^The Real Deal:/i.test(entry)) || '').replace(/^The Real Deal:\s*/i, ''),
+      traits: traitsFromBlock(block),
+    }
+  }).sort((a, b) => a.name.localeCompare(b.name))
 })()
 const speciesNames = speciesOptions.map(species => species.name)
 const contactCatalog = (() => {
@@ -2093,6 +2099,9 @@ function CharacterSheet() {
       return `${tail}000`.slice(0, 3)
     }).join('-') || ''
     const knownCommandOption = (options, requestedValue) => {
+      const spokenAliases = { sigh: 'SAI (Sentient AI)', sai: 'SAI (Sentient AI)', sentientai: 'SAI (Sentient AI)' }
+      const aliased = spokenAliases[commandKey(requestedValue)]
+      if (aliased && options.includes(aliased)) return aliased
       const exact = options.find(option => commandKey(option) === commandKey(requestedValue))
       if (exact) return exact
       const ranked = options.map(option => ({ option, distance: commandDistance(option, requestedValue) })).sort((left, right) => left.distance - right.distance)
@@ -2368,6 +2377,8 @@ function CharacterSheet() {
           }),
           ...character.items.filter(item => item.name?.trim()).map(item => ({ kind: String(item.source || '').includes('trait') ? 'Trait' : 'Item', name: item.name, description: item.description || 'No description is listed.' })),
           ...talentCatalog.map(talent => ({ kind: 'Talent', name: talent.name, description: `${talent.ability ? `${talent.ability}. ` : ''}${talent.notes || 'No additional description is available.'}${talent.duration ? ` Duration: ${talent.duration}.` : ''}` })),
+          ...archetypeOptions.map(archetype => ({ kind: 'Archetype', name: archetype.name, description: `${archetype.description}${archetype.strengths.filter(Boolean).length ? ` Strengths: ${archetype.strengths.join(', ')}.` : ''}${archetype.weaknesses.filter(Boolean).length ? ` Weaknesses: ${archetype.weaknesses.join(', ')}.` : ''}` })),
+          ...speciesOptions.map(species => ({ kind: 'Species', name: species.name, aliases: species.name.startsWith('SAI') ? ['SAI', 'Sigh', 'Sentient AI'] : [], description: [species.description, species.reputation && `Reputation: ${species.reputation}`, species.reality && `The real story: ${species.reality}`].filter(Boolean).join(' ') })),
         ]
         const entryKeys = entry => [entry.name, ...(entry.aliases || [])].map(commandKey)
         const exact = candidates.filter(entry => entryKeys(entry).includes(key))
@@ -2386,7 +2397,7 @@ function CharacterSheet() {
             matches = ranked.filter(match => match.distance === best.distance && Math.abs(match.ratio - best.ratio) < .03).map(match => match.entry)
           }
         }
-        if (!matches.length) { reply(`I could not find a Weapon, Item, Trait, or Talent matching ${request.entry}.`); return }
+        if (!matches.length) { reply(`I could not find a Weapon, Item, Trait, Talent, Archetype, or Species matching ${request.entry}.`); return }
         if (matches.length > 1) { reply(`${request.entry} matches ${matches.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
         const entry = matches[0]
         reply(`${entry.name}. ${entry.kind}. ${entry.description}`)

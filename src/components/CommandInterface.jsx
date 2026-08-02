@@ -423,7 +423,7 @@ function CommandInterface() {
       const rollMatch = spokenCommand.match(/^roll(?:\s+my)?\s+(.+)$/i)
       if (rollMatch) { respond(characterCommand({ intent: 'roll-check', check: rollMatch[1] })); return }
       const entryResponse = characterCommand({ intent: 'explain-entry', entry: spokenCommand })
-      if (!/^I could not find a Weapon, Item, Trait, or Talent matching /i.test(entryResponse)) {
+      if (!/^I could not find a Weapon, Item, Trait, Talent, Archetype, or Species matching /i.test(entryResponse)) {
         respond(entryResponse)
         return
       }
