@@ -2089,7 +2089,7 @@ function CharacterSheet() {
       const reply = message => request.reply?.(message)
       if (request.intent === 'read-vital') {
         const vital = commandKey(request.vital)
-        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, maxenergy: `${computed.maxEnergy} Maximum Energy`, maxforce: `Maximum Force ${computed.maxForce}`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP`, totalxp: `${character.totalXp} Total XP`, unspentxp: `${character.unspentXp} Unspent XP` }
+        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, maxenergy: `${computed.maxEnergy} Maximum Energy`, maxforce: `Maximum Force ${computed.maxForce}`, meleeattackmodifier: `${signed(character.meleeAttackModifier)} Melee Attack modifier`, rangedattackmodifier: `${signed(character.rangedAttackModifier)} Ranged Attack modifier`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP`, totalxp: `${character.totalXp} Total XP`, unspentxp: `${character.unspentXp} Unspent XP` }
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
         return
       }
@@ -2222,6 +2222,11 @@ function CharacterSheet() {
           currentValue = number(character.defenseRating)
           nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
           nextValue = Math.max(1, Math.min(7, nextValue))
+        } else if (kind === 'melee-attack-modifier' || kind === 'ranged-attack-modifier') {
+          label = kind === 'melee-attack-modifier' ? 'Melee Attack modifier' : 'Ranged Attack modifier'
+          currentValue = number(kind === 'melee-attack-modifier' ? character.meleeAttackModifier : character.rangedAttackModifier)
+          nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+          nextValue = Math.max(-4, Math.min(4, nextValue))
         } else if (kind === 'stat' && stat) {
           label = stat[1]
           currentValue = number(character.stats[stat[0]])
@@ -2247,6 +2252,8 @@ function CharacterSheet() {
         setCharacter(current => {
           const copy = structuredClone(current)
           if (kind === 'defense') copy.defenseRating = nextValue
+          else if (kind === 'melee-attack-modifier') copy.meleeAttackModifier = nextValue
+          else if (kind === 'ranged-attack-modifier') copy.rangedAttackModifier = nextValue
           else if (kind === 'stat') copy.stats[stat[0]] = nextValue
           else if (kind === 'skill') copy.skills[skill[0]].ability = nextValue
           else copy.attackSkill = nextValue
