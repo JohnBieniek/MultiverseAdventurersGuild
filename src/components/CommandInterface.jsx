@@ -92,6 +92,7 @@ function CommandInterface() {
   const speechGenerationRef = useRef(0)
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
+  const mobileCommandTimerRef = useRef(null)
   const pendingActionRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [command, setCommand] = useState('')
@@ -147,6 +148,7 @@ function CommandInterface() {
     speechGenerationRef.current += 1
     speechActiveRef.current = false
     window.clearTimeout(restartTimerRef.current)
+    window.clearTimeout(mobileCommandTimerRef.current)
     recognitionRef.current?.stop()
     window.speechSynthesis?.cancel()
     setListening(false)
@@ -403,6 +405,7 @@ function CommandInterface() {
     if (!recognitionSupported) { respond('Voice recognition is not supported by this browser. You can still type commands.'); return }
     if (listening) {
       keepListeningRef.current = false
+      window.clearTimeout(mobileCommandTimerRef.current)
       recognitionRef.current?.stop()
       setListening(false)
       respond('Listening stopped.')
@@ -429,6 +432,7 @@ function CommandInterface() {
     let announcedStart = false
     let retryDelay = 200
     let networkRetries = 0
+    let mobileTranscript = ''
     const createRecognition = () => {
       const recognition = new Recognition()
       let replaceAfterEnd = false
@@ -448,9 +452,22 @@ function CommandInterface() {
       }
       recognition.onresult = event => {
         if (speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
-        const transcript = event.results[event.results.length - 1][0].transcript
+        const transcript = event.results[event.results.length - 1][0].transcript.trim()
         retryDelay = 200
         networkRetries = 0
+        if (mobileRecognition) {
+          mobileTranscript = [mobileTranscript, transcript].filter(Boolean).join(' ')
+          setCommand(mobileTranscript)
+          setStatus(`Heard: “${mobileTranscript}” Waiting for you to finish.`)
+          window.clearTimeout(mobileCommandTimerRef.current)
+          mobileCommandTimerRef.current = window.setTimeout(() => {
+            const completedCommand = mobileTranscript.trim()
+            mobileTranscript = ''
+            if (!completedCommand || speechActiveRef.current) return
+            execute(completedCommand)
+          }, 3000)
+          return
+        }
         setCommand(transcript)
         execute(transcript)
       }
@@ -514,6 +531,7 @@ function CommandInterface() {
     keepListeningRef.current = false
     speechGenerationRef.current += 1
     window.clearTimeout(restartTimerRef.current)
+    window.clearTimeout(mobileCommandTimerRef.current)
     recognitionRef.current?.abort()
     window.speechSynthesis?.cancel()
   }, [])
