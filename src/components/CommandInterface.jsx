@@ -355,13 +355,14 @@ function CommandInterface() {
       return
     }
     const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const mobileRecognition = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches
     let announcedStart = false
     let retryDelay = 200
     let networkRetries = 0
     const createRecognition = () => {
       const recognition = new Recognition()
       let replaceAfterEnd = false
-      recognition.continuous = false
+      recognition.continuous = mobileRecognition
       recognition.interimResults = false
       recognition.lang = 'en-US'
       recognition.onstart = () => {
@@ -416,6 +417,12 @@ function CommandInterface() {
         if (!keepListeningRef.current) { setListening(false); return }
         setListening(true)
         const delay = Math.max(retryDelay, ignoreSpeechUntilRef.current - Date.now())
+        if (!replaceAfterEnd && mobileRecognition) {
+          keepListeningRef.current = false
+          setListening(false)
+          setStatus('Listening paused. Tap Start listening when you are ready to continue.')
+          return
+        }
         if (!replaceAfterEnd) { resumeRecognition(delay); return }
         window.clearTimeout(restartTimerRef.current)
         restartTimerRef.current = window.setTimeout(() => {
