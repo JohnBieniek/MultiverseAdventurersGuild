@@ -2094,6 +2094,19 @@ function CharacterSheet() {
       const key = commandKey(query)
       return talentCatalog.find(talent => commandKey(talent.name) === key) || talentCatalog.filter(talent => commandKey(talent.name).includes(key) || key.includes(commandKey(talent.name))).find(() => true)
     }
+    const commandWords = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean)
+    const orderedWordSubset = (candidate, query) => {
+      const candidateWords = commandWords(candidate)
+      const queryWords = commandWords(query)
+      if (!queryWords.length) return false
+      let candidateIndex = 0
+      return queryWords.every(queryWord => {
+        const matchIndex = candidateWords.findIndex((candidateWord, index) => index >= candidateIndex && (candidateWord.includes(queryWord) || queryWord.includes(candidateWord)))
+        if (matchIndex < 0) return false
+        candidateIndex = matchIndex + 1
+        return true
+      })
+    }
     const findWeapons = query => {
       const key = commandKey(query)
       if (!key) return []
@@ -2104,7 +2117,9 @@ function CharacterSheet() {
         if (name === key) score = 0
         else if (type === key) score = 1
         else if (name.includes(key)) score = 2 + ((name.length - key.length) / Math.max(name.length, 1))
+        else if (orderedWordSubset(weapon.name, query)) score = 2.99
         else if (type.includes(key) || key.includes(type)) score = 3 + (Math.abs(type.length - key.length) / Math.max(type.length, key.length, 1))
+        else if (orderedWordSubset(weapon.type, query)) score = 3.75
         return { weapon, score }
       }).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
     }
