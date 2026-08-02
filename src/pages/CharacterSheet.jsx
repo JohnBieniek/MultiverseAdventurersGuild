@@ -103,7 +103,7 @@ const suppliedDescriptorOptions = {
         "Holy Weapon",
         "Spirit Strike"
       ],
-      "racial": [
+      "species": [
         "Orcish War Axe",
         "Dwarven Hammer",
         "Elven Rapier",
@@ -170,7 +170,7 @@ const suppliedDescriptorOptions = {
         "harm talent",
         "telekinetic"
       ],
-      "racial": [
+      "species": [
         "Elven Archer Lineage",
         "Dwarven Crossbow Craft",
         "Orcish Throwing Instinct"
@@ -235,7 +235,7 @@ const suppliedDescriptorOptions = {
         "Ki-Infused Blow",
         "Spirit Claw"
       ],
-      "racial": [
+      "species": [
         "Orcish Brawler Lineage",
         "Giant’s Grip"
       ],
@@ -304,7 +304,7 @@ const suppliedDescriptorOptions = {
         "Stoneskin Rune",
         "Holy Aegis"
       ],
-      "racial": [
+      "species": [
         "Dwarven Forgeplate",
         "Orcish Battlehide",
         "Giant’s Endurance"
@@ -372,7 +372,7 @@ const suppliedDescriptorOptions = {
         "Enchanted Gauntlets",
         "Rune of Might"
       ],
-      "racial": [
+      "species": [
         "Orcish Bulk",
         "Giant Heritage",
         "Dwarven Endurance"
@@ -418,7 +418,7 @@ const suppliedDescriptorOptions = {
         "Enchanted Reflex Rune",
         "Chrono-Sense Tattoo"
       ],
-      "racial": [
+      "species": [
         "Elven Agility",
         "Fey Reflexes"
       ],
@@ -462,7 +462,7 @@ const suppliedDescriptorOptions = {
         "Blessing of Fortitude",
         "Regeneration Tattoo"
       ],
-      "racial": [
+      "species": [
         "Dwarven Constitution",
         "Giant’s Stamina",
         "Orcish Toughness"
@@ -507,7 +507,7 @@ const suppliedDescriptorOptions = {
         "Precognition Tattoo",
         "Foresight Blessing"
       ],
-      "racial": [
+      "species": [
         "Elven Awareness",
         "Fey Perception"
       ],
@@ -550,7 +550,7 @@ const suppliedDescriptorOptions = {
         "Blessing of Knowledge",
         "Lorekeeper’s Tattoo"
       ],
-      "racial": [
+      "species": [
         "Elven Scholar Lineage",
         "Dwarven Craft Memory"
       ],
@@ -593,7 +593,7 @@ const suppliedDescriptorOptions = {
         "Glamour Rune",
         "Spirit of Persuasion"
       ],
-      "racial": [
+      "species": [
         "Elven Grace",
         "Fey Presence"
       ],
@@ -637,7 +637,7 @@ const suppliedDescriptorOptions = {
         "Lightning Touch",
         "Channelled Smite"
       ],
-      "racial": [
+      "species": [
         "Orcish Fury",
         "Giant’s Might"
       ],
@@ -680,7 +680,7 @@ const suppliedDescriptorOptions = {
         "Glamour Ward",
         "Charm Rune"
       ],
-      "racial": [
+      "species": [
         "Elven Charm",
         "Fey Diplomacy"
       ],
@@ -723,7 +723,7 @@ const suppliedDescriptorOptions = {
         "Divination Sigil",
         "Blessing of Wisdom"
       ],
-      "racial": [
+      "species": [
         "Dwarven Craft Lore",
         "Elven History"
       ],
@@ -766,7 +766,7 @@ const suppliedDescriptorOptions = {
         "Eagle Eye Enchantment",
         "Spirit Sight"
       ],
-      "racial": [
+      "species": [
         "Elven Eyes",
         "Dwarven Detail Sense"
       ],
@@ -809,7 +809,7 @@ const suppliedDescriptorOptions = {
         "Druidic Ward",
         "Weather Sense Charm"
       ],
-      "racial": [
+      "species": [
         "Elven Survival Instincts",
         "Orcish Endurance",
         "Dwarven Pathfinder"
@@ -853,7 +853,7 @@ const suppliedDescriptorOptions = {
         "Illusion Veil",
         "Ghost Step Charm"
       ],
-      "racial": [
+      "species": [
         "Halfling Nimbleness",
         "Elven Shadowstep"
       ],
@@ -895,7 +895,7 @@ const suppliedDescriptorOptions = {
         "Enchanted Gear",
         "Spell-Powered Machine"
       ],
-      "racial": [
+      "species": [
         "Dwarven Engineer",
         "Constructed Heritage",
         "Machineborn"
@@ -939,7 +939,7 @@ const suppliedDescriptorOptions = {
         "Speed Rune",
         "Arcane Stabilizer"
       ],
-      "racial": [
+      "species": [
         "Dwarven Mechanist",
         "Orcish Driver",
         "Faerie Sky Pilot"
@@ -973,7 +973,7 @@ const descriptorTypesByStyle = {
   western: ['chemical', 'archetype'],
   martial: ['magic', 'wetwired', 'chemical', 'archetype'],
 }
-const racialDescriptorTerms = {
+const speciesDescriptorTerms = {
   Cyborg: ['cyber', 'machineborn', 'constructed'],
   Dwarf: ['dwarf', 'dwarven'],
   Elf: ['elf', 'elven'],
@@ -1019,14 +1019,14 @@ const archetypeDescriptorTerms = {
   'Street Samurai': ['duelist', 'martial artist', 'soldier', 'guardian', 'combat'],
   Warlock: ['mystic', 'mage', 'illusionist', 'mentalist'],
 }
-const racialDescriptorMatches = (name, species) => (racialDescriptorTerms[species] || []).some(term => name.toLowerCase().includes(term))
+const speciesDescriptorMatches = (name, species) => (speciesDescriptorTerms[species] || []).some(term => name.toLowerCase().includes(term))
 const archetypeDescriptorMatches = (name, archetypeName) => (archetypeDescriptorTerms[archetypeName] || []).some(term => name.toLowerCase().includes(term))
-const descriptorMatchesCharacter = (name, descriptorType, archetypeName, species) => descriptorType === 'racial'
-  ? racialDescriptorMatches(name, species)
+const descriptorMatchesCharacter = (name, descriptorType, archetypeName, species) => descriptorType === 'species'
+  ? speciesDescriptorMatches(name, species)
   : descriptorType !== 'archetype' || archetypeDescriptorMatches(name, archetypeName)
 const descriptorTypesFor = (archetypeName, species) => {
   const style = weaponStyleByArchetype[archetypeName] || 'modern'
-  return [...(descriptorTypesByStyle[style] || descriptorTypesByStyle.modern), ...(species ? ['racial'] : [])]
+  return [...(descriptorTypesByStyle[style] || descriptorTypesByStyle.modern), ...(species ? ['species'] : [])]
 }
 const suppliedWeaponStandardByType = {
   'Unarmed / Tiny Melee': suppliedDescriptorOptions.UNM.improvised,
@@ -1470,7 +1470,7 @@ const descriptorMethodDescriptions = {
   hardwired: 'Installed machinery converts intent into consistent, precisely controlled performance.',
   wetwired: 'Engineered organic changes make the enhanced response feel instinctive rather than externally assisted.',
   magic: 'A sustained supernatural effect reinforces the capability whenever practiced effort reaches its limit.',
-  racial: 'A species-linked tradition or physical inheritance provides a distinctive foundation for the talent.',
+  species: 'A species-linked tradition or physical inheritance provides a distinctive foundation for the talent.',
   archetype: 'Specialized experience turns repeated training into reliable performance under pressure.',
   chemical: 'A controlled enhancement regimen temporarily pushes the body or mind beyond its ordinary response.',
   standard: 'Purpose-built protection and practical construction make the benefit dependable without exotic enhancement.',

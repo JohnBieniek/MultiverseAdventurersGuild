@@ -83,7 +83,7 @@ Species Content Updates
 - Added Giant culture around libraries, remote settlements, abandoned districts, wilderness, memory, patience, oral history, and shared knowledge.
 - Revised Giant Rep to focus on assumptions that Giants are slow, violent, and useful mainly for lifting, breaking, or intimidation.
 - Revised Giant Real Deal to highlight gentle, erudite, communal, low-tech, book-loving Giants.
-- Updated Giant Weaknesses from "Charisma (they simply don't relate well to other races), Technology" to "Charisma, Technology."
+- Updated Giant Weaknesses from "Charisma (they simply don't relate well to other Species), Technology" to "Charisma, Technology."
 - Moved the "do not relate well" idea into Giant Personality as Reserved.
 - Updated Giant Talents to Intimidating Presence, Melee Reach, and Pathfinder.
 - Updated Giant Common Archetypes to Barbarian, Druid, and Shaman.
