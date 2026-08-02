@@ -302,9 +302,9 @@ Action: Attack action.
 
 Ferocious Attack
 
-Description: You fight with emotion. This combat style is a reckless, all-out attack.
+Description: You fight with emotion. This melee-only combat style is a reckless, all-out attack.
 
-Mechanics: The player buffs the damage by +1d4 per Force used. It can't be combined with Bring the Pain. Maximum Force 2.
+Mechanics: When making a melee attack, buff the damage by +1d4 per Force used. Ferocious Attack cannot be used with ranged attacks and can't be combined with Bring the Pain. Maximum Force 2.
 
 Find secret doors:
 Description: Discover hidden doors and passages.
