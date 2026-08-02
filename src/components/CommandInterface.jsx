@@ -342,7 +342,8 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
-      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
+      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is| are)|how (?:much|many)|read|tell me|get)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
+        || spokenCommand.match(/^(?:my\s+)?(health|hp|hit\s*points?)$/i)
       if (readVitalMatch || /^(?:how am i doing|what is my condition|status)$/i.test(spokenCommand)) {
         const requestedVital = readVitalMatch?.[1] || 'status'
         const normalizedVital = normalize(requestedVital)
