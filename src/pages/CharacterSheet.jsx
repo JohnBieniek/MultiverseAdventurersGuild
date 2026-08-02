@@ -2216,7 +2216,6 @@ function CharacterSheet() {
           return
         }
         if (request.key === 'level') {
-          if (nextValue > currentValue) setLevelUp(nextValue)
           setCharacter(current => {
             const normalized = normalizeXpTracking(current)
             return { ...normalized, level: nextValue, totalXp: normalized.totalXpManuallySet ? normalized.totalXp : xpForLevel(nextValue), unspentXp: normalized.totalXpManuallySet || normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(nextValue), talentRowsGrantedForLevel: Math.max(number(normalized.talentRowsGrantedForLevel), talentAllowanceForLevel(nextValue)), updatedAt: Date.now() }
@@ -2226,7 +2225,6 @@ function CharacterSheet() {
         } else {
           const increase = Math.max(0, nextValue - currentValue)
           const nextLevel = Math.max(number(character.level), levelForXp(nextValue))
-          if (nextLevel > number(character.level)) setLevelUp(nextLevel)
           setCharacter(current => ({ ...current, level: Math.max(number(current.level), levelForXp(nextValue)), totalXp: nextValue, unspentXp: increase ? number(current.unspentXp) + increase : current.unspentXp, totalXpManuallySet: true, updatedAt: Date.now() }))
         }
         reply(`${label} changed from ${currentValue} to ${nextValue}.`)
@@ -2333,7 +2331,6 @@ function CharacterSheet() {
       if (request.intent === 'roll-die') {
         const sides = Math.max(2, Math.min(100, number(request.sides)))
         const result = rollDie(sides)
-        setRoll({ kind: 'die', label: `d${sides}`, die: sides, natural: result, modifier: 0, total: result })
         reply(`d${sides} result: ${result}.`)
         return
       }
@@ -2354,7 +2351,6 @@ function CharacterSheet() {
         if (modifier == null) { reply(`I could not find a roll named ${request.check}.`); return }
         const natural = rollDie(20)
         const total = natural + number(modifier)
-        setRoll({ kind: 'check', label, natural, modifier: number(modifier), total, tn: null, result: natural === 20 ? 'Critical success!' : natural === 1 ? 'Critical failure!' : '' })
         reply(`${label} roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}.`)
         return
       }
@@ -2373,7 +2369,6 @@ function CharacterSheet() {
         const total = natural + modifier
         const attack = { kind: 'attack', label: weapon.name || type[0], natural, modifier, total, tn: null, hit: natural !== 1, weapon, die: type[2], stat: number(stat) }
         lastCommandAttackRef.current = attack
-        setRoll(attack)
         reply(`${attack.label} attack roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}.${natural === 20 ? ' Critical hit.' : natural === 1 ? ' Critical miss.' : ''} Say roll damage to roll its damage.`)
         return
       }
@@ -2383,7 +2378,6 @@ function CharacterSheet() {
         const dieResult = attack.natural === 20 ? attack.die : rollDie(attack.die)
         const modifier = attack.stat + number(attack.weapon.enhancement)
         const total = dieResult + modifier
-        setRoll({ kind: 'damage', label: `${attack.label} damage`, die: attack.die, natural: dieResult, modifier, total, critical: attack.natural === 20 })
         reply(`${attack.label} damage: ${dieResult} on the d${attack.die}, ${signed(modifier)} modifier, total ${total}.${attack.natural === 20 ? ' Critical damage used the maximum die result.' : ''}`)
       }
     }
