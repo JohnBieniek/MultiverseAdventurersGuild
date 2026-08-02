@@ -2166,6 +2166,9 @@ function CharacterSheet() {
         } else if (list === 'weapons') {
           const weapons = character.weapons.filter(weapon => weapon.name?.trim()).map(weapon => `${weapon.name}, ${weapon.type}`)
           reply(weapons.length ? `${character.name}'s weapons are ${weapons.join('; ')}.` : `${character.name} has no weapons listed.`)
+        } else if (list === 'itemsandtraits') {
+          const entries = character.items.filter(item => item.name?.trim()).map(item => `${item.name}${String(item.source || '').includes('trait') ? ', Trait' : ', Item'}`)
+          reply(entries.length ? `${character.name}'s Items and Traits are ${entries.join('; ')}.` : `${character.name} has no Items or Traits listed.`)
         } else if (list === 'traits') {
           const traits = named(character.items.filter(item => String(item.source || '').includes('trait')))
           reply(traits.length ? `${character.name}'s Traits are ${traits.join(', ')}.` : `${character.name} has no generated Traits identified. Check the Items and Traits section for custom entries.`)
@@ -2261,6 +2264,20 @@ function CharacterSheet() {
           setCharacter(current => ({ ...current, currentHp: next, updatedAt: Date.now() }))
           reply(`${request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
         }
+        return
+      }
+      if (request.intent === 'explain-entry') {
+        const key = commandKey(request.entry)
+        const candidates = [
+          ...character.items.filter(item => item.name?.trim()).map(item => ({ kind: String(item.source || '').includes('trait') ? 'Trait' : 'Item', name: item.name, description: item.description || 'No description is listed.' })),
+          ...talentCatalog.map(talent => ({ kind: 'Talent', name: talent.name, description: `${talent.ability ? `${talent.ability}. ` : ''}${talent.notes || 'No additional description is available.'}${talent.duration ? ` Duration: ${talent.duration}.` : ''}` })),
+        ]
+        const exact = candidates.filter(entry => commandKey(entry.name) === key)
+        const partial = exact.length ? exact : candidates.filter(entry => commandKey(entry.name).includes(key) || key.includes(commandKey(entry.name)))
+        if (!partial.length) { reply(`I could not find an Item, Trait, or Talent matching ${request.entry}.`); return }
+        if (partial.length > 1) { reply(`${request.entry} matches ${partial.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
+        const entry = partial[0]
+        reply(`${entry.name}. ${entry.kind}. ${entry.description}`)
         return
       }
       if (request.intent === 'explain-talent' || request.intent === 'preview-add-talent' || request.intent === 'add-talent') {

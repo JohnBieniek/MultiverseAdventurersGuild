@@ -210,6 +210,13 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-options', list }))
         return
       }
+      const combinedItemsMatch = spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all)?\s+(?:of\s+)?(?:my\s+)?items?\s+(?:and|&)\s+traits?$/i)
+        || spokenCommand.match(/^(?:what|which)\s+are\s+my\s+items?\s+(?:and|&)\s+traits?$/i)
+        || spokenCommand.match(/^(?:what|which)\s+items?\s+(?:and|&)\s+traits?\s+(?:do i have|are listed)$/i)
+      if (combinedItemsMatch) {
+        respond(characterCommand({ intent: 'read-list', list: 'items-and-traits' }))
+        return
+      }
       const listMatch = spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all)?\s+(?:of\s+)?(?:my\s+)?(talents?|contacts?|weapons?|items?|traits?)$/i)
         || spokenCommand.match(/^(?:what|which)\s+(talents?|contacts?|weapons?|items?|traits?)\s+(?:do i have|am i carrying|are listed)$/i)
         || spokenCommand.match(/^(?:what|which|who)\s+are\s+my\s+(talents?|contacts?|weapons?|items?|traits?)$/i)
@@ -348,9 +355,9 @@ function CommandInterface() {
         respond(preview)
         return
       }
-      const explainTalentMatch = spokenCommand.match(/^(?:what does|what is|explain|read)\s+(?:the\s+)?(.+?)(?:\s+talent)?(?:\s+do)?$/i)
-      if (explainTalentMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|force|energy|level|xp|experience)/i.test(explainTalentMatch[1])) {
-        respond(characterCommand({ intent: 'explain-talent', talent: explainTalentMatch[1] }))
+      const explainEntryMatch = spokenCommand.match(/^(?:what does|what is|explain|read|tell me about)\s+(?:my\s+|the\s+)?(.+?)(?:\s+(?:talent|item|trait))?(?:\s+do)?$/i)
+      if (explainEntryMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|force|energy|level|xp|experience)/i.test(explainEntryMatch[1])) {
+        respond(characterCommand({ intent: 'explain-entry', entry: explainEntryMatch[1] }))
         return
       }
       const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
