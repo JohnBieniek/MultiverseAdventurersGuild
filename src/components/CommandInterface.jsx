@@ -466,11 +466,11 @@ function CommandInterface() {
           if (keepListeningRef.current && !speechActiveRef.current) { retryDelay = 250; setStatus('Listening.') }
           return
         }
-        if (event.error === 'network' && keepListeningRef.current && networkRetries < 5) {
+        if (event.error === 'network' && keepListeningRef.current) {
           networkRetries += 1
-          retryDelay = Math.min(4000, 500 * networkRetries)
+          retryDelay = Math.min(8000, 500 * networkRetries)
           replaceAfterEnd = true
-          setStatus(`The microphone works, but Chrome's speech service could not connect. Opening a fresh listening session (${networkRetries} of 5).`)
+          setStatus(`The microphone works, but Chrome's speech service could not connect. Keeping listening active and reconnecting. Attempt ${networkRetries}.`)
           return
         }
         keepListeningRef.current = false
@@ -479,7 +479,7 @@ function CommandInterface() {
           'not-allowed': 'Microphone access was denied. Allow microphone access in your browser settings, then try again. You can still type commands.',
           'service-not-allowed': 'This browser blocked its speech-recognition service. You can still type commands or try a supported browser.',
           'audio-capture': 'No working microphone was available. Check the selected microphone and operating-system permissions, then try again.',
-          network: 'The browser speech-recognition service could not connect after five fresh sessions. Check your connection or type the command instead.',
+          network: 'The browser speech-recognition service could not connect. Listening will keep trying until you press Stop listening.',
           'language-not-supported': 'The browser does not support speech recognition for en-US. You can still type commands.',
         }
         respond(errors[event.error] || `Voice listening stopped because the browser reported ${event.error || 'an unknown error'}. Try again or type the command.`)
@@ -489,12 +489,6 @@ function CommandInterface() {
         if (!keepListeningRef.current) { setListening(false); return }
         setListening(true)
         const delay = Math.max(retryDelay, ignoreSpeechUntilRef.current - Date.now())
-        if (!replaceAfterEnd && mobileRecognition) {
-          keepListeningRef.current = false
-          setListening(false)
-          setStatus('Listening paused. Tap Start listening when you are ready to continue.')
-          return
-        }
         if (!replaceAfterEnd) { resumeRecognition(delay); return }
         window.clearTimeout(restartTimerRef.current)
         restartTimerRef.current = window.setTimeout(() => {
