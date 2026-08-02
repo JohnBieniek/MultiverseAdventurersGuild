@@ -93,14 +93,12 @@ function CommandInterface() {
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
-  const pendingActionRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [command, setCommand] = useState('')
   const [status, setStatus] = useState('')
   const [results, setResults] = useState([])
   const [listening, setListening] = useState(false)
   const [spoken, setSpoken] = useState(() => localStorage.getItem(SPEECH_KEY) === 'true')
-  const [pendingAction, setPendingAction] = useState(null)
   const recognitionSupported = typeof window !== 'undefined' && Boolean(window.SpeechRecognition || window.webkitSpeechRecognition)
   const onCharacterSheet = location.pathname === '/character-sheet'
 
@@ -188,17 +186,10 @@ function CommandInterface() {
     setCommand(original)
     setResults([])
     if (!value) { respond('Type or speak a command first.'); return }
-    if (['confirm', 'confirm action', 'do it', 'apply it'].includes(value) && pendingActionRef.current) {
-      respond(characterCommand(pendingActionRef.current))
-      pendingActionRef.current = null
-      setPendingAction(null)
-      return
-    }
-    if (['cancel', 'never mind', 'nevermind'].includes(value) && pendingActionRef.current) { pendingActionRef.current = null; setPendingAction(null); respond('Action cancelled.'); return }
     if (['cancel', 'close', 'never mind', 'nevermind'].includes(value)) { close(); return }
     if (['repeat', 'say that again', 'read again'].includes(value)) { speak(lastResponseRef.current || 'There is nothing to repeat yet.'); return }
     if (['help', 'what can i say', 'commands'].includes(value)) {
-      respond(onCharacterSheet ? 'On a Character Sheet you can ask about or change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage. State changes ask for confirmation.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
+      respond(onCharacterSheet ? 'On a Character Sheet you can ask about or immediately change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
       return
     }
     if (onCharacterSheet) {
@@ -233,26 +224,14 @@ function CommandInterface() {
         const type = captures.find(value => new RegExp(`^${weaponTypePattern}$`, 'i').test(value)) || 'medium melee'
         const name = captures.find(value => value !== type) || ''
         const pending = { intent: 'add-weapon', type, name }
-        const preview = characterCommand({ ...pending, intent: 'preview-add-weapon' })
-        if (/^Add /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: 'Add this weapon', action: 'confirm' }, { label: 'Cancel', detail: 'Do not add it', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(name|species|archetype)\s+(?:to|as)\s+(.+)$/i)
         || spokenCommand.match(/^(?:my\s+)?(name|species|archetype)\s+(?:is|should be)\s+(.+)$/i)
       if (setIdentityMatch) {
         const pending = { intent: 'change-identity', field: normalize(setIdentityMatch[1]), value: setIdentityMatch[2].trim() }
-        const preview = characterCommand({ ...pending, intent: 'preview-identity' })
-        if (/^Change /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: `Change this Hero's ${pending.field}`, action: 'confirm' }, { label: 'Cancel', detail: 'Leave it unchanged', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const readIdentityMatch = spokenCommand.match(/^(?:what(?:'s| is)|tell me|read|check)\s+(?:my\s+)?(name|species|archetype)$/i)
@@ -278,13 +257,7 @@ function CommandInterface() {
         if (amount == null) { respond(`I could not determine the Energy amount in ${original}.`); return }
         const operation = setEnergyMatch ? 'set' : /^(?:decrease|lower|reduce|spend|use)$/i.test(verb) ? 'subtract' : 'add'
         const pending = { intent: 'change-energy', operation, amount }
-        const preview = characterCommand({ ...pending, intent: 'preview-energy' })
-        if (/^Change /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: 'Apply this Energy change', action: 'confirm' }, { label: 'Cancel', detail: 'Leave Energy unchanged', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const setProgressMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
@@ -296,13 +269,7 @@ function CommandInterface() {
         if (amount == null) { respond(`I could not determine the new value in ${original}.`); return }
         const operation = setProgressMatch ? 'set' : /^(?:decrease|lower|reduce)$/i.test(adjustProgressMatch[1]) ? 'subtract' : 'add'
         const pending = { intent: 'change-progression', key, operation, amount }
-        const preview = characterCommand({ ...pending, intent: 'preview-progression' })
-        if (/^Change /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: 'Apply this Level or XP change', action: 'confirm' }, { label: 'Cancel', detail: 'Leave it unchanged', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const setScoreMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(.+?)\s+(?:to|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
@@ -322,13 +289,7 @@ function CommandInterface() {
         const operation = setScoreMatch ? 'set' : /^(?:decrease|lower|reduce)$/i.test(adjustScoreMatch?.[1] || '') ? 'subtract' : 'add'
         const pending = { intent: 'change-score', kind, score, operation, amount: Math.abs(amount) }
         if (operation === 'set') pending.amount = amount
-        const preview = characterCommand({ ...pending, intent: 'preview-score' })
-        if (/^Change /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: 'Apply this score change', action: 'confirm' }, { label: 'Cancel', detail: 'Leave the score unchanged', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const damageMatch = spokenCommand.match(/^(?:i\s+)?(?:(?:take|suffer|receive|lose|remove|subtract)(?:\s+me)?\s+|damage\s+me(?:\s+for)?\s+)(\d+|[a-z]+)(?:\s+(?:from\s+my\s+)?(?:damage|health|hp|hit\s*points?|dealth))?$/i)
@@ -339,22 +300,13 @@ function CommandInterface() {
         if (amount == null) { respond(`I could not determine the amount in ${original}.`); return }
         const operation = damageMatch ? 'subtract' : 'add'
         const pending = { intent: 'change-health', operation, amount }
-        pendingActionRef.current = pending
-        setPendingAction(pending)
-        setResults([{ label: 'Confirm', detail: 'Apply this HP change', action: 'confirm' }, { label: 'Cancel', detail: 'Leave HP unchanged', action: 'cancel' }])
-        respond(characterCommand({ intent: 'preview-health', operation, amount }))
+        respond(characterCommand(pending))
         return
       }
       const addTalentMatch = spokenCommand.match(/^(?:add|learn|give me|take)\s+(?:the\s+)?(?:talent\s+)?(.+?)(?:\s+talent)?$/i)
       if (addTalentMatch && /talent/i.test(original)) {
         const pending = { intent: 'add-talent', talent: addTalentMatch[1] }
-        const preview = characterCommand({ intent: 'preview-add-talent', talent: addTalentMatch[1] })
-        if (/^Add /i.test(preview)) {
-          pendingActionRef.current = pending
-          setPendingAction(pending)
-          setResults([{ label: 'Confirm', detail: 'Add this Talent', action: 'confirm' }, { label: 'Cancel', detail: 'Do not add it', action: 'cancel' }])
-        }
-        respond(preview)
+        respond(characterCommand(pending))
         return
       }
       const readAttackTotalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+(?:(?:attack\s+)?total(?:\s+to\s+hit)?|to[ -]?hit(?:\s+(?:total|bonus))?|attack\s+bonus)$/i)
@@ -581,20 +533,6 @@ function CommandInterface() {
   }, [open])
 
   const chooseResult = result => {
-    if (result.action === 'confirm' && pendingActionRef.current) {
-      respond(characterCommand(pendingActionRef.current))
-      pendingActionRef.current = null
-      setPendingAction(null)
-      setResults([])
-      return
-    }
-    if (result.action === 'cancel') {
-      pendingActionRef.current = null
-      setPendingAction(null)
-      setResults([])
-      respond('Action cancelled.')
-      return
-    }
     completeNavigation(result.path, `${result.label} opened.`, result.character)
   }
   const exampleCommand = text => { setCommand(text); inputRef.current?.focus() }
