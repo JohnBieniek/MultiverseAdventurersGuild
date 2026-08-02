@@ -282,6 +282,8 @@ function CommandInterface() {
     const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
     const recognition = new Recognition()
     let announcedStart = false
+    let retryDelay = 200
+    let networkRetries = 0
     recognition.continuous = false
     recognition.interimResults = false
     recognition.lang = document.documentElement.lang || 'en-US'
@@ -292,24 +294,43 @@ function CommandInterface() {
     recognition.onresult = event => {
       if (speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
       const transcript = event.results[event.results.length - 1][0].transcript
+      retryDelay = 200
+      networkRetries = 0
       setCommand(transcript)
       execute(transcript)
     }
     recognition.onerror = event => {
       if (event.error === 'no-speech' && keepListeningRef.current) {
+        retryDelay = 250
         setStatus('Listening. No speech heard yet.')
         return
       }
-      if (event.error === 'aborted' && (!keepListeningRef.current || speechActiveRef.current)) return
+      if (event.error === 'aborted') {
+        if (keepListeningRef.current && !speechActiveRef.current) { retryDelay = 250; setStatus('Listening.') }
+        return
+      }
+      if (event.error === 'network' && keepListeningRef.current && networkRetries < 5) {
+        networkRetries += 1
+        retryDelay = Math.min(4000, 500 * networkRetries)
+        setStatus(`Speech service temporarily unavailable. Retrying listening (${networkRetries} of 5).`)
+        return
+      }
       keepListeningRef.current = false
       setListening(false)
-      respond(event.error === 'not-allowed' ? 'Microphone access was denied. You can still type commands.' : 'Voice listening stopped after an error. Start listening again or type the command.')
+      const errors = {
+        'not-allowed': 'Microphone access was denied. Allow microphone access in your browser settings, then try again. You can still type commands.',
+        'service-not-allowed': 'This browser blocked its speech-recognition service. You can still type commands or try a supported browser.',
+        'audio-capture': 'No working microphone was available. Check the selected microphone and operating-system permissions, then try again.',
+        network: 'The browser speech-recognition service could not connect after five retries. Check your connection or type the command instead.',
+        'language-not-supported': 'The browser does not support speech recognition for the current language. You can still type commands.',
+      }
+      respond(errors[event.error] || `Voice listening stopped because the browser reported ${event.error || 'an unknown error'}. Try again or type the command.`)
     }
     recognition.onend = () => {
       if (speechActiveRef.current) return
       if (keepListeningRef.current) {
         setListening(true)
-        resumeRecognition(Math.max(200, ignoreSpeechUntilRef.current - Date.now()))
+        resumeRecognition(Math.max(retryDelay, ignoreSpeechUntilRef.current - Date.now()))
       } else setListening(false)
     }
     recognitionRef.current = recognition
