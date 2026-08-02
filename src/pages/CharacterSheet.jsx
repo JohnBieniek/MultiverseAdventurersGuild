@@ -2066,6 +2066,30 @@ function CharacterSheet() {
   useEffect(() => {
     if (!character) return undefined
     const commandKey = value => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+    const commandDistance = (leftValue, rightValue) => {
+      const left = commandKey(leftValue)
+      const right = commandKey(rightValue)
+      const row = Array.from({ length: right.length + 1 }, (_, index) => index)
+      for (let leftIndex = 1; leftIndex <= left.length; leftIndex += 1) {
+        let diagonal = row[0]
+        row[0] = leftIndex
+        for (let rightIndex = 1; rightIndex <= right.length; rightIndex += 1) {
+          const above = row[rightIndex]
+          row[rightIndex] = Math.min(row[rightIndex] + 1, row[rightIndex - 1] + 1, diagonal + (left[leftIndex - 1] === right[rightIndex - 1] ? 0 : 1))
+          diagonal = above
+        }
+      }
+      return row[right.length]
+    }
+    const knownCommandOption = (options, requestedValue) => {
+      const exact = options.find(option => commandKey(option) === commandKey(requestedValue))
+      if (exact) return exact
+      const ranked = options.map(option => ({ option, distance: commandDistance(option, requestedValue) })).sort((left, right) => left.distance - right.distance)
+      const closest = ranked[0]
+      const requestedLength = commandKey(requestedValue).length
+      const uniqueClosest = closest && ranked.filter(candidate => candidate.distance === closest.distance).length === 1
+      return uniqueClosest && closest.distance <= 2 && closest.distance / Math.max(requestedLength, commandKey(closest.option).length, 1) <= .25 ? closest.option : requestedValue
+    }
     const findTalent = query => {
       const key = commandKey(query)
       return talentCatalog.find(talent => commandKey(talent.name) === key) || talentCatalog.filter(talent => commandKey(talent.name).includes(key) || key.includes(commandKey(talent.name))).find(() => true)
@@ -2172,7 +2196,7 @@ function CharacterSheet() {
         if (!field || !String(request.value || '').trim()) { reply('Tell me whether to change the name, Species, or Archetype and what its new value should be.'); return }
         const requestedValue = String(request.value).trim()
         const options = field === 'species' ? speciesNames : field === 'archetype' ? archetypeOptions.map(option => option.name) : []
-        const canonicalValue = options.find(option => commandKey(option) === commandKey(requestedValue)) || requestedValue
+        const canonicalValue = knownCommandOption(options, requestedValue)
         const currentValue = String(character[field] || '').trim() || 'not selected'
         const label = field === 'name' ? 'name' : field === 'species' ? 'Species' : 'Archetype'
         if (request.intent === 'preview-identity') { reply(`Change ${label} from ${currentValue} to ${canonicalValue}?`); return }
