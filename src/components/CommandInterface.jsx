@@ -6,6 +6,7 @@ import './CommandInterface.css'
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const SPEECH_KEY = 'mag-command-spoken-responses-v1'
+const VOSK_MODEL_URL = 'https://ccoreilly.github.io/vosk-browser/models/vosk-model-small-en-us-0.15.tar.gz'
 
 const destinations = [
   { label: 'Home', path: '/', terms: 'home welcome guild start' },
@@ -94,13 +95,20 @@ function CommandInterface() {
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
+  const localModelRef = useRef(null)
+  const localRecognizerRef = useRef(null)
+  const localStreamRef = useRef(null)
+  const localAudioContextRef = useRef(null)
+  const localSourceRef = useRef(null)
+  const localProcessorRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [command, setCommand] = useState('')
   const [status, setStatus] = useState('')
   const [results, setResults] = useState([])
   const [listening, setListening] = useState(false)
   const [spoken, setSpoken] = useState(() => localStorage.getItem(SPEECH_KEY) === 'true')
-  const recognitionSupported = typeof window !== 'undefined' && Boolean(window.SpeechRecognition || window.webkitSpeechRecognition)
+  const localRecognitionSupported = typeof window !== 'undefined' && Boolean(navigator.mediaDevices?.getUserMedia && (window.AudioContext || window.webkitAudioContext) && window.WebAssembly)
+  const recognitionSupported = localRecognitionSupported || (typeof window !== 'undefined' && Boolean(window.SpeechRecognition || window.webkitSpeechRecognition))
   const onCharacterSheet = location.pathname === '/character-sheet'
 
   const characterCommand = request => {
@@ -118,13 +126,32 @@ function CommandInterface() {
       }
     }, delay)
   }
+  const stopLocalRecognition = ({ releaseModel = false } = {}) => {
+    localProcessorRef.current?.disconnect()
+    localSourceRef.current?.disconnect()
+    localRecognizerRef.current?.remove()
+    localStreamRef.current?.getTracks().forEach(track => track.stop())
+    localAudioContextRef.current?.close()
+    localProcessorRef.current = null
+    localSourceRef.current = null
+    localRecognizerRef.current = null
+    localStreamRef.current = null
+    localAudioContextRef.current = null
+    recognitionRunningRef.current = false
+    if (releaseModel) {
+      localModelRef.current?.terminate()
+      localModelRef.current = null
+    }
+  }
   const speak = message => {
     if (!spoken || !window.speechSynthesis) return
     const generation = speechGenerationRef.current + 1
     speechGenerationRef.current = generation
     speechActiveRef.current = true
     ignoreSpeechUntilRef.current = Infinity
-    const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && recognitionRunningRef.current
+    const localAudioContext = localAudioContextRef.current
+    if (localAudioContext?.state === 'running') localAudioContext.suspend().catch(() => {})
+    const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && (recognitionRunningRef.current || Boolean(localAudioContext))
     if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(message)
@@ -132,6 +159,9 @@ function CommandInterface() {
       if (speechGenerationRef.current !== generation) return
       speechActiveRef.current = false
       ignoreSpeechUntilRef.current = Date.now() + 900
+      if (keepListeningRef.current && localAudioContext?.state === 'suspended') {
+        window.setTimeout(() => localAudioContext.resume().catch(() => {}), 900)
+      }
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
     utterance.onend = finished
@@ -150,6 +180,7 @@ function CommandInterface() {
     window.clearTimeout(restartTimerRef.current)
     window.clearTimeout(mobileCommandTimerRef.current)
     recognitionRef.current?.stop()
+    stopLocalRecognition()
     window.speechSynthesis?.cancel()
     setListening(false)
     setOpen(false)
@@ -158,6 +189,7 @@ function CommandInterface() {
   const completeNavigation = (path, message, character = null) => {
     keepListeningRef.current = false
     recognitionRef.current?.stop()
+    stopLocalRecognition()
     setListening(false)
     if (character) {
       localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
@@ -418,8 +450,71 @@ function CommandInterface() {
       keepListeningRef.current = false
       window.clearTimeout(mobileCommandTimerRef.current)
       recognitionRef.current?.stop()
+      stopLocalRecognition()
       setListening(false)
       respond('Listening stopped.')
+      return
+    }
+    const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
+    if (mobileRecognition && localRecognitionSupported) {
+      keepListeningRef.current = true
+      setListening(true)
+      try {
+        setStatus(localModelRef.current ? 'Opening the microphone.' : 'Preparing free on-device voice recognition. The first download is about 41 MB and is cached by your browser.')
+        if (!localModelRef.current) {
+          const { createModel } = await import('vosk-browser')
+          localModelRef.current = await createModel(VOSK_MODEL_URL, -1)
+        }
+        if (!keepListeningRef.current) return
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext
+        const audioContext = new AudioContextClass({ sampleRate: 16000 })
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 } })
+        if (!keepListeningRef.current) { stream.getTracks().forEach(track => track.stop()); await audioContext.close(); return }
+        const recognizer = new localModelRef.current.KaldiRecognizer(audioContext.sampleRate)
+        let transcript = ''
+        const queueCommand = text => {
+          if (!text || speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
+          transcript = [transcript, text].filter(Boolean).join(' ').trim()
+          setCommand(transcript)
+          setStatus(`Heard: “${transcript}” Waiting for you to finish.`)
+          window.clearTimeout(mobileCommandTimerRef.current)
+          mobileCommandTimerRef.current = window.setTimeout(() => {
+            const completedCommand = transcript
+            transcript = ''
+            if (completedCommand && !speechActiveRef.current) execute(completedCommand)
+          }, 2200)
+        }
+        recognizer.on('partialresult', message => {
+          const partial = message.result.partial?.trim()
+          if (partial && !speechActiveRef.current) setStatus(`Hearing: “${[transcript, partial].filter(Boolean).join(' ')}”`)
+        })
+        recognizer.on('result', message => queueCommand(message.result.text?.trim()))
+        const source = audioContext.createMediaStreamSource(stream)
+        const processor = audioContext.createScriptProcessor(4096, 1, 1)
+        const silentOutput = audioContext.createGain()
+        silentOutput.gain.value = 0
+        processor.onaudioprocess = event => {
+          if (!speechActiveRef.current && keepListeningRef.current) {
+            try { recognizer.acceptWaveform(event.inputBuffer) } catch { /* worker may be shutting down */ }
+          }
+        }
+        source.connect(processor)
+        processor.connect(silentOutput)
+        silentOutput.connect(audioContext.destination)
+        localAudioContextRef.current = audioContext
+        localStreamRef.current = stream
+        localRecognizerRef.current = recognizer
+        localSourceRef.current = source
+        localProcessorRef.current = processor
+        recognitionRunningRef.current = true
+        setStatus('Listening continuously on this device. Press Stop listening when you are done.')
+      } catch (error) {
+        keepListeningRef.current = false
+        recognitionRunningRef.current = false
+        stopLocalRecognition()
+        setListening(false)
+        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : 'Free on-device voice recognition could not start. Check your connection for the first model download, then try again. You can still type commands.')
+      }
       return
     }
     if (!navigator.mediaDevices?.getUserMedia) {
@@ -439,7 +534,6 @@ function CommandInterface() {
       return
     }
     const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
-    const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
     let announcedStart = false
     let retryDelay = 200
     let networkRetries = 0
@@ -541,6 +635,7 @@ function CommandInterface() {
     window.clearTimeout(restartTimerRef.current)
     window.clearTimeout(mobileCommandTimerRef.current)
     recognitionRef.current?.abort()
+    stopLocalRecognition({ releaseModel: true })
     window.speechSynthesis?.cancel()
   }, [])
   useEffect(() => {
