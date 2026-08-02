@@ -55,9 +55,6 @@ function Navigation() {
           <li className="nav-item">
             <Link to="/character-sheet" className="nav-link">Characters</Link>
           </li>
-          <li className="nav-item">
-            <a href="#contact" className="nav-link">Contact</a>
-          </li>
         </ul>
       </div>
     </nav>

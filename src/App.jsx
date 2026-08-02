@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import GM from './pages/GM'
 import Players from './pages/Players'
 import Rules from './pages/Rules'
+import Contact from './pages/Contact'
 import CharacterSheet from './pages/CharacterSheet'
 import './App.css'
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/gm" element={<GM />} />
             <Route path="/players" element={<Players />} />
             <Route path="/rules" element={<Rules />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/character-sheet" element={<CharacterSheet />} />
           </Routes>
         </main>
