@@ -7,6 +7,7 @@ import credits from '../content/gm/credits.txt?raw'
 import loot from '../content/gm/loot.txt?raw'
 import death from '../content/gm/death.txt?raw'
 import npcCreation from '../content/gm/npc-creation.txt?raw'
+import creatureCompendium from '../content/gm/creature-compendium.txt?raw'
 import adventures from '../content/gm/adventures.txt?raw'
 import history from '../content/gm/history.txt?raw'
 import factions from '../content/gm/factions.txt?raw'
@@ -45,6 +46,10 @@ const sections = [
   {
     title: 'NPC Creation',
     content: npcCreation
+  },
+  {
+    title: 'Creature Compendium',
+    content: creatureCompendium
   },
   {
     title: 'Adventures',

@@ -1,0 +1,91 @@
+Building Creatures
+
+Building a monster can be as simple as assigning a few numbers or as detailed as you want. A creature's Attack can be negative for balance. See the Dragon, for example. A high-Strength monster that should not hit all the time could have a negative Attack score to counter its Strength.
+
+Super Simple: Use one number for all Stats, AV, and weapons. This is good for creating creatures on the fly.
+
+Simple: Use one number for physical Stats and another for mental Stats, then assign AV, HP, and weapons.
+
+Standard: Apply scores in every category. A Standard creature can easily be generated using the character creation app.
+
+Creature Classifications
+
+PCs - The player-controlled Heroes.
+
+NPCs - Characters created by the GM. They can help or hinder PCs.
+
+Minions - Enemies that use the rules in the Minions section below.
+
+Monsters - NPC adversaries that can be reasoned with or killed. They do not follow character creation rules.
+
+Most humanoid enemies are built like PCs. Some enemies are more fantastic and have Stats exceeding +4. Many low-level threats will have negative numbers. Enemies can have Talents as well, and their Talents may be permanent.
+
+Creature Example
+
+The shortest format is:
+
+(Attack/Damage), (AV), (HP)
+
+Giant: +6/12/12
+
+A more specific Giant might look like this:
+
+Strength: +8
+
+Dexterity: -1
+
+Endurance: +3
+
+Education: -3
+
+Intuition: 0
+
+Influence: -2
+
+Skills
+
+Melee: +1
+
+Enhancements: +1
+
+Talents
+
+Fly F3 (permanent)
+
+NPCs are not created with point buy like PCs. NPCs can also have abilities outside the rules. You could build a dragon using Talents, rule that it has a 2d6 fireball usable every 3 turns, or give it three separate attacks: claw, claw, and bite. Use what works. The goal is to keep creatures simple and easy to plug into your campaign.
+
+This system makes it easy to create opponents while allowing a high degree of creativity.
+
+Minions
+
+Minions allow the GM to use greater numbers of enemies that are easy to kill. They can force tactical decisions: Do the Heroes take them out first? Do the Minions get in the way of other actions? When a Minion is hit, it dies.
+
+The following rules apply to Minions:
+
+Minions form groups of 2 to 5.
+
+Each group gains a +1 Attack bonus per member. A group of 4 has a +4 bonus to hit.
+
+The entire group deals 1d6 damage.
+
+AV is 2 lower than the base creature's AV. A Goblin Scrapper Minion with a base AV of 14 has 12 AV.
+
+The group fights using one attack roll.
+
+The group attacks as a whole and can combine melee and ranged attacks. Minions are not limited by being adjacent to the target, and a group can contain both melee and ranged weapons.
+
+As groups suffer casualties, survivors rearrange into a smaller number of groups. The last surviving group members will often flee or surrender.
+
+All groups of Minions are assumed to be adjacent to one another. This rule applies only to Minions, not non-Minion characters.
+
+Minions go last in turn order.
+
+Minions are susceptible to Influence attempts such as Intimidation.
+
+Minions cannot make reactive strikes.
+
+Minions are easily identified.
+
+Adjusting Creatures
+
+Creatures can be modified on the fly to make them weaker or stronger based on the Heroes' abilities. The easiest adjustment is increasing or decreasing HP or AV.
