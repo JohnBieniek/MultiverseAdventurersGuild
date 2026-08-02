@@ -49,7 +49,24 @@ const sections = [
   },
   {
     title: 'Creature Compendium',
-    content: creatureCompendium
+    content: creatureCompendium,
+    creatureCards: [
+      {
+        name: 'Giant',
+        summary: 'A brutally strong threat balanced by poor agility and limited education.',
+        fields: [['Attack', '+6'], ['Damage', 'd12'], ['AV', '12'], ['HP', '12'], ['Stats', 'STR +8, DEX −1, END +3, INT 0, EDU −3, CHA −2'], ['Skills', 'Melee +1'], ['Enhancements', '+1'], ['Talents', 'Fly F3 (permanent)']]
+      },
+      {
+        name: 'Werewolf',
+        summary: 'A relentless supernatural hunter that closes distance quickly and shrugs off ordinary wounds.',
+        fields: [['Attack', '+5'], ['Damage', 'd8 claws or d10 bite'], ['AV', '13'], ['HP', '18'], ['Stats', 'STR +4, DEX +3, END +4, INT +2, EDU −2, CHA −1'], ['Skills', 'Observation +3, Outdoors +3, Sneak +2'], ['Talents', 'Regeneration F2 (permanent), Super Speed F1']]
+      },
+      {
+        name: 'Cyber Oozer',
+        summary: 'Escaped smart matter that digests machines, flows through vents, and rewrites damaged circuitry into itself.',
+        fields: [['Attack', '+3'], ['Damage', 'd10 corrosive pseudopod'], ['AV', '9'], ['HP', '24'], ['Stats', 'STR +3, DEX −2, END +6, INT +1, EDU +2, CHA −4'], ['Skills', 'Technology +3, Sneak +2'], ['Talents', 'Shapechange F2 (permanent), Harm F2'], ['Special', 'A successful hit against armor or machinery gives the target −1 AV until repaired.']]
+      }
+    ]
   },
   {
     title: 'Adventures',

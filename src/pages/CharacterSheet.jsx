@@ -139,8 +139,8 @@ const suppliedDescriptorOptions = {
       "Ceramic Kukri",
       "Hookblade",
       "Longword",
-      "2 handed sword",
-      "katana"
+      "2-Handed Sword",
+      "Katana"
     ],
     "improvised": []
   },
@@ -166,9 +166,8 @@ const suppliedDescriptorOptions = {
         "Magic Missile Focus",
         "Elemental Shot Rune",
         "Spellgun",
-        "elemental attack (fire, electricity, water, cold, wind)",
-        "harm talent",
-        "telekinetic"
+        "Elemental Attack (Fire, Electricity, Water, Cold, Wind)",
+        "Harm Talent"
       ],
       "species": [
         "Elven Archer Lineage",
@@ -208,7 +207,7 @@ const suppliedDescriptorOptions = {
       "Sniper Rifle",
       "Tranquilizer Gun",
       "Energy Carbine",
-      "laz gun/rifle"
+      "Laz Gun/Rifle"
     ],
     "improvised": []
   },
@@ -1031,11 +1030,11 @@ const descriptorTypesFor = (archetypeName, species) => {
 const suppliedWeaponStandardByType = {
   'Unarmed / Tiny Melee': suppliedDescriptorOptions.UNM.improvised,
   'Light Melee': ['Combat Knife', 'Short Sword', 'Shock Glove', 'Bio-talon', 'Vibro-Dagger', 'Ceramic Kukri', 'Hookblade'],
-  'Medium Melee': ['Broad Sword', 'War Hammer', 'Poleaxe', 'Rune Blade', 'Mace', 'Longword', 'katana', 'Baseball Bat', 'Crowbar', 'Lead Pipe', 'Frying Pan', 'Wrench', 'Chair Leg', 'Chain', 'Staff'],
-  'Heavy Melee': ['Greatsword', '2 handed sword', 'Rock / Brick', 'Folding Chair', 'Steel Cable Coil', 'Iron Rod'],
+  'Medium Melee': ['Broad Sword', 'War Hammer', 'Poleaxe', 'Rune Blade', 'Mace', 'Longword', 'Katana', 'Baseball Bat', 'Crowbar', 'Lead Pipe', 'Frying Pan', 'Wrench', 'Chair Leg', 'Chain', 'Staff'],
+  'Heavy Melee': ['Greatsword', '2-Handed Sword', 'Rock / Brick', 'Folding Chair', 'Steel Cable Coil', 'Iron Rod'],
   'Holdout Ranged': ['Throwing Knife', 'Sling', 'Hand Crossbow', 'Blowgun', 'Dart Gun', 'Light Pistol'],
   'Compact Ranged': ['Shortbow', 'Recurve Bow', 'Heavy Pistol', 'Revolver', 'Submachine Gun', 'Tranquilizer Gun'],
-  'Longarm Ranged': ['Longbow', 'Crossbow', 'Shotgun', 'Assault Rifle', 'Hunting Rifle', 'Energy Carbine', 'laz gun/rifle'],
+  'Longarm Ranged': ['Longbow', 'Crossbow', 'Shotgun', 'Assault Rifle', 'Hunting Rifle', 'Energy Carbine', 'Laz Gun/Rifle'],
   'Heavy Ranged': ['Sniper Rifle'],
 }
 const suppliedWeaponNames = (archetypeName, type, species) => {

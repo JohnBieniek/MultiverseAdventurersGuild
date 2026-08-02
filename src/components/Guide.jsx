@@ -507,6 +507,22 @@ function renderSkillCard(line, exampleLine, index, sectionTitle) {
   )
 }
 
+function renderCreatureCards(cards) {
+  return (
+    <div className="guide-creature-grid">
+      {cards.map((card) => (
+        <article key={card.name} className="guide-info-card guide-creature-card">
+          <h3>{card.name}</h3>
+          <p className="guide-card-summary">{card.summary}</p>
+          <div className="guide-card-body">
+            {card.fields.map(([label, value]) => <p key={label}><strong>{label}:</strong> {value}</p>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}
+
 function renderTextBlocks(content, sectionTitle, section) {
   const lines = getLines(content).filter(Boolean)
   const elements = []
@@ -547,6 +563,11 @@ function renderTextBlocks(content, sectionTitle, section) {
           {renderSectionMedia(section)}
         </div>
       )
+      continue
+    }
+
+    if (line === '[creature-cards]') {
+      elements.push(<div key={`${line}-${index}`}>{renderCreatureCards(section.creatureCards || [])}</div>)
       continue
     }
 

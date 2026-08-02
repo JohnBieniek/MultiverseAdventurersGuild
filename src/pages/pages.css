@@ -490,6 +490,18 @@
   gap: 1rem;
 }
 
+.guide-creature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .guide-creature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .guide-card-layout-talent .guide-card-grid {
   grid-template-columns: 1fr;
 }

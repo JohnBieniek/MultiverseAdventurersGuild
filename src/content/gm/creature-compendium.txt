@@ -20,37 +20,9 @@ Monsters - NPC adversaries that can be reasoned with or killed. They do not foll
 
 Most humanoid enemies are built like PCs. Some enemies are more fantastic and have Stats exceeding +4. Many low-level threats will have negative numbers. Enemies can have Talents as well, and their Talents may be permanent.
 
-Creature Example
+Creature Examples
 
-The shortest format is:
-
-(Attack/Damage), (AV), (HP)
-
-Giant: +6/12/12
-
-A more specific Giant might look like this:
-
-Strength: +8
-
-Dexterity: -1
-
-Endurance: +3
-
-Education: -3
-
-Intuition: 0
-
-Influence: -2
-
-Skills
-
-Melee: +1
-
-Enhancements: +1
-
-Talents
-
-Fly F3 (permanent)
+[creature-cards]
 
 NPCs are not created with point buy like PCs. NPCs can also have abilities outside the rules. You could build a dragon using Talents, rule that it has a 2d6 fireball usable every 3 turns, or give it three separate attacks: claw, claw, and bite. Use what works. The goal is to keep creatures simple and easy to plug into your campaign.
 
