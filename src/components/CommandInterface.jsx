@@ -358,8 +358,13 @@ function CommandInterface() {
         return
       }
       const explainEntryMatch = spokenCommand.match(/^(?:what does|what is|explain|read|tell me about)\s+(?:my\s+|the\s+)?(.+?)(?:\s+(?:talent|item|trait))?(?:\s+do)?$/i)
-      if (explainEntryMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|force|energy|level|xp|experience|melee|ranged|range|distance|close)/i.test(explainEntryMatch[1])) {
+      if (explainEntryMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|force|energy|level|xp|experience|attack|melee|ranged|range|distance|close)/i.test(explainEntryMatch[1])) {
         respond(characterCommand({ intent: 'explain-entry', entry: explainEntryMatch[1] }))
+        return
+      }
+      const readAttackSkillMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?attack\s+skill$/i)
+      if (readAttackSkillMatch) {
+        respond(characterCommand({ intent: 'read-vital', vital: 'attack-skill' }))
         return
       }
       const readAttackModifierMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+attack\s+(?:modifier|mod)$/i)
