@@ -1955,6 +1955,15 @@ function CharacterSheet() {
   }, [character])
 
   useEffect(() => {
+    const openSavedCharacter = event => {
+      const saved = characters.find(hero => hero.id === event.detail?.id)
+      if (saved) setCharacter(normalizeXpTracking(structuredClone(saved)))
+    }
+    window.addEventListener('mag-open-character', openSavedCharacter)
+    return () => window.removeEventListener('mag-open-character', openSavedCharacter)
+  }, [characters])
+
+  useEffect(() => {
     if (!character) return
     let changed = false
     let talents = character.talents.map(row => {

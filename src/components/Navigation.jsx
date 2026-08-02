@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useLayoutEffect, useRef } from 'react'
+import CommandInterface from './CommandInterface'
 import './Navigation.css'
 
 function Navigation() {
@@ -56,6 +57,7 @@ function Navigation() {
             <Link to="/character-sheet" className="nav-link">Characters</Link>
           </li>
         </ul>
+        <CommandInterface />
       </div>
     </nav>
   )
