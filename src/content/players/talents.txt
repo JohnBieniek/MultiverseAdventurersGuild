@@ -108,45 +108,75 @@ Buffs:
 Description: Buffs are Talents that temporarily improve a target's skill. They last one hour, use an attack action, and have a maximum of Force 2 (F2). Buffs cannot stack with each other; only one Buff can be active on a target at a time. One-shots do not count toward this limit.
 Mechanic: Buffs are activated by touching the target. For 1 additional energy, you can activate a Buff at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range. A Buff can also be purchased as self-only, which means it uses the one-shot energy cost and only affects you.
 
-Buff Option: Genius
+Genius:
 Description: Your mind processes information with incredible speed and accuracy.
 Mechanic: The target improves Knowledge by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Heightened Awareness
+Heightened Awareness:
 Description: Your senses sharpen to extraordinary levels, allowing you to notice hidden details, danger, and subtle clues that others overlook.
 Mechanic: The target improves Observation by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Intimidating Presence
+Intimidating Presence:
 Description: Your sheer physical presence radiates menace, making threats impossible to ignore.
 Mechanic: You intimidate as a subset of Influence, using Strength as the stat. Add +1d6 per Force used to intimidate.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Pathfinder
+Pathfinder:
 Description: You become an excellent tracker, survivalist, and wilderness guide.
 Mechanic: The target improves Outdoors by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Shadowstep
+Shadowstep:
 Description: Your movements become silent and instinctive, making it easier to avoid detection.
 Mechanic: The target improves Sneak by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Silver Tongue
+Silver Tongue:
 Description: Every word carries confidence and charisma. You effortlessly persuade, negotiate, and inspire others.
 Mechanic: The target improves Influence by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Technical Expertise
+Technical Expertise:
 Description: Your understanding of machines, electronics, and complex systems reaches exceptional levels.
 Mechanic: The target improves Technology by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Transporter
+Transporter:
 Description: Whether behind the wheel, at the controls, or in the pilot's seat, your reflexes and instincts make every vehicle feel like an extension of yourself.
 Mechanic: The target improves Vehicle by +1d4 per Force used.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Trap Sense
+Trap Sense:
 Description: You instinctively notice dangerous mechanisms and understand how to disable them, regardless of whether they are technological or magical.
 Mechanic: The target improves Observation for traps by +1d6 per Force used and Technology to remove traps by +1d6 per Force used. This works at any tech level.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
-Buff Option: Truthsense
+Truthsense:
 Description: You instinctively recognize hesitation, deception, and hidden motives.
 Mechanic: Add +1d6 per Force used to Observation checks made to determine truth.
+Duration: 1 hour.
+Action: Attack action.
+Category: Buff.
 
 Change of Fortune:
 Description: Grant the target the ability to receive a one-time bonus as a modifier to d20 rolls. Can be taken to modify after rolling.

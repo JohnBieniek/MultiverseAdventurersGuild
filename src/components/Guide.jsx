@@ -855,13 +855,14 @@ function buildCardElements(cards, type, cardIndex) {
 
 function renderCards(content, type, cardIndex) {
   const { intro, cards } = splitCards(content, type)
+  const orderedCards = type === 'talent' ? [...cards].sort((a, b) => a.name.localeCompare(b.name)) : cards
 
   return (
     <div className={`guide-card-layout guide-card-layout-${type}`}>
       <aside className="guide-item-sidebar" aria-label={`${type} list`}>
         <h3>{cardTypeLabels[type] || `${type.charAt(0).toUpperCase()}${type.slice(1)}`}</h3>
         <nav>
-          {cards.map((card) => {
+          {orderedCards.map((card) => {
             const subcards = splitSubcards(card.lines).subcards
 
             return (
@@ -900,7 +901,7 @@ function renderCards(content, type, cardIndex) {
         )}
 
         <div className="guide-card-grid">
-          {buildCardElements(cards, type, cardIndex)}
+          {buildCardElements(orderedCards, type, cardIndex)}
         </div>
       </div>
     </div>
