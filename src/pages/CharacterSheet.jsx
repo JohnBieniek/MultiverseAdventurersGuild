@@ -2316,7 +2316,7 @@ function CharacterSheet() {
 
     <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon, description]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#stat-${key}`}>{label} <span>({short})</span></a></strong><InfoTooltip label={label} description={description}/></div><SkillScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
       <section className="sheet-section skills">
-        <SectionTitle icon="★" title="Skills" subtitle="Starting array: +2, +2, +1, +1, +1, 0, 0, 0, −1"/>
+        <SectionTitle icon="★" title="Skills" subtitle="Starting array: +2, +2, +1, +1, +1, 0, 0, 0, −1. Assign each value to one Skill, including Attack. Use +2 twice, +1 three times, 0 three times, and −1 once."/>
         <div className="skill-head"><span>Skill</span><span>Stat</span><span>Ability</span><span>Modifier</span><span>Buffs</span><span>Debuffs</span><span>Total</span></div>
         {skillDefs.map(([key, label, defaultStat, Icon, description]) => {
           const total = skillTotal(key, defaultStat)
