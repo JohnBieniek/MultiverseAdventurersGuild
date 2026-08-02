@@ -86,6 +86,7 @@ function CommandInterface() {
   const triggerRef = useRef(null)
   const inputRef = useRef(null)
   const recognitionRef = useRef(null)
+  const recognitionRunningRef = useRef(false)
   const keepListeningRef = useRef(false)
   const lastResponseRef = useRef('')
   const speechActiveRef = useRef(false)
@@ -123,14 +124,15 @@ function CommandInterface() {
     speechGenerationRef.current = generation
     speechActiveRef.current = true
     ignoreSpeechUntilRef.current = Infinity
-    recognitionRef.current?.abort()
+    const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && recognitionRunningRef.current
+    if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(message)
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
       speechActiveRef.current = false
       ignoreSpeechUntilRef.current = Date.now() + 900
-      if (keepListeningRef.current) resumeRecognition(950)
+      if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
     utterance.onend = finished
     utterance.onerror = finished
@@ -449,6 +451,7 @@ function CommandInterface() {
       recognition.interimResults = false
       recognition.lang = 'en-US'
       recognition.onstart = () => {
+        recognitionRunningRef.current = true
         setListening(true)
         if (!announcedStart) { setStatus('Listening.'); announcedStart = true }
       }
@@ -510,6 +513,7 @@ function CommandInterface() {
         respond(errors[event.error] || `Voice listening stopped because the browser reported ${event.error || 'an unknown error'}. Try again or type the command.`)
       }
       recognition.onend = () => {
+        recognitionRunningRef.current = false
         if (speechActiveRef.current) return
         if (!keepListeningRef.current) { setListening(false); return }
         setListening(true)
