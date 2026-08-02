@@ -329,6 +329,19 @@ function CommandInterface() {
         if (/^(?:melee|close(?:\s+combat)?)\s+attack\s+(?:modifier|mod)$/i.test(score)) { kind = 'melee-attack-modifier'; score = 'melee attack modifier' }
         else if (/^(?:ranged|range|distance)\s+attack\s+(?:modifier|mod)$/i.test(score)) { kind = 'ranged-attack-modifier'; score = 'ranged attack modifier' }
         else if (/defen[cs]e(?:\s+rating)?$/i.test(score)) { kind = 'defense'; score = 'defense' }
+        else if (/\s+(?:skill\s+)?(?:ability|buffs?|debuffs?|modifier|mod)$/i.test(score)) {
+          const componentMatch = score.match(/(ability|buffs?|debuffs?|modifier|mod)$/i)
+          kind = 'skill-component'
+          score = score.replace(/\s+(?:skill\s+)?(?:ability|buffs?|debuffs?|modifier|mod)$/i, '')
+          const component = /^buff/i.test(componentMatch[1]) ? 'buffs' : /^debuff/i.test(componentMatch[1]) ? 'debuffs' : /^(?:modifier|mod)$/i.test(componentMatch[1]) ? 'modifier' : 'ability'
+          score = score.trim()
+          const amountText = setScoreMatch?.[2] || adjustScoreMatch?.[3] || addToScoreMatch?.[1] || 'one'
+          const amount = signedSpokenNumber(amountText)
+          if (amount == null) { respond(`I could not determine the new value in ${original}.`); return }
+          const operation = setScoreMatch ? 'set' : /^(?:decrease|lower|reduce)$/i.test(adjustScoreMatch?.[1] || '') ? 'subtract' : 'add'
+          respond(characterCommand({ intent: 'change-score', kind, score, component, operation, amount: operation === 'set' ? amount : Math.abs(amount) }))
+          return
+        }
         else if (/\s+skill$/i.test(score)) { kind = /attack/i.test(score) ? 'attack' : 'skill'; score = score.replace(/\s+skill$/i, '') }
         else if (/\s+stat$/i.test(score)) { kind = 'stat'; score = score.replace(/\s+stat$/i, '') }
         const amountText = setScoreMatch?.[2] || adjustScoreMatch?.[3] || addToScoreMatch?.[1] || 'one'

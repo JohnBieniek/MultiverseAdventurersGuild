@@ -2329,6 +2329,19 @@ function CharacterSheet() {
           currentValue = number(character.skills[skill[0]].ability)
           nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
           nextValue = Math.max(-4, Math.min(4, nextValue))
+        } else if (kind === 'skill-component' && skill) {
+          const component = ['ability', 'modifier', 'buffs', 'debuffs'].includes(request.component) ? request.component : 'ability'
+          const componentLabel = component === 'buffs' ? 'Buff' : component === 'debuffs' ? 'Debuff' : component[0].toUpperCase() + component.slice(1)
+          label = `${skill[1]} ${componentLabel}`
+          currentValue = number(character.skills[skill[0]][component])
+          if (component === 'debuffs') {
+            const currentMagnitude = Math.abs(currentValue)
+            const nextMagnitude = operation === 'set' ? Math.abs(amount) : currentMagnitude + (operation === 'subtract' ? -Math.abs(amount) : Math.abs(amount))
+            nextValue = -Math.max(0, nextMagnitude)
+          } else {
+            nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+            if (component === 'ability') nextValue = Math.max(-4, Math.min(4, nextValue))
+          }
         } else if (kind === 'attack' || requestedKey === 'attack' || requestedKey === 'attackskill') {
           kind = 'attack'
           label = 'Attack Skill'
@@ -2348,6 +2361,7 @@ function CharacterSheet() {
           else if (kind === 'ranged-attack-modifier') copy.rangedAttackModifier = nextValue
           else if (kind === 'stat') copy.stats[stat[0]] = nextValue
           else if (kind === 'skill') copy.skills[skill[0]].ability = nextValue
+          else if (kind === 'skill-component') copy.skills[skill[0]][request.component] = nextValue
           else copy.attackSkill = nextValue
           copy.updatedAt = Date.now()
           return copy
