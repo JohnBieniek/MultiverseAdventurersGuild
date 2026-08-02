@@ -1309,7 +1309,13 @@ const archetypeWeaponVariants = {
   ],
   'Street Samurai': [
     ['White-Handle Tanto', 'Neon-Clan Wakizashi', 'Honor-Debt Blade', 'Chrome Petal Knife', 'Ronin’s Last Tanto'],
-    ['Crimson Circuit Katana', 'Ghostline Ninjatō', 'Shogun-Protocol Saber', 'Rain-Slick Monoblade', 'Clanless Moon Katana'],
+    [
+      'Crimson Circuit Katana', 'Clanless Moon Katana', 'Neon Shogun Katana', 'Ghostwire Katana',
+      'Chrome Chrysanthemum Katana', 'Midnight Ronin Katana', 'Red Dragon Katana', 'Stormcode Katana',
+      'Black Lotus Katana', 'Razor-Sun Katana', 'Static Oni Katana', 'Jade Serpent Katana',
+      'Blood-Rain Katana', 'Void Blossom Katana', 'Last Honor Katana', 'Silver Kitsune Katana',
+      'Burning Shrine Katana', 'Night-Circuit Katana', 'Grave Neon Katana', 'Thousand-Cut Katana',
+    ],
     ['Clan-Locked Smart Pistol', 'Ronin’s Backup Sidearm', 'Honor-Code Holdout', 'Shrine-Gate Needler', 'Chrome Chrysanthemum Pistol'],
     ['Ronin Compact SMG', 'Dojo-War Machine Pistol', 'Clan Banner Carbine', 'Shogunate Street Sweeper', 'Neon Daimyo SMG'],
   ],
@@ -1338,7 +1344,7 @@ const weaponNameIsUnedited = (weapon, archetypeName, species = '') => {
   if (weapon.generatedName) return weapon.name === weapon.generatedName
   return weapon.source === 'archetype' && generatedWeaponNamesForType(archetypeName, weapon.type, species).includes(weapon.name)
 }
-const characterDataVersion = 1
+const characterDataVersion = archetypeName => archetypeName === 'Street Samurai' ? 2 : 1
 const weaponNotesByType = {
   'Unarmed / Tiny Melee': 'Automatically concealed.',
   'Light Melee': 'Automatically concealed.',
@@ -1349,14 +1355,15 @@ const weaponNotesByType = {
   'Longarm Ranged': 'TN 12 Observation to conceal.',
   'Heavy Ranged': 'Cannot be concealed; must be fired from a braced position.',
 }
-const weaponLoadoutMarker = (archetypeName, species = '') => `${characterDataVersion}:${archetypeName}:${species}`
+const weaponLoadoutMarker = (archetypeName, species = '') => `${characterDataVersion(archetypeName)}:${archetypeName}:${species}`
 const populateArchetypeWeapons = (existingWeapons, archetypeName, species = '') => {
   const weapons = existingWeapons.filter(weapon => weapon.source !== 'archetype').map(weapon => ({ ...weapon }))
   const usedNames = new Set()
   ;(weaponLoadouts[archetypeName] || []).forEach(([defaultName, type], slotIndex) => {
     const specificPool = archetypeWeaponVariants[archetypeName]?.[slotIndex]
-    const specificNames = specificPool?.length ? expandWeaponNames(specificPool) : []
-    const pool = [...specificNames, ...weaponNamePool(archetypeName, type, [defaultName], species)].filter(name => !usedNames.has(name))
+    const katanaOnly = archetypeName === 'Street Samurai' && type === 'Medium Melee'
+    const specificNames = specificPool?.length ? (katanaOnly ? specificPool : expandWeaponNames(specificPool)) : []
+    const pool = (katanaOnly ? specificNames : [...specificNames, ...weaponNamePool(archetypeName, type, [defaultName], species)]).filter(name => !usedNames.has(name))
     const name = pool[Math.floor(Math.random() * pool.length)] || defaultName
     usedNames.add(name)
     const weapon = { id: crypto.randomUUID(), name, generatedName: name, nameCustomized: false, type, enhancement: 0, notes: weaponNotesByType[type] || 'Archetype starting weapon.', source: 'archetype' }
@@ -2249,7 +2256,7 @@ function CharacterSheet() {
       <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/><IdentityChoice label="Species" value={character.species} options={speciesNames} onChange={setSpecies}/><IdentityChoice label="Archetype" value={character.archetype} options={archetypeOptions.map(option => option.name)} tooltip={archetypeOptions.find(option => option.name === character.archetype)?.description} onChange={chooseArchetype} allowReselect/><div className="identity-utility-row"><Field label="Level" type="number" min="0" max="10" value={character.level} onChange={setLevel}/><Field label="Total XP" type="number" min="0" value={character.totalXp} onFocus={() => { totalXpEditValue.current = number(character.totalXp); totalXpLastValue.current = number(character.totalXp); totalXpAppliedIncrease.current = 0 }} onKeyDown={event => { if (event.key === 'ArrowUp' || event.key === 'ArrowDown') totalXpArrowChange.current = true }} onKeyUp={() => { totalXpArrowChange.current = false }} onMouseDown={event => { const bounds = event.currentTarget.getBoundingClientRect(); if (event.clientX >= bounds.right - 24) totalXpArrowChange.current = true }} onMouseUp={() => { totalXpArrowChange.current = false }} onBlur={() => { totalXpEditValue.current = null; totalXpLastValue.current = null; totalXpAppliedIncrease.current = 0; totalXpArrowChange.current = false }} onChange={setTotalXp}/><Field label="Unspent XP" type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/><div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div></div></div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
-      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><Vital label="HP" editable value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
+      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><HpVital value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
     </section>
 
     <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon, description]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#stat-${key}`}>{label} <span>({short})</span></a></strong><InfoTooltip label={label} description={description}/></div><SkillScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
@@ -2339,6 +2346,12 @@ function SectionTitle({ title, subtitle }) {
   return <div className="section-title"><h2>{guideLink ? <a className="section-guide-link" href={guideLink}>{heading}</a> : heading}{startingArray && <InfoTooltip label={`${title} starting array`} description={startingArray}/>}</h2>{note && <p>{note}</p>}{title === 'Talents' && subtitle && <strong className="section-metric">{subtitle}</strong>}</div>
 }
 function Vital({ label, value, max, editable, onChange, roll, children }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<a className="vital-rule-link" href={vitalRuleLinks[label]}>{label}</a>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : roll ? <div className="vital-roll-value"><strong>{value}</strong><button className="roll-button" onClick={roll}>Roll</button></div> : <strong>{value}</strong>}{children}</div> }
+function HpVital({ value, max, onChange }) {
+  const [amount, setAmount] = useState(1)
+  const [direction, setDirection] = useState(-1)
+  const apply = () => onChange(Math.max(0, Math.min(number(max), number(value) + direction * Math.abs(number(amount)))))
+  return <div className="vital hp-vital"><FaHeartbeat className="vital-icon"/><a className="vital-rule-link" href={vitalRuleLinks.HP}>HP</a><div className="vital-combined"><input aria-label="HP current" type="number" value={value} onChange={event => onChange(event.target.value)}/><span>/</span><strong aria-label="HP maximum">{max}</strong></div><div className="hp-adjuster" aria-label="Adjust HP"><button type="button" className={direction === -1 ? 'selected' : ''} aria-label="Hurt" aria-pressed={direction === -1} onClick={() => setDirection(-1)}>−</button><input aria-label="HP adjustment amount" type="number" min="0" value={amount} onChange={event => setAmount(event.target.value)}/><button type="button" className={direction === 1 ? 'selected' : ''} aria-label="Heal" aria-pressed={direction === 1} onClick={() => setDirection(1)}>+</button><button type="button" className="hp-apply" onClick={apply}>Apply</button></div></div>
+}
 function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
   const normalizedRating = number(rating)
   const nextCost = defenseUpgradeCosts[normalizedRating + 1]

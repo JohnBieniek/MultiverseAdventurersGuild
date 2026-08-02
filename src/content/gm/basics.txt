@@ -2,16 +2,6 @@ Introduction
 
 Welcome to the Multiverse! You can play a Hero from any time, setting, or era. Imagine a party comprising a superhero, a cowgirl, a cyborg, a medieval knight, and a Witch. Now imagine them being any Species you want. In 15 minutes, you could build that Hero and start playing. You will be a part of the Guild that explores the Multiverse.
 
-How to Navigate the Rules
-
-There are 3 levels to play.
-
-Basic: Quick start and play. Perfect for one shots or introductions to the game. You start at Level "0". Read the text to build a character. Level "0" is about learning game concepts, most importantly the basic roll. The GM interprets and explains rules as you go. It's important to listen to the Heroes concept and translate it into game terms. Explain the tutorial nature of the level. The Hero doesn't need to know any rules to start with or even read anything. Incorporate Talents when the Heroes might need them.
-
-Campaign: Using Talents demonstrates how to use them and how they affect gameplay. Talents are a core concept. At this point, encourage your Heroes to at least read the combat Talents. Ask your Heroes about the cool things they want to do and introduce them to the particular Talent.
-
-Advanced Play: At this point, encourage your Heroes to read all the player material. Much of the material, in particular the section on Archetypes, will help advanced Heroes discover new character concepts. May consider starting at level 1 or higher.
-
 Heroes can focus on playing in one setting or multiple settings.
 
 The idea behind the game is to spend more time playing and less time going through the rules. The central dynamic of target number (TN) allows the GM to quickly factor in difficulty. TN modifiers are circumstantial. This also limits metagaming because it's not written down; it's in the GM's head. The key is that modifiers are determined by the GM, not by specific rules. This streamlines play.
