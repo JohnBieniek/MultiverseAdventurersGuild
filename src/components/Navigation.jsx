@@ -56,7 +56,7 @@ function Navigation() {
             <Link to="/character-sheet" className="nav-link">Characters</Link>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-link">Contact</Link>
+            <a href="#contact" className="nav-link">Contact</a>
           </li>
         </ul>
       </div>
