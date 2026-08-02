@@ -196,7 +196,7 @@ function CommandInterface() {
     if (['cancel', 'close', 'never mind', 'nevermind'].includes(value)) { close(); return }
     if (['repeat', 'say that again', 'read again'].includes(value)) { speak(lastResponseRef.current || 'There is nothing to repeat yet.'); return }
     if (['help', 'what can i say', 'commands'].includes(value)) {
-      respond(onCharacterSheet ? 'On a Character Sheet you can ask about health, Ego, Defense, Resilience, Energy, XP, or Talents; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage. State changes ask for confirmation.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
+      respond(onCharacterSheet ? 'On a Character Sheet you can ask about or change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage. State changes ask for confirmation.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
       return
     }
     if (onCharacterSheet) {
@@ -206,6 +206,25 @@ function CommandInterface() {
       if (listMatch) {
         const list = normalize(listMatch[1]).replace(/s?$/, 's')
         respond(characterCommand({ intent: 'read-list', list }))
+        return
+      }
+      const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(name|species|archetype)\s+(?:to|as)\s+(.+)$/i)
+        || spokenCommand.match(/^(?:my\s+)?(name|species|archetype)\s+(?:is|should be)\s+(.+)$/i)
+      if (setIdentityMatch) {
+        const pending = { intent: 'change-identity', field: normalize(setIdentityMatch[1]), value: setIdentityMatch[2].trim() }
+        const preview = characterCommand({ ...pending, intent: 'preview-identity' })
+        if (/^Change /i.test(preview)) {
+          pendingActionRef.current = pending
+          setPendingAction(pending)
+          setResults([{ label: 'Confirm', detail: `Change this Hero's ${pending.field}`, action: 'confirm' }, { label: 'Cancel', detail: 'Leave it unchanged', action: 'cancel' }])
+        }
+        respond(preview)
+        return
+      }
+      const readIdentityMatch = spokenCommand.match(/^(?:what(?:'s| is)|tell me|read|check)\s+(?:my\s+)?(name|species|archetype)$/i)
+        || spokenCommand.match(/^(?:what|which)\s+(species|archetype)\s+am\s+i$/i)
+      if (readIdentityMatch || /^(?:who am i|describe my character|describe my hero)$/i.test(spokenCommand)) {
+        respond(characterCommand({ intent: 'read-identity', field: readIdentityMatch ? normalize(readIdentityMatch[1]) : 'all' }))
         return
       }
       const setProgressMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
@@ -277,7 +296,7 @@ function CommandInterface() {
         return
       }
       const explainTalentMatch = spokenCommand.match(/^(?:what does|what is|explain|read)\s+(?:the\s+)?(.+?)(?:\s+talent)?(?:\s+do)?$/i)
-      if (explainTalentMatch && !/^(?:my\s+)?(?:(?:total|unspent)\s+)?(?:health|hp|ego|defense|resilience|energy|level|xp|experience)/i.test(explainTalentMatch[1])) {
+      if (explainTalentMatch && !/^(?:my\s+)?(?:(?:total|unspent)\s+)?(?:name|species|archetype|health|hp|ego|defense|resilience|energy|level|xp|experience)/i.test(explainTalentMatch[1])) {
         respond(characterCommand({ intent: 'explain-talent', talent: explainTalentMatch[1] }))
         return
       }

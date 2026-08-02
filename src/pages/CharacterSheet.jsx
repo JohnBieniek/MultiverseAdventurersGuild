@@ -2083,6 +2083,27 @@ function CharacterSheet() {
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
         return
       }
+      if (request.intent === 'read-identity') {
+        const name = character.name?.trim() || 'Unnamed Hero'
+        const species = character.species?.trim() || 'no Species selected'
+        const archetype = character.archetype?.trim() || 'no Archetype selected'
+        const values = { name: `${character.name ? `Your Hero's name is ${name}` : 'Your Hero has no name selected'}.`, species: character.species ? `${name}'s Species is ${species}.` : `${name} has no Species selected.`, archetype: character.archetype ? `${name}'s Archetype is ${archetype}.` : `${name} has no Archetype selected.`, all: `${name}. Species: ${species}. Archetype: ${archetype}.` }
+        reply(values[request.field] || values.all)
+        return
+      }
+      if (request.intent === 'preview-identity' || request.intent === 'change-identity') {
+        const field = ['name', 'species', 'archetype'].includes(request.field) ? request.field : ''
+        if (!field || !String(request.value || '').trim()) { reply('Tell me whether to change the name, Species, or Archetype and what its new value should be.'); return }
+        const requestedValue = String(request.value).trim()
+        const options = field === 'species' ? speciesNames : field === 'archetype' ? archetypeOptions.map(option => option.name) : []
+        const canonicalValue = options.find(option => commandKey(option) === commandKey(requestedValue)) || requestedValue
+        const currentValue = String(character[field] || '').trim() || 'not selected'
+        const label = field === 'name' ? 'name' : field === 'species' ? 'Species' : 'Archetype'
+        if (request.intent === 'preview-identity') { reply(`Change ${label} from ${currentValue} to ${canonicalValue}?`); return }
+        setCharacter(current => ({ ...current, [field]: canonicalValue, ...(field === 'name' ? { characterNameSource: 'user' } : {}), ...(field === 'species' ? { speciesSource: 'user' } : {}), updatedAt: Date.now() }))
+        reply(`${label} changed from ${currentValue} to ${canonicalValue}.`)
+        return
+      }
       if (request.intent === 'read-list') {
         const list = commandKey(request.list)
         const named = entries => entries.map(entry => entry.name?.trim()).filter(Boolean)
