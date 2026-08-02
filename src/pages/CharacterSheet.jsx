@@ -2312,7 +2312,7 @@ function CharacterSheet() {
         const entryKeys = entry => [entry.name, ...(entry.aliases || [])].map(commandKey)
         const exact = candidates.filter(entry => entryKeys(entry).includes(key))
         const partial = exact.length ? exact : candidates.filter(entry => entryKeys(entry).some(entryKey => entryKey.includes(key) || key.includes(entryKey)))
-        if (!partial.length) { reply(`I could not find an Item, Trait, or Talent matching ${request.entry}.`); return }
+        if (!partial.length) { reply(`I could not find a Weapon, Item, Trait, or Talent matching ${request.entry}.`); return }
         if (partial.length > 1) { reply(`${request.entry} matches ${partial.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
         const entry = partial[0]
         reply(`${entry.name}. ${entry.kind}. ${entry.description}`)

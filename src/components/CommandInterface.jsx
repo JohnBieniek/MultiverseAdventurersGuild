@@ -366,6 +366,11 @@ function CommandInterface() {
       if (weaponMatch) { respond(characterCommand({ intent: 'roll-weapon', weapon: weaponMatch[1] })); return }
       const rollMatch = spokenCommand.match(/^roll(?:\s+my)?\s+(.+)$/i)
       if (rollMatch) { respond(characterCommand({ intent: 'roll-check', check: rollMatch[1] })); return }
+      const entryResponse = characterCommand({ intent: 'explain-entry', entry: spokenCommand })
+      if (!/^I could not find a Weapon, Item, Trait, or Talent matching /i.test(entryResponse)) {
+        respond(entryResponse)
+        return
+      }
     }
     const searchMatch = original.match(/^(?:search(?: for)?|find|look for)\s+(.+)$/i)
     if (searchMatch) { search(searchMatch[1]); return }
