@@ -12,6 +12,7 @@ import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
+const WELCOME_SEEN_KEY = 'mag-character-sheet-welcome-seen-v1'
 const stats = [
   ['strength', 'Strength', 'STR', GiBiceps, 'Your ability to lift, hit hard, and manipulate the world through physical means. Strength powers melee attacks and feats of raw force.'],
   ['dexterity', 'Dexterity', 'DEX', FaHandPaper, 'Your precision, coordination, and control. Dexterity helps you strike accurately, hit weak spots, sneak, and handle ranged weapons or vehicles.'],
@@ -1921,11 +1922,18 @@ function CharacterSheet() {
   const [showArchetypeQuiz, setShowArchetypeQuiz] = useState(false)
   const [pendingDelete, setPendingDelete] = useState(null)
   const [notice, setNotice] = useState('')
+  const [showWelcome, setShowWelcome] = useState(false)
   const fileRef = useRef(null)
   const totalXpEditValue = useRef(null)
   const totalXpLastValue = useRef(null)
   const totalXpAppliedIncrease = useRef(0)
   const totalXpArrowChange = useRef(false)
+
+  useEffect(() => {
+    if (localStorage.getItem(WELCOME_SEEN_KEY)) return
+    localStorage.setItem(WELCOME_SEEN_KEY, 'true')
+    setShowWelcome(true)
+  }, [])
 
   useEffect(() => {
     if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
@@ -2268,6 +2276,7 @@ function CharacterSheet() {
     </div>
     <section className="saved-library"><h2>Saved Heroes</h2>{characters.length === 0 ? <div className="empty-state"><strong>No saved Heroes yet</strong><span>Your characters stay in this browser using local storage.</span></div> : <div className="character-grid">{characters.map(hero => <article className="character-card" key={hero.id}><div><span>LEVEL {hero.level || 0}</span><h3>{hero.name}</h3><p>{[hero.species, hero.archetype].filter(Boolean).join(' • ') || 'Unwritten legend'}</p></div><div className="card-actions"><button className="primary" onClick={() => setCharacter(normalizeXpTracking(structuredClone(hero)))}>Load</button><button className="danger" onClick={() => setPendingDelete({ id: hero.id, name: hero.name })}>Delete</button></div></article>)}</div>}</section>
     {notice && <div className="toast">{notice}</div>}
+    {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
     {pendingDelete && <ConfirmModal
       eyebrow="DELETE HERO"
       title={`Delete ${pendingDelete.name || 'this Hero'}?`}
@@ -2353,6 +2362,7 @@ function CharacterSheet() {
     </EditableTable>
     <div className="sheet-columns lower"><EditableTable title="Contacts" icon="♟" subtitle={`You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`} rows={character.contacts} add={() => addRow('contacts',{name:'',role:''})} columns={['Name','Relationship / Role','']}>{(row,i)=><><label className="contact-field"><span>Name</span><input aria-label="Contact name" placeholder="Contact name" value={row.name} onChange={e=>update(['contacts',i,'name'],e.target.value)}/></label><label className="contact-field"><span>Role</span><ContactRoleChoice value={row.role} onChange={value=>setContactRole(i,value)}/></label><button className="icon-button" onClick={()=>deleteRow('contacts',row.id)}>×</button></>}</EditableTable><section className="sheet-section notes"><SectionTitle icon="✎" title="Session Notes"/><textarea value={character.notes} onChange={e=>update(['notes'],e.target.value)} placeholder="Conditions, mission clues, inventory, reminders…"/></section></div>
     {notice && <div className="toast">{notice}</div>}
+    {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
     {roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>}
     {showArchetypeQuiz && (
       <ArchetypeQuizModal close={() => setShowArchetypeQuiz(false)} complete={name => { setShowArchetypeQuiz(false); setPendingArchetype(name) }}/>
@@ -2418,6 +2428,14 @@ function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
+function CharacterSheetWelcome({ close }) {
+  useEffect(() => {
+    const dismiss = event => { if (event.key === 'Escape') close() }
+    window.addEventListener('keydown', dismiss)
+    return () => window.removeEventListener('keydown', dismiss)
+  }, [close])
+  return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt sheet-welcome" role="dialog" aria-modal="true" aria-labelledby="sheet-welcome-title" aria-describedby="sheet-welcome-intro"><button type="button" className="modal-close" aria-label="Close character sheet instructions" autoFocus onClick={close}>×</button><span className="eyebrow">NEW HERO GUIDE</span><h2 id="sheet-welcome-title">Build your Hero your way</h2><p id="sheet-welcome-intro" className="sheet-welcome-intro">You can create every detail yourself or choose an Archetype and let the sheet provide a complete starting package. Nothing is permanent—you can edit any result.</p><div className="sheet-welcome-grid"><section><h3>Choose a starting path</h3><p><strong>Build manually:</strong> Choose a Species, assign Stats and Skills, select Contacts and weapons, then describe your Hero with Items and personality Traits.</p><p><strong>Use an Archetype:</strong> Choose a familiar character style and select <em>Use Starting Package</em> to fill everything you need. “Help me choose!” can guide you.</p><p><strong>Make it custom:</strong> You can enter your own Archetype. Archetypes are examples, not hard boundaries on who your Hero can become.</p></section><section><h3>Set your core abilities</h3><p>Assign every value in the Stat and Skill starting arrays. Attack is also a Skill, with its own selector in the Attack section.</p><p>Choose whether your starting Attack modifier applies to melee or ranged attacks. You can improve both later.</p><p>Defense, HP, Energy, and other combat values are tracked in the Combat Summary.</p></section><section><h3>Describe and equip your Hero</h3><p><strong>Weapons</strong> define how you deal damage. <strong>Contacts</strong> are people you can call on. <strong>Items</strong> explain your capabilities, while <strong>Traits</strong> capture personality, beliefs, habits, and complications.</p><p>Generated entries are suggestions. Rename, replace, add, or remove them until the character feels right.</p></section><section><h3>Grow with XP</h3><p>Level 0 Heroes begin without Talents. You gain some Talents automatically as you level and may purchase more for 5 XP each.</p><p>Spend XP to improve Stats, Skills, Defense, and melee or ranged Attack modifiers. Additional Energy costs 2 XP per point.</p><p>Total XP determines Level; spending your unspent XP does not delay advancement.</p></section></div><button type="button" className="primary sheet-welcome-start" onClick={close}>Start Building</button></div></div>, document.body)
+}
 function ArchetypeQuizModal({ close, complete }) {
   const [nodeKey, setNodeKey] = useState('start')
   const [history, setHistory] = useState([])
