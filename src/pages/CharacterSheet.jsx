@@ -51,6 +51,7 @@ const levelUpBenefits = {
   9: { automatic: 'Unlock Force 4 Talents and gain 1 Talent. Your base HP becomes 64 and maximum Energy becomes 27.' },
   10: { automatic: 'Your base HP becomes 70, maximum Energy becomes 30, and you reach the final Guild rank.' },
 }
+const xpSpendingHelp = 'XP available to purchase improvements. Stats, Skills, and each Attack modifier cost 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4; buy each step separately. Defense ratings +2 through +7 cost 2, 2, 4, 4, 8, and 8 XP. Talents cost 5 XP each. Additional Energy costs 2 XP per point. Subtract purchases from Unspent XP; Total XP and Level do not decrease.'
 const weaponTypes = [
   ['Unarmed / Tiny Melee', 'melee', 4, 0], ['Light Melee', 'melee', 6, 0],
   ['Medium Melee', 'melee', 8, 0], ['Heavy Melee', 'melee', 10, -2],
@@ -2358,7 +2359,7 @@ function CharacterSheet() {
       <div className="identity-utility-row">
         <Field label="Level" href="/rules#level-progression-force-energy-and-talents" help="Level is based on Total XP earned. Level 0 is 0–9 XP, Level 1 begins at 10 XP, and every additional 10 XP grants another Level, up to Level 10 at 100 XP. Spending XP does not lower your Level." type="number" min="0" max="10" value={character.level} onChange={setLevel}/>
         <Field label="Total XP" href="/rules#level-progression-force-energy-and-talents" help="All XP your Hero has earned. Total XP never decreases and determines Level: every 10 Total XP grants one Level." type="number" min="0" value={character.totalXp} onFocus={() => { totalXpEditValue.current = number(character.totalXp); totalXpLastValue.current = number(character.totalXp); totalXpAppliedIncrease.current = 0 }} onKeyDown={event => { if (event.key === 'ArrowUp' || event.key === 'ArrowDown') totalXpArrowChange.current = true }} onKeyUp={() => { totalXpArrowChange.current = false }} onMouseDown={event => { const bounds = event.currentTarget.getBoundingClientRect(); if (event.clientX >= bounds.right - 24) totalXpArrowChange.current = true }} onMouseUp={() => { totalXpArrowChange.current = false }} onBlur={() => { totalXpEditValue.current = null; totalXpLastValue.current = null; totalXpAppliedIncrease.current = 0; totalXpArrowChange.current = false }} onChange={setTotalXp}/>
-        <Field label="Unspent XP" href="/rules#level-progression-force-energy-and-talents" help="XP available to purchase improvements. Spending it does not reduce Total XP or Level." type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/>
+        <Field label="Unspent XP" href="/rules#level-progression-force-energy-and-talents" help={xpSpendingHelp} type="number" min="0" value={character.unspentXp} onChange={setUnspentXp}/>
         <div className="quick-dice" aria-label="Quick dice rolls"><span>Roll a Die</span>{[4,6,8,10,20].map(sides=><button type="button" key={sides} onClick={()=>quickDieRoll(sides)}>d{sides}</button>)}</div>
       </div>
     </div></header>
