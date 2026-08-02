@@ -281,7 +281,7 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital: maximum ? `max-${resource}` : 'energy' }))
         return
       }
-      const setEnergyMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?energy\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
+      const setEnergyMatch = spokenCommand.match(/^(?:set|change|update|increase|raise|improve|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?energy\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
       const adjustEnergyMatch = spokenCommand.match(/^(increase|raise|add|gain|restore|recover|decrease|lower|reduce|spend|use)\s+(?:my\s+)?(?:current\s+)?energy(?:\s+by)?\s+(\d+|[a-z]+)$/i)
         || spokenCommand.match(/^(?:add|gain|restore|recover|spend|use)\s+(\d+|[a-z]+)\s+(?:points?\s+of\s+)?energy$/i)
       if (setEnergyMatch || adjustEnergyMatch) {
@@ -294,7 +294,7 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setProgressMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
+      const setProgressMatch = spokenCommand.match(/^(?:set|change|update|increase|raise|improve|decrease|lower|reduce)\s+(?:my\s+)?(level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
       const adjustProgressMatch = spokenCommand.match(/^(increase|raise|add|decrease|lower|reduce)\s+(?:my\s+)?(level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+by\s+(\d+|[a-z]+))?$/i)
       if (setProgressMatch || adjustProgressMatch) {
         const label = setProgressMatch?.[1] || adjustProgressMatch?.[2]
@@ -306,7 +306,14 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setScoreMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(.+?)\s+(?:to|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+      const setHealthMatch = spokenCommand.match(/^(?:set|change|update|increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:to|at)\s+(\d+|[a-z]+)$/i)
+      if (setHealthMatch) {
+        const amount = spokenNumber(setHealthMatch[1])
+        if (amount == null) { respond(`I could not determine the health value in ${original}.`); return }
+        respond(characterCommand({ intent: 'change-health', operation: 'set', amount }))
+        return
+      }
+      const setScoreMatch = spokenCommand.match(/^(?:set|change|update|increase|raise|improve|decrease|lower|reduce)\s+(?:my\s+)?(.+?)\s+(?:to|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
       const adjustScoreMatch = spokenCommand.match(/^(increase|raise|improve|decrease|lower|reduce)\s+(?:my\s+)?(.+?)(?:\s+by\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+)))?$/i)
       const addToScoreMatch = spokenCommand.match(/^add\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))\s+to\s+(?:my\s+)?(.+)$/i)
       if (setScoreMatch || adjustScoreMatch || addToScoreMatch) {

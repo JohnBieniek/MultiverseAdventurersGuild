@@ -2327,12 +2327,13 @@ function CharacterSheet() {
         return
       }
       if (request.intent === 'preview-health' || request.intent === 'change-health') {
-        const amount = Math.max(0, number(request.amount)) * (request.operation === 'subtract' ? -1 : 1)
-        const next = Math.max(0, Math.min(computed.maxHp, number(character.currentHp) + amount))
+        const requestedAmount = Math.max(0, number(request.amount))
+        const amount = requestedAmount * (request.operation === 'subtract' ? -1 : 1)
+        const next = Math.max(0, Math.min(computed.maxHp, request.operation === 'set' ? requestedAmount : number(character.currentHp) + amount))
         if (request.intent === 'preview-health') reply(`${request.operation === 'subtract' ? 'Apply' : 'Restore'} ${Math.abs(amount)} HP to ${character.name}? Current health ${character.currentHp}. New health ${next}.`)
         else {
           setCharacter(current => ({ ...current, currentHp: next, updatedAt: Date.now() }))
-          reply(`${request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
+          reply(`${request.operation === 'set' ? `Health set to ${next}` : request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
         }
         return
       }
