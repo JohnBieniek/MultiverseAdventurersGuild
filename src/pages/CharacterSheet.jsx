@@ -2079,8 +2079,18 @@ function CharacterSheet() {
       const reply = message => request.reply?.(message)
       if (request.intent === 'read-vital') {
         const vital = commandKey(request.vital)
-        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP`, totalxp: `${character.totalXp} Total XP`, unspentxp: `${character.unspentXp} Unspent XP` }
+        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, maxenergy: `${computed.maxEnergy} Maximum Energy`, maxforce: `Maximum Force ${computed.maxForce}`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP`, totalxp: `${character.totalXp} Total XP`, unspentxp: `${character.unspentXp} Unspent XP` }
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
+        return
+      }
+      if (request.intent === 'preview-energy' || request.intent === 'change-energy') {
+        const currentValue = number(character.currentEnergy)
+        const amount = Math.max(0, number(request.amount))
+        const calculated = request.operation === 'set' ? amount : currentValue + (request.operation === 'subtract' ? -amount : amount)
+        const nextValue = Math.max(0, Math.min(computed.maxEnergy, calculated))
+        if (request.intent === 'preview-energy') { reply(`Change Energy from ${currentValue} to ${nextValue}? Maximum Energy is ${computed.maxEnergy}.`); return }
+        setCharacter(current => ({ ...current, currentEnergy: nextValue, updatedAt: Date.now() }))
+        reply(`Energy changed from ${currentValue} to ${nextValue}. Maximum Energy is ${computed.maxEnergy}.`)
         return
       }
       if (request.intent === 'read-identity') {
