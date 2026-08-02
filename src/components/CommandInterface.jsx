@@ -22,10 +22,50 @@ const destinations = [
   { label: 'Contact Us', path: '/contact', terms: 'contact email feedback message' },
 ]
 
-const normalize = value => String(value || '').trim().toLowerCase().replace(/[?.!,]/g, '')
+const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase().replace(/[^a-z0-9\s'-]/g, '').replace(/\s+/g, ' ')
+const compactName = value => normalize(value).replace(/[^a-z0-9]/g, '')
+const soundex = value => {
+  const letters = normalize(value).replace(/[^a-z]/g, '')
+  if (!letters) return ''
+  const codes = { b: 1, f: 1, p: 1, v: 1, c: 2, g: 2, j: 2, k: 2, q: 2, s: 2, x: 2, z: 2, d: 3, t: 3, l: 4, m: 5, n: 5, r: 6 }
+  let previous = codes[letters[0]] || 0
+  let result = letters[0].toUpperCase()
+  for (const letter of letters.slice(1)) {
+    const code = codes[letter] || 0
+    if (code && code !== previous) result += code
+    previous = code
+  }
+  return `${result}000`.slice(0, 4)
+}
+const phoneticName = value => normalize(value).split(/[\s'-]+/).filter(Boolean).map(soundex).join(' ')
+const editDistance = (left, right) => {
+  const row = Array.from({ length: right.length + 1 }, (_, index) => index)
+  for (let leftIndex = 1; leftIndex <= left.length; leftIndex += 1) {
+    let diagonal = row[0]
+    row[0] = leftIndex
+    for (let rightIndex = 1; rightIndex <= right.length; rightIndex += 1) {
+      const above = row[rightIndex]
+      row[rightIndex] = Math.min(row[rightIndex] + 1, row[rightIndex - 1] + 1, diagonal + (left[leftIndex - 1] === right[rightIndex - 1] ? 0 : 1))
+      diagonal = above
+    }
+  }
+  return row[right.length]
+}
+const characterMatchScore = (name, query) => {
+  const saved = compactName(name)
+  const requested = compactName(query)
+  if (!saved || !requested) return Infinity
+  if (saved === requested) return 0
+  if (saved.includes(requested) || requested.includes(saved)) return 1
+  const distance = editDistance(saved, requested)
+  if (distance <= Math.max(1, Math.floor(Math.max(saved.length, requested.length) * .22))) return 2 + (distance / Math.max(saved.length, requested.length))
+  if (phoneticName(name) === phoneticName(query)) return 2.5
+  return Infinity
+}
 const savedCharacters = () => {
   try { return JSON.parse(localStorage.getItem(STORE_KEY)) || [] } catch { return [] }
 }
+const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
 
 function CommandInterface() {
   const navigate = useNavigate()
@@ -78,7 +118,8 @@ function CommandInterface() {
   }
   const search = term => {
     const query = normalize(term)
-    const characters = savedCharacters().filter(hero => normalize(hero.name).includes(query)).map(hero => ({ label: hero.name, path: '/character-sheet', character: hero, detail: 'Saved Hero' }))
+    const characterQuery = query.replace(/^(?:a\s+)?(?:character|hero)\s+/, '')
+    const characters = matchingCharacters(characterQuery).map(({ character }) => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' }))
     const pages = destinations.filter(item => `${normalize(item.label)} ${item.terms}`.includes(query)).map(item => ({ ...item, detail: 'App section' }))
     const matches = [...characters, ...pages].slice(0, 8)
     setResults(matches)
@@ -112,15 +153,14 @@ function CommandInterface() {
     if (destination) { completeNavigation(destination.path, `${destination.label} opened.`); return }
     const characterMatch = original.match(/^(?:open|load|show)\s+(?:character\s+)?(.+?)(?:\s+character(?:\s+sheet)?)?$/i)
     if (characterMatch) {
-      const requestedName = normalize(characterMatch[1])
-      const characters = savedCharacters()
-      const exact = characters.find(hero => normalize(hero.name) === requestedName)
-      const partial = characters.filter(hero => normalize(hero.name).includes(requestedName))
-      const hero = exact || (partial.length === 1 ? partial[0] : null)
+      const matches = matchingCharacters(characterMatch[1])
+      const bestScore = matches[0]?.score
+      const bestMatches = matches.filter(match => match.score === bestScore)
+      const hero = bestMatches.length === 1 ? bestMatches[0].character : null
       if (hero) { completeNavigation('/character-sheet', `${hero.name}'s character sheet opened.`, hero); return }
-      if (partial.length > 1) {
-        setResults(partial.map(character => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' })))
-        respond(`I found ${partial.length} matching Heroes. Choose one.`)
+      if (matches.length > 1) {
+        setResults(matches.map(({ character }) => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' })))
+        respond(`I found ${matches.length} matching Heroes. Choose one.`)
         return
       }
       respond(`I could not find a saved Hero named ${characterMatch[1]}.`)
@@ -140,25 +180,41 @@ function CommandInterface() {
     }
     const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
     const recognition = new Recognition()
-    recognition.continuous = true
+    let announcedStart = false
+    recognition.continuous = false
     recognition.interimResults = false
     recognition.lang = document.documentElement.lang || 'en-US'
-    recognition.onstart = () => { setListening(true); setStatus('Listening.') }
+    recognition.onstart = () => {
+      setListening(true)
+      if (!announcedStart) { setStatus('Listening.'); announcedStart = true }
+    }
     recognition.onresult = event => {
       const transcript = event.results[event.results.length - 1][0].transcript
       setCommand(transcript)
       execute(transcript)
     }
     recognition.onerror = event => {
+      if (event.error === 'no-speech' && keepListeningRef.current) {
+        setStatus('Listening. No speech heard yet.')
+        return
+      }
+      if (event.error === 'aborted' && !keepListeningRef.current) return
       keepListeningRef.current = false
       setListening(false)
-      respond(event.error === 'not-allowed' ? 'Microphone access was denied. You can still type commands.' : 'I could not hear a command. Try again or type it instead.')
+      respond(event.error === 'not-allowed' ? 'Microphone access was denied. You can still type commands.' : 'Voice listening stopped after an error. Start listening again or type the command.')
     }
     recognition.onend = () => {
-      setListening(false)
       if (keepListeningRef.current) {
-        try { recognition.start() } catch { keepListeningRef.current = false }
-      }
+        setListening(true)
+        window.setTimeout(() => {
+          if (!keepListeningRef.current) return
+          try { recognition.start() } catch {
+            keepListeningRef.current = false
+            setListening(false)
+            respond('Voice listening stopped. Start listening again or type the command.')
+          }
+        }, 200)
+      } else setListening(false)
     }
     recognitionRef.current = recognition
     keepListeningRef.current = true
