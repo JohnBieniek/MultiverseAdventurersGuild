@@ -74,6 +74,42 @@ Dice decide uncertain outcomes: Roll d20 + skill + stat = Basic Roll.
 GM narrates the result: You spot armed men watching the door.
 Repeat: This loop continues for exploration, social scenes, and combat.
 
+Adventure Phases
+
+Exploration Phase
+
+Exploration is the most basic, important, and enjoyable part of adventuring. It is why you adventure in the first place. What is in the next room? What happens if you pull that lever? How does your Hero interact with this particular setting? Exploration turns curiosity into the next part of the story.
+
+Preparation Phase
+
+Preparation is your opportunity to learn about a target, anticipate obstacles, and create an advantage before acting. You might invade the target's network, observe guard patterns through a complex proxy, or sneak into position for direct observation.
+
+Useful intelligence can grant a positive modifier to a later action, as determined by the GM. Good preparation should reward specific discoveries and plans rather than simply delay the mission.
+
+Preparation Examples
+
+Loop the Cameras - Compromise the surveillance system to improve your chances of remaining concealed.
+
+Study Guard Patterns - Learn when and where guards move to gain an advantage when sneaking past them.
+
+Build a Disguise - Change your appearance and cover story so the target does not identify you as an enemy.
+
+Bring the Right Equipment - Use gathered intelligence to prepare for known security measures. If you discover that a Friedrick Norse safe requires specialized tools, bringing those tools could grant a bonus when you attempt to open it.
+
+Engagement Phase
+
+Engagement begins when your preparation goes live and you interact directly with the target. This is where you use the intelligence and advantages you gathered. Uncertain outcomes are resolved with rolls.
+
+There are three primary ways to engage a target.
+
+The Three Cs of Engagement
+
+Conceal - Use Sneak to hide your presence, identity, or intentions. Examples include avoiding guards, pickpocketing an enemy, creating a diversion, or changing your appearance.
+
+Convince - Use Influence to get others to cooperate through lies, flattery, negotiation, or intimidation.
+
+Combat - Defeat the opposition through direct violence when subtlety and persuasion are no longer the chosen approach.
+
 High roll = success, low roll = failure or complication.
 
 Dice add chance and tension.
