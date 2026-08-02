@@ -230,6 +230,7 @@ function CommandInterface() {
       const optionListMatch = spokenCommand.match(/^(?:what|which)\s+(skills?|stats?|statistics?)\s+(?:are there|are available|exist|can i use)$/i)
         || spokenCommand.match(/^(?:what|which)\s+are\s+(?:the\s+)?(?:available\s+|all\s+)?(skills?|stats?|statistics?)$/i)
         || spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all|\s+the)?\s+(skills?|stats?|statistics?)$/i)
+        || spokenCommand.match(/^(?:available\s+|all\s+)?(skills?|stats?|statistics?)$/i)
       if (optionListMatch) {
         const list = /^skill/i.test(optionListMatch[1]) ? 'skills' : 'stats'
         respond(characterCommand({ intent: 'read-options', list }))
@@ -238,6 +239,7 @@ function CommandInterface() {
       const combinedItemsMatch = spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all)?\s+(?:of\s+)?(?:my\s+)?items?\s+(?:and|&)\s+traits?$/i)
         || spokenCommand.match(/^(?:what|which)\s+are\s+my\s+items?\s+(?:and|&)\s+traits?$/i)
         || spokenCommand.match(/^(?:what|which)\s+items?\s+(?:and|&)\s+traits?\s+(?:do i have|are listed)$/i)
+        || spokenCommand.match(/^my\s+items?\s+(?:and|&)\s+traits?$/i)
       if (combinedItemsMatch) {
         respond(characterCommand({ intent: 'read-list', list: 'items-and-traits' }))
         return
@@ -245,15 +247,17 @@ function CommandInterface() {
       const listMatch = spokenCommand.match(/^(?:list|read|name|show|tell me)(?:\s+all)?\s+(?:of\s+)?(?:my\s+)?(talents?|contacts?|weapons?|items?|traits?)$/i)
         || spokenCommand.match(/^(?:what|which)\s+(talents?|contacts?|weapons?|items?|traits?)\s+(?:do i have|am i carrying|are listed)$/i)
         || spokenCommand.match(/^(?:what|which|who)\s+are\s+my\s+(talents?|contacts?|weapons?|items?|traits?)$/i)
+        || spokenCommand.match(/^my\s+(talents?|contacts?|weapons?|items?|traits?)$/i)
       if (listMatch) {
         const list = normalize(listMatch[1]).replace(/s?$/, 's')
         respond(characterCommand({ intent: 'read-list', list }))
         return
       }
       const weaponTypePattern = String.raw`(unarmed(?:\s*\/\s*tiny)?(?:\s+melee)?|tiny(?:\s+melee)?|light(?:\s+melee)?|medium(?:\s+melee)?|heavy\s+melee|holdout(?:\s+ranged)?|compact(?:\s+ranged)?|long\s*arm(?:\s+ranged)?|heavy\s+ranged)`
-      const addWeaponMatch = spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:new\\s+)?weapon\\s+(.+?)\\s+${weaponTypePattern}$`, 'i'))
+      const addWeaponMatch = spokenCommand.match(new RegExp(`^(?:(?:add|create|give me)\\s+)?new\\s+weapon\\s+(.+?)\\s+${weaponTypePattern}$`, 'i'))
         || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:${weaponTypePattern}\\s+)?weapon(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
-        || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*${weaponTypePattern}(?:\\s+weapon)?(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
+        || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:new\\s+)?${weaponTypePattern}(?:\\s+weapon)?(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
+        || spokenCommand.match(new RegExp(`^new\\s+${weaponTypePattern}(?:\\s+weapon)?$`, 'i'))
       if (addWeaponMatch) {
         const captures = addWeaponMatch.slice(1).filter(value => value != null)
         const type = captures.find(value => new RegExp(`^${weaponTypePattern}$`, 'i').test(value)) || 'medium melee'
@@ -271,11 +275,13 @@ function CommandInterface() {
       }
       const readIdentityMatch = spokenCommand.match(/^(?:what(?:'s| is)|tell me|read|check)\s+(?:my\s+)?(name|species|archetype)$/i)
         || spokenCommand.match(/^(?:what|which)\s+(species|archetype)\s+am\s+i$/i)
+        || spokenCommand.match(/^my\s+(name|species|archetype)$/i)
       if (readIdentityMatch || /^(?:who am i|describe my character|describe my hero)$/i.test(spokenCommand)) {
         respond(characterCommand({ intent: 'read-identity', field: readIdentityMatch ? normalize(readIdentityMatch[1]) : 'all' }))
         return
       }
       const readResourceMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|tell me|read|check)(?:\s+is)?\s+(?:my\s+)?(maximum|max|current)?\s*(force|for|energy)(?:\s+do\s+i\s+have)?$/i)
+        || spokenCommand.match(/^my\s+(maximum|max|current)?\s*(force|for|energy)$/i)
       if (readResourceMatch) {
         const resource = /^(?:force|for)$/i.test(readResourceMatch[2]) ? 'force' : 'energy'
         const maximum = /^(?:maximum|max)$/i.test(readResourceMatch[1] || '') || resource === 'force'
@@ -374,18 +380,20 @@ function CommandInterface() {
         return
       }
       const readAttackSkillMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?attack\s+skill$/i)
+        || spokenCommand.match(/^my\s+attack\s+skill$/i)
       if (readAttackSkillMatch) {
         respond(characterCommand({ intent: 'read-vital', vital: 'attack-skill' }))
         return
       }
       const readAttackModifierMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:my\s+)?(melee|close(?:\s+combat)?|ranged|range|distance)\s+attack\s+(?:modifier|mod)$/i)
+        || spokenCommand.match(/^my\s+(melee|close(?:\s+combat)?|ranged|range|distance)\s+attack\s+(?:modifier|mod)$/i)
       if (readAttackModifierMatch) {
         const vital = /^(?:melee|close)/i.test(readAttackModifierMatch[1]) ? 'melee-attack-modifier' : 'ranged-attack-modifier'
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
       const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is| are)|how (?:much|many)|read|tell me|get)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
-        || spokenCommand.match(/^(?:my\s+)?(health|hp|hit\s*points?)$/i)
+        || spokenCommand.match(/^(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)$/i)
       if (readVitalMatch || /^(?:how am i doing|what is my condition|status)$/i.test(spokenCommand)) {
         const requestedVital = readVitalMatch?.[1] || 'status'
         const normalizedVital = normalize(requestedVital)
