@@ -1,6 +1,6 @@
 Vehicle combat
 
-A vehicle can be defined in 2 ways: as a vehicle or as a drone. A vehicle has a driver. A drone is piloted remotely using the Control Drone talent. A vehicle can function both ways.
+A vehicle can be defined in 2 ways: as a vehicle or as a drone. A vehicle has a driver. A drone is piloted remotely using the Control Proxy talent. A vehicle can function both ways.
 
 A drone costs 1500 credits. You choose the size at purchase.
 

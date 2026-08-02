@@ -377,7 +377,7 @@ Scores: Strength 0, Dexterity +3, Endurance 0, Intuition +1, Education +2, Chari
 Strengths: Dexterity, Vehicle, Technology, Range Attack
 Note: Screamers can use a drone as a simple proxy for Range Attack.
 Weaknesses: Charisma, Influence, Athletics
-Preferred Talents: Control Drone, Transporter, Technical Expertise
+Preferred Talents: Control Proxy, Transporter, Technical Expertise
 
 Personality Traits:
 
@@ -407,7 +407,7 @@ Smuggler - You are an expert at getting illicit goods from one place to another.
 Scores: Strength -1, Dexterity +3, Endurance 0, Intuition +1, Education 0, Charisma +2
 Strengths: Dexterity, Sneak, Influence, Range Weapon
 Weaknesses: Strength, Knowledge, Outdoors
-Preferred Talents: Shadowstep, Critical Hit, Control Drone
+Preferred Talents: Shadowstep, Critical Hit, Control Proxy
 
 Personality Traits:
 

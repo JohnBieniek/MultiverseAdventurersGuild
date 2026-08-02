@@ -166,8 +166,8 @@ Mechanic: Add your Sneak skill to the weapon's concealment TN. Spend Force 1 (F1
 Duration: 8 hours.
 Action: 1 minute.
 
-Control Drone:
-Description: Player has a free drone useful for surveillance. A drone that acts in combat is a simple proxy useful for ranged attacks. Mechanics: Force 1 (F1) to control the drone. Hero takes damage incurred by the drone. Vehicles controlled as a drone gain +1d4 per Force used to all rolls, up to Force 2 (F2), including Defense. Drones can be operated out to 10 miles per Force used. These drones provide surveillance only. At F1, the drone is the size of a deck of cards and can be spotted with a TN 14 Observation check. At F2, the drone is the size of a fly and can be spotted with a TN 20 Observation check.
+Control Proxy:
+Description: Player has a free proxy, which can be a drone, animal, or spirit, useful for surveillance. A proxy that acts in combat is useful for ranged attacks. Mechanics: Force 1 (F1) to control the proxy. Hero takes damage incurred by the proxy. Vehicles controlled as a proxy gain +1d4 per Force used to all rolls, up to Force 2 (F2), including Defense. Proxies can be operated out to 10 miles per Force used. These proxies provide surveillance only. At F1, the proxy is the size of a deck of cards and can be spotted with a TN 14 Observation check. At F2, the proxy is the size of a fly and can be spotted with a TN 20 Observation check.
 Action: Attack action.
 Duration: 8 hours.
 

@@ -20,7 +20,9 @@ const stats = [
   ['education', 'Education', 'EDU', FaBookOpen, 'What you have learned through school, training, research, or life experience. Education helps you recall facts and apply specialized knowledge.'],
   ['charisma', 'Charisma', 'CHA', FaCommentDots, 'Your force of personality and ability to connect with or sway others through persuasion, intimidation, performance, or fast talk. It also affects Contacts.'],
 ]
+const attackSkillDescription = 'Make attacks and use offensive Talents. Buy Attack once; it applies to melee attacks using Strength and ranged attacks using Dexterity. Each Hero starts with a +1 modifier in either Melee or Ranged Attack. Improve that modifier one step at a time by spending 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4.'
 const skillDefs = [
+  ['attack', 'Attack', '', GiCrossedSwords, attackSkillDescription],
   ['athletics', 'Athletics', 'endurance', FaRunning, 'Climb, jump, swim, grapple, resist knockback, endure physical hazards, and perform other demanding physical tasks.'],
   ['influence', 'Influence', 'charisma', FaSmile, 'Persuade, intimidate, interrogate, deceive, perform, impersonate, and otherwise shape what people think or do.'],
   ['knowledge', 'Knowledge', 'education', FaLightbulb, 'Recall learned topics, research unfamiliar subjects, and understand academic, historical, cultural, or magical theory.'],
@@ -30,7 +32,6 @@ const skillDefs = [
   ['technology', 'Technology', 'education', FaMicrochip, 'Hack systems, practice medicine, operate or repair devices, engineer solutions, disable traps, and search digital networks.'],
   ['vehicle', 'Vehicle', 'dexterity', FaCar, 'Drive, pilot, ride, maneuver, or control vehicles and mounts—from cars and horses to aircraft and starships.'],
 ]
-const attackSkillDescription = 'Make attacks and use offensive Talents. Buy Attack once; it applies to melee attacks using Strength and ranged attacks using Dexterity. Each Hero starts with a +1 modifier in either Melee or Ranged Attack. Improve that modifier one step at a time by spending 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4.'
 const sectionIcons = { 'Combat Summary': GiBroadsword, Stats: FaChartBar, Skills: FaStar, Attack: GiCrossedAxes, Weapons: GiCrossedSwords, Talents: FaAsterisk, 'Items & Traits': FaFlask, Contacts: FaUsers, 'Session Notes': FaStickyNote }
 const sectionGuideLinks = { Stats: '/players#stats', Skills: '/players#skills', Weapons: '/players#weapons', Talents: '/players#talents', 'Items & Traits': '/players#equipment', Contacts: '/players#contacts' }
 const vitalIcons = { Initiative: FaCrosshairs, HP: FaHeartbeat, Defense: FaShieldAlt, Resilience: FaHeart, Ego: FaBrain, Energy: FaBolt, 'Max Force': FaSun }
@@ -1052,7 +1053,19 @@ const weaponStyleByArchetype = {
 const multiverseWeaponMakers = ['Abyssal Crown', 'Aetherline', 'Amber Circuit', 'Andromeda Forge', 'Ash Meridian', 'Astral Loom', 'Black Comet', 'Brass Horizon', 'Broken Halo', 'Cinder Vault', 'Clockwork Sun', 'Crimson Orbit', 'Dawn Engine', 'Deepwell', 'Dragon Gate', 'Dreaming Anvil', 'Eclipse Foundry', 'Ember Choir', 'Farstar', 'Fifth Moon', 'Glass Citadel', 'Gravestone Works', 'Green Nova', 'Hollow Crown', 'Iron Nebula', 'Ivory Signal', 'Jade Tempest', 'Last Parallax', 'Lightning Archive', 'Lost Atlas', 'Midnight Assembly', 'Mirror Forge', 'Ninefold', 'Obsidian Choir', 'Orichalcum Works', 'Pale Meteor', 'Phoenix Circuit', 'Quantum Pilgrim', 'Redshift', 'Riftwalker', 'Silver Labyrinth', 'Skygrave', 'Solar Reliquary', 'Starless Sea', 'Stormglass', 'Thorn Engine', 'Titan Wake', 'Umbral Foundry', 'Void Lantern', 'Worldroot']
 const nameOffset = name => [...name].reduce((total, character) => total + character.charCodeAt(0), 0)
 const selectionsForName = (name, values, count) => Array.from({ length: count }, (_, index) => values[(nameOffset(name) + index * 11) % values.length])
-const expandWeaponNames = names => names.flatMap(name => [name, ...selectionsForName(name, multiverseWeaponMakers, 4).map(maker => `${maker} ${name}`)])
+const expandWeaponNames = names => {
+  const makerUses = new Map()
+  return names.flatMap(name => {
+    const variants = selectionsForName(name, multiverseWeaponMakers, 4).map(selectedMaker => {
+      const start = multiverseWeaponMakers.indexOf(selectedMaker)
+      const maker = Array.from({ length: multiverseWeaponMakers.length }, (_, offset) => multiverseWeaponMakers[(start + offset) % multiverseWeaponMakers.length])
+        .find(candidate => (makerUses.get(candidate) || 0) < 3) || selectedMaker
+      makerUses.set(maker, (makerUses.get(maker) || 0) + 1)
+      return `${maker} ${name}`
+    })
+    return [name, ...variants]
+  })
+}
 const weaponStylePools = {
   modern: {
     'Unarmed / Tiny Melee': ['Knuckle-Duster', 'Palm Sap', 'Garrote Wire', 'Weighted Gloves'],
@@ -1535,13 +1548,19 @@ const uniqueItemDescription = (baseDescription, variationIndex) => {
   const detail = itemVariationDetails[variationIndex % itemVariationDetails.length]
   return `${prefix ? `${prefix} — ` : ''}${explanation}. ${detail}`
 }
-const expandItemCandidates = candidates => candidates.flatMap(candidate => [
-  candidate,
-  ...selectionsForName(candidate[0], multiverseItemModels, 9).map((model, variationIndex) => {
-    const name = `${model} ${candidate[0]}`
-    return [name, uniqueItemDescription(candidate[1], variationIndex)]
-  }),
-])
+const expandItemCandidates = candidates => {
+  const modelUses = new Map()
+  return candidates.flatMap(candidate => {
+    const variants = selectionsForName(candidate[0], multiverseItemModels, 9).map((selectedModel, variationIndex) => {
+      const start = multiverseItemModels.indexOf(selectedModel)
+      const model = Array.from({ length: multiverseItemModels.length }, (_, offset) => multiverseItemModels[(start + offset) % multiverseItemModels.length])
+        .find(candidateModel => (modelUses.get(candidateModel) || 0) < 3) || selectedModel
+      modelUses.set(model, (modelUses.get(model) || 0) + 1)
+      return [`${model} ${candidate[0]}`, uniqueItemDescription(candidate[1], variationIndex)]
+    })
+    return [candidate, ...variants]
+  })
+}
 const itemScoreDetails = description => {
   const match = description.match(/^\(\+(\d+)\)\s+([A-Za-z]+)/)
   return { bonus: number(match?.[1]), score: match?.[2]?.toLowerCase() || '' }
@@ -1557,7 +1576,6 @@ const fitItemToScores = (candidate, scoreValues) => {
 const itemScoresForCharacter = character => ({
   ...Object.fromEntries(stats.map(([key]) => [key, number(character.stats?.[key])])),
   ...Object.fromEntries(skillDefs.map(([key]) => [key, number(character.skills?.[key]?.ability)])),
-  attack: number(character.attackSkill),
   defense: number(character.defenseRating),
 })
 const populateArchetypeItems = (existingItems, archetypeName, scoreValues, species = '') => {
@@ -1831,8 +1849,13 @@ const levelForXp = xp => Math.max(0, Math.min(10, Math.floor(number(xp) / 10)))
 const normalizeXpTracking = character => {
   const legacyXp = number(character.xp)
   const legacyXpWasSet = character.xpManuallySet ?? legacyXp !== 0
+  const skills = Object.fromEntries(skillDefs.map(([key]) => [key, {
+    ability: key === 'attack' ? character.skills?.[key]?.ability ?? character.attackSkill ?? '' : '',
+    modifier: 0, buffs: 0, debuffs: 0, ...character.skills?.[key],
+  }]))
   return {
     ...character,
+    skills,
     totalXp: character.totalXp ?? legacyXp,
     unspentXp: character.unspentXp ?? legacyXp,
     totalXpManuallySet: character.totalXpManuallySet ?? legacyXpWasSet,
@@ -1844,7 +1867,7 @@ const newCharacter = () => ({
   totalXp: 0, unspentXp: 0, totalXpManuallySet: false, unspentXpManuallySet: false,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
-  attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
+  meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
   currentHp: 10, temporaryHp: 0, currentEnergy: 0,
   weapons: blankRows(2, { name: '', type: 'Unarmed / Tiny Melee', enhancement: 0, notes: '' }),
   talents: [],
@@ -1854,6 +1877,7 @@ const newCharacter = () => ({
   autoSave: true,
 })
 const signed = value => `${number(value) >= 0 ? '+' : ''}${number(value)}`
+const skillEntryTotal = skill => Object.values(skill || {}).reduce((sum, value) => sum + number(value), 0)
 const rollDie = sides => Math.floor(Math.random() * sides) + 1
 
 function CharacterSheet() {
@@ -2090,7 +2114,7 @@ function CharacterSheet() {
   const applyArchetype = name => {
     const preset = archetypeOptions.find(option => option.name === name)
     if (!preset) { update(['archetype'], name); return }
-    const skillKeys = ['attack', ...skillDefs.map(([key]) => key)]
+    const skillKeys = skillDefs.map(([key]) => key)
     const matchSkill = value => {
       const normalized = value.toLowerCase()
       if (/attack|weapon/.test(normalized)) return 'attack'
@@ -2145,7 +2169,6 @@ function CharacterSheet() {
         ...current, name: characterName, characterNameSource: userSelectedName ? 'user' : 'starting-package',
         species, speciesSource: userSelectedSpecies ? 'user' : 'starting-package',
         archetype: preset.name, stats: { ...current.stats, ...preset.stats },
-        attackSkill: allocation.attack,
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
@@ -2195,7 +2218,7 @@ function CharacterSheet() {
     const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
     const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity
     const attackModifier = type[1] === 'melee' ? character.meleeAttackModifier : character.rangedAttackModifier
-    const modifier = number(stat) + number(character.attackSkill) + number(attackModifier)
+    const modifier = number(stat) + skillEntryTotal(character.skills.attack) + number(attackModifier)
     const natural = rollDie(20), total = natural + modifier
     setRoll({ kind: 'attack', label: weapon.name || type[0], natural, modifier, total, tn: null,
       hit: natural !== 1, weapon, die: type[2], stat: number(stat) })
@@ -2224,7 +2247,7 @@ function CharacterSheet() {
     />}
   </div>
 
-  const skillTotal = (key, stat) => number(character.stats[stat]) + Object.values(character.skills[key]).reduce((sum, value) => sum + number(value), 0)
+  const skillTotal = (key, stat) => number(character.stats[stat]) + skillEntryTotal(character.skills[key])
   const combatSlots = 1 + (computed.level >= 4 ? 1 : 0) + (computed.level >= 7 ? 1 : 0)
   const talentsAcquired = Math.max(talentAllowanceForLevel(computed.level), character.talents.length)
   const addRow = (key, shape) => update([key], [...character[key], { ...shape, id: crypto.randomUUID() }])
@@ -2246,7 +2269,7 @@ function CharacterSheet() {
   }
   const skillOptionUnavailable = (currentKey, option) => {
     const available = startingSkillArray.filter(value => value === option).length
-    const assignments = [['attack', character.attackSkill], ...skillDefs.map(([key]) => [key, character.skills[key].ability])]
+    const assignments = skillDefs.map(([key]) => [key, character.skills[key].ability])
     const usedByOtherSkills = assignments.filter(([key, value]) => key !== currentKey && value !== '').filter(([, value]) => number(value) === option).length
     return usedByOtherSkills >= available
   }
@@ -2259,28 +2282,6 @@ function CharacterSheet() {
       <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><HpVital value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
     </section>
 
-    <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon, description]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#stat-${key}`}>{label} <span>({short})</span></a></strong><InfoTooltip label={label} description={description}/></div><SkillScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
-      <section className="sheet-section skills">
-        <SectionTitle icon="★" title="Skills" subtitle="Starting array: +2, +2, +1, +1, +1, 0, 0, 0, −1"/>
-        <div className="skill-head"><span>Skill</span><span>Stat</span><span>Ability</span><span>Modifier</span><span>Buffs</span><span>Debuffs</span><span>Total</span></div>
-        {skillDefs.map(([key, label, defaultStat, Icon, description]) => {
-          const total = skillTotal(key, defaultStat)
-          const statDefinition = stats.find(([statKey]) => statKey === defaultStat)
-          const statName = statDefinition?.[1]
-          const statShort = statDefinition?.[2]
-          const statScore = character.stats[defaultStat]
-          return <div className="skill-row" key={key}>
-            <div className="skill-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#skill-${key}`}><span>{label} <small className="skill-stat-full">({statName})</small><small className="skill-stat-short">({statShort})</small></span></a></strong><InfoTooltip label={label} description={description}/></div>
-            <div className="skill-field"><small>Stat</small><output className="skill-stat">{signed(statScore)}</output></div>
-            <div className={`skill-field skill-ability-field ${character.skills[key].ability === '' ? 'is-empty' : ''}`}><small>Ability</small><SkillScoreControl label={`${label} ability`} value={character.skills[key].ability} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable(key, option)} onChange={v => update(['skills', key, 'ability'], v)}/></div>
-            {['modifier','buffs','debuffs'].map(field => <div className="skill-field" key={field}><small>{field === 'modifier' ? 'Modifier' : field === 'buffs' ? 'Buffs' : 'Debuffs'}</small><NumberInput value={character.skills[key][field]} onChange={v => update(['skills', key, field], field === 'debuffs' ? -Math.abs(number(v)) : v)}/></div>)}
-            <div className="skill-total"><div className="skill-total-actions"><div className="skill-total-value"><small>Total</small><output>{signed(total)}</output></div><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div></div>
-          </div>
-        })}
-      </section></div>
-
-    <section className="sheet-section"><SectionTitle icon="✦" title="Attack" subtitle="Attack skill applies to melee and ranged attacks"/><div className="attack-summary"><label className="field attack-control"><span><a className="sheet-reference-link" href="/players#skill-attack"><span className="attack-label-full">Attack skill</span><span className="attack-label-short">Skill</span></a><InfoTooltip label="Attack" description={attackSkillDescription}/></span><SkillScoreControl label="Attack skill" value={character.attackSkill} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable('attack', option)} onChange={v => update(['attackSkill'], v)}/></label><div className="field attack-control"><span>Attack modifiers</span><div className="attack-modifier-fields"><label><small>Melee</small><input aria-label="Melee attack modifier" type="number" value={character.meleeAttackModifier} onChange={e => update(['meleeAttackModifier'], e.target.value)}/></label><label><small>Ranged</small><input aria-label="Ranged attack modifier" type="number" value={character.rangedAttackModifier} onChange={e => update(['rangedAttackModifier'], e.target.value)}/></label></div></div><AttackEquation label="Melee" statLabel="Strength" stat={character.stats.strength} attack={character.attackSkill} modifier={character.meleeAttackModifier}/><AttackEquation label="Ranged" statLabel="Dexterity" stat={character.stats.dexterity} attack={character.attackSkill} modifier={character.rangedAttackModifier}/></div></section>
-
     <EditableTable title="Weapons" icon="⚔" rows={character.weapons} add={() => addRow('weapons', { name: '', type: weaponTypes[0][0], enhancement: 0, notes: '' })} remove={id => deleteRow('weapons', id)} columns={['Name','Type','Enhancement','Damage','Notes','']}>
       {(row, i) => {
         const weaponType = weaponTypes.find(type => type[0] === row.type) || weaponTypes[0]
@@ -2289,6 +2290,29 @@ function CharacterSheet() {
         return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value={row.type} onChange={e => setWeaponType(i,e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
       }}
     </EditableTable>
+
+    <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon, description]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#stat-${key}`}>{label} <span>({short})</span></a></strong><InfoTooltip label={label} description={description}/></div><SkillScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
+      <section className="sheet-section skills">
+        <SectionTitle icon="★" title="Skills" subtitle="Starting array: +2, +2, +1, +1, +1, 0, 0, 0, −1"/>
+        <div className="skill-head"><span>Skill</span><span>Stat</span><span>Ability</span><span>Modifier</span><span>Buffs</span><span>Debuffs</span><span>Total</span></div>
+        {skillDefs.map(([key, label, defaultStat, Icon, description]) => {
+          const total = skillTotal(key, defaultStat)
+          const statDefinition = stats.find(([statKey]) => statKey === defaultStat)
+          const statName = statDefinition?.[1] || 'Any'
+          const statShort = statDefinition?.[2] || '—'
+          const statScore = defaultStat ? character.stats[defaultStat] : 0
+          return <div className="skill-row" key={key}>
+            <div className="skill-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#skill-${key}`}><span>{label} <small className="skill-stat-full">({statName})</small><small className="skill-stat-short">({statShort})</small></span></a></strong><InfoTooltip label={label} description={description}/></div>
+            <div className="skill-field"><small>Stat</small><output className="skill-stat">{defaultStat ? signed(statScore) : '—'}</output></div>
+            <div className={`skill-field skill-ability-field ${character.skills[key].ability === '' ? 'is-empty' : ''}`}><small>Ability</small><SkillScoreControl label={`${label} ability`} value={character.skills[key].ability} options={[-1, 0, 1, 2]} isOptionDisabled={option => skillOptionUnavailable(key, option)} onChange={v => update(['skills', key, 'ability'], v)}/></div>
+            {['modifier','buffs','debuffs'].map(field => <div className="skill-field" key={field}><small>{field === 'modifier' ? 'Modifier' : field === 'buffs' ? 'Buffs' : 'Debuffs'}</small><NumberInput value={character.skills[key][field]} onChange={v => update(['skills', key, field], field === 'debuffs' ? -Math.abs(number(v)) : v)}/></div>)}
+            <div className="skill-total"><div className="skill-total-actions"><div className="skill-total-value"><small>Total</small><output>{signed(total)}</output></div><button className="roll-button" onClick={() => checkRoll(label, total)}>Roll</button></div></div>
+          </div>
+        })}
+      </section></div>
+
+    <section className="sheet-section"><SectionTitle icon="✦" title="Attack" subtitle="Attack skill applies to melee and ranged attacks"/><div className="attack-summary"><div className="field attack-control"><span><a className="sheet-reference-link" href="/players#skill-attack"><span className="attack-label-full">Attack skill</span><span className="attack-label-short">Skill</span></a><InfoTooltip label="Attack" description={attackSkillDescription}/></span><output className="attack-skill-static" aria-label="Attack skill total">{signed(skillEntryTotal(character.skills.attack))}</output></div><div className="field attack-control"><span>Attack modifiers</span><div className="attack-modifier-fields"><label><small>Melee</small><input aria-label="Melee attack modifier" type="number" value={character.meleeAttackModifier} onChange={e => update(['meleeAttackModifier'], e.target.value)}/></label><label><small>Ranged</small><input aria-label="Ranged attack modifier" type="number" value={character.rangedAttackModifier} onChange={e => update(['rangedAttackModifier'], e.target.value)}/></label></div></div><AttackEquation label="Melee" statLabel="Strength" stat={character.stats.strength} attack={skillEntryTotal(character.skills.attack)} modifier={character.meleeAttackModifier}/><AttackEquation label="Ranged" statLabel="Dexterity" stat={character.stats.dexterity} attack={skillEntryTotal(character.skills.attack)} modifier={character.rangedAttackModifier}/></div></section>
+
     <EditableTable title="Talents" icon="✹" subtitle={`Talents Acquired: ${talentsAcquired}\u00a0\u00a0\u00a0\u00a0Combat Slots: ${combatSlots}`} rows={character.talents} add={() => addRow('talents',{name:'',ability:'',duration:'',notes:''})} columns={['Talent','Ability / Cost','Duration','Notes','']}>
       {(row,i)=><><label className="talent-field"><span>Talent</span><TalentControl value={row.name} onChange={value=>selectTalent(i,value)}/></label><label className="talent-field"><span>Ability / Cost</span><input value={row.ability} onChange={e=>update(['talents',i,'ability'],e.target.value)}/></label><label className="talent-field"><span>Duration</span><input value={row.duration || ''} onChange={e=>update(['talents',i,'duration'],e.target.value)}/></label><label className="talent-field"><span>Notes</span><AutoTextarea fitOnMobile value={row.notes || ''} onChange={value=>update(['talents',i,'notes'],value)}/></label><button className="icon-button" onClick={()=>deleteTalent(row)}>×</button></>}
     </EditableTable>
@@ -2338,7 +2362,7 @@ function SkillScoreControl({ label, value, options, onChange, isOptionDisabled =
 function TalentControl({ value, onChange }) { return <div className="talent-control"><select aria-label="Choose a talent" value={talentNames.includes(value) ? value : ''} onChange={e => onChange(e.target.value)}><option value="">Choose a talent</option>{talentNames.map(name => <option value={name} key={name}>{name}</option>)}</select></div> }
 function SectionTitle({ title, subtitle }) {
   const startingArray = title === 'Stats' || title === 'Skills' ? subtitle : ''
-  const reminders = { 'Combat Summary': 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', Attack: 'One Skill is used for both melee and ranged attacks.', Skills: 'You can activate one Skill per turn.', Contacts: subtitle || 'You begin with 3 + Charisma Contacts.', Talents: 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.', 'Items & Traits': 'Items explain why your Stats and Skills look the way they do. They do not change numbers; they describe your Hero through equipment, Species, Archetype, and background. Examples: (+2) Strength — Giant Species; (−1) Sneak — loud, heavy boots. Treat them like character-defining gear without a price tag. Traits describe your Hero’s personality, beliefs, habits, and complications. Use them as roleplaying prompts; they do not change numbers unless a rule specifically says otherwise.', Weapons: 'You can have as many weapons as you like. You can attack once each turn, or move an extra 30 feet instead.' }
+  const reminders = { 'Combat Summary': 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', Attack: 'One Skill is used for both melee and ranged attacks.', Skills: 'You can activate one Skill per turn.', Contacts: subtitle || 'You begin with 3 + Charisma Contacts.', Talents: 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.', 'Items & Traits': 'Items explain why your Stats and Skills look the way they do. They do not change numbers; they describe your Hero through equipment, Species, Archetype, and background. Examples: (+2) Strength — Giant Species; (−1) Sneak — loud, heavy boots. Treat them like character-defining gear without a price tag. Traits describe your Hero’s personality, beliefs, habits, and complications. Use them as roleplaying prompts; they do not change numbers unless a rule specifically says otherwise.', Weapons: 'You can have as many weapons as you like. You can attack once each turn, or move an extra 30 feet instead. Improvised weapon attacks deal 1d4−1.' }
   const note = reminders[title] || (startingArray ? '' : subtitle)
   const Icon = sectionIcons[title] || FaStar
   const guideLink = sectionGuideLinks[title]

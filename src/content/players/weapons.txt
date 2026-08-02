@@ -28,24 +28,28 @@ Examples: Staff, halberd, great axe, great sword, maul, heavy polearm.
 Holdout Ranged Weapon - Small ranged weapons that are easy to hide but limited in impact.
 Category: Ranged
 Damage: d4
+Range: Short (30 feet).
 Concealment: Automatic concealment.
 Examples: Revolver, handgun, sling, slingshot, compact blaster.
 
 Compact Ranged Weapon - Short ranged weapons with more punch, but harder to hide.
 Category: Ranged
 Damage: d6
+Range: 60 feet.
 Concealment: TN 15 Observation check to conceal.
 Examples: Submachine gun, Uzi, Ingram, bow, crossbow, compact carbine.
 
 Longarm Ranged Weapon - Full-sized ranged weapons built for serious fights.
 Category: Ranged
 Damage: d8
+Range: 120 feet.
 Concealment: TN 12 Observation check to conceal.
 Examples: Assault rifle, AR-15, AK-47, shotgun, hunting rifle, battle bow.
 
 Heavy Ranged Weapon - Large ranged weapons that need space, bracing, or commitment.
 Category: Ranged
 Damage: d10
+Range: Line of sight.
 Concealment: No concealment.
 Special Rules: Braced.
 Examples: Sniper rifle, machine gun, anti-materiel rifle, heavy crossbow.
