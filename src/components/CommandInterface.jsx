@@ -74,6 +74,10 @@ function CommandInterface() {
   const recognitionRef = useRef(null)
   const keepListeningRef = useRef(false)
   const lastResponseRef = useRef('')
+  const speechActiveRef = useRef(false)
+  const speechGenerationRef = useRef(0)
+  const ignoreSpeechUntilRef = useRef(0)
+  const restartTimerRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [command, setCommand] = useState('')
   const [status, setStatus] = useState('')
@@ -82,10 +86,33 @@ function CommandInterface() {
   const [spoken, setSpoken] = useState(() => localStorage.getItem(SPEECH_KEY) === 'true')
   const recognitionSupported = typeof window !== 'undefined' && Boolean(window.SpeechRecognition || window.webkitSpeechRecognition)
 
+  const resumeRecognition = (delay = 250) => {
+    window.clearTimeout(restartTimerRef.current)
+    restartTimerRef.current = window.setTimeout(() => {
+      if (!keepListeningRef.current || speechActiveRef.current || !recognitionRef.current) return
+      try { recognitionRef.current.start() } catch {
+        restartTimerRef.current = window.setTimeout(() => resumeRecognition(0), 300)
+      }
+    }, delay)
+  }
   const speak = message => {
     if (!spoken || !window.speechSynthesis) return
+    const generation = speechGenerationRef.current + 1
+    speechGenerationRef.current = generation
+    speechActiveRef.current = true
+    ignoreSpeechUntilRef.current = Infinity
+    recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(message))
+    const utterance = new SpeechSynthesisUtterance(message)
+    const finished = () => {
+      if (speechGenerationRef.current !== generation) return
+      speechActiveRef.current = false
+      ignoreSpeechUntilRef.current = Date.now() + 900
+      if (keepListeningRef.current) resumeRecognition(950)
+    }
+    utterance.onend = finished
+    utterance.onerror = finished
+    window.speechSynthesis.speak(utterance)
   }
   const respond = message => {
     lastResponseRef.current = message
@@ -94,7 +121,11 @@ function CommandInterface() {
   }
   const close = () => {
     keepListeningRef.current = false
+    speechGenerationRef.current += 1
+    speechActiveRef.current = false
+    window.clearTimeout(restartTimerRef.current)
     recognitionRef.current?.stop()
+    window.speechSynthesis?.cancel()
     setListening(false)
     setOpen(false)
     window.setTimeout(() => triggerRef.current?.focus(), 0)
@@ -189,6 +220,7 @@ function CommandInterface() {
       if (!announcedStart) { setStatus('Listening.'); announcedStart = true }
     }
     recognition.onresult = event => {
+      if (speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
       const transcript = event.results[event.results.length - 1][0].transcript
       setCommand(transcript)
       execute(transcript)
@@ -198,22 +230,16 @@ function CommandInterface() {
         setStatus('Listening. No speech heard yet.')
         return
       }
-      if (event.error === 'aborted' && !keepListeningRef.current) return
+      if (event.error === 'aborted' && (!keepListeningRef.current || speechActiveRef.current)) return
       keepListeningRef.current = false
       setListening(false)
       respond(event.error === 'not-allowed' ? 'Microphone access was denied. You can still type commands.' : 'Voice listening stopped after an error. Start listening again or type the command.')
     }
     recognition.onend = () => {
+      if (speechActiveRef.current) return
       if (keepListeningRef.current) {
         setListening(true)
-        window.setTimeout(() => {
-          if (!keepListeningRef.current) return
-          try { recognition.start() } catch {
-            keepListeningRef.current = false
-            setListening(false)
-            respond('Voice listening stopped. Start listening again or type the command.')
-          }
-        }, 200)
+        resumeRecognition(Math.max(200, ignoreSpeechUntilRef.current - Date.now()))
       } else setListening(false)
     }
     recognitionRef.current = recognition
@@ -223,6 +249,8 @@ function CommandInterface() {
 
   useEffect(() => () => {
     keepListeningRef.current = false
+    speechGenerationRef.current += 1
+    window.clearTimeout(restartTimerRef.current)
     recognitionRef.current?.abort()
     window.speechSynthesis?.cancel()
   }, [])
