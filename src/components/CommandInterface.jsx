@@ -496,13 +496,20 @@ function CommandInterface() {
         setStatus(localModelRef.current ? 'Opening the microphone.' : 'Loading high-accuracy Whisper recognition on this device. The first use downloads and caches the model.')
         if (!localModelRef.current) {
           const { pipeline } = await import('@huggingface/transformers')
-          localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, {
-            device: navigator.gpu ? 'webgpu' : 'wasm',
-            dtype: 'q8',
-            progress_callback: progress => {
-              if (progress.status === 'progress' && progress.total) setStatus(`Loading Whisper on this device: ${Math.round((progress.loaded / progress.total) * 100)}%.`)
-            },
-          })
+          const progress_callback = progress => {
+            if (progress.status === 'progress' && progress.total) setStatus(`Loading Whisper on this device: ${Math.round((progress.loaded / progress.total) * 100)}%.`)
+          }
+          let webgpuAvailable = false
+          try { webgpuAvailable = Boolean(await navigator.gpu?.requestAdapter()) } catch { webgpuAvailable = false }
+          if (webgpuAvailable) {
+            try {
+              localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'webgpu', dtype: 'q4', progress_callback })
+            } catch (webgpuError) {
+              console.warn('Whisper WebGPU initialization failed; retrying with WASM.', webgpuError)
+              setStatus('This phone could not initialize Whisper with its GPU. Retrying locally with the compatible processor mode.')
+            }
+          }
+          if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback })
         }
         if (!keepListeningRef.current) return
         const AudioContextClass = window.AudioContext || window.webkitAudioContext
@@ -578,11 +585,14 @@ function CommandInterface() {
         recognitionRunningRef.current = true
         setStatus('High-accuracy Whisper is listening continuously on this device. Press Stop listening when you are done.')
       } catch (error) {
+        console.error('High-accuracy recognition startup failed.', error)
         keepListeningRef.current = false
         recognitionRunningRef.current = false
         stopLocalRecognition()
         setListening(false)
-        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : 'High-accuracy on-device recognition could not start. Check your connection and available device storage for the first model download, then try again. You can still type commands.')
+        const detail = String(error?.message || '').toLowerCase()
+        const reason = /quota|storage|space|memory|allocation/.test(detail) ? 'The phone may not have enough available storage or memory for the model.' : /fetch|network|load|download|http/.test(detail) ? 'The model download failed or was blocked.' : 'The browser could not initialize either its GPU or compatible processor recognition mode.'
+        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : `High-accuracy on-device recognition could not start. ${reason} You can still type commands.`)
       }
       return
     }
