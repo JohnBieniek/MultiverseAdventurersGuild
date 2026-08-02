@@ -2380,7 +2380,7 @@ function SectionTitle({ title, subtitle }) {
 }
 function Vital({ label, value, max, editable, onChange, roll, children }) { const Icon = vitalIcons[label]; return <div className="vital">{Icon && <Icon className="vital-icon"/>}<a className="vital-rule-link" href={vitalRuleLinks[label]}>{label}</a>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : roll ? <div className="vital-roll-value"><strong>{value}</strong><button className="roll-button" onClick={roll}>Roll</button></div> : <strong>{value}</strong>}{children}</div> }
 function HpVital({ value, max, onChange }) {
-  const [amount, setAmount] = useState(-1)
+  const [amount, setAmount] = useState(0)
   const apply = () => onChange(Math.max(0, Math.min(number(max), number(value) + number(amount))))
   return <div className="vital hp-vital"><FaHeartbeat className="vital-icon"/><a className="vital-rule-link" href={vitalRuleLinks.HP}>HP</a><div className="vital-combined"><input aria-label="HP current" type="number" value={value} onChange={event => onChange(event.target.value)}/><span>/</span><strong aria-label="HP maximum">{max}</strong></div><div className="hp-adjuster" aria-label="Adjust HP"><input aria-label="HP adjustment amount" type="number" value={amount} onChange={event => setAmount(event.target.value)}/><button type="button" className="hp-apply" onClick={apply}>Apply</button></div></div>
 }
