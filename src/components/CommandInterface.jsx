@@ -352,7 +352,12 @@ function CommandInterface() {
       }
       const diceExpressionMatch = spokenCommand.match(/^roll\s+(.+)$/i)
       if (diceExpressionMatch) {
-        const expression = diceExpressionMatch[1].toLowerCase().replace(/\bplus\b/g, '+').replace(/\bminus\b/g, '-').replace(/\s+/g, '')
+        const expression = diceExpressionMatch[1].toLowerCase()
+          .replace(/\b(?:plus|and)\b/g, '+')
+          .replace(/\bminus\b/g, '-')
+          .replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\b/g, word => String(numberWords[word]))
+          .replace(/\ba\s+(?=d\s*\d)/g, '1')
+          .replace(/\s+/g, '')
         if (/^(?:\d*)d\d+(?:[+-](?:(?:\d*)d\d+|\d+))*$/i.test(expression)) {
           respond(characterCommand({ intent: 'roll-expression', expression }))
           return

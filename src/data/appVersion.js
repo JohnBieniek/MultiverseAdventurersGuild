@@ -1,3 +1,3 @@
-const appVersion = 'v0.8.80'
+const appVersion = 'v0.8.81'
 
 export default appVersion
