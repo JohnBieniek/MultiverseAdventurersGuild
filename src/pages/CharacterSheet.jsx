@@ -1362,6 +1362,12 @@ const weaponNotesByType = {
   'Light Melee': 'Automatically concealed.',
   'Medium Melee': 'TN 15 Observation to conceal.',
   'Heavy Melee': 'Cannot be concealed; −2 Defense while using it.',
+  'Holdout Ranged': 'Range: Short (30 feet). Automatically concealed.',
+  'Compact Ranged': 'Range: 60 feet. TN 15 Observation to conceal.',
+  'Longarm Ranged': 'Range: 120 feet. TN 12 Observation to conceal.',
+  'Heavy Ranged': 'Range: Line of sight. Cannot be concealed; must be fired from a braced position.',
+}
+const legacyGeneratedWeaponNotes = {
   'Holdout Ranged': 'Automatically concealed.',
   'Compact Ranged': 'TN 15 Observation to conceal.',
   'Longarm Ranged': 'TN 12 Observation to conceal.',
@@ -1948,8 +1954,13 @@ function CharacterSheet() {
     }
     let items = character.items
     const needsWeaponLoadout = Boolean(archetype && character.weaponLoadoutAppliedFor !== weaponLoadoutMarker(character.archetype, character.species))
-    const weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype, character.species) : character.weapons
+    let weapons = needsWeaponLoadout ? populateArchetypeWeapons(character.weapons, character.archetype, character.species) : character.weapons
     if (needsWeaponLoadout) changed = true
+    weapons = weapons.map(weapon => {
+      if (weapon.source !== 'archetype' || weapon.notes !== legacyGeneratedWeaponNotes[weapon.type]) return weapon
+      changed = true
+      return { ...weapon, notes: weaponNotesByType[weapon.type] }
+    })
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
     if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character), character.species); changed = true }
     let meleeAttackModifier = character.meleeAttackModifier
@@ -2306,7 +2317,7 @@ function CharacterSheet() {
         const weaponType = weaponTypes.find(type => type[0] === row.type) || weaponTypes[0]
         const damageStat = weaponType[1] === 'melee' ? character.stats.strength : character.stats.dexterity
         const damageModifier = number(damageStat) + number(row.enhancement)
-        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value={row.type} onChange={e => setWeaponType(i,e.target.value)}>{weaponTypes.map(type => <option key={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
+        return <><label className="weapon-field"><span>Name</span><input aria-label="Weapon name" value={row.name} onChange={e => setWeaponName(i,e.target.value)}/></label><label className="weapon-field"><span>Type</span><select aria-label="Weapon type" value="__current__" onChange={e => setWeaponType(i,e.target.value)}><option value="__current__" hidden>{row.type}</option>{weaponTypes.map(type => <option key={type[0]} value={type[0]}>{type[0]}</option>)}</select></label><label className="weapon-field"><span>Enhancement</span><NumberInput value={row.enhancement} onChange={v => update(['weapons',i,'enhancement'],v)}/></label><label className="weapon-field"><span>Damage</span><output className="weapon-damage">d{weaponType[2]} {signed(damageModifier)}</output></label><label className="weapon-field weapon-notes"><span>Notes</span><AutoTextarea maxLines={2} value={row.notes} onChange={value => update(['weapons',i,'notes'],value)}/></label><div className="row-actions"><button className="roll-button" onClick={() => attackRoll(row)}>Attack</button><button className="icon-button" onClick={() => deleteRow('weapons',row.id)}>×</button></div></>
       }}
     </EditableTable>
 
