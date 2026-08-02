@@ -2107,6 +2107,30 @@ function CharacterSheet() {
         else reply(`I could not find the available options for ${request.list}.`)
         return
       }
+      if (request.intent === 'preview-add-weapon' || request.intent === 'add-weapon') {
+        const requestedType = commandKey(request.type)
+        const aliases = {
+          unarmed: 'Unarmed / Tiny Melee', unarmedtiny: 'Unarmed / Tiny Melee', unarmedtinymelee: 'Unarmed / Tiny Melee', unarmedmelee: 'Unarmed / Tiny Melee', tiny: 'Unarmed / Tiny Melee', tinymelee: 'Unarmed / Tiny Melee',
+          light: 'Light Melee', lightmelee: 'Light Melee', medium: 'Medium Melee', mediummelee: 'Medium Melee', heavymelee: 'Heavy Melee',
+          holdout: 'Holdout Ranged', holdoutranged: 'Holdout Ranged', compact: 'Compact Ranged', compactranged: 'Compact Ranged', longarm: 'Longarm Ranged', longarmranged: 'Longarm Ranged', heavyranged: 'Heavy Ranged',
+        }
+        const type = aliases[requestedType] || weaponTypes.find(([label]) => commandKey(label) === requestedType)?.[0] || (!requestedType ? weaponTypes[Math.floor(Math.random() * weaponTypes.length)][0] : '')
+        if (!type) { reply(`I could not identify the weapon type ${request.type}. Try light melee, medium melee, heavy melee, holdout, compact, longarm, or heavy ranged.`); return }
+        const customName = String(request.name || '').trim().replace(/\b\w/g, letter => letter.toUpperCase())
+        if (request.intent === 'preview-add-weapon') { reply(`Add ${customName ? `${customName}, a ${type} weapon` : `a generated ${type} weapon`}, to ${character.name}?`); return }
+        const usedNames = new Set(character.weapons.map(weapon => weapon.name).filter(Boolean))
+        let availableNames
+        if (character.archetype === 'Street Samurai' && type === 'Medium Melee') {
+          availableNames = weaponLoadouts['Street Samurai'].flatMap(([, loadoutType], index) => loadoutType === type ? (archetypeWeaponVariants['Street Samurai']?.[index] || []) : []).filter(name => !usedNames.has(name))
+        } else availableNames = generatedWeaponNamesForType(character.archetype, type, character.species).filter(name => !usedNames.has(name))
+        const generatedName = availableNames[Math.floor(Math.random() * availableNames.length)] || generatedWeaponNamesForType(character.archetype, type, character.species)[0] || type
+        const name = customName || generatedName
+        const generatedNotes = weaponNotesByType[type] || ''
+        const weapon = { id: crypto.randomUUID(), name, generatedName: customName ? '' : name, nameCustomized: Boolean(customName), type, enhancement: 0, notes: generatedNotes, generatedNotes, notesCustomized: false, source: 'command' }
+        setCharacter(current => ({ ...current, weapons: [...current.weapons, weapon], updatedAt: Date.now() }))
+        reply(`${name}, a ${type} weapon, was added to ${character.name}. ${generatedNotes}`)
+        return
+      }
       if (request.intent === 'preview-identity' || request.intent === 'change-identity') {
         const field = ['name', 'species', 'archetype'].includes(request.field) ? request.field : ''
         if (!field || !String(request.value || '').trim()) { reply('Tell me whether to change the name, Species, or Archetype and what its new value should be.'); return }

@@ -216,6 +216,23 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-list', list }))
         return
       }
+      const weaponTypePattern = String.raw`(unarmed(?:\s*\/\s*tiny)?(?:\s+melee)?|tiny(?:\s+melee)?|light(?:\s+melee)?|medium(?:\s+melee)?|heavy\s+melee|holdout(?:\s+ranged)?|compact(?:\s+ranged)?|long\s*arm(?:\s+ranged)?|heavy\s+ranged)`
+      const addWeaponMatch = spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:${weaponTypePattern}\\s+)?weapon(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
+        || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*${weaponTypePattern}(?:\\s+weapon)?(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
+      if (addWeaponMatch) {
+        const captures = addWeaponMatch.slice(1).filter(value => value != null)
+        const type = captures.find(value => new RegExp(`^${weaponTypePattern}$`, 'i').test(value)) || 'medium melee'
+        const name = captures.find(value => value !== type) || ''
+        const pending = { intent: 'add-weapon', type, name }
+        const preview = characterCommand({ ...pending, intent: 'preview-add-weapon' })
+        if (/^Add /i.test(preview)) {
+          pendingActionRef.current = pending
+          setPendingAction(pending)
+          setResults([{ label: 'Confirm', detail: 'Add this weapon', action: 'confirm' }, { label: 'Cancel', detail: 'Do not add it', action: 'cancel' }])
+        }
+        respond(preview)
+        return
+      }
       const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(name|species|archetype)\s+(?:to|as)\s+(.+)$/i)
         || spokenCommand.match(/^(?:my\s+)?(name|species|archetype)\s+(?:is|should be)\s+(.+)$/i)
       if (setIdentityMatch) {
