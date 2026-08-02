@@ -2120,6 +2120,11 @@ function CharacterSheet() {
         else if (orderedWordSubset(weapon.name, query)) score = 2.99
         else if (type.includes(key) || key.includes(type)) score = 3 + (Math.abs(type.length - key.length) / Math.max(type.length, key.length, 1))
         else if (orderedWordSubset(weapon.type, query)) score = 3.75
+        else {
+          const distance = commandDistance(weapon.name, query)
+          const length = Math.max(name.length, key.length, 1)
+          if (distance <= Math.max(2, Math.ceil(length * .25)) && distance / length <= .3) score = 4 + (distance / length)
+        }
         return { weapon, score }
       }).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
     }
@@ -2352,9 +2357,23 @@ function CharacterSheet() {
         const entryKeys = entry => [entry.name, ...(entry.aliases || [])].map(commandKey)
         const exact = candidates.filter(entry => entryKeys(entry).includes(key))
         const partial = exact.length ? exact : candidates.filter(entry => entryKeys(entry).some(entryKey => entryKey.includes(key) || key.includes(entryKey)))
-        if (!partial.length) { reply(`I could not find a Weapon, Item, Trait, or Talent matching ${request.entry}.`); return }
-        if (partial.length > 1) { reply(`${request.entry} matches ${partial.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
-        const entry = partial[0]
+        let matches = partial
+        if (!matches.length && key) {
+          const ranked = candidates.map(entry => {
+            const distances = entryKeys(entry).filter(Boolean).map(entryKey => commandDistance(entryKey, key))
+            const distance = Math.min(...distances)
+            const length = Math.max(key.length, ...entryKeys(entry).map(entryKey => entryKey.length), 1)
+            return { entry, distance, ratio: distance / length }
+          }).filter(match => match.distance <= Math.max(2, Math.ceil(key.length * .25)) && match.ratio <= .3)
+            .sort((left, right) => left.ratio - right.ratio || left.distance - right.distance)
+          if (ranked.length) {
+            const best = ranked[0]
+            matches = ranked.filter(match => match.distance === best.distance && Math.abs(match.ratio - best.ratio) < .03).map(match => match.entry)
+          }
+        }
+        if (!matches.length) { reply(`I could not find a Weapon, Item, Trait, or Talent matching ${request.entry}.`); return }
+        if (matches.length > 1) { reply(`${request.entry} matches ${matches.map(entry => `${entry.name}, ${entry.kind}`).join('; ')}. Say more of the name.`); return }
+        const entry = matches[0]
         reply(`${entry.name}. ${entry.kind}. ${entry.description}`)
         return
       }
