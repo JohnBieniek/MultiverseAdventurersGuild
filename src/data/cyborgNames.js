@@ -199,98 +199,98 @@ const cyborgNames = [
   {
     "name": "Abacus",
     "identity": "Abacus",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Brightmind",
     "identity": "Brightmind",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Cerebrum",
     "identity": "Cerebrum",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Deepthink",
     "identity": "Deepthink",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Foresight",
     "identity": "Foresight",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Logician",
     "identity": "Logician",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Polymath",
     "identity": "Polymath",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Theorem",
     "identity": "Theorem",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Intellection",
     "identity": "Intellection",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Ratiocinator",
     "identity": "Ratiocinator",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Cognition",
     "identity": "Cognition",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Second",
     "identity": "Second",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Peerless",
     "identity": "Peerless",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Abstract",
     "identity": "Abstract",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
@@ -3167,7 +3167,7 @@ const cyborgNames = [
   {
     "name": "Analyst",
     "identity": "Analyst",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Fairy",
     "style": "self-chosen"
   },
@@ -3398,7 +3398,7 @@ const cyborgNames = [
   {
     "name": "Axion",
     "identity": "Axion",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Halfling",
     "style": "self-chosen"
   },
@@ -3699,98 +3699,98 @@ const cyborgNames = [
   {
     "name": "Brightlogic",
     "identity": "Brightlogic",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Cerebralist",
     "identity": "Cerebralist",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Conjecture",
     "identity": "Conjecture",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Cortexian",
     "identity": "Cortexian",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Deduction",
     "identity": "Deduction",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Deepreason",
     "identity": "Deepreason",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
   {
     "name": "Forecaster",
     "identity": "Forecaster",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Halfling",
     "style": "self-chosen"
   },
   {
     "name": "Ideamaker",
     "identity": "Ideamaker",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Fairy",
     "style": "self-chosen"
   },
   {
     "name": "Intellect",
     "identity": "Intellect",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Orc",
     "style": "self-chosen"
   },
   {
     "name": "Loreengine",
     "identity": "Loreengine",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Giant",
     "style": "self-chosen"
   },
   {
     "name": "Mindvault",
     "identity": "Mindvault",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Elf",
     "style": "self-chosen"
   },
   {
     "name": "Proofsmith",
     "identity": "Proofsmith",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Human",
     "style": "self-chosen"
   },
   {
     "name": "Rationale",
     "identity": "Rationale",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Gnome",
     "style": "self-chosen"
   },
   {
     "name": "Savant",
     "identity": "Savant",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Dwarf",
     "style": "self-chosen"
   },
@@ -6667,7 +6667,7 @@ const cyborgNames = [
   {
     "name": "Thinktank",
     "identity": "Thinktank",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Fairy",
     "style": "self-chosen"
   },
@@ -6898,7 +6898,7 @@ const cyborgNames = [
   {
     "name": "Witspark",
     "identity": "Witspark",
-    "archetype": "Brainiac",
+    "archetype": "Scientist",
     "origin": "Halfling",
     "style": "self-chosen"
   },

@@ -38,7 +38,7 @@ Loner - Bounty Hunters prefer to operate on their own.
 
 Connected - You rely on contacts to help you with your bounties. You see every social opportunity as an opportunity to cultivate a new contact.
 
-Brainiac - Knowledge is power and you know everything. You are a brilliant problem solver and believe you are an expert on everything.
+Scientist - Knowledge is power and you know everything. You are a brilliant problem solver and believe you are an expert on everything.
 
 Scores: Strength 0, Dexterity +1, Endurance -1, Intuition +2, Education +3, Charisma 0
 Strengths: Education, Knowledge, Technology, Any Weapon

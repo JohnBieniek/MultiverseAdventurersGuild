@@ -3,7 +3,7 @@ import { archetypeTraitPools, speciesTraitPools } from '../src/data/randomTraits
 
 const expectedSpecies = ['Cyborg', 'Dwarf', 'Elf', 'Fairy', 'Gnome', 'Giant', 'Halfling', 'Human', 'Orc', 'SAI']
 const expectedArchetypes = [
-  'Barbarian', 'Bounty Hunter', 'Brainiac', 'Cleric', 'Commando', 'Criminal', 'Druid', 'Eco Terrorist',
+  'Barbarian', 'Bounty Hunter', 'Scientist', 'Cleric', 'Commando', 'Criminal', 'Druid', 'Eco Terrorist',
   'Ex-Company Man', 'Ex-Cop', 'Ex-Military', 'Face', 'Fixer', 'Ganger', 'Gonzo Journalist', 'Gunslinger',
   'Hacker', 'Mad Bomber', 'Mage', 'Mercenary', 'Monk', 'Ninja', 'Performer', 'Private Eye/Investigator',
   'Screamer', 'Shaman', 'Smuggler', 'Sniper', 'Spy', 'Street Doc', 'Street Samurai', 'Warlock',

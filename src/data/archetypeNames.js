@@ -25,7 +25,7 @@ const archetypeNames = {
     'Flight Risk', 'No Safe Harbor', 'Paid on Delivery', 'Probable Location', 'Remand Pending',
     'Reward Posted', 'Skip Country', 'The Price Named', 'Wanted Elsewhere', 'You Have Been Served',
   ],
-  Brainiac: [
+  Scientist: [
     'Many Fields Mastered', 'First Principles', 'Learned Beyond Measure', 'Systems Thinker', 'Premise and Conclusion',
     'Pattern Reader', 'Keeper of References', 'Mental Cartographer', 'Theorist', 'Proofmaker',
     'Mnemonist', 'Structured Inquiry', 'Deep Reader', 'Abstractionist', 'Methodologist',

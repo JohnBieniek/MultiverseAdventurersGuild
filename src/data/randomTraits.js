@@ -150,7 +150,7 @@ export const archetypeTraitPools = {
     ['Patient Shadow', 'Can wait motionless for hours but becomes agitated during ordinary social delays.'],
     ['Terms Before Blood', 'Reads every contract aloud so nobody can pretend not to understand the price.'],
   ]),
-  Brainiac: pool([
+  Scientist: pool([
     ['Explain It Twice', 'Offers one elegant explanation, then a kinder one when elegance fails the listener.'],
     ['Favorite Error', 'Keeps a famous personal mistake framed above the workspace as protection against certainty.'],
     ['Unlicensed Curiosity', 'Investigates locked questions first and worries about authorization afterward.'],

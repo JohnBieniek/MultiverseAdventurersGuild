@@ -87,7 +87,7 @@ Species Content Updates
 - Moved the "do not relate well" idea into Giant Personality as Reserved.
 - Updated Giant Talents to Intimidating Presence, Melee Reach, and Pathfinder.
 - Updated Giant Common Archetypes to Barbarian, Druid, and Shaman.
-- Removed Brainiac from Giant Common Archetypes.
+- Removed Scientist from Giant Common Archetypes.
 - Removed Street Doc, Mage, and Street Samurai from Giant Common Archetypes because they fit less well with the revised Giant culture.
 - Revised Orc intro to be more nuanced and less one-note.
 - Revised Orc Rep to frame the harsher language as an outsider stereotype.

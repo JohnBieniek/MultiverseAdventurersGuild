@@ -1,12 +1,12 @@
 Credits
 
-This represents several resources for the party. This is a resource for all members to use during adventures to buy special items, pay off NPCs, etc. Credits are how Heroes are paid for their efforts. An NPC will negotiate the mission price with the party. That price becomes a number of Credits the party will earn at the end of each play session. Credits may be negotiated with an upfront amount, ready for immediate use. Keep in mind this is a per-session amount. If I negotiate 10 Credits, I get that amount for every session played. Each Hero would have their own credits to spend. The group should also put away credits to purchase items that benefit the group. Unused Credits do not roll over into the next session.
+This represents several resources for the party. This is a resource for all members to use during adventures to buy special items, pay off NPCs, etc. Credits are how Heroes are paid for their efforts. An NPC will negotiate the mission price with the party. That price becomes a number of Credits the party will earn at the end of the mission. Credits may be negotiated with an upfront amount, ready for immediate use. Keep in mind this is a per-mission amount. If I negotiate 10 Credits, I get that amount for completing the mission. Each Hero would have their own credits to spend. The group should also put away credits to purchase items that benefit the group. Unused Credits do not roll over into the next mission.
 
 Heroes automatically have a vehicle and a place to live.
 
-Missions grant 4000 Credits on average. Easy missions might cost less than more difficult ones. This is subject to negotiation. This amount is granted after each playing session.
+Missions grant 4000 Credits on average. Easy missions might pay less than more difficult ones. This is subject to negotiation. This amount is granted after each mission.
 
-Pay off a contact - 1 credit will get basic information, more could yield more detailed information. 3+ Credits will get a favor from a Contact, such as referring them to someone else who can help, finding a tricky piece of gear, or performing an action for them.
+Pay off a Contact - 500 Credits gets basic information. Spending more could yield detailed information or a favor, such as a referral to someone who can help, help finding a tricky piece of gear, or an action performed on the Heroes' behalf.
 
 A Hero can spend 1000 Credits to buy a grenade.
 
@@ -16,7 +16,7 @@ Sneak a small weapon by security. Cost is based on security level: less than 0 c
 
 Cover Identity - Half the cost for a legitimate Global Relevant Identification Number (GRIN). Maximum Force 3. Preestablished paper/identification for the adventure. Usable until burned, which occurs when the GRIN fails a security check. Also, any crimes associated with the GRIN remain active.
 
-Rumor Mill - 1000 Credits, social interaction reveals a solid, reliable lead. Twice per session.
+Rumor Mill - 1000 Credits, social interaction reveals a solid, reliable lead. Twice per mission.
 
 2G would yield a home with a (+2) value.
 

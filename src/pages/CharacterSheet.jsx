@@ -48,7 +48,7 @@ const weaponTypes = [
 const weaponLoadouts = {
   Barbarian: [['Notched Seax','Light Melee'],['Stonehead War Club','Medium Melee'],['Worldsplitter Greataxe','Heavy Melee'],['Iron Throwing Axe','Holdout Ranged']],
   'Bounty Hunter': [['Capture Knife','Light Melee'],['Arc-Cuff Shock Baton','Medium Melee'],['Sleeve Dartcaster','Holdout Ranged'],['Tracker Carbine','Longarm Ranged']],
-  Brainiac: [['Laser Scalpel','Light Melee'],['Telescoping Logic Staff','Medium Melee'],['Palm-Sized Beam Emitter','Holdout Ranged']],
+  Scientist: [['Laser Scalpel','Light Melee'],['Telescoping Logic Staff','Medium Melee'],['Palm-Sized Beam Emitter','Holdout Ranged']],
   Cleric: [['Consecrated Dirk','Light Melee'],['Reliquary Warhammer','Medium Melee'],['Bolt of Judgment','Holdout Ranged']],
   Commando: [['Black-Ops Combat Knife','Light Melee'],['Tactical Tomahawk','Medium Melee'],['Suppressed Service Pistol','Holdout Ranged'],['Modular Assault Rifle','Longarm Ranged']],
   Criminal: [['Spring-Loaded Switchblade','Light Melee'],['Weighted Tire Thumper','Medium Melee'],['Filed-Off Snub Revolver','Holdout Ranged']],
@@ -988,7 +988,7 @@ const speciesDescriptorTerms = {
 const archetypeDescriptorTerms = {
   Barbarian: ['barbarian', 'berserker', 'brawler', 'gladiator', 'survivor', 'martial'],
   'Bounty Hunter': ['hunter', 'ranger', 'scout', 'investigator'],
-  Brainiac: ['academic', 'researcher', 'scholar', 'historian', 'engineer', 'inventor'],
+  Scientist: ['academic', 'researcher', 'scholar', 'historian', 'engineer', 'inventor'],
   Cleric: ['cleric', 'healer', 'guardian', 'paladin', 'devotion'],
   Commando: ['soldier', 'marksman', 'combat', 'defender', 'guardian'],
   Criminal: ['rogue', 'thief', 'con artist', 'brawler', 'wheelman', 'gambler'],
@@ -1047,7 +1047,7 @@ const suppliedWeaponNames = (archetypeName, type, species) => {
   return [...typeNames, ...(suppliedWeaponStandardByType[type] || [])]
 }
 const weaponStyleByArchetype = {
-  Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Brainiac: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
+  Barbarian: 'fantasy', 'Bounty Hunter': 'modern', Scientist: 'science', Cleric: 'mystic', Commando: 'modern', Criminal: 'street', Druid: 'mystic', 'Eco Terrorist': 'modern', 'Ex-Company Man': 'cyber', 'Ex-Cop': 'modern', 'Ex-Military': 'modern', Face: 'elegant', Fixer: 'cyber', Ganger: 'street', 'Gonzo Journalist': 'modern', Gunslinger: 'western', Hacker: 'cyber', 'Mad Bomber': 'cyber', Mage: 'mystic', Mercenary: 'modern', Monk: 'martial', Ninja: 'martial', Performer: 'mystic', 'Private Eye/Investigator': 'street', Screamer: 'cyber', Shaman: 'mystic', Smuggler: 'cyber', Sniper: 'modern', Spy: 'elegant', 'Street Doc': 'cyber', 'Street Samurai': 'martial', Warlock: 'mystic',
 }
 const multiverseWeaponMakers = ['Abyssal Crown', 'Aetherline', 'Amber Circuit', 'Andromeda Forge', 'Ash Meridian', 'Astral Loom', 'Black Comet', 'Brass Horizon', 'Broken Halo', 'Cinder Vault', 'Clockwork Sun', 'Crimson Orbit', 'Dawn Engine', 'Deepwell', 'Dragon Gate', 'Dreaming Anvil', 'Eclipse Foundry', 'Ember Choir', 'Farstar', 'Fifth Moon', 'Glass Citadel', 'Gravestone Works', 'Green Nova', 'Hollow Crown', 'Iron Nebula', 'Ivory Signal', 'Jade Tempest', 'Last Parallax', 'Lightning Archive', 'Lost Atlas', 'Midnight Assembly', 'Mirror Forge', 'Ninefold', 'Obsidian Choir', 'Orichalcum Works', 'Pale Meteor', 'Phoenix Circuit', 'Quantum Pilgrim', 'Redshift', 'Riftwalker', 'Silver Labyrinth', 'Skygrave', 'Solar Reliquary', 'Starless Sea', 'Stormglass', 'Thorn Engine', 'Titan Wake', 'Umbral Foundry', 'Void Lantern', 'Worldroot']
 const nameOffset = name => [...name].reduce((total, character) => total + character.charCodeAt(0), 0)
@@ -1097,14 +1097,14 @@ const weaponStylePools = {
     'Heavy Ranged': ['Portable Rail Cannon', 'Rotary Flechette Gun', 'Plasma Support Cannon', 'Micro-Missile Rack'],
   },
   mystic: {
-    'Unarmed / Tiny Melee': ['Ghost-Touch Handwraps', 'Runed Prayer Beads', 'Astral Claws', 'Elemental Knuckle Seal'],
-    'Light Melee': ['Moon-Silver Athame', 'Saint’s Reliquary Dagger', 'Thorned Ritual Sickle', 'Crystal Wand-Blade'],
-    'Medium Melee': ['Starwood Focus Staff', 'Sun-Disc Warhammer', 'Spirit-Bound Scimitar', 'Runesong Spear'],
-    'Heavy Melee': ['Doom-Bell Maul', 'Archmage’s Greatstaff', 'Demon-Iron Greatblade', 'Worldroot Poleaxe'],
-    'Holdout Ranged': ['Witchfire Dart', 'Bottled Lightning', 'Spectral Thorn', 'Saint’s Judgment Bolt'],
-    'Compact Ranged': ['Moonbeam Shortbow', 'Hexbolt Repeater', 'Elemental Wand Array', 'Spirit-Horn Blaster'],
-    'Longarm Ranged': ['Sunray Longstaff', 'Cometstring Longbow', 'Stormcaller Rod', 'Dragon-Breath Scepter'],
-    'Heavy Ranged': ['Meteor Invocation', 'Void-Cannon Focus', 'Celestial Ballista', 'Leviathan-Bone Thunderstaff'],
+    'Unarmed / Tiny Melee': ['Ghost-Touch Handwraps', 'Runed Prayer Beads', 'Astral Claws', 'Elemental Knuckle Seal', 'Shocking Grasp', 'Chill Touch', 'Flame Palm', 'Thunderclap', 'Vampiric Grasp'],
+    'Light Melee': ['Moon-Silver Athame', 'Saint’s Reliquary Dagger', 'Thorned Ritual Sickle', 'Crystal Wand-Blade', 'Frost Knife', 'Witchlight Edge', 'Spectral Fang', 'Ember Dagger', 'Moon-Shard Blade'],
+    'Medium Melee': ['Starwood Focus Staff', 'Sun-Disc Warhammer', 'Spirit-Bound Scimitar', 'Runesong Spear', 'Lightning Blade', 'Icebrand', 'Solar Saber', 'Gravewind Sword', 'Storm-Forged Scimitar'],
+    'Heavy Melee': ['Doom-Bell Maul', 'Archmage’s Greatstaff', 'Demon-Iron Greatblade', 'Worldroot Poleaxe', 'Meteor Maul', 'Thunderhead Greatblade', 'Avalanche Axe', 'Infernal Cleaver', 'Worldbreaker Staff'],
+    'Holdout Ranged': ['Witchfire Dart', 'Bottled Lightning', 'Spectral Thorn', 'Saint’s Judgment Bolt', 'Zap', 'Spark Dart', 'Frostbite', 'Ghost Needle', 'Ember Snap'],
+    'Compact Ranged': ['Moonbeam Shortbow', 'Hexbolt Repeater', 'Elemental Wand Array', 'Spirit-Horn Blaster', 'Firebolt', 'Acid Arrow', 'Shadow Lance', 'Thunder Orb', 'Spirit Shot'],
+    'Longarm Ranged': ['Sunray Longstaff', 'Cometstring Longbow', 'Stormcaller Rod', 'Dragon-Breath Scepter', 'Ice Beam', 'Chain Lightning', 'Solar Ray', 'Winter Spear', 'Dragonfire Bolt'],
+    'Heavy Ranged': ['Meteor Invocation', 'Void-Cannon Focus', 'Celestial Ballista', 'Leviathan-Bone Thunderstaff', 'Meteor Swarm', 'Disintegration Ray', 'Heaven’s Thunder', 'Cataclysm Wave', 'Starfall Barrage'],
   },
   science: {
     'Unarmed / Tiny Melee': ['Gravitic Push Glove', 'Sonic Palm Emitter', 'Kinetic Lab Gauntlet', 'Stun-Field Ring'],
@@ -1170,7 +1170,7 @@ const archetypeWeaponVariants = {
     ['Sleeve Dartcaster', 'Warrant-Tag Needler', 'Bounty Seal Holdout', 'Sleeper-Dart Palmgun', 'Last-Chance Stunner'],
     ['Tracker Carbine', 'Skiptrace Repeater', 'Long-Warrant Rifle', 'Quarry Mark Carbine', 'Dead-or-Alive Longarm'],
   ],
-  Brainiac: [
+  Scientist: [
     ['Laser Scalpel', 'Molecular Sample Knife', 'Cryo-Edge Dissector', 'Photon Microcutter', 'Monofilament Lab Blade'],
     ['Telescoping Logic Staff', 'Graviton Calibration Rod', 'Proof-by-Induction Baton', 'Field-Theory Resonator', 'Collapsible Research Staff'],
     ['Palm-Sized Beam Emitter', 'Pocket Particle Projector', 'Hypothesis Tester', 'Microcoil Demonstrator', 'Portable Ray Apparatus'],
@@ -1394,7 +1394,7 @@ const populateArchetypeWeapons = (existingWeapons, archetypeName, species = '') 
 const archetypeItemLoadouts = {
   Barbarian: [['Bearskin War Cloak', '(+3) Strength — The heavy trophy cloak reflects a life built around raw power.'], ['Iron-Shod Trail Boots', '(+2) Endurance — Made for punishing marches through hostile country.'], ['Ancestor-Totem Necklace', '(+1) Intuition — Carved tokens reinforce instinct and inherited warnings.']],
   'Bounty Hunter': [['Targeting Monocle', '(+3) Observation — Highlights tells, tracks, and wanted faces.'], ['Reinforced Pursuit Coat', '(+2) Endurance — Built to survive long hunts and violent arrests.'], ['Restraint and Warrant Kit', '(+1) Influence — Makes authority look convincing even far from home.']],
-  Brainiac: [['Thesis-Archive Mnemonic Crown', '(+3) Education — Its dense personal annotations preserve years of advanced study.'], ['Predictive Lens Array', '(+2) Intuition — Models likely outcomes from incomplete evidence.'], ['Pocket Omnilibrary', '(+1) Knowledge — A carefully curated reference collection reflects relentless research habits.']],
+  Scientist: [['Thesis-Archive Mnemonic Crown', '(+3) Education — Its dense personal annotations preserve years of advanced study.'], ['Predictive Lens Array', '(+2) Intuition — Models likely outcomes from incomplete evidence.'], ['Pocket Omnilibrary', '(+1) Knowledge — A carefully curated reference collection reflects relentless research habits.']],
   Cleric: [['Consecrated Vestments', '(+3) Charisma — Invests the wearer with visible spiritual authority.'], ['Reliquary of Steadfast Hearts', '(+2) Endurance — A reminder to endure suffering in service to others.'], ['Illuminated Prayer Book', '(+1) Education — Preserves doctrine, rites, and healing traditions.']],
   Commando: [['Tactical Assault Harness', '(+3) Dexterity — Keeps ammunition and tools exactly where trained hands expect them.'], ['Ballistic Combat Armor', '(+2) Endurance — Designed for sustained operations under fire.'], ['Encrypted Squad Radio', '(+1) Influence — Supports precise commands and coordinated action.']],
   Criminal: [['Chameleon-Lined Coat', '(+3) Sneak — Breaks up the wearer’s outline during illicit work.'], ['Professional Lock Roll', '(+2) Technology — Holds bypass tools for mechanical and electronic security.'], ['Burner Identity Wallet', '(+1) Influence — Provides convincing names, credentials, and cover stories.']],
@@ -1428,7 +1428,7 @@ const archetypeItemLoadouts = {
 const archetypeItemVariations = {
   Barbarian: [['Mammoth-Bone Grip Wraps', '(+2) Athletics — Give powerful hands purchase during climbs, grapples, and brutal labor.'], ['Smoke-Reading War Paint', '(+1) Outdoors — Traditional pigments encode weather signs and hunting wisdom.']],
   'Bounty Hunter': [['Fugitive-Scent Sampler', '(+2) Outdoors — Tracks quarry through biological traces across unfamiliar terrain.'], ['Interrogator’s Voice Modulator', '(+1) Charisma — Makes quiet questions carry an unmistakable threat.']],
-  Brainiac: [['Thought-Speed Stylus', '(+2) Technology — Captures calculations as quickly as they occur.'], ['Academic Citation Familiar', '(+1) Influence — Supplies credentials and authoritative references during debate.']],
+  Scientist: [['Thought-Speed Stylus', '(+2) Technology — Captures calculations as quickly as they occur.'], ['Academic Citation Familiar', '(+1) Influence — Supplies credentials and authoritative references during debate.']],
   Cleric: [['Annotated Pilgrim’s Mercy Kit', '(+2) Education — Handwritten treatment notes record practical lessons learned through service.'], ['Bell of Revealed Spirits', '(+1) Observation — Rings differently near curses, hauntings, and concealed suffering.']],
   Commando: [['Grip-Memory Combat Gloves', '(+2) Attack — Reinforce drilled weapon handling under stress.'], ['Terrain-Mapping Knee Display', '(+1) Observation — Keeps squad routes and danger zones in view.']],
   Criminal: [['Silent-Sole Getaway Shoes', '(+2) Dexterity — Built for quick exits through alleys, rooftops, and service corridors.'], ['Marked-Card Data Deck', '(+1) Intuition — Helps spot scams because every common trick is already encoded.']],
@@ -1722,7 +1722,7 @@ const contactNamePools = Object.fromEntries(contactCatalog.map(({ type, category
 const archetypeContactRoles = {
   Barbarian: ['Wilderness scout', 'Monster handler', 'Caravan master', 'Witch', 'Ferryman'],
   'Bounty Hunter': ['Informant', 'Fixer', 'Detective', 'Fence', 'Monster bounty clerk', 'Getaway driver'],
-  Brainiac: ['Librarian', 'Engineer', 'Artifact appraiser', 'Occult researcher', 'Portal technician'],
+  Scientist: ['Librarian', 'Engineer', 'Artifact appraiser', 'Occult researcher', 'Portal technician'],
   Cleric: ['Temple priest', 'Exorcist', 'Resurrection specialist', 'Spirit medium', 'Cult defector'],
   Commando: ['Guild quartermaster', 'Spy handler', 'Demolitions expert', 'Mission handler', 'Pilot'],
   Criminal: ['Fence', 'Forger', 'Corrupt official', 'Crime boss', 'Safecracker', 'Street doctor'],
@@ -1857,6 +1857,7 @@ const normalizeXpTracking = character => {
   const legacyXpWasSet = character.xpManuallySet ?? legacyXp !== 0
   return {
     ...character,
+    archetype: character.archetype === 'Brainiac' ? 'Scientist' : character.archetype,
     attackSkill: character.attackSkill ?? character.skills?.attack?.ability ?? '',
     totalXp: character.totalXp ?? legacyXp,
     unspentXp: character.unspentXp ?? legacyXp,
