@@ -1948,6 +1948,7 @@ function CharacterSheet() {
   const totalXpLastValue = useRef(null)
   const totalXpAppliedIncrease = useRef(0)
   const totalXpArrowChange = useRef(false)
+  const lastCommandAttackRef = useRef(null)
 
   useEffect(() => {
     if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
@@ -2061,6 +2062,98 @@ function CharacterSheet() {
       ego: number(character.defenseBonus) + number(s.intuition) + number(s.education) + number(s.charisma),
     }
   }, [character])
+
+  useEffect(() => {
+    if (!character) return undefined
+    const commandKey = value => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+    const findTalent = query => {
+      const key = commandKey(query)
+      return talentCatalog.find(talent => commandKey(talent.name) === key) || talentCatalog.filter(talent => commandKey(talent.name).includes(key) || key.includes(commandKey(talent.name))).find(() => true)
+    }
+    const findWeapon = query => {
+      const key = commandKey(query)
+      return character.weapons.find(weapon => commandKey(weapon.name) === key || commandKey(weapon.type) === key) || character.weapons.find(weapon => commandKey(weapon.name).includes(key) || commandKey(weapon.type).includes(key) || key.includes(commandKey(weapon.type)))
+    }
+    const handleCommand = event => {
+      const request = event.detail || {}
+      const reply = message => request.reply?.(message)
+      if (request.intent === 'read-vital') {
+        const vital = commandKey(request.vital)
+        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP` }
+        reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
+        return
+      }
+      if (request.intent === 'preview-health' || request.intent === 'change-health') {
+        const amount = Math.max(0, number(request.amount)) * (request.operation === 'subtract' ? -1 : 1)
+        const next = Math.max(0, Math.min(computed.maxHp, number(character.currentHp) + amount))
+        if (request.intent === 'preview-health') reply(`${request.operation === 'subtract' ? 'Apply' : 'Restore'} ${Math.abs(amount)} HP to ${character.name}? Current health ${character.currentHp}. New health ${next}.`)
+        else {
+          setCharacter(current => ({ ...current, currentHp: next, updatedAt: Date.now() }))
+          reply(`${request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
+        }
+        return
+      }
+      if (request.intent === 'explain-talent' || request.intent === 'preview-add-talent' || request.intent === 'add-talent') {
+        const talent = findTalent(request.talent)
+        if (!talent) { reply(`I could not find a Talent named ${request.talent}.`); return }
+        if (request.intent === 'explain-talent') { reply(`${talent.name}. ${talent.ability ? `${talent.ability}. ` : ''}${talent.notes || 'No additional description is available.'}${talent.duration ? ` Duration: ${talent.duration}.` : ''}`); return }
+        if (character.talents.some(entry => commandKey(entry.name) === commandKey(talent.name))) { reply(`${character.name} already has ${talent.name}.`); return }
+        if (request.intent === 'preview-add-talent') { reply(`Add ${talent.name} to ${character.name}'s Talents? Purchased Talents normally cost 5 XP.`); return }
+        setCharacter(current => ({ ...current, talents: [...current.talents, { ...talent, id: crypto.randomUUID(), source: 'command' }], updatedAt: Date.now() }))
+        reply(`${talent.name} added to ${character.name}. Remember to subtract 5 XP if this Talent was purchased.`)
+        return
+      }
+      if (request.intent === 'roll-die') {
+        const sides = Math.max(2, Math.min(100, number(request.sides)))
+        const result = rollDie(sides)
+        setRoll({ kind: 'die', label: `d${sides}`, die: sides, natural: result, modifier: 0, total: result })
+        reply(`d${sides} result: ${result}.`)
+        return
+      }
+      if (request.intent === 'roll-check') {
+        const key = commandKey(request.check)
+        const vitalModifiers = { ego: computed.ego, resilience: computed.resilience, initiative: computed.initiative }
+        let label = request.check
+        let modifier = vitalModifiers[key]
+        if (modifier == null) {
+          const skill = skillDefs.find(([skillKey, skillLabel]) => commandKey(skillKey) === key || commandKey(skillLabel) === key)
+          if (skill) { label = skill[1]; modifier = number(character.stats[skill[2]]) + skillEntryTotal(character.skills[skill[0]]) }
+        }
+        if (modifier == null) { reply(`I could not find a roll named ${request.check}.`); return }
+        const natural = rollDie(20)
+        const total = natural + number(modifier)
+        setRoll({ kind: 'check', label, natural, modifier: number(modifier), total, tn: null, result: natural === 20 ? 'Critical success!' : natural === 1 ? 'Critical failure!' : '' })
+        reply(`${label} roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}.`)
+        return
+      }
+      if (request.intent === 'roll-weapon') {
+        const weapon = findWeapon(request.weapon)
+        if (!weapon) { reply(`I could not find a carried weapon matching ${request.weapon}.`); return }
+        const type = weaponTypes.find(item => item[0] === weapon.type) || weaponTypes[0]
+        const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity
+        const attackModifier = type[1] === 'melee' ? character.meleeAttackModifier : character.rangedAttackModifier
+        const modifier = number(stat) + number(character.attackSkill) + number(attackModifier)
+        const natural = rollDie(20)
+        const total = natural + modifier
+        const attack = { kind: 'attack', label: weapon.name || type[0], natural, modifier, total, tn: null, hit: natural !== 1, weapon, die: type[2], stat: number(stat) }
+        lastCommandAttackRef.current = attack
+        setRoll(attack)
+        reply(`${attack.label} attack roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}.${natural === 20 ? ' Critical hit.' : natural === 1 ? ' Critical miss.' : ''} Say roll damage to roll its damage.`)
+        return
+      }
+      if (request.intent === 'roll-damage') {
+        const attack = lastCommandAttackRef.current
+        if (!attack) { reply('Roll an attack with a weapon before asking to roll damage.'); return }
+        const dieResult = attack.natural === 20 ? attack.die : rollDie(attack.die)
+        const modifier = attack.stat + number(attack.weapon.enhancement)
+        const total = dieResult + modifier
+        setRoll({ kind: 'damage', label: `${attack.label} damage`, die: attack.die, natural: dieResult, modifier, total, critical: attack.natural === 20 })
+        reply(`${attack.label} damage: ${dieResult} on the d${attack.die}, ${signed(modifier)} modifier, total ${total}.${attack.natural === 20 ? ' Critical damage used the maximum die result.' : ''}`)
+      }
+    }
+    window.addEventListener('mag-character-command', handleCommand)
+    return () => window.removeEventListener('mag-character-command', handleCommand)
+  }, [character, computed])
 
   const update = (path, value) => setCharacter(current => {
     const copy = structuredClone(current)
