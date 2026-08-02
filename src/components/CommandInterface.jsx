@@ -251,7 +251,8 @@ function CommandInterface() {
         return
       }
       const weaponTypePattern = String.raw`(unarmed(?:\s*\/\s*tiny)?(?:\s+melee)?|tiny(?:\s+melee)?|light(?:\s+melee)?|medium(?:\s+melee)?|heavy\s+melee|holdout(?:\s+ranged)?|compact(?:\s+ranged)?|long\s*arm(?:\s+ranged)?|heavy\s+ranged)`
-      const addWeaponMatch = spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:${weaponTypePattern}\\s+)?weapon(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
+      const addWeaponMatch = spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:new\\s+)?weapon\\s+(.+?)\\s+${weaponTypePattern}$`, 'i'))
+        || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*(?:${weaponTypePattern}\\s+)?weapon(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
         || spokenCommand.match(new RegExp(`^(?:add|create|give me)\\s+(?:a|an)?\\s*${weaponTypePattern}(?:\\s+weapon)?(?:\\s+(?:named|called)\\s+(.+?))?(?:\\s+and\\s+(?:equip|use)\\s+it)?$`, 'i'))
       if (addWeaponMatch) {
         const captures = addWeaponMatch.slice(1).filter(value => value != null)
