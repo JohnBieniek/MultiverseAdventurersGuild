@@ -323,7 +323,10 @@ function CommandInterface() {
   useEffect(() => {
     if (!open) return undefined
     setStatus('Game commands opened. Type a command or activate Start Listening.')
-    window.setTimeout(() => inputRef.current?.focus(), 0)
+    window.setTimeout(() => {
+      inputRef.current?.focus()
+      if (window.matchMedia('(max-width: 768px)').matches) document.querySelector('.character-command-guide')?.removeAttribute('open')
+    }, 0)
     const dismiss = event => { if (event.key === 'Escape') close() }
     window.addEventListener('keydown', dismiss)
     return () => window.removeEventListener('keydown', dismiss)
