@@ -12,6 +12,32 @@ Per Force: If a rule says "per Force," multiply the listed effect by the Force u
 
 XP Cost: Any player can buy a talent for 5 XP per talent. Players also gain Talents as their level increases.
 
+Talents Gained by Level
+
+Level 0: You begin without Talents, but you have access to Force 1 Talents and one sustained Combat Talent Slot.
+
+Level 1: Gain 2 Talents. Also choose one Level benefit: +1 Attack, +1 Defense, or 1 additional Talent.
+
+Level 2: No automatic Talent. You unlock Force 2 Talents.
+
+Level 3: Gain 1 Talent.
+
+Level 4: No automatic Talent. Gain a second sustained Combat Talent Slot, then choose +1 Attack, +1 Defense, or 1 additional Talent.
+
+Level 5: Gain 1 Talent and unlock Force 3 Talents.
+
+Level 6: Choose +1 Attack, +1 Defense, or 1 additional Talent.
+
+Level 7: Gain 1 Talent and a third sustained Combat Talent Slot.
+
+Level 8: Choose +1 Attack, +1 Defense, or 1 additional Talent.
+
+Level 9: Gain 1 Talent and unlock Force 4 Talents.
+
+Level 10: No automatic Talent. You may still purchase eligible Talents for 5 XP each.
+
+Automatic Talents and chosen Level benefits cost no XP. You may switch your Talents whenever you reach a new Level. A Talent you purchase or select must be within your currently unlocked Force Level.
+
 Attack Stats: Melee attacks use Strength. Ranged attacks use Dexterity.
 
 Talent Types
