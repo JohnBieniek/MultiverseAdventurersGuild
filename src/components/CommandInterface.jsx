@@ -177,7 +177,7 @@ function CommandInterface() {
     const pages = destinations.filter(item => `${normalize(item.label)} ${item.terms}`.includes(query)).map(item => ({ ...item, detail: 'App section' }))
     const matches = [...characters, ...pages].slice(0, 8)
     setResults(matches)
-    respond(matches.length ? `Found ${matches.length} result${matches.length === 1 ? '' : 's'} for ${term}.` : `I could not find ${term}. Try Talents, Skills, Weapons, Rules, or a saved Hero's name.`)
+    respond(matches.length ? `Found ${matches.length} result${matches.length === 1 ? '' : 's'} for ${term}.` : `I could not find ${term}.`)
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
