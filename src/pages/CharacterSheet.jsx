@@ -2079,8 +2079,58 @@ function CharacterSheet() {
       const reply = message => request.reply?.(message)
       if (request.intent === 'read-vital') {
         const vital = commandKey(request.vital)
-        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP` }
+        const values = { health: `${character.currentHp} of ${computed.maxHp} HP`, hp: `${character.currentHp} of ${computed.maxHp} HP`, hitpoints: `${character.currentHp} of ${computed.maxHp} HP`, status: `${character.currentHp} of ${computed.maxHp} HP`, ego: `${signed(computed.ego)} Ego`, defense: `${computed.defense} Defense`, resilience: `${signed(computed.resilience)} Resilience`, energy: `${character.currentEnergy} of ${computed.maxEnergy} Energy`, level: `Level ${computed.level}`, xp: `${character.unspentXp} Unspent XP and ${character.totalXp} Total XP` }
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
+        return
+      }
+      if (request.intent === 'preview-score' || request.intent === 'change-score') {
+        const requestedKey = commandKey(request.score)
+        const operation = request.operation || 'set'
+        const amount = number(request.amount)
+        const stat = stats.find(([key, label, short]) => [key, label, short].some(value => commandKey(value) === requestedKey))
+        const skill = skillDefs.find(([key, label]) => [key, label].some(value => commandKey(value) === requestedKey))
+        let kind = request.kind
+        if (!kind || kind === 'score') kind = stat ? 'stat' : skill ? 'skill' : request.score === 'attack' ? 'attack' : ''
+        let label = request.score
+        let currentValue
+        let nextValue
+        if (kind === 'defense') {
+          label = 'Defense Rating'
+          currentValue = number(character.defenseRating)
+          nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+          nextValue = Math.max(1, Math.min(7, nextValue))
+        } else if (kind === 'stat' && stat) {
+          label = stat[1]
+          currentValue = number(character.stats[stat[0]])
+          nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+          nextValue = Math.max(-4, Math.min(4, nextValue))
+        } else if (kind === 'skill' && skill) {
+          label = skill[1]
+          currentValue = number(character.skills[skill[0]].ability)
+          nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+          nextValue = Math.max(-4, Math.min(4, nextValue))
+        } else if (kind === 'attack' || requestedKey === 'attack' || requestedKey === 'attackskill') {
+          kind = 'attack'
+          label = 'Attack Skill'
+          currentValue = number(character.attackSkill)
+          nextValue = operation === 'set' ? amount : currentValue + (operation === 'subtract' ? -amount : amount)
+          nextValue = Math.max(-4, Math.min(4, nextValue))
+        } else { reply(`I could not find a Stat or Skill named ${request.score}.`); return }
+        if (request.intent === 'preview-score') {
+          const cost = kind === 'defense' ? defenseUpgradeCosts[nextValue] : nextValue > 0 ? nextValue ** 2 : 0
+          reply(`Change ${label} from ${signed(currentValue)} to ${signed(nextValue)}?${nextValue > currentValue && cost ? ` The listed XP cost for that rating is ${cost} XP; update Unspent XP if this is a purchase.` : ''}`)
+          return
+        }
+        setCharacter(current => {
+          const copy = structuredClone(current)
+          if (kind === 'defense') copy.defenseRating = nextValue
+          else if (kind === 'stat') copy.stats[stat[0]] = nextValue
+          else if (kind === 'skill') copy.skills[skill[0]].ability = nextValue
+          else copy.attackSkill = nextValue
+          copy.updatedAt = Date.now()
+          return copy
+        })
+        reply(`${label} changed from ${signed(currentValue)} to ${signed(nextValue)}.`)
         return
       }
       if (request.intent === 'preview-health' || request.intent === 'change-health') {

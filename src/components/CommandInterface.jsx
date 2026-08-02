@@ -72,6 +72,13 @@ const savedCharacters = () => {
 const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
 const numberWords = { zero: 0, one: 1, two: 2, to: 2, too: 2, three: 3, four: 4, for: 4, five: 5, six: 6, seven: 7, eight: 8, ate: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 }
 const spokenNumber = value => /^\d+$/.test(String(value)) ? Number(value) : numberWords[normalize(value)]
+const signedSpokenNumber = value => {
+  const normalized = normalize(value)
+  const negative = /^(?:minus|negative)\s+/.test(normalized)
+  const unsigned = normalized.replace(/^(?:minus|negative|plus|positive)\s+/, '')
+  const amount = spokenNumber(unsigned)
+  return amount == null ? undefined : amount * (negative ? -1 : 1)
+}
 
 function CommandInterface() {
   const navigate = useNavigate()
@@ -193,6 +200,30 @@ function CommandInterface() {
       return
     }
     if (onCharacterSheet) {
+      const setScoreMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(.+?)\s+(?:to|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+      const adjustScoreMatch = spokenCommand.match(/^(increase|raise|improve|decrease|lower|reduce)\s+(?:my\s+)?(.+?)(?:\s+by\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+)))?$/i)
+      const addToScoreMatch = spokenCommand.match(/^add\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))\s+to\s+(?:my\s+)?(.+)$/i)
+      if (setScoreMatch || adjustScoreMatch || addToScoreMatch) {
+        let score = setScoreMatch?.[1] || adjustScoreMatch?.[2] || addToScoreMatch?.[2]
+        let kind = 'score'
+        if (/defen[cs]e(?:\s+rating)?$/i.test(score)) { kind = 'defense'; score = 'defense' }
+        else if (/\s+skill$/i.test(score)) { kind = /attack/i.test(score) ? 'attack' : 'skill'; score = score.replace(/\s+skill$/i, '') }
+        else if (/\s+stat$/i.test(score)) { kind = 'stat'; score = score.replace(/\s+stat$/i, '') }
+        const amountText = setScoreMatch?.[2] || adjustScoreMatch?.[3] || addToScoreMatch?.[1] || 'one'
+        const amount = signedSpokenNumber(amountText)
+        if (amount == null) { respond(`I could not determine the new value in ${original}.`); return }
+        const operation = setScoreMatch ? 'set' : /^(?:decrease|lower|reduce)$/i.test(adjustScoreMatch?.[1] || '') ? 'subtract' : 'add'
+        const pending = { intent: 'change-score', kind, score, operation, amount: Math.abs(amount) }
+        if (operation === 'set') pending.amount = amount
+        const preview = characterCommand({ ...pending, intent: 'preview-score' })
+        if (/^Change /i.test(preview)) {
+          pendingActionRef.current = pending
+          setPendingAction(pending)
+          setResults([{ label: 'Confirm', detail: 'Apply this score change', action: 'confirm' }, { label: 'Cancel', detail: 'Leave the score unchanged', action: 'cancel' }])
+        }
+        respond(preview)
+        return
+      }
       const damageMatch = spokenCommand.match(/^(?:i\s+)?(?:(?:take|suffer|receive|lose|remove|subtract)(?:\s+me)?\s+|damage\s+me(?:\s+for)?\s+)(\d+|[a-z]+)(?:\s+(?:from\s+my\s+)?(?:damage|health|hp|hit\s*points?|dealth))?$/i)
       const healMatch = spokenCommand.match(/^(?:i\s+)?(?:heal|restore|add|gain|recover)(?:\s+me)?\s+(\d+|[a-z]+)(?:\s+(?:to\s+my\s+)?(?:health|hp|hit\s*points?))?$/i)
       const healthMatch = damageMatch || healMatch
@@ -224,9 +255,10 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'explain-talent', talent: explainTalentMatch[1] }))
         return
       }
-      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me)(?:\s+is)?\s+(?:my\s+)?(health|hp|ego|defense|resilience|energy|level|xp|experience(?:\s+points?)?)$/i)
-      if (readVitalMatch) {
-        const vital = /^experience/.test(normalize(readVitalMatch[1])) ? 'xp' : readVitalMatch[1]
+      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|xp|experience(?:\s+points?)?)$/i)
+      if (readVitalMatch || /^(?:how am i doing|what is my condition|status)$/i.test(spokenCommand)) {
+        const requestedVital = readVitalMatch?.[1] || 'status'
+        const vital = /^experience/.test(normalize(requestedVital)) ? 'xp' : requestedVital
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
