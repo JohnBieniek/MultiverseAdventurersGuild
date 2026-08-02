@@ -58,8 +58,12 @@ const characterMatchScore = (name, query) => {
   if (saved === requested) return 0
   if (saved.includes(requested) || requested.includes(saved)) return 1
   const distance = editDistance(saved, requested)
-  if (distance <= Math.max(1, Math.floor(Math.max(saved.length, requested.length) * .22))) return 2 + (distance / Math.max(saved.length, requested.length))
+  const savedWords = normalize(name).split(/[\s'-]+/).filter(Boolean)
+  const requestedWords = normalize(query).split(/[\s'-]+/).filter(Boolean)
+  if (savedWords.length === requestedWords.length && savedWords.every((word, index) => editDistance(word, requestedWords[index]) <= 1)) return 1.5
+  if (distance <= 2) return 2 + (distance / Math.max(saved.length, requested.length))
   if (phoneticName(name) === phoneticName(query)) return 2.5
+  if (distance <= 4 && distance / Math.max(saved.length, requested.length) <= .32) return 3 + (distance / Math.max(saved.length, requested.length))
   return Infinity
 }
 const savedCharacters = () => {
@@ -248,7 +252,7 @@ function CommandInterface() {
     ]
     const destination = directDestinations.find(([pattern]) => pattern.test(value))?.[1]
     if (destination) { completeNavigation(destination.path, `${destination.label} opened.`); return }
-    const characterMatch = original.match(/^(?:open|load|show)\s+(?:character\s+)?(.+?)(?:\s+character(?:\s+sheet)?)?$/i)
+    const characterMatch = spokenCommand.match(/^(?:please\s+)?(?:open(?:\s+up)?|load|show)\s+(?:the\s+)?(?:(?:character|hero)(?:\s+named)?\s+)?(.+?)(?:['’]s)?(?:\s+(?:character|hero)(?:\s+sheet)?)?$/i)
     if (characterMatch) {
       const matches = matchingCharacters(characterMatch[1])
       const bestScore = matches[0]?.score
