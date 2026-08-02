@@ -1,6 +1,6 @@
 Vehicle combat
 
-A vehicle can be defined in 2 ways: as a vehicle or as a drone. A vehicle has a driver. A drone is piloted remotely using the Control Proxy talent. A vehicle can function both ways.
+A vehicle can be defined in 2 ways: as a vehicle or as a drone. A vehicle has a Screamer. A drone is piloted remotely using the Control Proxy talent. A vehicle can function both ways.
 
 A drone costs 1500 credits. You choose the size at purchase.
 
@@ -58,11 +58,11 @@ Later: "Defense = 11 + level adjustment + (Armor * 2)" is (armor * 2) + 1 for me
 
 The players roll initiative based on the pilot. The pilot goes first and must pick from the following maneuvers:
 
-For every 25% of damage to the vehicle/drone, all rolls suffer a (+2) to TN and a (-2) to Defense. The driver/pilot also loses 25% of their current HP if they are utilizing the vehicle as a drone.
+For every 25% of damage to the vehicle/drone, all rolls suffer a (+2) to TN and a (-2) to Defense. The Screamer also loses 25% of their current HP if they are utilizing the vehicle as a drone.
 
 Attack
 
-Vehicles operate on the driver's initiative. The driver makes a modified TN 11 Vehicle roll. Each success increases the given effect. Vehicle gunners can use standard per-turn actions, but can't use a move action to move. The vehicle/drone has as many firearms as there are players in the combat. The vehicle/drone can have one permanent armament used by the pilot and subject to size restrictions.
+Vehicles operate on the Screamer's initiative. The Screamer makes a modified TN 11 Vehicle roll. Each success increases the given effect. Vehicle gunners can use standard per-turn actions, but can't use a move action to move. The vehicle/drone has as many firearms as there are players in the combat. The vehicle/drone can have one permanent armament used by the pilot and subject to size restrictions.
 
 Offense - (-2) to vehicle Defense and (+1)/success to the pool for attack or damage. For instance, with 3 successes, I might opt for (+2) attack and (+1) damage. All attacks by the occupants gain these bonuses. Max (+3 in total bonuses.)
 
