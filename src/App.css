@@ -1,10 +1,16 @@
 .app {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .main-content {
+  box-sizing: border-box;
+  min-width: 0;
   max-width: min(100%, 1200px);
   margin: 0 auto;
   width: 100%;

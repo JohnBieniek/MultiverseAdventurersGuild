@@ -907,9 +907,10 @@
 
   .guide-subnav {
     top: calc(var(--sticky-nav-offset) + var(--sticky-subnav-gap));
-    width: 100vw;
+    box-sizing: border-box;
+    width: 100%;
     max-height: 42vh;
-    margin-left: calc(50% - 50vw);
+    margin-left: 0;
     margin-bottom: 0;
     overflow-y: auto;
     padding-left: 0.4rem;
