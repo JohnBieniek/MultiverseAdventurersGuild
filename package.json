@@ -13,11 +13,11 @@
     "prepare": "node scripts/setup-git-hooks.mjs"
   },
   "dependencies": {
+    "@huggingface/transformers": "^3.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.7.0",
-    "react-router-dom": "^6.14.0",
-    "vosk-browser": "^0.0.8"
+    "react-router-dom": "^6.14.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.3",

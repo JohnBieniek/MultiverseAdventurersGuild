@@ -6,7 +6,7 @@ import './CommandInterface.css'
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const SPEECH_KEY = 'mag-command-spoken-responses-v1'
-const VOSK_MODEL_URL = 'https://ccoreilly.github.io/vosk-browser/models/vosk-model-small-en-us-0.15.tar.gz'
+const WHISPER_MODEL = 'onnx-community/whisper-base.en'
 
 const destinations = [
   { label: 'Home', path: '/', terms: 'home welcome guild start' },
@@ -129,7 +129,7 @@ function CommandInterface() {
   const stopLocalRecognition = ({ releaseModel = false } = {}) => {
     localProcessorRef.current?.disconnect()
     localSourceRef.current?.disconnect()
-    localRecognizerRef.current?.remove()
+    localRecognizerRef.current?.remove?.()
     localStreamRef.current?.getTracks().forEach(track => track.stop())
     localAudioContextRef.current?.close()
     localProcessorRef.current = null
@@ -139,7 +139,7 @@ function CommandInterface() {
     localAudioContextRef.current = null
     recognitionRunningRef.current = false
     if (releaseModel) {
-      localModelRef.current?.terminate()
+      localModelRef.current?.dispose?.()
       localModelRef.current = null
     }
   }
@@ -493,42 +493,78 @@ function CommandInterface() {
       keepListeningRef.current = true
       setListening(true)
       try {
-        setStatus(localModelRef.current ? 'Opening the microphone.' : 'Preparing free on-device voice recognition. The first download is about 41 MB and is cached by your browser.')
+        setStatus(localModelRef.current ? 'Opening the microphone.' : 'Loading high-accuracy Whisper recognition on this device. The first use downloads and caches the model.')
         if (!localModelRef.current) {
-          const { createModel } = await import('vosk-browser')
-          localModelRef.current = await createModel(VOSK_MODEL_URL, -1)
+          const { pipeline } = await import('@huggingface/transformers')
+          localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, {
+            device: navigator.gpu ? 'webgpu' : 'wasm',
+            dtype: 'q8',
+            progress_callback: progress => {
+              if (progress.status === 'progress' && progress.total) setStatus(`Loading Whisper on this device: ${Math.round((progress.loaded / progress.total) * 100)}%.`)
+            },
+          })
         }
         if (!keepListeningRef.current) return
         const AudioContextClass = window.AudioContext || window.webkitAudioContext
         const audioContext = new AudioContextClass({ sampleRate: 16000 })
         const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 } })
         if (!keepListeningRef.current) { stream.getTracks().forEach(track => track.stop()); await audioContext.close(); return }
-        const recognizer = new localModelRef.current.KaldiRecognizer(audioContext.sampleRate)
-        let transcript = ''
-        const queueCommand = text => {
-          if (!text || speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
-          transcript = [transcript, text].filter(Boolean).join(' ').trim()
-          setCommand(transcript)
-          setStatus(`Heard: “${transcript}” Waiting for you to finish.`)
-          window.clearTimeout(mobileCommandTimerRef.current)
-          mobileCommandTimerRef.current = window.setTimeout(() => {
-            const completedCommand = transcript
-            transcript = ''
-            if (completedCommand && !speechActiveRef.current) execute(completedCommand)
-          }, 2200)
-        }
-        recognizer.on('partialresult', message => {
-          const partial = message.result.partial?.trim()
-          if (partial && !speechActiveRef.current) setStatus(`Hearing: “${[transcript, partial].filter(Boolean).join(' ')}”`)
-        })
-        recognizer.on('result', message => queueCommand(message.result.text?.trim()))
         const source = audioContext.createMediaStreamSource(stream)
         const processor = audioContext.createScriptProcessor(4096, 1, 1)
         const silentOutput = audioContext.createGain()
         silentOutput.gain.value = 0
+        let utteranceChunks = []
+        let preRoll = []
+        let speechStartedAt = 0
+        let lastSpeechAt = 0
+        let transcriptionQueue = Promise.resolve()
+        const transcribe = chunks => {
+          if (!chunks.length) return
+          const length = chunks.reduce((total, chunk) => total + chunk.length, 0)
+          if (length < audioContext.sampleRate * .3) return
+          const audio = new Float32Array(length)
+          let offset = 0
+          chunks.forEach(chunk => { audio.set(chunk, offset); offset += chunk.length })
+          transcriptionQueue = transcriptionQueue.then(async () => {
+            if (!keepListeningRef.current) return
+            setStatus('Speech captured. Whisper is recognizing the words.')
+            const result = await localModelRef.current(audio, { language: 'en', task: 'transcribe' })
+            const transcript = String(result?.text || '').trim().replace(/^\[.*?\]\s*/, '')
+            if (!transcript || !keepListeningRef.current || speechActiveRef.current) {
+              if (keepListeningRef.current) setStatus('Listening continuously. Say the command again if it was not recognized.')
+              return
+            }
+            setCommand(transcript)
+            setStatus(`Processing: “${transcript}”`)
+            execute(transcript)
+          }).catch(() => {
+            if (keepListeningRef.current) setStatus('That sentence could not be recognized. Listening for another command.')
+          })
+        }
         processor.onaudioprocess = event => {
           if (!speechActiveRef.current && keepListeningRef.current) {
-            try { recognizer.acceptWaveform(event.inputBuffer) } catch { /* worker may be shutting down */ }
+            const chunk = new Float32Array(event.inputBuffer.getChannelData(0))
+            const rms = Math.sqrt(chunk.reduce((sum, sample) => sum + (sample * sample), 0) / chunk.length)
+            const now = performance.now()
+            preRoll.push(chunk)
+            if (preRoll.length > 4) preRoll.shift()
+            if (rms > .012) {
+              if (!speechStartedAt) {
+                speechStartedAt = now
+                utteranceChunks = [...preRoll]
+                setStatus('Speech detected. Keep talking.')
+              }
+              lastSpeechAt = now
+            }
+            if (speechStartedAt) utteranceChunks.push(chunk)
+            if ((speechStartedAt && now - lastSpeechAt > 1250) || (speechStartedAt && now - speechStartedAt > 20000)) {
+              const completed = utteranceChunks
+              utteranceChunks = []
+              preRoll = []
+              speechStartedAt = 0
+              lastSpeechAt = 0
+              transcribe(completed)
+            }
           }
         }
         source.connect(processor)
@@ -536,17 +572,17 @@ function CommandInterface() {
         silentOutput.connect(audioContext.destination)
         localAudioContextRef.current = audioContext
         localStreamRef.current = stream
-        localRecognizerRef.current = recognizer
+        localRecognizerRef.current = { remove: () => { utteranceChunks = []; preRoll = [] } }
         localSourceRef.current = source
         localProcessorRef.current = processor
         recognitionRunningRef.current = true
-        setStatus('Listening continuously on this device. Press Stop listening when you are done.')
+        setStatus('High-accuracy Whisper is listening continuously on this device. Press Stop listening when you are done.')
       } catch (error) {
         keepListeningRef.current = false
         recognitionRunningRef.current = false
         stopLocalRecognition()
         setListening(false)
-        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : 'Free on-device voice recognition could not start. Check your connection for the first model download, then try again. You can still type commands.')
+        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : 'High-accuracy on-device recognition could not start. Check your connection and available device storage for the first model download, then try again. You can still type commands.')
       }
       return
     }
