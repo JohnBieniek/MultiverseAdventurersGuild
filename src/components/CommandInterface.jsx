@@ -413,7 +413,7 @@ function CommandInterface() {
       return
     }
     const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
-    const mobileRecognition = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches
+    const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
     let announcedStart = false
     let retryDelay = 200
     let networkRetries = 0
@@ -453,6 +453,7 @@ function CommandInterface() {
           }, 3000)
           return
         }
+        setStatus(`Processing: “${transcript}”`)
         setCommand(transcript)
         execute(transcript)
       }
