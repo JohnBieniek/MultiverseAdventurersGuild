@@ -39,6 +39,18 @@ const startingStatArray = [3, 2, 1, 0, 0, -1]
 const startingSkillArray = [2, 2, 1, 1, 1, 0, 0, 0, -1]
 const defenseUpgradeCosts = { 2: 2, 3: 2, 4: 4, 5: 4, 6: 8, 7: 8 }
 const defenseXpSpent = rating => Object.entries(defenseUpgradeCosts).reduce((total, [score, cost]) => total + (number(rating) >= number(score) ? cost : 0), 0)
+const levelUpBenefits = {
+  1: { automatic: 'Gain 2 Talents. Your base HP becomes 16 and maximum Energy becomes 3.', choice: 'Choose one free Level benefit: +1 melee or ranged Attack modifier, +1 Defense, or 1 additional Talent.' },
+  2: { automatic: 'Unlock Force 2 Talents. Your base HP becomes 22 and maximum Energy becomes 6.' },
+  3: { automatic: 'Gain 1 Talent. Your base HP becomes 28 and maximum Energy becomes 9.' },
+  4: { automatic: 'Gain a second sustained Combat Talent Slot. Your base HP becomes 34 and maximum Energy becomes 12.', choice: 'Choose one free Level benefit: +1 melee or ranged Attack modifier, +1 Defense, or 1 additional Talent.' },
+  5: { automatic: 'Unlock Force 3 Talents and gain 1 Talent. Your base HP becomes 40 and maximum Energy becomes 15.' },
+  6: { automatic: 'Your base HP becomes 46 and maximum Energy becomes 18.', choice: 'Choose one free Level benefit: +1 melee or ranged Attack modifier, +1 Defense, or 1 additional Talent.' },
+  7: { automatic: 'Gain a third sustained Combat Talent Slot and 1 Talent. Your base HP becomes 52 and maximum Energy becomes 21.' },
+  8: { automatic: 'Your base HP becomes 58 and maximum Energy becomes 24.', choice: 'Choose one free Level benefit: +1 melee or ranged Attack modifier, +1 Defense, or 1 additional Talent.' },
+  9: { automatic: 'Unlock Force 4 Talents and gain 1 Talent. Your base HP becomes 64 and maximum Energy becomes 27.' },
+  10: { automatic: 'Your base HP becomes 70, maximum Energy becomes 30, and you reach the final Guild rank.' },
+}
 const weaponTypes = [
   ['Unarmed / Tiny Melee', 'melee', 4, 0], ['Light Melee', 'melee', 6, 0],
   ['Medium Melee', 'melee', 8, 0], ['Heavy Melee', 'melee', 10, -2],
@@ -1929,6 +1941,7 @@ function CharacterSheet() {
   const [pendingDelete, setPendingDelete] = useState(null)
   const [notice, setNotice] = useState('')
   const [showWelcome, setShowWelcome] = useState(false)
+  const [levelUp, setLevelUp] = useState(null)
   const fileRef = useRef(null)
   const totalXpEditValue = useRef(null)
   const totalXpLastValue = useRef(null)
@@ -2047,7 +2060,10 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
-  const setLevel = level => setCharacter(current => {
+  const setLevel = level => {
+    const nextLevel = Math.max(0, Math.min(10, number(level)))
+    if (nextLevel > number(character.level)) setLevelUp(nextLevel)
+    setCharacter(current => {
     const normalized = normalizeXpTracking(current)
     return {
       ...normalized,
@@ -2056,7 +2072,8 @@ function CharacterSheet() {
       unspentXp: normalized.totalXpManuallySet || normalized.unspentXpManuallySet ? normalized.unspentXp : xpForLevel(level),
       updatedAt: Date.now(),
     }
-  })
+    })
+  }
   const setTotalXp = totalXp => {
     const editStartingTotal = totalXpEditValue.current ?? number(character.totalXp)
     if (totalXp === '') {
@@ -2064,6 +2081,8 @@ function CharacterSheet() {
       return
     }
     const nextTotal = Math.max(0, number(totalXp))
+    const nextLevel = Math.max(number(character.level), levelForXp(nextTotal))
+    if (nextLevel > number(character.level)) setLevelUp(nextLevel)
     let unspentDifference
     if (totalXpArrowChange.current) {
       unspentDifference = nextTotal - (totalXpLastValue.current ?? editStartingTotal)
@@ -2388,6 +2407,7 @@ function CharacterSheet() {
     <div className="sheet-columns lower"><EditableTable title="Contacts" icon="♟" subtitle={`You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`} rows={character.contacts} add={() => addRow('contacts',{name:'',role:''})} columns={['Name','Relationship / Role','']}>{(row,i)=><><label className="contact-field"><span>Name</span><input aria-label="Contact name" placeholder="Contact name" value={row.name} onChange={e=>update(['contacts',i,'name'],e.target.value)}/></label><label className="contact-field"><span>Role</span><ContactRoleChoice value={row.role} onChange={value=>setContactRole(i,value)}/></label><button className="icon-button" onClick={()=>deleteRow('contacts',row.id)}>×</button></>}</EditableTable><section className="sheet-section notes"><SectionTitle icon="✎" title="Session Notes"/><textarea value={character.notes} onChange={e=>update(['notes'],e.target.value)} placeholder="Conditions, mission clues, inventory, reminders…"/></section></div>
     {notice && <div className="toast">{notice}</div>}
     {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
+    {levelUp && <LevelUpModal level={levelUp} close={() => setLevelUp(null)}/>}
     {roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>}
     {showArchetypeQuiz && (
       <ArchetypeQuizModal close={() => setShowArchetypeQuiz(false)} complete={name => { setShowArchetypeQuiz(false); setPendingArchetype(name) }}/>
@@ -2454,6 +2474,15 @@ function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
+function LevelUpModal({ level, close }) {
+  const benefits = levelUpBenefits[level] || { automatic: 'Your Level has increased.' }
+  useEffect(() => {
+    const dismiss = event => { if (event.key === 'Escape') close() }
+    window.addEventListener('keydown', dismiss)
+    return () => window.removeEventListener('keydown', dismiss)
+  }, [close])
+  return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt level-up-modal" role="dialog" aria-modal="true" aria-labelledby="level-up-title"><button type="button" className="modal-close" aria-label="Close level up guide" autoFocus onClick={close}>×</button><span className="eyebrow">LEVEL UP</span><h2 id="level-up-title">You reached Level {level}!</h2><div className="level-up-grid"><section><h3>Automatically gained</h3><p>{benefits.automatic}</p>{benefits.choice && <div className="level-up-choice"><strong>Make your Level choice</strong><p>{benefits.choice}</p></div>}<p>Your maximum HP updates automatically and includes your Endurance bonus. Add or choose any granted Talents on the sheet. You may also switch your Talents whenever you reach a new Level.</p></section><section><h3>Spend Unspent XP</h3><ul><li><strong>Stats, Skills, and each Attack modifier:</strong> +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP. Buy each step separately.</li><li><strong>Defense ratings +2 through +7:</strong> 2, 2, 4, 4, 8, and 8 XP respectively.</li><li><strong>Talent:</strong> 5 XP each, within your unlocked Force Level.</li><li><strong>Energy:</strong> 2 XP per additional point.</li></ul><p>Subtract purchases from Unspent XP, not Total XP. Total XP determines your Level and never decreases.</p></section></div><div className="level-up-actions"><a href="/rules#level-progression-force-energy-and-talents">Read the full Level rules</a><button type="button" className="primary" onClick={close}>Update My Hero</button></div></div></div>, document.body)
+}
 function CharacterSheetWelcome({ close }) {
   useEffect(() => {
     const dismiss = event => { if (event.key === 'Escape') close() }
