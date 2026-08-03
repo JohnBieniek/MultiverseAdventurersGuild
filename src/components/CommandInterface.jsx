@@ -92,6 +92,7 @@ function CommandInterface() {
   const lastResponseRef = useRef('')
   const speechActiveRef = useRef(false)
   const speechGenerationRef = useRef(0)
+  const speechUtteranceRef = useRef(null)
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
@@ -106,7 +107,7 @@ function CommandInterface() {
   const [status, setStatus] = useState('')
   const [results, setResults] = useState([])
   const [listening, setListening] = useState(false)
-  const [spoken, setSpoken] = useState(() => localStorage.getItem(SPEECH_KEY) === 'true')
+  const [spoken, setSpoken] = useState(() => localStorage.getItem(SPEECH_KEY) !== 'false')
   const localRecognitionSupported = typeof window !== 'undefined' && Boolean(navigator.mediaDevices?.getUserMedia && (window.AudioContext || window.webkitAudioContext) && window.WebAssembly)
   const recognitionSupported = localRecognitionSupported || (typeof window !== 'undefined' && Boolean(window.SpeechRecognition || window.webkitSpeechRecognition))
   const onCharacterSheet = location.pathname === '/character-sheet'
@@ -155,8 +156,12 @@ function CommandInterface() {
     if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(message)
+    const voices = window.speechSynthesis.getVoices()
+    utterance.voice = voices.find(voice => voice.lang === 'en-US' && voice.default) || voices.find(voice => voice.lang?.toLowerCase().startsWith('en')) || null
+    speechUtteranceRef.current = utterance
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
+      speechUtteranceRef.current = null
       speechActiveRef.current = false
       ignoreSpeechUntilRef.current = Date.now() + 900
       if (keepListeningRef.current && localAudioContext?.state === 'suspended') {
@@ -166,6 +171,7 @@ function CommandInterface() {
     }
     utterance.onend = finished
     utterance.onerror = finished
+    window.speechSynthesis.resume()
     window.speechSynthesis.speak(utterance)
   }
   const respond = message => {
