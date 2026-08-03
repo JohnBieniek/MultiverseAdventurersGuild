@@ -2131,6 +2131,21 @@ function CharacterSheet() {
         return true
       })
     }
+    const approximateSubstringDistance = (candidateValue, queryValue) => {
+      const candidate = commandKey(candidateValue)
+      const query = commandKey(queryValue)
+      if (query.length < 4 || !candidate) return Infinity
+      let closest = commandDistance(candidate, query)
+      const minimumLength = Math.max(2, query.length - 2)
+      const maximumLength = Math.min(candidate.length, query.length + 2)
+      for (let length = minimumLength; length <= maximumLength; length += 1) {
+        for (let start = 0; start + length <= candidate.length; start += 1) {
+          closest = Math.min(closest, commandDistance(candidate.slice(start, start + length), query))
+          if (closest === 0) return 0
+        }
+      }
+      return closest
+    }
     const findWeapons = query => {
       const key = commandKey(query)
       if (!key) return []
@@ -2145,9 +2160,13 @@ function CharacterSheet() {
         else if (type.includes(key) || key.includes(type)) score = 3 + (Math.abs(type.length - key.length) / Math.max(type.length, key.length, 1))
         else if (orderedWordSubset(weapon.type, query)) score = 3.75
         else {
-          const distance = commandDistance(weapon.name, query)
-          const length = Math.max(name.length, key.length, 1)
-          if (distance <= Math.max(2, Math.ceil(length * .25)) && distance / length <= .3) score = 4 + (distance / length)
+          const substringDistance = approximateSubstringDistance(weapon.name, query)
+          if (substringDistance <= Math.max(1, Math.ceil(key.length * .25))) score = 3.8 + (substringDistance / Math.max(key.length, 1))
+          else {
+            const distance = commandDistance(weapon.name, query)
+            const length = Math.max(name.length, key.length, 1)
+            if (distance <= Math.max(2, Math.ceil(length * .25)) && distance / length <= .3) score = 4 + (distance / length)
+          }
         }
         return { weapon, score }
       }).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
