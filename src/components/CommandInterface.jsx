@@ -495,7 +495,10 @@ function CommandInterface() {
       return
     }
     const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
-    if (mobileRecognition && localRecognitionSupported) {
+    let braveBrowser = false
+    try { braveBrowser = Boolean(await navigator.brave?.isBrave?.()) } catch { braveBrowser = false }
+    const useLocalRecognition = mobileRecognition || braveBrowser
+    if (useLocalRecognition && localRecognitionSupported) {
       keepListeningRef.current = true
       setListening(true)
       try {
@@ -512,7 +515,7 @@ function CommandInterface() {
               localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'webgpu', dtype: 'q4', progress_callback })
             } catch (webgpuError) {
               console.warn('Whisper WebGPU initialization failed; retrying with WASM.', webgpuError)
-              setStatus('This phone could not initialize Whisper with its GPU. Retrying locally with the compatible processor mode.')
+              setStatus('This device could not initialize Whisper with its GPU. Retrying locally with the compatible processor mode.')
             }
           }
           if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback })
@@ -597,7 +600,7 @@ function CommandInterface() {
         stopLocalRecognition()
         setListening(false)
         const detail = String(error?.message || '').toLowerCase()
-        const reason = /quota|storage|space|memory|allocation/.test(detail) ? 'The phone may not have enough available storage or memory for the model.' : /fetch|network|load|download|http/.test(detail) ? 'The model download failed or was blocked.' : 'The browser could not initialize either its GPU or compatible processor recognition mode.'
+        const reason = /quota|storage|space|memory|allocation/.test(detail) ? 'The device may not have enough available storage or memory for the model.' : /fetch|network|load|download|http/.test(detail) ? 'The model download failed or was blocked.' : 'The browser could not initialize either its GPU or compatible processor recognition mode.'
         respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : `High-accuracy on-device recognition could not start. ${reason} You can still type commands.`)
       }
       return
