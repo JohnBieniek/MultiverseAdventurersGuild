@@ -8,6 +8,8 @@ You roll the BR against TN. You can modify the BR by activating Talents.
 
 TN is situational. This game is a d20 system. The score can be a (-4) to (+4) modifier in each category. These numbers interact to create a + or - to the d20 roll to a base target number (TN) that you have to tie or beat. The GM assigns the TN, but it starts at 11.
 
+For example, Rolph, the Giant Pirate, wants to sneak past the guards. The guards are not paying attention. The GM assigns a TN12. Rolph rolls a 14 and successfully avoids the guards attention.
+
 Default TN ladder: 9 Easy - 11 Standard - 13 Tricky - 15 Hard - 17 Heroic - 19 Legendary.
 
 The average TN depends on the tier the players are in. Tier 1 = 11, Tier 2 = 13, Tier 3 = 17.
@@ -21,8 +23,6 @@ Game Concepts
 So what happens with an astounding success or failure known as crits? One is always a critical failure. The GM adjudicates the outcome. Some of the most exciting sessions I have been involved in resulted from a critical failure. This may result in a minor incident or issue. For instance, in play, a Hero made an Observation check and rolled a "1". This resulted in failing to see a particularly dangerous adversary.
 
 Critical success happens on a natural 20. If it is in combat, the Hero deals maximum damage and is granted a free attack. NPCs can't have critical success in combat. A natural 20 is always a critical success. A natural one is still a critical miss. Out of combat, a critical miss would be a catastrophic failure. For instance, instead of sneaking quietly, you make a ton of noise. A crit on a skill check should result in a better-than-expected outcome.
-
-TN is either simple or complex. A simple roll is binary: rolling the TN or higher succeeds, and rolling below the TN fails. For clarity, write this as "TN 14" instead of the shorthand "14S." A TN 14 complex roll may be listed as "TN 14 complex" or "14C." A complex roll adds successes for every 2 beyond the TN. Use a simple roll if you only want to note success or failure. A complex test answers the question of how well the Hero succeeded.
 
 The last type of check is an opposed roll. The Hero and target roll using the relevant skill. The highest number wins.
 
