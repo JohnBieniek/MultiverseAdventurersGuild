@@ -516,7 +516,7 @@ function CommandInterface() {
           }
           let webgpuAvailable = false
           try { webgpuAvailable = Boolean(await navigator.gpu?.requestAdapter()) } catch { webgpuAvailable = false }
-          if (webgpuAvailable) {
+          if (webgpuAvailable && !braveBrowser) {
             try {
               localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'webgpu', dtype: 'q4', progress_callback })
             } catch (webgpuError) {
@@ -550,7 +550,7 @@ function CommandInterface() {
           transcriptionQueue = transcriptionQueue.then(async () => {
             if (!keepListeningRef.current) return
             setStatus('Speech captured. Whisper is recognizing the words.')
-            const result = await localModelRef.current(audio, { language: 'en', task: 'transcribe' })
+            const result = await localModelRef.current(audio)
             const transcript = String(result?.text || '').trim().replace(/^\[.*?\]\s*/, '')
             if (!transcript || !keepListeningRef.current || speechActiveRef.current) {
               if (keepListeningRef.current) setStatus('Listening continuously. Say the command again if it was not recognized.')
@@ -559,7 +559,8 @@ function CommandInterface() {
             setCommand(transcript)
             setStatus(`Processing: “${transcript}”`)
             execute(transcript)
-          }).catch(() => {
+          }).catch(error => {
+            console.error('Whisper could not transcribe the captured sentence.', error)
             if (keepListeningRef.current) setStatus('That sentence could not be recognized. Listening for another command.')
           })
         }
