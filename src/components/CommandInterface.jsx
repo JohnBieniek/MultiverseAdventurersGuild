@@ -221,7 +221,7 @@ function CommandInterface() {
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
-    const spokenCommand = original.replace(/[?.!,]+$/, '')
+    const spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll')
     const value = normalize(original)
     setCommand(original)
     setResults([])
