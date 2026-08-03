@@ -272,7 +272,7 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(name|species|archetype)\s+(?:(?:to|two|as)\s+)?(.+)$/i)
+      const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:(?:my|mine|me|the)\s+)?(?:(?:character|hero)(?:['’]?s)?\s+)?(name|species|archetype)\s+(?:(?:to|two|too|as|is|should\s+be)\s+)?(.+)$/i)
         || spokenCommand.match(/^(?:my\s+)?(name|species|archetype)\s+(?:is|should be)\s+(.+)$/i)
       if (setIdentityMatch) {
         const pending = { intent: 'change-identity', field: normalize(setIdentityMatch[1]), value: setIdentityMatch[2].trim() }
