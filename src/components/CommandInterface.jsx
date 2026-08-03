@@ -506,8 +506,13 @@ function CommandInterface() {
         if (!localModelRef.current) {
           const { pipeline, env } = await import('@huggingface/transformers')
           if (!import.meta.env.DEV) env.remoteHost = `${window.location.origin}/model-proxy/`
+          const downloadedByFile = new Map()
+          let displayedBytes = 0
           const progress_callback = progress => {
-            if (progress.status === 'progress' && progress.total) setStatus(`Loading Whisper on this device: ${Math.round((progress.loaded / progress.total) * 100)}%.`)
+            if (progress.status !== 'progress' || !progress.file) return
+            downloadedByFile.set(progress.file, Math.max(downloadedByFile.get(progress.file) || 0, Number(progress.loaded) || 0))
+            displayedBytes = Math.max(displayedBytes, [...downloadedByFile.values()].reduce((total, loaded) => total + loaded, 0))
+            setStatus(`Loading Whisper on this device: ${(displayedBytes / 1048576).toFixed(1)} MB downloaded.`)
           }
           let webgpuAvailable = false
           try { webgpuAvailable = Boolean(await navigator.gpu?.requestAdapter()) } catch { webgpuAvailable = false }
