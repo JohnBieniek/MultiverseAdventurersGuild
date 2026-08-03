@@ -506,27 +506,31 @@ function CommandInterface() {
         if (!localModelRef.current) {
           const { pipeline, env } = await import('@huggingface/transformers')
           if (!import.meta.env.DEV) env.remoteHost = `${window.location.origin}/model-proxy/`
-          const downloadedByFile = new Map()
-          let displayedBytes = 0
-          const progress_callback = progress => {
-            if (progress.status !== 'progress' || !progress.file) return
-            downloadedByFile.set(progress.file, Math.max(downloadedByFile.get(progress.file) || 0, Number(progress.loaded) || 0))
-            displayedBytes = Math.max(displayedBytes, [...downloadedByFile.values()].reduce((total, loaded) => total + loaded, 0))
-            setStatus(`Loading Whisper on this device: ${(displayedBytes / 1048576).toFixed(1)} MB downloaded.`)
+          const modelProgress = expectedMegabytes => {
+            const downloadedByFile = new Map()
+            let displayedPercent = 0
+            return progress => {
+              if (progress.status !== 'progress' || !progress.file) return
+              downloadedByFile.set(progress.file, Math.max(downloadedByFile.get(progress.file) || 0, Number(progress.loaded) || 0))
+              const downloadedBytes = [...downloadedByFile.values()].reduce((total, loaded) => total + loaded, 0)
+              displayedPercent = Math.max(displayedPercent, Math.min(99, Math.floor((downloadedBytes / (expectedMegabytes * 1048576)) * 100)))
+              setStatus(`Loading Whisper on this device: ${displayedPercent}%.`)
+            }
           }
           let webgpuAvailable = false
           try { webgpuAvailable = Boolean(await navigator.gpu?.requestAdapter()) } catch { webgpuAvailable = false }
           if (webgpuAvailable && !braveBrowser) {
             try {
-              localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'webgpu', dtype: 'q4', progress_callback })
+              localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'webgpu', dtype: 'q4', progress_callback: modelProgress(145) })
             } catch (webgpuError) {
               console.warn('Whisper WebGPU initialization failed; retrying with WASM.', webgpuError)
               setStatus('This device could not initialize Whisper with its GPU. Retrying locally with the compatible processor mode.')
             }
           }
-          if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback })
+          if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback: modelProgress(80) })
         }
         if (!keepListeningRef.current) return
+        setStatus('Loading Whisper on this device: 100%. Opening the microphone.')
         const AudioContextClass = window.AudioContext || window.webkitAudioContext
         const audioContext = new AudioContextClass({ sampleRate: 16000 })
         const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 } })
