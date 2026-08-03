@@ -504,7 +504,8 @@ function CommandInterface() {
       try {
         setStatus(localModelRef.current ? 'Opening the microphone.' : 'Loading high-accuracy Whisper recognition on this device. The first use downloads and caches the model.')
         if (!localModelRef.current) {
-          const { pipeline } = await import('@huggingface/transformers')
+          const { pipeline, env } = await import('@huggingface/transformers')
+          if (!import.meta.env.DEV) env.remoteHost = `${window.location.origin}/model-proxy/`
           const progress_callback = progress => {
             if (progress.status === 'progress' && progress.total) setStatus(`Loading Whisper on this device: ${Math.round((progress.loaded / progress.total) * 100)}%.`)
           }
