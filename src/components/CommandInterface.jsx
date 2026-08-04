@@ -281,21 +281,29 @@ function CommandInterface() {
       ignoreSpeechUntilRef.current = Date.now() + 900
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
-    const speakChunk = index => {
-      if (speechGenerationRef.current !== generation) return
-      if (index >= chunks.length) { finished(); return }
+    const queuedChunks = new Set()
+    const queueChunk = index => {
+      if (speechGenerationRef.current !== generation || index >= chunks.length || queuedChunks.has(index)) return
+      queuedChunks.add(index)
       const utterance = new SpeechSynthesisUtterance(chunks[index])
       utterance.voice = voice
-      speechUtteranceRef.current = utterance
-      utterance.onend = () => window.setTimeout(() => speakChunk(index + 1), 35)
+      utterance.onstart = () => {
+        speechUtteranceRef.current = utterance
+        queueChunk(index + 1)
+      }
+      utterance.onend = () => {
+        if (index === chunks.length - 1) finished()
+        else queueChunk(index + 1)
+      }
       utterance.onerror = event => {
         if (event.error === 'canceled' || event.error === 'interrupted') { finished(); return }
-        window.setTimeout(() => speakChunk(index + 1), 35)
+        if (index === chunks.length - 1) finished()
+        else queueChunk(index + 1)
       }
       window.speechSynthesis.resume()
       window.speechSynthesis.speak(utterance)
     }
-    speakChunk(0)
+    queueChunk(0)
   }
   const waitForSpeech = (timeout = 10000) => new Promise(resolve => {
     const startedAt = Date.now()
