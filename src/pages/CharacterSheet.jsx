@@ -1613,12 +1613,18 @@ const populateArchetypeItems = (existingItems, archetypeName, scoreValues, speci
   const selectedItems = []
   const coveredScores = new Set()
   const selectedNames = new Set()
-  shuffled(candidates).forEach(candidate => {
+  const randomizedCandidates = shuffled(candidates)
+  randomizedCandidates.forEach(candidate => {
     const coverage = itemScoreCoverage(candidate)
     if (selectedItems.length >= 3 || selectedNames.has(candidate[0]) || (coverage && coveredScores.has(coverage))) return
     selectedItems.push(candidate)
     selectedNames.add(candidate[0])
     if (coverage) coveredScores.add(coverage)
+  })
+  randomizedCandidates.forEach(candidate => {
+    if (selectedItems.length >= 3 || selectedNames.has(candidate[0])) return
+    selectedItems.push(candidate)
+    selectedNames.add(candidate[0])
   })
   selectedItems.forEach(([name, description]) => {
     const item = { id: crypto.randomUUID(), name, description, source: 'archetype-item' }
@@ -1981,6 +1987,7 @@ function CharacterSheet() {
       setDeathwatch(null)
       setShowWelcome(false)
       setCharacter(hero)
+      if (requestedArchetype && archetypeOptions.some(option => option.name === hero.archetype)) applyArchetype(hero.archetype)
     }
     window.addEventListener('mag-create-character', createCommandHero)
     createCommandHero()
