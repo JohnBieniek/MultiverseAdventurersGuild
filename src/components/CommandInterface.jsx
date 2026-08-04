@@ -180,6 +180,17 @@ const playListeningTone = async kind => {
     })
   } catch { /* Audio cues are optional when a browser blocks synthesized audio. */ }
 }
+const speechSegments = message => {
+  const limit = 2800
+  const blocks = String(message || '').replace(/\r/g, '').split(/\n+/).map(block => block.replace(/\s+/g, ' ').trim()).filter(Boolean)
+  const units = blocks.flatMap(block => block.length <= limit ? [block] : (block.match(/[^.!?]+(?:[.!?]+|$)/g) || [block]).map(sentence => sentence.trim()).filter(Boolean))
+  return units.reduce((segments, unit) => {
+    const current = segments.at(-1) || ''
+    if (!current || `${current} ${unit}`.length > limit) segments.push(unit)
+    else segments[segments.length - 1] = `${current} ${unit}`
+    return segments
+  }, [])
+}
 function CommandInterface() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -260,7 +271,7 @@ function CommandInterface() {
     window.speechSynthesis.cancel()
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find(candidate => candidate.lang === 'en-US' && candidate.default) || voices.find(candidate => candidate.lang?.toLowerCase().startsWith('en')) || null
-    const continuousText = String(message || '').replace(/\s+/g, ' ').trim()
+    const segments = speechSegments(message)
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
       speechUtteranceRef.current = null
@@ -269,14 +280,28 @@ function CommandInterface() {
       ignoreSpeechUntilRef.current = Date.now() + 900
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
-    const continuousUtterance = new SpeechSynthesisUtterance(continuousText)
-    continuousUtterance.voice = voice
-    continuousUtterance.onstart = () => { speechUtteranceRef.current = continuousUtterance }
-    continuousUtterance.onend = finished
-    continuousUtterance.onerror = finished
-    speechUtteranceRef.current = continuousUtterance
+    const queuedSegments = new Set()
+    const queueSegment = index => {
+      if (speechGenerationRef.current !== generation || index >= segments.length || queuedSegments.has(index)) return
+      queuedSegments.add(index)
+      const utterance = new SpeechSynthesisUtterance(segments[index])
+      utterance.voice = voice
+      utterance.onstart = () => {
+        speechUtteranceRef.current = utterance
+        queueSegment(index + 1)
+      }
+      utterance.onend = () => {
+        if (index === segments.length - 1) finished()
+        else queueSegment(index + 1)
+      }
+      utterance.onerror = event => {
+        if (event.error === 'canceled' || event.error === 'interrupted' || index === segments.length - 1) { finished(); return }
+        queueSegment(index + 1)
+      }
+      window.speechSynthesis.speak(utterance)
+    }
     window.speechSynthesis.resume()
-    window.speechSynthesis.speak(continuousUtterance)
+    queueSegment(0)
   }
   const waitForSpeech = (timeout = 10000) => new Promise(resolve => {
     const startedAt = Date.now()
@@ -354,16 +379,16 @@ function CommandInterface() {
         window.setTimeout(() => readWhenReady(attempt + 1), 100)
         return
       }
-      let targetText = target?.innerText?.replace(/\s+/g, ' ').trim() || ''
+      let targetText = target?.innerText?.trim() || ''
       if (target?.matches('h2, h3, h4')) {
         const parts = [targetText]
         let sibling = target.nextElementSibling
         while (sibling && !sibling.matches('h2, h3, h4')) {
-          const siblingText = sibling.innerText?.replace(/\s+/g, ' ').trim()
+          const siblingText = sibling.innerText?.trim()
           if (siblingText) parts.push(siblingText)
           sibling = sibling.nextElementSibling
         }
-        targetText = parts.join('. ')
+        targetText = parts.join('\n\n')
       }
       const text = topic.overview || targetText || `${topic.title} opened, but its text could not be read.`
       target?.scrollIntoView({ block: 'start' })
