@@ -14,27 +14,19 @@ Taking Damage
 
 When an attack hits, subtract the damage from your current HP. Temporary HP is lost first. Normal healing cannot restore temporary HP unless a Talent specifically says it can.
 
-At 0 HP
+Hero Death
 
-A Hero at 0 HP can only take a move action. They are still conscious enough to crawl, stagger, speak, or try to get out of danger, but they cannot fight normally.
+Deathwatch: the clock is ticking.
 
-Below 0 HP
+A Hero with "0" HP can only take a move action. When a Hero drops below "0" HP, they are dying.
 
-After a Hero drops below 0 HP, no matter how far below, set them to -1 HP. They begin bleeding out.
+At the end of each turn, the Hero makes an Endurance TN11 roll. Each time the Hero fails the roll, the clock increases by 1. The clock stops when the Hero makes the roll or a teammate provides first aid.
 
-Bleeding Out
-
-At the start of each of their turns, a bleeding Hero loses 1 HP. At -5 HP, the Hero dies.
-
-Stabilizing
-
-Each turn, the Hero rolls to stabilize using Endurance as the modifier. The TN is 11. On a success, the Hero stops bleeding out.
-
-A Hero can spend a Credit to automatically stabilize.
+Now roll a d6. If the roll is less than the clock, the Hero dies; otherwise, the Hero stabilizes.
 
 Healing
 
-Healing in combat takes a move action and automatically stabilizes a Hero below 0 HP.
+Healing in combat takes a move action. First aid stops a dying Hero's Deathwatch clock.
 
 Outside combat, healing restores the maximum amount, but it takes 1 minute to complete.
 

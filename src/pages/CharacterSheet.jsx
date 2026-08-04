@@ -1949,6 +1949,7 @@ function CharacterSheet() {
   const [notice, setNotice] = useState('')
   const [showWelcome, setShowWelcome] = useState(false)
   const [levelUp, setLevelUp] = useState(null)
+  const [deathwatch, setDeathwatch] = useState(null)
   const fileRef = useRef(null)
   const totalXpEditValue = useRef(null)
   const totalXpLastValue = useRef(null)
@@ -2391,10 +2392,10 @@ function CharacterSheet() {
       if (request.intent === 'preview-health' || request.intent === 'change-health') {
         const requestedAmount = Math.max(0, number(request.amount))
         const amount = requestedAmount * (request.operation === 'subtract' ? -1 : 1)
-        const next = Math.max(0, Math.min(computed.maxHp, request.operation === 'set' ? requestedAmount : number(character.currentHp) + amount))
+        const next = Math.max(-1, Math.min(computed.maxHp, request.operation === 'set' ? requestedAmount : number(character.currentHp) + amount))
         if (request.intent === 'preview-health') reply(`${request.operation === 'subtract' ? 'Apply' : 'Restore'} ${Math.abs(amount)} HP to ${character.name}? Current health ${character.currentHp}. New health ${next}.`)
         else {
-          setCharacter(current => ({ ...current, currentHp: next, updatedAt: Date.now() }))
+          changeCurrentHp(next)
           reply(`${request.operation === 'set' ? `Health set to ${next}` : request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
         }
         return
@@ -2543,6 +2544,13 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
+  const changeCurrentHp = value => {
+    const nextHp = Math.max(-1, Math.min(number(computed.maxHp), number(value)))
+    if (number(character.currentHp) >= 0 && nextHp === -1) {
+      setDeathwatch({ clock: 0, phase: 'endurance', checks: [], stopReason: '', deathRoll: null, outcome: '' })
+    }
+    setCharacter(current => ({ ...current, currentHp: nextHp, updatedAt: Date.now() }))
+  }
   const setLevel = level => {
     const nextLevel = Math.max(0, Math.min(10, number(level)))
     if (nextLevel > number(character.level)) setLevelUp(nextLevel)
@@ -2847,7 +2855,7 @@ function CharacterSheet() {
     </div></header>
 
     <section className="sheet-section vitals"><SectionTitle icon="⚔" title="Combat Summary" subtitle="Move 30 feet each turn. One reaction per round."/><div className="vital-grid">
-      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><HpVital value={character.currentHp} max={computed.maxHp} onChange={v => update(['currentHp'], v)}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
+      <Vital label="Initiative" value={signed(computed.initiative)} roll={() => checkRoll('Initiative', computed.initiative)}/><HpVital value={character.currentHp} max={computed.maxHp} onChange={changeCurrentHp}/><DefenseVital value={computed.defense} bonus={character.defenseBonus} rating={character.defenseRating} onBonus={value => update(['defenseBonus'], value)} onRating={value => update(['defenseRating'], value)}/><Vital label="Resilience" value={signed(computed.resilience)} roll={() => checkRoll('Resilience', computed.resilience)}/><Vital label="Ego" value={signed(computed.ego)} roll={() => checkRoll('Ego', computed.ego)}/><Vital label="Energy" editable value={character.currentEnergy} max={computed.maxEnergy} onChange={v => update(['currentEnergy'], v)}/><Vital label="Max Force" value={computed.maxForce}/></div>
     </section>
 
     <div className="sheet-columns"><section className="sheet-section"><SectionTitle icon="▥" title="Stats" subtitle="Starting array: +3, +2, +1, 0, 0, −1. Each choice can only be used once, except 0 twice."/><div className="stat-list">{stats.map(([key, label, short, Icon, description]) => <div className="stat-row" key={key}><div className="stat-name"><Icon/><strong><a className="sheet-reference-link" href={`/players#stat-${key}`}>{label} <span>({short})</span></a></strong><InfoTooltip label={label} description={description}/></div><SkillScoreControl label={`${label} score`} value={character.stats[key]} options={[-1, 0, 1, 2, 3]} isOptionDisabled={option => statOptionUnavailable(key, option)} onChange={v => update(['stats', key], v)}/><button className="roll-button" onClick={() => checkRoll(label, character.stats[key])}>Roll</button></div>)}</div></section>
@@ -2892,6 +2900,7 @@ function CharacterSheet() {
     {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
     {levelUp && <LevelUpModal level={levelUp} close={() => setLevelUp(null)}/>}
     {roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>}
+    {deathwatch && <DeathwatchModal heroName={character.name || 'The Hero'} endurance={character.stats.endurance} state={deathwatch} setState={setDeathwatch} close={() => setDeathwatch(null)}/>}
     {showArchetypeQuiz && (
       <ArchetypeQuizModal close={() => setShowArchetypeQuiz(false)} complete={name => { setShowArchetypeQuiz(false); setPendingArchetype(name) }}/>
     )}
@@ -2946,7 +2955,7 @@ function SectionTitle({ title, subtitle }) {
 function Vital({ label, value, max, editable, onChange, roll, children }) { const Icon = vitalIcons[label]; return <div className="vital"><div className="vital-heading">{Icon && <Icon className="vital-icon"/>}<a className="vital-rule-link" href={vitalRuleLinks[label]}>{label}</a></div>{editable && max !== undefined ? <div className="vital-combined"><input aria-label={`${label} current`} type="number" value={value} onChange={e=>onChange(e.target.value)}/><span>/</span><strong aria-label={`${label} maximum`}>{max}</strong></div> : editable ? <input type="number" value={value} onChange={e=>onChange(e.target.value)}/> : roll ? <div className="vital-roll-value"><strong>{value}</strong><button className="roll-button" onClick={roll}>Roll</button></div> : <strong>{value}</strong>}{children}</div> }
 function HpVital({ value, max, onChange }) {
   const [amount, setAmount] = useState(0)
-  const apply = () => onChange(Math.max(0, Math.min(number(max), number(value) + number(amount))))
+  const apply = () => onChange(Math.max(-1, Math.min(number(max), number(value) + number(amount))))
   return <div className="vital hp-vital"><div className="vital-heading"><FaHeartbeat className="vital-icon"/><a className="vital-rule-link" href={vitalRuleLinks.HP}>HP</a></div><div className="vital-combined"><input aria-label="HP current" type="number" value={value} onChange={event => onChange(event.target.value)}/><span>/</span><strong aria-label="HP maximum">{max}</strong></div><div className="hp-adjuster" aria-label="Adjust HP"><button type="button" className="hp-step" aria-label="Decrease HP adjustment" onClick={() => setAmount(current => number(current) - 1)}>−</button><input aria-label="HP adjustment amount" type="number" value={amount} onChange={event => setAmount(event.target.value)}/><button type="button" className="hp-step" aria-label="Increase HP adjustment" onClick={() => setAmount(current => number(current) + 1)}>+</button><button type="button" className="hp-apply" onClick={apply}>Apply</button></div></div>
 }
 function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
@@ -2957,6 +2966,22 @@ function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
+function DeathwatchModal({ heroName, endurance, state, setState, close }) {
+  const rollEndurance = () => {
+    const natural = rollDie(20)
+    const modifier = number(endurance)
+    const total = natural + modifier
+    const success = natural === 20 || (natural !== 1 && total >= 11)
+    setState(current => ({ ...current, clock: success ? current.clock : current.clock + 1, phase: success ? 'death-roll' : 'endurance', stopReason: success ? 'Endurance check succeeded.' : '', checks: [...current.checks, { natural, modifier, total, success }] }))
+  }
+  const firstAid = () => setState(current => ({ ...current, phase: 'death-roll', stopReason: 'A teammate provided first aid.' }))
+  const resolveDeathwatch = () => {
+    const deathRoll = rollDie(6)
+    setState(current => ({ ...current, phase: 'resolved', deathRoll, outcome: deathRoll < current.clock ? 'dead' : 'stable' }))
+  }
+  const latestCheck = state.checks.at(-1)
+  return createPortal(<div className="modal-backdrop"><div className={`archetype-prompt deathwatch-modal ${state.outcome || ''}`} role="alertdialog" aria-modal="true" aria-labelledby="deathwatch-title" aria-describedby="deathwatch-description"><span className="eyebrow">DEATHWATCH</span><h2 id="deathwatch-title">The clock is ticking.</h2><p id="deathwatch-description"><strong>{heroName}</strong> has dropped to −1 HP and is dying.</p><div className="deathwatch-clock"><span>Clock</span><strong>{state.clock}</strong></div>{latestCheck && <div className={`deathwatch-check ${latestCheck.success ? 'success' : 'failure'}`}><strong>Endurance: {latestCheck.natural} {signed(latestCheck.modifier)} = {latestCheck.total}</strong><span>{latestCheck.success ? 'Success—the clock stops.' : `Failure—the clock increases to ${state.clock}.`}</span></div>}{state.phase === 'endurance' && <><p>At the end of each turn, make an Endurance TN11 roll. A failure increases the clock by 1.</p><div className="deathwatch-actions"><button type="button" className="primary" autoFocus onClick={rollEndurance}>Roll Endurance TN11</button><button type="button" onClick={firstAid}>Teammate Provides First Aid</button></div></>}{state.phase === 'death-roll' && <><p>{state.stopReason} Roll a d6. If it is less than the clock, {heroName} dies; otherwise, {heroName} stabilizes.</p><button type="button" className="primary deathwatch-resolve" autoFocus onClick={resolveDeathwatch}>Roll the d6</button></>}{state.phase === 'resolved' && <><div className="deathwatch-result"><span>d6 result</span><strong>{state.deathRoll}</strong><h3>{state.outcome === 'dead' ? `${heroName} dies.` : `${heroName} stabilizes.`}</h3><p>{state.deathRoll} {state.outcome === 'dead' ? 'is less than' : 'is not less than'} the clock of {state.clock}.</p></div><button type="button" className="primary deathwatch-resolve" autoFocus onClick={close}>Return to Sheet</button></>}</div></div>, document.body)
+}
 function LevelUpModal({ level, close }) {
   const benefits = levelUpBenefits[level] || { automatic: 'Your Level has increased.' }
   useEffect(() => {
