@@ -16,17 +16,17 @@ When an attack hits, subtract the damage from your current HP. Temporary HP is l
 
 Hero Death
 
-Deathwatch: the clock is ticking.
+Deathwatch: the Death Clock is ticking.
 
 A Hero with "0" HP can only take a move action. When a Hero drops below "0" HP, they are dying.
 
-At the end of each turn, the Hero makes an Endurance TN11 roll. Each time the Hero fails the roll, the clock increases by 1. The clock stops when the Hero makes the roll or a teammate provides first aid.
+At the end of each turn, the Hero makes an Endurance TN11 roll. Each time the Hero fails the roll, the Death Clock increases by 1. The Death Clock stops when the Hero makes the roll or a teammate provides first aid.
 
-Now roll a d6. If the roll is less than the clock, the Hero dies; otherwise, the Hero stabilizes.
+Now roll a d6. If the roll is less than the Death Clock, the Hero dies; otherwise, the Hero stabilizes.
 
 Healing
 
-Healing in combat takes a move action. First aid stops a dying Hero's Deathwatch clock.
+Healing in combat takes a move action. First aid stops a dying Hero's Death Clock.
 
 Outside combat, healing restores the maximum amount, but it takes 1 minute to complete.
 

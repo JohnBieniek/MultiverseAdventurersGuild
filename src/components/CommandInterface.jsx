@@ -19,6 +19,7 @@ const destinations = [
   { label: 'Archetypes', path: '/players#archetypes', terms: 'archetypes character type class role' },
   { label: 'Contacts', path: '/players#contacts', terms: 'contacts allies people information' },
   { label: 'Game Masters', path: '/gm', terms: 'game master gm creatures monsters minions adventures' },
+  { label: 'NPC Creation', path: '/gm#npc-creation', terms: 'npc npcs non player character non player characters npc creation' },
   { label: 'Character Sheets', path: '/character-sheet', terms: 'characters heroes sheet hp health defense experience xp weapons talents contacts' },
   { label: 'Contact Us', path: '/contact', terms: 'contact email feedback message' },
 ]
@@ -80,12 +81,19 @@ const signedSpokenNumber = value => {
   const amount = spokenNumber(unsigned)
   return amount == null ? undefined : amount * (negative ? -1 : 1)
 }
+const cleanSpeechTranscript = value => String(value || '').trim().replace(/^(?:(?:\[[^\]]+\]|\([^)]*\))\s*)+/g, '').trim()
+const isNonSpeechTranscript = value => {
+  const transcript = String(value || '').trim()
+  if (!transcript || /^(?:\[[^\]]+\]|\([^)]*\))$/i.test(transcript)) return true
+  return /^(?:audio (?:cut off|cuts? out)|applause|background noise|blank audio|clapping|gavel bangs?|laughter|laughing|music|noise|silence|static)$/i.test(normalize(transcript))
+}
 
 function CommandInterface() {
   const navigate = useNavigate()
   const location = useLocation()
   const triggerRef = useRef(null)
   const inputRef = useRef(null)
+  const closeButtonRef = useRef(null)
   const recognitionRef = useRef(null)
   const recognitionRunningRef = useRef(false)
   const keepListeningRef = useRef(false)
@@ -114,7 +122,7 @@ function CommandInterface() {
 
   const characterCommand = request => {
     let response = ''
-    window.dispatchEvent(new CustomEvent('mag-character-command', { detail: { ...request, reply: message => { response = message } } }))
+    window.dispatchEvent(new CustomEvent('mag-character-command', { detail: { ...request, commandInterfaceOpen: open, reply: message => { response = message } } }))
     return response || 'Open a saved Hero on the Character Sheet before using that command.'
   }
 
@@ -144,8 +152,8 @@ function CommandInterface() {
       localModelRef.current = null
     }
   }
-  const speak = message => {
-    if (!spoken || !window.speechSynthesis) return
+  const speak = (message, { force = false } = {}) => {
+    if ((!spoken && !force) || !window.speechSynthesis) return
     const generation = speechGenerationRef.current + 1
     speechGenerationRef.current = generation
     speechActiveRef.current = true
@@ -212,6 +220,10 @@ function CommandInterface() {
   }
   const search = term => {
     const query = normalize(term)
+    if (compactName(query) === 'npc' || compactName(query) === 'npcs') {
+      completeNavigation('/gm#npc-creation', 'NPC Creation opened.')
+      return
+    }
     const characterQuery = query.replace(/^(?:a\s+)?(?:character|hero)\s+/, '')
     const characters = matchingCharacters(characterQuery).map(({ character }) => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' }))
     const pages = destinations.filter(item => `${normalize(item.label)} ${item.terms}`.includes(query)).map(item => ({ ...item, detail: 'App section' }))
@@ -221,7 +233,7 @@ function CommandInterface() {
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
-    const spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll')
+    const spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
     const value = normalize(original)
     setCommand(original)
     setResults([])
@@ -321,10 +333,10 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setHealthMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:(?:to|two|at)\s+)?(\d+|[a-z]+)$/i)
-        || spokenCommand.match(/^(?:increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:to|two|at)\s+(\d+|[a-z]+)$/i)
+      const setHealthMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:(?:to|two|at)\s+)?((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+        || spokenCommand.match(/^(?:increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:to|two|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
       if (setHealthMatch) {
-        const amount = spokenNumber(setHealthMatch[1])
+        const amount = signedSpokenNumber(setHealthMatch[1])
         if (amount == null) { respond(`I could not determine the health value in ${original}.`); return }
         respond(characterCommand({ intent: 'change-health', operation: 'set', amount }))
         return
@@ -424,6 +436,18 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
+      if (/^(?:roll|make)\s+(?:an?\s+)?endurance(?:\s+(?:check|roll))?$/i.test(spokenCommand)) {
+        respond(characterCommand({ intent: 'death-clock-action', action: 'endurance' }))
+        return
+      }
+      if (/^(?:provide|use|give|apply)?\s*(?:teammate\s+)?first aid$/i.test(spokenCommand)) {
+        respond(characterCommand({ intent: 'death-clock-action', action: 'first-aid' }))
+        return
+      }
+      if (/^roll(?:\s+the|\s+a)?\s+(?:death\s+(?:clock\s+)?(?:die|roll)|d6\s+for\s+(?:the\s+)?death\s+clock)$/i.test(spokenCommand)) {
+        respond(characterCommand({ intent: 'death-clock-action', action: 'death-roll' }))
+        return
+      }
       const diceExpressionMatch = spokenCommand.match(/^roll\s+(.+)$/i)
       if (diceExpressionMatch) {
         const expression = diceExpressionMatch[1].toLowerCase()
@@ -461,7 +485,8 @@ function CommandInterface() {
       [/^(?:go to|open|show)\s+(?:the\s+)?skills?$/, destinations[4]],
       [/^(?:go to|open|show)\s+(?:the\s+)?players?$/, destinations[2]],
       [/^(?:go to|open|show)\s+(?:the\s+)?(?:game masters?|gms?)$/, destinations[9]],
-      [/^(?:go to|open|show)\s+(?:my\s+)?character(?: sheet)?$/, destinations[10]],
+      [/^(?:go to|open|show|find|look for)\s+(?:the\s+)?(?:n\s*p\s*c|npcs?|non[- ]player characters?)(?:\s+(?:creation|section))?$/, destinations[10]],
+      [/^(?:go to|open|show)\s+(?:my\s+)?character(?: sheet)?$/, destinations[11]],
     ]
     const destination = directDestinations.find(([pattern]) => pattern.test(value))?.[1]
     if (destination) { completeNavigation(destination.path, `${destination.label} opened.`); return }
@@ -504,6 +529,7 @@ function CommandInterface() {
       try {
         setStatus(localModelRef.current ? 'Opening the microphone.' : 'Loading high-accuracy Whisper recognition on this device. The first use downloads and caches the model.')
         if (!localModelRef.current) {
+          speak('Whisper is loading on this device. The first download may take a moment.', { force: true })
           const { pipeline, env } = await import('@huggingface/transformers')
           if (!import.meta.env.DEV) env.remoteHost = `${window.location.origin}/model-proxy/`
           const modelProgress = expectedMegabytes => {
@@ -528,6 +554,7 @@ function CommandInterface() {
             }
           }
           if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback: modelProgress(80) })
+          speak('Whisper has finished loading. Opening the microphone now.', { force: true })
         }
         if (!keepListeningRef.current) return
         setStatus('Loading Whisper on this device: 100%. Opening the microphone.')
@@ -555,8 +582,13 @@ function CommandInterface() {
             if (!keepListeningRef.current) return
             setStatus('Speech captured. Whisper is recognizing the words.')
             const result = await localModelRef.current(audio)
-            const transcript = String(result?.text || '').trim().replace(/^\[.*?\]\s*/, '')
-            if (!transcript || !keepListeningRef.current || speechActiveRef.current) {
+            const rawTranscript = String(result?.text || '').trim()
+            const transcript = cleanSpeechTranscript(rawTranscript)
+            if (isNonSpeechTranscript(rawTranscript) || !transcript) {
+              if (keepListeningRef.current) setStatus('Non-speech audio ignored. Listening for a command.')
+              return
+            }
+            if (!keepListeningRef.current || speechActiveRef.current) {
               if (keepListeningRef.current) setStatus('Listening continuously. Say the command again if it was not recognized.')
               return
             }
@@ -657,7 +689,12 @@ function CommandInterface() {
       }
       recognition.onresult = event => {
         if (speechActiveRef.current || Date.now() < ignoreSpeechUntilRef.current) return
-        const transcript = event.results[event.results.length - 1][0].transcript.trim()
+        const rawTranscript = event.results[event.results.length - 1][0].transcript.trim()
+        const transcript = cleanSpeechTranscript(rawTranscript)
+        if (isNonSpeechTranscript(rawTranscript) || !transcript) {
+          setStatus('Non-speech audio ignored. Listening for a command.')
+          return
+        }
         retryDelay = 200
         networkRetries = 0
         if (mobileRecognition) {
@@ -741,8 +778,13 @@ function CommandInterface() {
     if (!open) return undefined
     setStatus('Game commands opened. Type a command or activate Start Listening.')
     window.setTimeout(() => {
-      inputRef.current?.focus()
-      if (window.matchMedia('(max-width: 768px)').matches) document.querySelector('.character-command-guide')?.removeAttribute('open')
+      const mobile = window.matchMedia('(max-width: 768px)').matches
+      if (!mobile) inputRef.current?.focus()
+      if (mobile) {
+        inputRef.current?.blur()
+        closeButtonRef.current?.focus({ preventScroll: true })
+        document.querySelector('.character-command-guide')?.removeAttribute('open')
+      }
     }, 0)
     const dismiss = event => { if (event.key === 'Escape') close() }
     window.addEventListener('keydown', dismiss)
@@ -753,10 +795,14 @@ function CommandInterface() {
     completeNavigation(result.path, `${result.label} opened.`, result.character)
   }
   const exampleCommand = text => { setCommand(text); inputRef.current?.focus() }
+  const openCommands = () => {
+    if (window.matchMedia('(max-width: 768px)').matches && document.activeElement instanceof HTMLElement) document.activeElement.blur()
+    setOpen(true)
+  }
   return <>
-    <button ref={triggerRef} type="button" className="command-trigger" aria-label="Open game commands" onClick={() => setOpen(true)}>⌘ <span>Command</span></button>
+    <button ref={triggerRef} type="button" className="command-trigger" aria-label="Open game commands" onClick={openCommands}>⌘ <span>Command</span></button>
     <div className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">{status}</div>
-    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={toggleListening}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples"><button type="button" onClick={() => exampleCommand('What is my health?')}>What is my health?</button><button type="button" onClick={() => exampleCommand('Take 6 damage')}>Take 6 damage</button><button type="button" onClick={() => exampleCommand('Heal 4 health')}>Heal 4 health</button><button type="button" onClick={() => exampleCommand('What is my maximum Energy?')}>What is my maximum Energy?</button><button type="button" onClick={() => exampleCommand('Spend 2 Energy')}>Spend 2 Energy</button><button type="button" onClick={() => exampleCommand('What is my unspent XP?')}>What is my unspent XP?</button><button type="button" onClick={() => exampleCommand('Increase my level by one')}>Increase my level</button><button type="button" onClick={() => exampleCommand('Roll Ego')}>Roll Ego</button><button type="button" onClick={() => exampleCommand('Roll a d4')}>Roll a d4</button><button type="button" onClick={() => exampleCommand('Roll to hit with medium melee weapon')}>Attack with medium melee</button><button type="button" onClick={() => exampleCommand('Roll damage')}>Roll damage</button><button type="button" onClick={() => exampleCommand('What does Aim do?')}>Explain Aim</button><button type="button" onClick={() => exampleCommand('Add Talent Aim')}>Add Talent Aim</button></div><p>Also ask for Defense, Resilience, current or maximum Energy, maximum Force, Level, Total XP, Unspent XP, Initiative, or any Skill roll. Weapon attacks can use a weapon name or type.</p></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
+    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button ref={closeButtonRef} type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={toggleListening}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples"><button type="button" onClick={() => exampleCommand('What is my health?')}>What is my health?</button><button type="button" onClick={() => exampleCommand('Take 6 damage')}>Take 6 damage</button><button type="button" onClick={() => exampleCommand('Heal 4 health')}>Heal 4 health</button><button type="button" onClick={() => exampleCommand('What is my maximum Energy?')}>What is my maximum Energy?</button><button type="button" onClick={() => exampleCommand('Spend 2 Energy')}>Spend 2 Energy</button><button type="button" onClick={() => exampleCommand('What is my unspent XP?')}>What is my unspent XP?</button><button type="button" onClick={() => exampleCommand('Increase my level by one')}>Increase my level</button><button type="button" onClick={() => exampleCommand('Roll Ego')}>Roll Ego</button><button type="button" onClick={() => exampleCommand('Roll a d4')}>Roll a d4</button><button type="button" onClick={() => exampleCommand('Roll to hit with medium melee weapon')}>Attack with medium melee</button><button type="button" onClick={() => exampleCommand('Roll damage')}>Roll damage</button><button type="button" onClick={() => exampleCommand('What does Aim do?')}>Explain Aim</button><button type="button" onClick={() => exampleCommand('Add Talent Aim')}>Add Talent Aim</button></div><p>Also ask for Defense, Resilience, current or maximum Energy, maximum Force, Level, Total XP, Unspent XP, Initiative, or any Skill roll. Weapon attacks can use a weapon name or type.</p></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
   </>
 }
 

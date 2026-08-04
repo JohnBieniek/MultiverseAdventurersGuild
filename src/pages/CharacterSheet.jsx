@@ -2390,15 +2390,49 @@ function CharacterSheet() {
         return
       }
       if (request.intent === 'preview-health' || request.intent === 'change-health') {
-        const requestedAmount = Math.max(0, number(request.amount))
+        const requestedAmount = request.operation === 'set' ? number(request.amount) : Math.max(0, number(request.amount))
         const amount = requestedAmount * (request.operation === 'subtract' ? -1 : 1)
         const next = Math.max(-1, Math.min(computed.maxHp, request.operation === 'set' ? requestedAmount : number(character.currentHp) + amount))
         if (request.intent === 'preview-health') reply(`${request.operation === 'subtract' ? 'Apply' : 'Restore'} ${Math.abs(amount)} HP to ${character.name}? Current health ${character.currentHp}. New health ${next}.`)
         else {
-          changeCurrentHp(next)
-          reply(`${request.operation === 'set' ? `Health set to ${next}` : request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
+          const startingDeathClock = number(character.currentHp) >= 0 && next === -1
+          changeCurrentHp(next, { audioOnly: startingDeathClock && request.commandInterfaceOpen })
+          reply(startingDeathClock && request.commandInterfaceOpen
+            ? `${character.name} has dropped to negative 1 HP. Death Clock started at zero. At the end of the turn, say roll Endurance, or say first aid if a teammate helps.`
+            : `${request.operation === 'set' ? `Health set to ${next}` : request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
         }
         return
+      }
+      if (request.intent === 'death-clock-action') {
+        if (!deathwatch || deathwatch.mode !== 'audio' || deathwatch.phase === 'resolved') { reply('There is no active audio Death Clock.'); return }
+        if (request.action === 'first-aid') {
+          if (deathwatch.phase !== 'endurance') { reply('The Death Clock has already stopped. Say roll death die.'); return }
+          setDeathwatch(current => ({ ...current, phase: 'death-roll', stopReason: 'A teammate provided first aid.' }))
+          reply(`First aid stops the Death Clock at ${deathwatch.clock}. Say roll death die to determine whether ${character.name} stabilizes.`)
+          return
+        }
+        if (request.action === 'endurance') {
+          if (deathwatch.phase !== 'endurance') { reply('The Death Clock has already stopped. Say roll death die.'); return }
+          const natural = rollDie(20)
+          const modifier = number(character.stats.endurance)
+          const total = natural + modifier
+          const success = natural === 20 || (natural !== 1 && total >= 11)
+          const nextClock = success ? deathwatch.clock : deathwatch.clock + 1
+          setDeathwatch(current => ({ ...current, clock: nextClock, phase: success ? 'death-roll' : 'endurance', stopReason: success ? 'Endurance check succeeded.' : '', checks: [...current.checks, { natural, modifier, total, success }] }))
+          reply(success
+            ? `Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Success. The Death Clock stops at ${nextClock}. Say roll death die.`
+            : `Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Failure. The Death Clock increases to ${nextClock}. Say roll Endurance again, or say first aid.`)
+          return
+        }
+        if (request.action === 'death-roll') {
+          if (deathwatch.phase !== 'death-roll') { reply('The Death Clock is still running. Say roll Endurance, or say first aid.'); return }
+          const deathRoll = rollDie(6)
+          const outcome = deathRoll < deathwatch.clock ? 'dead' : 'stable'
+          setDeathwatch(current => ({ ...current, phase: 'resolved', deathRoll, outcome }))
+          if (outcome === 'stable') setCharacter(current => ({ ...current, currentHp: 0, updatedAt: Date.now() }))
+          reply(`Death die result: ${deathRoll}. ${deathRoll} is ${outcome === 'dead' ? 'less than' : 'not less than'} the Death Clock of ${deathwatch.clock}. ${character.name} ${outcome === 'dead' ? 'dies' : 'stabilizes at zero HP'}.`)
+          return
+        }
       }
       if (request.intent === 'explain-entry') {
         const key = commandKey(String(request.entry || '').replace(/\s+weapon$/i, ''))
@@ -2534,7 +2568,7 @@ function CharacterSheet() {
     }
     window.addEventListener('mag-character-command', handleCommand)
     return () => window.removeEventListener('mag-character-command', handleCommand)
-  }, [character, computed])
+  }, [character, computed, deathwatch])
 
   const update = (path, value) => setCharacter(current => {
     const copy = structuredClone(current)
@@ -2544,10 +2578,10 @@ function CharacterSheet() {
     copy.updatedAt = Date.now()
     return copy
   })
-  const changeCurrentHp = value => {
+  const changeCurrentHp = (value, { audioOnly = false } = {}) => {
     const nextHp = Math.max(-1, Math.min(number(computed.maxHp), number(value)))
     if (number(character.currentHp) >= 0 && nextHp === -1) {
-      setDeathwatch({ clock: 0, phase: 'endurance', checks: [], stopReason: '', deathRoll: null, outcome: '' })
+      setDeathwatch({ clock: 0, phase: 'endurance', checks: [], stopReason: '', deathRoll: null, outcome: '', mode: audioOnly ? 'audio' : 'visual' })
     }
     setCharacter(current => ({ ...current, currentHp: nextHp, updatedAt: Date.now() }))
   }
@@ -2900,7 +2934,7 @@ function CharacterSheet() {
     {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
     {levelUp && <LevelUpModal level={levelUp} close={() => setLevelUp(null)}/>}
     {roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>}
-    {deathwatch && <DeathwatchModal heroName={character.name || 'The Hero'} endurance={character.stats.endurance} state={deathwatch} setState={setDeathwatch} close={() => setDeathwatch(null)}/>}
+    {deathwatch && deathwatch.mode !== 'audio' && <DeathwatchModal heroName={character.name || 'The Hero'} endurance={character.stats.endurance} state={deathwatch} setState={setDeathwatch} onStabilize={() => update(['currentHp'], 0)} close={() => setDeathwatch(null)}/>}
     {showArchetypeQuiz && (
       <ArchetypeQuizModal close={() => setShowArchetypeQuiz(false)} complete={name => { setShowArchetypeQuiz(false); setPendingArchetype(name) }}/>
     )}
@@ -2915,8 +2949,8 @@ function CharacterSheet() {
 
 function Field({ label, onChange, wide, help = '', href = '', ...props }) { return <label className={`field ${wide ? 'wide' : ''}`}><span className="field-label">{href ? <a className="sheet-reference-link" href={href}>{label}</a> : label}{help && <InfoTooltip label={label} description={help}/>}</span><input {...props} onChange={e => onChange(e.target.value)}/></label> }
 function InfoTooltip({ label, description }) { return <button type="button" className="info-tooltip" aria-label={`What does ${label} do?`} data-tooltip={description}>?</button> }
-function IdentityChoice({ label, value, options, tooltip = '', help = '', href = '', onChange, allowReselect = false }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; const option = name => <option value={name} key={name}>{name}</option>; const helpOption = options.includes('Help me choose!'); const listedOptions = options.filter(name => name !== 'Help me choose!'); const selectedValue = allowReselect && existing ? '__current__' : existing ? value : ''; return <label className="field identity-choice" data-tooltip={tooltip}><span className="field-label">{href ? <a className="sheet-reference-link" href={href}>{label}</a> : label}{help && <InfoTooltip label={label} description={help}/>}</span>{custom ? <div className="identity-custom"><input autoFocus aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{helpOption && option('Help me choose!')}{listedOptions.map(option)}</select></div> : <select aria-label={`Choose ${label}`} value={selectedValue} onChange={choose}>{allowReselect && existing && <option value="__current__" hidden>{value}</option>}<option value="" disabled>Choose</option>{helpOption && option('Help me choose!')}<option value="__custom__">Custom {label.toLowerCase()}…</option>{listedOptions.map(option)}</select>}</label> }
-function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''}>{custom ? <div className="identity-custom"><input autoFocus aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
+function IdentityChoice({ label, value, options, tooltip = '', help = '', href = '', onChange, allowReselect = false }) { const existing = options.includes(value); const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; const option = name => <option value={name} key={name}>{name}</option>; const helpOption = options.includes('Help me choose!'); const listedOptions = options.filter(name => name !== 'Help me choose!'); const selectedValue = allowReselect && existing ? '__current__' : existing ? value : ''; return <label className="field identity-choice" data-tooltip={tooltip}><span className="field-label">{href ? <a className="sheet-reference-link" href={href}>{label}</a> : label}{help && <InfoTooltip label={label} description={help}/>}</span>{custom ? <div className="identity-custom"><input autoFocus={!window.matchMedia('(max-width: 768px)').matches} aria-label={`Custom ${label}`} value={value} placeholder={`Enter custom ${label.toLowerCase()}`} onChange={e => onChange(e.target.value)}/><select className="custom-list-trigger" aria-label={`Choose ${label} from list`} value="" onChange={choose}><option value="" disabled></option>{helpOption && option('Help me choose!')}{listedOptions.map(option)}</select></div> : <select aria-label={`Choose ${label}`} value={selectedValue} onChange={choose}>{allowReselect && existing && <option value="__current__" hidden>{value}</option>}<option value="" disabled>Choose</option>{helpOption && option('Help me choose!')}<option value="__custom__">Custom {label.toLowerCase()}…</option>{listedOptions.map(option)}</select>}</label> }
+function ContactRoleChoice({ value, onChange }) { const existing = contactTypes.includes(value); const expertise = contactCatalog.find(contact => contact.type === value)?.expertise || ''; const [custom, setCustom] = useState(Boolean(value) && !existing); useEffect(() => { if (existing) setCustom(false) }, [existing]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return <div className="contact-role-control" data-tooltip={expertise ? `Expertise: ${expertise}` : ''}>{custom ? <div className="identity-custom"><input autoFocus={!window.matchMedia('(max-width: 768px)').matches} aria-label="Custom contact role" value={value} placeholder="Enter custom role" onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label="Choose contact type from list" value="" onChange={choose}><option value="" disabled></option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select></div> : <select aria-label="Contact role" value={existing ? value : ''} onChange={choose}><option value="" disabled>Choose contact type</option><option value="__custom__">Custom contact role…</option>{contactTypes.map(option => <option value={option} key={option}>{option}</option>)}</select>}</div> }
 function NumberInput({ value, onChange }) { return <input className="number-input" type="number" value={value} onChange={e => onChange(e.target.value)}/> }
 function AttackEquation({ label, statLabel, stat, attack, modifier }) { const total = number(stat) + number(attack) + number(modifier); const statShort = statLabel === 'Strength' ? 'STR' : 'DEX'; return <div className="attack-equation"><h3>{label}</h3><div className="attack-equation-values"><span><small><span className="attack-label-full">{statLabel}</span><span className="attack-label-short">{statShort}</span></small><strong>{signed(stat)}</strong></span><span><small><span className="attack-label-full">Skill</span><span className="attack-label-short">Skill</span></small><strong>{signed(attack)}</strong></span><span><small><span className="attack-label-full">Modifier</span><span className="attack-label-short">Mod</span></small><strong>{signed(modifier)}</strong></span><span className="attack-equation-total"><small>Total</small><strong>{signed(total)}</strong></span></div></div> }
 function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '', fitOnMobile = false }) {
@@ -2940,7 +2974,7 @@ function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '', fitOnMo
   }, [])
   return <textarea ref={ref} className="auto-textarea" rows="1" value={value} placeholder={placeholder} onChange={event => { onChange(event.target.value); window.requestAnimationFrame(() => resize(event.target)) }}/>
 }
-function SkillScoreControl({ label, value, options, onChange, isOptionDisabled = () => false }) { const hasPreset = value !== '' && options.includes(number(value)); const [custom, setCustom] = useState(value !== '' && !hasPreset); useEffect(() => { if (hasPreset) setCustom(false) }, [hasPreset]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return custom ? <div className="identity-custom"><input autoFocus aria-label={`${label} custom value`} type="number" min="-4" max="4" value={value} onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label={`${label} preset list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select></div> : <select aria-label={label} value={hasPreset ? number(value) : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom…</option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select> }
+function SkillScoreControl({ label, value, options, onChange, isOptionDisabled = () => false }) { const hasPreset = value !== '' && options.includes(number(value)); const [custom, setCustom] = useState(value !== '' && !hasPreset); useEffect(() => { if (hasPreset) setCustom(false) }, [hasPreset]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return custom ? <div className="identity-custom"><input autoFocus={!window.matchMedia('(max-width: 768px)').matches} aria-label={`${label} custom value`} type="number" min="-4" max="4" value={value} onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label={`${label} preset list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select></div> : <select aria-label={label} value={hasPreset ? number(value) : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom…</option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select> }
 function TalentControl({ value, onChange }) { return <div className="talent-control"><select aria-label="Choose a talent" value={talentNames.includes(value) ? value : ''} onChange={e => onChange(e.target.value)}><option value="">Choose a talent</option>{talentNames.map(name => <option value={name} key={name}>{name}</option>)}</select></div> }
 function SectionTitle({ title, subtitle }) {
   const startingArray = title === 'Stats' || title === 'Skills' ? subtitle : ''
@@ -2966,7 +3000,7 @@ function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
-function DeathwatchModal({ heroName, endurance, state, setState, close }) {
+function DeathwatchModal({ heroName, endurance, state, setState, onStabilize, close }) {
   const rollEndurance = () => {
     const natural = rollDie(20)
     const modifier = number(endurance)
@@ -2977,10 +3011,12 @@ function DeathwatchModal({ heroName, endurance, state, setState, close }) {
   const firstAid = () => setState(current => ({ ...current, phase: 'death-roll', stopReason: 'A teammate provided first aid.' }))
   const resolveDeathwatch = () => {
     const deathRoll = rollDie(6)
-    setState(current => ({ ...current, phase: 'resolved', deathRoll, outcome: deathRoll < current.clock ? 'dead' : 'stable' }))
+    const outcome = deathRoll < state.clock ? 'dead' : 'stable'
+    setState(current => ({ ...current, phase: 'resolved', deathRoll, outcome }))
+    if (outcome === 'stable') onStabilize()
   }
   const latestCheck = state.checks.at(-1)
-  return createPortal(<div className="modal-backdrop"><div className={`archetype-prompt deathwatch-modal ${state.outcome || ''}`} role="alertdialog" aria-modal="true" aria-labelledby="deathwatch-title" aria-describedby="deathwatch-description"><span className="eyebrow">DEATHWATCH</span><h2 id="deathwatch-title">The clock is ticking.</h2><p id="deathwatch-description"><strong>{heroName}</strong> has dropped to −1 HP and is dying.</p><div className="deathwatch-clock"><span>Clock</span><strong>{state.clock}</strong></div>{latestCheck && <div className={`deathwatch-check ${latestCheck.success ? 'success' : 'failure'}`}><strong>Endurance: {latestCheck.natural} {signed(latestCheck.modifier)} = {latestCheck.total}</strong><span>{latestCheck.success ? 'Success—the clock stops.' : `Failure—the clock increases to ${state.clock}.`}</span></div>}{state.phase === 'endurance' && <><p>At the end of each turn, make an Endurance TN11 roll. A failure increases the clock by 1.</p><div className="deathwatch-actions"><button type="button" className="primary" autoFocus onClick={rollEndurance}>Roll Endurance TN11</button><button type="button" onClick={firstAid}>Teammate Provides First Aid</button></div></>}{state.phase === 'death-roll' && <><p>{state.stopReason} Roll a d6. If it is less than the clock, {heroName} dies; otherwise, {heroName} stabilizes.</p><button type="button" className="primary deathwatch-resolve" autoFocus onClick={resolveDeathwatch}>Roll the d6</button></>}{state.phase === 'resolved' && <><div className="deathwatch-result"><span>d6 result</span><strong>{state.deathRoll}</strong><h3>{state.outcome === 'dead' ? `${heroName} dies.` : `${heroName} stabilizes.`}</h3><p>{state.deathRoll} {state.outcome === 'dead' ? 'is less than' : 'is not less than'} the clock of {state.clock}.</p></div><button type="button" className="primary deathwatch-resolve" autoFocus onClick={close}>Return to Sheet</button></>}</div></div>, document.body)
+  return createPortal(<div className="modal-backdrop"><div className={`archetype-prompt deathwatch-modal ${state.outcome || ''}`} role="alertdialog" aria-modal="true" aria-labelledby="deathwatch-title" aria-describedby="deathwatch-description"><span className="eyebrow">DEATH CLOCK</span><h2 id="deathwatch-title">The Death Clock is ticking.</h2><p id="deathwatch-description"><strong>{heroName}</strong> has dropped to −1 HP and is dying.</p><div className="deathwatch-clock"><span>Death Clock</span><strong>{state.clock}</strong></div>{latestCheck && <div className={`deathwatch-check ${latestCheck.success ? 'success' : 'failure'}`}><strong>Endurance: {latestCheck.natural} {signed(latestCheck.modifier)} = {latestCheck.total}</strong><span>{latestCheck.success ? 'Success—the Death Clock stops.' : `Failure—the Death Clock increases to ${state.clock}.`}</span></div>}{state.phase === 'endurance' && <><p>At the end of each turn, make an Endurance TN11 roll. A failure increases the Death Clock by 1.</p><div className="deathwatch-actions"><button type="button" className="primary" autoFocus onClick={rollEndurance}>Roll Endurance TN11</button><button type="button" onClick={firstAid}>Teammate Provides First Aid</button></div></>}{state.phase === 'death-roll' && <><p>{state.stopReason} Roll a d6. If it is less than the Death Clock, {heroName} dies; otherwise, {heroName} stabilizes.</p><button type="button" className="primary deathwatch-resolve" autoFocus onClick={resolveDeathwatch}>Roll the d6</button></>}{state.phase === 'resolved' && <><div className="deathwatch-result"><span>d6 result</span><strong>{state.deathRoll}</strong><h3>{state.outcome === 'dead' ? `${heroName} dies.` : `${heroName} stabilizes.`}</h3><p>{state.deathRoll} {state.outcome === 'dead' ? 'is less than' : 'is not less than'} the Death Clock of {state.clock}.</p></div><button type="button" className="primary deathwatch-resolve" autoFocus onClick={close}>Return to Sheet</button></>}</div></div>, document.body)
 }
 function LevelUpModal({ level, close }) {
   const benefits = levelUpBenefits[level] || { automatic: 'Your Level has increased.' }
