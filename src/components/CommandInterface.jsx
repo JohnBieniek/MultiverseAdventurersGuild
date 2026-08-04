@@ -757,9 +757,9 @@ function CommandInterface() {
     search(original)
   }
 
-  const toggleListening = async () => {
+  const toggleListening = async (retryAttempt = 0, recovering = false) => {
     if (!recognitionSupported) { respond('Voice recognition is not supported by this browser. You can still type commands.'); return }
-    if (listening) {
+    if (listening && !recovering) {
       await playListeningTone('stop')
       keepListeningRef.current = false
       window.clearTimeout(mobileCommandTimerRef.current)
@@ -890,13 +890,23 @@ function CommandInterface() {
         setStatus('High-accuracy Whisper is listening continuously on this device. Press Stop listening when you are done.')
       } catch (error) {
         console.error('High-accuracy recognition startup failed.', error)
-        keepListeningRef.current = false
         recognitionRunningRef.current = false
-        stopLocalRecognition()
+        stopLocalRecognition({ releaseModel: true })
+        if (error?.name !== 'NotAllowedError' && retryAttempt < 3 && keepListeningRef.current) {
+          const nextAttempt = retryAttempt + 1
+          const delay = Math.min(6000, 1000 * (2 ** retryAttempt))
+          setStatus(`Whisper did not load. Recovering automatically; retry ${nextAttempt} of 3.`)
+          speak(`Whisper did not load. I am fixing it and trying again. Retry ${nextAttempt} of 3.`, { force: true })
+          await waitForSpeech(12000)
+          await new Promise(resolve => window.setTimeout(resolve, delay))
+          if (keepListeningRef.current) return toggleListening(nextAttempt, true)
+          return
+        }
+        keepListeningRef.current = false
         setListening(false)
         const detail = String(error?.message || '').toLowerCase()
         const reason = /quota|storage|space|memory|allocation/.test(detail) ? 'The device may not have enough available storage or memory for the model.' : /fetch|network|load|download|http/.test(detail) ? 'The model download failed or was blocked.' : 'The browser could not initialize either its GPU or compatible processor recognition mode.'
-        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : `High-accuracy on-device recognition could not start. ${reason} You can still type commands.`)
+        respond(error?.name === 'NotAllowedError' ? 'Microphone access was denied. Allow it in your browser settings and try again.' : `Whisper could not start after three automatic recovery attempts. ${reason} You can still type commands, or press Start Listening to try again without refreshing.`)
       }
       return
     }
@@ -1069,7 +1079,7 @@ function CommandInterface() {
     <button ref={triggerRef} type="button" className="command-trigger" aria-label="Open game commands" onClick={openCommands}>⌘ <span>Command</span></button>
     {speaking && <button type="button" className="speech-stop" onClick={stopSpeaking}>■ Stop reading</button>}
     <div className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">{status}</div>
-    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button ref={closeButtonRef} type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={toggleListening}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples">{commonCharacterCommands.map(example => <button type="button" key={example} onClick={() => exampleCommand(example)}>{example}</button>)}</div></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
+    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button ref={closeButtonRef} type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={() => toggleListening()}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples">{commonCharacterCommands.map(example => <button type="button" key={example} onClick={() => exampleCommand(example)}>{example}</button>)}</div></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
   </>
 }
 
