@@ -159,7 +159,6 @@ function CommandInterface() {
     speechActiveRef.current = true
     ignoreSpeechUntilRef.current = Infinity
     const localAudioContext = localAudioContextRef.current
-    if (localAudioContext?.state === 'running') localAudioContext.suspend().catch(() => {})
     const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && (recognitionRunningRef.current || Boolean(localAudioContext))
     if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
@@ -172,9 +171,6 @@ function CommandInterface() {
       speechUtteranceRef.current = null
       speechActiveRef.current = false
       ignoreSpeechUntilRef.current = Date.now() + 900
-      if (keepListeningRef.current && localAudioContext?.state === 'suspended') {
-        window.setTimeout(() => localAudioContext.resume().catch(() => {}), 900)
-      }
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
     utterance.onend = finished
@@ -182,6 +178,14 @@ function CommandInterface() {
     window.speechSynthesis.resume()
     window.speechSynthesis.speak(utterance)
   }
+  const waitForSpeech = (timeout = 10000) => new Promise(resolve => {
+    const startedAt = Date.now()
+    const check = () => {
+      if (!speechActiveRef.current || Date.now() - startedAt >= timeout) { resolve(); return }
+      window.setTimeout(check, 100)
+    }
+    check()
+  })
   const respond = message => {
     lastResponseRef.current = message
     setStatus(message)
@@ -335,9 +339,9 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setHealthMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:(?:to|two|at)\s+)?((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
-        || spokenCommand.match(/^(?:increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:to|two|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
-        || spokenCommand.match(/\b(?:health|hp|hit\s*points?)\s+(?:to|two|too|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+      const setHealthMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?(?:health|h\s*p|hi[pt]\s*points?)\s+(?:(?:to|two|too|at)\s+)?((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+        || spokenCommand.match(/^(?:increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|h\s*p|hi[pt]\s*points?)\s+(?:to|two|too|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+        || spokenCommand.match(/\b(?:health|h\s*p|hi[pt]\s*points?)\s+(?:(?:to|two|too)\s+)?(?:set|change|update)?\s*(?:to|two|too|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
       if (setHealthMatch) {
         const amount = signedSpokenNumber(setHealthMatch[1])
         if (amount == null) { respond(`I could not determine the health value in ${original}.`); return }
@@ -378,8 +382,8 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const damageMatch = spokenCommand.match(/^(?:i\s+)?(?:(?:take|suffer|receive|lose|remove|subtract)(?:\s+me)?\s+|damage\s+me(?:\s+for)?\s+)(\d+|[a-z]+)(?:\s+(?:from\s+my\s+)?(?:damage|health|hp|hit\s*points?|dealth))?$/i)
-      const healMatch = spokenCommand.match(/^(?:i\s+)?(?:heal|restore|add|gain|recover)(?:\s+me)?\s+(\d+|[a-z]+)(?:\s+(?:to\s+my\s+)?(?:health|hp|hit\s*points?))?$/i)
+      const damageMatch = spokenCommand.match(/^(?:i\s+)?(?:(?:take|suffer|receive|lose|remove|subtract)(?:\s+me)?\s+|damage\s+me(?:\s+for)?\s+)(\d+|[a-z]+)(?:\s+(?:from\s+my\s+)?(?:damage|health|h\s*p|hi[pt]\s*points?|dealth))?$/i)
+      const healMatch = spokenCommand.match(/^(?:i\s+)?(?:heal|restore|add|gain|recover)(?:\s+me)?\s+(\d+|[a-z]+)(?:\s+(?:to\s+my\s+)?(?:health|h\s*p|hi[pt]\s*points?))?$/i)
       const healthMatch = damageMatch || healMatch
       if (healthMatch) {
         const amount = spokenNumber(healthMatch[1])
@@ -430,12 +434,12 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
-      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is| are)|how (?:much|many)|read|tell me|get)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
-        || spokenCommand.match(/^(?:my\s+)?(?:current\s+)?(health|hp|hit\s*points?|status|ego|defense|resilience|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)$/i)
+      const readVitalMatch = spokenCommand.match(/^(?:what(?:'s| is| are)|how (?:much|many)|read|tell me|get)(?:\s+is)?\s+(?:my\s+)?(?:current\s+)?(health|h\s*p|hi[pt]\s*points?|status|ego|defense|resilience|energy|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)(?:\s+do\s+i\s+have)?$/i)
+        || spokenCommand.match(/^(?:my\s+)?(?:current\s+)?(health|h\s*p|hi[pt]\s*points?|status|ego|defense|resilience|level|total\s+(?:xp|experience(?:\s+points?)?)|unspent\s+(?:xp|experience(?:\s+points?)?)|xp|experience(?:\s+points?)?)$/i)
       if (readVitalMatch || /^(?:how am i doing|what is my condition|status)$/i.test(spokenCommand)) {
         const requestedVital = readVitalMatch?.[1] || 'status'
         const normalizedVital = normalize(requestedVital)
-        const vital = normalizedVital.startsWith('total ') ? 'total-xp' : normalizedVital.startsWith('unspent ') ? 'unspent-xp' : /^experience/.test(normalizedVital) ? 'xp' : requestedVital
+        const vital = /^(?:h\s*p|hi[pt]\s*points?)$/.test(normalizedVital) ? 'health' : normalizedVital.startsWith('total ') ? 'total-xp' : normalizedVital.startsWith('unspent ') ? 'unspent-xp' : /^experience/.test(normalizedVital) ? 'xp' : requestedVital
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
@@ -558,6 +562,7 @@ function CommandInterface() {
           }
           if (!localModelRef.current) localModelRef.current = await pipeline('automatic-speech-recognition', WHISPER_MODEL, { device: 'wasm', dtype: 'q8', progress_callback: modelProgress(80) })
           speak('Whisper has finished loading. Opening the microphone now.', { force: true })
+          await waitForSpeech()
         }
         if (!keepListeningRef.current) return
         setStatus('Loading Whisper on this device: 100%. Opening the microphone.')

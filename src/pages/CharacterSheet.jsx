@@ -2405,10 +2405,16 @@ function CharacterSheet() {
       }
       if (request.intent === 'death-clock-action') {
         if (!deathwatch || deathwatch.mode !== 'audio' || deathwatch.phase === 'resolved') { reply('There is no active audio Death Clock.'); return }
+        const resolveAudioDeathClock = (clock, introduction, updates = {}) => {
+          const deathRoll = rollDie(6)
+          const outcome = deathRoll < clock ? 'dead' : 'stable'
+          setDeathwatch(current => ({ ...current, ...updates, clock, phase: 'resolved', deathRoll, outcome }))
+          if (outcome === 'stable') setCharacter(current => ({ ...current, currentHp: 0, updatedAt: Date.now() }))
+          reply(`${introduction} Rolling the death die automatically. Result: ${deathRoll}. ${deathRoll} is ${outcome === 'dead' ? 'less than' : 'not less than'} the Death Clock of ${clock}. ${character.name} ${outcome === 'dead' ? 'dies' : 'stabilizes at zero HP'}.`)
+        }
         if (request.action === 'first-aid') {
           if (deathwatch.phase !== 'endurance') { reply('The Death Clock has already stopped. Say roll death die.'); return }
-          setDeathwatch(current => ({ ...current, phase: 'death-roll', stopReason: 'A teammate provided first aid.' }))
-          reply(`First aid stops the Death Clock at ${deathwatch.clock}. Say roll death die to determine whether ${character.name} stabilizes.`)
+          resolveAudioDeathClock(deathwatch.clock, `First aid stops the Death Clock at ${deathwatch.clock}.`, { stopReason: 'A teammate provided first aid.' })
           return
         }
         if (request.action === 'endurance') {
@@ -2418,10 +2424,12 @@ function CharacterSheet() {
           const total = natural + modifier
           const success = natural === 20 || (natural !== 1 && total >= 11)
           const nextClock = success ? deathwatch.clock : deathwatch.clock + 1
-          setDeathwatch(current => ({ ...current, clock: nextClock, phase: success ? 'death-roll' : 'endurance', stopReason: success ? 'Endurance check succeeded.' : '', checks: [...current.checks, { natural, modifier, total, success }] }))
-          reply(success
-            ? `Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Success. The Death Clock stops at ${nextClock}. Say roll death die.`
-            : `Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Failure. The Death Clock increases to ${nextClock}. Say roll Endurance again, or say first aid.`)
+          const checks = [...deathwatch.checks, { natural, modifier, total, success }]
+          if (success) resolveAudioDeathClock(nextClock, `Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Success. The Death Clock stops at ${nextClock}.`, { stopReason: 'Endurance check succeeded.', checks })
+          else {
+            setDeathwatch(current => ({ ...current, clock: nextClock, phase: 'endurance', stopReason: '', checks }))
+            reply(`Endurance roll: ${natural} on the die, ${signed(modifier)} modifier, total ${total}. Failure. The Death Clock increases to ${nextClock}. Say roll Endurance again, or say first aid.`)
+          }
           return
         }
         if (request.action === 'death-roll') {
