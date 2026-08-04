@@ -90,9 +90,19 @@
 
   .footer-version.is-mobile-revealed {
     display: block;
-    grid-column: 1 / -1;
+    position: fixed;
+    z-index: 250;
+    right: 50%;
+    bottom: .75rem;
+    width: max-content;
+    padding: .55rem .8rem;
+    border: 1px solid #d9bd70;
+    border-radius: 7px;
+    background: #254723;
     color: #fff4cf;
     text-align: center;
+    box-shadow: 0 6px 20px #0007;
+    transform: translateX(50%);
   }
 }
 

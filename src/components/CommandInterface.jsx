@@ -233,8 +233,10 @@ function CommandInterface() {
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
-    const spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
-    const value = normalize(original)
+    let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
+    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|provide|give|apply|attack|strike|shoot|fire|search|find|look|go|open|return|load)\b/i)
+    if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
+    const value = normalize(spokenCommand)
     setCommand(original)
     setResults([])
     if (!value) { respond('Type or speak a command first.'); return }
@@ -335,6 +337,7 @@ function CommandInterface() {
       }
       const setHealthMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:(?:to|two|at)\s+)?((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
         || spokenCommand.match(/^(?:increase|raise|decrease|lower|reduce)\s+(?:my\s+)?(?:current\s+)?(?:health|hp|hit\s*points?)\s+(?:to|two|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
+        || spokenCommand.match(/\b(?:health|hp|hit\s*points?)\s+(?:to|two|too|at)\s+((?:minus|negative|plus|positive)?\s*(?:\d+|[a-z]+))$/i)
       if (setHealthMatch) {
         const amount = signedSpokenNumber(setHealthMatch[1])
         if (amount == null) { respond(`I could not determine the health value in ${original}.`); return }

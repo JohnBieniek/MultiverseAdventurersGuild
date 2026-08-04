@@ -2396,8 +2396,8 @@ function CharacterSheet() {
         if (request.intent === 'preview-health') reply(`${request.operation === 'subtract' ? 'Apply' : 'Restore'} ${Math.abs(amount)} HP to ${character.name}? Current health ${character.currentHp}. New health ${next}.`)
         else {
           const startingDeathClock = number(character.currentHp) >= 0 && next === -1
-          changeCurrentHp(next, { audioOnly: startingDeathClock && request.commandInterfaceOpen })
-          reply(startingDeathClock && request.commandInterfaceOpen
+          changeCurrentHp(next, { audioOnly: startingDeathClock })
+          reply(startingDeathClock
             ? `${character.name} has dropped to negative 1 HP. Death Clock started at zero. At the end of the turn, say roll Endurance, or say first aid if a teammate helps.`
             : `${request.operation === 'set' ? `Health set to ${next}` : request.operation === 'subtract' ? `${Math.abs(amount)} damage applied` : `${Math.abs(amount)} health restored`}. ${character.name} has ${next} of ${computed.maxHp} HP remaining.`)
         }
