@@ -450,6 +450,20 @@ function CommandInterface() {
       completeNavigation('/character-sheet', `New Hero created${selected.length ? `, ${selected.join(', ')}` : ''}.`)
       return
     }
+    const openHeroMatch = spokenCommand.match(/^(?:please\s+)?(?:open(?:\s+up)?|load|show)\s+(?:the\s+)?(?:(?:character|hero)(?:\s+named)?\s+)?(.+?)(?:['’]s)?(?:\s+(?:character|hero)(?:\s+sheet)?)?$/i)
+    const openHeroMatches = openHeroMatch ? matchingCharacters(openHeroMatch[1]) : []
+    if (openHeroMatches.length) {
+      const bestScore = openHeroMatches[0].score
+      const bestMatches = openHeroMatches.filter(match => match.score === bestScore)
+      if (bestMatches.length === 1) {
+        const hero = bestMatches[0].character
+        completeNavigation('/character-sheet', `${hero.name}'s character sheet opened.`, hero)
+        return
+      }
+      setResults(openHeroMatches.map(({ character }) => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' })))
+      respond(`I found ${openHeroMatches.length} matching Heroes. Choose one.`)
+      return
+    }
     if (onCharacterSheet) {
       const optionListMatch = spokenCommand.match(/^(?:what|which)\s+(skills?|stats?|statistics?)\s+(?:are there|are available|exist|can i use)$/i)
         || spokenCommand.match(/^(?:what|which)\s+are\s+(?:the\s+)?(?:available\s+|all\s+)?(skills?|stats?|statistics?)$/i)
@@ -703,19 +717,8 @@ function CommandInterface() {
     ]
     const destination = directDestinations.find(([pattern]) => pattern.test(value))?.[1]
     if (destination) { completeNavigation(destination.path, `${destination.label} opened.`); return }
-    const characterMatch = spokenCommand.match(/^(?:please\s+)?(?:open(?:\s+up)?|load|show)\s+(?:the\s+)?(?:(?:character|hero)(?:\s+named)?\s+)?(.+?)(?:['’]s)?(?:\s+(?:character|hero)(?:\s+sheet)?)?$/i)
-    if (characterMatch) {
-      const matches = matchingCharacters(characterMatch[1])
-      const bestScore = matches[0]?.score
-      const bestMatches = matches.filter(match => match.score === bestScore)
-      const hero = bestMatches.length === 1 ? bestMatches[0].character : null
-      if (hero) { completeNavigation('/character-sheet', `${hero.name}'s character sheet opened.`, hero); return }
-      if (matches.length > 1) {
-        setResults(matches.map(({ character }) => ({ label: character.name, path: '/character-sheet', character, detail: 'Saved Hero' })))
-        respond(`I found ${matches.length} matching Heroes. Choose one.`)
-        return
-      }
-      respond(`I could not find a saved Hero named ${characterMatch[1]}.`)
+    if (openHeroMatch) {
+      respond(`I could not find a saved Hero named ${openHeroMatch[1]}.`)
       return
     }
     search(original)
