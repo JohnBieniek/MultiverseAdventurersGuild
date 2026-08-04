@@ -382,6 +382,11 @@ function getTextBlockAnchor(sectionTitle, line) {
     return `defense-${name}`
   }
 
+  const titledBlock = splitTitleLine(line, { allowFieldLabelName: true })
+  if (titledBlock?.name) {
+    return `${slugify(sectionTitle)}-${slugify(titledBlock.name)}`
+  }
+
   return null
 }
 

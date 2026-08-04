@@ -13,6 +13,19 @@ import './CharacterSheet.css'
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const NEW_CHARACTER_COMMAND_KEY = 'mag-new-character-command-v1'
+const DEATHWATCH_STORE_KEY = 'mag-deathwatch-v1'
+const readStoredDeathwatch = heroId => {
+  if (!heroId) return null
+  try { return JSON.parse(localStorage.getItem(DEATHWATCH_STORE_KEY) || '{}')[heroId] || null } catch { return null }
+}
+const writeStoredDeathwatch = (heroId, state) => {
+  if (!heroId) return
+  let stored = {}
+  try { stored = JSON.parse(localStorage.getItem(DEATHWATCH_STORE_KEY) || '{}') } catch { stored = {} }
+  if (state) stored[heroId] = state
+  else delete stored[heroId]
+  localStorage.setItem(DEATHWATCH_STORE_KEY, JSON.stringify(stored))
+}
 const stats = [
   ['strength', 'Strength', 'STR', GiBiceps, 'Your ability to lift, hit hard, and manipulate the world through physical means. Strength powers melee attacks and feats of raw force.'],
   ['dexterity', 'Dexterity', 'DEX', FaHandPaper, 'Your precision, coordination, and control. Dexterity helps you strike accurately, hit weak spots, sneak, and handle ranged weapons or vehicles.'],
@@ -1987,8 +2000,13 @@ function CharacterSheet() {
   const [notice, setNotice] = useState('')
   const [showWelcome, setShowWelcome] = useState(false)
   const [levelUp, setLevelUp] = useState(null)
-  const [deathwatch, setDeathwatch] = useState(null)
-  const [deathwatchHidden, setDeathwatchHidden] = useState(false)
+  const [deathwatch, setDeathwatchState] = useState(() => readStoredDeathwatch(character?.id))
+  const [deathwatchHidden, setDeathwatchHidden] = useState(() => Boolean(readStoredDeathwatch(character?.id)))
+  const setDeathwatch = nextState => setDeathwatchState(current => {
+    const next = typeof nextState === 'function' ? nextState(current) : nextState
+    writeStoredDeathwatch(character?.id, next)
+    return next
+  })
   const fileRef = useRef(null)
   const totalXpEditValue = useRef(null)
   const totalXpLastValue = useRef(null)
@@ -2000,6 +2018,15 @@ function CharacterSheet() {
     if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
     else localStorage.removeItem(ACTIVE_CHARACTER_KEY)
   }, [character])
+
+  useEffect(() => {
+    if (!character) { setDeathwatchState(null); setDeathwatchHidden(false); return }
+    const stored = readStoredDeathwatch(character.id)
+    const restored = stored || (number(character.currentHp) < 0 ? { clock: 0, phase: 'endurance', checks: [], stopReason: '', deathRoll: null, outcome: '', mode: 'visual' } : null)
+    if (!stored && restored) writeStoredDeathwatch(character.id, restored)
+    setDeathwatchState(restored)
+    setDeathwatchHidden(Boolean(restored && restored.mode !== 'audio' && restored.phase !== 'resolved'))
+  }, [character?.id])
 
   useEffect(() => {
     const createCommandHero = event => {
@@ -2963,7 +2990,7 @@ function CharacterSheet() {
     return usedByOtherSkills >= available
   }
   return <div className="sheet-page">
-    <div className="sheet-toolbar-region"><div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>{deathwatch && deathwatch.mode !== 'audio' && deathwatch.phase !== 'resolved' && deathwatchHidden && <button type="button" className="dying-toast" onClick={() => setDeathwatchHidden(false)}>You’re dying.</button>}</div>
+    <div className="sheet-toolbar-region"><div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>{deathwatch && deathwatch.mode !== 'audio' && deathwatch.phase !== 'resolved' && deathwatchHidden && <button type="button" className="dying-toast" onClick={() => setDeathwatchHidden(false)}><strong>You’re dying.</strong><span>Click here to continue the Death Clock.</span></button>}</div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
       <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/>
       <IdentityChoice label="Species" href="/players#species" help="Species describes what kind of being your Hero is. It is primarily a roleplaying choice and does not limit your Stats or Skills." value={character.species} options={speciesNames} onChange={setSpecies}/>
