@@ -6,6 +6,7 @@ import './CommandInterface.css'
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const SPEECH_KEY = 'mag-command-spoken-responses-v1'
+const NEW_CHARACTER_COMMAND_KEY = 'mag-new-character-command-v1'
 const WHISPER_MODEL = 'onnx-community/whisper-base.en'
 
 const destinations = [
@@ -238,7 +239,7 @@ function CommandInterface() {
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
     let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
-    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|provide|give|apply|attack|strike|shoot|fire|search|find|look|go|open|return|load)\b/i)
+    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load)\b/i)
     if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
     const value = normalize(spokenCommand)
     setCommand(original)
@@ -248,6 +249,25 @@ function CommandInterface() {
     if (['repeat', 'say that again', 'read again'].includes(value)) { speak(lastResponseRef.current || 'There is nothing to repeat yet.'); return }
     if (['help', 'what can i say', 'commands'].includes(value)) {
       respond(onCharacterSheet ? 'On a Character Sheet you can ask about or immediately change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
+      return
+    }
+    const createHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?(?:new\s+)?(?:hero|character)\b(.*)$/i)
+      || spokenCommand.match(/^new\s+(?:hero|character)\b(.*)$/i)
+    if (createHeroMatch) {
+      const details = createHeroMatch[1].replace(/^[,;:\s]+/, '').trim()
+      const extractDetail = (labels, followingLabels) => {
+        const match = details.match(new RegExp(`\\b(?:${labels})(?:\\s+(?:is|of))?\\s+(.+?)(?=[,;]?\\s+(?:${followingLabels})\\b|$)`, 'i'))
+        return match?.[1]?.replace(/[,;]+$/, '').trim() || ''
+      }
+      const hero = {
+        name: extractDetail('name|named|called', 'species|archetype'),
+        species: extractDetail('species', 'name|named|called|archetype'),
+        archetype: extractDetail('archetype', 'name|named|called|species'),
+      }
+      sessionStorage.setItem(NEW_CHARACTER_COMMAND_KEY, JSON.stringify(hero))
+      window.dispatchEvent(new CustomEvent('mag-create-character', { detail: hero }))
+      const selected = [hero.name && `named ${hero.name}`, hero.species && `Species ${hero.species}`, hero.archetype && `Archetype ${hero.archetype}`].filter(Boolean)
+      completeNavigation('/character-sheet', `New Hero created${selected.length ? `, ${selected.join(', ')}` : ''}.`)
       return
     }
     if (onCharacterSheet) {
@@ -443,11 +463,11 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-vital', vital }))
         return
       }
-      if (/^(?:roll|make)\s+(?:an?\s+)?endurance(?:\s+(?:check|roll))?$/i.test(spokenCommand)) {
+      if (/^roll$/i.test(spokenCommand) || /^(?:roll|make)\s+(?:an?\s+)?endurance(?:\s+(?:check|roll))?$/i.test(spokenCommand) || /^roll\s+(?:(?:and|in)\s+)?a\s+dance$/i.test(spokenCommand)) {
         respond(characterCommand({ intent: 'death-clock-action', action: 'endurance' }))
         return
       }
-      if (/^(?:provide|use|give|apply)?\s*(?:teammate\s+)?first aid$/i.test(spokenCommand)) {
+      if (/^(?:first|aid)$/i.test(spokenCommand) || /^(?:provide|use|give|apply)?\s*(?:teammate\s+)?first aid$/i.test(spokenCommand)) {
         respond(characterCommand({ intent: 'death-clock-action', action: 'first-aid' }))
         return
       }

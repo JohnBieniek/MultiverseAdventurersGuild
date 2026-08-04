@@ -12,6 +12,7 @@ import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
 const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
+const NEW_CHARACTER_COMMAND_KEY = 'mag-new-character-command-v1'
 const stats = [
   ['strength', 'Strength', 'STR', GiBiceps, 'Your ability to lift, hit hard, and manipulate the world through physical means. Strength powers melee attacks and feats of raw force.'],
   ['dexterity', 'Dexterity', 'DEX', FaHandPaper, 'Your precision, coordination, and control. Dexterity helps you strike accurately, hit weak spots, sneak, and handle ranged weapons or vehicles.'],
@@ -1961,6 +1962,30 @@ function CharacterSheet() {
     if (character) localStorage.setItem(ACTIVE_CHARACTER_KEY, character.id)
     else localStorage.removeItem(ACTIVE_CHARACTER_KEY)
   }, [character])
+
+  useEffect(() => {
+    const createCommandHero = event => {
+      let requested = event?.detail
+      if (!requested) {
+        try { requested = JSON.parse(sessionStorage.getItem(NEW_CHARACTER_COMMAND_KEY)) } catch { requested = null }
+      }
+      if (!requested) return
+      sessionStorage.removeItem(NEW_CHARACTER_COMMAND_KEY)
+      const hero = newCharacter()
+      const requestedName = String(requested.name || '').trim()
+      const requestedSpecies = String(requested.species || '').trim()
+      const requestedArchetype = String(requested.archetype || '').trim()
+      if (requestedName) { hero.name = requestedName; hero.characterNameSource = 'user' }
+      if (requestedSpecies) { hero.species = knownCommandOption(speciesNames, requestedSpecies); hero.speciesSource = 'user' }
+      if (requestedArchetype) hero.archetype = knownCommandOption(archetypeOptions.map(option => option.name), requestedArchetype)
+      setDeathwatch(null)
+      setShowWelcome(false)
+      setCharacter(hero)
+    }
+    window.addEventListener('mag-create-character', createCommandHero)
+    createCommandHero()
+    return () => window.removeEventListener('mag-create-character', createCommandHero)
+  }, [])
 
   useEffect(() => {
     const openSavedCharacter = event => {
