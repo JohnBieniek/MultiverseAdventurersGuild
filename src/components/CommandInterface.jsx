@@ -10,6 +10,7 @@ const NEW_CHARACTER_COMMAND_KEY = 'mag-new-character-command-v1'
 const WHISPER_MODEL = 'onnx-community/whisper-base.en'
 const commonCharacterCommands = [
   'Create new character',
+  'Open character (character name)',
   'Read action economy',
   'Set species to Cyborg',
   'Set archetype to Street Samurai',
@@ -152,32 +153,43 @@ const isNonSpeechTranscript = value => {
   return /^(?:audio (?:cut off|cuts? out)|applause|background noise|blank audio|clapping|gavel bangs?|laughter|laughing|music|noise|silence|static)$/i.test(normalize(transcript))
 }
 let listeningToneContext = null
-const playListeningTone = kind => {
+const playListeningTone = async kind => {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext
     if (!AudioContext) return
     if (!listeningToneContext || listeningToneContext.state === 'closed') listeningToneContext = new AudioContext()
     const context = listeningToneContext
-    const schedule = () => {
+    if (context.state === 'suspended') await context.resume()
+    await new Promise(resolve => {
       const notes = kind === 'start' ? [523.25, 659.25] : [587.33, 440]
       notes.forEach((frequency, index) => {
-        const startsAt = context.currentTime + .025 + index * .105
+        const startsAt = context.currentTime + .02 + index * .14
         const oscillator = context.createOscillator()
         const gain = context.createGain()
-        oscillator.type = 'sine'
+        oscillator.type = 'triangle'
         oscillator.frequency.setValueAtTime(frequency, startsAt)
         gain.gain.setValueAtTime(.0001, startsAt)
-        gain.gain.exponentialRampToValueAtTime(.045, startsAt + .018)
-        gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .095)
+        gain.gain.exponentialRampToValueAtTime(.11, startsAt + .025)
+        gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .13)
         oscillator.connect(gain)
         gain.connect(context.destination)
         oscillator.start(startsAt)
-        oscillator.stop(startsAt + .1)
+        oscillator.stop(startsAt + .14)
       })
-    }
-    if (context.state === 'suspended') context.resume().then(schedule).catch(() => {})
-    else schedule()
+      window.setTimeout(resolve, 330)
+    })
   } catch { /* Audio cues are optional when a browser blocks synthesized audio. */ }
+}
+const speechChunks = message => {
+  const segments = String(message || '').replace(/\s+/g, ' ').trim().match(/[^.!?;:]+[.!?;:]?|[.!?;:]+/g) || []
+  return segments.reduce((chunks, segment) => {
+    segment.trim().split(' ').forEach(word => {
+      const current = chunks.at(-1) || ''
+      if (!current || `${current} ${word}`.length > 150) chunks.push(word)
+      else chunks[chunks.length - 1] = `${current} ${word}`
+    })
+    return chunks
+  }, [])
 }
 
 function CommandInterface() {
@@ -260,12 +272,7 @@ function CommandInterface() {
     window.speechSynthesis.cancel()
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find(candidate => candidate.lang === 'en-US' && candidate.default) || voices.find(candidate => candidate.lang?.toLowerCase().startsWith('en')) || null
-    const chunks = String(message || '').replace(/\s+/g, ' ').trim().split(' ').reduce((parts, word) => {
-      const current = parts.at(-1) || ''
-      if (!current || `${current} ${word}`.length > 240) parts.push(word)
-      else parts[parts.length - 1] = `${current} ${word}`
-      return parts
-    }, [])
+    const chunks = speechChunks(message)
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
       speechUtteranceRef.current = null
@@ -280,8 +287,11 @@ function CommandInterface() {
       const utterance = new SpeechSynthesisUtterance(chunks[index])
       utterance.voice = voice
       speechUtteranceRef.current = utterance
-      utterance.onend = () => speakChunk(index + 1)
-      utterance.onerror = finished
+      utterance.onend = () => window.setTimeout(() => speakChunk(index + 1), 35)
+      utterance.onerror = event => {
+        if (event.error === 'canceled' || event.error === 'interrupted') { finished(); return }
+        window.setTimeout(() => speakChunk(index + 1), 35)
+      }
       window.speechSynthesis.resume()
       window.speechSynthesis.speak(utterance)
     }
@@ -750,7 +760,7 @@ function CommandInterface() {
   const toggleListening = async () => {
     if (!recognitionSupported) { respond('Voice recognition is not supported by this browser. You can still type commands.'); return }
     if (listening) {
-      playListeningTone('stop')
+      await playListeningTone('stop')
       keepListeningRef.current = false
       window.clearTimeout(mobileCommandTimerRef.current)
       recognitionRef.current?.stop()
@@ -759,7 +769,7 @@ function CommandInterface() {
       setStatus('Listening stopped.')
       return
     }
-    playListeningTone('start')
+    await playListeningTone('start')
     const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
     let braveBrowser = false
     try { braveBrowser = Boolean(await navigator.brave?.isBrave?.()) } catch { braveBrowser = false }
