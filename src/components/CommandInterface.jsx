@@ -205,6 +205,7 @@ function CommandInterface() {
   const speechActiveRef = useRef(false)
   const speechGenerationRef = useRef(0)
   const speechUtteranceRef = useRef(null)
+  const speechWatchdogRef = useRef(null)
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
@@ -270,11 +271,15 @@ function CommandInterface() {
     const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && (recognitionRunningRef.current || Boolean(localAudioContext))
     if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
+    window.clearInterval(speechWatchdogRef.current)
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find(candidate => candidate.lang === 'en-US' && candidate.default) || voices.find(candidate => candidate.lang?.toLowerCase().startsWith('en')) || null
+    const continuousText = String(message || '').replace(/\s+/g, ' ').trim()
     const chunks = speechChunks(message)
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
+      window.clearInterval(speechWatchdogRef.current)
+      speechWatchdogRef.current = null
       speechUtteranceRef.current = null
       speechActiveRef.current = false
       setSpeaking(false)
@@ -303,7 +308,21 @@ function CommandInterface() {
       window.speechSynthesis.resume()
       window.speechSynthesis.speak(utterance)
     }
-    queueChunk(0)
+    const continuousUtterance = new SpeechSynthesisUtterance(continuousText)
+    continuousUtterance.voice = voice
+    continuousUtterance.onstart = () => { speechUtteranceRef.current = continuousUtterance }
+    continuousUtterance.onend = finished
+    continuousUtterance.onerror = event => {
+      if (speechGenerationRef.current !== generation) return
+      if (event.error === 'canceled' || event.error === 'interrupted') { finished(); return }
+      queueChunk(0)
+    }
+    speechUtteranceRef.current = continuousUtterance
+    speechWatchdogRef.current = window.setInterval(() => {
+      if (speechGenerationRef.current === generation && speechActiveRef.current) window.speechSynthesis.resume()
+    }, 4000)
+    window.speechSynthesis.resume()
+    window.speechSynthesis.speak(continuousUtterance)
   }
   const waitForSpeech = (timeout = 10000) => new Promise(resolve => {
     const startedAt = Date.now()
@@ -320,6 +339,8 @@ function CommandInterface() {
   }
   const stopSpeaking = () => {
     speechGenerationRef.current += 1
+    window.clearInterval(speechWatchdogRef.current)
+    speechWatchdogRef.current = null
     speechUtteranceRef.current = null
     speechActiveRef.current = false
     ignoreSpeechUntilRef.current = Date.now() + 300
@@ -330,6 +351,8 @@ function CommandInterface() {
   const close = () => {
     keepListeningRef.current = false
     speechGenerationRef.current += 1
+    window.clearInterval(speechWatchdogRef.current)
+    speechWatchdogRef.current = null
     speechActiveRef.current = false
     setSpeaking(false)
     window.clearTimeout(restartTimerRef.current)
@@ -1039,6 +1062,7 @@ function CommandInterface() {
   useEffect(() => () => {
     keepListeningRef.current = false
     speechGenerationRef.current += 1
+    window.clearInterval(speechWatchdogRef.current)
     window.clearTimeout(restartTimerRef.current)
     window.clearTimeout(mobileCommandTimerRef.current)
     recognitionRef.current?.abort()
