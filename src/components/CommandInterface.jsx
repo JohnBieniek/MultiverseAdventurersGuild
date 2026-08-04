@@ -436,6 +436,12 @@ function CommandInterface() {
         respond(characterCommand({ intent: 'read-weapon', weapon: readWeaponDamageMatch[1], damageOnly: true }))
         return
       }
+      const readScoreMatch = spokenCommand.match(/^(?:what(?:'s| is)|how much|read|tell me|check)(?:\s+is)?\s+(?:(?:my|the|this)\s+)?(strength|str|dexterity|dex|endurance|end|intuition|int|education|edu|charisma|cha|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle)(?:\s+(?:stat|statistic|skill|score))?$/i)
+        || spokenCommand.match(/^(?:(?:my|the|this)\s+)?(strength|str|dexterity|dex|endurance|end|intuition|int|education|edu|charisma|cha|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle)(?:\s+(?:stat|statistic|skill|score))?$/i)
+      if (readScoreMatch) {
+        respond(characterCommand({ intent: 'read-score', score: readScoreMatch[1] }))
+        return
+      }
       const explainEntryMatch = spokenCommand.match(/^(?:what does|what is|explain|read|tell me about)\s+(?:my\s+|the\s+)?(.+?)(?:\s+(?:talent|item|trait))?(?:\s+do)?$/i)
       if (explainEntryMatch && !/^(?:my\s+)?(?:(?:total|unspent|maximum|max|current)\s+)?(?:name|species|archetype|health|hp|hit\s*points?|status|condition|ego|defense|resilience|force|energy|level|xp|experience|attack|melee|ranged|range|distance|close)/i.test(explainEntryMatch[1])) {
         respond(characterCommand({ intent: 'explain-entry', entry: explainEntryMatch[1] }))

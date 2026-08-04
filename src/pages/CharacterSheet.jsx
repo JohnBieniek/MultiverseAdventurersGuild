@@ -2206,6 +2206,20 @@ function CharacterSheet() {
         reply(values[vital] ? `${character.name} has ${values[vital]}.` : `I do not know the character value ${request.vital}.`)
         return
       }
+      if (request.intent === 'read-score') {
+        const requestedKey = commandKey(request.score)
+        const stat = stats.find(([key, label, short]) => [key, label, short].some(value => commandKey(value) === requestedKey))
+        if (stat) { reply(`${character.name} has ${signed(character.stats[stat[0]])} ${stat[1]}.`); return }
+        const skill = skillDefs.find(([key, label]) => [key, label].some(value => commandKey(value) === requestedKey))
+        if (skill) {
+          const statScore = number(character.stats[skill[2]])
+          const ability = skillEntryTotal(character.skills[skill[0]])
+          reply(`${character.name} has ${signed(statScore + ability)} ${skill[1]} total: ${signed(statScore)} from ${stats.find(([key]) => key === skill[2])?.[1] || skill[2]} and ${signed(ability)} from Skill adjustments.`)
+          return
+        }
+        reply(`I could not find a Stat or Skill named ${request.score}.`)
+        return
+      }
       if (request.intent === 'preview-energy' || request.intent === 'change-energy') {
         const currentValue = number(character.currentEnergy)
         const amount = Math.max(0, number(request.amount))
