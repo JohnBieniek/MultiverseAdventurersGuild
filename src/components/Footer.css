@@ -74,12 +74,25 @@
     text-align: right;
   }
 
+  .footer-copyright {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
   .footer-rights {
     display: block;
   }
 
   .footer-version {
     display: none;
+  }
+
+  .footer-version.is-mobile-revealed {
+    display: block;
+    grid-column: 1 / -1;
+    color: #fff4cf;
+    text-align: center;
   }
 }
 
