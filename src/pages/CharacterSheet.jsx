@@ -1551,8 +1551,10 @@ const suppliedItemCandidates = (archetypeName, species = '') => suppliedScoreDes
   ]) : []
   return [...typed, ...standardArmor]
 })
-const itemDataVersion = 4
+const itemDataVersion = 5
 const itemLoadoutMarker = archetypeName => `${itemDataVersion}:${archetypeName}`
+const traitDataVersion = 1
+const traitLoadoutMarker = (archetypeName, speciesName) => `${traitDataVersion}:${archetypeName}:${speciesName}`
 const multiverseItemModels = ['Aetherwake', 'Amberlight', 'Ashfall', 'Astral Key', 'Blackglass', 'Brightcoil', 'Cinderheart', 'Clockstar', 'Crimson Echo', 'Dawnchime', 'Deepwell', 'Dreamwire', 'Eclipse', 'Emberline', 'Evernight', 'Farstar', 'Ghostkey', 'Glasswing', 'Gravemark', 'Greenfire', 'Hollow Sun', 'Iron Halo', 'Ivory Pulse', 'Jade Signal', 'Kingshade', 'Lightning Thread', 'Lost Compass', 'Midnight Bell', 'Mirrorwake', 'Moonspoke', 'Ninefold', 'Obsidian Hymn', 'Orichalcum', 'Pale Comet', 'Phoenix', 'Quantum Rose', 'Redshift', 'Riftglass', 'Silver Thorn', 'Skyfire', 'Solaris', 'Starfall', 'Stormkey', 'Sunspoke', 'Thornlight', 'Titan Song', 'Umbral', 'Voidlight', 'Wayfinder', 'Worldroot']
 const itemVariationDetails = [
   'Its calibration shifts subtly with the wearer’s habits.',
@@ -1610,13 +1612,9 @@ const populateArchetypeItems = (existingItems, archetypeName, scoreValues, speci
     .map(candidate => fitItemToScores(candidate, scoreValues))
     .filter(Boolean)
   const selectedItems = []
-  const coveredScores = new Set(
-    items.map(item => itemScoreDetails(item.description || '').score).filter(Boolean),
-  )
+  const coveredScores = new Set()
   const selectedNames = new Set()
-  const selectedDescriptions = new Set(
-    items.map(item => String(item.description || '').trim().toLowerCase()).filter(Boolean),
-  )
+  const selectedDescriptions = new Set()
   const randomizedCandidates = shuffled(candidates)
   randomizedCandidates.forEach(candidate => {
     const coverage = itemScoreCoverage(candidate)
@@ -1883,6 +1881,19 @@ const randomStartingTraits = (speciesName, archetype, usedNames = new Set()) => 
   if (thirdTrait) selected.push(thirdTrait)
   return selected
 }
+const populateStartingTraits = (existingItems, speciesName, archetype) => {
+  const items = existingItems.map(item => ({ ...item }))
+  const generatedTraits = items.filter(item => ['archetype', 'archetype-trait', 'species-trait'].includes(item.source))
+  const needed = Math.max(0, 3 - generatedTraits.length)
+  const usedNames = new Set(generatedTraits.map(item => item.name?.trim()).filter(Boolean))
+  randomStartingTraits(speciesName, archetype, usedNames).slice(0, needed).forEach(({ name, description, source }) => {
+    const trait = { id: crypto.randomUUID(), name, description, source }
+    const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.description || '').trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
+    if (emptyIndex >= 0) items[emptyIndex] = { ...trait, id: items[emptyIndex].id || trait.id }
+    else items.push(trait)
+  })
+  return items
+}
 const attackFocusForArchetype = archetype => {
   const strengths = (archetype?.strengths || []).join(' ').toLowerCase()
   const hasMeleeFocus = /\bmelee\b/.test(strengths)
@@ -1977,6 +1988,7 @@ function CharacterSheet() {
   const [showWelcome, setShowWelcome] = useState(false)
   const [levelUp, setLevelUp] = useState(null)
   const [deathwatch, setDeathwatch] = useState(null)
+  const [deathwatchHidden, setDeathwatchHidden] = useState(false)
   const fileRef = useRef(null)
   const totalXpEditValue = useRef(null)
   const totalXpLastValue = useRef(null)
@@ -2005,6 +2017,7 @@ function CharacterSheet() {
       if (requestedSpecies) { hero.species = knownCommandOption(speciesNames, requestedSpecies); hero.speciesSource = 'user' }
       if (requestedArchetype) hero.archetype = knownCommandOption(archetypeOptions.map(option => option.name), requestedArchetype)
       setDeathwatch(null)
+      setDeathwatchHidden(false)
       setShowWelcome(false)
       setCharacter(hero)
       if (requestedArchetype && archetypeOptions.some(option => option.name === hero.archetype)) applyArchetype(hero.archetype)
@@ -2077,6 +2090,8 @@ function CharacterSheet() {
     })
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
     if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character), character.species); changed = true }
+    const needsTraitLoadout = Boolean(archetype && character.traitLoadoutAppliedFor !== traitLoadoutMarker(character.archetype, character.species))
+    if (needsTraitLoadout) { items = populateStartingTraits(items, character.species, archetype); changed = true }
     items = items.map(item => {
       if (!['archetype', 'archetype-item', 'archetype-trait', 'species-trait'].includes(item.source) || !/^\p{Ll}/u.test(item.name || '')) return item
       changed = true
@@ -2101,7 +2116,7 @@ function CharacterSheet() {
       defenseCostVersion = 1
       changed = true
     }
-    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, contacts, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, contactLoadoutAppliedFor: needsContactLoadout ? contactLoadoutMarker(character.archetype) : current.contactLoadoutAppliedFor, updatedAt: Date.now() }))
+    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, contacts, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, traitLoadoutAppliedFor: needsTraitLoadout ? traitLoadoutMarker(character.archetype, character.species) : current.traitLoadoutAppliedFor, contactLoadoutAppliedFor: needsContactLoadout ? contactLoadoutMarker(character.archetype) : current.contactLoadoutAppliedFor, updatedAt: Date.now() }))
   }, [character])
 
   useEffect(() => {
@@ -2338,6 +2353,11 @@ function CharacterSheet() {
         const currentValue = String(character[field] || '').trim() || 'not selected'
         const label = field === 'name' ? 'name' : field === 'species' ? 'Species' : 'Archetype'
         if (request.intent === 'preview-identity') { reply(`Change ${label} from ${currentValue} to ${canonicalValue}?`); return }
+        if (field === 'archetype' && archetypeOptions.some(option => option.name === canonicalValue)) {
+          applyArchetype(canonicalValue)
+          reply(`${label} changed from ${currentValue} to ${canonicalValue}. The complete default starting package was applied.`)
+          return
+        }
         setCharacter(current => ({ ...current, [field]: canonicalValue, ...(field === 'name' ? { characterNameSource: 'user' } : {}), ...(field === 'species' ? { speciesSource: 'user' } : {}), updatedAt: Date.now() }))
         reply(`${label} changed from ${currentValue} to ${canonicalValue}.`)
         return
@@ -2358,8 +2378,8 @@ function CharacterSheet() {
           const entries = character.items.filter(item => item.name?.trim()).map(item => `${item.name}${String(item.source || '').includes('trait') ? ', Trait' : ', Item'}`)
           reply(entries.length ? `${character.name}'s Items and Traits are ${entries.join('; ')}.` : `${character.name} has no Items or Traits listed.`)
         } else if (list === 'traits') {
-          const traits = named(character.items.filter(item => String(item.source || '').includes('trait')))
-          reply(traits.length ? `${character.name}'s Traits are ${traits.join(', ')}.` : `${character.name} has no generated Traits identified. Check the Items and Traits section for custom entries.`)
+          const traits = named(character.items.filter(item => String(item.source || '').includes('trait') || !item.source))
+          reply(traits.length ? `${character.name}'s Traits are ${traits.join(', ')}.` : `${character.name} has no Traits listed.`)
         } else if (list === 'items') {
           const items = named(character.items.filter(item => !String(item.source || '').includes('trait')))
           reply(items.length ? `${character.name}'s Items are ${items.join(', ')}.` : `${character.name} has no Items listed.`)
@@ -2664,6 +2684,7 @@ function CharacterSheet() {
     const nextHp = Math.max(-1, Math.min(number(computed.maxHp), number(value)))
     if (number(character.currentHp) >= 0 && nextHp === -1) {
       setDeathwatch({ clock: 0, phase: 'endurance', checks: [], stopReason: '', deathRoll: null, outcome: '', mode: audioOnly ? 'audio' : 'visual' })
+      setDeathwatchHidden(false)
     }
     setCharacter(current => ({ ...current, currentHp: nextHp, updatedAt: Date.now() }))
   }
@@ -2813,14 +2834,7 @@ function CharacterSheet() {
         : randomSpeciesChoices[Math.floor(Math.random() * randomSpeciesChoices.length)] || speciesNames[0] || ''
       const manualItems = current.items.filter(item => !['archetype', 'archetype-trait', 'species-trait', 'archetype-item'].includes(item.source))
       const packageItemScores = { ...preset.stats, ...allocation, defense: Math.max(1, number(current.defenseRating)) }
-      const items = populateArchetypeItems(manualItems, preset.name, packageItemScores, species)
-      const usedItemNames = new Set(items.map(item => item.name?.trim()).filter(Boolean))
-      randomStartingTraits(species, preset, usedItemNames).forEach(({ name, description, source }) => {
-        const trait = { id: crypto.randomUUID(), name, description, source }
-        const emptyIndex = items.findIndex(item => !item.name?.trim() && !String(item.description || '').trim() && !String(item.bonus || '').trim() && !item.appliesTo?.trim())
-        if (emptyIndex >= 0) items[emptyIndex] = { ...trait, id: items[emptyIndex].id || trait.id }
-        else items.push(trait)
-      })
+      const items = populateStartingTraits(populateArchetypeItems(manualItems, preset.name, packageItemScores, species), species, preset)
       const weapons = populateArchetypeWeapons(current.weapons, preset.name, species)
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
       const attackFocus = attackFocusForArchetype(preset)
@@ -2835,7 +2849,7 @@ function CharacterSheet() {
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
-        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name, species), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), contactLoadoutAppliedFor: contactLoadoutMarker(preset.name), updatedAt: Date.now(),
+        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name, species), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), traitLoadoutAppliedFor: traitLoadoutMarker(preset.name, species), contactLoadoutAppliedFor: contactLoadoutMarker(preset.name), updatedAt: Date.now(),
       }
     })
     flash(`${preset.name} starting scores, skills, and traits applied`)
@@ -2879,6 +2893,8 @@ function CharacterSheet() {
     setRoll({ kind: 'die', label: `d${sides}`, die: sides, natural, modifier: 0, total: natural })
   }
   const createHero = () => {
+    setDeathwatch(null)
+    setDeathwatchHidden(false)
     setCharacter(newCharacter())
     setShowWelcome(true)
   }
@@ -2943,7 +2959,7 @@ function CharacterSheet() {
     return usedByOtherSkills >= available
   }
   return <div className="sheet-page">
-    <div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>
+    <div className="sheet-toolbar-region"><div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>{deathwatch && deathwatch.mode !== 'audio' && deathwatch.phase !== 'resolved' && deathwatchHidden && <button type="button" className="dying-toast" onClick={() => setDeathwatchHidden(false)}>You’re dying.</button>}</div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
       <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/>
       <IdentityChoice label="Species" href="/players#species" help="Species describes what kind of being your Hero is. It is primarily a roleplaying choice and does not limit your Stats or Skills." value={character.species} options={speciesNames} onChange={setSpecies}/>
@@ -3002,7 +3018,7 @@ function CharacterSheet() {
     {showWelcome && <CharacterSheetWelcome close={() => setShowWelcome(false)}/>}
     {levelUp && <LevelUpModal level={levelUp} close={() => setLevelUp(null)}/>}
     {roll && <RollModal roll={roll} close={() => setRoll(null)} damage={() => damageRoll(roll)}/>}
-    {deathwatch && deathwatch.mode !== 'audio' && <DeathwatchModal heroName={character.name || 'The Hero'} endurance={character.stats.endurance} state={deathwatch} setState={setDeathwatch} onStabilize={() => update(['currentHp'], 0)} close={() => setDeathwatch(null)}/>}
+    {deathwatch && deathwatch.mode !== 'audio' && !deathwatchHidden && <DeathwatchModal heroName={character.name || 'The Hero'} endurance={character.stats.endurance} state={deathwatch} setState={setDeathwatch} onStabilize={() => update(['currentHp'], 0)} dismiss={() => setDeathwatchHidden(true)} close={() => { setDeathwatch(null); setDeathwatchHidden(false) }}/>}
     {showArchetypeQuiz && (
       <ArchetypeQuizModal close={() => setShowArchetypeQuiz(false)} complete={name => { setShowArchetypeQuiz(false); setPendingArchetype(name) }}/>
     )}
@@ -3068,7 +3084,7 @@ function DefenseVital({ value, bonus, rating, onBonus, onRating }) {
 function EditableTable({ title, icon, subtitle, rows, columns, add, children }) { const slug = title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-'); return <section className={`sheet-section editable-table table-${slug}`}><SectionTitle icon={icon} title={title} subtitle={subtitle}/><div className="table-head">{columns.map((column,i)=><span key={`${column}-${i}`}>{column}</span>)}</div>{rows.map((row,i)=><div className="table-row" key={row.id}>{children(row,i)}</div>)}<button className="add-row" onClick={add}>＋ Add {title.replace(/s$/, '')}</button>{title === 'Talents' && <ForceTable/>}</section> }
 function ForceTable() { return <div className="force-table"><h3>Force Activation Costs</h3><div className="force-row force-head"><span>Force</span><span>Sustained</span><span>One-shot</span></div>{[[1,1,1],[2,4,2],[3,9,4],[4,16,8]].map(([force,sustained,oneShot]) => <div className="force-row" key={force}><strong>F{force}</strong><span>{sustained} Energy</span><span>{oneShot} Energy</span></div>)}<p>One-shots last for one roll or immediate use and do not occupy a Talent Slot.</p></div> }
 function RollModal({ roll, close, damage }) { const success = roll.result?.includes('Success') || roll.result?.includes('success') || roll.hit; const displayDie = roll.kind === 'damage' || roll.kind === 'die' ? roll.die : 20; return createPortal(<div className="modal-backdrop" onMouseDown={e => e.target===e.currentTarget && close()}><div className={`roll-modal ${success ? 'success' : ''}`} role="dialog" aria-modal="true"><button className="modal-close" onClick={close}>×</button><span className="eyebrow">{roll.kind === 'damage' ? 'DAMAGE ROLL' : roll.kind === 'attack' ? 'ATTACK ROLL' : roll.kind === 'die' ? 'DIE ROLL' : 'D20 CHECK'}</span><h2>{roll.label}</h2><div className={`die-result die-d${displayDie}`}>{roll.natural}</div>{roll.kind !== 'die' && <div className="roll-math"><span>Die <strong>{roll.natural}</strong></span><span>Modifier <strong>{signed(roll.modifier)}</strong></span><span>Total <strong>{roll.total}</strong></span>{roll.tn != null && <span>Target <strong>{roll.tn}</strong></span>}</div>}{roll.kind === 'attack' && <h3>{roll.natural === 20 ? 'Critical hit!' : roll.natural === 1 ? 'Critical miss!' : roll.tn == null ? 'Attack rolled' : roll.hit ? 'Hit!' : 'Miss'}</h3>}{roll.result && <h3>{roll.result}</h3>}{roll.critical && <p>Critical hit: maximum d{roll.die} damage.</p>}{roll.kind === 'attack' && roll.hit && <button className="primary damage-button" onClick={damage}>Roll d{roll.die} Damage</button>}</div></div>, document.body) }
-function DeathwatchModal({ heroName, endurance, state, setState, onStabilize, close }) {
+function DeathwatchModal({ heroName, endurance, state, setState, onStabilize, dismiss, close }) {
   const rollEndurance = () => {
     const natural = rollDie(20)
     const modifier = number(endurance)
@@ -3084,7 +3100,8 @@ function DeathwatchModal({ heroName, endurance, state, setState, onStabilize, cl
     if (outcome === 'stable') onStabilize()
   }
   const latestCheck = state.checks.at(-1)
-  return createPortal(<div className="modal-backdrop"><div className={`archetype-prompt deathwatch-modal ${state.outcome || ''}`} role="alertdialog" aria-modal="true" aria-labelledby="deathwatch-title" aria-describedby="deathwatch-description"><span className="eyebrow">DEATH CLOCK</span><h2 id="deathwatch-title">The Death Clock is ticking.</h2><p id="deathwatch-description"><strong>{heroName}</strong> has dropped to −1 HP and is dying.</p><div className="deathwatch-clock"><span>Death Clock</span><strong>{state.clock}</strong></div>{latestCheck && <div className={`deathwatch-check ${latestCheck.success ? 'success' : 'failure'}`}><strong>Endurance: {latestCheck.natural} {signed(latestCheck.modifier)} = {latestCheck.total}</strong><span>{latestCheck.success ? 'Success—the Death Clock stops.' : `Failure—the Death Clock increases to ${state.clock}.`}</span></div>}{state.phase === 'endurance' && <><p>At the end of each turn, make an Endurance TN11 roll. A failure increases the Death Clock by 1.</p><div className="deathwatch-actions"><button type="button" className="primary" autoFocus onClick={rollEndurance}>Roll Endurance TN11</button><button type="button" onClick={firstAid}>Teammate Provides First Aid</button></div></>}{state.phase === 'death-roll' && <><p>{state.stopReason} Roll a d6. If it is less than the Death Clock, {heroName} dies; otherwise, {heroName} stabilizes.</p><button type="button" className="primary deathwatch-resolve" autoFocus onClick={resolveDeathwatch}>Roll the d6</button></>}{state.phase === 'resolved' && <><div className="deathwatch-result"><span>d6 result</span><strong>{state.deathRoll}</strong><h3>{state.outcome === 'dead' ? `${heroName} dies.` : `${heroName} stabilizes.`}</h3><p>{state.deathRoll} {state.outcome === 'dead' ? 'is less than' : 'is not less than'} the Death Clock of {state.clock}.</p></div><button type="button" className="primary deathwatch-resolve" autoFocus onClick={close}>Return to Sheet</button></>}</div></div>, document.body)
+  const dismissButton = state.phase !== 'resolved' ? <button type="button" className="modal-close" aria-label="Close Death Clock" onClick={dismiss}>×</button> : null
+  return createPortal(<div className="modal-backdrop"><div className={`archetype-prompt deathwatch-modal ${state.outcome || ''}`} role="alertdialog" aria-modal="true" aria-labelledby="deathwatch-title" aria-describedby="deathwatch-description">{dismissButton}<span className="eyebrow">DEATH CLOCK</span><h2 id="deathwatch-title">The Death Clock is ticking.</h2><p id="deathwatch-description"><strong>{heroName}</strong> has dropped to −1 HP and is dying.</p><div className="deathwatch-clock"><span>Death Clock</span><strong>{state.clock}</strong></div>{latestCheck && <div className={`deathwatch-check ${latestCheck.success ? 'success' : 'failure'}`}><strong>Endurance: {latestCheck.natural} {signed(latestCheck.modifier)} = {latestCheck.total}</strong><span>{latestCheck.success ? 'Success—the Death Clock stops.' : `Failure—the Death Clock increases to ${state.clock}.`}</span></div>}{state.phase === 'endurance' && <><p>At the end of each turn, make an Endurance TN11 roll. A failure increases the Death Clock by 1.</p><div className="deathwatch-actions"><button type="button" className="primary" autoFocus onClick={rollEndurance}>Roll Endurance TN11</button><button type="button" onClick={firstAid}>Teammate Provides First Aid</button></div></>}{state.phase === 'death-roll' && <><p>{state.stopReason} Roll a d6. If it is less than the Death Clock, {heroName} dies; otherwise, {heroName} stabilizes.</p><button type="button" className="primary deathwatch-resolve" autoFocus onClick={resolveDeathwatch}>Roll the d6</button></>}{state.phase === 'resolved' && <><div className="deathwatch-result"><span>d6 result</span><strong>{state.deathRoll}</strong><h3>{state.outcome === 'dead' ? `${heroName} dies.` : `${heroName} stabilizes.`}</h3><p>{state.deathRoll} {state.outcome === 'dead' ? 'is less than' : 'is not less than'} the Death Clock of {state.clock}.</p></div><button type="button" className="primary deathwatch-resolve" autoFocus onClick={close}>Return to Sheet</button></>}</div></div>, document.body)
 }
 function LevelUpModal({ level, close }) {
   const benefits = levelUpBenefits[level] || { automatic: 'Your Level has increased.' }

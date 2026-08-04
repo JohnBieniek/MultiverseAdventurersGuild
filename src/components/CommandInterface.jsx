@@ -248,7 +248,7 @@ function CommandInterface() {
         pendingHeroCommandRef.current = ''
       } else pendingHeroCommandRef.current = ''
     }
-    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load)\b/i)
+    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|my|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load|strength|dexterity|endurance|intuition|education|charisma|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle|health|status|ego|defense|resilience|energy|level|xp|experience|skills|stats)\b/i)
     if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
     const value = normalize(spokenCommand)
     setCommand(original)
