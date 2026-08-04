@@ -2011,9 +2011,13 @@ function CharacterSheet() {
       sessionStorage.removeItem(NEW_CHARACTER_COMMAND_KEY)
       const hero = newCharacter()
       const requestedName = String(requested.name || '').trim()
-      const requestedSpecies = String(requested.species || '').trim()
-      const requestedArchetype = String(requested.archetype || '').trim()
+      const descriptor = String(requested.descriptor || '').trim().toLowerCase()
+      const descriptorOption = options => [...options].sort((left, right) => right.length - left.length).find(option => descriptor.includes(option.toLowerCase())) || ''
+      const requestedSpecies = String(requested.species || descriptorOption(speciesNames)).trim()
+      const requestedArchetype = String(requested.archetype || descriptorOption(archetypeOptions.map(option => option.name))).trim()
+      const requestedLevel = Number.isFinite(Number(requested.level)) ? Math.max(0, Math.min(10, Number(requested.level))) : null
       if (requestedName) { hero.name = requestedName; hero.characterNameSource = 'user' }
+      if (requestedLevel != null) { hero.level = requestedLevel; hero.totalXp = xpForLevel(requestedLevel); hero.unspentXp = xpForLevel(requestedLevel) }
       if (requestedSpecies) { hero.species = knownCommandOption(speciesNames, requestedSpecies); hero.speciesSource = 'user' }
       if (requestedArchetype) hero.archetype = knownCommandOption(archetypeOptions.map(option => option.name), requestedArchetype)
       setDeathwatch(null)

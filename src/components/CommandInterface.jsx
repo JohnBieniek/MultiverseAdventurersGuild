@@ -74,6 +74,7 @@ const savedCharacters = () => {
 }
 const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
 const numberWords = { zero: 0, one: 1, two: 2, to: 2, too: 2, three: 3, four: 4, for: 4, five: 5, six: 6, seven: 7, eight: 8, ate: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 }
+const ordinalWords = { zeroth: 0, first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 }
 const spokenNumber = value => /^\d+$/.test(String(value)) ? Number(value) : numberWords[normalize(value)]
 const signedSpokenNumber = value => {
   const normalized = normalize(value)
@@ -106,6 +107,7 @@ function CommandInterface() {
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
   const pendingHeroCommandRef = useRef('')
+  const pendingHeroNeedsNameRef = useRef(false)
   const localModelRef = useRef(null)
   const localRecognizerRef = useRef(null)
   const localStreamRef = useRef(null)
@@ -200,6 +202,7 @@ function CommandInterface() {
     window.clearTimeout(restartTimerRef.current)
     window.clearTimeout(mobileCommandTimerRef.current)
     pendingHeroCommandRef.current = ''
+    pendingHeroNeedsNameRef.current = false
     recognitionRef.current?.stop()
     stopLocalRecognition()
     window.speechSynthesis?.cancel()
@@ -240,13 +243,14 @@ function CommandInterface() {
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
-    let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
+    let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add').replace(/\band\s+durance\b/gi, 'endurance')
     if (pendingHeroCommandRef.current) {
-      if (/^(?:cancel|close|never\s*mind)$/i.test(spokenCommand)) pendingHeroCommandRef.current = ''
+      if (/^(?:cancel|close|never\s*mind)$/i.test(spokenCommand)) { pendingHeroCommandRef.current = ''; pendingHeroNeedsNameRef.current = false }
       else if (!/^(?:create|make|start|new)\b/i.test(spokenCommand)) {
-        spokenCommand = `${pendingHeroCommandRef.current} ${spokenCommand}`.trim()
+        spokenCommand = `${pendingHeroCommandRef.current}${pendingHeroNeedsNameRef.current ? ' named' : ''} ${spokenCommand}`.trim()
         pendingHeroCommandRef.current = ''
-      } else pendingHeroCommandRef.current = ''
+        pendingHeroNeedsNameRef.current = false
+      } else { pendingHeroCommandRef.current = ''; pendingHeroNeedsNameRef.current = false }
     }
     const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|my|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load|strength|dexterity|endurance|intuition|education|charisma|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle|health|status|ego|defense|resilience|energy|level|xp|experience|skills|stats)\b/i)
     if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
@@ -256,6 +260,7 @@ function CommandInterface() {
     if (!value) { respond('Type or speak a command first.'); return }
     if (keepListeningRef.current && /^(?:(?:create|make|start)\s+(?:a\s+)?(?:new\s+)?|new\s+)(?:hero|character)$/i.test(spokenCommand)) {
       pendingHeroCommandRef.current = spokenCommand
+      pendingHeroNeedsNameRef.current = true
       setStatus('Creating a new Hero. Say the Hero’s name.')
       speak('What is the new Hero’s name?')
       return
@@ -266,10 +271,25 @@ function CommandInterface() {
       respond(onCharacterSheet ? 'On a Character Sheet you can ask about or immediately change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
       return
     }
+    const levelHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?((?:(?:zeroth|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+)(?:st|nd|rd|th)?\s+level|level\s+(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+))\b.*)$/i)
+    const packageHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?(.+\s+.+)$/i)
+    const describedHeroMatch = levelHeroMatch || (packageHeroMatch && !/\b(?:hero|character|weapon|talent|contact|item)\b/i.test(packageHeroMatch[1]) ? packageHeroMatch : null)
     const createHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?(?:new\s+)?(?:hero|character)\b(.*)$/i)
       || spokenCommand.match(/^new\s+(?:hero|character)\b(.*)$/i)
+      || describedHeroMatch
     if (createHeroMatch) {
       const details = createHeroMatch[1].replace(/^[,;:\s]+/, '').trim()
+      if (describedHeroMatch && !/\b(?:name|named|called)\b/i.test(details)) {
+        pendingHeroCommandRef.current = spokenCommand
+        pendingHeroNeedsNameRef.current = true
+        setStatus(`Creating ${details}. Say the Hero’s name.`)
+        speak('What is the new Hero’s name?')
+        return
+      }
+      const levelMatch = details.match(/\b(?:(level)\s+(zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+)|((?:zeroth|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+)(?:st|nd|rd|th)?)\s+level)\b/i)
+      const levelText = String(levelMatch?.[2] || levelMatch?.[3] || '').toLowerCase().replace(/(?:st|nd|rd|th)$/i, '')
+      const requestedLevel = levelText ? (/^\d+$/.test(levelText) ? Number(levelText) : ordinalWords[levelText] ?? numberWords[levelText]) : undefined
+      const descriptor = describedHeroMatch ? details.replace(levelMatch?.[0] || '', '').replace(/\b(?:hero|character)\b/i, '').trim() : ''
       const extractDetail = (labels, followingLabels) => {
         const match = details.match(new RegExp(`\\b(?:${labels})(?:\\s+(?:is|of))?\\s+(.+?)(?=[,;]?\\s+(?:${followingLabels})\\b|$)`, 'i'))
         return match?.[1]?.replace(/[,;]+$/, '').trim() || ''
@@ -277,13 +297,15 @@ function CommandInterface() {
       const namedValue = extractDetail('name|named|called', 'species|archetype')
       const unlabeledName = details.split(/\b(?:species|archetype|name|named|called)\b/i)[0].replace(/[,;]+$/, '').trim()
       const hero = {
-        name: namedValue || unlabeledName,
+        name: namedValue || (describedHeroMatch ? '' : unlabeledName),
         species: extractDetail('species', 'name|named|called|archetype'),
         archetype: extractDetail('archetype', 'name|named|called|species'),
+        level: requestedLevel,
+        descriptor,
       }
       sessionStorage.setItem(NEW_CHARACTER_COMMAND_KEY, JSON.stringify(hero))
       window.dispatchEvent(new CustomEvent('mag-create-character', { detail: hero }))
-      const selected = [hero.name && `named ${hero.name}`, hero.species && `Species ${hero.species}`, hero.archetype && `Archetype ${hero.archetype}`].filter(Boolean)
+      const selected = [hero.name && `named ${hero.name}`, hero.level != null && `Level ${hero.level}`, hero.species && `Species ${hero.species}`, hero.archetype && `Archetype ${hero.archetype}`, hero.descriptor && hero.descriptor].filter(Boolean)
       completeNavigation('/character-sheet', `New Hero created${selected.length ? `, ${selected.join(', ')}` : ''}.`)
       return
     }
