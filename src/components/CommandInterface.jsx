@@ -1,15 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
-import rollsRules from '../content/rules/rolls.txt?raw'
-import actionEconomyRules from '../content/rules/action-economy.txt?raw'
-import levelProgressionRules from '../content/rules/level-progression.txt?raw'
-import movementRules from '../content/rules/movement.txt?raw'
-import healingRules from '../content/rules/healing.txt?raw'
-import assistingRules from '../content/rules/assisting.txt?raw'
-import combatRules from '../content/rules/combat.txt?raw'
-import creditsRules from '../content/rules/credits.txt?raw'
-import vehiclesRules from '../content/rules/vehicles.txt?raw'
 import './CommandInterface.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
@@ -34,17 +25,15 @@ const destinations = [
   { label: 'Contact Us', path: '/contact', terms: 'contact email feedback message' },
 ]
 
-const ruleTopics = [
-  ['Rolls', rollsRules],
-  ['Action Economy', actionEconomyRules],
-  ['Level Progression', levelProgressionRules],
-  ['Movement', movementRules],
-  ['Healing', healingRules],
-  ['Assisting', assistingRules],
-  ['Combat', combatRules],
-  ['Credits', creditsRules],
-  ['Vehicles', vehiclesRules],
-].map(([title, content]) => ({ title, content, path: `/rules#${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}` }))
+const guideSlug = title => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+const guideTopics = [
+  { title: 'Core Rules', aliases: ['rules', 'core rules', 'game rules'], path: '/rules', overview: 'Core Rules. Available sections are Rolls, Action Economy, Level Progression, Movement, Healing, Assisting, Combat, Credits, and Vehicles.' },
+  ...['Rolls', 'Action Economy', 'Level Progression', 'Movement', 'Healing', 'Assisting', 'Combat', 'Credits', 'Vehicles'].map(title => ({ title, aliases: [title, `${title} rules`, `core ${title}`], path: `/rules#${guideSlug(title)}` })),
+  { title: 'Player Rules', aliases: ['player rules', 'players rules', 'player guide', 'players guide'], path: '/players', overview: 'Player Rules. Available sections are How to Play, Species, Archetypes, Stats, Skills, Defenses, HP, Contacts, Weapons, Reputation, Equipment, and Talents.' },
+  ...['How to Play', 'Species', 'Archetypes', 'Stats', 'Skills', 'Defenses', 'HP', 'Contacts', 'Weapons', 'Reputation', 'Equipment', 'Talents'].map(title => ({ title, aliases: [title, `player ${title}`, `players ${title}`], path: `/players#${guideSlug(title)}` })),
+  { title: 'GM Rules', aliases: ['gm rules', 'game master rules', 'gm guide', 'game master guide'], path: '/gm', overview: 'Game Master Rules. Available sections are The Guild, Basics, Levels, Rolls, Credits, Loot, Death, NPC Creation, Creature Compendium, Adventures, History, and Factions.' },
+  ...['The Guild', 'Basics', 'Levels', 'Rolls', 'Credits', 'Loot', 'Death', 'NPC Creation', 'Creature Compendium', 'Adventures', 'History', 'Factions'].map(title => ({ title, aliases: [title, `gm ${title}`, `game master ${title}`], path: `/gm#${guideSlug(title)}` })),
+]
 
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase().replace(/[^a-z0-9\s'-]/g, '').replace(/\s+/g, ' ')
 const compactName = value => normalize(value).replace(/[^a-z0-9]/g, '')
@@ -94,12 +83,7 @@ const savedCharacters = () => {
   try { return JSON.parse(localStorage.getItem(STORE_KEY)) || [] } catch { return [] }
 }
 const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
-const matchingRuleTopic = query => ruleTopics.map(topic => ({ topic, score: characterMatchScore(topic.title, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)[0]?.topic
-const readableRuleText = topic => {
-  const lines = String(topic.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
-  if (normalize(lines[0]) === normalize(topic.title)) lines.shift()
-  return `${topic.title}. ${lines.join(' ')}`
-}
+const matchingRuleTopic = query => guideTopics.flatMap(topic => topic.aliases.map(alias => ({ topic, score: characterMatchScore(alias, query) }))).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)[0]?.topic
 const numberWords = { zero: 0, one: 1, two: 2, to: 2, too: 2, three: 3, four: 4, for: 4, five: 5, six: 6, seven: 7, eight: 8, ate: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 }
 const ordinalWords = { zeroth: 0, first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 }
 const spokenNumber = value => /^\d+$/.test(String(value)) ? Number(value) : numberWords[normalize(value)]
@@ -255,6 +239,22 @@ function CommandInterface() {
       if (target) { target.tabIndex = -1; target.scrollIntoView({ block: 'start' }); target.focus() }
     }, 100)
   }
+  const readGuideTopic = topic => {
+    keepListeningRef.current = false
+    recognitionRef.current?.stop()
+    stopLocalRecognition()
+    setListening(false)
+    navigate(topic.path)
+    setOpen(false)
+    setStatus(`Opening ${topic.title}.`)
+    window.setTimeout(() => {
+      const hash = topic.path.includes('#') ? topic.path.slice(topic.path.indexOf('#') + 1) : ''
+      const target = hash ? document.getElementById(hash) : null
+      const text = topic.overview || target?.innerText?.replace(/\s+/g, ' ').trim() || `${topic.title} opened, but its text could not be read.`
+      target?.scrollIntoView({ block: 'start' })
+      respond(text)
+    }, 180)
+  }
   const search = term => {
     const query = normalize(term)
     if (compactName(query) === 'npc' || compactName(query) === 'npcs') {
@@ -302,7 +302,7 @@ function CommandInterface() {
     if (readRuleMatch) {
       const topic = matchingRuleTopic(readRuleMatch[1])
       if (topic) {
-        completeNavigation(topic.path, readableRuleText(topic))
+        readGuideTopic(topic)
         return
       }
     }
