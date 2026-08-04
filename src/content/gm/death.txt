@@ -2,7 +2,7 @@ Hero Death
 
 Deathwatch: the Death Clock is ticking.
 
-A Hero with "0" HP can only take a move action. When a Hero drops below "0" HP, they are dying.
+A Hero with 0 HP can only take a move action. When a Hero drops below 0 HP, they are dying.
 
 At the end of each turn, the Hero makes an Endurance TN11 roll. Each time the Hero fails the roll, the Death Clock increases by 1. The Death Clock stops when the Hero makes the roll or a teammate provides first aid.
 

@@ -34,7 +34,28 @@ const guideTopics = [
   ...['How to Play', 'Species', 'Archetypes', 'Stats', 'Skills', 'Defenses', 'HP', 'Contacts', 'Weapons', 'Reputation', 'Equipment', 'Talents'].map(title => ({ title, aliases: [title, `player ${title}`, `players ${title}`], path: `/players#${guideSlug(title)}` })),
   { title: 'GM Rules', aliases: ['gm rules', 'game master rules', 'gm guide', 'game master guide'], path: '/gm', overview: 'Game Master Rules. Available sections are The Guild, Basics, Levels, Rolls, Credits, Loot, Death, NPC Creation, Creature Compendium, Adventures, History, and Factions.' },
   ...['The Guild', 'Basics', 'Levels', 'Rolls', 'Credits', 'Loot', 'Death', 'NPC Creation', 'Creature Compendium', 'Adventures', 'History', 'Factions'].map(title => ({ title, aliases: [title, `gm ${title}`, `game master ${title}`, ...(title === 'Death' ? ['hero death'] : [])], path: `/gm#${guideSlug(title)}` })),
+  { title: 'Items and Traits', aliases: ['items and traits', 'items traits'], path: '/players#equipment' },
 ]
+const guideSourceFiles = import.meta.glob('../content/{rules,players,gm}/*.txt', { eager: true, query: '?raw', import: 'default' })
+const generatedGuideTopics = Object.entries(guideSourceFiles).flatMap(([filePath, source]) => {
+  const pathMatch = filePath.match(/\/content\/(rules|players|gm)\/([^/]+)\.txt$/)
+  if (!pathMatch) return []
+  const [, guide, fileName] = pathMatch
+  const pagePath = guide === 'rules' ? '/rules' : guide === 'players' ? '/players' : '/gm'
+  const sectionSlug = guide === 'players' && fileName === 'roleplaying' ? 'how-to-play' : fileName
+  const lines = String(source || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+  const ignoredLabels = /^(?:description|mechanic|mechanics|strengths?|weaknesses?|preferred talents?|talents?|personality traits?|category|example name|scores?|range|action|targets?|force|minor version|major version|mass version)$/i
+  return lines.flatMap((line, index) => {
+    const titled = line.match(/^(.{2,45}?)(?:\s+-\s+|:\s+)(.+)$/)
+    const title = titled?.[1]?.trim() || line.replace(/[.:\s]+$/, '')
+    const nextLine = lines[index + 1] || ''
+    const standaloneHeading = line.length < 48 && !line.endsWith('.') && !line.includes(',') && !/^[-+*]\s/.test(line) && !/^[-+]?\d|^[-+]?\(/.test(line) && nextLine.length > 0
+    if ((!titled && !standaloneHeading) || ignoredLabels.test(title) || title.length < 3) return []
+    const singular = title.endsWith('s') ? title.slice(0, -1) : title
+    return [{ title, lookup: title, aliases: [...new Set([title, singular])], path: `${pagePath}#${sectionSlug}-${guideSlug(title)}` }]
+  })
+})
+guideTopics.push(...generatedGuideTopics)
 
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase().replace(/[^a-z0-9\s'-]/g, '').replace(/\s+/g, ' ')
 const compactName = value => normalize(value).replace(/[^a-z0-9]/g, '')
@@ -286,7 +307,12 @@ function CommandInterface() {
     setStatus(`Opening ${topic.title}.`)
     window.setTimeout(() => {
       const hash = topic.path.includes('#') ? topic.path.slice(topic.path.indexOf('#') + 1) : ''
-      const target = hash ? document.getElementById(hash) : null
+      let target = hash ? document.getElementById(hash) : null
+      if (!target && topic.lookup) {
+        const requested = normalize(topic.lookup)
+        target = [...document.querySelectorAll('.guide-section h2, .guide-section h3, .guide-section h4, .guide-linked-entry, .guide-card h3, .guide-section p')]
+          .find(element => normalize(element.textContent).startsWith(requested)) || null
+      }
       let targetText = target?.innerText?.replace(/\s+/g, ' ').trim() || ''
       if (target?.matches('h2, h3, h4')) {
         const parts = [targetText]
