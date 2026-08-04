@@ -1655,14 +1655,8 @@ const talentCatalog = (() => {
     const buff = line.match(/^Buff Option:\s*(.+)$/i)
     if (buff) { headings.push({ name: buff[1].replace(/:$/, ''), index }); return }
     const next = lines.slice(index + 1).find(Boolean) || ''
-    if (line && /^Description:/i.test(next) && !line.includes(': ') && !/^Buffs:?$/i.test(line)) headings.push({ name: line.replace(/:$/, ''), index })
+    if (line && /^Description:/i.test(next) && !line.includes(': ')) headings.push({ name: line.replace(/:$/, ''), index })
   })
-  const buffOptionNames = new Set(lines.map(line => line.match(/^Buff Option:\s*(.+)$/i)?.[1]?.replace(/:$/, '')).filter(Boolean))
-  const buffsStart = lines.findIndex(line => /^Buffs:$/i.test(line))
-  const firstBuffOption = lines.findIndex((line, index) => index > buffsStart && /^Buff Option:/i.test(line))
-  const buffsBlock = buffsStart >= 0 ? lines.slice(buffsStart + 1, firstBuffOption >= 0 ? firstBuffOption : lines.length) : []
-  const buffsDescription = buffsBlock.find(line => /^Description:/i.test(line)) || ''
-  const buffDuration = (buffsDescription.match(/\b(?:They|Buffs)\s+last\s+(.+?)(?=,|\.|;|$)/i)?.[1] || '').replace(/^one\b/i, '1')
   return headings.map((heading, index) => {
     const block = lines.slice(heading.index + 1, headings[index + 1]?.index ?? lines.length).filter(Boolean)
     const description = block.find(line => /^Description:/i.test(line))?.replace(/^Description:\s*/i, '') || ''
@@ -1670,7 +1664,7 @@ const talentCatalog = (() => {
     const durationText = (block.find(line => /^Duration:/i.test(line)) || '').replace(/^Duration:\s*/i, '')
     const durationNote = durationText.match(/\s*\(((?:Special )?note:[\s\S]+)\)\s*$/i)?.[1] || ''
     const parsedDuration = durationNote ? durationText.replace(/\s*\((?:Special )?note:[\s\S]+\)\s*$/i, '').trim() : durationText
-    const duration = abbreviateTalentDuration(parsedDuration || (buffOptionNames.has(heading.name) ? buffDuration : ''))
+    const duration = abbreviateTalentDuration(parsedDuration)
     const details = block.filter(line => /^(Action|Cost|Energy Cost):/i.test(line))
     const joined = block.join(' ')
     const minimum = joined.match(/Minimum Force\s*(?:is\s*)?(\d)/i)?.[1]

@@ -130,10 +130,6 @@ Description: You are skilled at making damaging attacks.
 
 Mechanic: Force 2 (F2) allows a reroll of all damage dice. The attacker can choose what roll to use. Can be used after the dice are rolled.
 
-Buffs:
-Description: Buffs are Talents that temporarily improve a target's skill. They last one hour, use an attack action, and have a maximum of Force 2 (F2). Buffs cannot stack with each other; only one Buff can be active on a target at a time. One-shots do not count toward this limit.
-Mechanic: Buffs are activated by touching the target. For 1 additional energy, you can activate a Buff at short range; for 2 additional energy, at medium range; and for 3 additional energy, at long range. A Buff can also be purchased as self-only, which means it uses the one-shot energy cost and only affects you.
-
 Genius:
 Description: Your mind processes information with incredible speed and accuracy.
 Mechanic: The target improves Knowledge by +1d4 per Force used.

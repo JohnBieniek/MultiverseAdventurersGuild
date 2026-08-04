@@ -180,18 +180,6 @@ const playListeningTone = async kind => {
     })
   } catch { /* Audio cues are optional when a browser blocks synthesized audio. */ }
 }
-const speechChunks = message => {
-  const segments = String(message || '').replace(/\s+/g, ' ').trim().match(/[^.!?;:]+[.!?;:]?|[.!?;:]+/g) || []
-  return segments.reduce((chunks, segment) => {
-    segment.trim().split(' ').forEach(word => {
-      const current = chunks.at(-1) || ''
-      if (!current || `${current} ${word}`.length > 150) chunks.push(word)
-      else chunks[chunks.length - 1] = `${current} ${word}`
-    })
-    return chunks
-  }, [])
-}
-
 function CommandInterface() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -273,7 +261,6 @@ function CommandInterface() {
     const voices = window.speechSynthesis.getVoices()
     const voice = voices.find(candidate => candidate.lang === 'en-US' && candidate.default) || voices.find(candidate => candidate.lang?.toLowerCase().startsWith('en')) || null
     const continuousText = String(message || '').replace(/\s+/g, ' ').trim()
-    const chunks = speechChunks(message)
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
       speechUtteranceRef.current = null
@@ -282,37 +269,11 @@ function CommandInterface() {
       ignoreSpeechUntilRef.current = Date.now() + 900
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
-    const queuedChunks = new Set()
-    const queueChunk = index => {
-      if (speechGenerationRef.current !== generation || index >= chunks.length || queuedChunks.has(index)) return
-      queuedChunks.add(index)
-      const utterance = new SpeechSynthesisUtterance(chunks[index])
-      utterance.voice = voice
-      utterance.onstart = () => {
-        speechUtteranceRef.current = utterance
-        queueChunk(index + 1)
-      }
-      utterance.onend = () => {
-        if (index === chunks.length - 1) finished()
-        else queueChunk(index + 1)
-      }
-      utterance.onerror = event => {
-        if (event.error === 'canceled' || event.error === 'interrupted') { finished(); return }
-        if (index === chunks.length - 1) finished()
-        else queueChunk(index + 1)
-      }
-      window.speechSynthesis.resume()
-      window.speechSynthesis.speak(utterance)
-    }
     const continuousUtterance = new SpeechSynthesisUtterance(continuousText)
     continuousUtterance.voice = voice
     continuousUtterance.onstart = () => { speechUtteranceRef.current = continuousUtterance }
     continuousUtterance.onend = finished
-    continuousUtterance.onerror = event => {
-      if (speechGenerationRef.current !== generation) return
-      if (event.error === 'canceled' || event.error === 'interrupted') { finished(); return }
-      queueChunk(0)
-    }
+    continuousUtterance.onerror = finished
     speechUtteranceRef.current = continuousUtterance
     window.speechSynthesis.resume()
     window.speechSynthesis.speak(continuousUtterance)
