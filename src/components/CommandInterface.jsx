@@ -41,6 +41,7 @@ const generatedGuideTopics = Object.entries(guideSourceFiles).flatMap(([filePath
   const pathMatch = filePath.match(/\/content\/(rules|players|gm)\/([^/]+)\.txt$/)
   if (!pathMatch) return []
   const [, guide, fileName] = pathMatch
+  if (guide === 'players' && ['backstory', 'create-your-hero'].includes(fileName)) return []
   const pagePath = guide === 'rules' ? '/rules' : guide === 'players' ? '/players' : '/gm'
   const sectionSlug = guide === 'players' && fileName === 'roleplaying' ? 'how-to-play' : fileName
   const lines = String(source || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
@@ -105,7 +106,13 @@ const savedCharacters = () => {
   try { return JSON.parse(localStorage.getItem(STORE_KEY)) || [] } catch { return [] }
 }
 const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
-const matchingRuleTopic = query => guideTopics.flatMap(topic => topic.aliases.map(alias => ({ topic, score: characterMatchScore(alias, query) }))).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)[0]?.topic
+const guideHomophones = { role: 'roll', roles: 'rolls', row: 'roll', rows: 'rolls', heel: 'heal', heeling: 'healing', aide: 'aid', dye: 'die', dyeing: 'dying', brake: 'break', brakes: 'breaks', coarse: 'course', site: 'sight', stationary: 'stationery', principle: 'principal', faze: 'phase' }
+const guideQueryVariants = query => {
+  const normalized = normalize(query)
+  const corrected = normalized.split(' ').map(word => guideHomophones[word] || word).join(' ')
+  return [...new Set([normalized, corrected])]
+}
+const matchingRuleTopic = query => guideTopics.flatMap(topic => topic.aliases.flatMap(alias => guideQueryVariants(query).map((variant, index) => ({ topic, score: characterMatchScore(alias, variant) + index * .05 })))).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)[0]?.topic
 const numberWords = { zero: 0, one: 1, two: 2, to: 2, too: 2, three: 3, four: 4, for: 4, five: 5, six: 6, seven: 7, eight: 8, ate: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 }
 const ordinalWords = { zeroth: 0, first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 }
 const spokenNumber = value => /^\d+$/.test(String(value)) ? Number(value) : numberWords[normalize(value)]
