@@ -1810,6 +1810,25 @@ const randomContactName = (role, usedNames = new Set()) => {
   const choices = available
   return choices.length ? choices[Math.floor(Math.random() * choices.length)] : ''
 }
+const contactDataVersion = 1
+const contactLoadoutMarker = archetypeName => `${contactDataVersion}:${archetypeName}`
+const populateArchetypeContacts = (existingContacts, archetype) => {
+  let contacts = existingContacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
+  const requiredContacts = Math.max(0, 3 + number(archetype.stats.charisma))
+  const roles = shuffled(contactRolesForArchetype(archetype.name))
+  const usedNames = new Set(contacts.map(contact => contact.name).filter(Boolean))
+  let populatedContacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim()).length
+  for (let roleIndex = 0; populatedContacts < requiredContacts; roleIndex += 1) {
+    const role = roles[roleIndex % roles.length]
+    const generated = { id: crypto.randomUUID(), name: randomContactName(role, usedNames), role, source: 'archetype' }
+    usedNames.add(generated.name)
+    const emptyIndex = contacts.findIndex(contact => !contact.name?.trim() && !contact.role?.trim())
+    if (emptyIndex >= 0) contacts[emptyIndex] = { ...generated, id: contacts[emptyIndex].id || generated.id }
+    else contacts.push(generated)
+    populatedContacts += 1
+  }
+  return contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
+}
 const archetypeOptions = (() => {
   const lines = archetypesText.split(/\r?\n/).map(line => line.trim())
   const headings = lines.map((line, index) => ({ line, index })).filter(({ line, index }) => line.includes(' - ') && /^Scores:/i.test(lines.slice(index + 1).find(Boolean) || ''))
@@ -2057,6 +2076,9 @@ function CharacterSheet() {
     })
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
     if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character), character.species); changed = true }
+    const needsContactLoadout = Boolean(archetype && character.contactLoadoutAppliedFor !== contactLoadoutMarker(character.archetype))
+    const contacts = needsContactLoadout ? populateArchetypeContacts(character.contacts, archetype) : character.contacts
+    if (needsContactLoadout) changed = true
     let meleeAttackModifier = character.meleeAttackModifier
     let rangedAttackModifier = character.rangedAttackModifier
     if (meleeAttackModifier == null || rangedAttackModifier == null) {
@@ -2073,7 +2095,7 @@ function CharacterSheet() {
       defenseCostVersion = 1
       changed = true
     }
-    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, updatedAt: Date.now() }))
+    if (changed) setCharacter(current => ({ ...current, talents, items, weapons, contacts, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, contactLoadoutAppliedFor: needsContactLoadout ? contactLoadoutMarker(character.archetype) : current.contactLoadoutAppliedFor, updatedAt: Date.now() }))
   }, [character])
 
   useEffect(() => {
@@ -2796,21 +2818,7 @@ function CharacterSheet() {
       const weapons = populateArchetypeWeapons(current.weapons, preset.name, species)
       const talents = populateArchetypeTalents(current.talents, preset, talentAllowanceForLevel(current.level))
       const attackFocus = attackFocusForArchetype(preset)
-      let contacts = current.contacts.filter(contact => contact.source !== 'archetype').map(contact => ({ ...contact }))
-      const requiredContacts = Math.max(0, 3 + number(preset.stats.charisma))
-      const roles = shuffled(contactRolesForArchetype(preset.name))
-      const usedNames = new Set(contacts.map(contact => contact.name).filter(Boolean))
-      let populatedContacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim()).length
-      for (let roleIndex = 0; populatedContacts < requiredContacts; roleIndex += 1) {
-        const role = roles[roleIndex % roles.length]
-        const generated = { id: crypto.randomUUID(), name: randomContactName(role, usedNames), role, source: 'archetype' }
-        usedNames.add(generated.name)
-        const emptyIndex = contacts.findIndex(contact => !contact.name?.trim() && !contact.role?.trim())
-        if (emptyIndex >= 0) contacts[emptyIndex] = { ...generated, id: contacts[emptyIndex].id || generated.id }
-        else contacts.push(generated)
-        populatedContacts += 1
-      }
-      contacts = contacts.filter(contact => contact.name?.trim() || contact.role?.trim())
+      const contacts = populateArchetypeContacts(current.contacts, preset)
       const userSelectedName = current.characterNameSource === 'user' || (current.characterNameSource == null && current.name?.trim() && current.name !== 'New Hero')
       const characterName = userSelectedName ? current.name : randomCharacterName(species, preset.name) || current.name
       return {
@@ -2821,7 +2829,7 @@ function CharacterSheet() {
         meleeAttackModifier: attackFocus === 'melee' ? 1 : 0,
         rangedAttackModifier: attackFocus === 'ranged' ? 1 : 0,
         skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ...current.skills[key], ability: allocation[key] }])),
-        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name, species), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), updatedAt: Date.now(),
+        items, weapons, talents, contacts, talentRowsGrantedForLevel: Math.max(number(current.talentRowsGrantedForLevel), talentAllowanceForLevel(current.level)), weaponLoadoutAppliedFor: weaponLoadoutMarker(preset.name, species), itemLoadoutAppliedFor: itemLoadoutMarker(preset.name), contactLoadoutAppliedFor: contactLoadoutMarker(preset.name), updatedAt: Date.now(),
       }
     })
     flash(`${preset.name} starting scores, skills, and traits applied`)
