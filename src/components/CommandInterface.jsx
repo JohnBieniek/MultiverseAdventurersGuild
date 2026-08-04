@@ -259,8 +259,10 @@ function CommandInterface() {
         const match = details.match(new RegExp(`\\b(?:${labels})(?:\\s+(?:is|of))?\\s+(.+?)(?=[,;]?\\s+(?:${followingLabels})\\b|$)`, 'i'))
         return match?.[1]?.replace(/[,;]+$/, '').trim() || ''
       }
+      const namedValue = extractDetail('name|named|called', 'species|archetype')
+      const unlabeledName = details.split(/\b(?:species|archetype|name|named|called)\b/i)[0].replace(/[,;]+$/, '').trim()
       const hero = {
-        name: extractDetail('name|named|called', 'species|archetype'),
+        name: namedValue || unlabeledName,
         species: extractDetail('species', 'name|named|called|archetype'),
         archetype: extractDetail('archetype', 'name|named|called|species'),
       }
