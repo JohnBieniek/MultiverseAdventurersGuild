@@ -2029,6 +2029,13 @@ function CharacterSheet() {
   }, [character?.id])
 
   useEffect(() => {
+    if (!character || number(character.currentHp) < 0) return
+    writeStoredDeathwatch(character.id, null)
+    setDeathwatchState(null)
+    setDeathwatchHidden(false)
+  }, [character?.id, character?.currentHp])
+
+  useEffect(() => {
     const createCommandHero = event => {
       let requested = event?.detail
       if (!requested) {
