@@ -8,6 +8,28 @@ const ACTIVE_CHARACTER_KEY = 'mag-active-character-v1'
 const SPEECH_KEY = 'mag-command-spoken-responses-v1'
 const NEW_CHARACTER_COMMAND_KEY = 'mag-new-character-command-v1'
 const WHISPER_MODEL = 'onnx-community/whisper-base.en'
+const commonCharacterCommands = [
+  'Create new character',
+  'Read action economy',
+  'Set species to Cyborg',
+  'Set archetype to Street Samurai',
+  'What are my weapons?',
+  'What are my items?',
+  'What does (item name) do?',
+  'What are my traits?',
+  'What are my talents?',
+  'What does (talent name) do?',
+  'Who are my contacts?',
+  'What is my health?',
+  'Take 4 damage',
+  'Heal 6 health',
+  'Attack with my medium melee weapon',
+  'Roll damage',
+  'Roll 1d20+1d4+3',
+  'Set level to 1',
+  'Roll Ego',
+  'What is my defense?',
+]
 
 const destinations = [
   { label: 'Home', path: '/', terms: 'home welcome guild start' },
@@ -504,10 +526,11 @@ function CommandInterface() {
         respond(characterCommand(pending))
         return
       }
-      const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:(?:my|mine|me|the)\s+)?(?:(?:character|hero)(?:['’]?s)?\s+)?(name|species|archetype)\s+(?:(?:to|two|too|as|is|should\s+be)\s+)?(.+)$/i)
-        || spokenCommand.match(/^(?:my\s+)?(name|species|archetype)\s+(?:is|should be)\s+(.+)$/i)
+      const setIdentityMatch = spokenCommand.match(/^(?:set|change|update)\s+(?:(?:my|mine|me|the)\s+)?(?:(?:character|hero)(?:['’]?s)?\s+)?(name|species|race|archetype)\s+(?:(?:to|two|too|as|is|should\s+be)\s+)?(.+)$/i)
+        || spokenCommand.match(/^(?:my\s+)?(name|species|race|archetype)\s+(?:is|should be)\s+(.+)$/i)
       if (setIdentityMatch) {
-        const pending = { intent: 'change-identity', field: normalize(setIdentityMatch[1]), value: setIdentityMatch[2].trim() }
+        const requestedField = normalize(setIdentityMatch[1])
+        const pending = { intent: 'change-identity', field: requestedField === 'race' ? 'species' : requestedField, value: setIdentityMatch[2].trim() }
         respond(characterCommand(pending))
         return
       }
@@ -1036,7 +1059,7 @@ function CommandInterface() {
     <button ref={triggerRef} type="button" className="command-trigger" aria-label="Open game commands" onClick={openCommands}>⌘ <span>Command</span></button>
     {speaking && <button type="button" className="speech-stop" onClick={stopSpeaking}>■ Stop reading</button>}
     <div className="visually-hidden" role="status" aria-live="polite" aria-atomic="true">{status}</div>
-    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button ref={closeButtonRef} type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={toggleListening}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples"><button type="button" onClick={() => exampleCommand('What is my health?')}>What is my health?</button><button type="button" onClick={() => exampleCommand('Take 6 damage')}>Take 6 damage</button><button type="button" onClick={() => exampleCommand('Heal 4 health')}>Heal 4 health</button><button type="button" onClick={() => exampleCommand('What is my maximum Energy?')}>What is my maximum Energy?</button><button type="button" onClick={() => exampleCommand('Spend 2 Energy')}>Spend 2 Energy</button><button type="button" onClick={() => exampleCommand('What is my unspent XP?')}>What is my unspent XP?</button><button type="button" onClick={() => exampleCommand('Increase my level by one')}>Increase my level</button><button type="button" onClick={() => exampleCommand('Roll Ego')}>Roll Ego</button><button type="button" onClick={() => exampleCommand('Roll a d4')}>Roll a d4</button><button type="button" onClick={() => exampleCommand('Roll to hit with medium melee weapon')}>Attack with medium melee</button><button type="button" onClick={() => exampleCommand('Roll damage')}>Roll damage</button><button type="button" onClick={() => exampleCommand('What does Aim do?')}>Explain Aim</button><button type="button" onClick={() => exampleCommand('Add Talent Aim')}>Add Talent Aim</button></div><p>Also ask for Defense, Resilience, current or maximum Energy, maximum Force, Level, Total XP, Unspent XP, Initiative, or any Skill roll. Weapon attacks can use a weapon name or type.</p></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
+    {open && createPortal(<div className="command-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><section className="command-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title"><button ref={closeButtonRef} type="button" className="command-close" aria-label="Close game commands" onClick={close}>×</button><span className="command-eyebrow">GAME COMMANDS</span><h2 id="command-title">What would you like to do?</h2><form onSubmit={event => { event.preventDefault(); execute(command) }}><label htmlFor="command-input">Type or speak a command</label><div className="command-entry"><input ref={inputRef} id="command-input" type="text" autoComplete="off" value={command} onChange={event => setCommand(event.target.value)} placeholder={onCharacterSheet ? 'Roll to hit with my katana' : 'Open character Roderick'}/><button type="submit">Run</button></div></form><div className="command-options"><button type="button" className={listening ? 'is-listening' : ''} aria-pressed={listening} onClick={toggleListening}>{listening ? '■ Stop listening' : '● Start listening'}</button><label><input type="checkbox" checked={spoken} onChange={event => { const enabled = event.target.checked; setSpoken(enabled); localStorage.setItem(SPEECH_KEY, String(enabled)) }}/><span>Speak responses aloud</span></label></div><div className="command-status" role="status" aria-live="polite" aria-atomic="true">{status}</div>{results.length > 0 && <div className="command-results" aria-label="Command results">{results.map(result => <button type="button" key={`${result.action || result.path}-${result.label}`} onClick={() => chooseResult(result)}><strong>{result.label}</strong><span>{result.detail}</span></button>)}</div>}{onCharacterSheet ? <details className="character-command-guide" open><summary>Common Character Sheet commands</summary><div className="command-examples">{commonCharacterCommands.map(example => <button type="button" key={example} onClick={() => exampleCommand(example)}>{example}</button>)}</div></details> : <div className="command-examples"><strong>Try a command</strong><button type="button" onClick={() => exampleCommand('Open my character sheet')}>Open my character sheet</button><button type="button" onClick={() => exampleCommand('Go to Talents')}>Go to Talents</button><button type="button" onClick={() => exampleCommand('Search for healing')}>Search for healing</button><button type="button" onClick={() => execute('Help')}>Help</button></div>}{!recognitionSupported && <p className="command-support-note">Voice recognition is unavailable in this browser. Typed commands and spoken responses still work.</p>}</section></div>, document.body)}
   </>
 }
 
