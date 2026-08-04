@@ -101,6 +101,29 @@ const isNonSpeechTranscript = value => {
   if (!transcript || /^(?:\[[^\]]+\]|\([^)]*\))$/i.test(transcript)) return true
   return /^(?:audio (?:cut off|cuts? out)|applause|background noise|blank audio|clapping|gavel bangs?|laughter|laughing|music|noise|silence|static)$/i.test(normalize(transcript))
 }
+const playListeningTone = kind => {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext
+    if (!AudioContext) return
+    const context = new AudioContext()
+    const notes = kind === 'start' ? [523.25, 659.25] : [587.33, 440]
+    notes.forEach((frequency, index) => {
+      const startsAt = context.currentTime + index * .105
+      const oscillator = context.createOscillator()
+      const gain = context.createGain()
+      oscillator.type = 'sine'
+      oscillator.frequency.setValueAtTime(frequency, startsAt)
+      gain.gain.setValueAtTime(.0001, startsAt)
+      gain.gain.exponentialRampToValueAtTime(.035, startsAt + .018)
+      gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .095)
+      oscillator.connect(gain)
+      gain.connect(context.destination)
+      oscillator.start(startsAt)
+      oscillator.stop(startsAt + .1)
+    })
+    window.setTimeout(() => context.close(), 350)
+  } catch { /* Audio cues are optional when a browser blocks synthesized audio. */ }
+}
 
 function CommandInterface() {
   const navigate = useNavigate()
@@ -644,14 +667,16 @@ function CommandInterface() {
   const toggleListening = async () => {
     if (!recognitionSupported) { respond('Voice recognition is not supported by this browser. You can still type commands.'); return }
     if (listening) {
+      playListeningTone('stop')
       keepListeningRef.current = false
       window.clearTimeout(mobileCommandTimerRef.current)
       recognitionRef.current?.stop()
       stopLocalRecognition()
       setListening(false)
-      respond('Listening stopped.')
+      setStatus('Listening stopped.')
       return
     }
+    playListeningTone('start')
     const mobileRecognition = window.matchMedia('(max-width: 768px)').matches
     let braveBrowser = false
     try { braveBrowser = Boolean(await navigator.brave?.isBrave?.()) } catch { braveBrowser = false }
