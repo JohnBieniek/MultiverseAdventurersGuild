@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
+import rollsRules from '../content/rules/rolls.txt?raw'
+import actionEconomyRules from '../content/rules/action-economy.txt?raw'
+import levelProgressionRules from '../content/rules/level-progression.txt?raw'
+import movementRules from '../content/rules/movement.txt?raw'
+import healingRules from '../content/rules/healing.txt?raw'
+import assistingRules from '../content/rules/assisting.txt?raw'
+import combatRules from '../content/rules/combat.txt?raw'
+import creditsRules from '../content/rules/credits.txt?raw'
+import vehiclesRules from '../content/rules/vehicles.txt?raw'
 import './CommandInterface.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
@@ -24,6 +33,18 @@ const destinations = [
   { label: 'Character Sheets', path: '/character-sheet', terms: 'characters heroes sheet hp health defense experience xp weapons talents contacts' },
   { label: 'Contact Us', path: '/contact', terms: 'contact email feedback message' },
 ]
+
+const ruleTopics = [
+  ['Rolls', rollsRules],
+  ['Action Economy', actionEconomyRules],
+  ['Level Progression', levelProgressionRules],
+  ['Movement', movementRules],
+  ['Healing', healingRules],
+  ['Assisting', assistingRules],
+  ['Combat', combatRules],
+  ['Credits', creditsRules],
+  ['Vehicles', vehiclesRules],
+].map(([title, content]) => ({ title, content, path: `/rules#${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}` }))
 
 const normalize = value => String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase().replace(/[^a-z0-9\s'-]/g, '').replace(/\s+/g, ' ')
 const compactName = value => normalize(value).replace(/[^a-z0-9]/g, '')
@@ -73,6 +94,12 @@ const savedCharacters = () => {
   try { return JSON.parse(localStorage.getItem(STORE_KEY)) || [] } catch { return [] }
 }
 const matchingCharacters = query => savedCharacters().map(character => ({ character, score: characterMatchScore(character.name, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)
+const matchingRuleTopic = query => ruleTopics.map(topic => ({ topic, score: characterMatchScore(topic.title, query) })).filter(match => Number.isFinite(match.score)).sort((left, right) => left.score - right.score)[0]?.topic
+const readableRuleText = topic => {
+  const lines = String(topic.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+  if (normalize(lines[0]) === normalize(topic.title)) lines.shift()
+  return `${topic.title}. ${lines.join(' ')}`
+}
 const numberWords = { zero: 0, one: 1, two: 2, to: 2, too: 2, three: 3, four: 4, for: 4, five: 5, six: 6, seven: 7, eight: 8, ate: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20 }
 const ordinalWords = { zeroth: 0, first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 }
 const spokenNumber = value => /^\d+$/.test(String(value)) ? Number(value) : numberWords[normalize(value)]
@@ -270,6 +297,14 @@ function CommandInterface() {
     if (['help', 'what can i say', 'commands'].includes(value)) {
       respond(onCharacterSheet ? 'On a Character Sheet you can ask about or immediately change your name, Species, Archetype, Level, XP, health, and other scores; roll dice, Skills, defenses, weapon attacks, and damage; add a Talent; heal; or take damage.' : 'You can open a saved Hero by name, open app sections, or search the app. Try: open character Roderick, go to Talents, open Rules, or search for healing.')
       return
+    }
+    const readRuleMatch = spokenCommand.match(/^(?:read|explain|tell me about)\s+(?:the\s+)?(.+?)(?:\s+rules?)?$/i)
+    if (readRuleMatch) {
+      const topic = matchingRuleTopic(readRuleMatch[1])
+      if (topic) {
+        completeNavigation(topic.path, readableRuleText(topic))
+        return
+      }
     }
     const levelHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?((?:(?:zeroth|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+)(?:st|nd|rd|th)?\s+level|level\s+(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|\d+))\b.*)$/i)
     const packageHeroMatch = spokenCommand.match(/^(?:create|make|start)\s+(?:a\s+)?(.+\s+.+)$/i)
