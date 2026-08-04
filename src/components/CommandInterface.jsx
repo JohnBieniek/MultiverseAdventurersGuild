@@ -129,27 +129,32 @@ const isNonSpeechTranscript = value => {
   if (!transcript || /^(?:\[[^\]]+\]|\([^)]*\))$/i.test(transcript)) return true
   return /^(?:audio (?:cut off|cuts? out)|applause|background noise|blank audio|clapping|gavel bangs?|laughter|laughing|music|noise|silence|static)$/i.test(normalize(transcript))
 }
+let listeningToneContext = null
 const playListeningTone = kind => {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext
     if (!AudioContext) return
-    const context = new AudioContext()
-    const notes = kind === 'start' ? [523.25, 659.25] : [587.33, 440]
-    notes.forEach((frequency, index) => {
-      const startsAt = context.currentTime + index * .105
-      const oscillator = context.createOscillator()
-      const gain = context.createGain()
-      oscillator.type = 'sine'
-      oscillator.frequency.setValueAtTime(frequency, startsAt)
-      gain.gain.setValueAtTime(.0001, startsAt)
-      gain.gain.exponentialRampToValueAtTime(.035, startsAt + .018)
-      gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .095)
-      oscillator.connect(gain)
-      gain.connect(context.destination)
-      oscillator.start(startsAt)
-      oscillator.stop(startsAt + .1)
-    })
-    window.setTimeout(() => context.close(), 350)
+    if (!listeningToneContext || listeningToneContext.state === 'closed') listeningToneContext = new AudioContext()
+    const context = listeningToneContext
+    const schedule = () => {
+      const notes = kind === 'start' ? [523.25, 659.25] : [587.33, 440]
+      notes.forEach((frequency, index) => {
+        const startsAt = context.currentTime + .025 + index * .105
+        const oscillator = context.createOscillator()
+        const gain = context.createGain()
+        oscillator.type = 'sine'
+        oscillator.frequency.setValueAtTime(frequency, startsAt)
+        gain.gain.setValueAtTime(.0001, startsAt)
+        gain.gain.exponentialRampToValueAtTime(.045, startsAt + .018)
+        gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .095)
+        oscillator.connect(gain)
+        gain.connect(context.destination)
+        oscillator.start(startsAt)
+        oscillator.stop(startsAt + .1)
+      })
+    }
+    if (context.state === 'suspended') context.resume().then(schedule).catch(() => {})
+    else schedule()
   } catch { /* Audio cues are optional when a browser blocks synthesized audio. */ }
 }
 
@@ -231,10 +236,14 @@ function CommandInterface() {
     const preserveMobileRecognition = window.matchMedia('(max-width: 768px)').matches && (recognitionRunningRef.current || Boolean(localAudioContext))
     if (!preserveMobileRecognition) recognitionRef.current?.abort()
     window.speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(message)
     const voices = window.speechSynthesis.getVoices()
-    utterance.voice = voices.find(voice => voice.lang === 'en-US' && voice.default) || voices.find(voice => voice.lang?.toLowerCase().startsWith('en')) || null
-    speechUtteranceRef.current = utterance
+    const voice = voices.find(candidate => candidate.lang === 'en-US' && candidate.default) || voices.find(candidate => candidate.lang?.toLowerCase().startsWith('en')) || null
+    const chunks = String(message || '').replace(/\s+/g, ' ').trim().split(' ').reduce((parts, word) => {
+      const current = parts.at(-1) || ''
+      if (!current || `${current} ${word}`.length > 240) parts.push(word)
+      else parts[parts.length - 1] = `${current} ${word}`
+      return parts
+    }, [])
     const finished = () => {
       if (speechGenerationRef.current !== generation) return
       speechUtteranceRef.current = null
@@ -243,10 +252,18 @@ function CommandInterface() {
       ignoreSpeechUntilRef.current = Date.now() + 900
       if (keepListeningRef.current && !recognitionRunningRef.current) resumeRecognition(950)
     }
-    utterance.onend = finished
-    utterance.onerror = finished
-    window.speechSynthesis.resume()
-    window.speechSynthesis.speak(utterance)
+    const speakChunk = index => {
+      if (speechGenerationRef.current !== generation) return
+      if (index >= chunks.length) { finished(); return }
+      const utterance = new SpeechSynthesisUtterance(chunks[index])
+      utterance.voice = voice
+      speechUtteranceRef.current = utterance
+      utterance.onend = () => speakChunk(index + 1)
+      utterance.onerror = finished
+      window.speechSynthesis.resume()
+      window.speechSynthesis.speak(utterance)
+    }
+    speakChunk(0)
   }
   const waitForSpeech = (timeout = 10000) => new Promise(resolve => {
     const startedAt = Date.now()
@@ -312,13 +329,17 @@ function CommandInterface() {
     navigate(topic.path)
     setOpen(false)
     setStatus(`Opening ${topic.title}.`)
-    window.setTimeout(() => {
+    const readWhenReady = (attempt = 0) => {
       const hash = topic.path.includes('#') ? topic.path.slice(topic.path.indexOf('#') + 1) : ''
       let target = hash ? document.getElementById(hash) : null
       if (!target && topic.lookup) {
         const requested = normalize(topic.lookup)
         target = [...document.querySelectorAll('.guide-section h2, .guide-section h3, .guide-section h4, .guide-linked-entry, .guide-card h3, .guide-section p')]
           .find(element => normalize(element.textContent).startsWith(requested)) || null
+      }
+      if (!topic.overview && !target && attempt < 20) {
+        window.setTimeout(() => readWhenReady(attempt + 1), 100)
+        return
       }
       let targetText = target?.innerText?.replace(/\s+/g, ' ').trim() || ''
       if (target?.matches('h2, h3, h4')) {
@@ -333,8 +354,11 @@ function CommandInterface() {
       }
       const text = topic.overview || targetText || `${topic.title} opened, but its text could not be read.`
       target?.scrollIntoView({ block: 'start' })
-      respond(text)
-    }, 180)
+      lastResponseRef.current = text
+      setStatus(text)
+      speak(text, { force: true })
+    }
+    window.setTimeout(readWhenReady, 100)
   }
   const search = term => {
     const query = normalize(term)
@@ -351,7 +375,7 @@ function CommandInterface() {
   }
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
-    let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add').replace(/\band\s+durance\b/gi, 'endurance')
+    let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^reed\b/i, 'read').replace(/^ad\b/i, 'add').replace(/\band\s+durance\b/gi, 'endurance')
     if (pendingHeroCommandRef.current) {
       if (/^(?:cancel|close|never\s*mind)$/i.test(spokenCommand)) { pendingHeroCommandRef.current = ''; pendingHeroNeedsNameRef.current = false }
       else if (!/^(?:create|make|start|new)\b/i.test(spokenCommand)) {
@@ -360,8 +384,8 @@ function CommandInterface() {
         pendingHeroNeedsNameRef.current = false
       } else { pendingHeroCommandRef.current = ''; pendingHeroNeedsNameRef.current = false }
     }
-    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|stop|quiet|silence|repeat|help|commands|what|which|who|how|my|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load|strength|dexterity|endurance|intuition|education|charisma|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle|health|status|ego|defense|resilience|energy|level|xp|experience|skills|stats)\b/i)
-    if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
+    const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|stop|quiet|silence|repeat|help|commands|what|which|who|how|my|list|read|reed|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load|strength|dexterity|endurance|intuition|education|charisma|athletics|influence|knowledge|observation|outdoors|sneak|technology|vehicle|health|status|ego|defense|resilience|energy|level|xp|experience|skills|stats)\b/i)
+    if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^reed\b/i, 'read').replace(/^ad\b/i, 'add')
     const value = normalize(spokenCommand)
     setCommand(original)
     setResults([])
