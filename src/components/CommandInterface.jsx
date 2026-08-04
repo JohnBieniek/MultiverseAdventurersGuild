@@ -105,6 +105,7 @@ function CommandInterface() {
   const ignoreSpeechUntilRef = useRef(0)
   const restartTimerRef = useRef(null)
   const mobileCommandTimerRef = useRef(null)
+  const pendingHeroCommandRef = useRef('')
   const localModelRef = useRef(null)
   const localRecognizerRef = useRef(null)
   const localStreamRef = useRef(null)
@@ -198,6 +199,7 @@ function CommandInterface() {
     speechActiveRef.current = false
     window.clearTimeout(restartTimerRef.current)
     window.clearTimeout(mobileCommandTimerRef.current)
+    pendingHeroCommandRef.current = ''
     recognitionRef.current?.stop()
     stopLocalRecognition()
     window.speechSynthesis?.cancel()
@@ -239,12 +241,25 @@ function CommandInterface() {
   const execute = rawCommand => {
     const original = String(rawCommand || '').trim()
     let spokenCommand = original.replace(/[?.!,]+$/, '').replace(/^role\b/i, 'roll').replace(/^ad\b/i, 'add')
+    if (pendingHeroCommandRef.current) {
+      if (/^(?:cancel|close|never\s*mind)$/i.test(spokenCommand)) pendingHeroCommandRef.current = ''
+      else if (!/^(?:create|make|start|new)\b/i.test(spokenCommand)) {
+        spokenCommand = `${pendingHeroCommandRef.current} ${spokenCommand}`.trim()
+        pendingHeroCommandRef.current = ''
+      } else pendingHeroCommandRef.current = ''
+    }
     const embeddedCommand = spokenCommand.match(/\b(?:cancel|close|repeat|help|commands|what|which|who|how|list|read|name|show|tell|get|set|change|update|increase|raise|improve|decrease|lower|reduce|add|ad|gain|restore|recover|spend|use|take|suffer|receive|lose|remove|subtract|damage|heal|roll|make|create|start|new|provide|give|apply|first|aid|attack|strike|shoot|fire|search|find|look|go|open|return|load)\b/i)
     if (embeddedCommand?.index > 0) spokenCommand = spokenCommand.slice(embeddedCommand.index).replace(/^ad\b/i, 'add')
     const value = normalize(spokenCommand)
     setCommand(original)
     setResults([])
     if (!value) { respond('Type or speak a command first.'); return }
+    if (keepListeningRef.current && /^(?:(?:create|make|start)\s+(?:a\s+)?(?:new\s+)?|new\s+)(?:hero|character)$/i.test(spokenCommand)) {
+      pendingHeroCommandRef.current = spokenCommand
+      setStatus('Creating a new Hero. Say the Hero’s name.')
+      speak('What is the new Hero’s name?')
+      return
+    }
     if (['cancel', 'close', 'never mind', 'nevermind'].includes(value)) { close(); return }
     if (['repeat', 'say that again', 'read again'].includes(value)) { speak(lastResponseRef.current || 'There is nothing to repeat yet.'); return }
     if (['help', 'what can i say', 'commands'].includes(value)) {
@@ -812,6 +827,15 @@ function CommandInterface() {
   }, [])
   useEffect(() => {
     if (!open) return undefined
+    const scrollX = window.scrollX
+    const scrollY = window.scrollY
+    const bodyStyle = document.body.style.cssText
+    const rootOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.inset = `${-scrollY}px 0 0 ${-scrollX}px`
+    document.body.style.width = '100%'
+    document.body.style.overflow = 'hidden'
     setStatus('Game commands opened. Type a command or activate Start Listening.')
     window.setTimeout(() => {
       const mobile = window.matchMedia('(max-width: 768px)').matches
@@ -824,7 +848,12 @@ function CommandInterface() {
     }, 0)
     const dismiss = event => { if (event.key === 'Escape') close() }
     window.addEventListener('keydown', dismiss)
-    return () => window.removeEventListener('keydown', dismiss)
+    return () => {
+      window.removeEventListener('keydown', dismiss)
+      document.body.style.cssText = bodyStyle
+      document.documentElement.style.overflow = rootOverflow
+      window.scrollTo(scrollX, scrollY)
+    }
   }, [open])
 
   const chooseResult = result => {

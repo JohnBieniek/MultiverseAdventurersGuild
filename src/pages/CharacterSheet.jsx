@@ -355,8 +355,7 @@ const suppliedDescriptorOptions = {
       "Ballistic Coat",
       "Nano-Mesh Armor",
       "Environmental Suit",
-      "dodgy",
-      "shield"
+      "Shield"
     ],
     "improvised": []
   },
@@ -1552,7 +1551,7 @@ const suppliedItemCandidates = (archetypeName, species = '') => suppliedScoreDes
   ]) : []
   return [...typed, ...standardArmor]
 })
-const itemDataVersion = 3
+const itemDataVersion = 4
 const itemLoadoutMarker = archetypeName => `${itemDataVersion}:${archetypeName}`
 const multiverseItemModels = ['Aetherwake', 'Amberlight', 'Ashfall', 'Astral Key', 'Blackglass', 'Brightcoil', 'Cinderheart', 'Clockstar', 'Crimson Echo', 'Dawnchime', 'Deepwell', 'Dreamwire', 'Eclipse', 'Emberline', 'Evernight', 'Farstar', 'Ghostkey', 'Glasswing', 'Gravemark', 'Greenfire', 'Hollow Sun', 'Iron Halo', 'Ivory Pulse', 'Jade Signal', 'Kingshade', 'Lightning Thread', 'Lost Compass', 'Midnight Bell', 'Mirrorwake', 'Moonspoke', 'Ninefold', 'Obsidian Hymn', 'Orichalcum', 'Pale Comet', 'Phoenix', 'Quantum Rose', 'Redshift', 'Riftglass', 'Silver Thorn', 'Skyfire', 'Solaris', 'Starfall', 'Stormkey', 'Sunspoke', 'Thornlight', 'Titan Song', 'Umbral', 'Voidlight', 'Wayfinder', 'Worldroot']
 const itemVariationDetails = [
@@ -1611,20 +1610,22 @@ const populateArchetypeItems = (existingItems, archetypeName, scoreValues, speci
     .map(candidate => fitItemToScores(candidate, scoreValues))
     .filter(Boolean)
   const selectedItems = []
-  const coveredScores = new Set()
+  const coveredScores = new Set(
+    items.map(item => itemScoreDetails(item.description || '').score).filter(Boolean),
+  )
   const selectedNames = new Set()
+  const selectedDescriptions = new Set(
+    items.map(item => String(item.description || '').trim().toLowerCase()).filter(Boolean),
+  )
   const randomizedCandidates = shuffled(candidates)
   randomizedCandidates.forEach(candidate => {
     const coverage = itemScoreCoverage(candidate)
-    if (selectedItems.length >= 3 || selectedNames.has(candidate[0]) || (coverage && coveredScores.has(coverage))) return
+    const description = String(candidate[1] || '').trim().toLowerCase()
+    if (selectedItems.length >= 3 || selectedNames.has(candidate[0]) || (description && selectedDescriptions.has(description)) || (coverage && coveredScores.has(coverage))) return
     selectedItems.push(candidate)
     selectedNames.add(candidate[0])
+    if (description) selectedDescriptions.add(description)
     if (coverage) coveredScores.add(coverage)
-  })
-  randomizedCandidates.forEach(candidate => {
-    if (selectedItems.length >= 3 || selectedNames.has(candidate[0])) return
-    selectedItems.push(candidate)
-    selectedNames.add(candidate[0])
   })
   selectedItems.forEach(([name, description]) => {
     const item = { id: crypto.randomUUID(), name, description, source: 'archetype-item' }
@@ -2076,6 +2077,11 @@ function CharacterSheet() {
     })
     const needsItemLoadout = Boolean(archetype && character.itemLoadoutAppliedFor !== itemLoadoutMarker(character.archetype))
     if (needsItemLoadout) { items = populateArchetypeItems(items, character.archetype, itemScoresForCharacter(character), character.species); changed = true }
+    items = items.map(item => {
+      if (!['archetype', 'archetype-item', 'archetype-trait', 'species-trait'].includes(item.source) || !/^\p{Ll}/u.test(item.name || '')) return item
+      changed = true
+      return { ...item, name: item.name.replace(/^\p{Ll}/u, letter => letter.toUpperCase()) }
+    })
     const needsContactLoadout = Boolean(archetype && character.contactLoadoutAppliedFor !== contactLoadoutMarker(character.archetype))
     const contacts = needsContactLoadout ? populateArchetypeContacts(character.contacts, archetype) : character.contacts
     if (needsContactLoadout) changed = true
