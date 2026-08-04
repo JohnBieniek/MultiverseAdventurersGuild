@@ -169,7 +169,7 @@ const playListeningTone = async kind => {
         oscillator.type = 'triangle'
         oscillator.frequency.setValueAtTime(frequency, startsAt)
         gain.gain.setValueAtTime(.0001, startsAt)
-        gain.gain.exponentialRampToValueAtTime(.11, startsAt + .025)
+        gain.gain.exponentialRampToValueAtTime(kind === 'stop' ? .18 : .11, startsAt + .025)
         gain.gain.exponentialRampToValueAtTime(.0001, startsAt + .13)
         oscillator.connect(gain)
         gain.connect(context.destination)
@@ -760,13 +760,14 @@ function CommandInterface() {
   const toggleListening = async (retryAttempt = 0, recovering = false) => {
     if (!recognitionSupported) { respond('Voice recognition is not supported by this browser. You can still type commands.'); return }
     if (listening && !recovering) {
-      await playListeningTone('stop')
       keepListeningRef.current = false
       window.clearTimeout(mobileCommandTimerRef.current)
       recognitionRef.current?.stop()
       stopLocalRecognition()
       setListening(false)
       setStatus('Listening stopped.')
+      await new Promise(resolve => window.setTimeout(resolve, 120))
+      await playListeningTone('stop')
       return
     }
     await playListeningTone('start')
