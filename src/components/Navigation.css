@@ -12,6 +12,7 @@
 }
 
 .nav-container {
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   max-width: none;
@@ -54,8 +55,10 @@
 }
 
 .nav-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-self: center;
   list-style: none;
   gap: clamp(1rem, 2vw, 2rem);
   flex: 0 0 auto;
@@ -134,6 +137,8 @@
   }
 
   .nav-menu {
+    position: static;
+    transform: none;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: clamp(0.55rem, 2.5vw, 0.9rem);
