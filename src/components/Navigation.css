@@ -141,8 +141,8 @@
   }
 
   .nav-logo {
-    justify-content: center;
-    align-self: center;
+    justify-content: flex-start;
+    align-self: flex-start;
     box-sizing: border-box;
     width: fit-content;
     max-width: calc(100% - 7rem);
@@ -150,7 +150,7 @@
     gap: .35rem;
     padding: .35rem .2rem;
     font-size: clamp(.82rem, 3.4vw, 1rem);
-    text-align: center;
+    text-align: left;
   }
 
   .nav-logo-icon {
