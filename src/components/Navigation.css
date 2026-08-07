@@ -16,10 +16,18 @@
   max-width: min(96vw, 1680px);
   margin: 0 auto;
   padding: 0 clamp(12px, 1.5vw, 24px);
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 1.25rem;
+}
+
+.nav-logo {
+  justify-self: start;
+}
+
+.nav-container > .command-trigger {
+  justify-self: end;
 }
 
 .nav-logo {
@@ -85,6 +93,7 @@
   .nav-container {
     position: relative;
     box-sizing: border-box;
+    display: flex;
     flex-direction: column;
     gap: 0.35rem;
     max-width: none;
