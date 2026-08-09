@@ -41,8 +41,9 @@ function Home() {
       </section>
 
       <aside className="site-partnership" aria-label="Site credits">
-        <p>
-          Published by Multiverse Adventurers Guild. Website created in partnership with
+        <p>Published by Multiverse Adventurers Guild.</p>
+        <p className="whimsy-credit">
+          <span>Website created in partnership with</span>
           <img className="whimsy-logo" src="/logo.png" alt="Whimsy" />
         </p>
       </aside>

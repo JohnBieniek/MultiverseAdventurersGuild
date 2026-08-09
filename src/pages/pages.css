@@ -114,27 +114,32 @@
 
 .site-partnership {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 0.15rem 0.5rem;
   padding: 0.4rem 0 0.15rem;
 }
 
 .site-partnership p {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem 0.45rem;
   margin: 0;
   color: #55655a;
-  font-size: 0.78rem;
+  font-size: 1rem;
   line-height: 1.3;
   text-align: center;
 }
 
+.site-partnership .whimsy-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
 .whimsy-logo {
-  width: 88px;
-  height: 28px;
-  object-fit: contain;
+  width: 118px;
+  height: 45px;
+  object-fit: cover;
+  object-position: center 44%;
 }
 
 @media (max-width: 900px) {
@@ -203,12 +208,12 @@
   }
 
   .site-partnership p {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .whimsy-logo {
-    width: 145px;
-    height: 46px;
+    width: 176px;
+    height: 67px;
   }
 
   .content-card h2 {
