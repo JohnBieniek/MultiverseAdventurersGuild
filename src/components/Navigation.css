@@ -64,6 +64,13 @@
   flex: 0 0 auto;
 }
 
+.navbar.nav-centered .nav-menu {
+  position: absolute;
+  left: 50%;
+  width: max-content;
+  transform: translateX(-50%);
+}
+
 .nav-item {
   position: relative;
 }

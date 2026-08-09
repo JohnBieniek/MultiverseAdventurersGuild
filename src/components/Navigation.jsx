@@ -25,6 +25,7 @@ function Navigation() {
 
       if (!container || !logo || !menu || !command || window.innerWidth <= 768) {
         nav.classList.remove('nav-stacked')
+        nav.classList.remove('nav-centered')
         updateNavHeight()
         return
       }
@@ -34,15 +35,23 @@ function Navigation() {
       const items = [...menu.children]
       const menuGap = Number.parseFloat(menuStyle.columnGap) || 0
       const gridGap = Number.parseFloat(containerStyle.columnGap) || 0
-      const horizontalPadding =
-        (Number.parseFloat(containerStyle.paddingLeft) || 0) +
-        (Number.parseFloat(containerStyle.paddingRight) || 0)
+      const leftPadding = Number.parseFloat(containerStyle.paddingLeft) || 0
+      const rightPadding = Number.parseFloat(containerStyle.paddingRight) || 0
+      const horizontalPadding = leftPadding + rightPadding
       const menuWidth = items.reduce((width, item) => width + item.getBoundingClientRect().width, 0) +
         Math.max(0, items.length - 1) * menuGap
       const requiredWidth = horizontalPadding + logo.scrollWidth + menuWidth +
         command.getBoundingClientRect().width + gridGap * 2
+      const shouldStack = nav.clientWidth < Math.ceil(requiredWidth) + 8
+      const centeredMenuLeft = (nav.clientWidth - menuWidth) / 2
+      const centeredMenuRight = centeredMenuLeft + menuWidth
+      const brandRight = leftPadding + logo.scrollWidth
+      const commandLeft = nav.clientWidth - rightPadding - command.getBoundingClientRect().width
+      const canCenter = centeredMenuLeft >= brandRight + gridGap &&
+        centeredMenuRight <= commandLeft - gridGap
 
-      nav.classList.toggle('nav-stacked', nav.clientWidth < Math.ceil(requiredWidth) + 8)
+      nav.classList.toggle('nav-stacked', shouldStack)
+      nav.classList.toggle('nav-centered', !shouldStack && canCenter)
       updateNavHeight()
     }
 
