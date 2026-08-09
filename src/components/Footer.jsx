@@ -31,7 +31,7 @@ function Footer() {
       <div className="footer-bottom">
         <div className="footer-line">
           <Link className="footer-contact-link" to="/contact">Contact Us</Link>
-          <p className="footer-copyright" onPointerDown={startHold} onPointerUp={finishHold} onPointerCancel={finishHold} onContextMenu={event => event.preventDefault()}><span>&copy; {new Date().getFullYear()} Multiverse Adventurers Guild.</span>{' '}<span className="footer-rights">All rights reserved.</span></p>
+          <p className="footer-copyright" onPointerDown={startHold} onPointerUp={finishHold} onPointerCancel={finishHold} onContextMenu={event => event.preventDefault()}><span>&copy; {new Date().getFullYear()} The Multiverse Adventurers Guild LLC.</span>{' '}<span className="footer-rights">All rights reserved.</span></p>
           <span className={`footer-version${showMobileVersion ? ' is-mobile-revealed' : ''}`}>{appVersion}</span>
         </div>
       </div>
