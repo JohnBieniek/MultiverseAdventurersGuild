@@ -17,7 +17,7 @@
   width: 100%;
   max-width: none;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr) max-content;
   align-items: center;
@@ -36,7 +36,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #fff;
   transition: color 0.3s ease;
@@ -83,35 +83,35 @@
   display: none;
 }
 
-@media (min-width: 769px) and (max-width: 1180px) {
-  .nav-container {
+@media (min-width: 769px) {
+  .navbar.nav-stacked .nav-container {
     grid-template-areas:
       "brand command"
       "menu menu";
     grid-template-columns: minmax(0, 1fr) max-content;
-    gap: .3rem 1rem;
+    gap: .3rem 1.25rem;
     padding-top: .35rem;
     padding-bottom: .35rem;
   }
 
-  .nav-logo {
+  .navbar.nav-stacked .nav-logo {
     grid-area: brand;
     min-width: 0;
   }
 
-  .nav-logo span {
+  .navbar.nav-stacked .nav-logo span {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .nav-menu {
+  .navbar.nav-stacked .nav-menu {
     grid-area: menu;
     flex-wrap: wrap;
     row-gap: .2rem;
   }
 
-  .nav-container > .command-trigger {
+  .navbar.nav-stacked .nav-container > .command-trigger {
     grid-area: command;
   }
 }
