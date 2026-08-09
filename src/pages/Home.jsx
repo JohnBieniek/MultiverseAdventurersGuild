@@ -39,6 +39,13 @@ function Home() {
           <p>Create, save, load, and play your Hero with automatic rules and built-in dice rolls.</p>
         </Link>
       </section>
+
+      <aside className="site-partnership" aria-label="Site credits">
+        <p>
+          Published by Multiverse Adventurers Guild. Website created in partnership with
+          <img className="whimsy-logo" src="/logo.png" alt="Whimsy" />
+        </p>
+      </aside>
     </div>
   )
 }
