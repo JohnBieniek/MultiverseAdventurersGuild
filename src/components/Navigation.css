@@ -55,10 +55,10 @@
 }
 
 .nav-menu {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  width: 100%;
+  min-width: 0;
+  justify-content: center;
   list-style: none;
   gap: clamp(1rem, 2vw, 2rem);
   flex: 0 0 auto;
