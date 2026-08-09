@@ -83,6 +83,39 @@
   display: none;
 }
 
+@media (min-width: 769px) and (max-width: 1920px) {
+  .nav-container {
+    grid-template-areas:
+      "brand command"
+      "menu menu";
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: .3rem 1rem;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+  }
+
+  .nav-logo {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .nav-logo span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-menu {
+    grid-area: menu;
+    flex-wrap: wrap;
+    row-gap: .2rem;
+  }
+
+  .nav-container > .command-trigger {
+    grid-area: command;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1100px) {
   .nav-container {
     padding-right: 20px;
