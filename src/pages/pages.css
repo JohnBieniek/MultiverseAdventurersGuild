@@ -136,11 +136,18 @@
   gap: 0.15rem;
 }
 
-.whimsy-logo {
+.whimsy-logo-frame {
+  display: block;
   width: 190px;
-  height: 72px;
-  object-fit: cover;
-  object-position: center 44%;
+  aspect-ratio: 4744 / 2298;
+  overflow: hidden;
+}
+
+.whimsy-logo {
+  display: block;
+  width: 105.4%;
+  height: auto;
+  transform: translate(-2.7%, -21%);
 }
 
 @media (max-width: 900px) {
@@ -212,9 +219,8 @@
     font-size: 1.5rem;
   }
 
-  .whimsy-logo {
+  .whimsy-logo-frame {
     width: 260px;
-    height: 98px;
   }
 
   .content-card h2 {
