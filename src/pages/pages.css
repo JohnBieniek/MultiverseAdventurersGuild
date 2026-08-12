@@ -150,6 +150,15 @@
   transform: translate(-2.7%, -21%);
 }
 
+.whimsy-facebook-link {
+  color: #365b45;
+  font-size: 0.9rem;
+}
+
+.whimsy-facebook-link:hover {
+  color: #1f3e2c;
+}
+
 @media (max-width: 900px) {
   .featured-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));

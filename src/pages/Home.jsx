@@ -43,9 +43,19 @@ function Home() {
       <aside className="site-partnership" aria-label="Site credits">
         <p className="whimsy-credit">
           <span>Website created in partnership with</span>
-          <span className="whimsy-logo-frame">
+          <a
+            className="whimsy-logo-frame"
+            href="https://www.facebook.com/Experiencewhimsy"
+            aria-label="Visit Whimsy on Facebook"
+          >
             <img className="whimsy-logo" src="/logo.png" alt="Whimsy" />
-          </span>
+          </a>
+          <a
+            className="whimsy-facebook-link"
+            href="https://www.facebook.com/Experiencewhimsy"
+          >
+            facebook.com/Experiencewhimsy
+          </a>
         </p>
       </aside>
     </div>
