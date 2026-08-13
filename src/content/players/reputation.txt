@@ -20,6 +20,9 @@ Expertise: Frightens enemies, attracts violent employers, and makes peaceful NPC
 Chaos Magnet - Trouble follows you, and everyone nearby knows it.
 Expertise: Draws rumors, weird opportunities, reckless allies, and NPCs who want the impossible stirred up.
 
+Charming - You are known for talking your way into, out of, and around trouble.
+Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
+
 Clean Professional - You are known for doing jobs neatly, quietly, and on time.
 Expertise: Earns trust from fixers, spies, nobles, and clients who value discretion.
 
@@ -103,9 +106,6 @@ Expertise: Helps with treasure leads, museum contacts, artifact rumors, and ruin
 
 Shield of the Weak - People believe you protect children, civilians, and anyone who cannot fight back.
 Expertise: Earns trust from communities, families, healers, and NPCs who need protection more than victory.
-
-Charming - You are known for talking your way into, out of, and around trouble.
-Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
 
 Soft Touch - People believe you can be moved by a sad story.
 Expertise: Makes desperate NPCs approach you first, which can reveal hooks, lies, and hidden victims.
