@@ -65,7 +65,7 @@ const levelUpBenefits = {
   9: { automatic: 'Unlock Force 4 Talents and gain 1 Talent. Your base HP becomes 64 and maximum Energy becomes 27.' },
   10: { automatic: 'Your base HP becomes 70, maximum Energy becomes 30, and you reach the final Guild rank.' },
 }
-const xpSpendingHelp = 'XP available to purchase improvements. Stats, Skills, and each Attack modifier cost 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4; buy each step separately. Defense ratings +2 through +7 cost 2, 2, 4, 4, 8, and 8 XP. Talents cost 5 XP each. Additional Energy costs 2 XP per point. Subtract purchases from Unspent XP; Total XP and Level do not decrease.'
+const xpSpendingHelp = 'XP available to purchase improvements. Stats, Skills, and each Attack modifier cost 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4; buy each step separately. Defense ratings +1 through +6 cost 2, 2, 4, 4, 8, and 8 XP. Talents cost 5 XP each. Additional Energy costs 2 XP per point. Subtract purchases from Unspent XP; Total XP and Level do not decrease.'
 const weaponTypes = [
   ['Unarmed / Tiny Melee', 'melee', 4, 0], ['Light Melee', 'melee', 6, 0],
   ['Medium Melee', 'melee', 8, 0], ['Heavy Melee', 'melee', 10, -2],
@@ -1962,7 +1962,7 @@ const newCharacter = () => ({
   totalXp: 0, unspentXp: 0, totalXpManuallySet: false, unspentXpManuallySet: false,
   stats: Object.fromEntries(stats.map(([key]) => [key, ''])),
   skills: Object.fromEntries(skillDefs.map(([key]) => [key, { ability: '', modifier: 0, buffs: 0, debuffs: 0 }])),
-  attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 1, defenseCostVersion: 1,
+  attackSkill: '', meleeAttackModifier: 0, rangedAttackModifier: 0, defenseBonus: 0, defenseRating: 0, defenseCostVersion: 2,
   currentHp: 10, temporaryHp: 0, currentEnergy: 0,
   weapons: blankRows(2, { name: '', type: 'Unarmed / Tiny Melee', enhancement: 0, notes: '' }),
   talents: [],
@@ -2143,9 +2143,9 @@ function CharacterSheet() {
     }
     let defenseRating = character.defenseRating
     let defenseCostVersion = character.defenseCostVersion
-    if (defenseCostVersion == null) {
-      defenseRating = number(defenseRating) + 1
-      defenseCostVersion = 1
+    if (number(defenseCostVersion) < 2) {
+      defenseRating = Math.max(0, number(defenseRating) - (defenseCostVersion == null ? 0 : 1))
+      defenseCostVersion = 2
       changed = true
     }
     if (changed) setCharacter(current => ({ ...current, talents, items, weapons, contacts, meleeAttackModifier, rangedAttackModifier, defenseRating, defenseCostVersion, talentRowsGrantedForLevel, removedBlankTalentRows, weaponLoadoutAppliedFor: needsWeaponLoadout ? weaponLoadoutMarker(character.archetype, character.species) : current.weaponLoadoutAppliedFor, itemLoadoutAppliedFor: needsItemLoadout ? itemLoadoutMarker(character.archetype) : current.itemLoadoutAppliedFor, traitLoadoutAppliedFor: needsTraitLoadout ? traitLoadoutMarker(character.archetype, character.species) : current.traitLoadoutAppliedFor, contactLoadoutAppliedFor: needsContactLoadout ? contactLoadoutMarker(character.archetype) : current.contactLoadoutAppliedFor, updatedAt: Date.now() }))
@@ -2171,7 +2171,7 @@ function CharacterSheet() {
       maxForce: level >= 9 ? 4 : level >= 5 ? 3 : level >= 2 ? 2 : 1,
       slots: level >= 7 ? 3 : level >= 4 ? 2 : 1,
       initiative: number(s.intuition),
-      defense: 10 + number(character.defenseBonus) + number(character.defenseRating),
+      defense: 11 + number(character.defenseBonus) + number(character.defenseRating),
       resilience: number(character.defenseBonus) + number(s.strength) + number(s.dexterity) + number(s.endurance),
       ego: number(character.defenseBonus) + number(s.intuition) + number(s.education) + number(s.charisma),
     }
@@ -3142,7 +3142,7 @@ function LevelUpModal({ level, close }) {
     window.addEventListener('keydown', dismiss)
     return () => window.removeEventListener('keydown', dismiss)
   }, [close])
-  return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt level-up-modal" role="dialog" aria-modal="true" aria-labelledby="level-up-title"><button type="button" className="modal-close" aria-label="Close level up guide" autoFocus onClick={close}>×</button><span className="eyebrow">LEVEL UP</span><h2 id="level-up-title">You reached Level {level}!</h2><div className="level-up-grid"><section><h3>Automatically gained</h3><p>{benefits.automatic}</p>{benefits.choice && <div className="level-up-choice"><strong>Make your Level choice</strong><p>{benefits.choice}</p></div>}<p>Your maximum HP updates automatically and includes your Endurance bonus. Add or choose any granted Talents on the sheet. You may also switch your Talents whenever you reach a new Level.</p></section><section><h3>Spend Unspent XP</h3><ul><li><strong>Stats, Skills, and each Attack modifier:</strong> +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP. Buy each step separately.</li><li><strong>Defense ratings +2 through +7:</strong> 2, 2, 4, 4, 8, and 8 XP respectively.</li><li><strong>Talent:</strong> 5 XP each, within your unlocked Force Level.</li><li><strong>Energy:</strong> 2 XP per additional point.</li></ul><p>Subtract purchases from Unspent XP, not Total XP. Total XP determines your Level and never decreases.</p></section></div><div className="level-up-actions"><a href="/rules#level-progression-force-energy-and-talents">Read the full Level rules</a><button type="button" className="primary" onClick={close}>Update My Hero</button></div></div></div>, document.body)
+  return createPortal(<div className="modal-backdrop" onMouseDown={event => event.target === event.currentTarget && close()}><div className="archetype-prompt level-up-modal" role="dialog" aria-modal="true" aria-labelledby="level-up-title"><button type="button" className="modal-close" aria-label="Close level up guide" autoFocus onClick={close}>×</button><span className="eyebrow">LEVEL UP</span><h2 id="level-up-title">You reached Level {level}!</h2><div className="level-up-grid"><section><h3>Automatically gained</h3><p>{benefits.automatic}</p>{benefits.choice && <div className="level-up-choice"><strong>Make your Level choice</strong><p>{benefits.choice}</p></div>}<p>Your maximum HP updates automatically and includes your Endurance bonus. Add or choose any granted Talents on the sheet. You may also switch your Talents whenever you reach a new Level.</p></section><section><h3>Spend Unspent XP</h3><ul><li><strong>Stats, Skills, and each Attack modifier:</strong> +1 costs 1 XP, +2 costs 4 XP, +3 costs 9 XP, and +4 costs 16 XP. Buy each step separately.</li><li><strong>Defense ratings +1 through +6:</strong> 2, 2, 4, 4, 8, and 8 XP respectively.</li><li><strong>Talent:</strong> 5 XP each, within your unlocked Force Level.</li><li><strong>Energy:</strong> 2 XP per additional point.</li></ul><p>Subtract purchases from Unspent XP, not Total XP. Total XP determines your Level and never decreases.</p></section></div><div className="level-up-actions"><a href="/rules#level-progression-force-energy-and-talents">Read the full Level rules</a><button type="button" className="primary" onClick={close}>Update My Hero</button></div></div></div>, document.body)
 }
 function CharacterSheetWelcome({ close }) {
   useEffect(() => {

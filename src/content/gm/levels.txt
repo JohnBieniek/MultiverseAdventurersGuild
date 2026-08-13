@@ -58,7 +58,7 @@ Stats, Skills, and Attack Modifiers use the same escalating step costs:
 
 Each increase is purchased separately. Increasing a score from 0 to +3 costs 1 XP for +1, 4 XP for +2, and 9 XP for +3, for 14 XP total. Increasing a score from +2 to +3 costs only the next step: 9 XP.
 
-Defense Rating has its own progression. Every Hero begins at +1 for free, giving Defense 11 from base 10. Later ratings must be purchased in order: +2 costs 2 XP, +3 costs 2 XP, +4 costs 4 XP, +5 costs 4 XP, +6 costs 8 XP, and +7 costs 8 XP. The cumulative costs are 0, 2, 4, 8, 12, 20, and 28 XP. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas.
+Defense Rating has its own progression. Every Hero begins at Defense 11 with a +0 rating. Later ratings must be purchased in order: +1 costs 2 XP, +2 costs 2 XP, +3 costs 4 XP, +4 costs 4 XP, +5 costs 8 XP, and +6 costs 8 XP. The cumulative costs are 0, 2, 4, 8, 12, 20, and 28 XP. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas.
 
 Energy: XP can be spent to buy additional Energy, but the XP cost for additional Energy has not yet been defined.
 

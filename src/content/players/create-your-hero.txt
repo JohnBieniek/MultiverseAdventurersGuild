@@ -54,7 +54,7 @@ Stat + Skill + Talent or other Modifiers
 Compare the total to a Target Number (TN) set by the GM.
 
 If your total meets or beats the TN, you succeed.
-Use this process during Session Zero to build your hero in about 15 minutes. Heroes new to role-playing take longer, as it's important to teach them how to play.
+Answer a few brief questions and you can create a fully developed Hero in less than 1 minute. Heroes new to role-playing may take longer as they learn how to play.
 Think about the kind of hero you want to play. Any genre, any era, any setting is allowed in the Multiverse - cyborgs, cowgirls, witches, knights, superheroes, detectives, monks, and everything in between.
 Pick the Archetype that best matches your concept. Archetypes give your character direction, style, a few suggested Talents, and ideas about your Hero's personality.
 You can change your Archetype early in the campaign as you get familiar with the system.
@@ -95,10 +95,10 @@ Technology (Edu) - hacking, medicine, devices, engineering, disable traps, Matri
 Vehicle (Dex) - driving a car, piloting a starship, riding a horse
 "Pick the two most important stats and write in a (+2). You pay once for Attack and it works for all weapons. Consider placing a (+2) in attack and then your next most important skill. Now choose your least important skill and write in a (-1). Pick the next 2 skills that are the least important and write in a (0). The remaining skills are (+1)."
 Your defenses protect you from harm:
-Defense = 10 + Defense rating + other Defense bonuses
+Defense = 11 + Defense rating + other Defense bonuses
 Resilience = Defense bonus + Strength + Dexterity + Endurance
 Ego = Defense bonus + Intuition + Education + Charisma
-Defense is used when enemies try to hit you. Every Hero begins with Defense rating +1 for free, so starting Defense is 11 before other bonuses. Later ratings must be purchased in order: +2 costs 2 XP, +3 costs 2 XP, +4 costs 4 XP, +5 costs 4 XP, +6 costs 8 XP, and +7 costs 8 XP. Resilience and Ego cannot be purchased or upgraded; both are calculated from the Stats and bonuses in their formulas. Resilience resists physical danger and body-based effects. Ego resists fear, influence, mental attacks, and willpower-based effects.
+Defense is used when enemies try to hit you. Every Hero begins with Defense 11 before ratings or other bonuses. Defense rating upgrades must be purchased in order: +1 costs 2 XP, +2 costs 2 XP, +3 costs 4 XP, +4 costs 4 XP, +5 costs 8 XP, and +6 costs 8 XP. Resilience and Ego cannot be purchased or upgraded; both are calculated from the Stats and bonuses in their formulas. Resilience resists physical danger and body-based effects. Ego resists fear, influence, mental attacks, and willpower-based effects.
 You begin with:
 1 Talent Slot
 10 + endurance HP
@@ -244,6 +244,6 @@ Tagline: You are a legend in motion, the Guild's finest. Timelines bend around y
 If you improve your Endurance score, the bonus applies retroactively to all levels. For example, at level 3 with a score of (0), my HP is 28. I buy (+1) endurance. The bonus applies to all levels, giving me 32 HP.
 You can switch your talents when you reach a new level.
 MAG is a blended system. You gain specific advantages as you reach each level, but you can also spend XP whenever you want.
-A player earns 3 XP per playing session. Unspent XP can improve Stats, Skills, Attack modifiers, Defense rating, Talents, and Energy. Stats, Skills, and Attack modifiers cost 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4, with each step purchased separately. Defense rating begins at +1 for free; later ratings cost 2, 2, 4, 4, 8, and 8 XP for +2 through +7, respectively. A Talent costs 5 XP and must be within the Hero's unlocked Force Level. The rules do not yet define the XP cost for additional Energy. The GM can adjust XP awards depending on campaign pace. Level 0 is a tutorial for beginning players.
+A player earns 3 XP per playing session. Unspent XP can improve Stats, Skills, Attack modifiers, Defense rating, Talents, and Energy. Stats, Skills, and Attack modifiers cost 1 XP for +1, 4 XP for +2, 9 XP for +3, and 16 XP for +4, with each step purchased separately. Defense rating begins at +0; later ratings cost 2, 2, 4, 4, 8, and 8 XP for +1 through +6, respectively. A Talent costs 5 XP and must be within the Hero's unlocked Force Level. The rules do not yet define the XP cost for additional Energy. The GM can adjust XP awards depending on campaign pace. Level 0 is a tutorial for beginning players.
 0 / Untrained/ 0
 You must pay for each level of the score. For instance, if I went from (0) to (3), I would pay one point for a score of (+1), another four points to increase it to (+2), and a final nine points for a (+3), for a total of fourteen points.

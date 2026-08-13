@@ -104,7 +104,7 @@ Expertise: Helps with treasure leads, museum contacts, artifact rumors, and ruin
 Shield of the Weak - People believe you protect children, civilians, and anyone who cannot fight back.
 Expertise: Earns trust from communities, families, healers, and NPCs who need protection more than victory.
 
-Silver Tongue - You are known for talking your way into, out of, and around trouble.
+Charming - You are known for talking your way into, out of, and around trouble.
 Expertise: Helps with negotiations, lies, bargaining, introductions, and fast talk under pressure.
 
 Soft Touch - People believe you can be moved by a sad story.

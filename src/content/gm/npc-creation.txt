@@ -15,3 +15,10 @@ The Rating
 We determine various traits using (- 4) to (+4). As a GM I don't want to have to calculate the size of a village or the security level of a city. The game doesn't want to bog down on some details. Instead you can define everything from (-4) to (+4). This is the rating. Remember 0 is average. So let's say you want to know the population of a given city. Small might be a (-4), a huge city (+4). You define most things this way; wealth levels, tech levels ect. The number could be used to alter TN value x 2. For instance, if I defined the police force as a (+2) I could add 4 to that number to TNs when encountering security forces.
 
 The value can be used for modifying TN.
+
+Quick Benchmark Summary
+
+Tier | Levels | Attack Bonus | AV | HP Range | Force | Talent Slots
+🟢 I | 0–3 | +3 to +6 | 12–14 | 4–25 | F1–F2 | 1
+🟡 II | 4–6 | +6 to +8 | 14–16 | 25–40 | F2–F3 | 2
+🔴 III | 7–10 | +8 to +10+ | 16–19 | 40–70+ | F3–F4 | 3

@@ -22,9 +22,9 @@ Threat Response - if you leave an area that another player/enemy can reach, they
 
 Defense
 
-Defense = 10 + Defense rating + other Defense bonuses
+Defense = 11 + Defense rating + other Defense bonuses
 
-Heroes start with a Defense rating of +1 for free, producing a starting Defense of 11 before other bonuses. Higher ratings are purchased in order with unspent XP: +2 costs 2 XP, +3 costs 2 XP, +4 costs 4 XP, +5 costs 4 XP, +6 costs 8 XP, and +7 costs 8 XP. The cumulative cost is 0, 2, 4, 8, 12, 20, or 28 XP for ratings +1 through +7. These explicit costs are not calculated as half of Stat progression. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas. Defense can represent armor or a high ability to evade attacks. A shield, leather, plate, hides, an amulet, an off-hand weapon, or Kevlar can explain the rating without changing its cost. Your choice of armor type does not independently increase or reduce Defense.
+Heroes start at Defense 11 before ratings or other bonuses. Higher ratings are purchased in order with unspent XP: +1 costs 2 XP, +2 costs 2 XP, +3 costs 4 XP, +4 costs 4 XP, +5 costs 8 XP, and +6 costs 8 XP. The cumulative cost is 0, 2, 4, 8, 12, 20, or 28 XP for ratings +0 through +6. These explicit costs are not calculated as half of Stat progression. Resilience and Ego cannot be purchased or upgraded; they are calculated only from their formulas. Defense can represent armor or a high ability to evade attacks. A shield, leather, plate, hides, an amulet, an off-hand weapon, or Kevlar can explain the rating without changing its cost. Your choice of armor type does not independently increase or reduce Defense.
 
 Initiative
 

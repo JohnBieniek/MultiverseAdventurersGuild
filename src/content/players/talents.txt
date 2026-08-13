@@ -175,6 +175,7 @@ Category: Buff.
 Technical Expertise:
 Description: Your understanding of machines, electronics, and complex systems reaches exceptional levels.
 Mechanic: The target improves Technology by +1d4 per Force used.
+Restriction: Can't be combined with Hacker.
 Duration: 1 hour.
 Action: Attack action.
 Category: Buff.

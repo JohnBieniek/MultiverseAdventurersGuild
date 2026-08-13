@@ -38,7 +38,7 @@ Defenses
 
 Defense
 
-10 + Defense rating + other Defense bonuses
+11 + Defense rating + other Defense bonuses
 
 Weapon & physical attacks
 
