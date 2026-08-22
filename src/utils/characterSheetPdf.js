@@ -110,7 +110,16 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   section(first, 'COMBAT SUMMARY', 24, 104, 564, 100, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.')
   const combat = [['Initiative', signed(computed.initiative)], ['HP', `       / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `       / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
-  combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 141, 68, 39, `combat_${label.toLowerCase().replace(' ', '_')}`))
+  let combatX = 30
+  combat.forEach(([label, value]) => {
+    const width = label === 'Defense' ? 96 : 68
+    if (label === 'Defense') {
+      first.write(label.toUpperCase(), combatX + ((width - bold.widthOfTextAtSize(label.toUpperCase(), 12)) / 2), 141, 12, bold, ink)
+      const defenseEntries = [['MODIFIER', signedEntry(character.defenseBonus)], ['TOTAL', computed.defense], ['RATING', signedEntry(character.defenseRating)]]
+      defenseEntries.forEach(([entryLabel, entryValue], index) => { const fieldX = combatX + (index * 34); first.write(entryLabel, fieldX + ((28 - bold.widthOfTextAtSize(entryLabel, 7)) / 2), 158, 7, bold, ink); addTextField(first, `combat_defense_${entryLabel.toLowerCase()}`, entryValue, fieldX, 168, 28, 29, 9).setAlignment(TextAlignment.Center) })
+    } else valueBox(first, label, value, combatX, 141, width, 39, `combat_${label.toLowerCase().replace(' ', '_')}`)
+    combatX += width + 8
+  })
 
   section(first, 'ATTACK', 24, 210, 564, 113, 'attack', 'One Skill is used for both melee and ranged attacks.')
   const attack = number(character.attackSkill)
