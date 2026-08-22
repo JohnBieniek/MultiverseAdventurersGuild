@@ -99,8 +99,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   const first = addPage(1, true)
   const labeledField = (label, value, name, x, top, width) => {
-    first.write(label, x, top, 12, bold, green)
-    addTextField(first, name, value, x, top + 14, width, 22, 12)
+    first.write(label, x + ((width - bold.widthOfTextAtSize(label, 12)) / 2), top, 12, bold, green)
+    addTextField(first, name, value, x, top + 14, width, 22, 12).setAlignment(TextAlignment.Center)
   }
   first.write(fit(bold, character.name || 'Unnamed Hero', 18, 236), 352, 10, 18, bold, green)
   first.write(fit(regular, [text(character.species), text(character.archetype)].filter(Boolean).join(' / '), 12, 236), 352, 36, 12, regular)
