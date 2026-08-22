@@ -121,7 +121,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const weaponRows = padRows((character.weapons || []).filter(weapon => text(weapon.name) || text(weapon.notes) || number(weapon.enhancement)).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] }), 6, ['', '', '', ''])
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
-  const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
+  const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
   const rowUnits = weaponRows.length + talentRows.length + Math.max(itemRows.length, contactRows.length)
   const detailRowHeight = Math.max(14, Math.min(24, Math.floor(420 / rowUnits)))
   const blockHeight = rows => 64 + (rows.length * detailRowHeight)
