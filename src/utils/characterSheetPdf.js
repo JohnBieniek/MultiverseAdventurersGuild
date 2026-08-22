@@ -84,14 +84,14 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     write(label.toUpperCase(), x, top, 12, bold, ink)
     addTextField(ctx, fieldName, value, x, top + 17, width, height, 14).setAlignment(TextAlignment.Center)
   }
-  const table = (ctx, x, top, widths, headers, rows, rowHeight = 30, rowIconKeys = [], fieldPrefix = '', editableColumns = []) => {
+  const table = (ctx, x, top, widths, headers, rows, rowHeight = 30, rowIconKeys = [], fieldPrefix = '', editableColumns = [], alternatingRows = true) => {
     const { page, H, write } = ctx; const total = widths.reduce((sum, width) => sum + width, 0)
     page.drawRectangle({ x, y: H - top - 24, width: total, height: 24, color: pale, borderColor: line, borderWidth: .7 })
     let cx = x
     headers.forEach((header, index) => { write(fit(bold, header.toUpperCase(), 12, widths[index] - 4), cx + 2, top + 6, 12, bold); cx += widths[index] })
     rows.forEach((row, rowIndex) => {
       const rowTop = top + 24 + (rowIndex * rowHeight); cx = x
-      page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
+      page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: alternatingRows && rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
       row.forEach((cell, index) => { if (index) page.drawLine({ start: { x: cx, y: H - rowTop }, end: { x: cx, y: H - rowTop - rowHeight }, thickness: .5, color: line }); const rowIcon = index === 0 ? icons[rowIconKeys[rowIndex]] : null; if (rowIcon) page.drawImage(rowIcon, { x: cx + 5, y: H - rowTop - ((rowHeight + 17) / 2), width: 17, height: 17 }); const inset = rowIcon ? 26 : 4; if (editableColumns.includes(index)) { const field = addTextField(ctx, `${fieldPrefix}_${rowIndex}_${index}`, cell, cx + 1, rowTop + 1, widths[index] - 2, rowHeight - 2, 12); if ((fieldPrefix === 'skill' && index >= 2) || (fieldPrefix === 'stat' && index === 1)) field.setAlignment(TextAlignment.Center) } else write(fit(regular, cell, 12, widths[index] - inset - 4), cx + inset, rowTop + ((rowHeight - 12) / 2), 12); cx += widths[index] })
     })
   }
@@ -114,10 +114,10 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 259, 96, 42, `attack_${index}`))
 
   section(first, 'STATS', 24, 346, 156, 368, 'stats')
-  table(first, 24, 376, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
+  table(first, 24, 376, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1], false)
   section(first, 'SKILLS', 184, 346, 404, 368, 'skills', 'You can activate one Skill per turn.')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
-  table(first, 184, 376, [109, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
+  table(first, 184, 376, [109, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
   const second = addPage(2)
   const padRows = (rows, minimum, blank) => { const next = [...rows]; while (next.length < minimum) next.push([...blank]); return next }
