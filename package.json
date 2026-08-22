@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "@huggingface/transformers": "^3.7.6",
-    "jspdf": "^4.2.1",
-    "jspdf-autotable": "^5.0.8",
+    "pdf-lib": "^1.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.7.0",

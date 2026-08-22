@@ -1,76 +1,117 @@
-import { jsPDF } from 'jspdf'
-import autoTable from 'jspdf-autotable'
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
-const ink = [31, 42, 36], green = [38, 82, 62], gold = [188, 139, 55], paper = [250, 248, 240]
+const PAGE = [612, 792]
+const green = rgb(.055, .22, .12), gold = rgb(.73, .54, .22), ink = rgb(.08, .11, .09), pale = rgb(.97, .96, .92), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
 const number = value => Number(value) || 0
 const signed = value => `${number(value) >= 0 ? '+' : ''}${number(value)}`
 const signedEntry = value => value === '' || value == null ? '' : signed(value)
 const text = value => String(value ?? '').trim()
 const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
-const loadImage = source => new Promise((resolve, reject) => { const image = new Image(); image.onload = () => resolve(image); image.onerror = reject; image.src = source })
 
-const drawStar = (doc, x, y, radius = 7) => {
-  const points = Array.from({ length: 10 }, (_, index) => { const angle = (-Math.PI / 2) + (index * Math.PI / 5); const distance = index % 2 ? radius * .42 : radius; return [x + Math.cos(angle) * distance, y + Math.sin(angle) * distance] })
-  points.forEach(([px, py], index) => { const [nextX, nextY] = points[(index + 1) % points.length]; doc.line(px, py, nextX, nextY) })
-}
-const drawIcon = (doc, kind, x, y) => {
-  doc.setDrawColor(...green); doc.setFillColor(...green); doc.setLineWidth(1.5)
-  if (kind === 'skills') return drawStar(doc, x, y)
-  if (kind === 'strength') { doc.line(x - 7, y + 5, x - 2, y - 2); doc.line(x - 2, y - 2, x + 2, y + 2); doc.circle(x + 5, y - 2, 3); doc.line(x + 2, y + 2, x + 7, y + 5); return }
-  if (kind === 'dexterity') { doc.line(x - 6, y + 6, x - 4, y - 4); doc.line(x - 2, y + 3, x, y - 6); doc.line(x + 1, y + 3, x + 4, y - 5); doc.line(x + 3, y + 4, x + 7, y - 2); return }
-  if (kind === 'endurance') { doc.circle(x, y, 6); doc.line(x - 4, y, x - 1, y); doc.line(x - 1, y, x + 1, y - 3); doc.line(x + 1, y - 3, x + 3, y + 3); doc.line(x + 3, y + 3, x + 6, y + 3); return }
-  if (kind === 'intuition') { doc.circle(x, y - 2, 5); doc.line(x - 3, y + 4, x + 3, y + 4); doc.line(x - 2, y + 7, x + 2, y + 7); return }
-  if (kind === 'education') { doc.rect(x - 7, y - 6, 6, 12); doc.rect(x + 1, y - 6, 6, 12); doc.line(x, y - 5, x, y + 6); return }
-  if (kind === 'charisma') { doc.circle(x, y - 1, 6); doc.circle(x - 2, y - 2, .5, 'F'); doc.circle(x + 2, y - 2, .5, 'F'); doc.line(x - 3, y + 2, x + 3, y + 2); return }
-  if (['combat', 'attack', 'weapons'].includes(kind)) { doc.line(x - 6, y + 6, x + 5, y - 5); doc.line(x - 3, y + 6, x + 7, y - 4); doc.line(x + 2, y - 5, x + 6, y - 1); return }
-  if (kind === 'talents') { doc.circle(x, y, 3); for (let i = 0; i < 8; i += 1) { const a = i * Math.PI / 4; doc.line(x + Math.cos(a) * 5, y + Math.sin(a) * 5, x + Math.cos(a) * 8, y + Math.sin(a) * 8) } return }
-  if (kind === 'items') { doc.line(x - 4, y - 7, x + 4, y - 7); doc.line(x - 2, y - 7, x - 2, y - 2); doc.line(x + 2, y - 7, x + 2, y - 2); doc.line(x - 2, y - 2, x - 6, y + 7); doc.line(x + 2, y - 2, x + 6, y + 7); doc.line(x - 6, y + 7, x + 6, y + 7); return }
-  if (kind === 'contacts') { doc.circle(x - 3, y - 3, 3); doc.circle(x + 4, y - 2, 2.5); doc.line(x - 8, y + 6, x + 1, y + 6); doc.line(x + 1, y + 5, x + 8, y + 5); return }
-  if (kind === 'notes') { doc.rect(x - 6, y - 7, 12, 14); doc.line(x - 3, y - 3, x + 3, y - 3); doc.line(x - 3, y + 1, x + 3, y + 1); return }
-  doc.circle(x, y, 6)
+const fit = (font, value, size, width) => {
+  const source = text(value)
+  if (font.widthOfTextAtSize(source, size) <= width) return source
+  let result = source
+  while (result && font.widthOfTextAtSize(`${result}...`, size) > width) result = result.slice(0, -1)
+  return result ? `${result}...` : ''
 }
 
 export async function downloadCharacterSheetPdf({ character, computed, stats, skills, weaponTypes }) {
-  const doc = new jsPDF({ unit: 'pt', format: 'letter', compress: true })
-  const pageWidth = doc.internal.pageSize.getWidth(), pageHeight = doc.internal.pageSize.getHeight(), margin = 38, contentWidth = pageWidth - (margin * 2)
-  let y = margin
-  const addPage = () => { doc.addPage(); y = margin }
-  const ensure = height => { if (y + height > pageHeight - 42) addPage() }
-  const section = (title, icon, detail = '') => {
-    ensure(34); doc.setFillColor(...green); doc.roundedRect(margin, y, contentWidth, 28, 4, 4, 'F'); doc.setFillColor(255, 255, 255); doc.circle(margin + 15, y + 14, 10, 'F'); drawIcon(doc, icon, margin + 15, y + 14)
-    doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.text(title, margin + 31, y + 19)
-    if (detail) { doc.setFont('helvetica', 'normal'); doc.setFontSize(12); doc.text(detail, pageWidth - margin - 10, y + 19, { align: 'right' }) }
-    doc.setTextColor(...ink); y += 34
+  const pdf = await PDFDocument.create()
+  const regular = await pdf.embedFont(StandardFonts.Helvetica)
+  const bold = await pdf.embedFont(StandardFonts.HelveticaBold)
+  let logo
+  try { logo = await pdf.embedPng(await fetch('/multiverse%20adventurers%20guild%20icon.png').then(response => response.arrayBuffer())) } catch { logo = null }
+
+  const addPage = (pageNumber, fullHeader = false) => {
+    const page = pdf.addPage(PAGE)
+    const H = page.getHeight()
+    const write = (value, x, top, size = 12, font = regular, color = ink, options = {}) => page.drawText(String(value), { x, y: H - top - size, size, font, color, ...options })
+    if (fullHeader) {
+      page.drawRectangle({ x: 0, y: H - 104, width: 612, height: 104, color: pale })
+      page.drawRectangle({ x: 0, y: H - 108, width: 612, height: 4, color: gold })
+      if (logo) page.drawImage(logo, { x: 24, y: H - 93, width: 70, height: 70 })
+      write('MULTIVERSE', 104, 20, 24, bold, green); write('ADVENTURERS GUILD', 104, 48, 17, bold, green); write('CHARACTER SHEET', 104, 72, 14, bold, ink)
+      write(fit(bold, character.name || 'Unnamed Hero', 18, 230), 352, 19, 18, bold)
+      write([text(character.species), text(character.archetype)].filter(Boolean).join(' / '), 352, 46, 12, regular)
+      write(`LEVEL ${computed.level}`, 352, 72, 12, bold)
+    } else {
+      page.drawRectangle({ x: 0, y: H - 52, width: 612, height: 52, color: green })
+      if (logo) page.drawImage(logo, { x: 22, y: H - 45, width: 36, height: 36 })
+      write('MULTIVERSE ADVENTURERS GUILD', 68, 15, 16, bold, white)
+      write(fit(bold, character.name || 'Unnamed Hero', 14, 190), 382, 16, 14, bold, white)
+    }
+    write(`PAGE ${pageNumber} OF 2`, 500, 770, 12, regular, green)
+    return { page, H, write }
   }
-  const table = (head, body, widths = {}, options = {}) => {
-    autoTable(doc, { startY: y, margin: { left: margin, right: margin, bottom: 42 }, head: [head], body, theme: 'grid', styles: { font: 'helvetica', fontSize: 12, cellPadding: 5, textColor: ink, lineColor: [205, 211, 204], lineWidth: .5, overflow: 'linebreak' }, headStyles: { fillColor: paper, textColor: green, fontStyle: 'bold', fontSize: 12 }, alternateRowStyles: { fillColor: [253, 252, 247] }, columnStyles: widths, ...options })
-    y = doc.lastAutoTable.finalY + 10
+
+  const section = (ctx, title, x, top, width, height, icon = '') => {
+    const { page, H, write } = ctx
+    page.drawRectangle({ x, y: H - top - height, width, height, borderColor: line, borderWidth: 1, color: white })
+    page.drawRectangle({ x, y: H - top - 30, width: Math.min(width, 205), height: 30, color: green })
+    if (icon) { page.drawCircle({ x: x + 17, y: H - top - 15, size: 10, color: white }); write(icon, x + 10, top + 7, 12, bold, green) }
+    write(title, x + (icon ? 32 : 10), top + 7, 14, bold, white)
+    return top + 30
+  }
+  const valueBox = (ctx, label, value, x, top, width, height = 48) => {
+    const { page, H, write } = ctx
+    write(label.toUpperCase(), x, top, 12, bold, ink)
+    page.drawRectangle({ x, y: H - top - height - 17, width, height, borderColor: line, borderWidth: 1, color: white })
+    const shown = fit(bold, value, 14, width - 8); const tw = bold.widthOfTextAtSize(shown, 14)
+    write(shown, x + Math.max(4, (width - tw) / 2), top + 17 + ((height - 14) / 2), 14, bold)
+  }
+  const table = (ctx, x, top, widths, headers, rows, rowHeight = 30) => {
+    const { page, H, write } = ctx; const total = widths.reduce((sum, width) => sum + width, 0)
+    page.drawRectangle({ x, y: H - top - 24, width: total, height: 24, color: pale, borderColor: line, borderWidth: .7 })
+    let cx = x
+    headers.forEach((header, index) => { write(fit(bold, header.toUpperCase(), 12, widths[index] - 8), cx + 4, top + 6, 12, bold); cx += widths[index] })
+    rows.forEach((row, rowIndex) => {
+      const rowTop = top + 24 + (rowIndex * rowHeight); cx = x
+      page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
+      row.forEach((cell, index) => { if (index) page.drawLine({ start: { x: cx, y: H - rowTop }, end: { x: cx, y: H - rowTop - rowHeight }, thickness: .5, color: line }); write(fit(regular, cell, 12, widths[index] - 8), cx + 4, rowTop + ((rowHeight - 12) / 2), 12); cx += widths[index] })
+    })
   }
 
-  doc.setFillColor(...green); doc.rect(0, 0, pageWidth, 126, 'F'); doc.setFillColor(...gold); doc.rect(0, 122, pageWidth, 4, 'F')
-  try { const logo = await loadImage('/multiverse%20adventurers%20guild%20icon.png'); doc.addImage(logo, 'PNG', margin, 19, 76, 76) } catch { /* Keep generating if the image is unavailable. */ }
-  doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.text('MULTIVERSE ADVENTURERS GUILD', margin + 90, 35)
-  doc.setFontSize(25); doc.text(text(character.name) || 'Character Sheet', margin + 90, 68); doc.setFont('helvetica', 'normal'); doc.setFontSize(14); doc.text([text(character.species), text(character.archetype)].filter(Boolean).join('  /  '), margin + 90, 94)
-  doc.setFont('helvetica', 'bold'); doc.text(`LEVEL ${computed.level}`, pageWidth - margin, 31, { align: 'right' })
-  const addXpField = (label, value, x, fieldName) => {
-    doc.setFontSize(12); doc.text(label, x, 53); const field = new doc.AcroForm.TextField(); field.fieldName = fieldName; field.Rect = [x, 59, 78, 27]; field.value = String(number(value)); field.defaultValue = field.value; field.fontSize = 14; field.textAlign = 'center'; field.showWhenPrinted = true; doc.addField(field)
+  const first = addPage(1, true)
+  const form = pdf.getForm()
+  const addXpField = (label, value, name, x) => {
+    first.write(label, x, 88, 12, bold, green)
+    const field = form.createTextField(name); field.setText(String(number(value))); field.addToPage(first.page, { x: x + 62, y: first.H - 104, width: 52, height: 23, font: regular, textColor: ink, backgroundColor: white, borderColor: line, borderWidth: 1 }); field.setFontSize(14)
   }
-  addXpField('TOTAL XP', character.totalXp, pageWidth - margin - 174, 'total_xp'); addXpField('UNSPENT XP', character.unspentXp, pageWidth - margin - 78, 'unspent_xp')
-  doc.setTextColor(...ink); y = 145
+  addXpField('TOTAL XP', character.totalXp, 'total_xp', 352); addXpField('UNSPENT XP', character.unspentXp, 'unspent_xp', 470)
 
-  section('Combat Summary', 'combat'); table(['Initiative', 'HP', 'Defense', 'Resilience', 'Ego', 'Energy', 'Max Force'], [[signed(computed.initiative), `${number(character.currentHp)} / ${computed.maxHp}`, computed.defense, signed(computed.resilience), signed(computed.ego), `${number(character.currentEnergy)} / ${computed.maxEnergy}`, computed.maxForce]])
-  section('Stats', 'strength'); table(['', 'Stat', 'Score'], stats.map(([key, label]) => ['', label, signedEntry(character.stats[key])]), { 0: { cellWidth: 28 }, 2: { cellWidth: 90, overflow: 'hidden' } }, { didDrawCell: data => { if (data.section === 'body' && data.column.index === 0) drawIcon(doc, stats[data.row.index][0], data.cell.x + 14, data.cell.y + (data.cell.height / 2)) } })
+  section(first, 'COMBAT SUMMARY', 24, 120, 564, 112, 'C')
+  const combat = [['Initiative', signed(computed.initiative)], ['HP', `${number(character.currentHp)} / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `${number(character.currentEnergy)} / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
+  combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 160, 68, 39))
 
-  section('Skills', 'skills', 'All skills'); const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statLabel = stats.find(([candidate]) => candidate === statKey)?.[2] || statKey; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return ['', label, statLabel, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
-  table(['', 'Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, { 0: { cellWidth: 25 }, 1: { cellWidth: 85 }, 2: { cellWidth: 38 }, 3: { cellWidth: 52 }, 4: { cellWidth: 55 }, 5: { cellWidth: 45 }, 6: { cellWidth: 55 }, 7: { cellWidth: 45 } }, { didDrawCell: data => { if (data.section === 'body' && data.column.index === 0) drawIcon(doc, 'skills', data.cell.x + 13, data.cell.y + (data.cell.height / 2), 5) } })
+  section(first, 'ATTACK', 24, 244, 564, 118, 'A')
+  const attack = number(character.attackSkill)
+  ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 286, 96, 42))
 
-  section('Attack', 'attack'); const attack = number(character.attackSkill); table(['Attack Skill', 'Melee Modifier', 'Melee Total', 'Ranged Modifier', 'Ranged Total'], [[signedEntry(character.attackSkill), signedEntry(character.meleeAttackModifier), signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier)), signedEntry(character.rangedAttackModifier), signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]])
-  section('Weapons', 'weapons'); table(['Name', 'Type', 'Enhancement', 'Damage', 'Notes'], (character.weapons || []).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), signedEntry(weapon.enhancement), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] }), { 0: { cellWidth: 90 }, 1: { cellWidth: 105 }, 2: { cellWidth: 75 }, 3: { cellWidth: 70 } })
-  section('Talents', 'talents', `Combat Slots: ${computed.slots}`); table(['Talent', 'Ability / Cost', 'Duration', 'Notes'], (character.talents || []).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), { 0: { cellWidth: 115 }, 1: { cellWidth: 105 }, 2: { cellWidth: 80 } })
-  section('Items & Traits', 'items'); table(['Item / Trait', 'Description'], (character.items || []).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), { 0: { cellWidth: 155 } })
-  section('Contacts', 'contacts'); table(['Name', 'Relationship / Role'], (character.contacts || []).map(row => [text(row.name), text(row.role)]), { 0: { cellWidth: 180 } })
-  if (text(character.notes)) { section('Session Notes', 'notes'); doc.setFont('helvetica', 'normal'); doc.setFontSize(14); doc.splitTextToSize(character.notes, contentWidth - 16).forEach(line => { ensure(18); doc.text(line, margin + 8, y + 13); y += 18 }) }
+  section(first, 'STATS', 24, 374, 180, 368, 'S')
+  table(first, 30, 414, [116, 48], ['Stat', 'Score'], stats.map(([key, label, short]) => [`${label} (${short})`, signedEntry(character.stats[key])]), 50)
+  section(first, 'SKILLS', 216, 374, 372, 368, '*')
+  const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
+  table(first, 222, 414, [84, 39, 48, 50, 43, 54, 42], ['Skill', 'Stat', 'Ability', 'Mod', 'Buffs', 'Debuffs', 'Total'], skillRows, 37)
 
-  const pages = doc.getNumberOfPages(); for (let page = 1; page <= pages; page += 1) { doc.setPage(page); doc.setDrawColor(...gold); doc.line(margin, pageHeight - 29, pageWidth - margin, pageHeight - 29); doc.setFont('helvetica', 'normal'); doc.setFontSize(12); doc.setTextColor(90, 98, 92); doc.text(`${text(character.name) || 'Hero'}  /  Character Sheet`, margin, pageHeight - 15); doc.text(`${page} / ${pages}`, pageWidth - margin, pageHeight - 15, { align: 'right' }) }
-  doc.save(`${safeName(character.name)}-Character-Sheet.pdf`)
+  const second = addPage(2)
+  const weaponRows = (character.weapons || []).slice(0, 6).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] })
+  while (weaponRows.length < 6) weaponRows.push(['', '', '', ''])
+  section(second, 'WEAPONS', 24, 66, 564, 236, 'W'); table(second, 30, 106, [150, 145, 82, 175], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, 30)
+
+  const talentRows = (character.talents || []).slice(0, 6).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)])
+  while (talentRows.length < 6) talentRows.push(['', '', '', ''])
+  section(second, 'TALENTS', 24, 314, 564, 236, 'T'); table(second, 30, 354, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, 30)
+
+  const itemRows = (character.items || []).slice(0, 4).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))])
+  const contactRows = (character.contacts || []).slice(0, 4).map(row => [text(row.name), text(row.role)])
+  while (itemRows.length < 4) itemRows.push(['', '']); while (contactRows.length < 4) contactRows.push(['', ''])
+  section(second, 'ITEMS & TRAITS', 24, 562, 276, 142, 'I'); table(second, 30, 602, [105, 159], ['Name', 'Description'], itemRows, 23)
+  section(second, 'CONTACTS', 312, 562, 276, 142, 'C'); table(second, 318, 602, [105, 159], ['Name', 'Relationship / Role'], contactRows, 23)
+  section(second, 'SESSION NOTES', 24, 714, 564, 48, 'N')
+  second.write(fit(regular, text(character.notes).replace(/\s+/g, ' '), 12, 520), 58, 747, 12, regular)
+
+  const bytes = await pdf.save()
+  const blob = new Blob([bytes], { type: 'application/pdf' }); const url = URL.createObjectURL(blob); const link = document.createElement('a')
+  link.href = url; link.download = `${safeName(character.name)}-Character-Sheet.pdf`; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
