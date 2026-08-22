@@ -93,8 +93,13 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     first.write(label, x, top, 12, bold, green)
     addTextField(first, name, value, x, top + 14, width, 22, 12)
   }
-  labeledField('NAME', character.name, 'hero_name', 352, 12, 236)
-  labeledField('SPECIES', character.species, 'species', 352, 48, 112); labeledField('ARCHETYPE', character.archetype, 'archetype', 472, 48, 116)
+  const fixedField = (label, value, x, top, width) => {
+    first.write(label, x, top, 12, bold, green)
+    first.page.drawRectangle({ x, y: first.H - top - 36, width, height: 22, color: white, borderColor: line, borderWidth: 1 })
+    first.write(fit(regular, value, 12, width - 8), x + 4, top + 19, 12, regular)
+  }
+  fixedField('NAME', character.name, 352, 12, 236)
+  fixedField('SPECIES', character.species, 352, 48, 112); fixedField('ARCHETYPE', character.archetype, 472, 48, 116)
   labeledField('LEVEL', computed.level, 'level', 352, 84, 54); labeledField('TOTAL XP', character.totalXp, 'total_xp', 414, 84, 76); labeledField('UNSPENT XP', character.unspentXp, 'unspent_xp', 498, 84, 90)
 
   section(first, 'COMBAT SUMMARY', 24, 120, 564, 112, 'combat')
