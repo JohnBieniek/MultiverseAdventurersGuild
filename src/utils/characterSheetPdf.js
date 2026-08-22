@@ -50,11 +50,6 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
       page.drawRectangle({ x: 0, y: H - 108, width: 612, height: 4, color: gold })
       if (logo) page.drawImage(logo, { x: 24, y: H - 93, width: 70, height: 70 })
       write('MULTIVERSE', 104, 20, 24, bold, green); write('ADVENTURERS GUILD', 104, 48, 17, bold, green); write('CHARACTER SHEET', 104, 72, 14, bold, ink)
-    } else {
-      page.drawRectangle({ x: 0, y: H - 52, width: 612, height: 52, color: green })
-      if (logo) page.drawImage(logo, { x: 22, y: H - 45, width: 36, height: 36 })
-      write('MULTIVERSE ADVENTURERS GUILD', 68, 15, 16, bold, white)
-      write(fit(bold, character.name || 'Unnamed Hero', 14, 190), 382, 16, 14, bold, white)
     }
     write(`PAGE ${pageNumber} OF 2`, 500, 770, 12, regular, green)
     return { page, H, write }
@@ -125,7 +120,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const rowUnits = weaponRows.length + talentRows.length + Math.max(itemRows.length, contactRows.length)
   const detailRowHeight = Math.max(18, Math.min(24, Math.floor(374 / rowUnits)))
   const blockHeight = rows => 64 + (rows.length * detailRowHeight)
-  let detailTop = 66
+  let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
   section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons'); table(second, 30, detailTop + 40, [150, 145, 82, 175], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 10
