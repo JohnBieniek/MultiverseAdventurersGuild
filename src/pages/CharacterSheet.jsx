@@ -8,6 +8,7 @@ import archetypesText from '../content/players/archetypes.txt?raw'
 import contactsText from '../content/players/contacts.txt?raw'
 import { randomCharacterName } from '../data/characterNames'
 import { archetypeTraitPools, speciesTraitPools } from '../data/randomTraits'
+import { downloadCharacterSheetPdf } from '../utils/characterSheetPdf'
 import './CharacterSheet.css'
 
 const STORE_KEY = 'mag-playable-characters-v1'
@@ -2915,6 +2916,10 @@ function CharacterSheet() {
     const fileName = (character.name || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
     link.href = url; link.download = `${fileName}.MAGHero`; link.click(); URL.revokeObjectURL(url)
   }
+  const downloadPdf = () => {
+    downloadCharacterSheetPdf({ character, computed, stats, skills: skillDefs, weaponTypes })
+    flash('PDF downloaded')
+  }
   const checkRoll = (label, modifier, target = '') => {
     const natural = rollDie(20); const total = natural + number(modifier); const tn = target === '' ? null : number(target)
     setRoll({ kind: 'check', label, natural, modifier: number(modifier), total, tn,
@@ -2991,7 +2996,7 @@ function CharacterSheet() {
     return usedByOtherSkills >= available
   }
   return <div className={`sheet-page ${number(character.currentHp) < 0 ? 'sheet-page-danger' : ''}`}>
-    <div className="sheet-toolbar-region"><div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>{deathwatch && deathwatch.mode !== 'audio' && deathwatch.phase !== 'resolved' && deathwatchHidden && <button type="button" className="dying-toast" onClick={() => setDeathwatchHidden(false)}><strong>You’re dying.</strong><span>Click here to continue the Death Clock.</span></button>}</div>
+    <div className="sheet-toolbar-region"><div className="sheet-toolbar"><button onClick={() => setCharacter(null)}>← Heroes</button><div className="toolbar-title"><strong>{character.name || 'Unnamed Hero'}</strong><span>Level {computed.level}</span></div><button onClick={createHero}>New</button><button onClick={() => fileRef.current.click()}><span className="load-label-full">Load File</span><span className="load-label-mobile">Load</span></button><button onClick={exportCharacter}>Export</button><button onClick={downloadPdf} aria-label="Download character sheet PDF"><span className="pdf-label-full">Download PDF</span><span className="pdf-label-mobile">PDF</span></button><label className="autosave-toggle"><input type="checkbox" checked={character.autoSave !== false} onChange={e => setAutoSave(e.target.checked)}/><span>Autosave</span></label><button className="primary" onClick={save}>Save</button><input ref={fileRef} className="visually-hidden" type="file" onChange={importFile} /></div>{deathwatch && deathwatch.mode !== 'audio' && deathwatch.phase !== 'resolved' && deathwatchHidden && <button type="button" className="dying-toast" onClick={() => setDeathwatchHidden(false)}><strong>You’re dying.</strong><span>Click here to continue the Death Clock.</span></button>}</div>
     <header className="sheet-header"><img src="/multiverse%20adventurers%20guild%20icon.png" alt="Guild shield"/><div><span className="eyebrow sheet-eyebrow">MULTIVERSE ADVENTURERS GUILD</span><h1>Character Sheet</h1></div><div className="identity-fields">
       <Field label="Hero name" value={character.name} onChange={setCharacterName} wide/>
       <IdentityChoice label="Species" href="/players#species" help="Species describes what kind of being your Hero is. It is primarily a roleplaying choice and does not limit your Stats or Skills." value={character.species} options={speciesNames} onChange={setSpecies}/>
