@@ -81,7 +81,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const { page, H, write } = ctx; const total = widths.reduce((sum, width) => sum + width, 0)
     page.drawRectangle({ x, y: H - top - 24, width: total, height: 24, color: pale, borderColor: line, borderWidth: .7 })
     let cx = x
-    headers.forEach((header, index) => { write(fit(bold, header.toUpperCase(), 12, widths[index] - 8), cx + 4, top + 6, 12, bold); cx += widths[index] })
+    headers.forEach((header, index) => { write(fit(bold, header.toUpperCase(), 12, widths[index] - 4), cx + 2, top + 6, 12, bold); cx += widths[index] })
     rows.forEach((row, rowIndex) => {
       const rowTop = top + 24 + (rowIndex * rowHeight); cx = x
       page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
@@ -105,11 +105,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const attack = number(character.attackSkill)
   ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 286, 96, 42))
 
-  section(first, 'STATS', 24, 374, 180, 368, 'stats')
-  table(first, 30, 414, [116, 48], ['Stat', 'Score'], stats.map(([key, label, short]) => [`${label} (${short})`, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key))
-  section(first, 'SKILLS', 216, 374, 372, 368, 'skills')
+  section(first, 'STATS', 24, 374, 160, 368, 'stats')
+  table(first, 30, 414, [106, 42], ['Stat', 'Score'], stats.map(([key, label, short]) => [`${label} (${short})`, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key))
+  section(first, 'SKILLS', 196, 374, 392, 368, 'skills')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
-  table(first, 222, 414, [84, 39, 48, 50, 43, 54, 42], ['Skill', 'Stat', 'Ability', 'Mod', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key))
+  table(first, 202, 414, [85, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key))
 
   const second = addPage(2)
   const weaponRows = (character.weapons || []).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] })
