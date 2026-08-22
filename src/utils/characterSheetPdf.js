@@ -5,7 +5,7 @@ import { FaAsterisk, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaEy
 import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
-const green = rgb(.055, .22, .12), ink = rgb(.08, .11, .09), pale = rgb(.97, .96, .92), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
+const green = rgb(24 / 255, 61 / 255, 40 / 255), ink = rgb(.08, .11, .09), pale = rgb(248 / 255, 237 / 255, 212 / 255), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
 const number = value => Number(value) || 0
 const signed = value => `${number(value) >= 0 ? '+' : ''}${number(value)}`
 const signedEntry = value => value === '' || value == null ? '' : signed(value)
@@ -20,7 +20,7 @@ const iconComponents = {
 }
 
 const renderIcon = Icon => new Promise((resolve, reject) => {
-  const svg = renderToStaticMarkup(createElement(Icon, { color: '#0e381f', size: 64, xmlns: 'http://www.w3.org/2000/svg' }))
+  const svg = renderToStaticMarkup(createElement(Icon, { color: '#183d28', size: 64, xmlns: 'http://www.w3.org/2000/svg' }))
   const image = new Image(); image.onload = () => { const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 64; const context = canvas.getContext('2d'); context.drawImage(image, 0, 0, 64, 64); canvas.toBlob(blob => blob ? blob.arrayBuffer().then(resolve, reject) : reject(new Error('Icon rendering failed')), 'image/png') }; image.onerror = reject; image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 })
 
@@ -80,7 +80,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const valueBox = (ctx, label, value, x, top, width, height = 48, fieldName = '') => {
     const { write } = ctx
     write(label.toUpperCase(), x, top, 12, bold, ink)
-    addTextField(ctx, fieldName, value, x, top + 17, width, height, 14)
+    addTextField(ctx, fieldName, value, x, top + 17, width, height, 14).setAlignment(TextAlignment.Center)
   }
   const table = (ctx, x, top, widths, headers, rows, rowHeight = 30, rowIconKeys = [], fieldPrefix = '', editableColumns = []) => {
     const { page, H, write } = ctx; const total = widths.reduce((sum, width) => sum + width, 0)
@@ -90,7 +90,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     rows.forEach((row, rowIndex) => {
       const rowTop = top + 24 + (rowIndex * rowHeight); cx = x
       page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
-      row.forEach((cell, index) => { if (index) page.drawLine({ start: { x: cx, y: H - rowTop }, end: { x: cx, y: H - rowTop - rowHeight }, thickness: .5, color: line }); const rowIcon = index === 0 ? icons[rowIconKeys[rowIndex]] : null; if (rowIcon) page.drawImage(rowIcon, { x: cx + 5, y: H - rowTop - ((rowHeight + 17) / 2), width: 17, height: 17 }); const inset = rowIcon ? 26 : 4; if (editableColumns.includes(index)) { const field = addTextField(ctx, `${fieldPrefix}_${rowIndex}_${index}`, cell, cx + 1, rowTop + 1, widths[index] - 2, rowHeight - 2, 12); if (fieldPrefix === 'skill' && index >= 2) field.setAlignment(TextAlignment.Center) } else write(fit(regular, cell, 12, widths[index] - inset - 4), cx + inset, rowTop + ((rowHeight - 12) / 2), 12); cx += widths[index] })
+      row.forEach((cell, index) => { if (index) page.drawLine({ start: { x: cx, y: H - rowTop }, end: { x: cx, y: H - rowTop - rowHeight }, thickness: .5, color: line }); const rowIcon = index === 0 ? icons[rowIconKeys[rowIndex]] : null; if (rowIcon) page.drawImage(rowIcon, { x: cx + 5, y: H - rowTop - ((rowHeight + 17) / 2), width: 17, height: 17 }); const inset = rowIcon ? 26 : 4; if (editableColumns.includes(index)) { const field = addTextField(ctx, `${fieldPrefix}_${rowIndex}_${index}`, cell, cx + 1, rowTop + 1, widths[index] - 2, rowHeight - 2, 12); if ((fieldPrefix === 'skill' && index >= 2) || (fieldPrefix === 'stat' && index === 1)) field.setAlignment(TextAlignment.Center) } else write(fit(regular, cell, 12, widths[index] - inset - 4), cx + inset, rowTop + ((rowHeight - 12) / 2), 12); cx += widths[index] })
     })
   }
 
