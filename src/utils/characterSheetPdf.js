@@ -9,6 +9,7 @@ const green = rgb(.055, .22, .12), ink = rgb(.08, .11, .09), pale = rgb(.97, .96
 const number = value => Number(value) || 0
 const signed = value => `${number(value) >= 0 ? '+' : ''}${number(value)}`
 const signedEntry = value => value === '' || value == null ? '' : signed(value)
+const temporaryEntry = value => number(value) === 0 ? '' : signed(value)
 const text = value => String(value ?? '').trim()
 const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
 const iconComponents = {
@@ -113,7 +114,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   section(first, 'STATS', 24, 346, 156, 368, 'stats')
   table(first, 30, 376, [89, 55], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
   section(first, 'SKILLS', 184, 346, 404, 368, 'skills', 'You can activate one Skill per turn.')
-  const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
+  const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
   table(first, 190, 376, [97, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
 
   const second = addPage(2)
