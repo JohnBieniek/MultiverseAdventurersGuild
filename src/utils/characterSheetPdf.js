@@ -162,7 +162,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const blockHeight = rows => 54 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
-  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 24, detailTop + 30, [170, 150, 120, 124], ['Weapon', 'Type', 'Enhancement', 'Damage'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 24, detailTop + 30, [250, 150, 100, 64], ['Weapon', 'Type', 'Enhancement', 'Damage'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 6
   const talentsHeight = blockHeight(talentRows)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.'); table(second, 24, detailTop + 30, [150, 130, 90, 194], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
