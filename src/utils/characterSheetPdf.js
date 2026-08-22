@@ -109,16 +109,27 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const combat = [['Initiative', signed(computed.initiative)], ['HP', `       / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `       / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
   combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 141, 68, 39, `combat_${label.toLowerCase().replace(' ', '_')}`))
 
-  section(first, 'ATTACK', 24, 210, 564, 103, 'attack', 'One Skill is used for both melee and ranged attacks.')
+  section(first, 'ATTACK', 24, 210, 564, 113, 'attack', 'One Skill is used for both melee and ranged attacks.')
   const attack = number(character.attackSkill)
-  ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 247, 96, 42, `attack_${index}`))
+  const attackEquation = (label, statLabel, stat, modifier, x, prefix) => {
+    first.page.drawRectangle({ x, y: first.H - 316, width: 221, height: 72, borderColor: line, borderWidth: 1, color: white })
+    first.write(label, x + 10, 247, 13, bold, green)
+    const entries = [[statLabel, signedEntry(stat)], ['ATTACK', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
+    const positions = [x + 10, x + 63, x + 116, x + 173]
+    entries.forEach(([entryLabel, value], index) => { first.write(entryLabel, positions[index], 265, 8, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 276, index === 3 ? 38 : 36, 33, 11).setAlignment(TextAlignment.Center) })
+    first.write('+', x + 50, 286, 11, bold); first.write('+', x + 103, 286, 11, bold); first.write('=', x + 158, 286, 11, bold)
+  }
+  first.write('ATTACK SKILL', 34, 250, 10, bold, ink)
+  addTextField(first, 'attack_skill', signedEntry(character.attackSkill), 34, 276, 82, 33, 11).setAlignment(TextAlignment.Center)
+  attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack')
+  attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack')
 
   const statRowHeight = (skills.length * 37) / stats.length
-  section(first, 'STATS', 24, 319, 156, 54 + (stats.length * statRowHeight), 'stats')
-  table(first, 24, 349, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
-  section(first, 'SKILLS', 184, 319, 404, 54 + (skills.length * 37), 'skills', 'You can activate one Skill per turn.')
+  section(first, 'STATS', 24, 329, 156, 54 + (stats.length * statRowHeight), 'stats')
+  table(first, 24, 359, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
+  section(first, 'SKILLS', 184, 329, 404, 54 + (skills.length * 37), 'skills', 'You can activate one Skill per turn.')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
-  table(first, 184, 349, [109, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
+  table(first, 184, 359, [109, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
   const second = addPage(2)
   const padRows = (rows, minimum, blank) => { const next = [...rows]; while (next.length < minimum) next.push([...blank]); return next }
