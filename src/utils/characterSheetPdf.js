@@ -114,10 +114,10 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 259, 96, 42, `attack_${index}`))
 
   section(first, 'STATS', 24, 346, 156, 368, 'stats')
-  table(first, 30, 376, [89, 55], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
+  table(first, 24, 376, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
   section(first, 'SKILLS', 184, 346, 404, 368, 'skills', 'You can activate one Skill per turn.')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
-  table(first, 190, 376, [97, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
+  table(first, 184, 376, [109, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
 
   const second = addPage(2)
   const padRows = (rows, minimum, blank) => { const next = [...rows]; while (next.length < minimum) next.push([...blank]); return next }
@@ -130,16 +130,16 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const blockHeight = rows => 54 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
-  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 30, detailTop + 30, [150, 122, 63, 217], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 24, detailTop + 30, [150, 122, 63, 229], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 6
   const talentsHeight = blockHeight(talentRows)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.'); table(second, 30, detailTop + 30, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.'); table(second, 24, detailTop + 30, [150, 130, 90, 194], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
   detailTop += talentsHeight + 6
   const itemsHeight = blockHeight(itemRows)
-  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.'); table(second, 30, detailTop + 30, [180, 372], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.'); table(second, 24, detailTop + 30, [180, 384], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
   detailTop += itemsHeight + 6
   const contactsHeight = blockHeight(contactRows)
-  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 30, detailTop + 30, [200, 352], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 24, detailTop + 30, [200, 364], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
