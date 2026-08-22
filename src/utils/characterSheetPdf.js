@@ -153,7 +153,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   const second = addPage(2)
   const padRows = (rows, minimum, blank) => { const next = [...rows]; while (next.length < minimum) next.push([...blank]); return next }
-  const weaponRows = padRows((character.weapons || []).filter(weapon => text(weapon.name) || text(weapon.notes) || number(weapon.enhancement)).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] }), 6, ['', '', '', ''])
+  const weaponRows = padRows((character.weapons || []).filter(weapon => text(weapon.name) || number(weapon.enhancement)).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), signedEntry(weapon.enhancement), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`] }), 6, ['', '', '', ''])
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
@@ -162,7 +162,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const blockHeight = rows => 54 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
-  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 24, detailTop + 30, [150, 122, 63, 229], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 24, detailTop + 30, [170, 150, 120, 124], ['Weapon', 'Type', 'Enhancement', 'Damage'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 6
   const talentsHeight = blockHeight(talentRows)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.'); table(second, 24, detailTop + 30, [150, 130, 90, 194], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
