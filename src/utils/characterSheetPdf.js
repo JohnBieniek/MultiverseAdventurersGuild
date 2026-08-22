@@ -112,23 +112,31 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   table(first, 222, 414, [84, 39, 48, 50, 43, 54, 42], ['Skill', 'Stat', 'Ability', 'Mod', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key))
 
   const second = addPage(2)
-  const weaponRows = (character.weapons || []).slice(0, 6).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] })
-  while (weaponRows.length < 6) weaponRows.push(['', '', '', ''])
-  section(second, 'WEAPONS', 24, 66, 564, 208, 'weapons'); table(second, 30, 106, [150, 145, 82, 175], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, 24)
-
-  const talentRows = (character.talents || []).slice(0, 6).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)])
-  while (talentRows.length < 6) talentRows.push(['', '', '', ''])
-  section(second, 'TALENTS', 24, 284, 564, 208, 'talents'); table(second, 30, 324, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, 24)
-
-  const itemRows = (character.items || []).slice(0, 3).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))])
-  const contactRows = (character.contacts || []).slice(0, 3).map(row => [text(row.name), text(row.role)])
-  while (itemRows.length < 3) itemRows.push(['', '']); while (contactRows.length < 3) contactRows.push(['', ''])
-  section(second, 'ITEMS & TRAITS', 24, 502, 276, 124, 'items'); table(second, 30, 542, [105, 159], ['Name', 'Description'], itemRows, 20)
-  section(second, 'CONTACTS', 312, 502, 276, 124, 'contacts'); table(second, 318, 542, [105, 159], ['Name', 'Relationship / Role'], contactRows, 20)
-  section(second, 'SESSION NOTES', 24, 636, 564, 126, 'notes')
+  const weaponRows = (character.weapons || []).map(weapon => { const type = weaponTypes.find(([name]) => name === weapon.type) || weaponTypes[0]; const stat = type[1] === 'melee' ? character.stats.strength : character.stats.dexterity; return [text(weapon.name), text(weapon.type), `d${type[2]} ${signed(number(stat) + number(weapon.enhancement))}`, text(weapon.notes)] })
+  const talentRows = (character.talents || []).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)])
+  const itemRows = (character.items || []).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))])
+  const contactRows = (character.contacts || []).map(row => [text(row.name), text(row.role)])
+  if (!weaponRows.length) weaponRows.push(['', '', '', '']); if (!talentRows.length) talentRows.push(['', '', '', '']); if (!itemRows.length) itemRows.push(['', '']); if (!contactRows.length) contactRows.push(['', ''])
+  const rowUnits = weaponRows.length + talentRows.length + Math.max(itemRows.length, contactRows.length)
+  const detailRowHeight = Math.max(18, Math.min(24, Math.floor(374 / rowUnits)))
+  const blockHeight = rows => 64 + (rows.length * detailRowHeight)
+  let detailTop = 66
+  const weaponsHeight = blockHeight(weaponRows)
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons'); table(second, 30, detailTop + 40, [150, 145, 82, 175], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight)
+  detailTop += weaponsHeight + 10
+  const talentsHeight = blockHeight(talentRows)
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents'); table(second, 30, detailTop + 40, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight)
+  detailTop += talentsHeight + 10
+  const pairedHeight = 64 + (Math.max(itemRows.length, contactRows.length) * detailRowHeight)
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 276, pairedHeight, 'items'); table(second, 30, detailTop + 40, [105, 159], ['Name', 'Description'], itemRows, detailRowHeight)
+  section(second, 'CONTACTS', 312, detailTop, 276, pairedHeight, 'contacts'); table(second, 318, detailTop + 40, [105, 159], ['Name', 'Relationship / Role'], contactRows, detailRowHeight)
+  detailTop += pairedHeight + 10
+  const notesHeight = Math.max(90, 762 - detailTop)
+  section(second, 'SESSION NOTES', 24, detailTop, 564, notesHeight, 'notes')
   const noteWords = text(character.notes).replace(/\s+/g, ' ').split(' ').filter(Boolean); const noteLines = []; let noteLine = ''
   noteWords.forEach(word => { const candidate = noteLine ? `${noteLine} ${word}` : word; if (regular.widthOfTextAtSize(candidate, 12) <= 520) noteLine = candidate; else { noteLines.push(noteLine); noteLine = word } }); if (noteLine) noteLines.push(noteLine)
-  noteLines.slice(0, 5).forEach((note, index) => second.write(note, 36, 675 + (index * 16), 12, regular))
+  const visibleNoteLines = Math.max(1, Math.floor((notesHeight - 42) / 16))
+  noteLines.slice(0, visibleNoteLines).forEach((note, index) => second.write(note, 36, detailTop + 39 + (index * 16), 12, regular))
 
   const bytes = await pdf.save()
   const blob = new Blob([bytes], { type: 'application/pdf' }); const url = URL.createObjectURL(blob); const link = document.createElement('a')
