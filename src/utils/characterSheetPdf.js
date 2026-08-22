@@ -114,7 +114,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const attackEquation = (label, statLabel, stat, modifier, x, prefix) => {
     first.page.drawRectangle({ x, y: first.H - 316, width: 221, height: 72, borderColor: line, borderWidth: 1, color: white })
     first.write(label, x + 10, 247, 13, bold, green)
-    const entries = [[statLabel, signedEntry(stat)], ['ATTACK', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
+    const entries = [[statLabel, signedEntry(stat)], ['SKILL', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
     const positions = [x + 10, x + 63, x + 116, x + 173]
     entries.forEach(([entryLabel, value], index) => { first.write(entryLabel, positions[index], 265, 8, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 276, index === 3 ? 38 : 36, 33, 11).setAlignment(TextAlignment.Center) })
     first.write('+', x + 50, 286, 11, bold); first.write('+', x + 103, 286, 11, bold); first.write('=', x + 158, 286, 11, bold)
