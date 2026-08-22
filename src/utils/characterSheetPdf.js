@@ -19,8 +19,8 @@ const iconComponents = {
   athletics: FaRunning, influence: FaSmile, knowledge: FaLightbulb, observation: FaEye, outdoors: FaTree, sneak: FaUserSecret, technology: FaMicrochip, vehicle: FaCar,
 }
 
-const renderIcon = Icon => new Promise((resolve, reject) => {
-  const svg = renderToStaticMarkup(createElement(Icon, { color: '#183d28', size: 64, xmlns: 'http://www.w3.org/2000/svg' }))
+const renderIcon = (Icon, color = '#183d28') => new Promise((resolve, reject) => {
+  const svg = renderToStaticMarkup(createElement(Icon, { color, size: 64, xmlns: 'http://www.w3.org/2000/svg' }))
   const image = new Image(); image.onload = () => { const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 64; const context = canvas.getContext('2d'); context.drawImage(image, 0, 0, 64, 64); canvas.toBlob(blob => blob ? blob.arrayBuffer().then(resolve, reject) : reject(new Error('Icon rendering failed')), 'image/png') }; image.onerror = reject; image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 })
 
@@ -38,7 +38,9 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold)
   const form = pdf.getForm()
   const icons = {}
+  const headerIcons = {}
   await Promise.all(Object.entries(iconComponents).map(async ([key, Icon]) => { try { icons[key] = await pdf.embedPng(await renderIcon(Icon)) } catch { icons[key] = null } }))
+  await Promise.all(Object.entries(iconComponents).map(async ([key, Icon]) => { try { headerIcons[key] = await pdf.embedPng(await renderIcon(Icon, '#ffffff')) } catch { headerIcons[key] = null } }))
   let logo
   try { logo = await pdf.embedPng(await fetch('/multiverse%20adventurers%20guild%20icon.png').then(response => response.arrayBuffer())) } catch { logo = null }
 
@@ -68,8 +70,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     page.drawRectangle({ x, y: H - top - height, width, height, borderColor: line, borderWidth: 1, color: white })
     const titleWidth = Math.min(width, 205)
     page.drawRectangle({ x, y: H - top - 30, width: titleWidth, height: 30, color: green })
-    if (icons[iconKey]) { page.drawCircle({ x: x + 17, y: H - top - 15, size: 11, color: white }); page.drawImage(icons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 }) }
-    write(title, x + (icons[iconKey] ? 34 : 10), top + 7, 14, bold, white)
+    if (headerIcons[iconKey]) page.drawImage(headerIcons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 })
+    write(title, x + (headerIcons[iconKey] ? 34 : 10), top + 7, 14, bold, white)
     if (note && width - titleWidth > 90) {
       const available = width - titleWidth - 16; const words = note.split(' ')
       const wrap = size => { const lines = []; let current = ''; words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, size) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current); return lines }
