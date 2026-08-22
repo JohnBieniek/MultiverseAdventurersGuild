@@ -5,7 +5,7 @@ import { FaAsterisk, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaEy
 import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
-const green = rgb(.055, .22, .12), gold = rgb(.73, .54, .22), ink = rgb(.08, .11, .09), pale = rgb(.97, .96, .92), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
+const green = rgb(.055, .22, .12), ink = rgb(.08, .11, .09), pale = rgb(.97, .96, .92), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
 const number = value => Number(value) || 0
 const signed = value => `${number(value) >= 0 ? '+' : ''}${number(value)}`
 const signedEntry = value => value === '' || value == null ? '' : signed(value)
@@ -46,10 +46,9 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const H = page.getHeight()
     const write = (value, x, top, size = 12, font = regular, color = ink, options = {}) => page.drawText(String(value), { x, y: H - top - size, size, font, color, ...options })
     if (fullHeader) {
-      page.drawRectangle({ x: 0, y: H - 104, width: 612, height: 104, color: pale })
-      page.drawRectangle({ x: 0, y: H - 108, width: 612, height: 4, color: gold })
-      if (logo) page.drawImage(logo, { x: 24, y: H - 93, width: 70, height: 70 })
-      write('MULTIVERSE', 104, 20, 24, bold, green); write('ADVENTURERS GUILD', 104, 48, 17, bold, green); write('CHARACTER SHEET', 104, 72, 14, bold, ink)
+      page.drawRectangle({ x: 0, y: H - 96, width: 612, height: 96, color: pale })
+      if (logo) page.drawImage(logo, { x: 24, y: H - 82, width: 62, height: 62 })
+      write('MULTIVERSE', 96, 16, 22, bold, green); write('ADVENTURERS GUILD', 96, 41, 16, bold, green); write('CHARACTER SHEET', 96, 64, 14, bold, ink)
     }
     write(`PAGE ${pageNumber} OF 2`, 500, 770, 12, regular, green)
     return { page, H, write }
@@ -99,28 +98,23 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     first.write(label, x, top, 12, bold, green)
     addTextField(first, name, value, x, top + 14, width, 22, 12)
   }
-  const fixedField = (label, value, x, top, width) => {
-    first.write(label, x, top, 12, bold, green)
-    first.page.drawRectangle({ x, y: first.H - top - 36, width, height: 22, color: white, borderColor: line, borderWidth: 1 })
-    first.write(fit(regular, value, 12, width - 8), x + 4, top + 19, 12, regular)
-  }
-  fixedField('NAME', character.name, 352, 12, 236)
-  fixedField('SPECIES', character.species, 352, 48, 112); fixedField('ARCHETYPE', character.archetype, 472, 48, 116)
-  labeledField('LEVEL', computed.level, 'level', 352, 84, 54); labeledField('TOTAL XP', character.totalXp, 'total_xp', 414, 84, 76); labeledField('UNSPENT XP', character.unspentXp, 'unspent_xp', 498, 84, 90)
+  first.write(fit(bold, character.name || 'Unnamed Hero', 18, 236), 352, 10, 18, bold, green)
+  first.write(fit(regular, [text(character.species), text(character.archetype)].filter(Boolean).join(' / '), 12, 236), 352, 36, 12, regular)
+  labeledField('LEVEL', computed.level, 'level', 352, 56, 54); labeledField('TOTAL XP', character.totalXp, 'total_xp', 414, 56, 76); labeledField('UNSPENT XP', character.unspentXp, 'unspent_xp', 498, 56, 90)
 
-  section(first, 'COMBAT SUMMARY', 24, 120, 564, 112, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.')
+  section(first, 'COMBAT SUMMARY', 24, 104, 564, 112, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.')
   const combat = [['Initiative', signed(computed.initiative)], ['HP', `       / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `       / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
-  combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 160, 68, 39, `combat_${label.toLowerCase().replace(' ', '_')}`))
+  combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 141, 68, 39, `combat_${label.toLowerCase().replace(' ', '_')}`))
 
-  section(first, 'ATTACK', 24, 244, 564, 118, 'attack', 'One Skill is used for both melee and ranged attacks.')
+  section(first, 'ATTACK', 24, 222, 564, 118, 'attack', 'One Skill is used for both melee and ranged attacks.')
   const attack = number(character.attackSkill)
-  ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 286, 96, 42, `attack_${index}`))
+  ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 259, 96, 42, `attack_${index}`))
 
-  section(first, 'STATS', 24, 374, 156, 368, 'stats')
-  table(first, 30, 414, [89, 55], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
-  section(first, 'SKILLS', 184, 374, 404, 368, 'skills', 'You can activate one Skill per turn.')
+  section(first, 'STATS', 24, 346, 156, 368, 'stats')
+  table(first, 30, 376, [89, 55], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
+  section(first, 'SKILLS', 184, 346, 404, 368, 'skills', 'You can activate one Skill per turn.')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
-  table(first, 190, 414, [97, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
+  table(first, 190, 376, [97, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
 
   const second = addPage(2)
   const padRows = (rows, minimum, blank) => { const next = [...rows]; while (next.length < minimum) next.push([...blank]); return next }
@@ -130,21 +124,21 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
   const rowUnits = weaponRows.length + talentRows.length + Math.max(itemRows.length, contactRows.length)
   const detailRowHeight = Math.max(14, Math.min(24, Math.floor(420 / rowUnits)))
-  const blockHeight = rows => 64 + (rows.length * detailRowHeight)
+  const blockHeight = rows => 54 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
-  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 30, detailTop + 40, [150, 122, 63, 217], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
-  detailTop += weaponsHeight + 10
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 30, detailTop + 30, [150, 122, 63, 217], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
+  detailTop += weaponsHeight + 6
   const talentsHeight = blockHeight(talentRows)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `Activate two Talents per turn. Combat Slots: ${computed.slots}.`); table(second, 30, detailTop + 40, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
-  detailTop += talentsHeight + 10
-  const pairedHeight = 64 + (Math.max(itemRows.length, contactRows.length) * detailRowHeight)
-  section(second, 'ITEMS & TRAITS', 24, detailTop, 276, pairedHeight, 'items'); table(second, 30, detailTop + 40, [105, 159], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
-  section(second, 'CONTACTS', 312, detailTop, 276, pairedHeight, 'contacts'); table(second, 318, detailTop + 40, [105, 159], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
-  detailTop += pairedHeight + 10
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `Activate two Talents per turn. Combat Slots: ${computed.slots}.`); table(second, 30, detailTop + 30, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
+  detailTop += talentsHeight + 6
+  const pairedHeight = 54 + (Math.max(itemRows.length, contactRows.length) * detailRowHeight)
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 276, pairedHeight, 'items'); table(second, 30, detailTop + 30, [105, 159], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
+  section(second, 'CONTACTS', 312, detailTop, 276, pairedHeight, 'contacts'); table(second, 318, detailTop + 30, [105, 159], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
+  detailTop += pairedHeight + 6
   const notesHeight = 762 - detailTop
   section(second, 'SESSION NOTES', 24, detailTop, 564, notesHeight, 'notes')
-  addTextField(second, 'session_notes', character.notes, 30, detailTop + 36, 552, notesHeight - 42, 12, true)
+  addTextField(second, 'session_notes', character.notes, 30, detailTop + 30, 552, notesHeight - 30, 12, true)
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
