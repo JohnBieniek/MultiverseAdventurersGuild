@@ -51,7 +51,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     if (fullHeader) {
       page.drawRectangle({ x: 0, y: H - 96, width: 612, height: 96, color: pale })
       if (logo) page.drawImage(logo, { x: 24, y: H - 82, width: 62, height: 62 })
-      write('MULTIVERSE', 96, 16, 22, bold, green); write('ADVENTURERS GUILD', 96, 41, 16, bold, green); write('CHARACTER SHEET', 96, 64, 14, bold, ink)
+      write('MULTIVERSE', 96, 16, 22, bold, green); write('ADVENTURERS GUILD', 96, 41, 16, bold, green); write('Character Sheet', 96, 64, 14, bold, ink)
     }
     write(`PAGE ${pageNumber} OF 2`, 500, 770, 12, regular, green)
     return { page, H, write }
