@@ -2916,8 +2916,8 @@ function CharacterSheet() {
     const fileName = (character.name || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
     link.href = url; link.download = `${fileName}.MAGHero`; link.click(); URL.revokeObjectURL(url)
   }
-  const downloadPdf = () => {
-    downloadCharacterSheetPdf({ character, computed, stats, skills: skillDefs, weaponTypes })
+  const downloadPdf = async () => {
+    await downloadCharacterSheetPdf({ character, computed, stats, skills: skillDefs, weaponTypes })
     flash('PDF downloaded')
   }
   const checkRoll = (label, modifier, target = '') => {
