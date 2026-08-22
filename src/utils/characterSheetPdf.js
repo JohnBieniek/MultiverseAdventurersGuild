@@ -81,7 +81,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   }
   const valueBox = (ctx, label, value, x, top, width, height = 48, fieldName = '') => {
     const { write } = ctx
-    write(label.toUpperCase(), x, top, 12, bold, ink)
+    const heading = label.toUpperCase()
+    write(heading, x + ((width - bold.widthOfTextAtSize(heading, 12)) / 2), top, 12, bold, ink)
     addTextField(ctx, fieldName, value, x, top + 17, width, height, 14).setAlignment(TextAlignment.Center)
   }
   const table = (ctx, x, top, widths, headers, rows, rowHeight = 30, rowIconKeys = [], fieldPrefix = '', editableColumns = [], alternatingRows = true) => {
@@ -113,13 +114,13 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const attack = number(character.attackSkill)
   const attackEquation = (label, statLabel, stat, modifier, x, prefix) => {
     first.page.drawRectangle({ x, y: first.H - 316, width: 221, height: 72, borderColor: line, borderWidth: 1, color: white })
-    first.write(label, x + 10, 247, 13, bold, green)
+    first.write(label, x + ((221 - bold.widthOfTextAtSize(label, 13)) / 2), 247, 13, bold, green)
     const entries = [[statLabel, signedEntry(stat)], ['SKILL', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
     const positions = [x + 10, x + 63, x + 116, x + 173]
-    entries.forEach(([entryLabel, value], index) => { first.write(entryLabel, positions[index], 265, 8, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 276, index === 3 ? 38 : 36, 33, 11).setAlignment(TextAlignment.Center) })
-    first.write('+', x + 50, 286, 11, bold); first.write('+', x + 103, 286, 11, bold); first.write('=', x + 158, 286, 11, bold)
+    entries.forEach(([entryLabel, value], index) => { const fieldWidth = index === 3 ? 38 : 36; first.write(entryLabel, positions[index] + ((fieldWidth - bold.widthOfTextAtSize(entryLabel, 8)) / 2), 265, 8, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 276, fieldWidth, 33, 11).setAlignment(TextAlignment.Center) })
+    first.write('+', x + 52, 286, 11, bold); first.write('+', x + 105, 286, 11, bold); first.write('=', x + 159, 286, 11, bold)
   }
-  first.write('ATTACK SKILL', 34, 250, 10, bold, ink)
+  first.write('ATTACK SKILL', 34 + ((82 - bold.widthOfTextAtSize('ATTACK SKILL', 10)) / 2), 250, 10, bold, ink)
   addTextField(first, 'attack_skill', signedEntry(character.attackSkill), 34, 276, 82, 33, 11).setAlignment(TextAlignment.Center)
   attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack')
   attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack')
