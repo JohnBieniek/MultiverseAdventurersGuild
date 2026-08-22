@@ -40,6 +40,26 @@ function Home() {
         </Link>
       </section>
 
+      <section className="home-updates" aria-labelledby="updates-title">
+        <div className="updates-heading">
+          <span className="updates-eyebrow">WHAT’S NEW</span>
+          <h2 id="updates-title">Updates</h2>
+          <p>Highlights from major and minor releases.</p>
+        </div>
+        <article className="update-entry">
+          <header className="update-release">
+            <span>MINOR RELEASE</span>
+            <h3>Version 0.11.0</h3>
+          </header>
+          <div className="update-notes">
+            <h4>Patch notes</h4>
+            <ul>
+              <li>Added Character Sheet PDF downloads for early adopters.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
       <aside className="site-partnership" aria-label="Site credits">
         <p className="whimsy-credit">
           <span>Website created in partnership with</span>
