@@ -63,12 +63,18 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     return field
   }
 
-  const section = (ctx, title, x, top, width, height, iconKey = '') => {
+  const section = (ctx, title, x, top, width, height, iconKey = '', note = '') => {
     const { page, H, write } = ctx
     page.drawRectangle({ x, y: H - top - height, width, height, borderColor: line, borderWidth: 1, color: white })
-    page.drawRectangle({ x, y: H - top - 30, width: Math.min(width, 205), height: 30, color: green })
-    if (icons[iconKey]) page.drawImage(icons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 })
+    const titleWidth = Math.min(width, 205)
+    page.drawRectangle({ x, y: H - top - 30, width: titleWidth, height: 30, color: green })
+    if (icons[iconKey]) { page.drawCircle({ x: x + 17, y: H - top - 15, size: 11, color: white }); page.drawImage(icons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 }) }
     write(title, x + (icons[iconKey] ? 34 : 10), top + 7, 14, bold, white)
+    if (note && width - titleWidth > 90) {
+      const available = width - titleWidth - 16; const words = note.split(' '); const lines = []; let current = ''
+      words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, 12) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current)
+      lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), 12, available) : value, x + titleWidth + 8, top + 2 + (index * 13), 12, bold))
+    }
     return top + 30
   }
   const valueBox = (ctx, label, value, x, top, width, height = 48, fieldName = '') => {
@@ -102,17 +108,17 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   fixedField('SPECIES', character.species, 352, 48, 112); fixedField('ARCHETYPE', character.archetype, 472, 48, 116)
   labeledField('LEVEL', computed.level, 'level', 352, 84, 54); labeledField('TOTAL XP', character.totalXp, 'total_xp', 414, 84, 76); labeledField('UNSPENT XP', character.unspentXp, 'unspent_xp', 498, 84, 90)
 
-  section(first, 'COMBAT SUMMARY', 24, 120, 564, 112, 'combat')
+  section(first, 'COMBAT SUMMARY', 24, 120, 564, 112, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.')
   const combat = [['Initiative', signed(computed.initiative)], ['HP', `       / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `       / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
   combat.forEach(([label, value], index) => valueBox(first, label, value, 34 + (index * 79), 160, 68, 39, `combat_${label.toLowerCase().replace(' ', '_')}`))
 
-  section(first, 'ATTACK', 24, 244, 564, 118, 'attack')
+  section(first, 'ATTACK', 24, 244, 564, 118, 'attack', 'One Skill is used for both melee and ranged attacks.')
   const attack = number(character.attackSkill)
   ;[['Attack Skill', signedEntry(character.attackSkill)], ['Melee Mod', signedEntry(character.meleeAttackModifier)], ['Melee Total', signed(number(character.stats.strength) + attack + number(character.meleeAttackModifier))], ['Ranged Mod', signedEntry(character.rangedAttackModifier)], ['Ranged Total', signed(number(character.stats.dexterity) + attack + number(character.rangedAttackModifier))]].forEach(([label, value], index) => valueBox(first, label, value, 37 + (index * 110), 286, 96, 42, `attack_${index}`))
 
   section(first, 'STATS', 24, 374, 156, 368, 'stats')
   table(first, 30, 414, [89, 55], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), 50, stats.map(([key]) => key), 'stat', [1])
-  section(first, 'SKILLS', 184, 374, 404, 368, 'skills')
+  section(first, 'SKILLS', 184, 374, 404, 368, 'skills', 'You can activate one Skill per turn.')
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), signedEntry(entry.buffs), signedEntry(entry.debuffs), signed(total)] })
   table(first, 190, 414, [97, 34, 51, 63, 44, 61, 42], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, 37, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6])
 
@@ -127,10 +133,10 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const blockHeight = rows => 64 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
-  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons'); table(second, 30, detailTop + 40, [150, 145, 57, 200], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
+  section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 30, detailTop + 40, [150, 145, 57, 200], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 10
   const talentsHeight = blockHeight(talentRows)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents'); table(second, 30, detailTop + 40, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `Activate two Talents per turn. Combat Slots: ${computed.slots}.`); table(second, 30, detailTop + 40, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
   detailTop += talentsHeight + 10
   const pairedHeight = 64 + (Math.max(itemRows.length, contactRows.length) * detailRowHeight)
   section(second, 'ITEMS & TRAITS', 24, detailTop, 276, pairedHeight, 'items'); table(second, 30, detailTop + 40, [105, 159], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
