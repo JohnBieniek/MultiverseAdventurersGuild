@@ -71,9 +71,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     if (icons[iconKey]) { page.drawCircle({ x: x + 17, y: H - top - 15, size: 11, color: white }); page.drawImage(icons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 }) }
     write(title, x + (icons[iconKey] ? 34 : 10), top + 7, 14, bold, white)
     if (note && width - titleWidth > 90) {
-      const available = width - titleWidth - 16; const words = note.split(' '); const lines = []; let current = ''
-      words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, 12) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current)
-      lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), 12, available) : value, x + titleWidth + 8, top + 2 + (index * 13), 12, bold))
+      const available = width - titleWidth - 16; const words = note.split(' ')
+      const wrap = size => { const lines = []; let current = ''; words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, size) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current); return lines }
+      let noteSize = 12; let lines = wrap(noteSize)
+      while (lines.length > 2 && noteSize > 8) { noteSize -= 1; lines = wrap(noteSize) }
+      lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), noteSize, available) : value, x + titleWidth + 8, top + 3 + (index * 12), noteSize, bold))
     }
     return top + 30
   }
@@ -131,13 +133,13 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   section(second, 'WEAPONS', 24, detailTop, 564, weaponsHeight, 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.'); table(second, 30, detailTop + 30, [150, 122, 63, 217], ['Weapon', 'Type', 'Damage', 'Notes'], weaponRows, detailRowHeight, [], 'weapon', [0, 1, 2, 3])
   detailTop += weaponsHeight + 6
   const talentsHeight = blockHeight(talentRows)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `Activate two Talents per turn. Combat Slots: ${computed.slots}.`); table(second, 30, detailTop + 30, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.'); table(second, 30, detailTop + 30, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
   detailTop += talentsHeight + 6
   const itemsHeight = blockHeight(itemRows)
-  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items'); table(second, 30, detailTop + 30, [180, 372], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.'); table(second, 30, detailTop + 30, [180, 372], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
   detailTop += itemsHeight + 6
   const contactsHeight = blockHeight(contactRows)
-  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts'); table(second, 30, detailTop + 30, [200, 352], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 30, detailTop + 30, [200, 352], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
