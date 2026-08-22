@@ -1,7 +1,7 @@
 import { PDFDocument, StandardFonts, TextAlignment, rgb } from 'pdf-lib'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { FaAsterisk, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaEye, FaFlask, FaHandPaper, FaHeart, FaLightbulb, FaMicrochip, FaRunning, FaSmile, FaStar, FaStickyNote, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
+import { FaAsterisk, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaEye, FaFlask, FaHandPaper, FaHeart, FaLightbulb, FaMicrochip, FaRunning, FaSmile, FaStar, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
 import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
@@ -14,7 +14,7 @@ const text = value => String(value ?? '').trim()
 const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
 const iconComponents = {
   combat: GiBroadsword, attack: GiCrossedAxes, stats: FaChartBar, skills: FaStar, weapons: GiCrossedSwords,
-  talents: FaAsterisk, items: FaFlask, contacts: FaUsers, notes: FaStickyNote,
+  talents: FaAsterisk, items: FaFlask, contacts: FaUsers,
   strength: GiBiceps, dexterity: FaHandPaper, endurance: FaHeart, intuition: FaBrain, education: FaBookOpen, charisma: FaCommentDots,
   athletics: FaRunning, influence: FaSmile, knowledge: FaLightbulb, observation: FaEye, outdoors: FaTree, sneak: FaUserSecret, technology: FaMicrochip, vehicle: FaCar,
 }
@@ -123,8 +123,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const rowUnits = weaponRows.length + talentRows.length + Math.max(itemRows.length, contactRows.length)
-  const detailRowHeight = Math.max(14, Math.min(24, Math.floor(420 / rowUnits)))
+  const rowUnits = weaponRows.length + talentRows.length + itemRows.length + contactRows.length
+  const detailRowHeight = Math.max(14, Math.min(24, Math.floor(500 / rowUnits)))
   const blockHeight = rows => 54 + (rows.length * detailRowHeight)
   let detailTop = 24
   const weaponsHeight = blockHeight(weaponRows)
@@ -133,13 +133,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentsHeight = blockHeight(talentRows)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `Activate two Talents per turn. Combat Slots: ${computed.slots}.`); table(second, 30, detailTop + 30, [150, 130, 90, 182], ['Talent', 'Ability / Cost', 'Duration', 'Notes'], talentRows, detailRowHeight, [], 'talent', [0, 1, 2, 3])
   detailTop += talentsHeight + 6
-  const pairedHeight = 54 + (Math.max(itemRows.length, contactRows.length) * detailRowHeight)
-  section(second, 'ITEMS & TRAITS', 24, detailTop, 276, pairedHeight, 'items'); table(second, 30, detailTop + 30, [105, 159], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
-  section(second, 'CONTACTS', 312, detailTop, 276, pairedHeight, 'contacts'); table(second, 318, detailTop + 30, [105, 159], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
-  detailTop += pairedHeight + 6
-  const notesHeight = 762 - detailTop
-  section(second, 'SESSION NOTES', 24, detailTop, 564, notesHeight, 'notes')
-  addTextField(second, 'session_notes', character.notes, 30, detailTop + 30, 552, notesHeight - 30, 12, true)
+  const itemsHeight = blockHeight(itemRows)
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items'); table(second, 30, detailTop + 30, [180, 372], ['Name', 'Description'], itemRows, detailRowHeight, [], 'item', [0, 1])
+  detailTop += itemsHeight + 6
+  const contactsHeight = blockHeight(contactRows)
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts'); table(second, 30, detailTop + 30, [200, 352], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
