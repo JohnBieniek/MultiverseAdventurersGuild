@@ -115,7 +115,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const width = label === 'Defense' ? 96 : 68
     if (label === 'Defense') {
       first.write(label.toUpperCase(), combatX + ((width - bold.widthOfTextAtSize(label.toUpperCase(), 12)) / 2), 141, 12, bold, ink)
-      const defenseEntries = [['MODIFIER', signedEntry(character.defenseBonus)], ['TOTAL', computed.defense], ['RATING', signedEntry(character.defenseRating)]]
+      const defenseEntries = [['MOD', signedEntry(character.defenseBonus)], ['TOTAL', computed.defense], ['RATING', signedEntry(character.defenseRating)]]
       defenseEntries.forEach(([entryLabel, entryValue], index) => { const fieldX = combatX + (index * 34); first.write(entryLabel, fieldX + ((28 - bold.widthOfTextAtSize(entryLabel, 7)) / 2), 158, 7, bold, ink); addTextField(first, `combat_defense_${entryLabel.toLowerCase()}`, entryValue, fieldX, 168, 28, 29, 9).setAlignment(TextAlignment.Center) })
     } else valueBox(first, label, value, combatX, 141, width, 39, `combat_${label.toLowerCase().replace(' ', '_')}`)
     combatX += width + 8
