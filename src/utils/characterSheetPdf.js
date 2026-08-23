@@ -152,8 +152,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   section(first, 'STATS', 24, 294, 156, 54 + (stats.length * statRowHeight), 'stats')
   table(first, 24, 324, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
   section(first, 'SKILLS', 184, 294, 404, 54 + (skills.length * skillRowHeight), 'skills', 'You can activate one Skill per turn.')
-  const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(entry.ability), signedEntry(entry.modifier), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
-  table(first, 184, 324, [98, 36, 53, 65, 46, 63, 43], ['Skill', 'Stat', 'Ability', 'Modifier', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
+  const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(character.stats[statKey]), signedEntry(entry.ability), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
+  table(first, 184, 324, [98, 36, 45, 53, 57, 68, 47], ['Skill', 'Stat', 'Score', 'Ability', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
   const weaponTop = 514; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 31
   section(first, 'WEAPONS', 24, weaponTop, 564, 54 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.')
