@@ -70,14 +70,14 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const { page, H, write } = ctx
     page.drawRectangle({ x, y: H - top - height, width, height, borderColor: line, borderWidth: 1, color: white })
     const titleWidth = Math.min(width, 205)
-    const compact = headerHeight < 30; const iconSize = compact ? 14 : 18; const titleSize = compact ? 8 : 10
+    const compact = headerHeight < 30; const iconSize = compact ? 16 : 18; const titleSize = compact ? 12 : 10
     page.drawRectangle({ x, y: H - top - headerHeight, width: titleWidth, height: headerHeight, color: green })
     if (headerIcons[iconKey]) page.drawImage(headerIcons[iconKey], { x: x + 8, y: H - top - ((headerHeight + iconSize) / 2), width: iconSize, height: iconSize })
-    write(title, x + (headerIcons[iconKey] ? (compact ? 28 : 34) : 10), top + ((headerHeight - titleSize) / 2) - 1, titleSize, bold, white)
+    write(title, x + (headerIcons[iconKey] ? (compact ? 30 : 34) : 10), top + ((headerHeight - titleSize) / 2) - 1, titleSize, bold, white)
     if (note && width - titleWidth > 90) {
       const available = width - titleWidth - 16; const words = note.split(' ')
       const wrap = size => { const lines = []; let current = ''; words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, size) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current); return lines }
-      let noteSize = compact ? 8 : 12; let lines = wrap(noteSize)
+      let noteSize = compact ? 10 : 12; let lines = wrap(noteSize)
       while (lines.length > 2 && noteSize > 8) { noteSize -= 1; lines = wrap(noteSize) }
       const lineStep = compact ? 9 : 12
       lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), noteSize, available) : value, x + titleWidth + 8, top + (compact ? 1 : 3) + (index * lineStep), noteSize, bold))
