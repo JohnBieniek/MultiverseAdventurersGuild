@@ -55,7 +55,6 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
       if (logo) page.drawImage(logo, { x: 24, y: H - 65, width: 50, height: 50 })
       write('MULTIVERSE', 84, 9, 18, bold, green); write('ADVENTURERS GUILD', 84, 30, 13, bold, green); write('Character Sheet', 84, 49, 11, bold, ink)
     }
-    write(`PAGE ${pageNumber} OF 2`, 500, 770, 12, regular, green)
     return { page, H, write }
   }
 
@@ -150,7 +149,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack', 'meleeAttack')
   attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack', 'rangedAttack')
 
-  const skillRowHeight = 20
+  const skillRowHeight = 21
   const statRowHeight = (skills.length * skillRowHeight) / stats.length
   section(first, 'STATS', 24, 276, 156, 48 + (stats.length * statRowHeight), 'stats')
   table(first, 24, 306, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
@@ -158,7 +157,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(character.stats[statKey]), signedEntry(entry.ability), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
   table(first, 184, 306, [98, 36, 45, 53, 57, 68, 47], ['Skill', 'Stat', 'Score', 'Ability', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
-  const weaponTop = 490; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 34
+  const weaponTop = 498; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 39
   section(first, 'WEAPONS', 24, weaponTop, 564, 48 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.')
   first.page.drawRectangle({ x: 24, y: first.H - weaponTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   let weaponHeaderX = 24
@@ -179,7 +178,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
   const rowUnits = talentRows.length + itemRows.length + contactRows.length
-  const detailRowHeight = Math.max(22, Math.min(30, Math.floor(480 / rowUnits)))
+  const detailRowHeight = Math.max(22, Math.min(32, Math.floor(512 / rowUnits)))
   const blockHeight = rows => 48 + (rows.length * detailRowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows)
@@ -205,7 +204,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const contactsHeight = blockHeight(contactRows)
   section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 24, detailTop + 30, [200, 364], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
   detailTop += contactsHeight + 6
-  const notesHeight = Math.max(60, 756 - detailTop)
+  const notesHeight = Math.max(60, 780 - detailTop)
   section(second, 'NOTES', 24, detailTop, 564, notesHeight, 'notes')
   addTextField(second, 'session_notes', character.notes, 25, detailTop + 31, 562, notesHeight - 32, 10, true)
 
