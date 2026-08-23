@@ -92,11 +92,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   }
   const table = (ctx, x, top, widths, headers, rows, rowHeight = 30, rowIconKeys = [], fieldPrefix = '', editableColumns = [], alternatingRows = true) => {
     const { page, H, write } = ctx; const total = widths.reduce((sum, width) => sum + width, 0)
-    page.drawRectangle({ x, y: H - top - 18, width: total, height: 18, color: pale, borderColor: line, borderWidth: .7 })
+    page.drawRectangle({ x, y: H - top - 12, width: total, height: 12, color: pale, borderColor: line, borderWidth: .7 })
     let cx = x
     headers.forEach((header, index) => { write(fit(bold, header.toUpperCase(), 10, widths[index] - 4), cx + 2, top + 1, 10, bold); cx += widths[index] })
     rows.forEach((row, rowIndex) => {
-      const rowTop = top + 18 + (rowIndex * rowHeight); cx = x
+      const rowTop = top + 12 + (rowIndex * rowHeight); cx = x
       page.drawRectangle({ x, y: H - rowTop - rowHeight, width: total, height: rowHeight, color: alternatingRows && rowIndex % 2 ? pale : white, borderColor: line, borderWidth: .5 })
       row.forEach((cell, index) => { if (index) page.drawLine({ start: { x: cx, y: H - rowTop }, end: { x: cx, y: H - rowTop - rowHeight }, thickness: .5, color: line }); const rowIcon = index === 0 ? icons[rowIconKeys[rowIndex]] : null; if (rowIcon) page.drawImage(rowIcon, { x: cx + 5, y: H - rowTop - ((rowHeight + 17) / 2), width: 17, height: 17 }); const inset = rowIcon ? 26 : 4; if (editableColumns.includes(index)) { const field = addTextField(ctx, `${fieldPrefix}_${rowIndex}_${index}`, cell, cx + 1, rowTop + 1, widths[index] - 2, rowHeight - 2, 12); if ((fieldPrefix === 'skill' && index >= 2) || (fieldPrefix === 'stat' && index === 1)) field.setAlignment(TextAlignment.Center) } else write(fit(regular, cell, 12, widths[index] - inset - 4), cx + inset, rowTop + ((rowHeight - 12) / 2), 12); cx += widths[index] })
     })
@@ -153,19 +153,19 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   const skillRowHeight = 21
   const statRowHeight = (skills.length * skillRowHeight) / stats.length
-  section(first, 'STATS', 24, 260, 156, 40 + (stats.length * statRowHeight), 'stats', '', 22)
+  section(first, 'STATS', 24, 260, 156, 34 + (stats.length * statRowHeight), 'stats', '', 22)
   table(first, 24, 282, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
-  section(first, 'SKILLS', 184, 260, 404, 40 + (skills.length * skillRowHeight), 'skills', 'You can activate one Skill per turn.', 22)
+  section(first, 'SKILLS', 184, 260, 404, 34 + (skills.length * skillRowHeight), 'skills', 'You can activate one Skill per turn.', 22)
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(character.stats[statKey]), signedEntry(entry.ability), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
   table(first, 184, 282, [98, 36, 45, 53, 57, 68, 47], ['Skill', 'Stat', 'Score', 'Ability', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
   const weaponTop = 474; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 44; const weaponHeaderHeight = 22; const weaponLineHeight = 21
-  section(first, 'WEAPONS', 24, weaponTop, 564, 40 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.', weaponHeaderHeight)
-  first.page.drawRectangle({ x: 24, y: first.H - weaponTop - 40, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
+  section(first, 'WEAPONS', 24, weaponTop, 564, 34 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.', weaponHeaderHeight)
+  first.page.drawRectangle({ x: 24, y: first.H - weaponTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   let weaponHeaderX = 24
   ;['Weapon', 'Type', 'Enhancement', 'Damage'].forEach((header, index) => { first.write(header.toUpperCase(), weaponHeaderX + 3, weaponTop + 23, 10, bold); weaponHeaderX += weaponWidths[index] })
   weaponRows.forEach((row, rowIndex) => {
-    const rowTop = weaponTop + 40 + (rowIndex * weaponRowHeight)
+    const rowTop = weaponTop + 34 + (rowIndex * weaponRowHeight)
     first.page.drawRectangle({ x: 24, y: first.H - rowTop - weaponRowHeight, width: 564, height: weaponRowHeight, color: white, borderColor: line, borderWidth: .5 })
     let fieldX = 24
     row.slice(0, 4).forEach((value, index) => { if (index) first.page.drawLine({ start: { x: fieldX, y: first.H - rowTop }, end: { x: fieldX, y: first.H - rowTop - weaponLineHeight }, thickness: .5, color: line }); addTextField(first, `weapon_${rowIndex}_${index}`, value, fieldX + 1, rowTop, weaponWidths[index] - 2, weaponLineHeight, 11); fieldX += weaponWidths[index] })
@@ -179,19 +179,19 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const requestedRowSpace = (talentRows.length * 50) + (itemRows.length * 40) + (contactRows.length * 22)
-  const detailScale = Math.min(1, 600 / requestedRowSpace)
-  const talentRowHeight = Math.floor(50 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(22 * detailScale)
-  const blockHeight = (rows, rowHeight) => 40 + (rows.length * rowHeight)
+  const requestedRowSpace = (talentRows.length * 60) + (itemRows.length * 40) + (contactRows.length * 20)
+  const detailScale = Math.min(1, 640 / requestedRowSpace)
+  const talentRowHeight = Math.floor(60 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(20 * detailScale)
+  const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows, talentRowHeight)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`, 22)
   const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .32))
-  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 40, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
+  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   let talentHeaderX = 24
   ;['Talent', 'Ability / Cost', 'Duration'].forEach((header, index) => { second.write(header.toUpperCase(), talentHeaderX + 3, detailTop + 23, 10, bold); talentHeaderX += talentWidths[index] })
   talentRows.forEach((row, rowIndex) => {
-    const rowTop = detailTop + 40 + (rowIndex * talentRowHeight); let fieldX = 24
+    const rowTop = detailTop + 34 + (rowIndex * talentRowHeight); let fieldX = 24
     second.page.drawRectangle({ x: 24, y: second.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
     row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 9); fieldX += talentWidths[index] })
     second.page.drawLine({ start: { x: 24, y: second.H - rowTop - talentLineHeight }, end: { x: 588, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line })
@@ -200,9 +200,9 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   detailTop += talentsHeight + 6
   const itemsHeight = blockHeight(itemRows, itemRowHeight)
   section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.', 22)
-  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 40, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
+  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   second.write('NAME', 27, detailTop + 23, 10, bold); second.write('DESCRIPTION', 207, detailTop + 23, 10, bold)
-  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 40 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 9, true) })
+  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 9, true) })
   detailTop += itemsHeight + 6
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
   section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22); table(second, 24, detailTop + 22, [200, 364], ['Name', 'Relationship / Role'], contactRows, contactRowHeight, [], 'contact', [0, 1])
@@ -212,7 +212,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   addTextField(third, 'session_notes', character.notes, 25, 47, 562, 166, 10, true)
 
   const forceRows = [['F1', '1 Energy', '1 Energy'], ['F2', '4 Energy', '2 Energy'], ['F3', '9 Energy', '4 Energy'], ['F4', '16 Energy', '8 Energy']]
-  section(third, 'FORCE ACTIVATION COSTS', 24, 220, 564, 152, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
+  section(third, 'FORCE ACTIVATION COSTS', 24, 220, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
   table(third, 24, 242, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
 
   const weaponRuleNotes = {
@@ -221,13 +221,13 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   }
   const fightingRows = weaponTypes.map(([name, category, die]) => [name, category === 'melee' ? 'Melee' : 'Ranged', `d${die}`, weaponRuleNotes[name] || ''])
   fightingRows.push(['Dual Wield', 'Style', '-', 'Two d6 melee become d8; two d4 ranged become d6.'], ['Silenced', 'Style', '-1 step', 'Harder to notice; does not improve concealment.'], ['Braced', 'Style', '-', 'Heavy ranged attacks require a stable position.'])
-  section(third, 'WEAPON & FIGHTING TYPES', 24, 378, 564, 304, 'weapons', 'Choose the category that best matches how the weapon works.', 22)
-  table(third, 24, 400, [190, 72, 60, 242], ['Type', 'Class', 'Damage', 'Range / Rule'], fightingRows, 24, [], '', [], false)
+  section(third, 'WEAPON & FIGHTING TYPES', 24, 372, 564, 298, 'weapons', 'Choose the category that best matches how the weapon works.', 22)
+  table(third, 24, 394, [190, 72, 60, 242], ['Type', 'Class', 'Damage', 'Range / Rule'], fightingRows, 24, [], '', [], false)
 
-  section(third, 'KEY COMBAT RULES', 24, 688, 564, 92, 'combat', '', 22)
-  third.write('TURN: 1 Attack action, 1 Skill action, move 30 ft, activate 2 combat Talents, and 1 Reaction per round.', 32, 715, 9, bold)
-  third.write('ATTACK: d20 + Stat + Skill + Mod vs Defense. Natural 20: automatic success, free attack, and maximum damage.', 32, 730, 9, regular)
-  third.write('Natural 1: critical failure. Complex checks gain +1 success for every 2 points above the TN; ties favor Heroes.', 32, 745, 9, regular)
+  section(third, 'KEY COMBAT RULES', 24, 676, 564, 104, 'combat', '', 22)
+  third.write('TURN: 1 Attack action, 1 Skill action, move 30 ft, activate 2 combat Talents, and 1 Reaction per round.', 32, 703, 9, bold)
+  third.write('ATTACK: d20 + Stat + Skill + Mod vs Defense. Natural 20: automatic success, free attack, and maximum damage.', 32, 718, 9, regular)
+  third.write('Natural 1: critical failure. Complex checks gain +1 success for every 2 points above the TN; ties favor Heroes.', 32, 733, 9, regular)
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
