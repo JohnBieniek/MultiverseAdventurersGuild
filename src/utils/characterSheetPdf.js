@@ -2,7 +2,7 @@ import { PDFDocument, StandardFonts, TextAlignment, rgb } from 'pdf-lib'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaHeartBroken, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
-import { GiBiceps, GiBowArrow, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
+import { GiBiceps, GiBowArrow, GiBrainstorm, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
 const green = rgb(24 / 255, 61 / 255, 40 / 255), ink = rgb(.08, .11, .09), pale = rgb(248 / 255, 237 / 255, 212 / 255), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
@@ -15,7 +15,7 @@ const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim(
 const iconComponents = {
   combat: GiBroadsword, attack: GiCrossedAxes, stats: FaChartBar, skills: FaStar, weapons: GiCrossedSwords,
   talents: FaAsterisk, items: FaFlask, contacts: FaUsers, notes: FaStickyNote,
-  initiative: FaCrosshairs, hp: FaHeartbeat, defense: FaShieldAlt, resilience: FaHeartBroken, ego: FaBrain, energy: FaBolt, maxForce: FaSun,
+  initiative: FaCrosshairs, hp: FaHeartbeat, defense: FaShieldAlt, resilience: FaHeartBroken, ego: GiBrainstorm, energy: FaBolt, maxForce: FaSun,
   meleeAttack: FaFistRaised, rangedAttack: GiBowArrow,
   strength: GiBiceps, dexterity: FaHandPaper, endurance: FaHeart, intuition: FaBrain, education: FaBookOpen, charisma: FaCommentDots,
   athletics: FaRunning, influence: FaSmile, knowledge: FaLightbulb, observation: FaEye, outdoors: FaTree, sneak: FaUserSecret, technology: FaMicrochip, vehicle: FaCar,
