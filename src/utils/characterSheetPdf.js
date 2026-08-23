@@ -1,7 +1,7 @@
 import { PDFDocument, StandardFonts, TextAlignment, rgb } from 'pdf-lib'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaHeartBroken, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
+import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaHeartBroken, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
 import { GiBiceps, GiBowArrow, GiBrainstorm, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
@@ -14,7 +14,7 @@ const text = value => String(value ?? '').trim()
 const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim() || 'Hero'
 const iconComponents = {
   combat: GiBroadsword, attack: GiCrossedAxes, stats: FaChartBar, skills: FaStar, weapons: GiCrossedSwords,
-  talents: FaAsterisk, items: FaFlask, contacts: FaUsers, notes: FaStickyNote,
+  talents: FaAsterisk, items: FaFlask, contacts: FaUsers,
   initiative: FaCrosshairs, hp: FaHeartbeat, defense: FaShieldAlt, resilience: FaHeartBroken, ego: GiBrainstorm, energy: FaBolt, maxForce: FaSun,
   meleeAttack: FaFistRaised, rangedAttack: GiBowArrow,
   strength: GiBiceps, dexterity: FaHandPaper, endurance: FaHeart, intuition: FaBrain, education: FaBookOpen, charisma: FaCommentDots,
@@ -177,36 +177,33 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const rowUnits = talentRows.length + itemRows.length + contactRows.length
-  const detailRowHeight = Math.max(22, Math.min(32, Math.floor(512 / rowUnits)))
-  const blockHeight = rows => 48 + (rows.length * detailRowHeight)
+  const requestedRowSpace = (talentRows.length * 40) + (itemRows.length * 40) + (contactRows.length * 32)
+  const detailScale = Math.min(1, 600 / requestedRowSpace)
+  const talentRowHeight = Math.floor(40 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(32 * detailScale)
+  const blockHeight = (rows, rowHeight) => 48 + (rows.length * rowHeight)
   let detailTop = 24
-  const talentsHeight = blockHeight(talentRows)
+  const talentsHeight = blockHeight(talentRows, talentRowHeight)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`)
-  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(13, Math.floor(detailRowHeight * .56))
+  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .4))
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   let talentHeaderX = 24
   ;['Talent', 'Ability / Cost', 'Duration'].forEach((header, index) => { second.write(header.toUpperCase(), talentHeaderX + 3, detailTop + 31, 10, bold); talentHeaderX += talentWidths[index] })
   talentRows.forEach((row, rowIndex) => {
-    const rowTop = detailTop + 48 + (rowIndex * detailRowHeight); let fieldX = 24
-    second.page.drawRectangle({ x: 24, y: second.H - rowTop - detailRowHeight, width: 564, height: detailRowHeight, color: white, borderColor: line, borderWidth: .5 })
+    const rowTop = detailTop + 48 + (rowIndex * talentRowHeight); let fieldX = 24
+    second.page.drawRectangle({ x: 24, y: second.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
     row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 9); fieldX += talentWidths[index] })
     second.page.drawLine({ start: { x: 24, y: second.H - rowTop - talentLineHeight }, end: { x: 588, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line })
-    addTextField(second, `talent_${rowIndex}_notes`, row[3], 25, rowTop + talentLineHeight, 562, detailRowHeight - talentLineHeight, 8)
+    addTextField(second, `talent_${rowIndex}_notes`, row[3], 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 8, true)
   })
   detailTop += talentsHeight + 6
-  const itemsHeight = blockHeight(itemRows)
+  const itemsHeight = blockHeight(itemRows, itemRowHeight)
   section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.')
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   second.write('NAME', 27, detailTop + 31, 10, bold); second.write('DESCRIPTION', 207, detailTop + 31, 10, bold)
-  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 48 + (rowIndex * detailRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - detailRowHeight, width: 564, height: detailRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - detailRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, detailRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, detailRowHeight - 2, 9, true) })
+  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 48 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 9, true) })
   detailTop += itemsHeight + 6
-  const contactsHeight = blockHeight(contactRows)
-  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 24, detailTop + 30, [200, 364], ['Name', 'Relationship / Role'], contactRows, detailRowHeight, [], 'contact', [0, 1])
-  detailTop += contactsHeight + 6
-  const notesHeight = Math.max(60, 780 - detailTop)
-  section(second, 'NOTES', 24, detailTop, 564, notesHeight, 'notes')
-  addTextField(second, 'session_notes', character.notes, 25, detailTop + 31, 562, notesHeight - 32, 10, true)
+  const contactsHeight = blockHeight(contactRows, contactRowHeight)
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`); table(second, 24, detailTop + 30, [200, 364], ['Name', 'Relationship / Role'], contactRows, contactRowHeight, [], 'contact', [0, 1])
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
