@@ -1,8 +1,8 @@
 import { PDFDocument, StandardFonts, TextAlignment, rgb } from 'pdf-lib'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
-import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
+import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaHeartBroken, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
+import { GiBiceps, GiBowArrow, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
 
 const PAGE = [612, 792]
 const green = rgb(24 / 255, 61 / 255, 40 / 255), ink = rgb(.08, .11, .09), pale = rgb(248 / 255, 237 / 255, 212 / 255), line = rgb(.75, .79, .76), white = rgb(1, 1, 1)
@@ -15,7 +15,8 @@ const safeName = value => (value || 'Hero').replace(/[<>:"/\\|?*]+/g, '-').trim(
 const iconComponents = {
   combat: GiBroadsword, attack: GiCrossedAxes, stats: FaChartBar, skills: FaStar, weapons: GiCrossedSwords,
   talents: FaAsterisk, items: FaFlask, contacts: FaUsers, notes: FaStickyNote,
-  initiative: FaCrosshairs, hp: FaHeartbeat, defense: FaShieldAlt, resilience: FaHeart, ego: FaBrain, energy: FaBolt, maxForce: FaSun,
+  initiative: FaCrosshairs, hp: FaHeartbeat, defense: FaShieldAlt, resilience: FaHeartBroken, ego: FaBrain, energy: FaBolt, maxForce: FaSun,
+  meleeAttack: FaFistRaised, rangedAttack: GiBowArrow,
   strength: GiBiceps, dexterity: FaHandPaper, endurance: FaHeart, intuition: FaBrain, education: FaBookOpen, charisma: FaCommentDots,
   athletics: FaRunning, influence: FaSmile, knowledge: FaLightbulb, observation: FaEye, outdoors: FaTree, sneak: FaUserSecret, technology: FaMicrochip, vehicle: FaCar,
 }
@@ -134,9 +135,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   section(first, 'ATTACK', 24, 166, 564, 104, 'attack', 'One Skill is used for both melee and ranged attacks.')
   const attack = number(character.attackSkill)
-  const attackEquation = (label, statLabel, stat, modifier, x, prefix) => {
+  const attackEquation = (label, statLabel, stat, modifier, x, prefix, iconKey) => {
     first.page.drawRectangle({ x, y: first.H - 263, width: 221, height: 65, borderColor: line, borderWidth: 1, color: white })
-    first.write(label, x + ((221 - bold.widthOfTextAtSize(label, 11)) / 2), 201, 11, bold, green)
+    const attackIcon = icons[iconKey]; const labelWidth = bold.widthOfTextAtSize(label, 11); const labelX = x + ((221 - labelWidth - (attackIcon ? 18 : 0)) / 2)
+    if (attackIcon) first.page.drawImage(attackIcon, { x: labelX, y: first.H - 214, width: 14, height: 14 })
+    first.write(label, labelX + (attackIcon ? 18 : 0), 201, 11, bold, green)
     const entries = [[statLabel, signedEntry(stat)], ['SKILL', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
     const positions = [x + 10, x + 63, x + 116, x + 173]
     entries.forEach(([entryLabel, value], index) => { const fieldWidth = index === 3 ? 38 : 36; first.write(entryLabel, positions[index] + ((fieldWidth - bold.widthOfTextAtSize(entryLabel, 7)) / 2), 216, 7, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 226, fieldWidth, 29, 10).setAlignment(TextAlignment.Center) })
@@ -144,8 +147,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   }
   first.write('ATTACK SKILL', 34 + ((82 - bold.widthOfTextAtSize('ATTACK SKILL', 9)) / 2), 204, 9, bold, ink)
   addTextField(first, 'attack_skill', signedEntry(character.attackSkill), 34, 226, 82, 29, 10).setAlignment(TextAlignment.Center)
-  attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack')
-  attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack')
+  attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack', 'meleeAttack')
+  attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack', 'rangedAttack')
 
   const skillRowHeight = 20
   const statRowHeight = (skills.length * skillRowHeight) / stats.length
