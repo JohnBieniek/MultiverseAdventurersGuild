@@ -73,7 +73,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const titleWidth = Math.min(width, 205)
     page.drawRectangle({ x, y: H - top - 30, width: titleWidth, height: 30, color: green })
     if (headerIcons[iconKey]) page.drawImage(headerIcons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 })
-    write(title, x + (headerIcons[iconKey] ? 34 : 10), top + 7, 14, bold, white)
+    write(title, x + (headerIcons[iconKey] ? 34 : 10), top + 9, 10, bold, white)
     if (note && width - titleWidth > 90) {
       const available = width - titleWidth - 16; const words = note.split(' ')
       const wrap = size => { const lines = []; let current = ''; words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, size) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current); return lines }
