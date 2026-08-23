@@ -66,21 +66,23 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     return field
   }
 
-  const section = (ctx, title, x, top, width, height, iconKey = '', note = '') => {
+  const section = (ctx, title, x, top, width, height, iconKey = '', note = '', headerHeight = 30) => {
     const { page, H, write } = ctx
     page.drawRectangle({ x, y: H - top - height, width, height, borderColor: line, borderWidth: 1, color: white })
     const titleWidth = Math.min(width, 205)
-    page.drawRectangle({ x, y: H - top - 30, width: titleWidth, height: 30, color: green })
-    if (headerIcons[iconKey]) page.drawImage(headerIcons[iconKey], { x: x + 8, y: H - top - 24, width: 18, height: 18 })
-    write(title, x + (headerIcons[iconKey] ? 34 : 10), top + 9, 10, bold, white)
+    const compact = headerHeight < 30; const iconSize = compact ? 14 : 18; const titleSize = compact ? 8 : 10
+    page.drawRectangle({ x, y: H - top - headerHeight, width: titleWidth, height: headerHeight, color: green })
+    if (headerIcons[iconKey]) page.drawImage(headerIcons[iconKey], { x: x + 8, y: H - top - ((headerHeight + iconSize) / 2), width: iconSize, height: iconSize })
+    write(title, x + (headerIcons[iconKey] ? (compact ? 28 : 34) : 10), top + ((headerHeight - titleSize) / 2) - 1, titleSize, bold, white)
     if (note && width - titleWidth > 90) {
       const available = width - titleWidth - 16; const words = note.split(' ')
       const wrap = size => { const lines = []; let current = ''; words.forEach(word => { const candidate = current ? `${current} ${word}` : word; if (bold.widthOfTextAtSize(candidate, size) <= available || !current) current = candidate; else { lines.push(current); current = word } }); if (current) lines.push(current); return lines }
-      let noteSize = 12; let lines = wrap(noteSize)
+      let noteSize = compact ? 8 : 12; let lines = wrap(noteSize)
       while (lines.length > 2 && noteSize > 8) { noteSize -= 1; lines = wrap(noteSize) }
-      lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), noteSize, available) : value, x + titleWidth + 8, top + 3 + (index * 12), noteSize, bold))
+      const lineStep = compact ? 9 : 12
+      lines.slice(0, 2).forEach((value, index) => write(index === 1 && lines.length > 2 ? fit(bold, lines.slice(1).join(' '), noteSize, available) : value, x + titleWidth + 8, top + (compact ? 1 : 3) + (index * lineStep), noteSize, bold))
     }
-    return top + 30
+    return top + headerHeight
   }
   const valueBox = (ctx, label, value, x, top, width, height = 48, fieldName = '') => {
     const { write } = ctx
@@ -112,7 +114,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   first.write(fit(regular, [text(character.species), text(character.archetype)].filter(Boolean).join(' / '), 10, 236), 352, 27, 10, regular)
   labeledField('LEVEL', computed.level, 'level', 352, 43, 54); labeledField('TOTAL XP', character.totalXp, 'total_xp', 414, 43, 76); labeledField('UNSPENT XP', character.unspentXp, 'unspent_xp', 498, 43, 90)
 
-  section(first, 'COMBAT SUMMARY', 24, 82, 564, 78, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.')
+  section(first, 'COMBAT SUMMARY', 24, 82, 564, 70, 'combat', 'Move 30 feet each turn, even if you attack. Take one reaction per round. Free actions: talk, draw a weapon, or step 5 feet.', 22)
   const combat = [['Initiative', signed(computed.initiative)], ['HP', `       / ${computed.maxHp}`], ['Defense', computed.defense], ['Resilience', signed(computed.resilience)], ['Ego', signed(computed.ego)], ['Energy', `       / ${computed.maxEnergy}`], ['Max Force', computed.maxForce]]
   const combatIconKeys = { Initiative: 'initiative', HP: 'hp', Defense: 'defense', Resilience: 'resilience', Ego: 'ego', Energy: 'energy', 'Max Force': 'maxForce' }
   let combatX = 30
@@ -120,55 +122,55 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     const width = label === 'Defense' ? 96 : 68
     const combatIcon = icons[combatIconKeys[label]]
     const heading = label.toUpperCase(); const headingWidth = bold.widthOfTextAtSize(heading, 8); const headingX = combatX + ((width - headingWidth - (combatIcon ? 15 : 0)) / 2)
-    if (combatIcon) first.page.drawImage(combatIcon, { x: headingX, y: first.H - 127, width: 12, height: 12 })
+    if (combatIcon) first.page.drawImage(combatIcon, { x: headingX, y: first.H - 119, width: 12, height: 12 })
     if (label === 'Defense') {
-      first.write(heading, headingX + (combatIcon ? 15 : 0), 117, 8, bold, ink)
+      first.write(heading, headingX + (combatIcon ? 15 : 0), 109, 8, bold, ink)
       const defenseEntries = [['MOD', signedEntry(character.defenseBonus)], ['TOTAL', computed.defense], ['RATING', signedEntry(character.defenseRating)]]
-      defenseEntries.forEach(([entryLabel, entryValue], index) => { const fieldX = combatX + (index * 34); first.write(entryLabel, fieldX + ((28 - bold.widthOfTextAtSize(entryLabel, 6)) / 2), 128, 6, bold, ink); addTextField(first, `combat_defense_${entryLabel.toLowerCase()}`, entryValue, fieldX, 136, 28, 17, 8).setAlignment(TextAlignment.Center) })
+      defenseEntries.forEach(([entryLabel, entryValue], index) => { const fieldX = combatX + (index * 34); first.write(entryLabel, fieldX + ((28 - bold.widthOfTextAtSize(entryLabel, 6)) / 2), 120, 6, bold, ink); addTextField(first, `combat_defense_${entryLabel.toLowerCase()}`, entryValue, fieldX, 128, 28, 17, 8).setAlignment(TextAlignment.Center) })
     } else {
-      first.write(heading, headingX + (combatIcon ? 15 : 0), 117, 8, bold, ink)
-      addTextField(first, `combat_${label.toLowerCase().replace(' ', '_')}`, value, combatX, 132, width, 21, 9).setAlignment(TextAlignment.Center)
+      first.write(heading, headingX + (combatIcon ? 15 : 0), 109, 8, bold, ink)
+      addTextField(first, `combat_${label.toLowerCase().replace(' ', '_')}`, value, combatX, 124, width, 21, 9).setAlignment(TextAlignment.Center)
     }
     combatX += width + 8
   })
 
-  section(first, 'ATTACK', 24, 166, 564, 104, 'attack', 'One Skill is used for both melee and ranged attacks.')
+  section(first, 'ATTACK', 24, 158, 564, 96, 'attack', 'One Skill is used for both melee and ranged attacks.', 22)
   const attack = number(character.attackSkill)
   const attackEquation = (label, statLabel, stat, modifier, x, prefix, iconKey) => {
-    first.page.drawRectangle({ x, y: first.H - 263, width: 221, height: 65, borderColor: line, borderWidth: 1, color: white })
+    first.page.drawRectangle({ x, y: first.H - 247, width: 221, height: 65, borderColor: line, borderWidth: 1, color: white })
     const attackIcon = icons[iconKey]; const labelWidth = bold.widthOfTextAtSize(label, 11); const labelX = x + ((221 - labelWidth - (attackIcon ? 18 : 0)) / 2)
-    if (attackIcon) first.page.drawImage(attackIcon, { x: labelX, y: first.H - 214, width: 14, height: 14 })
-    first.write(label, labelX + (attackIcon ? 18 : 0), 201, 11, bold, green)
+    if (attackIcon) first.page.drawImage(attackIcon, { x: labelX, y: first.H - 198, width: 14, height: 14 })
+    first.write(label, labelX + (attackIcon ? 18 : 0), 185, 11, bold, green)
     const entries = [[statLabel, signedEntry(stat)], ['SKILL', signedEntry(character.attackSkill)], ['MOD', signedEntry(modifier)], ['TOTAL', signed(number(stat) + attack + number(modifier))]]
     const positions = [x + 10, x + 63, x + 116, x + 173]
-    entries.forEach(([entryLabel, value], index) => { const fieldWidth = index === 3 ? 38 : 36; first.write(entryLabel, positions[index] + ((fieldWidth - bold.widthOfTextAtSize(entryLabel, 7)) / 2), 216, 7, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 226, fieldWidth, 29, 10).setAlignment(TextAlignment.Center) })
-    first.write('+', x + 52, 235, 10, bold); first.write('+', x + 105, 235, 10, bold); first.write('=', x + 159, 235, 10, bold)
+    entries.forEach(([entryLabel, value], index) => { const fieldWidth = index === 3 ? 38 : 36; first.write(entryLabel, positions[index] + ((fieldWidth - bold.widthOfTextAtSize(entryLabel, 7)) / 2), 200, 7, bold, ink); addTextField(first, `${prefix}_${index}`, value, positions[index], 210, fieldWidth, 29, 10).setAlignment(TextAlignment.Center) })
+    first.write('+', x + 52, 219, 10, bold); first.write('+', x + 105, 219, 10, bold); first.write('=', x + 159, 219, 10, bold)
   }
-  first.write('ATTACK SKILL', 34 + ((82 - bold.widthOfTextAtSize('ATTACK SKILL', 9)) / 2), 204, 9, bold, ink)
-  addTextField(first, 'attack_skill', signedEntry(character.attackSkill), 34, 226, 82, 29, 10).setAlignment(TextAlignment.Center)
+  first.write('ATTACK SKILL', 34 + ((82 - bold.widthOfTextAtSize('ATTACK SKILL', 9)) / 2), 188, 9, bold, ink)
+  addTextField(first, 'attack_skill', signedEntry(character.attackSkill), 34, 210, 82, 29, 10).setAlignment(TextAlignment.Center)
   attackEquation('MELEE ATTACK (STR)', 'STR', character.stats.strength, character.meleeAttackModifier, 128, 'melee_attack', 'meleeAttack')
   attackEquation('RANGED ATTACK (DEX)', 'DEX', character.stats.dexterity, character.rangedAttackModifier, 357, 'ranged_attack', 'rangedAttack')
 
   const skillRowHeight = 21
   const statRowHeight = (skills.length * skillRowHeight) / stats.length
-  section(first, 'STATS', 24, 276, 156, 48 + (stats.length * statRowHeight), 'stats')
-  table(first, 24, 306, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
-  section(first, 'SKILLS', 184, 276, 404, 48 + (skills.length * skillRowHeight), 'skills', 'You can activate one Skill per turn.')
+  section(first, 'STATS', 24, 260, 156, 40 + (stats.length * statRowHeight), 'stats', '', 22)
+  table(first, 24, 282, [96, 60], ['Stat', 'Score'], stats.map(([key, label]) => [label, signedEntry(character.stats[key])]), statRowHeight, stats.map(([key]) => key), 'stat', [1], false)
+  section(first, 'SKILLS', 184, 260, 404, 40 + (skills.length * skillRowHeight), 'skills', 'You can activate one Skill per turn.', 22)
   const skillRows = skills.map(([key, label, statKey]) => { const entry = character.skills[key] || {}; const statShort = stats.find(([candidate]) => candidate === statKey)?.[2] || ''; const total = number(character.stats[statKey]) + Object.values(entry).reduce((sum, value) => sum + number(value), 0); return [label, statShort, signedEntry(character.stats[statKey]), signedEntry(entry.ability), temporaryEntry(entry.buffs), temporaryEntry(entry.debuffs), signed(total)] })
-  table(first, 184, 306, [98, 36, 45, 53, 57, 68, 47], ['Skill', 'Stat', 'Score', 'Ability', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
+  table(first, 184, 282, [98, 36, 45, 53, 57, 68, 47], ['Skill', 'Stat', 'Score', 'Ability', 'Buffs', 'Debuffs', 'Total'], skillRows, skillRowHeight, skills.map(([key]) => key), 'skill', [2, 3, 4, 5, 6], false)
 
-  const weaponTop = 498; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 39
-  section(first, 'WEAPONS', 24, weaponTop, 564, 48 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.')
-  first.page.drawRectangle({ x: 24, y: first.H - weaponTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
+  const weaponTop = 474; const weaponWidths = [275, 125, 100, 64]; const weaponRowHeight = 44; const weaponHeaderHeight = 22; const weaponLineHeight = 21
+  section(first, 'WEAPONS', 24, weaponTop, 564, 40 + (weaponRows.length * weaponRowHeight), 'weapons', 'You can attack once each turn, or move an extra 30 feet instead.', weaponHeaderHeight)
+  first.page.drawRectangle({ x: 24, y: first.H - weaponTop - 40, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   let weaponHeaderX = 24
-  ;['Weapon', 'Type', 'Enhancement', 'Damage'].forEach((header, index) => { first.write(header.toUpperCase(), weaponHeaderX + 3, weaponTop + 31, 10, bold); weaponHeaderX += weaponWidths[index] })
+  ;['Weapon', 'Type', 'Enhancement', 'Damage'].forEach((header, index) => { first.write(header.toUpperCase(), weaponHeaderX + 3, weaponTop + 23, 10, bold); weaponHeaderX += weaponWidths[index] })
   weaponRows.forEach((row, rowIndex) => {
-    const rowTop = weaponTop + 48 + (rowIndex * weaponRowHeight)
+    const rowTop = weaponTop + 40 + (rowIndex * weaponRowHeight)
     first.page.drawRectangle({ x: 24, y: first.H - rowTop - weaponRowHeight, width: 564, height: weaponRowHeight, color: white, borderColor: line, borderWidth: .5 })
     let fieldX = 24
-    row.slice(0, 4).forEach((value, index) => { if (index) first.page.drawLine({ start: { x: fieldX, y: first.H - rowTop }, end: { x: fieldX, y: first.H - rowTop - 18 }, thickness: .5, color: line }); addTextField(first, `weapon_${rowIndex}_${index}`, value, fieldX + 1, rowTop, weaponWidths[index] - 2, 18, 9); fieldX += weaponWidths[index] })
-    first.page.drawLine({ start: { x: 24, y: first.H - rowTop - 18 }, end: { x: 588, y: first.H - rowTop - 18 }, thickness: .5, color: line })
-    addTextField(first, `weapon_${rowIndex}_notes`, row[4], 25, rowTop + 18, 562, weaponRowHeight - 18, 8)
+    row.slice(0, 4).forEach((value, index) => { if (index) first.page.drawLine({ start: { x: fieldX, y: first.H - rowTop }, end: { x: fieldX, y: first.H - rowTop - weaponLineHeight }, thickness: .5, color: line }); addTextField(first, `weapon_${rowIndex}_${index}`, value, fieldX + 1, rowTop, weaponWidths[index] - 2, weaponLineHeight, 11); fieldX += weaponWidths[index] })
+    first.page.drawLine({ start: { x: 24, y: first.H - rowTop - weaponLineHeight }, end: { x: 588, y: first.H - rowTop - weaponLineHeight }, thickness: .5, color: line })
+    addTextField(first, `weapon_${rowIndex}_notes`, row[4], 25, rowTop + weaponLineHeight, 562, weaponRowHeight - weaponLineHeight, 10)
   })
 
   const second = addPage(2)
