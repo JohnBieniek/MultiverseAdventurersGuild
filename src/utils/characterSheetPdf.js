@@ -179,14 +179,14 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const requestedRowSpace = (talentRows.length * 40) + (itemRows.length * 40) + (contactRows.length * 32)
+  const requestedRowSpace = (talentRows.length * 50) + (itemRows.length * 40) + (contactRows.length * 22)
   const detailScale = Math.min(1, 600 / requestedRowSpace)
-  const talentRowHeight = Math.floor(40 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(32 * detailScale)
+  const talentRowHeight = Math.floor(50 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(22 * detailScale)
   const blockHeight = (rows, rowHeight) => 48 + (rows.length * rowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows, talentRowHeight)
   section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`)
-  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .4))
+  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .32))
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   let talentHeaderX = 24
   ;['Talent', 'Ability / Cost', 'Duration'].forEach((header, index) => { second.write(header.toUpperCase(), talentHeaderX + 3, detailTop + 31, 10, bold); talentHeaderX += talentWidths[index] })
