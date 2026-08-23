@@ -173,6 +173,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   })
 
   const second = addPage(2)
+  const talentAllowance = number(computed.level) === 0 ? 0 : 2 + [3, 5, 7, 9].filter(level => number(computed.level) >= level).length
+  const talentsAcquired = Math.max(talentAllowance, (character.talents || []).length)
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
@@ -181,7 +183,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const blockHeight = rows => 48 + (rows.length * detailRowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', 'You can activate two Talents per turn. Sustained combat Talents occupy Combat Slots: one at level 0, plus one at levels 4 and 7.')
+  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`)
   const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(13, Math.floor(detailRowHeight * .56))
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 48, width: 564, height: 18, color: pale, borderColor: line, borderWidth: .7 })
   let talentHeaderX = 24
