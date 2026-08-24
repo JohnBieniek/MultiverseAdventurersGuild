@@ -208,26 +208,12 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22); table(second, 24, detailTop + 22, [200, 364], ['Name', 'Relationship / Role'], contactRows, contactRowHeight, [], 'contact', [0, 1])
 
   const third = addPage(3)
-  section(third, 'NOTES', 24, 24, 564, 190, 'notes', '', 22)
-  addTextField(third, 'session_notes', character.notes, 25, 47, 562, 166, 10, true)
+  section(third, 'NOTES', 24, 24, 564, 596, 'notes', '', 22)
+  addTextField(third, 'session_notes', character.notes, 25, 47, 562, 572, 10, true)
 
   const forceRows = [['F1', '1 Energy', '1 Energy'], ['F2', '4 Energy', '2 Energy'], ['F3', '9 Energy', '4 Energy'], ['F4', '16 Energy', '8 Energy']]
-  section(third, 'FORCE ACTIVATION COSTS', 24, 220, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
-  table(third, 24, 242, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
-
-  const weaponRuleNotes = {
-    'Unarmed / Tiny Melee': 'Automatic concealment.', 'Light Melee': 'Automatic concealment.', 'Medium Melee': 'Concealment TN 15.', 'Heavy Melee': 'No concealment; -2 Defense.',
-    'Holdout Ranged': '30 ft; automatic concealment.', 'Compact Ranged': '60 ft; concealment TN 15.', 'Longarm Ranged': '120 ft; concealment TN 12.', 'Heavy Ranged': 'Line of sight; no concealment; braced.',
-  }
-  const fightingRows = weaponTypes.map(([name, category, die]) => [name, category === 'melee' ? 'Melee' : 'Ranged', `d${die}`, weaponRuleNotes[name] || ''])
-  fightingRows.push(['Dual Wield', 'Style', '-', 'Two d6 melee become d8; two d4 ranged become d6.'], ['Silenced', 'Style', '-1 step', 'Harder to notice; does not improve concealment.'], ['Braced', 'Style', '-', 'Heavy ranged attacks require a stable position.'])
-  section(third, 'WEAPON & FIGHTING TYPES', 24, 372, 564, 298, 'weapons', 'Choose the category that best matches how the weapon works.', 22)
-  table(third, 24, 394, [190, 72, 60, 242], ['Type', 'Class', 'Damage', 'Range / Rule'], fightingRows, 24, [], '', [], false)
-
-  section(third, 'KEY COMBAT RULES', 24, 676, 564, 104, 'combat', '', 22)
-  third.write('TURN: 1 Attack action, 1 Skill action, move 30 ft, activate 2 combat Talents, and 1 Reaction per round.', 32, 703, 9, bold)
-  third.write('ATTACK: d20 + Stat + Skill + Mod vs Defense. Natural 20: automatic success, free attack, and maximum damage.', 32, 718, 9, regular)
-  third.write('Natural 1: critical failure. Complex checks gain +1 success for every 2 points above the TN; ties favor Heroes.', 32, 733, 9, regular)
+  section(third, 'FORCE ACTIVATION COSTS', 24, 626, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
+  table(third, 24, 648, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
