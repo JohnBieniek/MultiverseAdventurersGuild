@@ -185,11 +185,12 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentAllowance = number(computed.level) === 0 ? 0 : 2 + [3, 5, 7, 9].filter(level => number(computed.level) >= level).length
   const talentsAcquired = Math.max(talentAllowance, (character.talents || []).length)
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
-  const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
+  const itemEntry = row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]
+  const isTrait = row => String(row.source || '').includes('trait')
+  const itemRows = padRows((character.items || []).filter(row => !isTrait(row) && [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 6, ['', ''])
+  const traitRows = padRows((character.items || []).filter(row => isTrait(row) && [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const requestedRowSpace = (talentRows.length * 64) + (itemRows.length * 40) + (contactRows.length * 16)
-  const detailScale = Math.min(1, 640 / requestedRowSpace)
-  const talentRowHeight = Math.floor(64 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(16 * detailScale)
+  const talentRowHeight = 64; const contactRowHeight = 20
   const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows, talentRowHeight)
@@ -206,25 +207,35 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     addTextField(second, `talent_${rowIndex}_notes`, wrap(regular, row[3], 7.5, 548), 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
   })
   detailTop += talentsHeight + 6
-  const itemsHeight = blockHeight(itemRows, itemRowHeight)
-  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do. Traits describe your Hero’s personality, beliefs, habits, and complications.', 22)
-  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
-  second.write('NAME', 27, detailTop + 23, 10, bold); second.write('DESCRIPTION', 207, detailTop + 23, 10, bold)
-  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 9, true) })
-  detailTop += itemsHeight + 6
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
   section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22)
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   second.write('NAME', 27, detailTop + 23, 10, bold); second.write('RELATIONSHIP / ROLE', 227, detailTop + 23, 10, bold)
   contactRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * contactRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - contactRowHeight, width: 564, height: contactRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 224, y: second.H - rowTop }, end: { x: 224, y: second.H - rowTop - contactRowHeight }, thickness: .5, color: line }); addTextField(second, `contact_${rowIndex}_0`, row[0], 25, rowTop + 1, 198, contactRowHeight - 2, 9); addTextField(second, `contact_${rowIndex}_1`, row[1], 225, rowTop + 1, 362, contactRowHeight - 2, 9) })
+  detailTop += contactsHeight + 6
+  const itemRowHeight = Math.max(16, Math.floor((772 - detailTop - 34) / itemRows.length))
+  const itemsHeight = blockHeight(itemRows, itemRowHeight)
+  section(second, 'ITEMS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do.', 22)
+  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
+  second.write('NAME', 27, detailTop + 23, 10, bold); second.write('DESCRIPTION', 207, detailTop + 23, 10, bold)
+  itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 8); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 8, true) })
 
   const third = addPage(3)
-  section(third, 'NOTES', 24, 24, 564, 596, 'notes', '', 22)
-  addTextField(third, 'session_notes', character.notes, 25, 47, 562, 572, 10, true)
+  const traitRowHeight = 40
+  const traitsHeight = blockHeight(traitRows, traitRowHeight)
+  section(third, 'TRAITS', 24, 24, 564, traitsHeight, 'items', 'Traits describe your Hero’s personality, beliefs, habits, and complications.', 22)
+  third.page.drawRectangle({ x: 24, y: third.H - 58, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
+  third.write('NAME', 27, 47, 10, bold); third.write('DESCRIPTION', 207, 47, 10, bold)
+  traitRows.forEach((row, rowIndex) => { const rowTop = 58 + (rowIndex * traitRowHeight); third.page.drawRectangle({ x: 24, y: third.H - rowTop - traitRowHeight, width: 564, height: traitRowHeight, color: white, borderColor: line, borderWidth: .5 }); third.page.drawLine({ start: { x: 204, y: third.H - rowTop }, end: { x: 204, y: third.H - rowTop - traitRowHeight }, thickness: .5, color: line }); addTextField(third, `trait_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, traitRowHeight - 2, 9); addTextField(third, `trait_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, traitRowHeight - 2, 9, true) })
 
   const forceRows = [['F1', '1 Energy', '1 Energy'], ['F2', '4 Energy', '2 Energy'], ['F3', '9 Energy', '4 Energy'], ['F4', '16 Energy', '8 Energy']]
-  section(third, 'FORCE ACTIVATION COSTS', 24, 626, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
-  table(third, 24, 648, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
+  const forceTop = 24 + traitsHeight + 6
+  section(third, 'FORCE ACTIVATION COSTS', 24, forceTop, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
+  table(third, 24, forceTop + 22, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
+  const notesTop = forceTop + 152
+  const notesHeight = 772 - notesTop
+  section(third, 'NOTES', 24, notesTop, 564, notesHeight, 'notes', '', 22)
+  addTextField(third, 'session_notes', character.notes, 25, notesTop + 23, 562, notesHeight - 24, 10, true)
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
