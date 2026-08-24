@@ -42,7 +42,7 @@ const wrap = (font, value, size, width) => text(value).split(/\s+/).reduce((line
   return lines
 }, []).join('\n')
 
-export async function downloadCharacterSheetPdf({ character, computed, stats, skills, weaponTypes }) {
+export async function downloadCharacterSheetPdf({ character, computed, stats, skills, weaponTypes, filename = '' }) {
   const pdf = await PDFDocument.create()
   const regular = await pdf.embedFont(StandardFonts.Helvetica)
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold)
@@ -227,5 +227,29 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
   const blob = new Blob([bytes], { type: 'application/pdf' }); const url = URL.createObjectURL(blob); const link = document.createElement('a')
-  link.href = url; link.download = `${safeName(character.name)}-Character-Sheet.pdf`; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+  link.href = url; link.download = filename || `${safeName(character.name)}-Character-Sheet.pdf`; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
+export const downloadBlankCharacterSheetPdf = () => {
+  const blankStats = [
+    ['strength', 'Strength', 'STR'], ['dexterity', 'Dexterity', 'DEX'], ['endurance', 'Endurance', 'END'],
+    ['intuition', 'Intuition', 'INT'], ['education', 'Education', 'EDU'], ['charisma', 'Charisma', 'CHA'],
+  ]
+  const blankSkills = [
+    ['athletics', 'Athletics', 'endurance'], ['influence', 'Influence', 'charisma'], ['knowledge', 'Knowledge', 'education'],
+    ['observation', 'Observation', 'intuition'], ['outdoors', 'Outdoors', 'intuition'], ['sneak', 'Sneak', 'dexterity'],
+    ['technology', 'Technology', 'education'], ['vehicle', 'Vehicle', 'dexterity'],
+  ]
+  const blankWeaponTypes = [
+    ['Unarmed / Tiny Melee', 'melee', 4], ['Light Melee', 'melee', 6], ['Medium Melee', 'melee', 8], ['Heavy Melee', 'melee', 10],
+    ['Holdout Ranged', 'ranged', 4], ['Compact Ranged', 'ranged', 6], ['Longarm Ranged', 'ranged', 8], ['Heavy Ranged', 'ranged', 10],
+  ]
+  const character = {
+    name: ' ', species: '', archetype: '', level: 0, totalXp: '', unspentXp: '', attackSkill: '', meleeAttackModifier: '', rangedAttackModifier: '',
+    stats: Object.fromEntries(blankStats.map(([key]) => [key, ''])),
+    skills: Object.fromEntries(blankSkills.map(([key]) => [key, { ability: '', buffs: '', debuffs: '' }])),
+    weapons: [], talents: [], items: [], contacts: [],
+  }
+  const computed = { level: 0, initiative: 0, maxHp: 10, defense: 11, resilience: 0, ego: 0, maxEnergy: 0, maxForce: 0, slots: 1 }
+  return downloadCharacterSheetPdf({ character, computed, stats: blankStats, skills: blankSkills, weaponTypes: blankWeaponTypes, filename: 'multiverse-adventurers-guild-character-sheet.pdf' })
 }

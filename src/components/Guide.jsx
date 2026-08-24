@@ -443,7 +443,15 @@ function renderSectionMedia(section) {
         </div>
       )}
 
-      {section.download && (
+      {section.download?.onClick ? (
+        <button
+          type="button"
+          className="guide-download-button"
+          onClick={section.download.onClick}
+        >
+          {section.download.label}
+        </button>
+      ) : section.download && (
         <a
           className="guide-download-button"
           href={section.download.href}

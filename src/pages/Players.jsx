@@ -11,6 +11,7 @@ import weapons from '../content/players/weapons.txt?raw'
 import reputation from '../content/players/reputation.txt?raw'
 import equipment from '../content/players/equipment.txt?raw'
 import talents from '../content/players/talents.txt?raw'
+import { downloadBlankCharacterSheetPdf } from '../utils/characterSheetPdf'
 import './pages.css'
 
 const sections = [
@@ -22,8 +23,7 @@ const sections = [
       alt: 'Multiverse Adventurers Guild character sheet'
     },
     download: {
-      href: '/character-sheet.pdf',
-      filename: 'multiverse-adventurers-guild-character-sheet.pdf',
+      onClick: downloadBlankCharacterSheetPdf,
       label: 'Download Character Sheet'
     }
   },
