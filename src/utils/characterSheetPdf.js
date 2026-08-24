@@ -184,11 +184,11 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const second = addPage(2)
   const talentAllowance = number(computed.level) === 0 ? 0 : 2 + [3, 5, 7, 9].filter(level => number(computed.level) >= level).length
   const talentsAcquired = Math.max(talentAllowance, (character.talents || []).length)
-  const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).slice(0, 6).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
+  const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).slice(0, 10).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 10, ['', '', '', ''])
   const itemEntry = row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]
-  const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 8, ['', ''])
+  const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).slice(0, 13).map(itemEntry), 13, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const talentRowHeight = 64; const contactRowHeight = 20
+  const talentRowHeight = 60; const contactRowHeight = 20
   const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
@@ -197,7 +197,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   second.write('NAME', 27, detailTop + 23, 10, bold); second.write('RELATIONSHIP / ROLE', 227, detailTop + 23, 10, bold)
   contactRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * contactRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - contactRowHeight, width: 564, height: contactRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 224, y: second.H - rowTop }, end: { x: 224, y: second.H - rowTop - contactRowHeight }, thickness: .5, color: line }); addTextField(second, `contact_${rowIndex}_0`, row[0], 25, rowTop + 1, 198, contactRowHeight - 2, 9); addTextField(second, `contact_${rowIndex}_1`, row[1], 225, rowTop + 1, 362, contactRowHeight - 2, 9) })
   detailTop += contactsHeight + 6
-  const itemRowHeight = Math.max(16, Math.floor((772 - detailTop - 34) / itemRows.length))
+  const itemRowHeight = Math.floor((772 - detailTop - 34) / itemRows.length)
   const itemsHeight = blockHeight(itemRows, itemRowHeight)
   section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain your capabilities. Traits describe your personality, beliefs, habits, and complications.', 22)
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
@@ -221,12 +221,8 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   const forceRows = [['F1', '1 Energy', '1 Energy'], ['F2', '4 Energy', '2 Energy'], ['F3', '9 Energy', '4 Energy'], ['F4', '16 Energy', '8 Energy']]
   const forceTop = 24 + talentsHeight + 6
-  section(third, 'FORCE ACTIVATION COSTS', 24, forceTop, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
-  table(third, 24, forceTop + 22, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
-  const notesTop = forceTop + 152
-  const notesHeight = 772 - notesTop
-  section(third, 'NOTES', 24, notesTop, 564, notesHeight, 'notes', '', 22)
-  addTextField(third, 'session_notes', character.notes, 25, notesTop + 23, 562, notesHeight - 24, 10, true)
+  section(third, 'FORCE ACTIVATION COSTS', 24, forceTop, 564, 106, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
+  table(third, 24, forceTop + 22, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 18, [], '', [], false)
 
   form.updateFieldAppearances(regular)
   const bytes = await pdf.save()
