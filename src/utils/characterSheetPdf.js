@@ -184,29 +184,13 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const second = addPage(2)
   const talentAllowance = number(computed.level) === 0 ? 0 : 2 + [3, 5, 7, 9].filter(level => number(computed.level) >= level).length
   const talentsAcquired = Math.max(talentAllowance, (character.talents || []).length)
-  const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
+  const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).slice(0, 6).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemEntry = row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]
-  const isTrait = row => String(row.source || '').includes('trait')
-  const itemRows = padRows((character.items || []).filter(row => !isTrait(row) && [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 6, ['', ''])
-  const traitRows = padRows((character.items || []).filter(row => isTrait(row) && [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 4, ['', ''])
+  const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(itemEntry), 8, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
   const talentRowHeight = 64; const contactRowHeight = 20
   const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
-  const talentsHeight = blockHeight(talentRows, talentRowHeight)
-  section(second, 'TALENTS', 24, detailTop, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`, 22)
-  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .32))
-  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
-  let talentHeaderX = 24
-  ;['Talent', 'Ability / Cost', 'Duration'].forEach((header, index) => { second.write(header.toUpperCase(), talentHeaderX + 3, detailTop + 23, 10, bold); talentHeaderX += talentWidths[index] })
-  talentRows.forEach((row, rowIndex) => {
-    const rowTop = detailTop + 34 + (rowIndex * talentRowHeight); let fieldX = 24
-    second.page.drawRectangle({ x: 24, y: second.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
-    row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 8); fieldX += talentWidths[index] })
-    second.page.drawLine({ start: { x: 24, y: second.H - rowTop - talentLineHeight }, end: { x: 588, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line })
-    addTextField(second, `talent_${rowIndex}_notes`, wrap(regular, row[3], 7.5, 548), 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
-  })
-  detailTop += talentsHeight + 6
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
   section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22)
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
@@ -215,21 +199,28 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   detailTop += contactsHeight + 6
   const itemRowHeight = Math.max(16, Math.floor((772 - detailTop - 34) / itemRows.length))
   const itemsHeight = blockHeight(itemRows, itemRowHeight)
-  section(second, 'ITEMS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain why your Stats and Skills look the way they do.', 22)
+  section(second, 'ITEMS & TRAITS', 24, detailTop, 564, itemsHeight, 'items', 'Items explain your capabilities. Traits describe your personality, beliefs, habits, and complications.', 22)
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   second.write('NAME', 27, detailTop + 23, 10, bold); second.write('DESCRIPTION', 207, detailTop + 23, 10, bold)
   itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 8); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 8, true) })
 
   const third = addPage(3)
-  const traitRowHeight = 40
-  const traitsHeight = blockHeight(traitRows, traitRowHeight)
-  section(third, 'TRAITS', 24, 24, 564, traitsHeight, 'items', 'Traits describe your Hero’s personality, beliefs, habits, and complications.', 22)
+  const talentsHeight = blockHeight(talentRows, talentRowHeight)
+  section(third, 'TALENTS', 24, 24, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`, 22)
+  const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .32))
   third.page.drawRectangle({ x: 24, y: third.H - 58, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
-  third.write('NAME', 27, 47, 10, bold); third.write('DESCRIPTION', 207, 47, 10, bold)
-  traitRows.forEach((row, rowIndex) => { const rowTop = 58 + (rowIndex * traitRowHeight); third.page.drawRectangle({ x: 24, y: third.H - rowTop - traitRowHeight, width: 564, height: traitRowHeight, color: white, borderColor: line, borderWidth: .5 }); third.page.drawLine({ start: { x: 204, y: third.H - rowTop }, end: { x: 204, y: third.H - rowTop - traitRowHeight }, thickness: .5, color: line }); addTextField(third, `trait_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, traitRowHeight - 2, 9); addTextField(third, `trait_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, traitRowHeight - 2, 9, true) })
+  let talentHeaderX = 24
+  ;['Talent', 'Ability / Cost', 'Duration'].forEach((header, index) => { third.write(header.toUpperCase(), talentHeaderX + 3, 47, 10, bold); talentHeaderX += talentWidths[index] })
+  talentRows.forEach((row, rowIndex) => {
+    const rowTop = 58 + (rowIndex * talentRowHeight); let fieldX = 24
+    third.page.drawRectangle({ x: 24, y: third.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
+    row.slice(0, 3).forEach((value, index) => { if (index) third.page.drawLine({ start: { x: fieldX, y: third.H - rowTop }, end: { x: fieldX, y: third.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(third, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 8); fieldX += talentWidths[index] })
+    third.page.drawLine({ start: { x: 24, y: third.H - rowTop - talentLineHeight }, end: { x: 588, y: third.H - rowTop - talentLineHeight }, thickness: .5, color: line })
+    addTextField(third, `talent_${rowIndex}_notes`, wrap(regular, row[3], 7.5, 548), 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
+  })
 
   const forceRows = [['F1', '1 Energy', '1 Energy'], ['F2', '4 Energy', '2 Energy'], ['F3', '9 Energy', '4 Energy'], ['F4', '16 Energy', '8 Energy']]
-  const forceTop = 24 + traitsHeight + 6
+  const forceTop = 24 + talentsHeight + 6
   section(third, 'FORCE ACTIVATION COSTS', 24, forceTop, 564, 146, 'talents', 'One-shots last for one roll or immediate use and never occupy a slot.', 22)
   table(third, 24, forceTop + 22, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 28, [], '', [], false)
   const notesTop = forceTop + 152
