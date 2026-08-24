@@ -34,6 +34,14 @@ const fit = (font, value, size, width) => {
   return result ? `${result}...` : ''
 }
 
+const wrap = (font, value, size, width) => text(value).split(/\s+/).reduce((lines, word) => {
+  if (!word) return lines
+  const current = lines.at(-1) || ''
+  if (!current || font.widthOfTextAtSize(`${current} ${word}`, size) > width) lines.push(word)
+  else lines[lines.length - 1] = `${current} ${word}`
+  return lines
+}, []).join('\n')
+
 export async function downloadCharacterSheetPdf({ character, computed, stats, skills, weaponTypes }) {
   const pdf = await PDFDocument.create()
   const regular = await pdf.embedFont(StandardFonts.Helvetica)
@@ -195,7 +203,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
     second.page.drawRectangle({ x: 24, y: second.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
     row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 8); fieldX += talentWidths[index] })
     second.page.drawLine({ start: { x: 24, y: second.H - rowTop - talentLineHeight }, end: { x: 588, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line })
-    addTextField(second, `talent_${rowIndex}_notes`, row[3], 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
+    addTextField(second, `talent_${rowIndex}_notes`, wrap(regular, row[3], 7.5, 548), 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
   })
   detailTop += talentsHeight + 6
   const itemsHeight = blockHeight(itemRows, itemRowHeight)
