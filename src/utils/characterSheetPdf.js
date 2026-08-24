@@ -193,9 +193,9 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   talentRows.forEach((row, rowIndex) => {
     const rowTop = detailTop + 34 + (rowIndex * talentRowHeight); let fieldX = 24
     second.page.drawRectangle({ x: 24, y: second.H - rowTop - talentRowHeight, width: 564, height: talentRowHeight, color: white, borderColor: line, borderWidth: .5 })
-    row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 9); fieldX += talentWidths[index] })
+    row.slice(0, 3).forEach((value, index) => { if (index) second.page.drawLine({ start: { x: fieldX, y: second.H - rowTop }, end: { x: fieldX, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line }); addTextField(second, `talent_${rowIndex}_${index}`, value, fieldX + 1, rowTop, talentWidths[index] - 2, talentLineHeight, 8); fieldX += talentWidths[index] })
     second.page.drawLine({ start: { x: 24, y: second.H - rowTop - talentLineHeight }, end: { x: 588, y: second.H - rowTop - talentLineHeight }, thickness: .5, color: line })
-    addTextField(second, `talent_${rowIndex}_notes`, row[3], 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 8, true)
+    addTextField(second, `talent_${rowIndex}_notes`, row[3], 25, rowTop + talentLineHeight, 562, talentRowHeight - talentLineHeight, 7.5, true)
   })
   detailTop += talentsHeight + 6
   const itemsHeight = blockHeight(itemRows, itemRowHeight)
@@ -205,7 +205,10 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   itemRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * itemRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - itemRowHeight, width: 564, height: itemRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 204, y: second.H - rowTop }, end: { x: 204, y: second.H - rowTop - itemRowHeight }, thickness: .5, color: line }); addTextField(second, `item_${rowIndex}_0`, row[0], 25, rowTop + 1, 178, itemRowHeight - 2, 9); addTextField(second, `item_${rowIndex}_1`, row[1], 205, rowTop + 1, 382, itemRowHeight - 2, 9, true) })
   detailTop += itemsHeight + 6
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
-  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22); table(second, 24, detailTop + 22, [200, 364], ['Name', 'Relationship / Role'], contactRows, contactRowHeight, [], 'contact', [0, 1])
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22)
+  second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
+  second.write('NAME', 27, detailTop + 23, 10, bold); second.write('RELATIONSHIP / ROLE', 227, detailTop + 23, 10, bold)
+  contactRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * contactRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - contactRowHeight, width: 564, height: contactRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 224, y: second.H - rowTop }, end: { x: 224, y: second.H - rowTop - contactRowHeight }, thickness: .5, color: line }); addTextField(second, `contact_${rowIndex}_0`, row[0], 25, rowTop + 1, 198, contactRowHeight - 2, 9); addTextField(second, `contact_${rowIndex}_1`, row[1], 225, rowTop + 1, 362, contactRowHeight - 2, 9) })
 
   const third = addPage(3)
   section(third, 'NOTES', 24, 24, 564, 596, 'notes', '', 22)
