@@ -179,9 +179,9 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const talentRows = padRows((character.talents || []).filter(row => [row.name, row.ability, row.duration, row.notes].some(text)).map(row => [text(row.name), text(row.ability), text(row.duration), text(row.notes)]), 6, ['', '', '', ''])
   const itemRows = padRows((character.items || []).filter(row => [row.name, row.description, row.bonus, row.appliesTo].some(text)).map(row => [text(row.name), text(row.description ?? [row.bonus, row.appliesTo].filter(Boolean).join(' - '))]), 4, ['', ''])
   const contactRows = padRows((character.contacts || []).filter(row => [row.name, row.role].some(text)).slice(0, 6).map(row => [text(row.name), text(row.role)]), 6, ['', ''])
-  const requestedRowSpace = (talentRows.length * 60) + (itemRows.length * 40) + (contactRows.length * 20)
+  const requestedRowSpace = (talentRows.length * 64) + (itemRows.length * 40) + (contactRows.length * 16)
   const detailScale = Math.min(1, 640 / requestedRowSpace)
-  const talentRowHeight = Math.floor(60 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(20 * detailScale)
+  const talentRowHeight = Math.floor(64 * detailScale); const itemRowHeight = Math.floor(40 * detailScale); const contactRowHeight = Math.floor(16 * detailScale)
   const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
   const talentsHeight = blockHeight(talentRows, talentRowHeight)
