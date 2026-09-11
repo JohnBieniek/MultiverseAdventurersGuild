@@ -43,7 +43,7 @@ const wrap = (font, value, size, width) => pdfText(font, text(value)).split(/\s+
   return lines
 }, []).join('\n')
 
-export async function downloadCharacterSheetPdf({ character, computed, stats, skills, weaponTypes, filename = '' }) {
+export async function createCharacterSheetPdf({ character, computed, stats, skills, weaponTypes }) {
   const pdf = await PDFDocument.create()
   const regular = await pdf.embedFont(StandardFonts.Helvetica)
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold)
@@ -226,12 +226,19 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   table(third, 24, forceTop + 22, [120, 220, 224], ['Force', 'Sustained', 'One-shot'], forceRows, 18, [], '', [], false)
 
   form.updateFieldAppearances(regular)
-  const bytes = await pdf.save()
-  const blob = new Blob([bytes], { type: 'application/pdf' }); const url = URL.createObjectURL(blob); const link = document.createElement('a')
-  link.href = url; link.download = filename || `${safeName(character.name)}-Character-Sheet.pdf`; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+  return pdf.save()
 }
 
-export const downloadBlankCharacterSheetPdf = () => {
+const downloadPdfBytes = (bytes, filename) => {
+  const blob = new Blob([bytes], { type: 'application/pdf' }); const url = URL.createObjectURL(blob); const link = document.createElement('a')
+  link.href = url; link.download = filename; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
+export async function downloadCharacterSheetPdf(options) {
+  downloadPdfBytes(await createCharacterSheetPdf(options), options.filename || `${safeName(options.character.name)}-Character-Sheet.pdf`)
+}
+
+export const createBlankCharacterSheetPdf = () => {
   const blankStats = [
     ['strength', 'Strength', 'STR'], ['dexterity', 'Dexterity', 'DEX'], ['endurance', 'Endurance', 'END'],
     ['intuition', 'Intuition', 'INT'], ['education', 'Education', 'EDU'], ['charisma', 'Charisma', 'CHA'],
@@ -252,5 +259,9 @@ export const downloadBlankCharacterSheetPdf = () => {
     weapons: [], talents: [], items: [], contacts: [],
   }
   const computed = { level: 0, initiative: 0, maxHp: 10, defense: 11, resilience: 0, ego: 0, maxEnergy: 0, maxForce: 0, slots: 1 }
-  return downloadCharacterSheetPdf({ character, computed, stats: blankStats, skills: blankSkills, weaponTypes: blankWeaponTypes, filename: 'multiverse-adventurers-guild-character-sheet.pdf' })
+  return createCharacterSheetPdf({ character, computed, stats: blankStats, skills: blankSkills, weaponTypes: blankWeaponTypes })
+}
+
+export async function downloadBlankCharacterSheetPdf() {
+  downloadPdfBytes(await createBlankCharacterSheetPdf(), 'multiverse-adventurers-guild-character-sheet.pdf')
 }

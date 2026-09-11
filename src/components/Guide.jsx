@@ -431,12 +431,13 @@ function parseForceEnergyCost(line) {
 }
 
 function renderSectionMedia(section) {
-  if (!section.image && !section.download) {
+  if (!section.image && !section.preview && !section.download) {
     return null
   }
 
   return (
     <>
+      {section.preview}
       {section.image && (
         <div className="guide-media">
           <img src={section.image.src} alt={section.image.alt} />

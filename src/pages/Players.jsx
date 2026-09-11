@@ -1,4 +1,5 @@
 import Guide from '../components/Guide'
+import BlankCharacterSheetPreview from '../components/BlankCharacterSheetPreview'
 import howToPlay from '../content/players/roleplaying.txt?raw'
 import species from '../content/players/species.txt?raw'
 import archetypes from '../content/players/archetypes.txt?raw'
@@ -18,10 +19,7 @@ const sections = [
   {
     title: 'How to Play',
     content: howToPlay,
-    image: {
-      src: '/character-sheet.png',
-      alt: 'Multiverse Adventurers Guild character sheet'
-    },
+    preview: <BlankCharacterSheetPreview />,
     download: {
       onClick: downloadBlankCharacterSheetPdf,
       label: 'Download Character Sheet'
