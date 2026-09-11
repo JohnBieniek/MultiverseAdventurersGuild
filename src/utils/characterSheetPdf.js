@@ -1,4 +1,5 @@
 import { PDFDocument, StandardFonts, TextAlignment, rgb } from 'pdf-lib'
+import { pdfText } from './pdfText'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFistRaised, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaHeartBroken, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
@@ -27,14 +28,14 @@ const renderIcon = (Icon, color = '#183d28') => new Promise((resolve, reject) =>
 })
 
 const fit = (font, value, size, width) => {
-  const source = text(value)
+  const source = pdfText(font, text(value)).replace(/\n/g, ' ')
   if (font.widthOfTextAtSize(source, size) <= width) return source
   let result = source
   while (result && font.widthOfTextAtSize(`${result}...`, size) > width) result = result.slice(0, -1)
   return result ? `${result}...` : ''
 }
 
-const wrap = (font, value, size, width) => text(value).split(/\s+/).reduce((lines, word) => {
+const wrap = (font, value, size, width) => pdfText(font, text(value)).split(/\s+/).reduce((lines, word) => {
   if (!word) return lines
   const current = lines.at(-1) || ''
   if (!current || font.widthOfTextAtSize(`${current} ${word}`, size) > width) lines.push(word)
@@ -57,7 +58,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
   const addPage = (pageNumber, fullHeader = false) => {
     const page = pdf.addPage(PAGE)
     const H = page.getHeight()
-    const write = (value, x, top, size = 12, font = regular, color = ink, options = {}) => page.drawText(String(value), { x, y: H - top - size, size, font, color, ...options })
+    const write = (value, x, top, size = 12, font = regular, color = ink, options = {}) => page.drawText(pdfText(font, value), { x, y: H - top - size, size, font, color, ...options })
     if (fullHeader) {
       page.drawRectangle({ x: 0, y: H - 76, width: 612, height: 76, color: pale })
       if (logo) page.drawImage(logo, { x: 24, y: H - 65, width: 50, height: 50 })
@@ -68,7 +69,7 @@ export async function downloadCharacterSheetPdf({ character, computed, stats, sk
 
   const addTextField = (ctx, name, value, x, top, width, height, fontSize = 12, multiline = false) => {
     const field = form.createTextField(name)
-    field.setText(String(value ?? '')); if (multiline) field.enableMultiline()
+    field.setText(pdfText(regular, value)); if (multiline) field.enableMultiline()
     field.addToPage(ctx.page, { x, y: ctx.H - top - height, width, height, font: regular, textColor: ink, backgroundColor: white, borderColor: line, borderWidth: 1 })
     field.setFontSize(fontSize)
     return field

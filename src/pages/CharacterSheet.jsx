@@ -2917,8 +2917,13 @@ function CharacterSheet() {
     link.href = url; link.download = `${fileName}.MAGHero`; link.click(); URL.revokeObjectURL(url)
   }
   const downloadPdf = async () => {
-    await downloadCharacterSheetPdf({ character, computed, stats, skills: skillDefs, weaponTypes })
-    flash('PDF downloaded')
+    try {
+      await downloadCharacterSheetPdf({ character, computed, stats, skills: skillDefs, weaponTypes })
+      flash('PDF downloaded')
+    } catch (error) {
+      console.error('Character sheet PDF download failed', error)
+      flash('PDF download failed. Please try again.')
+    }
   }
   const checkRoll = (label, modifier, target = '') => {
     const natural = rollDie(20); const total = natural + number(modifier); const tn = target === '' ? null : number(target)
