@@ -65,16 +65,16 @@ function Home() {
           <span>Website created in partnership with</span>
           <a
             className="whimsy-logo-frame"
-            href="https://www.facebook.com/Experiencewhimsy"
-            aria-label="Visit Whimsy on Facebook"
+            href="https://ExperienceWhimsy.com"
+            aria-label="Visit Experience Whimsy"
           >
             <img className="whimsy-logo" src="/logo.png" alt="Whimsy" />
           </a>
           <a
-            className="whimsy-facebook-link"
-            href="https://www.facebook.com/Experiencewhimsy"
+            className="whimsy-website-link"
+            href="https://ExperienceWhimsy.com"
           >
-            facebook.com/Experiencewhimsy
+            ExperienceWhimsy.com
           </a>
         </p>
       </aside>

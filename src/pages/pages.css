@@ -232,12 +232,12 @@
   transform: translate(-2.7%, -21%);
 }
 
-.whimsy-facebook-link {
+.whimsy-website-link {
   color: #365b45;
   font-size: 0.9rem;
 }
 
-.whimsy-facebook-link:hover {
+.whimsy-website-link:hover {
   color: #1f3e2c;
 }
 
