@@ -54,7 +54,7 @@ function Home() {
           <div className="update-notes">
             <h4>Patch notes</h4>
             <ul>
-              <li>Added Character Sheet PDF downloads for early adopters.</li>
+              <li>Character Sheet PDF downloads are now in public beta. By the end of 2026, downloads will become a paid feature available only to members.</li>
             </ul>
           </div>
         </article>
