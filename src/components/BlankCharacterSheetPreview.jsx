@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createBlankCharacterSheetPdf } from '../utils/characterSheetPdf'
+import { renderPdfFirstPage } from '../utils/pdfPreview'
 
 export default function BlankCharacterSheetPreview() {
   const [url, setUrl] = useState('')
@@ -8,9 +9,9 @@ export default function BlankCharacterSheetPreview() {
   useEffect(() => {
     let cancelled = false
     let objectUrl
-    createBlankCharacterSheetPdf().then(bytes => {
+    createBlankCharacterSheetPdf().then(renderPdfFirstPage).then(blob => {
       if (cancelled) return
-      objectUrl = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }))
+      objectUrl = URL.createObjectURL(blob)
       setUrl(objectUrl)
     }).catch(() => { if (!cancelled) setFailed(true) })
     return () => {
@@ -23,7 +24,7 @@ export default function BlankCharacterSheetPreview() {
 
   return (
     <div className="guide-media">
-      <iframe className="guide-sheet-preview" src={url} title="Blank Multiverse Adventurers Guild character sheet" />
+      <img src={url} width="1224" height="1584" alt="First page of the blank Multiverse Adventurers Guild character sheet" />
     </div>
   )
 }

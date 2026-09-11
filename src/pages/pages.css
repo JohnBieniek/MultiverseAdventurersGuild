@@ -977,13 +977,6 @@
   margin-top: 0;
 }
 
-.guide-sheet-preview {
-  width: 100%;
-  height: min(80vh, 900px);
-  min-height: 420px;
-  border: 0;
-}
-
 .guide-media img {
   display: block;
   width: min(100%, 720px);

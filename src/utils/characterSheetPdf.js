@@ -43,7 +43,7 @@ const wrap = (font, value, size, width) => pdfText(font, text(value)).split(/\s+
   return lines
 }, []).join('\n')
 
-export async function createCharacterSheetPdf({ character, computed, stats, skills, weaponTypes }) {
+export async function createCharacterSheetPdf({ character, computed, stats, skills, weaponTypes, blank = false }) {
   const pdf = await PDFDocument.create()
   const regular = await pdf.embedFont(StandardFonts.Helvetica)
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold)
@@ -69,7 +69,7 @@ export async function createCharacterSheetPdf({ character, computed, stats, skil
 
   const addTextField = (ctx, name, value, x, top, width, height, fontSize = 12, multiline = false) => {
     const field = form.createTextField(name)
-    field.setText(pdfText(regular, value)); if (multiline) field.enableMultiline()
+    field.setText(blank ? '' : pdfText(regular, value)); if (multiline) field.enableMultiline()
     field.addToPage(ctx.page, { x, y: ctx.H - top - height, width, height, font: regular, textColor: ink, backgroundColor: white, borderColor: line, borderWidth: 1 })
     field.setFontSize(fontSize)
     return field
@@ -193,7 +193,7 @@ export async function createCharacterSheetPdf({ character, computed, stats, skil
   const blockHeight = (rows, rowHeight) => 34 + (rows.length * rowHeight)
   let detailTop = 24
   const contactsHeight = blockHeight(contactRows, contactRowHeight)
-  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22)
+  section(second, 'CONTACTS', 24, detailTop, 564, contactsHeight, 'contacts', blank ? 'You begin with 3 + Charisma Contacts.' : `You begin with 3 + Charisma (${Math.max(0, 3 + number(character.stats.charisma))}) Contacts.`, 22)
   second.page.drawRectangle({ x: 24, y: second.H - detailTop - 34, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   second.write('NAME', 27, detailTop + 23, 10, bold); second.write('RELATIONSHIP / ROLE', 227, detailTop + 23, 10, bold)
   contactRows.forEach((row, rowIndex) => { const rowTop = detailTop + 34 + (rowIndex * contactRowHeight); second.page.drawRectangle({ x: 24, y: second.H - rowTop - contactRowHeight, width: 564, height: contactRowHeight, color: white, borderColor: line, borderWidth: .5 }); second.page.drawLine({ start: { x: 224, y: second.H - rowTop }, end: { x: 224, y: second.H - rowTop - contactRowHeight }, thickness: .5, color: line }); addTextField(second, `contact_${rowIndex}_0`, row[0], 25, rowTop + 1, 198, contactRowHeight - 2, 9); addTextField(second, `contact_${rowIndex}_1`, row[1], 225, rowTop + 1, 362, contactRowHeight - 2, 9) })
@@ -207,7 +207,7 @@ export async function createCharacterSheetPdf({ character, computed, stats, skil
 
   const third = addPage(3)
   const talentsHeight = blockHeight(talentRows, talentRowHeight)
-  section(third, 'TALENTS', 24, 24, 564, talentsHeight, 'talents', `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`, 22)
+  section(third, 'TALENTS', 24, 24, 564, talentsHeight, 'talents', blank ? 'You can activate two Talents per turn.' : `You can activate two Talents per turn. Talents Acquired: ${talentsAcquired}    Combat Slots: ${computed.slots}.`, 22)
   const talentWidths = [220, 190, 154]; const talentLineHeight = Math.max(14, Math.floor(talentRowHeight * .32))
   third.page.drawRectangle({ x: 24, y: third.H - 58, width: 564, height: 12, color: pale, borderColor: line, borderWidth: .7 })
   let talentHeaderX = 24
@@ -259,7 +259,7 @@ export const createBlankCharacterSheetPdf = () => {
     weapons: [], talents: [], items: [], contacts: [],
   }
   const computed = { level: 0, initiative: 0, maxHp: 10, defense: 11, resilience: 0, ego: 0, maxEnergy: 0, maxForce: 0, slots: 1 }
-  return createCharacterSheetPdf({ character, computed, stats: blankStats, skills: blankSkills, weaponTypes: blankWeaponTypes })
+  return createCharacterSheetPdf({ character, computed, stats: blankStats, skills: blankSkills, weaponTypes: blankWeaponTypes, blank: true })
 }
 
 export async function downloadBlankCharacterSheetPdf() {
