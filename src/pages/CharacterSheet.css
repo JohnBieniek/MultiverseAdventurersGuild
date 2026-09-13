@@ -127,49 +127,16 @@
 /* Tooltip panels never intercept the controls beneath them. */
 .info-tooltip::before{pointer-events:none}
 
-/* Custom skill values need a separate row so the preset list cannot cover the input. */
-@media (max-width:700px) {
-  .sheet-page .skill-row:has(.skill-ability-field>.identity-custom) {
-    grid-template-areas:
-      "name name stat mod buff debuff total"
-      "ability ability ability ability ability ability ability";
-    row-gap:.5rem;
-  }
-
-  .sheet-page .skill-ability-field:has(>.identity-custom) {
-    flex-direction:row;
-    justify-self:stretch;
-    gap:.5rem;
-  }
-
-  .sheet-page .skill-ability-field:has(>.identity-custom)>small {
-    font-size:.7rem;
-  }
-
-  .sheet-page .skill-ability-field>.identity-custom {
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 44px;
-    gap:.35rem;
-    flex:1 1 auto;
-    width:auto;
-    min-width:0;
-    padding:0!important;
-  }
-
-  .sheet-page .skill-ability-field>.identity-custom>input {
-    min-height:44px;
-    padding:.5rem;
-    font-size:1rem;
-  }
-
-  .sheet-page .skill-ability-field>.identity-custom>.custom-list-trigger {
-    position:static;
-    width:44px;
-    min-width:44px;
-    min-height:44px;
-    padding:0;
-    border:1px solid #bdc8bd;
-    background-color:#fff;
-    background-position:center;
-  }
-}
+/* Edit custom scores in a popup, then show the saved value in the compact selector. */
+.custom-score-dialog{width:min(300px,calc(100vw - 2rem));max-height:calc(100dvh - 2rem);margin:auto;padding:1rem;border:1px solid #9fb3a1;border-radius:12px;background:#fff;color:#18211b;box-shadow:0 12px 40px #0004}
+.custom-score-dialog::backdrop{background:#08160f80}
+.custom-score-dialog h2{margin:0 0 .75rem;color:#183d28;font-size:1.1rem}
+.custom-score-dialog label{display:block;margin-bottom:.25rem;font-size:.85rem;font-weight:700}
+.custom-score-input-row{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:.4rem}
+.custom-score-input-row input{width:100%;min-width:0;min-height:44px;padding:.4rem .6rem;border:1px solid #9fb3a1;border-radius:6px;background:#fff;color:#18211b;font:1.25rem Arial,sans-serif}
+.custom-score-dialog small{display:block;margin-top:.35rem;color:#59655b;font-size:.75rem}
+.custom-score-dialog button{min-height:44px;padding:.4rem .65rem;border:1px solid #9fb3a1;border-radius:6px;background:#fff;color:#183d28;font:inherit;font-weight:700}
+.custom-score-dialog button.primary{background:#2f6339;border-color:#2f6339;color:#fff}
+.custom-score-dialog input:focus-visible,.custom-score-dialog button:focus-visible{outline:2px solid #83aa87;outline-offset:2px}
+.custom-score-actions{display:flex;justify-content:flex-end;gap:.4rem;margin-top:.85rem}
+@media(max-width:700px){.sheet-page .skill-ability-field>.skill-score-select{padding-right:.45rem!important;background-size:.3rem auto}}

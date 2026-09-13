@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { FaAsterisk, FaBolt, FaBookOpen, FaBrain, FaCar, FaChartBar, FaCommentDots, FaCrosshairs, FaEye, FaFlask, FaHandPaper, FaHeart, FaHeartbeat, FaLightbulb, FaMicrochip, FaRunning, FaShieldAlt, FaSmile, FaStar, FaStickyNote, FaSun, FaTree, FaUserSecret, FaUsers } from 'react-icons/fa'
 import { GiBiceps, GiBroadsword, GiCrossedAxes, GiCrossedSwords } from 'react-icons/gi'
@@ -3100,7 +3100,61 @@ function AutoTextarea({ value, onChange, maxLines = 4, placeholder = '', fitOnMo
   }, [])
   return <textarea ref={ref} className="auto-textarea" rows="1" value={value} placeholder={placeholder} onChange={event => { onChange(event.target.value); window.requestAnimationFrame(() => resize(event.target)) }}/>
 }
-function SkillScoreControl({ label, value, options, onChange, isOptionDisabled = () => false }) { const hasPreset = value !== '' && options.includes(number(value)); const [custom, setCustom] = useState(value !== '' && !hasPreset); useEffect(() => { if (hasPreset) setCustom(false) }, [hasPreset]); const choose = event => { if (event.target.value === '__custom__') { onChange(''); setCustom(true) } else onChange(event.target.value) }; return custom ? <div className="identity-custom"><input autoFocus={!window.matchMedia('(max-width: 768px)').matches} aria-label={`${label} custom value`} type="number" min="-4" max="4" value={value} onChange={event => onChange(event.target.value)}/><select className="custom-list-trigger" aria-label={`${label} preset list`} value="" onChange={choose}><option value="" disabled></option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select></div> : <select aria-label={label} value={hasPreset ? number(value) : ''} onChange={choose}><option value="" disabled>Choose</option><option value="__custom__">Custom…</option>{options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}</select> }
+function SkillScoreControl({ label, value, options, onChange, isOptionDisabled = () => false }) {
+  const id = useId()
+  const selectRef = useRef(null)
+  const dialogRef = useRef(null)
+  const inputRef = useRef(null)
+  const hasPreset = value !== '' && options.includes(number(value))
+  const selectedValue = value === '' ? '' : number(value)
+  const close = () => dialogRef.current.close()
+  const choose = event => {
+    if (event.target.value !== '__custom__') {
+      onChange(event.target.value)
+      return
+    }
+    // Keep the current score until Done, and focus within the user gesture for mobile keyboards.
+    event.target.value = selectedValue
+    inputRef.current.value = value
+    dialogRef.current.showModal()
+    inputRef.current.focus()
+    inputRef.current.select()
+  }
+  const submit = event => {
+    event.preventDefault()
+    if (!inputRef.current.reportValidity()) return
+    onChange(String(inputRef.current.valueAsNumber))
+    close()
+  }
+  const toggleSign = () => {
+    const input = inputRef.current
+    if (input.value !== '') input.value = String(-input.valueAsNumber)
+    input.focus()
+  }
+  return <>
+    <select ref={selectRef} className="skill-score-select" aria-label={label} value={selectedValue} onChange={choose}>
+      <option value="" disabled>Choose</option>
+      <option value="__custom__">Custom…</option>
+      {value !== '' && !hasPreset && <option value={selectedValue} hidden>{signed(value)}</option>}
+      {options.map(option => <option value={option} key={option} disabled={isOptionDisabled(option)}>{signed(option)}</option>)}
+    </select>
+    {createPortal(<dialog ref={dialogRef} className="custom-score-dialog" aria-labelledby={`${id}-title`} onClose={() => selectRef.current?.focus({ preventScroll: true })}>
+      <form onSubmit={submit}>
+        <h2 id={`${id}-title`}>{label}</h2>
+        <label htmlFor={`${id}-value`}>Custom value</label>
+        <div className="custom-score-input-row">
+          <input ref={inputRef} id={`${id}-value`} aria-label={`${label} custom value`} aria-describedby={`${id}-hint`} type="number" inputMode="numeric" min="-99" max="99" step="1" required autoFocus/>
+          <button type="button" aria-label="Change value sign" onClick={toggleSign}>±</button>
+        </div>
+        <small id={`${id}-hint`}>Up to two digits, positive or negative.</small>
+        <div className="custom-score-actions">
+          <button type="button" onClick={close}>Cancel</button>
+          <button type="submit" className="primary">Done</button>
+        </div>
+      </form>
+    </dialog>, document.body)}
+  </>
+}
 function TalentControl({ value, onChange }) { return <div className="talent-control"><select aria-label="Choose a talent" value={talentNames.includes(value) ? value : ''} onChange={e => onChange(e.target.value)}><option value="">Choose a talent</option>{talentNames.map(name => <option value={name} key={name}>{name}</option>)}</select></div> }
 function SectionTitle({ title, subtitle }) {
   const startingArray = title === 'Stats' || title === 'Skills' ? subtitle : ''
