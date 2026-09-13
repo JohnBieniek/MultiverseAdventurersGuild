@@ -126,3 +126,50 @@
 
 /* Tooltip panels never intercept the controls beneath them. */
 .info-tooltip::before{pointer-events:none}
+
+/* Custom skill values need a separate row so the preset list cannot cover the input. */
+@media (max-width:700px) {
+  .sheet-page .skill-row:has(.skill-ability-field>.identity-custom) {
+    grid-template-areas:
+      "name name stat mod buff debuff total"
+      "ability ability ability ability ability ability ability";
+    row-gap:.5rem;
+  }
+
+  .sheet-page .skill-ability-field:has(>.identity-custom) {
+    flex-direction:row;
+    justify-self:stretch;
+    gap:.5rem;
+  }
+
+  .sheet-page .skill-ability-field:has(>.identity-custom)>small {
+    font-size:.7rem;
+  }
+
+  .sheet-page .skill-ability-field>.identity-custom {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 44px;
+    gap:.35rem;
+    flex:1 1 auto;
+    width:auto;
+    min-width:0;
+    padding:0!important;
+  }
+
+  .sheet-page .skill-ability-field>.identity-custom>input {
+    min-height:44px;
+    padding:.5rem;
+    font-size:1rem;
+  }
+
+  .sheet-page .skill-ability-field>.identity-custom>.custom-list-trigger {
+    position:static;
+    width:44px;
+    min-width:44px;
+    min-height:44px;
+    padding:0;
+    border:1px solid #bdc8bd;
+    background-color:#fff;
+    background-position:center;
+  }
+}
